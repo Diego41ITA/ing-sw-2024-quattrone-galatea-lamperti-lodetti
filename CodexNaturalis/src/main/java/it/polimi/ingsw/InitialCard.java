@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class InitialCard extends Card{
     private HashMap<Angle, TypeOfAngles> frontAngles = new HashMap<Angle, TypeOfAngles>();
@@ -9,36 +10,28 @@ public class InitialCard extends Card{
 
     private ArrayList<TypeOfAngles> resourcesBack = new ArrayList<TypeOfAngles>();
 
-    public InitialCard(Boolean isFront, TypeOfCard type,
-                       TypeOfAngles fhl, TypeOfAngles fhr, TypeOfAngles fdl, TypeOfAngles fdr,
-                       TypeOfAngles bhl, TypeOfAngles bhr, TypeOfAngles bdl, TypeOfAngles bdr,
-                       TypeOfAngles back1, TypeOfAngles back2, TypeOfAngles back3){
-        this.isFront = isFront;
+    //Inserire nello stack angles gli angoli in questo ordine DOWNRIGHT, DOWNLEFT, HIGHRIGHT, HIGHLEFT
+    public InitialCard(TypeOfCard type, Stack<String> frontAngles, Stack<String> backAngles, Stack<String> back){
+        isFront = true;
         this.type = type;
-        frontAngles.put(Angle.HIGHLEFT, fhl);
-        frontAngles.put(Angle.HIGHRIGHT, fhr);
-        frontAngles.put(Angle.DOWNLEFT, fdl);
-        frontAngles.put(Angle.DOWNRIGHT, fdr);
-        backAngles.put(Angle.HIGHLEFT, bhl);
-        backAngles.put(Angle.HIGHRIGHT, bhr);
-        backAngles.put(Angle.DOWNLEFT, bdl);
-        backAngles.put(Angle.DOWNRIGHT, bdr);
-        if(!back1.equals(TypeOfAngles.HIDDEN)){
-            resourcesBack.add(back1);
-        }
-        if(!back2.equals(TypeOfAngles.HIDDEN)){
-            resourcesBack.add(back2);
-        }
-        if(!back3.equals(TypeOfAngles.HIDDEN)){
-            resourcesBack.add(back3);
+        this.frontAngles.put(Angle.HIGHLEFT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.frontAngles.put(Angle.HIGHRIGHT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.frontAngles.put(Angle.DOWNLEFT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.frontAngles.put(Angle.DOWNRIGHT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.backAngles.put(Angle.HIGHLEFT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.backAngles.put(Angle.HIGHRIGHT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.backAngles.put(Angle.DOWNLEFT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        this.backAngles.put(Angle.DOWNRIGHT, TypeOfAngles.assignVALUE(frontAngles.pop()));
+        while(!back.empty()){
+            resourcesBack.add(TypeOfAngles.assignVALUE(back.pop()));
         }
     }
 
-    public ArrayList<TypeOfAngles> getResourcesBack() {
+    public ArrayList<TypeOfAngles> getResourcesBack(){
         return resourcesBack;
     }
 
-    public HashMap<Angle, TypeOfAngles> getAngles() {
+    public HashMap<Angle, TypeOfAngles> getAngles(){
         if(isFront) {
             return frontAngles;
         }else{
