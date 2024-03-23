@@ -8,4 +8,5 @@ public class Turn {
     private List<Player> alreadyPlayed;
     private Player playingPlayer;
     private List<Player> nextPlayers;
+
 }

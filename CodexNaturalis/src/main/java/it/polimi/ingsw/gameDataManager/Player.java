@@ -9,6 +9,7 @@ public class Player {
     private Optional<Color> optionalColor;
     private GoalCard goal;
 
+
     public Player(String nickname, GameStation gamestation, Color color,Optional<Color> optionalColor) {
         this.nickname = nickname;
         this.gamestation = gamestation;
