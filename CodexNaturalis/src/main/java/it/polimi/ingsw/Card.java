@@ -7,4 +7,12 @@ public class Card {
     public void flip(){
         isFront = !isFront;
     }
+
+    public Boolean getIsFront(){
+        return isFront;
+    }
+
+    public TypeOfCard getType() {
+        return type;
+    }
 }

@@ -3,18 +3,20 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class GoalCard {
-    private int numOfPoints;
-    private ArrayList<TypeOfAngles> listOfObjects;
-    private TypeOfGoalCard goalType;
-    private TypeOfPositioning positionType;
+public class GoalCard extends Card{
+    private final int numOfPoints;
+    private final ArrayList<Item> listOfObjects = new ArrayList<>();
+    private final TypeOfGoalCard goalType;
+    private final TypeOfPositioning positionType;
 
-    public GoalCard(int points, String goalType, String positionType, Stack<String> objects){
+    public GoalCard(TypeOfCard type, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, Stack<Item> objects){
+        isFront = true;
+        this.type = type;
         numOfPoints = points;
-        this.goalType = TypeOfGoalCard.assignVALUE(goalType);
-        this.positionType = TypeOfPositioning.assignVALUE(positionType);
+        this.goalType = goalType;
+        this.positionType = positionType;
         while (!objects.empty()){
-            listOfObjects.add(TypeOfAngles.assignVALUE(objects.pop()));
+            listOfObjects.add(objects.pop());
         }
     }
 
@@ -30,7 +32,7 @@ public class GoalCard {
         return positionType;
     }
 
-    public ArrayList<TypeOfAngles> getListOfObjects() {
-        return listOfObjects;
+    public ArrayList<Item> getListOfObjects() {
+        return new ArrayList<>(listOfObjects);
     }
 }
