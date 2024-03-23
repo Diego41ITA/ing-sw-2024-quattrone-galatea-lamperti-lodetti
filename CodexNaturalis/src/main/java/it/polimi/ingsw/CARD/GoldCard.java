@@ -30,11 +30,13 @@ public class GoldCard extends Card{
     public TypeOfGoldCard getType() {
         return type;
     }
+    public ArrayList<Item> getNeededResources(){
+        return new ArrayList<>(neededResources);
+    }
 
     public ArrayList<Item> getFreeItem(){
         //returns free item in the corner.
     }
-
 
 
 }
