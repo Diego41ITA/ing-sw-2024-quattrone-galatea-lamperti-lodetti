@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CARD;
+package it.polimi.ingsw.card;
 
 /**
  * Hello world!

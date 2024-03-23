@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CARD;
+package it.polimi.ingsw.card;
 import java.util.*;
 public class ResourceCard extends Card {
     private Map<Angle, Item> front;

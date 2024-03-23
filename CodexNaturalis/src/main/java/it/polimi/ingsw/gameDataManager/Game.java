@@ -124,8 +124,4 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = new Turn();
     }
-
-    public void setWinner(Player winner) {
-        this.winner = new Player();
-    }
 }

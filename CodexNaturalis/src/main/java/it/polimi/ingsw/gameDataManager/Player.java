@@ -1,5 +1,9 @@
 package it.polimi.ingsw.gameDataManager;
 import java.util.List;
+import java.util.Optional;
+
+import it.polimi.ingsw.card.Card;
+import it.polimi.ingsw.card.GoalCard;
 
 public class Player {
     private String nickname;

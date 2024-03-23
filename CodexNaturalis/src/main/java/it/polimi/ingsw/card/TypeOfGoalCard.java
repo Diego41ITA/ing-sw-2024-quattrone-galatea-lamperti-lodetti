@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CARD;
+package it.polimi.ingsw.card;
 
 public enum TypeOfGoalCard {
     OBJECT, POSITION, RESOURCE
