@@ -1,6 +1,7 @@
 package it.polimi.ingsw.CARD;
 
 public class Card {
+    //prova per Git
     protected Boolean isFront;
     protected TypeOfCard type;
 
