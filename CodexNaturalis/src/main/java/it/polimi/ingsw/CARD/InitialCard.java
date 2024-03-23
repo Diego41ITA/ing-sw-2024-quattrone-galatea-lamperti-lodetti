@@ -12,8 +12,7 @@ public class InitialCard extends Card {
 
     //Inserire nello stack angles gli angoli in questo ordine DOWNRIGHT, DOWNLEFT, HIGHRIGHT, HIGHLEFT
     public InitialCard(TypeOfCard type, Stack<Item> frontAngles, Stack<Item> backAngles, Stack<Item> back){
-        isFront = true;
-        this.type = type;
+        super(type);
         this.frontAngles.put(Angle.HIGHLEFT, frontAngles.pop());
         this.frontAngles.put(Angle.HIGHRIGHT, frontAngles.pop());
         this.frontAngles.put(Angle.DOWNLEFT, frontAngles.pop());

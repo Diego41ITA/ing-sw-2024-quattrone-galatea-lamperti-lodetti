@@ -10,8 +10,7 @@ public class GoalCard extends Card {
     private final TypeOfPositioning positionType;
 
     public GoalCard(TypeOfCard type, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, Stack<Item> objects){
-        isFront = true;
-        this.type = type;
+        super(type);
         numOfPoints = points;
         this.goalType = goalType;
         this.positionType = positionType;
