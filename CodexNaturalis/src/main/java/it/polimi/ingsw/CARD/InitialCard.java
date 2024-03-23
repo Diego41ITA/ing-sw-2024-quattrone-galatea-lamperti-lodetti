@@ -1,10 +1,10 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CARD;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
-public class InitialCard extends Card{
+public class InitialCard extends Card {
     private final HashMap<Angle, Item> frontAngles = new HashMap<>();
     private final HashMap<Angle, Item> backAngles = new HashMap<>();
 

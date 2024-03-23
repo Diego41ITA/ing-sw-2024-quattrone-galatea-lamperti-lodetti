@@ -1,9 +1,9 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CARD;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class GoalCard extends Card{
+public class GoalCard extends Card {
     private final int numOfPoints;
     private final ArrayList<Item> listOfObjects = new ArrayList<>();
     private final TypeOfGoalCard goalType;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CARD;
 
 public enum Item {
     VEGETABLE, ANIMAL, INSECT, MUSHROOM, RESOURCE, HIDDEN, EMPTY, POTION, FEATHER, PARCHMENT
