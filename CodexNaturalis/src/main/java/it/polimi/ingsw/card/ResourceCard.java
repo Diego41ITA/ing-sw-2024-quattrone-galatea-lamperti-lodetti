@@ -1,4 +1,5 @@
 package it.polimi.ingsw.card;
+
 import java.util.*;
 public class ResourceCard extends Card {
     private Map<Angle, Item> front;
@@ -6,8 +7,8 @@ public class ResourceCard extends Card {
     private final Item backResource;
     private final int numOfPoints;
 
-    public ResourceCard(Map<Angle, Item> front, Map<Angle, Item> back, Item backResource){
-        super();
+    public ResourceCard(Map<Angle, Item> front, Map<Angle, Item> back, Item backResource, TypeOfCard type){
+        super(type);
         this.front = new HashMap<>(front);
         this.back = new HashMap<>(back);
         this.numOfPoints = 1;

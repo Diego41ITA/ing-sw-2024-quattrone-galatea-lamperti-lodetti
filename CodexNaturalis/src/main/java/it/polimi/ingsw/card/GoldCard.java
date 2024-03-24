@@ -7,16 +7,16 @@ public class GoldCard extends Card{
     private final List<Item> neededResources;
     private final int numOfPoints;
     private final Item;
-    private final TypeOfGoldCard type;
+    private final TypeOfGoldCard typeOfGoldCard;
     private final Item backResource;
 
-    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, Item item, TypeOfGoldCard type, List<Item> resources)
+    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, Item item, TypeOfGoldCard typeGold, List<Item> resources, TypeOfCard typeCard)
     {
-        super();
+        super(typeCard);
         this.front = new HashMap<>(front);
         this.back = new HashMap<>(back);
         this.numOfPoints = points;
-        this.type = type;
+        this.typeOfGoldCard = typeGold;
         this.backResource = item;
         this.neededResources = new ArrayList<>(resources);
     }
@@ -27,14 +27,14 @@ public class GoldCard extends Card{
     public Item getBackResource() {
         return backResource;
     }
-    public TypeOfGoldCard getType() {
-        return type;
+    public TypeOfGoldCard getTypeOfGoldCard() {
+        return typeOfGoldCard;
     }
-    public ArrayList<Item> getNeededResources(){
+    public List<Item> getNeededResources(){
         return new ArrayList<>(neededResources);
     }
 
-    public ArrayList<Item> getFreeItem(){
+    public List<Item> getFreeItem(){
         //returns free item in the corner.
     }
 
