@@ -1,3 +1,7 @@
+/**
+ * this class defines the deck structure as a collection of cards
+ * @author Lodetti Alessandro
+ */
 package it.polimi.ingsw.card;
 
 import java.util.*;
@@ -5,6 +9,10 @@ import java.util.*;
 public class Deck {
     private List<Card> cards;
 
+    /**
+     * this is the only constructor
+     * @param deck it is simply the card collection.
+     */
     public Deck(List<Card> deck){
         this.cards = new ArrayList<>(deck);
     }
