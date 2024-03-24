@@ -99,4 +99,9 @@ public class ResourceCard extends Card {
                 l.add(m.get(a));
         return l;
     }
+
+    /**
+     * metodo per il salvataggio della carta.
+     */
+    public void save(){}
 }
