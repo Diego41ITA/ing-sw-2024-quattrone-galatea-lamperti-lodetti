@@ -37,6 +37,9 @@ public class Deck {
         return cards.size();
     }
 
+    public boolean isEmpty(){
+            return cards.isEmpty();
+    }
     //this method is useful when you want to save the match
     public List<Card> getStatus(){
         return new ArrayList<>(cards);

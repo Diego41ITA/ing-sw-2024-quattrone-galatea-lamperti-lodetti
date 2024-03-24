@@ -44,8 +44,8 @@ public class Matches {
     /**
      * metodo da discutere perchè hanno detto che il nome deve essere diverso all'interno della partita e
      * non di tutte le partite. Questo controllo lo può fare Game.
-     * @param name
-     * @return
+     * @param name the name to check.
+     * @return true only if the name is free.
      */
     public boolean checkName(String name){
         return false;
