@@ -1,7 +1,7 @@
 /**
  * @author Luca Lamperti
  * An enumeration to implement the objects contained in the corners of the cards. The objects can be resources, items needed for GoalCards, or
- * represent cases of an empty corner (a corner without objects) or a hidden corner (a corner where you mustn't place a card)
+ * represent cases of an empty corner (a corner without objects) or a hidden corner (a corner covered)
  */
 
 package it.polimi.ingsw.card;

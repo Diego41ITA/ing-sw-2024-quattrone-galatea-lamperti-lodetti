@@ -13,29 +13,24 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class InitialCard extends Card {
-    private final HashMap<Angle, Item> frontAngles = new HashMap<>();
-    private final HashMap<Angle, Item> backAngles = new HashMap<>();
+    private final HashMap<Angle, Item> frontAngles;
+    private final HashMap<Angle, Item> backAngles;
 
-    private final ArrayList<Item> resourcesBack = new ArrayList<>();
+    private final ArrayList<Item> resourcesBack;
 
     /**
      * @author Luca Lamperti
      * the constructor of the InitialCard class
      * @param type is the type of the card(from enum TypeOfCard)
-     * @param frontAngles is a Stack where the items(from enum Item) in the corners of the front face of the InitialCard must be pushed in the following order: DOWNRIGHT, DOWNLEFT, HIGHRIGHT, HIGHLEFT
-     * @param backAngles is a Stack where the items(from enum Item) in the corners of the back face of the InitialCard must be pushed in the following order: DOWNRIGHT, DOWNLEFT, HIGHRIGHT, HIGHLEFT
+     * @param frontAngles is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the front face
+     * @param backAngles is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the back face
      * @param back is a Stack where the items on the back face of the InitialCard are pushed
      */
-    public InitialCard(TypeOfCard type, Stack<Item> frontAngles, Stack<Item> backAngles, Stack<Item> back){
+    public InitialCard(TypeOfCard type, HashMap<Angle,Item> frontAngles, HashMap<Angle,Item> backAngles, Stack<Item> back){
         super(type);
-        this.frontAngles.put(Angle.HIGHLEFT, frontAngles.pop());
-        this.frontAngles.put(Angle.HIGHRIGHT, frontAngles.pop());
-        this.frontAngles.put(Angle.DOWNLEFT, frontAngles.pop());
-        this.frontAngles.put(Angle.DOWNRIGHT, frontAngles.pop());
-        this.backAngles.put(Angle.HIGHLEFT, backAngles.pop());
-        this.backAngles.put(Angle.HIGHRIGHT, backAngles.pop());
-        this.backAngles.put(Angle.DOWNLEFT, backAngles.pop());
-        this.backAngles.put(Angle.DOWNRIGHT, backAngles.pop());
+        this.frontAngles = new HashMap<>(frontAngles);
+        this.backAngles = new HashMap<>(backAngles);
+        resourcesBack = new ArrayList<>();
         while(!back.empty()){
             resourcesBack.add(back.pop());
         }

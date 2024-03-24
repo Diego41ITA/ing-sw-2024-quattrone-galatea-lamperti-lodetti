@@ -14,7 +14,7 @@ import java.util.Stack;
 
 public class GoalCard extends Card {
     private final int numOfPoints;
-    private final ArrayList<Item> listOfObjects = new ArrayList<>();
+    private final ArrayList<Item> listOfObjects;
     private final TypeOfGoalCard goalType;
     private final TypeOfPositioning positionType;
 
@@ -32,6 +32,7 @@ public class GoalCard extends Card {
         numOfPoints = points;
         this.goalType = goalType;
         this.positionType = positionType;
+        listOfObjects = new ArrayList<>();
         while (!objects.empty()){
             listOfObjects.add(objects.pop());
         }
