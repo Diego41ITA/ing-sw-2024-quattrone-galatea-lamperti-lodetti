@@ -28,4 +28,9 @@ public class Deck {
     public int getDimension(){
         return cards.size();
     }
+
+    //this method is useful when you want to save the match
+    public List<Card> getStatus(){
+        return new ArrayList<>(cards);
+    }
 }
