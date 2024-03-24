@@ -1,3 +1,9 @@
+/**
+ * @author Luca Lamperti
+ * an enumeration to implement whitch position is required to earn points in a GoalCard
+ * "EMPTY" is used in case there are no position requirements
+ */
+
 package it.polimi.ingsw.card;
 
 public enum TypeOfPositioning {
