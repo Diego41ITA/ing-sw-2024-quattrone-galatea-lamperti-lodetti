@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import it.polimi.ingsw.card.Card;
 import it.polimi.ingsw.card.GoalCard;
+import it.polimi.ingsw.card.Deck;
 
 public class Player {
     private String nickname;
