@@ -1,6 +1,6 @@
 /**
  * @author Luca Lamperti
- * define a subClass InitialCard of superclass Card
+ * define a subClass InitialCard of superClass Card
  * frontAngles is a HashMap consisting of keys to indicate the position of the corner (using the Angle enum) and values to indicate the item in the corner (using the Item enum)
  * backAngles is a HashMap consisting of keys to indicate the position of the corner(using enum Angle) and values to indicate the item in the corner(using enum Item)
  * resourcesBack is an ArrayList used to display the resources in the back box of the initialCard
@@ -10,11 +10,10 @@ package it.polimi.ingsw.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 
 public class InitialCard extends Card {
-    private final HashMap<Angle, Item> frontAngles;
-    private final HashMap<Angle, Item> backAngles;
+    private HashMap<Angle, Item> frontAngles;
+    private HashMap<Angle, Item> backAngles;
 
     private final ArrayList<Item> resourcesBack;
 
@@ -24,16 +23,13 @@ public class InitialCard extends Card {
      * @param type is the type of the card(from enum TypeOfCard)
      * @param frontAngles is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the front face
      * @param backAngles is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the back face
-     * @param back is a Stack where the items on the back face of the InitialCard are pushed
+     * @param back is a ArrayList with the items in the box of the back face of the InitialCard
      */
-    public InitialCard(TypeOfCard type, HashMap<Angle,Item> frontAngles, HashMap<Angle,Item> backAngles, Stack<Item> back){
+    public InitialCard(TypeOfCard type, HashMap<Angle,Item> frontAngles, HashMap<Angle,Item> backAngles, ArrayList<Item> back){
         super(type);
         this.frontAngles = new HashMap<>(frontAngles);
         this.backAngles = new HashMap<>(backAngles);
-        resourcesBack = new ArrayList<>();
-        while(!back.empty()){
-            resourcesBack.add(back.pop());
-        }
+        resourcesBack = new ArrayList<>(back);
     }
 
     /**

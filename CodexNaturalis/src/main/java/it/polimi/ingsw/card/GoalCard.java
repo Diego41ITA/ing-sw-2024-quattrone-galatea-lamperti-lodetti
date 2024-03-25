@@ -10,7 +10,6 @@
 package it.polimi.ingsw.card;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class GoalCard extends Card {
     private final int numOfPoints;
@@ -27,15 +26,12 @@ public class GoalCard extends Card {
      * @param positionType is the position requirement(it is "EMPTY" in case there is no position requirement)
      * @param objects is a Stack that contains the items needed to get points(this is the case of a typeOfGoalCard OBJECT or RESOURCE)
      */
-    public GoalCard(TypeOfCard type, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, Stack<Item> objects){
+    public GoalCard(TypeOfCard type, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, ArrayList<Item> objects){
         super(type);
         numOfPoints = points;
         this.goalType = goalType;
         this.positionType = positionType;
-        listOfObjects = new ArrayList<>();
-        while (!objects.empty()){
-            listOfObjects.add(objects.pop());
-        }
+        listOfObjects = new ArrayList<>(objects);
     }
 
     /**

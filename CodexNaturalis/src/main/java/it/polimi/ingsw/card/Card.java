@@ -32,14 +32,14 @@ public class Card {
     /**
      * @author Luca Lamperti
      * getter for the attribute isFront
-     * @return boolean to indicate the placement of the card (front face or back face)
+     * @return Boolean to indicate the placement of the card (front face or back face)
      */
     public Boolean getIsFront(){ return isFront;}
 
     /**
      * @author Luca Lamperti
      * getter for the attribute TypeOfCard
-     * @return TypeOfcard to indicate the type of the card
+     * @return TypeOfCard to indicate the type of the card
      */
     public TypeOfCard getType() {
         return type;
