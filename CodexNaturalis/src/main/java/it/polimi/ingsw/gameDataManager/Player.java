@@ -5,7 +5,7 @@ import java.util.Optional;
 import it.polimi.ingsw.card.Card;
 import it.polimi.ingsw.card.GoalCard;
 import it.polimi.ingsw.card.Deck;
-//*
+/**
 *    @author Lorenzo galatea
 * represents the class associated with the player
 * Nickname is the player's name and is a string
@@ -23,7 +23,7 @@ public class Player {
     private Optional<Color> optionalColor;
     private GoalCard goal;
 
-    //* 
+    /** 
     *@author Lorenzo Galatea
     * is the constructor of the class
     */
@@ -33,70 +33,70 @@ public class Player {
         this.color = color;
         this.optionalColor = optionalColor;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *is a method that returns the player's nickname
     * @return nickname a String which is the nickname of the player
     */
     public String getNick() {
         return nickname;
     }
-    //* @author Lorenzo Galatea
+    /** @author Lorenzo Galatea
     *Method for set the nickname
     *@param newNickname is the name of the player
     */
     public void setNickname(String newNickname){
         this.nickname= newNickname;
     }
-    //* @author Lorenzo Galatea
+    /** @author Lorenzo Galatea
     *method that returns the gamestation of the player
     *@return gamestation
     */
     public GameStation getGameStation(){
         return gamestation;
     }
-    //* @author Lorenzo Galatea
+    /** @author Lorenzo Galatea
     *method for set the gamestation
     *@param Gamestation
     */
     public void setGameStation(GameStation newGamestation){
         this.gamestation = newGamestation;
     }
-    //* @author Lorenzo Galatea
+    /** @author Lorenzo Galatea
     *method that return the maker of the first player
     *@return optionalColor that is the maker null or the maker black if is associated with the first player
     */
     public Optional<Color> getOptionalColor() {
         return optionalColor;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *method that set the maker black if I am the first player
     *@param optionalColor is the black maker or null
     */
     public void setOptionalColor(Optional<Color> optionalColor) {
         this.optionalColor = optionalColor;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *method return the maker associated with the player
     @return color is maker of the player
     */
     public Color getColor() {
         return color;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *setter for the attribute color
     *@param color: the maker
     */
     public void setColor(Color color) {
         this.color = color;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *getter of the attribute goal
     @return goal which is the GoalCard chosen by the player
         */
     public GoalCard getGoal() {
         return goal;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *draw a card from the TableOfDecks
     *@param card: one of the 4 cards visible in the TableOfDecks
     *@throws IllegaleStateException if the player already has 3 cards
@@ -109,7 +109,7 @@ public class Player {
                 cards.add(card);
             }
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *draw a card from one of the decks of the TableOfDecks
     *@param deck: Deck associated with TableOfDecks
     *@throws IllegaleStateException if the player already has 3 cards in his hand or the deck is empty
@@ -125,7 +125,7 @@ public class Player {
                 cards.add(card);
             }
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
     *@throws EmptyDeckException if the deck is empty
@@ -136,7 +136,7 @@ public class Player {
         }
         return cards;
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *choose the goal
     *@param goals is a list of objective cards
     *@param index is the index of the GoalCard chosen
@@ -149,7 +149,7 @@ public class Player {
             throw new IllegalArgumentException("Index out of bounds");
         }
     }
-    //*@author Lorenzo Galatea
+    /**@author Lorenzo Galatea
     *removes cards from the player's hand
     */
     public void removeCards() {
