@@ -118,7 +118,7 @@ public class Player {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
             } else {
-                if (deck.isEmpty()) {
+                if (deck.getDimension() == 0) {
                     throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
                 }
                 Card card = deck.getFirst();
