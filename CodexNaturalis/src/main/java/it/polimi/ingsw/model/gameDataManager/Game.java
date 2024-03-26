@@ -63,5 +63,5 @@ public class Game {
         this.turn = turn;
     }
 
-    public boolean isStarted(){}
+    public boolean isStarted(){return started;}
 }
