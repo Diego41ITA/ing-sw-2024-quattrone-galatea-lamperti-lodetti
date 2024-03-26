@@ -7,7 +7,7 @@
  * positionType indicates the position of the cards needed to earn points(if the TypeOfGoalCard is POSITION) or it is "EMPTY" in the case there are no position requirements
  */
 
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 import java.util.ArrayList;
 

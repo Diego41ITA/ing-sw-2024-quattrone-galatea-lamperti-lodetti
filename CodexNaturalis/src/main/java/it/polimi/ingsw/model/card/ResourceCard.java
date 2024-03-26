@@ -4,10 +4,9 @@
  * implement other classes easily; like getFreeCorner() for GameStation.
  * @author Lodetti Alessandro
  */
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ResourceCard extends Card {
     private final Map<Angle, Item> front;

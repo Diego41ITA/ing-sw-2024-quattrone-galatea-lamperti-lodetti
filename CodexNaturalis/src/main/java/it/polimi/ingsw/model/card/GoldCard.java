@@ -2,7 +2,7 @@
  * It defines how GoldCards are implemented
  * @author Lodetti Alessandro
  */
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 import java.util.*;
 public class GoldCard extends Card{

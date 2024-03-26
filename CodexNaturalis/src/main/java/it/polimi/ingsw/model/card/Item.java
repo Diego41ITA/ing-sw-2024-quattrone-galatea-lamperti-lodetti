@@ -4,7 +4,7 @@
  * represent cases of an empty corner (a corner without objects) or a hidden corner (a corner covered)
  */
 
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 public enum Item {
     VEGETABLE, ANIMAL, INSECT, MUSHROOM, RESOURCE, HIDDEN, EMPTY, POTION, FEATHER, PARCHMENT
 }

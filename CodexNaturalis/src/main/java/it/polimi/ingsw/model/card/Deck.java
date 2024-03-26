@@ -2,7 +2,7 @@
  * this class defines the deck structure as a collection of cards
  * @author Lodetti Alessandro
  */
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 import java.util.*;
 

@@ -1,8 +1,6 @@
-package it.polimi.ingsw.gameDataManager;
+package it.polimi.ingsw.model.gameDataManager;
 
-import java.util.Collection;
 import java.util.*;
-import java.util.Set;
 
 public class Game {
     private Map<Player, Boolean> players;

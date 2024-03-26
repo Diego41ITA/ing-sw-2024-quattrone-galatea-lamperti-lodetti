@@ -5,7 +5,7 @@
  * type indicates the type of the card (using the enum TypeOfCard)
  */
 
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 public class Card {
     protected Boolean isFront;
