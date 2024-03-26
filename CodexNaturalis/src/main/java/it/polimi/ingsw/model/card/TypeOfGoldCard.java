@@ -2,7 +2,7 @@
  * with this GoldCard instance.
  * @author Lodetti Alessandro
  */
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 public enum TypeOfGoldCard {
     ANGLE,

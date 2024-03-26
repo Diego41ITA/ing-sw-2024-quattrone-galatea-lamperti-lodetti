@@ -6,7 +6,7 @@
  * resourcesBack is an ArrayList used to display the resources in the back box of the initialCard
  */
 
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;

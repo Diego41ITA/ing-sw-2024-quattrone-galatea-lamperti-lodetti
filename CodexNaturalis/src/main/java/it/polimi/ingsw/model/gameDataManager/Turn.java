@@ -1,5 +1,4 @@
-package it.polimi.ingsw.gameDataManager;
-import java.util.ArrayList;
+package it.polimi.ingsw.model.gameDataManager;
 import java.util.List;
 
 

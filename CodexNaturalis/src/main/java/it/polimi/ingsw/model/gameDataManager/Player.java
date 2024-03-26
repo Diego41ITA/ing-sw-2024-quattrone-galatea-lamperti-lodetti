@@ -1,10 +1,10 @@
-package it.polimi.ingsw.gameDataManager;
+package it.polimi.ingsw.model.gameDataManager;
 import java.util.List;
 import java.util.Optional;
 
-import it.polimi.ingsw.card.Card;
-import it.polimi.ingsw.card.GoalCard;
-import it.polimi.ingsw.card.Deck;
+import it.polimi.ingsw.model.card.Card;
+import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.Deck;
 /**
 *    @author Lorenzo galatea
 * represents the class associated with the player

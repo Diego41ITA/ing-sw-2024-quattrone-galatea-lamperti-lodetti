@@ -2,7 +2,7 @@
  * This is the class that manages all the game (ongoing, suspended and ended)
  * @author Lodetti Alessandro
  */
-package it.polimi.ingsw.gameDataManager;
+package it.polimi.ingsw.model.gameDataManager;
 
 import java.util.ArrayList;
 import java.util.List;

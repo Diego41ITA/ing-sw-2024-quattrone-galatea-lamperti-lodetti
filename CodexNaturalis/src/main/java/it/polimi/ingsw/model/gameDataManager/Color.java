@@ -1,4 +1,4 @@
-package it.polimi.ingsw.gameDataManager;
+package it.polimi.ingsw.model.gameDataManager;
 
 public enum Color {
     YELLOW,

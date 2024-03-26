@@ -3,7 +3,7 @@
  * we could redefine this enum.
  * @author Lodetti Alessandro
  * */
-package it.polimi.ingsw.card;
+package it.polimi.ingsw.model.card;
 
 public enum TypeOfCard {
     ANIMAL,

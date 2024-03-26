@@ -1,4 +1,4 @@
-package it.polimi.ingsw.gameDataManager;
+package it.polimi.ingsw.model.gameDataManager;
 import java.util.HashMap;
 import java.util.Map;
 /** @author Lorenzo Galatea
