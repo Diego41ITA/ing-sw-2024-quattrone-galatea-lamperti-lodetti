@@ -44,7 +44,7 @@ public class Game {
         this.id = id;
     }
 
-    public void setPlayers(Map<Player, Boolean> players) {
+    public void setPlayers(HashMap<Player, Boolean> players) {
         this.players = players;
     }
 
