@@ -44,11 +44,11 @@ public class Game {
     }
 
     public void setPlayers(Map<Player, Boolean> players) {
-        this.players = new HashMap<Player, Boolean>();
+        this.players = players;
     }
 
     public void setPointTable(PointTable pointTable) {
-        this.pointTable = new PointTable();
+        this.pointTable = pointTable;
     }
 
     public void setStarted(boolean started) {
@@ -56,10 +56,10 @@ public class Game {
     }
 
     public void setTableOfDecks(TableOfDecks tableOfDecks) {
-        this.tableOfDecks = new TableOfDecks();
+        this.tableOfDecks = tableOfDecks;
     }
 
     public void setTurn(Turn turn) {
-        this.turn = new Turn();
+        this.turn = turn;
     }
 }
