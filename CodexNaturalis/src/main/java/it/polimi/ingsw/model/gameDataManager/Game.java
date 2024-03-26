@@ -74,4 +74,8 @@ public class Game {
     public boolean isConnected(Player player){
         return players.get(player);
     }
+
+    public void addPlayer(Player player) {
+        players.put(player, true);
+    }
 }
