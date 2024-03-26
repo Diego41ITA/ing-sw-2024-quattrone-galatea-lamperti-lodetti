@@ -91,16 +91,10 @@ public class ResourceCard extends Card {
      */
     public List<Item> getFreeItem(){
         Map<Angle, Item> m = new HashMap<>(this.getFreeAngleAndContents());
-        List<Item> l = new ArrayList<Item>();
+        List<Item> l = new ArrayList<>();
         //it could be done with functional programming.
         for(Angle a: m.keySet())
-            if(m.get(a) != Item.HIDDEN)
-                l.add(m.get(a));
+            l.add(m.get(a));
         return l;
     }
-
-    /**
-     * metodo per il salvataggio della carta.
-     */
-    public void save(){}
 }
