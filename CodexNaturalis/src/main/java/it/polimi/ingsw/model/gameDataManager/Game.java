@@ -10,6 +10,7 @@ public class Game {
     private boolean started;
     private String id;
     private Turn turn;
+    private ArrayList<Player> playersOrder;
 
     public Boolean getStarted() {
         return this.started;
@@ -62,7 +63,9 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = turn;
     }
-    public ArrayList<Player> getPlayerOrder(){
-        ;
+    public ArrayList<Player> getPlayersOrder(){
+        this.playersOrder.addAll(this.players.keySet());
+        Collections.shuffle(playersOrder);
+        return this.playersOrder;
     }
 }
