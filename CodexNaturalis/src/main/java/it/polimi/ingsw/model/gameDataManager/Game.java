@@ -8,6 +8,7 @@ public class Game {
     private PointTable pointTable;
     private Player winner;
     private boolean started;
+    private boolean finished;
     private String id;
     private Turn turn;
     private ArrayList<Player> playersOrder;
@@ -77,5 +78,9 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.put(player, true);
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }
