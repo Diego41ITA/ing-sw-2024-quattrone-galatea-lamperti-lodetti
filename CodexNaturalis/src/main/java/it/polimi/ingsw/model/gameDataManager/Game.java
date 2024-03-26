@@ -63,9 +63,11 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = turn;
     }
-    public ArrayList<Player> getPlayersOrder(){
+    public ArrayList<Player> generatePlayersOrder(){
         this.playersOrder.addAll(this.players.keySet());
         Collections.shuffle(playersOrder);
         return this.playersOrder;
     }
+
+    public boolean isStarted(){return started;}
 }
