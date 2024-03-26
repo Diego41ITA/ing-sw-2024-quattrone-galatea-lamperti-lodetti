@@ -62,4 +62,7 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = turn;
     }
+    public ArrayList<Player> getPlayerOrder(){
+        ;
+    }
 }
