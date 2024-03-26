@@ -1,7 +1,7 @@
 package it.polimi.ingsw.gameDataManager;
 
 import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 import java.util.Set;
 
 public class Game {
@@ -46,67 +46,7 @@ public class Game {
     }
 
     public void setPlayers(Map<Player, Boolean> players) {
-        this.players = new Map<Player, Boolean>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean containsKey(Object key) {
-                return false;
-            }
-
-            @Override
-            public boolean containsValue(Object value) {
-                return false;
-            }
-
-            @Override
-            public Boolean get(Object key) {
-                return null;
-            }
-
-            @Override
-            public Boolean put(Player key, Boolean value) {
-                return null;
-            }
-
-            @Override
-            public Boolean remove(Object key) {
-                return null;
-            }
-
-            @Override
-            public void putAll(Map<? extends Player, ? extends Boolean> m) {
-
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Set<Player> keySet() {
-                return null;
-            }
-
-            @Override
-            public Collection<Boolean> values() {
-                return null;
-            }
-
-            @Override
-            public Set<Entry<Player, Boolean>> entrySet() {
-                return null;
-            }
-        };
+        this.players = new HashMap<Player, Boolean>();
     }
 
     public void setPointTable(PointTable pointTable) {
