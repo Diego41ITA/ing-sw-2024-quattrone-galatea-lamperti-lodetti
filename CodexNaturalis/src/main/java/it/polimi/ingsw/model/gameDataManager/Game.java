@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.gameDataManager;
 import java.util.*;
 
 public class Game {
-    private Map<Player, Boolean> players;
+    private HashMap<Player, Boolean> players;
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
     private Player winner;
@@ -70,4 +70,8 @@ public class Game {
     }
 
     public boolean isStarted(){return started;}
+
+    public boolean isConnected(Player player){
+        return players.get(player);
+    }
 }
