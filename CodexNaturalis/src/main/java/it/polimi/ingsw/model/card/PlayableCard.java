@@ -114,6 +114,10 @@ public abstract class PlayableCard extends Card{
         return new HashMap<>(this.back);
     }
 
+    /**
+     * it returns the backResource as a list.
+     * @return a list of Item, which is a copy of "PlayableCard.backResource"
+     */
     protected List<Item> getAListOfBackResource(){
         return new ArrayList<>(backResource);
     }
