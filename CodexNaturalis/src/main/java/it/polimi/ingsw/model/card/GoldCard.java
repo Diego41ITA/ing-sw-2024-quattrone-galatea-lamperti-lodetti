@@ -5,14 +5,18 @@
 package it.polimi.ingsw.model.card;
 
 import java.util.*;
-public class GoldCard extends Card{
-    private Map<Angle, Item> front;
-    private Map<Angle, Item> back;
+
+/**
+ * @author Lodetti Alessandro
+ * It defines how GoldCards are implemented
+ */
+public class GoldCard extends PlayableCard{
+
     private final List<Item> neededResources;
     private final int numOfPoints;
-    private final Item item;
+    private final Item box;
     private final TypeOfGoldCard typeOfGoldCard;
-    private final Item backResource;
+
 
     /**
      * it is the only constructor for this class
@@ -20,28 +24,23 @@ public class GoldCard extends Card{
      * @param back same but for the back.
      * @param points these are the points that a player can earn from this card.
      * @param backResource defines the permanent resource in the back.
-     * @param item  it is the item that a player needs to earn points.
+     * @param box  it is the item that a player needs to earn points.
      * @param typeGold  indicates one of the type that a gold card can assume.
      * @param resources indicates the resource that a player need to place this card.
      * @param typeCard  refer to the super class.
      */
-    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points,Item backResource, Item item, TypeOfGoldCard typeGold, List<Item> resources, TypeOfCard typeCard)
+    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource, Item box,
+                    TypeOfGoldCard typeGold, List<Item> resources, TypeOfCard typeCard, boolean isFront)
     {
-        super(typeCard);
-        this.front = new HashMap<>(front);
-        this.back = new HashMap<>(back);
+        super(typeCard, isFront, front, back, backResource);
         this.numOfPoints = points;
         this.typeOfGoldCard = typeGold;
-        this.backResource = backResource;
-        this.item = item;
+        this.box = box;
         this.neededResources = new ArrayList<>(resources);
     }
 
     public int getNumOfPoints() {
         return numOfPoints;
-    }
-    public Item getBackResource() {
-        return backResource;
     }
     public TypeOfGoldCard getTypeOfGoldCard() {
         return typeOfGoldCard;
@@ -49,13 +48,11 @@ public class GoldCard extends Card{
     public List<Item> getNeededResources(){
         return new ArrayList<>(neededResources);
     }
-    public Item getItem(){
-        return item;
+    public Item getBox(){
+        return box;
     }
-
-    public List<Item> getFreeItem(){
-        //returns free item in the corner.
+    public Item getBackResource(){
+        return this.getAListOfBackResource().getFirst();
     }
-
 
 }
