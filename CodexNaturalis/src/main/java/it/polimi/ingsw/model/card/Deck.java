@@ -21,13 +21,13 @@ public class Deck {
      * in this implementation the methods removes the last card, in this way it is faster.
      * @return and REMOVES the first card (which is the last in the list)
      */
-    public Card getFirst() throws NoMoreCardEcxeption{
+    public Card getFirst() throws IllegalStateException{
         int index = this.getDimension();
         if(index > 0) {
             return cards.remove(index - 1); //return the last card
         }
         else
-            throw new NoMoreCardEcxeption ("the deck is empty");
+            throw new IllegalStateException ("the deck is empty");
     }
 
     /**
