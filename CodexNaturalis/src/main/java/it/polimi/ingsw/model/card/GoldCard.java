@@ -44,7 +44,7 @@ public class GoldCard extends PlayableCard{
      * the method return the number of point that this card gives
      * @return the value of "GoldCard.numOfPoints"
      */
-    public int getNumOfPoints() {
+    public int getNumberOfPoints() {
         return numOfPoints;
     }
 
