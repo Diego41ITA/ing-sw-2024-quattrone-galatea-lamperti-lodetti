@@ -1,3 +1,7 @@
+package it.polimi.ingsw.model.card;
+
+import java.util.*;
+
 /**
  * @author Luca Lamperti
  * define a subClass GoalCard of superclass Card
@@ -6,14 +10,9 @@
  * GoalType indicates the type of requirement(from the enum TypeOfGoalCard)
  * positionType indicates the position of the cards needed to earn points(if the TypeOfGoalCard is POSITION) or it is "EMPTY" in the case there are no position requirements
  */
-
-package it.polimi.ingsw.model.card;
-
-import java.util.ArrayList;
-
 public class GoalCard extends Card {
     private final int numOfPoints;
-    private final ArrayList<Item> listOfObjects;
+    private final List<Item> listOfObjects;
     private final TypeOfGoalCard goalType;
     private final TypeOfPositioning positionType;
 
@@ -26,8 +25,8 @@ public class GoalCard extends Card {
      * @param positionType is the position requirement(it is "EMPTY" in case there is no position requirement)
      * @param objects is a Stack that contains the items needed to get points(this is the case of a typeOfGoalCard OBJECT or RESOURCE)
      */
-    public GoalCard(TypeOfCard type, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, ArrayList<Item> objects){
-        super(type);
+    public GoalCard(TypeOfCard type, boolean isFront, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, ArrayList<Item> objects){
+        super(type, isFront);
         numOfPoints = points;
         this.goalType = goalType;
         this.positionType = positionType;
