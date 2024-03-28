@@ -11,7 +11,7 @@ public class InitialCard extends PlayableCard {
      * @author Luca Lamperti
      * the constructor of the InitialCard class
      * @param type is the type of the card(from enum TypeOfCard)
-     * @param isFront indicates how the card is displayed
+     * @param isFront shows how the card is displayed
      * @param front is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the front face
      * @param back is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the back face
      * @param backResource is a ArrayList with the items in the box of the back face of the InitialCard

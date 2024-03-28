@@ -27,7 +27,8 @@ public class GoldCard extends PlayableCard{
      * @param box  it is the item that a player needs to earn points.
      * @param typeGold  indicates one of the type that a gold card can assume.
      * @param resources indicates the resource that a player need to place this card.
-     * @param typeCard  refer to the super class.
+     * @param typeCard  refer to the super class attribute
+     * @param isFront refer to the super class attribute
      */
     public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource, Item box,
                     TypeOfGoldCard typeGold, List<Item> resources, TypeOfCard typeCard, boolean isFront)

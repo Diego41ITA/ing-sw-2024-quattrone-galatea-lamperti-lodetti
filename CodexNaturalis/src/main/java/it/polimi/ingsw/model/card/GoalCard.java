@@ -20,6 +20,7 @@ public class GoalCard extends Card {
      * @author Luca Lamperti
      * the constructor of the GoalCard class
      * @param type is the type of the GoalCard(from enum TypeOfCard)
+     * @param isFront show how the card is displayed
      * @param points are the points on the GoalCard
      * @param goalType is the requirement type of the GoalCard
      * @param positionType is the position requirement(it is "EMPTY" in case there is no position requirement)
