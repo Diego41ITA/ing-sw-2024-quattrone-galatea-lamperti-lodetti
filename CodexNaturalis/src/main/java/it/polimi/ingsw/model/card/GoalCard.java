@@ -28,10 +28,10 @@ public class GoalCard extends Card {
      */
     public GoalCard(TypeOfCard type, boolean isFront, int points, TypeOfGoalCard goalType, TypeOfPositioning positionType, ArrayList<Item> objects){
         super(type, isFront);
-        numOfPoints = points;
+        this.numOfPoints = points;
         this.goalType = goalType;
         this.positionType = positionType;
-        listOfObjects = new ArrayList<>(objects);
+        this.listOfObjects = new ArrayList<>(objects);
     }
 
     /**
@@ -39,7 +39,7 @@ public class GoalCard extends Card {
      * getter for the attribute NumOfPoints
      * @return an int as the points
      */
-    public int getNumOfPoints(){
+    public int getNumberOfPoints(){
         return numOfPoints;
     }
 
