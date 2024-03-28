@@ -14,6 +14,16 @@ public abstract class PlayableCard extends Card{
     private final Map<Angle, Item> front;
     private final Map<Angle, Item> back;
     private final List<Item> backResource;
+
+    /**
+     * this is the constructor for PlayableCard, at the first line it calls the super constructor with two parameters.
+     * Be careful that the parameters have to be correctly defined.
+     * @param type refers to the super class attribute
+     * @param isFront refers to the super class attribute
+     * @param front is the map used to initialize "PlayableCard.front"
+      * @param back is the map used to initialize "PlayableCard.back"
+     * @param backResource is the list used to initialize "PlayableCard.backResource"
+     */
     PlayableCard(TypeOfCard type, boolean isFront, Map<Angle, Item> front, Map<Angle, Item> back, List<Item> backResource)
     {
         super(type, isFront);
