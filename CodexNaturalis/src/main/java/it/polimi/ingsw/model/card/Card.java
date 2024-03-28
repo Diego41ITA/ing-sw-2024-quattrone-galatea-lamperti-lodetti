@@ -1,15 +1,14 @@
+package it.polimi.ingsw.model.card;
+
 /**
  * @author Luca Lamperti
  * define a class hierarchy with 'Card' as the superclass of 'InitialCard', 'GoalCard', 'GoldCard', and 'ResourceCard
  * isFront indicates the placement of the card (front face or back face)
  * type indicates the type of the card (using the enum TypeOfCard)
  */
-
-package it.polimi.ingsw.model.card;
-
 public class Card {
-    protected Boolean isFront;
-    protected TypeOfCard type;
+    protected boolean isFront;
+    protected final TypeOfCard type;
 
     /**
      * @author Luca Lamperti
@@ -17,7 +16,7 @@ public class Card {
      * @param type specifies the type of the card
      */
     public Card(TypeOfCard type){
-        isFront = true;
+        this.isFront = true;
         this.type = type;
     }
 
@@ -26,7 +25,7 @@ public class Card {
      * invert the attribute isFront
      */
     public void flip(){
-        isFront = !isFront;
+        this.isFront = !isFront;
     }
 
     /**
@@ -34,7 +33,7 @@ public class Card {
      * getter for the attribute isFront
      * @return Boolean to indicate the placement of the card (front face or back face)
      */
-    public Boolean getIsFront(){ return isFront;}
+    public Boolean IsFront(){ return this.isFront;}
 
     /**
      * @author Luca Lamperti
