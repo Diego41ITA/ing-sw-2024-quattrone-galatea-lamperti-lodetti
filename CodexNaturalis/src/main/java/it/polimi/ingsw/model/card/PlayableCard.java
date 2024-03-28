@@ -29,7 +29,7 @@ public abstract class PlayableCard extends Card{
      */
     public Map<Angle, Item> getFreeAngleAndContents() {
         Map<Angle, Item> newMap = new HashMap<>();
-        if(isFront)
+        if(isFront())
             newMap.putAll(this.front);
         else
             newMap.putAll(this.back);
@@ -65,7 +65,7 @@ public abstract class PlayableCard extends Card{
      * @return true if the corner is successfully hidden.
      */
     public boolean hideAngle(Angle angle){
-        if(isFront){
+        if(isFront()){
             if (!front.containsKey(angle) || front.get(angle) == Item.HIDDEN)
                 return false;
             front.replace(angle, Item.HIDDEN);
@@ -83,7 +83,7 @@ public abstract class PlayableCard extends Card{
      */
     public List<Angle> getHiddenCorner(){
         List<Angle> l = new ArrayList<>();
-        if(isFront) {
+        if(isFront()) {
             for (Angle a : front.keySet()) {
                 if (front.get(a) == Item.HIDDEN)
                     l.add(a);

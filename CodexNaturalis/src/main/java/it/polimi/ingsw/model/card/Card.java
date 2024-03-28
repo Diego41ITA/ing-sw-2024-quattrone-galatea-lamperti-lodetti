@@ -6,9 +6,9 @@ package it.polimi.ingsw.model.card;
  * isFront indicates the placement of the card (front face or back face)
  * type indicates the type of the card (using the enum TypeOfCard)
  */
-public class Card {
-    protected boolean isFront;
-    protected final TypeOfCard type;
+public abstract class Card {
+    private boolean isFront;
+    private final TypeOfCard type;
 
     /**
      * @author Luca Lamperti
@@ -33,7 +33,7 @@ public class Card {
      * getter for the attribute isFront
      * @return Boolean to indicate the placement of the card (front face or back face)
      */
-    public Boolean IsFront(){ return this.isFront;}
+    public boolean isFront(){ return this.isFront;}
 
     /**
      * @author Luca Lamperti
