@@ -1,17 +1,17 @@
-/**
- * this class defines the deck structure as a collection of cards
- * @author Lodetti Alessandro
- */
 package it.polimi.ingsw.model.card;
 
 import java.util.*;
 
+/**
+ * this class defines the deck structure as a collection of cards
+ * @author Lodetti Alessandro
+ */
 public class Deck {
-    private List<Card> cards;
+    private final List<Card> cards;
 
     /**
      * this is the only constructor
-     * @param deck it is simply the card collection.
+     * @param deck is simply the card collection.
      */
     public Deck(List<Card> deck){
         this.cards = new ArrayList<>(deck);
@@ -19,24 +19,36 @@ public class Deck {
 
     /**
      * in this implementation the methods removes the last card, in this way it is faster.
-     * @return and REMOVES the first card
+     * @return and REMOVES the first card (which is the last in the list)
      */
     public Card getFirst() throws NoMoreCardEcxeption{
-        int index = this.getDimension() - 1;
-        if(index > 0)
-            return cards.remove(index); //return the last card
+        int index = this.getDimension();
+        if(index > 0) {
+            return cards.remove(index - 1); //return the last card
+        }
         else
             throw new NoMoreCardEcxeption ("the deck is empty");
     }
 
+    /**
+     * this method is used to shuffle the deck randomly
+     */
     public void shuffle(){
         Collections.shuffle(cards);
     }
 
+    /**
+     * this method return the size of the current state of attribute deck
+     * @return a primitive type which correspond to the deck size.
+     */
     public int getDimension(){
         return cards.size();
     }
 
+    /**
+     * it checks the deck emptiness
+     * @return true only if the deck is actually empty, false otherwise.
+     */
     public boolean isEmpty(){
             return cards.isEmpty();
     }
