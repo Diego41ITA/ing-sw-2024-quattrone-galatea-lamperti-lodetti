@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.gameDataManager;
+import it.polimi.ingsw.model.card.*;
 import java.util.*;
 
 /** @author 
@@ -8,7 +9,7 @@ class GameStation {
     private Map<Card, List<Coord>> playedCards;
 
     public GameStation() {
-        playedCards = new Map<>;
+        playedCards = new HashMap<>();
     }
 
     public placeCard(){
