@@ -39,18 +39,42 @@ public class GoldCard extends PlayableCard{
         this.neededResources = new ArrayList<>(resources);
     }
 
+    /**
+     * the method return the number of point that this card gives
+     * @return the value of "GoldCard.numOfPoints"
+     */
     public int getNumOfPoints() {
         return numOfPoints;
     }
+
+    /**
+     * it's for knowing how to make points with this card.
+     * @return the type of this particular GoldCard
+     */
     public TypeOfGoldCard getTypeOfGoldCard() {
         return typeOfGoldCard;
     }
+
+    /**
+     * Indicates the resources that the player should have in order to place this card
+     * @return a list of item.
+     */
     public List<Item> getNeededResources(){
         return new ArrayList<>(neededResources);
     }
+
+    /**
+     * Return the item in the box
+     * @return an item
+     */
     public Item getBox(){
         return box;
     }
+
+    /**
+     * "redefine" the super method in order to return only an item
+     * @return an item not a list
+     */
     public Item getBackResource(){
         return this.getAListOfBackResource().getFirst();
     }
