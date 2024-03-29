@@ -6,14 +6,15 @@ public class Game {
     private HashMap<Player, Boolean> players;
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
-    private Player winner;
+    private Player winner; //we can remove it.
     private boolean started;
+    private boolean suspended;
     private boolean finished;
     private String id;
     private Turn turn;
     private ArrayList<Player> playersOrder;
 
-    public Boolean getStarted() {
+    public boolean isStarted() {
         return this.started;
     }
 
@@ -70,8 +71,6 @@ public class Game {
         return this.playersOrder;
     }
 
-    public boolean isStarted(){return started;}
-
     public boolean isConnected(Player player){
         return players.get(player);
     }
@@ -80,7 +79,6 @@ public class Game {
         players.put(player, true);
     }
 
-    public boolean isFinished() {
-        return finished;
-    }
+    public boolean isSuspended(){return suspended;}
+    public boolean isFinished(){return finished;}
 }
