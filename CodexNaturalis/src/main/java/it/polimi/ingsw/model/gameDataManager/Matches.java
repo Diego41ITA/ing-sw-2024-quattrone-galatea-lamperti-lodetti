@@ -28,24 +28,18 @@ public class Matches {
     }
 
     /**
-     * this method adds a game to the list, if the game is already present it does not add it.
+     * this method adds a game to the list, if the game is already present it does not add it. The controller can use
+     * this method when only some game crashed, and it wants to restore them.
      * @param game it is the new game
-     * @return returns a boolean: true if the game is correctly added otherwise false.
      */
-    public boolean addGame(Game game){
+    public void addGame(Game game) throws IllegalStateException{
 
         if(games.contains(game))
-            return false;
+            throw new IllegalStateException();
         else {
-            return games.add(game);
+            games.add(game);
         }
     }
-
-    private void addNewGame(){
-        Game g = new Game();
-        games.add(g);
-    }
-
 
     /**
      * a method that helps to know which games are waiting for players.
@@ -66,40 +60,48 @@ public class Matches {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * this method allows to join a random game
+     * @param player is the only parameter and indicates the player that wants to play
+     */
     public synchronized void joinRandomGame(Player player){
-        this.games.stream().filter(game -> !game.isStarted())
-                .findFirst()
-                .ifPresent(game -> game.addPlayer(player));
+        Optional <Game> g = this.games.stream()
+                .filter(game -> (!game.isStarted() && game.checkName(player.getNick())))
+                .findFirst();
 
+        if(g.isPresent())
+            g.get().addPlayer(player);
+        else{
+            //a new game should be created.
+            Game newGame = new Game();
+
+            //define a new game id
+            int n = this.games.size() + 1;
+            newGame.setId("game n°: " + n);
+
+            this.addGame(newGame);  //add an empty game to games
+            newGame.addPlayer(player);
+        }
 
     }
-    public void joinGame(String gameId){
-
-    }
-
-    public void joinSuspendedGame(String gameId, String name){
-
-    }
-
-
-
-
 
     /**
-     * metodo da discutere perchè hanno detto che il nome deve essere diverso all'interno della partita e
-     * non di tutte le partite. Questo controllo lo può fare Game.
-     * @param name the name to check.
-     * @return true only if the name is free.
+     * this method allows to join a specific game; it has a try-catch block to catch the eventual IlligalStateException
+     * thrown by addPlayer().
+     * Maybe the try-catch could be added to the controller and there the joinRandomGame() could be called.
+     * @param gameId it's the key of the game
+     * @param player it's the player that wants to join the game.
      */
-    public boolean checkName(String name){
-        return false;
-    }
-
-    public boolean insertName(String name){
-        return true;
-    }
-
-    public void findSavedGame(String id){
-
+    public synchronized void joinGame(String gameId, Player player) {
+        try {
+            this.games.stream().filter(g -> g.getId().equals(gameId))
+                    .findFirst()
+                    .ifPresent(g -> g.addPlayer(player));
+            System.out.println("you successfully joined the desired lobby!");
+        } catch (IllegalStateException e) {
+            System.out.println("4 player are currently playing in the required lobby.\n" +
+                    " You'll be added to a random lobby.");
+            joinRandomGame(player);
+        }
     }
 }
