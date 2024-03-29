@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.gameDataManager;
 import java.util.*;
 
 public class Game {
-    private HashMap<Player, Boolean> players;
+    private Map<Player, Boolean> players;
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
     private Player winner; //we can remove it.
@@ -12,10 +12,17 @@ public class Game {
     private boolean finished;
     private String id;
     private Turn turn;
-    private ArrayList<Player> playersOrder;
+    private List<Player> playersOrder;
 
     public boolean isStarted() {
         return this.started;
+    }
+    public boolean checkName(String name){
+        for(Player p: players.keySet()){
+            if(p.getNick().equals(name))
+                return false;
+        }
+        return true;
     }
 
     public Map<Player, Boolean> getPlayers() {
