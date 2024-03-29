@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  */
 public class Matches {
     private final List<Game> games;
+    private static int number = 0;
 
     /**
      * it builds an empty ArrayList
@@ -38,6 +39,7 @@ public class Matches {
             throw new IllegalStateException();
         else {
             games.add(game);
+            number = number + 1;
         }
     }
 
@@ -74,12 +76,9 @@ public class Matches {
         else{
             //a new game should be created.
             Game newGame = new Game();
-
+            this.addGame(newGame);
             //define a new game id
-            int n = this.games.size() + 1;
-            newGame.setId("game n°: " + n);
-
-            this.addGame(newGame);  //add an empty game to games
+            newGame.setId("game n°: " + number);
             newGame.addPlayer(player);
         }
 
