@@ -44,6 +44,24 @@ public class Matches {
     }
 
     /**
+     * when a game ends need to be removed
+     * @param gameId the id of the finished game
+     * @throws IllegalStateException this is thrown when the gameId does not match.
+     */
+    public void removeGame(String gameId) throws IllegalStateException {
+        Optional<Game> g = this.games.stream()
+                .filter(game -> game.getId().equals(gameId))
+                .findFirst();
+
+        if(g.isPresent()){
+            this.games.remove(g.get());
+        }
+        else{
+            throw new IllegalStateException();
+        }
+    }
+
+    /**
      * a method that helps to know which games are waiting for players.
      * @return a List of String: the gameID.
      */
