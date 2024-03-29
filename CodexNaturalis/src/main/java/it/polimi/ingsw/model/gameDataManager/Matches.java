@@ -86,7 +86,7 @@ public class Matches {
     }
 
     /**
-     * this method allows to join a specific game; it has a try-catch block to catch the eventual IlligalStateException
+     * this method allows to join a specific game; it has a try-catch block to catch the eventual IllegalStateException
      * thrown by addPlayer().
      * Maybe the try-catch could be added to the controller and there the joinRandomGame() could be called.
      * @param gameId it's the key of the game
