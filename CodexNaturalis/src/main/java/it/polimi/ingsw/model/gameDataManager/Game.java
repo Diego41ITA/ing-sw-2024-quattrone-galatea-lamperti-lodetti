@@ -82,7 +82,15 @@ public class Game {
         return players.get(player);
     }
 
-    public void addPlayer(Player player) {
+
+    /**
+     * @author Lodetti Alessandro
+     * This method add a player to this game only if the number of current player is less then 4
+     * @param player the new player
+     */
+    public void addPlayer(Player player) throws IllegalStateException {
+        if(players.size() >= 4)
+            throw new IllegalStateException();
         players.put(player, true);
     }
 
