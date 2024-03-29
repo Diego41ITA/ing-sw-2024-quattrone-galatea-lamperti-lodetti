@@ -14,6 +14,8 @@ public class Game {
     private Turn turn;
     private List<Player> playersOrder;
 
+    //need to add constructors: one for the new game and one for the already started game.
+
     public boolean isStarted() {
         return this.started;
     }
@@ -92,6 +94,8 @@ public class Game {
         if(players.size() >= 4)
             throw new IllegalStateException();
         players.put(player, true);
+        if(players.size() == 4)
+            this.started = true;
     }
 
     public boolean isSuspended(){return suspended;}
