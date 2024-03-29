@@ -89,6 +89,7 @@ public class Game {
      * @author Lodetti Alessandro
      * This method add a player to this game only if the number of current player is less then 4
      * @param player the new player
+     * @throws IllegalStateException thrown if there are already 4 players
      */
     public void addPlayer(Player player) throws IllegalStateException {
         if(players.size() >= 4)

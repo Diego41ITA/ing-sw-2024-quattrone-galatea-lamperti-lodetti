@@ -32,6 +32,7 @@ public class Matches {
      * this method adds a game to the list, if the game is already present it does not add it. The controller can use
      * this method when only some game crashed, and it wants to restore them.
      * @param game it is the new game
+     * @throws IllegalStateException is thrown if the game is already present
      */
     public void addGame(Game game) throws IllegalStateException{
 
