@@ -74,7 +74,7 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = turn;
     }
-    public ArrayList<Player> generatePlayersOrder(){
+    public List<Player> generatePlayersOrder(){
         this.playersOrder.addAll(this.players.keySet());
         Collections.shuffle(playersOrder);
         return this.playersOrder;
