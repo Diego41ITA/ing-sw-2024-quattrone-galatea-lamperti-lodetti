@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.gameDataManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class Player {
         this.color = color;
         this.optionalColor = optionalColor;
     }
+
     /**@author Lorenzo Galatea
     *is a method that returns the player's nickname
     * @return nickname a String which is the nickname of the player
@@ -134,7 +136,7 @@ public class Player {
         if (cards.isEmpty()) {
             throw new EmptyDeckException("Il mazzo è vuoto");
         }
-        return cards;
+        return new ArrayList<>(cards);
     }
     /**@author Lorenzo Galatea
     *choose the goal
