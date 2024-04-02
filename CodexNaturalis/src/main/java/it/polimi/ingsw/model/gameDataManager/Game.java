@@ -13,7 +13,6 @@ public class Game {
     private boolean finished;
     private String id;
     private Turn turn;
-    private List<Player> playersOrder;
 
     //need to add constructors: one for the new game and one for the already started game.
 
@@ -75,16 +74,10 @@ public class Game {
     public void setTurn(Turn turn) {
         this.turn = turn;
     }
-    public List<Player> generatePlayersOrder(){
-        this.playersOrder.addAll(this.players.keySet());
-        Collections.shuffle(playersOrder);
-        return this.playersOrder;
-    }
 
     public boolean isConnected(Player player){
         return players.get(player);
     }
-
 
     /**
      * @author Lodetti Alessandro
