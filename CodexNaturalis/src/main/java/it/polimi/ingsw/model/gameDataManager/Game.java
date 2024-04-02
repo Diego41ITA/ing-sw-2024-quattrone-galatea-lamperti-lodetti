@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Game {
     private Map<Player, Boolean> players;
+    private int maxNumberPlayer;
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
     private Player winner; //we can remove it.
@@ -92,10 +93,10 @@ public class Game {
      * @throws IllegalStateException thrown if there are already 4 players
      */
     public void addPlayer(Player player) throws IllegalStateException {
-        if(players.size() >= 4)
+        if(players.size() >= this.maxNumberPlayer)
             throw new IllegalStateException();
         players.put(player, true);
-        if(players.size() == 4)
+        if(players.size() == this.maxNumberPlayer)
             this.started = true;
     }
 
