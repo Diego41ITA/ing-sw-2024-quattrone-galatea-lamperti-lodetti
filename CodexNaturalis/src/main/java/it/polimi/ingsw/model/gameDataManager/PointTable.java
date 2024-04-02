@@ -7,7 +7,7 @@ points represents a map where each marker has a score associated with it
 */
 
 public class PointTable {
-    private Map<Color, Integer> points;
+    private final Map<Color, Integer> points;       //maybe Map<Player, int> points;
     /** @author Lorenzo Galatea
     *is the constructor of the PointTable class
         */
