@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
 
+import java.awt.*;
 import java.util.*;
 
 public class Game {
@@ -9,11 +10,25 @@ public class Game {
     private PointTable pointTable;
     private Player winner; //we can remove it.
     private Status status;
-    private String id;
+    private final String id;
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
 
+    /**
+     * @author Lodetti Alessandro
+     * this the only constructor available for this class. It needs one parameter
+     * @param id it is a String, and it is the key value of an object Game
+     */
+    public Game(String id){
+        this.players = new HashMap<>();
+        this.maxNumberPlayer = 0;
+        this.tableOfDecks = new TableOfDecks();
+        this.pointTable = new PointTable();
+        this.status = Status.WAITING;
+        this.turn = null;
+        this.id = id;
+    }
 
     /**
      * @author Lodetti Alessandro
@@ -33,6 +48,9 @@ public class Game {
         return new HashMap<>(players);
     }
 
+    public int getMaxNumberPlayer(){
+        return this.maxNumberPlayer;
+    }
     public Player getWinner() {
         return this.winner;
     }
@@ -53,11 +71,6 @@ public class Game {
         return this.turn;
     }
 
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setPlayers(HashMap<Player, Boolean> players) {
         this.players = players;
     }
@@ -73,6 +86,15 @@ public class Game {
 
     public void setTurn(Turn turn) {
         this.turn = turn;
+    }
+
+    /**
+     * @author Lodetti Alessandro
+     * this method sets the maximum number of player that can join this lobby
+     * @param num it's the maximum number of player
+     */
+    public void setMaxNumberPlayer(int num){
+        this.maxNumberPlayer = num;
     }
 
     /**
