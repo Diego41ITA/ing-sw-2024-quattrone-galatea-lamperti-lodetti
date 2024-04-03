@@ -40,22 +40,20 @@ public class TableOfDecks {
         return new ArrayList<Card>(goals);
 
     }
-    
+
     public setcards(Deck deckResource, Deck deckGold, Card drawedCard){//lasciare vedere regole
         if (cards.isEmpty()) {
             cards.add(deckResource.getFirst());
             cards.add(deckResource.getFirst());
             cards.add(deckGold.getFirst());
             cards.add(deckGold.getFirst());
-            
+
         } else if (newCard != null) {
             if (drawedCard.getType().equals(CardType.RESOURCE)) {
                 cards.add(deckResource.getFirst());
             } else if (newCard.getType().equals(CardType.GOLD)) {
                 cards.add(deckGold.getFirst());
             }
-        }
-            
         }
     }
 
