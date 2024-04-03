@@ -6,6 +6,7 @@ import java.util.Optional;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.Deck;
+import it.polimi.ingsw.model.exceptions.EmptyDeckException;
 /**
 *    @author Lorenzo galatea
 * represents the class associated with the player
