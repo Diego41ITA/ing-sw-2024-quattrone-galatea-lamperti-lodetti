@@ -67,7 +67,7 @@ public class Matches {
      * @return a List of String: the gameID.
      */
     public List<String> getGamesNotStartedYet(){
-        return games.stream().filter(game -> !game.isStarted())
+        return games.stream().filter(game -> game.getStatus() == Status.WAITING)
                 .map(Game::getId)
                 .collect(Collectors.toList());
     }
@@ -76,7 +76,7 @@ public class Matches {
      * @return a list of Game.
      */
     public List<String> getSuspendedGames(){
-        return games.stream().filter(Game::isSuspended)
+        return games.stream().filter(game -> game.getStatus() == Status.SUSPENDED)
                 .map(Game::getId)
                 .collect(Collectors.toList());
     }
@@ -87,7 +87,7 @@ public class Matches {
      */
     public synchronized void joinRandomGame(Player player){
         Optional <Game> g = this.games.stream()
-                .filter(game -> (!game.isStarted() && game.checkName(player.getNick())))
+                .filter(game -> (game.getStatus() == Status.WAITING && game.checkName(player.getNick())))
                 .findFirst();
 
         if(g.isPresent())
@@ -112,7 +112,8 @@ public class Matches {
      */
     public synchronized void joinGame(String gameId, Player player) {
         try {
-            this.games.stream().filter(g -> g.getId().equals(gameId))
+            this.games.stream()
+                    .filter(g -> g.getId().equals(gameId) && g.checkName(player.getNick()))
                     .findFirst()
                     .ifPresent(g -> g.addPlayer(player));
             System.out.println("you successfully joined the desired lobby!");
