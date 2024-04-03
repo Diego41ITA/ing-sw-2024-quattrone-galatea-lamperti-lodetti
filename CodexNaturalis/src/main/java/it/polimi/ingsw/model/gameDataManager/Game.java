@@ -10,7 +10,7 @@ public class Game {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
     private Map<Player, Boolean> players;
     /**the maximum number of players that can partecipate to a game. */
-    private int maxNumberPlayer;
+    private final int maxNumberPlayer=4;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
     private TableOfDecks tableOfDecks;
     /**an object representing the score board. */
@@ -23,19 +23,10 @@ public class Game {
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
+    public Game(int number){
+    }
 
-
-    /**
-     * This method checks the validity of the name.
-     * @param name the name which needs to be checked
-     * @return true if the name is correct, false otherwise.
-     */
-    public boolean checkName(String name){
-        for(Player p: players.keySet()){
-            if(p.getNick().equals(name))
-                return false;
-        }
-        return true;
+    public Game(){
     }
 
     public Map<Player, Boolean> getPlayers() {
@@ -58,7 +49,21 @@ public class Game {
         return this.turn;
     }
 
+    public int getMaxNumberPlayer() {
+        return maxNumberPlayer;
+    }
 
+    /**
+     * this method return the game status.
+     * @return a Status enum
+     */
+    public Status getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
     public void setId(String id) {
         this.id = id;
     }
@@ -80,12 +85,18 @@ public class Game {
         this.turn = turn;
     }
 
+
     /**
-     * this method return the game status.
-     * @return a Status enum
+     * This method checks the validity of the name.
+     * @param name the name which needs to be checked
+     * @return true if the name is correct, false otherwise.
      */
-    public Status getStatus(){
-        return this.status;
+    public boolean checkName(String name){
+        for(Player p: players.keySet()){
+            if(p.getNick().equals(name))
+                return false;
+        }
+        return true;
     }
 
     /**
