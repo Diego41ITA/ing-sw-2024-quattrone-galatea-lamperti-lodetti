@@ -8,6 +8,8 @@ public class Game {
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
     private Player winner; //we can remove it.
+
+    //private enum status {active, suspended, finished};
     private boolean started;
     private boolean suspended;
     private boolean finished;
