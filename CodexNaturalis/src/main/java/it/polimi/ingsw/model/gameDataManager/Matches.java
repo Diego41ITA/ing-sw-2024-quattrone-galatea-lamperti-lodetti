@@ -82,6 +82,14 @@ public class Matches {
     }
 
     /**
+     * provides all the games that have being created
+     * @return an ArrayList.
+     */
+    public List<Game> getMatches(){
+        return new ArrayList<>(this.games);
+    }
+
+    /**
      * this method allows to join a random game
      * @param player is the only parameter and indicates the player that wants to play
      */
