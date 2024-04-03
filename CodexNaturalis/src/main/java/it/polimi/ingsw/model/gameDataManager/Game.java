@@ -89,6 +89,13 @@ public class Game {
         if(players.size() >= this.maxNumberPlayer)
             throw new IllegalStateException();
         players.put(player, true);
+
+    }
+
+    /**
+     * this method starts the game by setting the attribute "started" true.
+     */
+    public void start(){
         if(players.size() == this.maxNumberPlayer)
             this.started = true;
     }
