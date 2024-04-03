@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Array;
+import java.util.*;
 
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
@@ -18,7 +17,7 @@ import it.polimi.ingsw.model.card.Deck;
 */
 public class Player {
     private String nickname;
-    private List<Card> cards;
+    private ArrayList<Card> cards;
     private GameStation gamestation;
     private Color color;
     private Optional<Color> optionalColor;
@@ -28,7 +27,8 @@ public class Player {
     *@author Lorenzo Galatea
     * is the constructor of the class
     */
-    public Player(String nickname, GameStation gamestation, Color color,Optional<Color> optionalColor) {
+    public Player(String nickname, GameStation gamestation, Color color,Optional<Color> optionalColor, ArrayList<Card> cards) {
+        this.cards = new ArrayList<Card>(cards);
         this.nickname = nickname;
         this.gamestation = gamestation;
         this.color = color;
@@ -136,7 +136,7 @@ public class Player {
         if (cards.isEmpty()) {
             throw new EmptyDeckException("Il mazzo è vuoto");
         }
-        return new ArrayList<>(cards);
+        return new ArrayList<Card>(cards);
     }
     /**@author Lorenzo Galatea
     *choose the goal
