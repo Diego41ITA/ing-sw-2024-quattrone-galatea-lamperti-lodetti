@@ -82,6 +82,14 @@ public class Matches {
     }
 
     /**
+     * provides all the games that have being created
+     * @return an ArrayList.
+     */
+    public List<Game> getMatches(){
+        return new ArrayList<>(this.games);
+    }
+
+    /**
      * this method allows to join a random game
      * @param player is the only parameter and indicates the player that wants to play
      */
@@ -94,13 +102,10 @@ public class Matches {
             g.get().addPlayer(player);
         else{
             //a new game should be created.
-            Game newGame = new Game();
+            Game newGame = new Game("game n°: " + number);
             this.addGame(newGame);
-            //define a new game id
-            newGame.setId("game n°: " + number);
             newGame.addPlayer(player);
         }
-
     }
 
     /**

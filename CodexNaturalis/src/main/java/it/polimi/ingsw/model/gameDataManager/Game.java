@@ -2,39 +2,35 @@ package it.polimi.ingsw.model.gameDataManager;
 
 import java.util.*;
 
+/**
+ * this class represents a single game of CodexNaturalis.
+ * @author Quattrone Diego
+ */
 public class Game {
+    /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
     private Map<Player, Boolean> players;
-    private int maxNumberPlayer;
+    /**the maximum number of players that can partecipate to a game. */
+    private final int maxNumberPlayer=4;
+    /**an object representing the common playing field, holding the decks and all the drawable cards. */
     private TableOfDecks tableOfDecks;
+    /**an object representing the score board. */
     private PointTable pointTable;
-    private Player winner; //we can remove it.
+    /**an enumeration representing the status of the game. */
     private Status status;
+    /**an univoque code associated with the game. */
     private String id;
+    /**an object that manages the orders in which players must play. */
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
+    public Game(int number){
+    }
 
-
-    /**
-     * @author Lodetti Alessandro
-     * This method checks the validity of the name.
-     * @param name the name which needs to be checked
-     * @return true if the name is correct, false otherwise.
-     */
-    public boolean checkName(String name){
-        for(Player p: players.keySet()){
-            if(p.getNick().equals(name))
-                return false;
-        }
-        return true;
+    public Game(){
     }
 
     public Map<Player, Boolean> getPlayers() {
         return new HashMap<>(players);
-    }
-
-    public Player getWinner() {
-        return this.winner;
     }
 
     public PointTable getPointTable() {
@@ -53,7 +49,21 @@ public class Game {
         return this.turn;
     }
 
+    public int getMaxNumberPlayer() {
+        return maxNumberPlayer;
+    }
 
+    /**
+     * this method return the game status.
+     * @return a Status enum
+     */
+    public Status getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
     public void setId(String id) {
         this.id = id;
     }
@@ -75,12 +85,18 @@ public class Game {
         this.turn = turn;
     }
 
+
     /**
-     * this method return the game status.
-     * @return a Status enum
+     * This method checks the validity of the name.
+     * @param name the name which needs to be checked
+     * @return true if the name is correct, false otherwise.
      */
-    public Status getStatus(){
-        return this.status;
+    public boolean checkName(String name){
+        for(Player p: players.keySet()){
+            if(p.getNick().equals(name))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -123,10 +139,10 @@ public class Game {
     }
 
     /**
-     * @author Lodetti Alessandro
      * This method add a player to this game only if the number of current player is less then 4
      * @param player the new player
      * @throws IllegalStateException thrown if there are already 4 players
+     * @author Lodetti Alessandro
      */
     public void addPlayer(Player player) throws IllegalStateException {
         if(players.size() >= this.maxNumberPlayer)
