@@ -57,8 +57,8 @@ public class Player {
         return gamestation;
     }
     /** @author Lorenzo Galatea
-    *method for set the gamestation
-    *@param Gamestation
+    *method for setting the gamestation
+    *@param newGamestation is the instance of the new GameStation to be setted
     */
     public void setGameStation(GameStation newGamestation){
         this.gamestation = newGamestation;
@@ -101,7 +101,7 @@ public class Player {
     /**@author Lorenzo Galatea
     *draw a card from the TableOfDecks
     *@param card: one of the 4 cards visible in the TableOfDecks
-    *@throws IllegaleStateException if the player already has 3 cards
+    *@throws IllegalStateException if the player already has 3 cards
     */
 
     public void draw(Card card) {
@@ -114,7 +114,7 @@ public class Player {
     /**@author Lorenzo Galatea
     *draw a card from one of the decks of the TableOfDecks
     *@param deck: Deck associated with TableOfDecks
-    *@throws IllegaleStateException if the player already has 3 cards in his hand or the deck is empty
+    *@throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
     */
     public void draw(Deck deck) {
             if (cards.size() >= 3) {
