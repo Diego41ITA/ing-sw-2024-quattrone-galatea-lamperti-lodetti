@@ -8,19 +8,19 @@ public class Game {
     private TableOfDecks tableOfDecks;
     private PointTable pointTable;
     private Player winner; //we can remove it.
-
-    //private enum status {active, suspended, finished};
-    private boolean started;
-    private boolean suspended;
-    private boolean finished;
+    private Status status;
     private String id;
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
 
-    public boolean isStarted() {
-        return this.started;
-    }
+
+    /**
+     * @author Lodetti Alessandro
+     * This method checks the validity of the name.
+     * @param name the name which needs to be checked
+     * @return true if the name is correct, false otherwise.
+     */
     public boolean checkName(String name){
         for(Player p: players.keySet()){
             if(p.getNick().equals(name))
@@ -30,7 +30,7 @@ public class Game {
     }
 
     public Map<Player, Boolean> getPlayers() {
-        return this.players;
+        return new HashMap<>(players);
     }
 
     public Player getWinner() {
@@ -53,6 +53,7 @@ public class Game {
         return this.turn;
     }
 
+
     public void setId(String id) {
         this.id = id;
     }
@@ -65,9 +66,6 @@ public class Game {
         this.pointTable = pointTable;
     }
 
-    public void setStarted(boolean started) {
-        this.started = started;
-    }
 
     public void setTableOfDecks(TableOfDecks tableOfDecks) {
         this.tableOfDecks = tableOfDecks;
@@ -77,6 +75,49 @@ public class Game {
         this.turn = turn;
     }
 
+    /**
+     * this method return the game status.
+     * @return a Status enum
+     */
+    public Status getStatus(){
+        return this.status;
+    }
+
+    /**
+     * this method starts the game by assigning active status to "this.status"
+     */
+    public void start() {
+        if(players.size() == maxNumberPlayer)
+            this.status = Status.ACTIVE;
+    }
+
+    /**
+     * This method suspends the game only if the previous status was ACTIVE
+     * @throws IllegalStateException if the previous status was not ACTIVE
+     */
+    public void suspend() throws IllegalStateException {
+        if(this.status == Status.ACTIVE)
+            this.status = Status.SUSPENDED;
+        else
+            throw new IllegalStateException("this game is not active");
+    }
+
+    /**
+     * this method ends the game only if the previous status was ACTIVE
+     * @throws IllegalStateException if the previous status was not ACTIVE
+     */
+    public void endGame() throws IllegalStateException{
+        if(this.status == Status.ACTIVE)
+            this.status = Status.FINISHED;
+        else
+            throw new IllegalStateException("this game is not active");
+    }
+
+    /**
+     * this method checks if the player is active.
+     * @param player the player to check.
+     * @return true if the player is active, false otherwise.
+     */
     public boolean isConnected(Player player){
         return players.get(player);
     }
@@ -91,17 +132,5 @@ public class Game {
         if(players.size() >= this.maxNumberPlayer)
             throw new IllegalStateException();
         players.put(player, true);
-
     }
-
-    /**
-     * this method starts the game by setting the attribute "started" true.
-     */
-    public void start(){
-        if(players.size() == this.maxNumberPlayer)
-            this.started = true;
-    }
-
-    public boolean isSuspended(){return suspended;}
-    public boolean isFinished(){return finished;}
 }
