@@ -94,13 +94,10 @@ public class Matches {
             g.get().addPlayer(player);
         else{
             //a new game should be created.
-            Game newGame = new Game();
+            Game newGame = new Game("game n°: " + number);
             this.addGame(newGame);
-            //define a new game id
-            newGame.setId("game n°: " + number);
             newGame.addPlayer(player);
         }
-
     }
 
     /**
