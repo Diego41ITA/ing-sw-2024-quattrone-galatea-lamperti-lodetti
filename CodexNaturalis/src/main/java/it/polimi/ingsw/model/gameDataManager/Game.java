@@ -78,6 +78,10 @@ public class Game {
         this.players = players;
     }
 
+    public void setMaxNumberPlayer(int maxNumberPlayer){
+        this.maxNumberPlayer = maxNumberPlayer;
+    }
+
     public void setPointTable(PointTable pointTable) {
         this.pointTable = pointTable;
     }
