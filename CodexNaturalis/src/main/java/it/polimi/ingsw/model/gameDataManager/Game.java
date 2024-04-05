@@ -79,7 +79,12 @@ public class Game {
     }
 
     public void setMaxNumberPlayer(int maxNumberPlayer){
-        this.maxNumberPlayer = maxNumberPlayer;
+        if(maxNumberPlayer > 4)
+            this.maxNumberPlayer = 4;
+        else if(maxNumberPlayer < 2)
+            this.maxNumberPlayer = 2;
+        else
+            this.maxNumberPlayer = maxNumberPlayer;
     }
 
     public void setPointTable(PointTable pointTable) {
