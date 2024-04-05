@@ -32,9 +32,9 @@ public class TableOfDecks {
      */
     public TableOfDecks(Deck deckGold,Deck deckGoal, Deck deckResource, ArrayList<Card> cards, ArrayList<Card> goals) {
         this.cards = new ArrayList<Card>(cards);
-        this.deckGold = deckGold;
-        this.deckGoal = deckGoal;
-        this.deckResource = deckResource;
+        this.deckGold =  new Deck((List<Card>) deckGold);
+        this.deckGoal = new Deck((List<Card>) deckGoal);
+        this.deckResource = new Deck((List<Card>) deckResource);
         this.goals = new ArrayList<Card>(goals);
     }
 
@@ -156,7 +156,7 @@ public class TableOfDecks {
      * @return deckResource
      */
     public Deck getDeckResource(){
-        return this.deckResource;
+        return new Deck((List<Card>) deckResource);
     }
 
     /**@author Lorenzo Galatea
@@ -164,7 +164,7 @@ public class TableOfDecks {
      * @return deckGoal
      */
     public Deck getDeckGoal(){
-        return this.deckGoal;
+        return new Deck((List<Card>) deckGoal);
     }
 
     /**@author Lorenzo Galatea
@@ -172,7 +172,7 @@ public class TableOfDecks {
      * @return deckGold
      */
     public Deck getDeckGold(){
-            return this.deckGold;
+            return new Deck((List<Card>) deckGold);
 
     }
 
