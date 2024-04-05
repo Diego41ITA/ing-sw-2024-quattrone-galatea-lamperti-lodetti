@@ -7,8 +7,16 @@ import java.util.*;
  * With all the methods defined the attribut turnNumber is totaly useless.
  */
 public class Turn {
+
+    //it is possible to do this with nicknames only.
     private final List<Player> players;
     private Player currentPlayer;
+
+
+    public Turn(){
+        this.players = new LinkedList<Player>();
+        this.currentPlayer = new Player();
+    }
 
     /**
      * this is the only constructor current player it is initialized as null.

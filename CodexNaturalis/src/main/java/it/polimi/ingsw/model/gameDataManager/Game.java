@@ -10,20 +10,32 @@ public class Game {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
     private Map<Player, Boolean> players;
     /**the maximum number of players that can partecipate to a game. */
-    private final int maxNumberPlayer=4;
+    private int maxNumberPlayer;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
     private TableOfDecks tableOfDecks;
     /**an object representing the score board. */
     private PointTable pointTable;
     /**an enumeration representing the status of the game. */
     private Status status;
-    /**an univoque code associated with the game. */
-    private String id;
+    /**a unique code associated with the game. */
+    private final String id;
     /**an object that manages the orders in which players must play. */
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
+
+    /**
+     * it the base constructor; it only initializes the id.
+     * @param id it's an unique attribute
+     */
     public Game(String id){
+        this.id = id;
+        this.players = new HashMap<>();
+        this.maxNumberPlayer = 4;   //in the future it could be
+        this.tableOfDecks = new TableOfDecks();
+        this.pointTable = new PointTable();
+        this.status = Status.WAITING;
+        this.turn = new Turn();
     }
 
     public Map<Player, Boolean> getPlayers() {
@@ -60,9 +72,6 @@ public class Game {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setPlayers(HashMap<Player, Boolean> players) {

@@ -22,6 +22,16 @@ public class TableOfDecks {
 
     private Deck deckResource;
 
+    /**
+     * default constructor
+     */
+    public TableOfDecks(){
+        //crea semplicemente gli attributi
+        //questi verranno settati in una fase iniziale.
+    }
+
+
+
     /**@author Lorenzo Galatea
      * this method is the constructor of the class
       * @param deckGold: represents the gold deck
