@@ -23,13 +23,8 @@ public class Game {
     private Turn turn;
 
     //need to add constructors: one for the new game and one for the already started game.
-    public Game(int number){
+    public Game(String id){
     }
-
-    public Game(){
-    }
-
-    //nothing
 
     public Map<Player, Boolean> getPlayers() {
         return new HashMap<>(players);
