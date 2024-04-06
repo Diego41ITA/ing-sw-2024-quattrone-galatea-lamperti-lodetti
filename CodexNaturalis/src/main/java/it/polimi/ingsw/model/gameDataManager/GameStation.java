@@ -29,9 +29,9 @@ class GameStation {
     //da sistemare
     public void updateFreeCoords(Point coord){
         Point a = new Point(coord.x - 1, coord.y - 1);
-        Point b = new Point(coord.x - 1, coord.y - 1);
-        Point c = new Point(coord.x - 1, coord.y - 1);
-        Point d = new Point(coord.x - 1, coord.y - 1);
+        Point b = new Point(coord.x - 1, coord.y + 1);
+        Point c = new Point(coord.x + 1, coord.y - 1);
+        Point d = new Point(coord.x + 1, coord.y + 1);
 
         if(!playedCards.containsValue(a)) FreeCords.add(a);
         if(!playedCards.containsValue(b)) FreeCords.add(b);
