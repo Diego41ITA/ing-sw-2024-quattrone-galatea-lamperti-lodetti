@@ -7,12 +7,12 @@ import java.awt.Point;
  * this class represents the Station where the player places his cards for make point
  */
 class GameStation {
-    private final Map<Card, Point> playedCards;
+    private final Map<Point, PlayableCard> playedCards;
     private ArrayList<Point> FreeCords;
 
     public GameStation(InitialCard card) {
         playedCards = new HashMap<>();
-        playedCards.put(card, new Point(0, 0));
+        playedCards.put(new Point(0, 0), card);
         FreeCords = new ArrayList<>();
         FreeCords.add(new Point(-1,1));
         FreeCords.add(new Point(1,1));
@@ -20,8 +20,8 @@ class GameStation {
         FreeCords.add(new Point(1,-1));
     }
 
-    public void placeCard(Card card, Point coord){
-            playedCards.put(card, coord);
+    public void placeCard(PlayableCard card, Point coord){
+            playedCards.put(coord, card);
             FreeCords.remove(coord);
             updateFreeCoords(coord);
     }
@@ -33,10 +33,26 @@ class GameStation {
         Point c = new Point(coord.x + 1, coord.y - 1);
         Point d = new Point(coord.x + 1, coord.y + 1);
 
-        if(!playedCards.containsValue(a)) FreeCords.add(a);
-        if(!playedCards.containsValue(b)) FreeCords.add(b);
-        if(!playedCards.containsValue(c)) FreeCords.add(c);
-        if(!playedCards.containsValue(d)) FreeCords.add(d);
+        if(!playedCards.containsValue(a)){
+            FreeCords.add(a);
+        }else {
+            playedCards.get(a).hideAngle(Angle.HIGHRIGHT);
+        }
+        if(!playedCards.containsValue(b)) {
+            FreeCords.add(b);
+        }else {
+            playedCards.get(b).hideAngle(Angle.DOWNRIGHT);
+        }
+        if(!playedCards.containsValue(c)){
+            FreeCords.add(c);
+        }else {
+            playedCards.get(c).hideAngle(Angle.HIGHLEFT);
+        }
+        if(!playedCards.containsValue(d)){
+            FreeCords.add(d);
+        }else {
+            playedCards.get(d).hideAngle(Angle.DOWNLEFT);
+        }
     }
     public calculateScore(){
 
