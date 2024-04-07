@@ -24,7 +24,7 @@ public class InitialCard extends PlayableCard {
 
     /**
      * @author Lodetti Alessandro
-     * this constructor is useful to initizialize the object by reading from a json file
+     * this constructor is useful to initialize the object by reading from a json file
      * @param card it's the object read from the file
      */
     public InitialCard(InitialCard card){

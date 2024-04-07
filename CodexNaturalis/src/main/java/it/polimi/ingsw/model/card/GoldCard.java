@@ -41,6 +41,19 @@ public class GoldCard extends PlayableCard{
     }
 
     /**
+     * this constructor is useful to initialize the object by reading from a json file
+     * @param card it's the object read from the file
+     */
+    public GoldCard(GoldCard card){
+        super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
+        this.numOfPoints = card.getNumberOfPoints();
+        this.neededResources = new ArrayList<>(card.getNeededResources());
+        this.box = card.getBox();
+        this.typeOfGoldCard = card.getTypeOfGoldCard();
+    }
+
+
+    /**
      * the method return the number of point that this card gives
      * @return the value of "GoldCard.numOfPoints"
      */
