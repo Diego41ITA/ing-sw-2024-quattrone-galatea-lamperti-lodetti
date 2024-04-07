@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.gameDataManager;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 /** @author Lorenzo Galatea
@@ -8,12 +9,30 @@ points represents a map where each marker has a score associated with it
 
 public class PointTable {
     private final HashMap<Color, Integer> points;
+
     /** @author Lorenzo Galatea
     *is the constructor of the PointTable class
         */
     public PointTable() {
         points = new HashMap<>();
     }
+
+    /**
+     * it's a simple copy-constructor
+     * @param pt is the point table that the user wants to copy
+     */
+    public PointTable(PointTable pt){
+        this.points = new HashMap<>(pt.getMap());
+    }
+
+    /**
+     * this return a copy of the table with all the scores
+     * @return an HashMap<Color, Integer>.
+     */
+    public Map<Color, Integer> getMap(){
+        return new HashMap<>(points);
+    }
+
     /** @author Lorenzo Galatea
     * is the marker setter
     *@param color: maker of the player
@@ -21,6 +40,7 @@ public class PointTable {
     public void setColorPoints(Color color) {
         points.put(color, 0);
     }
+
     /** @author Lorenzo Galatea
     *is the getter of the score associated with the Player/Maker
     *@return int which is the point associated with the Player
