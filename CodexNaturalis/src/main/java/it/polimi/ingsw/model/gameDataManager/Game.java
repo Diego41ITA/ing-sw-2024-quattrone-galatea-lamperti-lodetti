@@ -55,15 +55,12 @@ public class Game {
 
     }
 
-    //-------------------------------------------------------------------------
-    //we need to return a "copy": essential to preserve the encapsulation.
-
     public Map<Player, Boolean> getPlayers() {
         return new HashMap<>(players);
     }
 
     public PointTable getPointTable() {
-        return this.pointTable;
+        return new PointTable(this.pointTable);
     }
 
     public String getId() {
@@ -71,11 +68,11 @@ public class Game {
     }
 
     public TableOfDecks getTableOfDecks() {
-        return this.tableOfDecks;
+        return new TableOfDecks(this.tableOfDecks);
     }
 
     public Turn getTurn() {
-        return this.turn;
+        return new Turn(this.turn);
     }
 
     public int getMaxNumberPlayer() {
@@ -89,9 +86,6 @@ public class Game {
     public Status getStatus(){
         return this.status;
     }
-
-    //------------------------------------------------------------------------
-
 
     /**
      * sets a new status for the current game
