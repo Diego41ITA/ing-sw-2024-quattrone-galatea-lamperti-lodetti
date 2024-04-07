@@ -8,13 +8,13 @@ import java.util.*;
  */
 public class Game {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
-    private Map<Player, Boolean> players;
+    private final Map<Player, Boolean> players;
     /**the maximum number of players that can partecipate to a game. */
     private int maxNumberPlayer;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
-    private TableOfDecks tableOfDecks;
+    private final TableOfDecks tableOfDecks;
     /**an object representing the score board. */
-    private PointTable pointTable;
+    private final PointTable pointTable;
     /**an enumeration representing the status of the game. */
     private Status status;
     /**a unique code associated with the game. */
@@ -36,6 +36,23 @@ public class Game {
         this.pointTable = new PointTable();
         this.status = Status.WAITING;
         this.turn = new Turn();
+    }
+
+    /**
+     * this constructor initializes an already started game. For the attribute players is essential call another method
+     * to copy the singular object contained in the map.
+     * @param g
+     */
+    public Game(Game g){
+        this.players = new HashMap<Player, Boolean>();
+        setPlayers(g.getPlayers());
+        this.maxNumberPlayer = g.getMaxNumberPlayer();
+        this.tableOfDecks = new TableOfDecks(g.getTableOfDecks());
+        this.pointTable = new PointTable(g.getPointTable());
+        this.status = g.getStatus();
+        this.id = g.getId();
+        this.turn = new Turn(g.getTurn());
+
     }
 
     public Map<Player, Boolean> getPlayers() {
@@ -70,14 +87,31 @@ public class Game {
         return this.status;
     }
 
+    /**
+     * sets a new status for the current game
+     * @param status it is an enum literal of Status
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setPlayers(HashMap<Player, Boolean> players) {
-        this.players = players;
+    /**
+     * this method helps to instantiate a new map of player: these players already exist thus we need to utilize a copy
+     * constructor also for the key player.
+     * @param players map of players and their status: active (true), inactive (false)
+     */
+    public void setPlayers(Map<Player, Boolean> players) {
+        for(Player p: players.keySet())
+        {
+            if(!this.players.containsKey(p))
+                this.players.put(new Player(p), true);
+        }
     }
 
+    /**
+     * it sets the max number of player that can play in this lobby
+     * @param maxNumberPlayer it's int, which will be rounded if it exceeds maximum or minimum value.
+     */
     public void setMaxNumberPlayer(int maxNumberPlayer){
         if(maxNumberPlayer > 4)
             this.maxNumberPlayer = 4;
@@ -87,8 +121,20 @@ public class Game {
             this.maxNumberPlayer = maxNumberPlayer;
     }
 
+
+
+    //----------------------------------------------------------------
+    //THESE METHODS ARE NOT NECESSARY BECAUSE THE ATTRIBUTES HAVE BEEN ALREADY INITIALIZED IN THE CONSTRUCTORS.
+    //actually, if the first constructor is called there is the need to change this attribute content, to do that we
+    //need to implement methods in this game class that allow to call specific method on the attribute.
+
+
+    /**
+     *
+     * @param pointTable
+     */
     public void setPointTable(PointTable pointTable) {
-        this.pointTable = pointTable;
+
     }
 
 
@@ -113,6 +159,9 @@ public class Game {
         }
         return true;
     }
+
+    //----------------------------------------------------------------
+
 
     /**
      * this method starts the game by assigning active status to "this.status"
