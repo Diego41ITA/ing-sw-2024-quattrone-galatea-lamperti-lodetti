@@ -25,22 +25,30 @@ public class Matches {
      * @param matches it's the list of the saved ongoing/suspended game.
      */
     public Matches(List<Game> matches){
-        this.games = new ArrayList<>(matches);
+        this.games = new ArrayList<>(); //instantiation of the attribute
+        setMatches(matches);    //set the attribute at correct state
+    }
+
+    /**
+     * this is a private method used to instantiate the private attribute games when the client wants to restore
+     * a particular situation
+     * @param matches it's a list of all the game that needs to be restored.
+     */
+    private void setMatches(List<Game> matches){
+        for(Game g: matches){
+            this.addGame(g);
+        }
     }
 
     /**
      * this method adds a game to the list, if the game is already present it does not add it. The controller can use
      * this method when only some game crashed, and it wants to restore them.
      * @param game it is the new game
-     * @throws IllegalStateException is thrown if the game is already present
      */
-    public void addGame(Game game) throws IllegalStateException{
-
-        if(games.contains(game))
-            throw new IllegalStateException();
-        else {
-            games.add(game);
-            number = number + 1;
+    public void addGame(Game game){
+        if(!games.contains(game))
+        {
+            games.add(new Game(game));
         }
     }
 
@@ -103,6 +111,7 @@ public class Matches {
         else{
             //a new game should be created.
             Game newGame = new Game("game n°: " + number);
+            number = number + 1;
             this.addGame(newGame);
             newGame.addPlayer(player);
         }
