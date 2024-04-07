@@ -10,11 +10,19 @@ public class Deck {
     private final List<Card> cards;
 
     /**
-     * this is the only constructor
+     * this is the basic constructor
      * @param deck is simply the card collection.
      */
     public Deck(List<Card> deck){
         this.cards = new ArrayList<>(deck);
+    }
+
+    /**
+     * this is the advanced constructor: it is useful to initialize gameDataManager objects
+     * @param d is a deck well-formed.
+     */
+    public Deck(Deck d){
+        this.cards = new ArrayList<>(d.getStatus());
     }
 
     /**
