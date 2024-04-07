@@ -12,9 +12,9 @@ public class Game {
     /**the maximum number of players that can partecipate to a game. */
     private int maxNumberPlayer;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
-    private final TableOfDecks tableOfDecks;
+    private TableOfDecks tableOfDecks;
     /**an object representing the score board. */
-    private final PointTable pointTable;
+    private PointTable pointTable;
     /**an enumeration representing the status of the game. */
     private Status status;
     /**a unique code associated with the game. */
@@ -32,10 +32,10 @@ public class Game {
         this.id = id;
         this.players = new HashMap<>();
         this.maxNumberPlayer = 4;   //in the future it could be
-        this.tableOfDecks = new TableOfDecks();
-        this.pointTable = new PointTable();
+        this.tableOfDecks = new TableOfDecks(); //useless you can set it later with setTableOfDecks()
+        this.pointTable = new PointTable(); //useless you can set it later with setPointTable()
         this.status = Status.WAITING;
-        this.turn = new Turn();
+        this.turn = new Turn(); //useless you can set it later with setTurn()
     }
 
     /**
@@ -54,6 +54,9 @@ public class Game {
         this.turn = new Turn(g.getTurn());
 
     }
+
+    //-------------------------------------------------------------------------
+    //we need to return a "copy": essential to preserve the encapsulation.
 
     public Map<Player, Boolean> getPlayers() {
         return new HashMap<>(players);
@@ -86,6 +89,9 @@ public class Game {
     public Status getStatus(){
         return this.status;
     }
+
+    //------------------------------------------------------------------------
+
 
     /**
      * sets a new status for the current game
