@@ -33,22 +33,22 @@ class GameStation {
         Point c = new Point(coord.x + 1, coord.y - 1);
         Point d = new Point(coord.x + 1, coord.y + 1);
 
-        if(!playedCards.containsValue(a)){
+        if(!playedCards.containsKey(a)){
             FreeCords.add(a);
         }else {
             playedCards.get(a).hideAngle(Angle.HIGHRIGHT);
         }
-        if(!playedCards.containsValue(b)) {
+        if(!playedCards.containsKey(b)) {
             FreeCords.add(b);
         }else {
             playedCards.get(b).hideAngle(Angle.DOWNRIGHT);
         }
-        if(!playedCards.containsValue(c)){
+        if(!playedCards.containsKey(c)){
             FreeCords.add(c);
         }else {
             playedCards.get(c).hideAngle(Angle.HIGHLEFT);
         }
-        if(!playedCards.containsValue(d)){
+        if(!playedCards.containsKey(d)){
             FreeCords.add(d);
         }else {
             playedCards.get(d).hideAngle(Angle.DOWNLEFT);
