@@ -25,7 +25,7 @@ public class Matches {
      * @param matches it's the list of the saved ongoing/suspended game.
      */
     public Matches(List<Game> matches){
-        this.games = new ArrayList<>(); //instantiation of the attribute
+        this.games = new ArrayList<>();
         setMatches(matches);    //set the attribute at correct state
     }
 
