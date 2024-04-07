@@ -15,7 +15,7 @@ public abstract class Card {
      * the constructor of the Card class
      * @param type specifies the type of the card
      */
-    public Card(TypeOfCard type, boolean isFront){
+    Card(TypeOfCard type, boolean isFront){
         this.isFront = isFront;
         this.type = type;
     }
