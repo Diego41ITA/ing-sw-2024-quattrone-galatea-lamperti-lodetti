@@ -24,6 +24,11 @@ public class Player {
     private Optional<Color> optionalColor;
     private GoalCard goal;
 
+    /**
+     * this constructor does nothing
+     */
+    public Player(){}
+
     /** 
     *@author Lorenzo Galatea
     * is the constructor of the class
@@ -34,6 +39,15 @@ public class Player {
         this.gamestation = gamestation;
         this.color = color;
         this.optionalColor = optionalColor;
+    }
+
+    public Player(Player player){
+        this.nickname = player.getNick();
+        this.cards = new ArrayList<>(player.showCard());    //no need for the empty exception, we will see it later
+        this.gamestation = new GameStation(player.getGameStation());
+        this.color = player.getColor();
+        this.optionalColor = player.getOptionalColor();
+        this.goal = new GoalCard(player.getGoal()); //this is the safest approach
     }
 
     /**@author Lorenzo Galatea
@@ -55,15 +69,17 @@ public class Player {
     *@return gamestation
     */
     public GameStation getGameStation(){
-        return gamestation;
+        return new GameStation(this.gamestation);
     }
+
     /** @author Lorenzo Galatea
     *method for setting the gamestation
-    *@param newGamestation is the instance of the new GameStation to be setted
+    *@param newGamestation is the instance of the new GameStation to be set
     */
     public void setGameStation(GameStation newGamestation){
         this.gamestation = newGamestation;
     }
+
     /** @author Lorenzo Galatea
     *method that return the maker of the first player
     *@return optionalColor that is the maker null or the maker black if is associated with the first player
