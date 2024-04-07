@@ -35,6 +35,20 @@ public class GoalCard extends Card {
     }
 
     /**
+     * @author Lodetti Alessandro
+     * this constructor is useful to initialize the goal card by reading from a json file.
+     * @param card this is the object read from the json file
+     */
+    public GoalCard(GoalCard card){
+        super(card.getType(), card.isFront());
+        this.numOfPoints = card.getNumberOfPoints();
+        this.listOfObjects = new ArrayList<>(card.getListOfObjects());
+        this.goalType = card.getGoalType();
+        this.positionType = card.getPositionType();
+    }
+
+
+    /**
      * @author Luca Lamperti
      * getter for the attribute NumOfPoints
      * @return an int as the points
