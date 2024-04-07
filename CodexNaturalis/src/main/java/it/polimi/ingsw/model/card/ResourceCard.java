@@ -27,6 +27,16 @@ public class ResourceCard extends PlayableCard {
         this.numOfPoints = 1;
     }
 
+
+    /**
+     * this constructor is useful to initialize the game by reading from a json file or other file.
+     * @param card it is the object read from the file
+     */
+    public ResourceCard(ResourceCard card){
+        super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
+        this.numOfPoints = card.getNumberOfPoints();
+    }
+
     /**
      * return the number of point
      * @return (1) returns a variable but it always values 1.
