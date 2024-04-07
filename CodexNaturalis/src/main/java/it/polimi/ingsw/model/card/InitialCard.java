@@ -22,6 +22,20 @@ public class InitialCard extends PlayableCard {
         super(type, isFront, front, back, backResource);
     }
 
+    /**
+     * @author Lodetti Alessandro
+     * this constructor is useful to initizialize the object by reading from a json file
+     * @param card it's the object read from the file
+     */
+    public InitialCard(InitialCard card){
+        super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
+    }
+
+    /**
+     * @author Lodetti Alessandro
+     * return a list of the resources on the back, initial card could have more than one resource.
+     * @return a list of Item
+     */
     public List<Item> getBackResources(){
         return this.getAListOfBackResource();
     }
