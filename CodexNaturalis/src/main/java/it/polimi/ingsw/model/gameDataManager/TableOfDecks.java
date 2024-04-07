@@ -41,11 +41,24 @@ public class TableOfDecks {
      * @param goals:the 2 shared goals
      */
     public TableOfDecks(Deck deckGold,Deck deckGoal, Deck deckResource, ArrayList<Card> cards, ArrayList<Card> goals) {
-        this.cards = new ArrayList<Card>(cards);
-        this.deckGold =  new Deck((List<Card>) deckGold);
-        this.deckGoal = new Deck((List<Card>) deckGoal);
-        this.deckResource = new Deck((List<Card>) deckResource);
-        this.goals = new ArrayList<Card>(goals);
+        this.cards = new ArrayList<Card>(cards); //this one should be set later
+        this.deckGold =  new Deck(deckGold);
+        this.deckGoal = new Deck(deckGoal);
+        this.deckResource = new Deck(deckResource);
+        this.goals = new ArrayList<Card>(goals); //this one should be set later too
+    }
+
+    /**
+     * this second constructor is useful to upload a saved game
+     * @param table it the status of the tableOfDecks when it was saved.
+     */
+    public TableOfDecks(TableOfDecks table){
+        this.cards = new ArrayList<>(table.getCards());
+        this.deckGoal = new Deck(table.getDeckGoal());
+        this.deckGold = new Deck(table.getDeckGold());
+        this.deckResource = new Deck(table.getDeckResource());
+        //this.deckStart = new Deck(table.getStart());
+        this.goals = new ArrayList<>(table.getGoals());
     }
 
     /** @author Lorenzo Galatea
@@ -91,7 +104,7 @@ public class TableOfDecks {
         } else {
             if (newCard != null) {
                 if (cards.get(0) != null) {
-                    if (newCard.equals(cards.get(0))) {
+                    if (newCard.equals(cards.getFirst())) {
                         try {
                             cards.set(0, deckResource.getFirst());
                         } catch (IllegalStateException e) {
