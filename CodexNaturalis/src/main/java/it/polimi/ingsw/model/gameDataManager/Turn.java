@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Lodetti Alessandro
@@ -9,10 +10,10 @@ import java.util.*;
 public class Turn {
 
     //it is possible to do this with nicknames only.
-    private final List<Player> players;
+    private List<Player> players;
     private Player currentPlayer;
 
-
+    //probabilmente inutile perchè non andrebbe messo nel costruttore base di game. (si usa dopo il set)
     public Turn(){
         this.players = new LinkedList<Player>();
         this.currentPlayer = new Player();
@@ -25,6 +26,12 @@ public class Turn {
     public Turn(List<Player> players){
         this.players = new LinkedList<>(players);
         this.currentPlayer = null;
+    }
+
+    public Turn(Turn t){
+        this.players = new ArrayList<>();
+        setPlayers(t.getPlayers());
+        this.currentPlayer = new Player(t.getCurrentPlayer());
     }
 
     /**
@@ -71,5 +78,36 @@ public class Turn {
             int nextIndex = players.indexOf(this.currentPlayer) + 1;
             this.currentPlayer = players.get(nextIndex);
         }
+    }
+
+    /**
+     * return all the playing players
+     * @return a copy of the private attribute
+     */
+    public List<Player> getPlayers(){
+        return new ArrayList<>(this.players);
+    }
+
+    /**
+     * add all the player passed checking for homonyms.
+     * @param l is a list of player.
+     */
+    private void setPlayers(List<Player> l){
+        for(Player p: l) {
+            if (!this.players.stream()
+                    .map(Player::getNick)
+                    .toList()
+                    .contains(p.getNick())) {
+                this.players.add(new Player(p));
+            }
+        }
+    }
+
+    /**
+     * return the current player
+     * @return a copy of the private attribute.
+     */
+    private Player getCurrentPlayer(){
+        return new Player(this.currentPlayer);
     }
 }
