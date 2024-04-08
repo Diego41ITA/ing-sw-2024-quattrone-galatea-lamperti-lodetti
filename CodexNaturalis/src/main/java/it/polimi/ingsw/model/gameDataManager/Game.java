@@ -41,10 +41,10 @@ public class Game {
     /**
      * this constructor initializes an already started game. For the attribute players is essential call another method
      * to copy the singular object contained in the map.
-     * @param g
+     * @param g it's a Game object to copy.
      */
     public Game(Game g){
-        this.players = new HashMap<Player, Boolean>();
+        this.players = new HashMap<>();
         setPlayers(g.getPlayers());
         this.maxNumberPlayer = g.getMaxNumberPlayer();
         this.tableOfDecks = new TableOfDecks(g.getTableOfDecks());
