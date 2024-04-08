@@ -68,22 +68,26 @@ public class GameStation {
         Point d = new Point(cord.x + 1, cord.y + 1);
 
         if(!playedCards.containsKey(a)){
-            freeCords.add(a);
+            if(!playedCards.get(cord).checkIfEmpty(Angle.DOWNLEFT))
+                freeCords.add(a);
         }else {
             playedCards.get(a).hideAngle(Angle.HIGHRIGHT);
         }
         if(!playedCards.containsKey(b)) {
-            freeCords.add(b);
+            if(!playedCards.get(cord).checkIfEmpty(Angle.HIGHLEFT))
+                freeCords.add(b);
         }else {
             playedCards.get(b).hideAngle(Angle.DOWNRIGHT);
         }
         if(!playedCards.containsKey(c)){
-            freeCords.add(c);
+            if(!playedCards.get(cord).checkIfEmpty(Angle.DOWNRIGHT))
+                freeCords.add(c);
         }else {
             playedCards.get(c).hideAngle(Angle.HIGHLEFT);
         }
         if(!playedCards.containsKey(d)){
-            freeCords.add(d);
+            if(!playedCards.get(cord).checkIfEmpty(Angle.HIGHRIGHT))
+                freeCords.add(d);
         }else {
             playedCards.get(d).hideAngle(Angle.DOWNLEFT);
         }
