@@ -128,7 +128,7 @@ public abstract class PlayableCard extends Card{
      * it returns the backResource as a list.
      * @return a list of Item, which is a copy of "PlayableCard.backResource"
      */
-    protected List<Item> getAListOfBackResource(){
+    public List<Item> getAListOfBackResource(){
         return new ArrayList<>(backResource);
     }
 }
