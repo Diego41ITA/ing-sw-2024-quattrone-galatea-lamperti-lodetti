@@ -48,6 +48,10 @@ public class GameStation {
      * returns the free coordinates
      * @return returns a copy of the available coordinates.
      */
+    /**è un metodo che ritorna le coordinate(list) in cui pui mettere una carta:
+    analizza La Map di playedCards, Analizza ogni 
+    posizione confinante ai 4 angoli di ogni carta, 
+    vede se non c'è già una carta in quella posizione e controlla che la carta non abbia gli angoli nulli*/
     public List<Point> getFreeCords(){
         return new ArrayList<>(this.freeCords);
     }
@@ -86,33 +90,42 @@ public class GameStation {
             playedCards.get(d).hideAngle(Angle.DOWNLEFT);
         }
     }
-    public calculateScore(){
-
-    }
-    public showFreeCorners(){
-
-    }
+   
+    /**Calculatefinalpoint() ritorna il punteggio ottenuto attraverso la carta obiettivo: 
+    è composta da 11 rami if che controlla il tipo della carta obiettivo
+    in ogni ramo c'è il controllo dell'obiettivo: 
+    per esempio per le posizioni possiamo usare 3 cicli for per vedere se abbiamo il posizionamento 
+    corretto analizzando colore e posizionamento, 
+    per le risorse possiamo analizzare il numero delle risolrse attraverso il verifyResourceNeeded()/verifyObjectneeded()
+    */
     public calculateFinalPoint(){
 
     }
-    public verifyResorcePoint(){
+    /**Riceve in ingresso la GOld card e conta le risorse visibili su playedCards.
+    Ritorna il numero delle volte che 
+    sul tavolo da gioco sono comparse quelle risorse. 
+    Possiamo usare un unico ciclo for in cui per ogni carta si analizza attraverso un if se si è trovato
+    un certo tipo di risorsa aumentando ogni volta un contatore che alla fine verrà diviso(senza resto) per il numero di risorse richieste dalla carta. */
+    public verifyResorceNeeded(){
 
     }
 
-    public countAngleOccupied(){
-
-    }
-
+    /**
+    stessa cosa di verifyResourceNedded solo per le carte goal.
+    (ci deve essere un controllo per identificare il tipo della carta obiettivo)
+    */
     public verifyObjectNeeded(){
 
     }
-
-    public ControllPositioning(){
+    /**un metodo che a seconda del tipo di carta Gold
+    calcola il punteggio che ci da la carta Gold appena posizionamento.
+    Per esempio è composta da degli if per capire che tipo di Carta Gold è e poi
+    in ciascuno di quei if facciamo una analisi in base al tipo di carta Gold.
+    Per esempio nel tipo Angle andiamo a contare il numero di angoli occupati
+    e moltipichiamo pe il numeor di numOfPoint.*/
+    public CalculateGoldPoint(){
 
     }
-    public showCardDispositioning(){
-
-
-    }
+   
 
 }
