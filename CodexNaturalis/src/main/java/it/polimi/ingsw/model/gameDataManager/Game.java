@@ -109,6 +109,16 @@ public class Game {
     }
 
     /**
+     * @author Lodetti Alessandro
+     * This method update the stats of the player passed as a parameter
+     * @param p is a Player Object with updated stats.
+     */
+    public void setSinglePlayer(Player p){
+        this.players.remove(p);
+        this.players.put(new Player(p), true);
+    }
+
+    /**
      * it sets the max number of player that can play in this lobby
      * @param maxNumberPlayer it's int, which will be rounded if it exceeds maximum or minimum value.
      */
@@ -121,31 +131,32 @@ public class Game {
             this.maxNumberPlayer = maxNumberPlayer;
     }
 
-
-
-    //----------------------------------------------------------------
-    //THESE METHODS ARE NOT NECESSARY BECAUSE THE ATTRIBUTES HAVE BEEN ALREADY INITIALIZED IN THE CONSTRUCTORS.
-    //actually, if the first constructor is called there is the need to change this attribute content, to do that we
-    //need to implement methods in this game class that allow to call specific method on the attribute.
-
-
     /**
-     *
-     * @param pointTable
+     * @author Lodetti Alessandro
+     *This method sets a new this.pointTable which is a copy of the parameter.
+     * @param pointTable it's the item to copy
      */
     public void setPointTable(PointTable pointTable) {
-
+        this.pointTable = new PointTable(pointTable);   //makes a copy
     }
 
-
+    /**
+     * @author Lodetti Alessandro
+     *This method sets a new this.tableOfDecks which is a copy of the parameter.
+     * @param tableOfDecks it's the item to copy
+     */
     public void setTableOfDecks(TableOfDecks tableOfDecks) {
-        this.tableOfDecks = tableOfDecks;
+        this.tableOfDecks = new TableOfDecks(tableOfDecks);
     }
 
+    /**
+     * @author Lodetti Alessandro
+     *This method sets a new this.turn which is a copy of the parameter.
+     * @param turn it's the item to copy
+     */
     public void setTurn(Turn turn) {
-        this.turn = turn;
+        this.turn = new Turn(turn);
     }
-
 
     /**
      * This method checks the validity of the name.
@@ -159,9 +170,6 @@ public class Game {
         }
         return true;
     }
-
-    //----------------------------------------------------------------
-
 
     /**
      * this method starts the game by assigning active status to "this.status"
