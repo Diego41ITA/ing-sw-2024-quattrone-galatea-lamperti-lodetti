@@ -52,9 +52,7 @@ public class GameStation {
     analizza La Map di playedCards, Analizza ogni 
     posizione confinante ai 4 angoli di ogni carta, 
     vede se non c'è già una carta in quella posizione e controlla che la carta non abbia gli angoli nulli*/
-    public List<Point> getFreeCords(){
-        return new ArrayList<>(this.freeCords);
-    }
+    public List<Point> getFreeCords(){ return new ArrayList<>(this.freeCords); }
 
     public void placeCard(PlayableCard card, Point cord){
             playedCards.put(cord, card);
