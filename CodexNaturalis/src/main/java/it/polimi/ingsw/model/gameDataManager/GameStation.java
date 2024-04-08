@@ -155,8 +155,18 @@ public class GameStation {
                 else
                     resources.put(i, 1);
             }
+
+            //now it adds the permanent resources
+            if(!c.isFront())
+            {
+                for(Item i: c.getAListOfBackResource()){
+                    if(resources.containsKey(i))
+                        resources.put(i, resources.get(i) + 1);
+                    else
+                        resources.put(i, 1);
+                }
+            }
         }
-        //vanno valutate pure le risorse sul retro ??
 
         return resources;
     }
