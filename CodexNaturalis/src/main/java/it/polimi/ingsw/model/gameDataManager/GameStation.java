@@ -101,13 +101,25 @@ public class GameStation {
     public calculateFinalPoint(){
 
     }
-    /**Riceve in ingresso la GOld card e conta le risorse visibili su playedCards.
-    Ritorna il numero delle volte che 
-    sul tavolo da gioco sono comparse quelle risorse. 
-    Possiamo usare un unico ciclo for in cui per ogni carta si analizza attraverso un if se si è trovato
-    un certo tipo di risorsa aumentando ogni volta un contatore che alla fine verrà diviso(senza resto) per il numero di risorse richieste dalla carta. */
-    public verifyResorceNeeded(){
 
+    /**
+     * @author Lodetti Alessandro
+     * Checks if there are enough resources to place the Gold Card
+     * @param goldCard it is the card the client wants to play
+     * @return true if  it is ok to place the card, false otherwise
+     */
+    public boolean verifyResourcesNeeded(GoldCard goldCard){
+        Map<Item, Integer> resources = calculateAvailableResources();
+
+        for(Item i: goldCard.getNeededResources()){
+            if(!resources.containsKey(i))
+                return false;
+            else if(resources.get(i) == 0)
+                return false;
+            else
+                resources.put(i, resources.get(i) - 1);
+        }
+        return true;
     }
 
     /**
@@ -126,6 +138,26 @@ public class GameStation {
     public CalculateGoldPoint(){
 
     }
-   
 
+    /**
+     * this method helps to calculate the available resource displayed on table
+     * @return a map with items and their cardinality.
+     */
+    private Map<Item, Integer> calculateAvailableResources(){
+        Map<Item, Integer> resources = new HashMap<>();
+
+        for(PlayableCard c: this.playedCards.values())
+        {
+            for(Item i: c.getFreeItem()){
+                if(resources.containsKey(i)){
+                    resources.put(i, resources.get(i) + 1);
+                }
+                else
+                    resources.put(i, 1);
+            }
+        }
+        //vanno valutate pure le risorse sul retro ??
+
+        return resources;
+    }
 }
