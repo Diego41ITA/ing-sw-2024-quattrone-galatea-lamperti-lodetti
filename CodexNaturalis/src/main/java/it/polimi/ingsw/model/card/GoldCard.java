@@ -99,7 +99,7 @@ public class GoldCard extends PlayableCard{
 
     @Override
     public boolean verifyResources(GameStation gamestation){
-        return gamestation.verifyResourcesNeeded(this);
+        if(this.isFront()) {return gamestation.verifyResourcesNeeded(this);} else {return true;}
     }
 
 }
