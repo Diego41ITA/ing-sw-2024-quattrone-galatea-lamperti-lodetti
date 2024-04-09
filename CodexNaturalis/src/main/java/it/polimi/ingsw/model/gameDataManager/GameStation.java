@@ -8,9 +8,17 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
  * this class represents the Station where the player places his cards for make point
  */
 public class GameStation {
+    /**It's a map that associates each card that has been played with its coordinates.
+     * The coordinates refer to the center of the card
+     */
     private final Map<Point, PlayableCard> playedCards;
+    /**It's a list of all the avaible coordinates where a new card can be played*/
     private ArrayList<Point> freeCords;
 
+    /**
+     * it's a constructor that initialize the gameStation object. It places the initial card and updates the new freeCords
+     * @param card is the initial card chosen by the player
+     */
     public GameStation(InitialCard card) {
         playedCards = new HashMap<>();
         playedCards.put(new Point(0, 0), card);
