@@ -7,21 +7,22 @@ import java.awt.Point;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 /**
-*    @author Lorenzo galatea
 * represents the class associated with the player
-* Nickname is the player's name and is a string
-* Cards is a list and represents the cards the player has in his hand
-* gamestation is a class type of data and represents the level in which the cards played by the player are located
-* color is a data item in an enum and indicates the marker associated with the player
-* optionalColor represents the black marker associated with the first player
-* goal is a class type of data and represents the goal card chosen by the player
+* @author Lorenzo galatea
 */
 public class Player {
+
+    /** nickname is the player's name and is a string */
     private String nickname;
+    /** cards is a list and represents the cards the player has in his hand*/
     private ArrayList<Card> cards;
+    /** gamestation is an object that represents the level in which the cards played by the player are located*/
     private GameStation gamestation;
+    /** color is a data item in an enum and indicates the marker associated with the player*/
     private Color color;
+    /** optionalColor represents the black marker associated with the first player*/
     private Optional<Color> optionalColor;
+    /** goal is a class type of data and represents the goal card chosen by the player*/
     private GoalCard goal;
 
     /**

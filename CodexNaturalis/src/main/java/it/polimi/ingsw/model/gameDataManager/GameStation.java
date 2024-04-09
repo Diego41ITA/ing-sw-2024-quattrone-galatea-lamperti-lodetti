@@ -12,7 +12,7 @@ public class GameStation {
      * The coordinates refer to the center of the card
      */
     private final Map<Point, PlayableCard> playedCards;
-    /**It's a list of all the avaible coordinates where a new card can be played*/
+    /**It's a list of all the available coordinates where a new card can be played*/
     private ArrayList<Point> freeCords;
 
     /**
@@ -67,7 +67,6 @@ public class GameStation {
      * is called from the player when he wants to play a card
      * @param card is the card that the player wants to play
      * @param cord is the cord in which the player wants to play the card
-     * @throws illegalOperationException if the specified card positioning is not allowed by the game's rules
      */
     public void placeCard(PlayableCard card, Point cord){
         playedCards.put(cord, card);
@@ -134,7 +133,7 @@ public class GameStation {
     }
 
     /**
-    stessa cosa di verifyResourceNedded solo per le carte goal.
+    stessa cosa di verifyResourceNeeded solo per le carte goal.
     (ci deve essere un controllo per identificare il tipo della carta obiettivo)
     */
     public verifyObjectNeeded(){
