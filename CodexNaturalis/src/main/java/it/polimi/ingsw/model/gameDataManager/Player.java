@@ -150,7 +150,7 @@ public class Player {
     */
     public List<Card> showCard() throws illegalOperationException {
         if (cards.isEmpty()) {
-            throw new illegalOperationException("Il mazzo è vuoto");
+            throw new illegalOperationException("Il giocatore non ha carte in mano");
         }
         return new ArrayList<Card>(cards);
     }
