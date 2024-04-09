@@ -4,7 +4,7 @@ import java.util.*;
 import java.awt.Point;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
-/** @author 
+/**
  * this class represents the Station where the player places his cards for make point
  */
 public class GameStation {
