@@ -1,11 +1,10 @@
 package it.polimi.ingsw.model.gameDataManager;
-import java.sql.Array;
 import java.util.*;
 
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.Deck;
-import it.polimi.ingsw.model.exceptions.EmptyDeckException;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 /**
 *    @author Lorenzo galatea
 * represents the class associated with the player
@@ -147,11 +146,11 @@ public class Player {
     /**@author Lorenzo Galatea
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
-    *@throws EmptyDeckException if the deck is empty
+    *@throws illegalOperationException if the deck is empty
     */
-    public List<Card> showCard() throws EmptyDeckException {
+    public List<Card> showCard() throws illegalOperationException {
         if (cards.isEmpty()) {
-            throw new EmptyDeckException("Il mazzo è vuoto");
+            throw new illegalOperationException("Il mazzo è vuoto");
         }
         return new ArrayList<Card>(cards);
     }

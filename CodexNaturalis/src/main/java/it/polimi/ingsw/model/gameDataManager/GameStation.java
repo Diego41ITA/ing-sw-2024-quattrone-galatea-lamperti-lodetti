@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.gameDataManager;
 import it.polimi.ingsw.model.card.*;
 import java.util.*;
 import java.awt.Point;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
 /** @author 
  * this class represents the Station where the player places his cards for make point
@@ -54,10 +55,19 @@ public class GameStation {
         this.freeCords = new ArrayList<>(freeCords);
     }
 
-    public void placeCard(PlayableCard card, Point cord){
-            playedCards.put(cord, card);
-            freeCords.remove(cord);
-            updateFreeCoords(cord);
+    /**
+     * is called from the controller to play a card
+     * @param card is the card that the player wants to play
+     * @param cord is the cord in which the player wants to play the card
+     * @throws illegalOperationException if the specified card positioning is not allowed by the game's rules
+     */
+    public void placeCard(PlayableCard card, Point cord) throws illegalOperationException {
+        if(!this.freeCords.contains(cord)){
+            throw new illegalOperationException("Il posizionamento della carta non è valido");
+        }
+        playedCards.put(cord, card);
+        freeCords.remove(cord);
+        updateFreeCoords(cord);
     }
 
     /**
