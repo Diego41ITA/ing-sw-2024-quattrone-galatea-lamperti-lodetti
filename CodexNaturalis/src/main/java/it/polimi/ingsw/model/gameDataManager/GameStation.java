@@ -48,11 +48,11 @@ public class GameStation {
      * returns the free coordinates
      * @return returns a copy of the available coordinates.
      */
-    /**è un metodo che ritorna le coordinate(list) in cui pui mettere una carta:
-    analizza La Map di playedCards, Analizza ogni 
-    posizione confinante ai 4 angoli di ogni carta, 
-    vede se non c'è già una carta in quella posizione e controlla che la carta non abbia gli angoli nulli*/
     public List<Point> getFreeCords(){ return new ArrayList<>(this.freeCords); }
+
+    public void setFreeCords(ArrayList<Point> freeCords) {
+        this.freeCords = new ArrayList<>(freeCords);
+    }
 
     public void placeCard(PlayableCard card, Point cord){
             playedCards.put(cord, card);
@@ -60,39 +60,33 @@ public class GameStation {
             updateFreeCoords(cord);
     }
 
-    //da sistemare
-    public void updateFreeCoords(Point cord){
-        Point a = new Point(cord.x - 1, cord.y - 1);
-        Point b = new Point(cord.x - 1, cord.y + 1);
-        Point c = new Point(cord.x + 1, cord.y - 1);
-        Point d = new Point(cord.x + 1, cord.y + 1);
+    /**
+     * updates the coordinates where its possible to play a new card
+     * @param cord is the coordinate of the card played right before calling this method
+     */
+    public void updateFreeCoords(Point cord) {
+        Point[] offsets = { new Point(-1, -1), new Point(-1, 1), new Point(1, -1), new Point(1, 1) };
+        Angle[] angles = { Angle.DOWNLEFT, Angle.HIGHLEFT, Angle.DOWNRIGHT, Angle.HIGHRIGHT };
+        List<Point> forbiddenCoords = new ArrayList<>();
 
-        if(!playedCards.containsKey(a)){
-            if(!playedCards.get(cord).checkIfEmpty(Angle.DOWNLEFT))
-                freeCords.add(a);
-        }else {
-            playedCards.get(a).hideAngle(Angle.HIGHRIGHT);
-        }
-        if(!playedCards.containsKey(b)) {
-            if(!playedCards.get(cord).checkIfEmpty(Angle.HIGHLEFT))
-                freeCords.add(b);
-        }else {
-            playedCards.get(b).hideAngle(Angle.DOWNRIGHT);
-        }
-        if(!playedCards.containsKey(c)){
-            if(!playedCards.get(cord).checkIfEmpty(Angle.DOWNRIGHT))
-                freeCords.add(c);
-        }else {
-            playedCards.get(c).hideAngle(Angle.HIGHLEFT);
-        }
-        if(!playedCards.containsKey(d)){
-            if(!playedCards.get(cord).checkIfEmpty(Angle.HIGHRIGHT))
-                freeCords.add(d);
-        }else {
-            playedCards.get(d).hideAngle(Angle.DOWNLEFT);
+        for (int i = 0; i < offsets.length; i++) {
+            Point neighbor = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
+            if (!forbiddenCoords.contains(neighbor)) {
+                if (!playedCards.containsKey(neighbor)) {
+                    if (!playedCards.get(cord).checkIfEmpty(angles[i])) {
+                        freeCords.add(neighbor);
+                    } else {
+                        forbiddenCoords.add(neighbor);
+                    }
+                } else {
+                    playedCards.get(neighbor).hideAngle(angles[(i + 2) % 4]);
+                }
+            }
         }
     }
-   
+
+
+
     /**Calculatefinalpoint() ritorna il punteggio ottenuto attraverso la carta obiettivo: 
     è composta da 11 rami if che controlla il tipo della carta obiettivo
     in ogni ramo c'è il controllo dell'obiettivo: 
