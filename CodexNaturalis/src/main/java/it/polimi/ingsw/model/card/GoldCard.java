@@ -4,7 +4,11 @@
  */
 package it.polimi.ingsw.model.card;
 
+import it.polimi.ingsw.model.gameDataManager.GameStation;
+
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * @author Lodetti Alessandro
@@ -91,6 +95,11 @@ public class GoldCard extends PlayableCard{
      */
     public Item getBackResource(){
         return this.getAListOfBackResource().getFirst();
+    }
+
+    @Override
+    public boolean verifyResources(GameStation gamestation){
+        return gamestation.verifyResourcesNeeded(this);
     }
 
 }

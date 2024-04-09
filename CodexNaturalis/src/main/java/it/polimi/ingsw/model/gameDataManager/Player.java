@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model.gameDataManager;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
+import java.awt.Point;
 
-import it.polimi.ingsw.model.card.Card;
-import it.polimi.ingsw.model.card.GoalCard;
-import it.polimi.ingsw.model.card.Deck;
+import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 /**
 *    @author Lorenzo galatea
@@ -146,7 +147,7 @@ public class Player {
     /**@author Lorenzo Galatea
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
-    *@throws illegalOperationException if the deck is empty
+    *@throws illegalOperationException if the player's hand is empty
     */
     public List<Card> showCard() throws illegalOperationException {
         if (cards.isEmpty()) {
@@ -173,4 +174,23 @@ public class Player {
     public void removeCards() {
         cards.clear();
     }
+
+    /**
+     * allows the player to play a card.
+     * It verifies that, in case of playing a goldCard, there are all the resources needed to do it
+     * @param card is the card he wants to play
+     * @param cord is the cord where he wants to play the card
+     * @throws IllegalStateException if it's not possible to play the card
+     */
+    public void playCard(PlayableCard card, Point cord) throws illegalOperationException {
+        if (card.verifyResources(this.gamestation)) {
+            this.gamestation.placeCard(card, cord);
+            this.cards.remove(card);
+        }
+        else {
+            throw new illegalOperationException("Non ci sono le risorse sufficienti per giocare questa carta");
+        }
+    }
+
 }
+

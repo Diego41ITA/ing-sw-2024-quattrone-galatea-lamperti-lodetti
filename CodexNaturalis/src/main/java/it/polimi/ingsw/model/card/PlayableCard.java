@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.card;
 
 import java.util.ArrayList;
 import java.util.*;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
+import java.awt.Point;
 
 /**
 * @author Lodetti Alessandro
@@ -141,5 +143,9 @@ public abstract class PlayableCard extends Card{
      */
     public List<Item> getAListOfBackResource(){
         return new ArrayList<>(backResource);
+    }
+
+    public boolean verifyResources(GameStation gamestation){
+     return true;
     }
 }
