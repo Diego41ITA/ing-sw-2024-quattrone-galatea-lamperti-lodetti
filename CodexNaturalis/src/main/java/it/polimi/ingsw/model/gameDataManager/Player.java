@@ -151,7 +151,7 @@ public class Player {
     */
     public List<Card> showCard() throws illegalOperationException {
         if (cards.isEmpty()) {
-            throw new illegalOperationException("Il giocatore non ha carte in mano");
+            throw new illegalOperationException("The player has no cards in his hand");
         }
         return new ArrayList<Card>(cards);
     }
@@ -188,7 +188,7 @@ public class Player {
             this.cards.remove(card);
         }
         else {
-            throw new illegalOperationException("Non ci sono le risorse sufficienti per giocare questa carta");
+            throw new illegalOperationException("There are not enough resources to play this card");
         }
     }
 
