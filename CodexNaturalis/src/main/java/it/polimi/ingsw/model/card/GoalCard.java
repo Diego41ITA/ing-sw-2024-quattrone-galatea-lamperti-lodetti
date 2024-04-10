@@ -28,10 +28,9 @@ public class GoalCard extends Card {
      * @param isFront show how the card is displayed
      * @param points are the points on the GoalCard
      * @param goalType is the requirement type of the GoalCard
-     * @param positionType is the position requirement(it is "EMPTY" in case there is no position requirement)
      * @param objects is a HashMap that contains the items needed to get points(this is the case of a typeOfGoalCard OBJECT or RESOURCE)
      */
-    public GoalCard(TypeOfCard type, boolean isFront, int points, CheckInterface goalType, TypeOfPositioning positionType, HashMap<Item, Integer> objects){
+    public GoalCard(TypeOfCard type, boolean isFront, int points, CheckInterface goalType, HashMap<Item, Integer> objects){
         super(type, isFront);
         this.numOfPoints = points;
         this.goalType = goalType;
