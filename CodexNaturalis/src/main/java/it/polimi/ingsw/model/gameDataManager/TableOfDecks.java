@@ -233,7 +233,7 @@ public class TableOfDecks {
     /**@author Lorenzo Galatea
      * deletes all cards in goals
      */
-    public void restGoals(){
+    public void resetGoals(){
         goals.clear();
     }
 
@@ -253,5 +253,23 @@ public class TableOfDecks {
         this.deckGoal.shuffle();
         this.deckResource.shuffle();
         this.deckStart.shuffle();
+    }
+
+    public void initializeTable(){
+        //allCards = loadCardFromJSON(fileName)
+        //Collections.shuffle(allCards)
+        //for (int i = 0; i < allCards.size(); i++) {
+        //    if (i <= 51) {
+        //         this.deckResource.add(new Card(allCards.get(i))); // idk if we need a deep copy here
+        //    } else if (i <= 103) {
+        //         this.deckGold.add(new Card(allCards.get(i))); // same
+        //            }
+        //      else if (i <= 109) {
+        //         this.deckStart.add((new Card(allCards.get(i))); // same
+        //            }
+        //      else {
+        //          this.deckGoal.add((new Card(allCards.get(i))); // same
+        //            }
+        //}
     }
 }
