@@ -58,6 +58,7 @@ public class Player {
     public String getNick() {
         return nickname;
     }
+
     /** @author Lorenzo Galatea
     *Method for set the nickname
     *@param newNickname is the name of the player
@@ -65,6 +66,7 @@ public class Player {
     public void setNickname(String newNickname){
         this.nickname= newNickname;
     }
+
     /** @author Lorenzo Galatea
     *method that returns the gamestation of the player
     *@return gamestation
@@ -88,6 +90,7 @@ public class Player {
     public Optional<Color> getOptionalColor() {
         return optionalColor;
     }
+
     /**@author Lorenzo Galatea
     *method that set the maker black if I am the first player
     *@param optionalColor is the black maker or null
@@ -95,6 +98,7 @@ public class Player {
     public void setOptionalColor(Optional<Color> optionalColor) {
         this.optionalColor = optionalColor;
     }
+
     /**@author Lorenzo Galatea
     *method return the maker associated with the player
     @return color is maker of the player
@@ -102,6 +106,7 @@ public class Player {
     public Color getColor() {
         return color;
     }
+
     /**@author Lorenzo Galatea
     *setter for the attribute color
     *@param color: the maker
@@ -109,6 +114,7 @@ public class Player {
     public void setColor(Color color) {
         this.color = color;
     }
+
     /**@author Lorenzo Galatea
     *getter of the attribute goal
     @return goal which is the GoalCard chosen by the player
@@ -116,12 +122,12 @@ public class Player {
     public GoalCard getGoal() {
         return goal;
     }
+
     /**@author Lorenzo Galatea
     *draw a card from the TableOfDecks
     *@param card: one of the 4 cards visible in the TableOfDecks
     *@throws IllegalStateException if the player already has 3 cards
     */
-
     public void draw(Card card) {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
@@ -129,6 +135,7 @@ public class Player {
                 cards.add(card);
             }
     }
+
     /**@author Lorenzo Galatea
     *draw a card from one of the decks of the TableOfDecks
     *@param deck: Deck associated with TableOfDecks
@@ -145,6 +152,7 @@ public class Player {
                 cards.add(card);
             }
     }
+
     /**@author Lorenzo Galatea
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
@@ -156,6 +164,7 @@ public class Player {
         }
         return new ArrayList<Card>(cards);
     }
+
     /**@author Lorenzo Galatea
     *choose the goal
     *@param goals is a list of objective cards
@@ -169,6 +178,7 @@ public class Player {
             throw new IllegalArgumentException("Index out of bounds");
         }
     }
+
     /**@author Lorenzo Galatea
     *removes cards from the player's hand
     */
@@ -192,6 +202,5 @@ public class Player {
             throw new illegalOperationException("There are not enough resources to play this card");
         }
     }
-
 }
 
