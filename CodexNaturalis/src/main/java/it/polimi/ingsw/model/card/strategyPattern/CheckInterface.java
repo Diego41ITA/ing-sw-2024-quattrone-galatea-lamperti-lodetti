@@ -7,5 +7,5 @@ import java.util.*;
 import java.awt.*;
 
 public interface CheckInterface {
-    public boolean check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements);
+    public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements);
 }
