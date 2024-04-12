@@ -22,9 +22,17 @@ public class Crafter {
 
         //ora il file è creato bisogna creare tutto quello che serve a riempirlo
 
+        //carte oro
         HashMap> g;
         List >
         GoldCard gc = new GoldCard();
+
+        //carte risorsa
+
+
+        //carte start
+
+        //carte obiettivo
 
         //ora c'è il file e ci sono gli oggetti da metterci dentro, si utilizzando i comandi di Gson
 
