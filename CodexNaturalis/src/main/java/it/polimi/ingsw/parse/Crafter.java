@@ -1,9 +1,10 @@
 package it.polimi.ingsw.parse;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.typeadapter.RuntimeTypeAdapterFactory;
 import it.polimi.ingsw.model.card.GoldCard;
-import  //libreria file
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 /**
  * @author Lodetti Alessandro
@@ -28,7 +29,6 @@ public class Crafter {
         GoldCard gc = new GoldCard();
 
         //carte risorsa
-
 
         //carte start
 
