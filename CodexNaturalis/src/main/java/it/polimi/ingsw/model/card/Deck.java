@@ -10,6 +10,13 @@ public class Deck {
     private final List<Card> cards;
 
     /**
+     * default constructor, always useful
+     */
+    public Deck(){
+        this.cards = new ArrayList<>();
+    }
+
+    /**
      * this is the basic constructor
      * @param deck is simply the card collection.
      */
@@ -67,5 +74,9 @@ public class Deck {
      */
     public List<Card> getStatus(){
         return new ArrayList<>(cards);
+    }
+
+    public void addCard(Card c) {
+        this.cards.add(c);
     }
 }

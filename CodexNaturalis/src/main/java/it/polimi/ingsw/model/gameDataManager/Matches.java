@@ -137,4 +137,18 @@ public class Matches {
             joinRandomGame(player);
         }
     }
+
+    /*
+    * qui c'è un metodo per salvare: questo metodo salva in un file json il gioco quindi le varie classi game
+    * (deve creare le directory quando viene creata una nuova partita).
+    * e in questa directory salva pure i giocatori su file separati.
+    * */
+
+    public save(){};
+
+
+    /*
+    quando la partita finisce e i giocatori sono disconnessi questo cancella i file json
+     */
+    public remove(){};
 }
