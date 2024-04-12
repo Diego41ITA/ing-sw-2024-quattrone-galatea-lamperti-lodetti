@@ -4,52 +4,56 @@ import it.polimi.ingsw.model.card.*;
 
 import java.awt.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PositionCheck1 implements CheckInterface {
 
-    boolean flag;
+    boolean isValid = false;
+    boolean isContained = false;
     int i;
-    Set<Set<Point>> ValidPlacements = new HashSet<>();
-    Set<Point> GroupCards = new HashSet<>();
+    Set<Set<Point>> validPlacements = new HashSet<>();
+    Set<Point> groupCards = new HashSet<>();
     @Override
     public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.MUSHROOM)){
-                flag = true;
-                GroupCards.add(a);
+                isValid = true;
+                groupCards.add(a);
                 for (i=1; i<3; i++){
                     Point nextPoint = new Point(a.x+i,a.y+i);
-                    GroupCards.add(nextPoint);
+                    groupCards.add(nextPoint);
                     if (!PlayedCard.containsKey(nextPoint) || !PlayedCard.get(nextPoint).getType().equals(TypeOfCard.MUSHROOM)){
-                        flag = false;
+                        isValid = false;
                         break;
                     }
                 }
-                if (flag) ValidPlacements.add(new HashSet<>(GroupCards));
+                if (isValid) validPlacements.add(new HashSet<>(groupCards));
             }
-            GroupCards.clear();
+            groupCards.clear();
         }
-        for(Set<Point> g : ValidPlacements) {
-            flag = false;
-            for (Point p : g) {
-                for (Set<Point> h : ValidPlacements) {
-                    if (!h.equals(g) && !h.contains(p)) {
-                        flag = true;
+        for(Set<Point> CoordGroup : validPlacements) {
+            isContained = true;
+            outsideLoop:
+            for (Point p : CoordGroup) {
+                for (Set<Point> coordGroupCheck : validPlacements) {
+                    if (!coordGroupCheck.equals(CoordGroup) && !coordGroupCheck.contains(p)) {
+                        isContained = false;
+                        break outsideLoop;
                     }
                 }
             }
-            if(flag){
-                ValidPlacements.remove(g);
+            if(isContained){
+                validPlacements.remove(CoordGroup);
             }else {
-                for (Point p : g) {
-                    for (Set<Point> h : ValidPlacements) {
-                        if (!h.equals(g) && h.contains(p)) {
-                            ValidPlacements.remove(h);
-                        }
+                Set<Set<Point>> validPlacementsFiltered;
+                for (Point p : CoordGroup) {
+                    validPlacementsFiltered = validPlacements.stream()
+                            .filter(x -> x.equals(CoordGroup) || !x.contains(p))
+                            .collect(Collectors.toSet());
+                    validPlacements = validPlacementsFiltered;
                     }
                 }
             }
-        }
-        return ValidPlacements.size();
+        return validPlacements.size();
     }
 }
