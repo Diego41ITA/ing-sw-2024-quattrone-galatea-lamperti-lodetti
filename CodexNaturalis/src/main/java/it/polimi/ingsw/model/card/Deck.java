@@ -68,4 +68,8 @@ public class Deck {
     public List<Card> getStatus(){
         return new ArrayList<>(cards);
     }
+
+    public void addCard(Card c) {
+        this.cards.add(c);
+    }
 }
