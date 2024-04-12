@@ -53,7 +53,7 @@ public class Crafter {
         };
 
         Deck goalDeck = new Deck();
-        for(int i; 0<= i <= 15; i++)
+        for(int i = 0; i <= 15; i++)
         {
             GoalCard c = new GoalCard((TypeOfCard) matrix[i][0], (boolean) matrix[i][1], (int) matrix[i][2],
                     (CheckInterface) matrix[i][3], (HashMap<Item, Integer>) matrix[i][4]);
