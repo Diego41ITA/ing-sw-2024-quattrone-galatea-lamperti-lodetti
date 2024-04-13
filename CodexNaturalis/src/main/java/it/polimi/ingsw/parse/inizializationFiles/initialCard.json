@@ -1,44 +1,78 @@
 [
   {
+    "front": {
+      "HIGHLEFT" : "MUSHROOM",
+      "HIGHRIGHT" : "VEGETABLE",
+      "DOWNLEFT" : "INSECT",
+      "DOWNRIGHT" : "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT" : "EMPTY",
+      "HIGHRIGHT" : "VEGETABLE",
+      "DOWNLEFT" : "INSECT",
+      "DOWNRIGHT" : "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "isFront": false,
+    "type": "STARTING"
+  },
+  {
+    "front": {
+      "HIGHLEFT" : "VEGETABLE",
+      "HIGHRIGHT" : "ANIMAL",
+      "DOWNLEFT" : "MUSHROOM",
+      "DOWNRIGHT" : "INSECT"
+    },
+    "back": {
+      "HIGHLEFT" : "ANIMAL",
+      "HIGHRIGHT" : "EMPTY",
+      "DOWNLEFT" : "EMPTY",
+      "DOWNRIGHT" : "MUSHROOM"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "isFront": false,
+    "type": "STARTING"
+  },
+  {
+    "front": {
+      "HIGHLEFT" : "INSECT",
+      "HIGHRIGHT" : "ANIMAL",
+      "DOWNLEFT" : "MUSHROOM",
+      "DOWNRIGHT" : "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT" : "EMPTY",
+      "HIGHRIGHT" : "EMPTY",
+      "DOWNLEFT" : "EMPTY",
+      "DOWNRIGHT" : "EMPTY"
+    },
+    "backResource": [ "VEGETABLE", "MUSHROOM" ],
+    "isFront": false,
+    "type": "STARTING"
+  },
+
+  //you start from card number 84. REMOVE THIS COMMENT.
+  //REMEMBER THAT THE FRONT IS SWITCHED WITH THE BACK IN THE FILE.
+  // THE BACK IS THE ONE WITH THE BACK RESOURCES.
+  {
     "front": {},
     "back": {},
     "backResource": [],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "STARTING"
   },
   {
     "front": {},
     "back": {},
     "backResource": [],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "STARTING"
   },
   {
     "front": {},
     "back": {},
     "backResource": [],
     "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "front": {},
-    "back": {},
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "front": {},
-    "back": {},
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "front": {},
-    "back": {},
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
+    "type": "STARTING"
   }
 ]
