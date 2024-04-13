@@ -1,6 +1,6 @@
 [
   {
-    "numOfPoints": 0,
+    "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -10,10 +10,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -23,10 +23,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -36,10 +36,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -49,10 +49,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -62,10 +62,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -75,10 +75,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -88,10 +88,10 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
+    "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
       "isValid": false,
@@ -101,11 +101,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "MUSHROOM" : 3
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -114,11 +116,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "VEGETABLE" : 3
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -127,11 +131,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "ANIMAL" : 3
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -140,11 +146,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "INSECT" : 3
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -153,11 +161,15 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 3,
+    "listOfObjects": {
+      "FEATHER" : 1,
+      "POTION" : 1,
+      "PARCHMENT" : 1
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -166,11 +178,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "PARCHMENT" : 2
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -179,11 +193,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "POTION" : 2
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -192,11 +208,13 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   },
   {
-    "numOfPoints": 0,
-    "listOfObjects": {},
+    "numOfPoints": 2,
+    "listOfObjects": {
+      "FEATHER" : 2
+    },
     "goalType": {
       "isValid": false,
       "isContained": false,
@@ -205,6 +223,6 @@
       "groupCards": []
     },
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "GOAL"
   }
 ]
