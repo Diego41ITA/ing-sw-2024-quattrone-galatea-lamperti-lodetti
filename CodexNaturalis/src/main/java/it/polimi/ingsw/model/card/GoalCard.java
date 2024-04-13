@@ -16,10 +16,7 @@ import java.util.*;
 public class GoalCard extends Card {
     private final int numOfPoints;
     private final HashMap<Item, Integer> listOfObjects;
-    //private final TypeOfGoalCard goalType;
     private final CheckInterface goalType;
-
-    //private final TypeOfPositioning positionType;
 
     /**
      * @author Luca Lamperti
@@ -33,7 +30,6 @@ public class GoalCard extends Card {
         super(TypeOfCard.GOAL, isFront);
         this.numOfPoints = points;
         this.goalType = goalType;
-//        this.positionType = positionType;
         this.listOfObjects = new HashMap<>(objects);
     }
 
@@ -47,9 +43,7 @@ public class GoalCard extends Card {
         this.numOfPoints = card.getNumberOfPoints();
         this.listOfObjects = new HashMap<Item, Integer>(card.getListOfObjects());
         this.goalType = card.getGoalType();
-        //        this.positionType = card.getPositionType();
     }
-
 
     /**
      * @author Luca Lamperti
@@ -71,16 +65,6 @@ public class GoalCard extends Card {
 
     /**
      * @author Luca Lamperti
-     * getter for the attribute PositionType
-     * @return an enum that indicates the position requirement
-     */
-    /*
-    public TypeOfPositioning getPositionType() {
-        return positionType;
-    }
-    */
-    /**
-     * @author Luca Lamperti
      * getter for the attribute listOfObjects
      * @return an ArrayList that contains the items needed to earn the NumOfPoints of the GoalCard
      */
@@ -88,7 +72,7 @@ public class GoalCard extends Card {
         return new HashMap<>(listOfObjects);
     }
 
-    public Boolean checkGoal(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems){
-        return this.goalType.check(playedCard, availableItems, this.listOfObjects);
+    public int getGoalPoints(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems){
+        return this.numOfPoints * this.goalType.check(playedCard, availableItems, this.listOfObjects);
     }
 }
