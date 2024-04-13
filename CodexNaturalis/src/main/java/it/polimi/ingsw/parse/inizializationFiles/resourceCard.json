@@ -159,6 +159,9 @@
     "isFront": false,
     "type": "ANIMAL"
   },
+
+  //io faccio le prime 20 tu le successive
+
   {
     "numOfPoints": 0,
     "front": {},
