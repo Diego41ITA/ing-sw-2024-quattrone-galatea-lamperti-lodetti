@@ -421,6 +421,7 @@
   },
 
   //devi fare le carte da 61 a 80 compresa
+  //box e typeOfGoldCard non guardarli
 
   {
     "neededResources": [],
