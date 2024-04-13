@@ -8,7 +8,7 @@ package it.polimi.ingsw.model.card;
 public enum TypeOfGoldCard {
     ANGLE,
     CLASSIC,
-    POISON,
+    POTION,
     PARCHMENT,
     FEATHER;
 }
