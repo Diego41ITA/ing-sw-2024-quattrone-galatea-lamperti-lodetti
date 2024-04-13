@@ -9,61 +9,23 @@ import java.util.*;
 /**
  * @author Lodetti Alessandro
  * this class crafts the json file that contains all the card
+ *
+ * non serve più
  */
 public class Crafter {
     public static void main(String[] arg)
     {
 
-        //oppure si crea una directory nel robo di intellij e si crea il file direttamente da li
-        File resourceDeck = new File(/* path */);
-        File startingDeck = new File(/* path */);
-
-
-        //ora il file è creato bisogna creare tutto quello che serve a riempirlo
-
-        //carte oro
-        HashMap<>g;
-        List<> l;
-
-        GoldCard gc = new GoldCard();
-
-        //carte risorsa
-
-        //carte start
-
-        //carte obiettivo
-        Object[][] matrix = {
-                {TypeOfCard.MUSHROOM, false, 2, new PositionCheck1(), new HashMap<Item, Integer>()},
-                {TypeOfCard.VEGETABLE, false, 2, new PositionCheck2(), null},
-                //fino a qui ok
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck3, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck4, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck5, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck6, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck7, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck8, null},
-                {TypeOfCard.MUSHROOM, false, 2,null, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-                {TypeOfCard.MUSHROOM, false, 2, positionCheck1, null},
-        };
-
-        Deck goalDeck = new Deck();
-        for(int i = 0; i <= 15; i++)
-        {
-            GoalCard c = new GoalCard((TypeOfCard) matrix[i][0], (boolean) matrix[i][1], (int) matrix[i][2],
-                    (CheckInterface) matrix[i][3], (HashMap<Item, Integer>) matrix[i][4]);
-            goalDeck.addCard(c);
+        Gson gson = new Gson();
+        ArrayList<GoldCard> goals = new ArrayList<>();
+        try(FileWriter writer = new FileWriter("goalDeck.json")){
+            gson.toJson(goals, writer);
+            System.out.println("written successfully");
         }
-
-        //ora c'è il file e ci sono gli oggetti da metterci dentro, si utilizzando i comandi di Gson
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        /*
         //per il deck goal
         String jsonGoal = gson.toJson(goalDeck);
 
@@ -108,7 +70,7 @@ public class Crafter {
         catch(IOException e){
             e.printStackTrace();
         }
-
+        */
     }
 
 }
