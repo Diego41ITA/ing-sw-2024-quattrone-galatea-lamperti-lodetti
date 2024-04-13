@@ -1,7 +1,11 @@
 package it.polimi.ingsw.model.gameDataManager;
 
+import com.google.gson.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.io.*;
+
 
 /**
  * This is the class that manages all the game (ongoing, suspended and ended). The user should be able to join a game
@@ -138,17 +142,87 @@ public class Matches {
         }
     }
 
-    /*
-    * qui c'è un metodo per salvare: questo metodo salva in un file json il gioco quindi le varie classi game
-    * (deve creare le directory quando viene creata una nuova partita).
-    * e in questa directory salva pure i giocatori su file separati.
-    * */
+    /**
+     * this method saves the current status of the game on a json file
+     * @author Lodetti Alessandro
+     * @param g it is the game that wants to be saved
+     */
+    public void save(Game g){
+        //create a path to the directory
+        String directoryPath = "path" + g.getId();
+        File directory = new File(directoryPath);
 
-    public save(){};
+        if(!directory.exists()){
+            //the directory should be created
+            directory.mkdirs();
+        }
+
+        //now the directory surly exists
+        String gameFilePath = "path" + g.getId() + ".json";
+        File gameFile = new File(gameFilePath);
+
+        if(!gameFile.exists()){
+            //the file should be created
+            try{
+                gameFile.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        //now the game file surly exists
+        String playerFilePath = "path" + g.getTurn().getCurrentPlayerNick() + ".json";
+        File playerFile = new File(playerFilePath);
+
+        if(!playerFile.exists()){
+            //the player file should be created
+            try{
+                playerFile.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        //at this point it's certain that all the file are present
+        //it is possible to save the current status of all.
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try(FileWriter writer = new FileWriter(gameFilePath)){
+            gson.toJson(g, writer);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try(FileWriter writer = new FileWriter(playerFilePath)){
+            String nick = g.getTurn().getCurrentPlayerNick();
+            Player player = new Player();
+            for(Player p: g.getPlayers().keySet()){
+                if(p.getNick().equals(nick))
+                    player = p;
+            }
+            gson.toJson(player, writer);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
 
     /*
     quando la partita finisce e i giocatori sono disconnessi questo cancella i file json
      */
-    public remove(){};
+    public void remove(){
+        for(Game g: this.games)
+        {
+            if(g.getStatus() == Status.FINISHED){
+                boolean b = true;
+                for(Player p: g.getPlayers().keySet())
+                    b = b && g.getPlayers().get(p);
+                if(b){
+                    //rimuove la directory creata
+                    g.getId()
+                }
+            }
+        }
+    }
 }
