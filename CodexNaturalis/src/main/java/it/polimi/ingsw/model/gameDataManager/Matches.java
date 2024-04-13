@@ -208,8 +208,10 @@ public class Matches {
     }
 
 
-    /*
-    quando la partita finisce e i giocatori sono disconnessi questo cancella i file json
+    /**
+     * this method is meant to be a routine method, it's call by the controller, and it removes all the ended games.
+     * (consider that is impossible to know when a player will leave the game).
+     * @author Lodetti Alessandro
      */
     public void remove(){
         for(Game g: this.games)
@@ -219,10 +221,29 @@ public class Matches {
                 for(Player p: g.getPlayers().keySet())
                     b = b && g.getPlayers().get(p);
                 if(b){
-                    //rimuove la directory creata
-                    g.getId()
+                    //the game is ended and all the players left the lobby
+                    //thus, it is deletable.
+                    String directoryPath = "path" + g.getId();
+                    File directory = new File(directoryPath);
+                    deleteDirectory(directory);
                 }
             }
         }
+    }
+
+    /**
+     * this private method helps remove() to delete a precise directory ("set" of files), it lists all the file
+     * contained in the directory, it removes them, and then it removes the directory.
+     * @param directory it is the directory that the program needs to remove.
+     */
+    private void deleteDirectory(File directory)
+    {
+        File[] files = directory.listFiles();
+        if(files != null){
+            for(File f: files){
+                f.delete();
+            }
+        }
+        directory.delete();
     }
 }
