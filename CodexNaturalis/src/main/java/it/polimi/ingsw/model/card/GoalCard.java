@@ -24,14 +24,13 @@ public class GoalCard extends Card {
     /**
      * @author Luca Lamperti
      * the constructor of the GoalCard class
-     * @param type is the type of the GoalCard(from enum TypeOfCard)
      * @param isFront show how the card is displayed
      * @param points are the points on the GoalCard
      * @param goalType is the requirement type of the GoalCard
      * @param objects is a HashMap that contains the items needed to get points(this is the case of a typeOfGoalCard OBJECT or RESOURCE)
      */
-    public GoalCard(TypeOfCard type, boolean isFront, int points, CheckInterface goalType, HashMap<Item, Integer> objects){
-        super(type, isFront);
+    public GoalCard(boolean isFront, int points, CheckInterface goalType, HashMap<Item, Integer> objects){
+        super(TypeOfCard.GOAL, isFront);
         this.numOfPoints = points;
         this.goalType = goalType;
 //        this.positionType = positionType;

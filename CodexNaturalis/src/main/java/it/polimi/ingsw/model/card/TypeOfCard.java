@@ -10,5 +10,6 @@ public enum TypeOfCard {
     VEGETABLE,
     MUSHROOM,
     INSECT,
-    STARTING;   //this one might be useless
+    STARTING,
+    GOAL
 }
