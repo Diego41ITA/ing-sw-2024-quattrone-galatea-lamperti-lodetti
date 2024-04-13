@@ -361,6 +361,7 @@
   },
 
   //io faccio le prime 20 tu le successive
+  //Devi fare dalla 21 in poi (fino alla 41 esclusa)
 
   {
     "numOfPoints": 0,
