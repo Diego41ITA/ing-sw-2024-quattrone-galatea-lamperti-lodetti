@@ -87,7 +87,7 @@ public class GameStation {
             Point neighbor = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
             if (!forbiddenCoords.contains(neighbor)) {
                 if (!playedCards.containsKey(neighbor)) {
-                    if (!playedCards.get(cord).checkIfEmpty(angles[i])) {
+                    if (!playedCards.get(cord).checkIfHidden(angles[i])) {
                         freeCords.add(neighbor);
                     } else {
                         forbiddenCoords.add(neighbor);

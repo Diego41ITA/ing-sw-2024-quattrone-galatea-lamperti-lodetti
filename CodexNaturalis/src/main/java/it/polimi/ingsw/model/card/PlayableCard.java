@@ -64,6 +64,17 @@ public abstract class PlayableCard extends Card{
     }
 
     /**
+     * this method check if the item in the specified angle is hidden
+     * @param a is the angle position to search
+     * @return true if the item is Item.Empty
+     */
+    public boolean checkIfHidden(Angle a){
+        if(!isFront())
+            return false;
+        else return front.get(a) == Item.HIDDEN;
+    }
+
+    /**
      * using getFreeAngleAndContents() methods, this one provides e list of free angles.
      * @return an ArrayList of all the free Angles.
      */
