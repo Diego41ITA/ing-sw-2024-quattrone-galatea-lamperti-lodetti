@@ -1,24 +1,30 @@
 package it.polimi.ingsw.model.card.strategyPattern;
 
-import it.polimi.ingsw.model.card.Item;
-import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.card.TypeOfCard;
+import it.polimi.ingsw.model.card.*;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.*;
 
 public class UpsideDownLAnimalMushroomCheck implements CheckInterface{
+    Set<Set<Point>> validPlacements = new HashSet<>();
+    Set<Point> groupCards = new HashSet<>();
     @Override
-    public boolean check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
+    public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.MUSHROOM)){
-                if (PlayedCard.containsKey(new Point(a.x - 1, a.y - 1)) && PlayedCard.get(new Point(a.x -1, a.y - 1)).getType().equals(TypeOfCard.ANIMAL)){
-                    if (PlayedCard.containsKey(new Point(a.x -1, a.y - 3)) && PlayedCard.get(new Point(a.x -1, a.y - 3)).getType().equals(TypeOfCard.ANIMAL)){
-                        return true;
+                groupCards.add(a);
+                Point nextPoint = new Point(a.x -1, a.y - 1);
+                if (PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.ANIMAL)){
+                    groupCards.add(nextPoint);
+                    nextPoint = new Point(a.x -1, a.y - 3);
+                    if(PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.ANIMAL)){
+                        groupCards.add(nextPoint);
+                        validPlacements.add(groupCards);
                     }
                 }
             }
+            groupCards.clear();
         }
-        return false;
+        return PlacementOptimizer.optimize(validPlacements);
     }
 }
