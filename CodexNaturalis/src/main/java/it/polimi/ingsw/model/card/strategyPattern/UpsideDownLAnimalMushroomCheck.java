@@ -7,13 +7,13 @@ import it.polimi.ingsw.model.card.TypeOfCard;
 import java.awt.*;
 import java.util.HashMap;
 
-public class PositionCheck8 implements CheckInterface{
+public class UpsideDownLAnimalMushroomCheck implements CheckInterface{
     @Override
     public boolean check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
         for (Point a : PlayedCard.keySet()){
-            if (PlayedCard.get(a).getType().equals(TypeOfCard.ANIMAL)){
-                if (PlayedCard.containsKey(new Point(a.x + 1, a.y + 1)) && PlayedCard.get(new Point(a.x +1, a.y + 1)).getType().equals(TypeOfCard.INSECT)){
-                    if (PlayedCard.containsKey(new Point(a.x +1, a.y + 3)) && PlayedCard.get(new Point(a.x +1, a.y + 3)).getType().equals(TypeOfCard.INSECT)){
+            if (PlayedCard.get(a).getType().equals(TypeOfCard.MUSHROOM)){
+                if (PlayedCard.containsKey(new Point(a.x - 1, a.y - 1)) && PlayedCard.get(new Point(a.x -1, a.y - 1)).getType().equals(TypeOfCard.ANIMAL)){
+                    if (PlayedCard.containsKey(new Point(a.x -1, a.y - 3)) && PlayedCard.get(new Point(a.x -1, a.y - 3)).getType().equals(TypeOfCard.ANIMAL)){
                         return true;
                     }
                 }
