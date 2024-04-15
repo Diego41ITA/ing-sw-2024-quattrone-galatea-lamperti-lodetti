@@ -5,8 +5,7 @@
 package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.gameDataManager.GameStation;
-
-import java.awt.*;
+import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import java.util.*;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class GoldCard extends PlayableCard{
      * @param points these are the points that a player can earn from this card.
      * @param backResource defines the permanent resource in the back.
      * @param box  it is the item that a player needs to earn points.
-     * @param typeGold  indicates one of the type that a gold card can assume.
+     * @param goldType indicates one of the type that a gold card can assume.
      * @param resources indicates the resource that a player need to place this card.
      * @param typeCard  refer to the super class attribute
      * @param isFront refer to the super class attribute
@@ -41,7 +40,7 @@ public class GoldCard extends PlayableCard{
         this.numOfPoints = points;
         this.goldType = goldType;
         this.box = box;
-        this.resources = new HashMap<>(resources)
+        this.resources = new HashMap<>(resources);
     }
 
     /**
@@ -67,9 +66,10 @@ public class GoldCard extends PlayableCard{
 
     /**
      * it's for knowing how to make points with this card.
+     *
      * @return the type of this particular GoldCard
      */
-    public TypeOfGoldCard getGoldType() {
+    public CheckInterface getGoldType() {
         return goldType;
     }
 
