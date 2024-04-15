@@ -100,54 +100,30 @@ public class GameStation {
     }
 
 
-
-    /**Calculatefinalpoint() ritorna il punteggio ottenuto attraverso la carta obiettivo: 
-    è composta da 11 rami if che controlla il tipo della carta obiettivo
-    in ogni ramo c'è il controllo dell'obiettivo: 
-    per esempio per le posizioni possiamo usare 3 cicli for per vedere se abbiamo il posizionamento 
-    corretto analizzando colore e posizionamento, 
-    per le risorse possiamo analizzare il numero delle risolrse attraverso il verifyResourceNeeded()/verifyObjectneeded()
-    */
-    public calculateFinalPoint(){
-
-    }
-
     /**
-     * @author Lodetti Alessandro
+     * @author Lodetti Alessandro, Lorenzo Galatea
      * Checks if there are enough resources to place the Gold Card
      * @param goldCard it is the card the client wants to play
      * @return true if  it is ok to place the card, false otherwise
      */
     public boolean verifyResourcesNeeded(GoldCard goldCard){
         Map<Item, Integer> resources = calculateAvailableResources();
+        Map<Item, Integer> neededResources = goldCard.getNeededResources();
+        for (Map.Entry<Item, Integer> entry : neededResources.entrySet()){
+            Item item = entry.getKey();
+            int requiredAmount = entry.getValue();
+            if(!resources.containsKey(item))
+                return false;
+            int availableAmount = resources.get(item);
 
-        for(Item i: goldCard.getNeededResources()){
-            if(!resources.containsKey(i))
+            if(resources.get(item) == 0)
                 return false;
-            else if(resources.get(i) == 0)
-                return false;
-            else
-                resources.put(i, resources.get(i) - 1);
+
+            resources.put(item, availableAmount - 1);
         }
         return true;
     }
 
-    /**
-    stessa cosa di verifyResourceNeeded solo per le carte goal.
-    (ci deve essere un controllo per identificare il tipo della carta obiettivo)
-    */
-    public verifyObjectNeeded(){
-
-    }
-    /**un metodo che a seconda del tipo di carta Gold
-    calcola il punteggio che ci da la carta Gold appena posizionamento.
-    Per esempio è composta da degli if per capire che tipo di Carta Gold è e poi
-    in ciascuno di quei if facciamo una analisi in base al tipo di carta Gold.
-    Per esempio nel tipo Angle andiamo a contare il numero di angoli occupati
-    e moltipichiamo pe il numeor di numOfPoint.*/
-    public CalculateGoldPoint(){
-
-    }
 
     /**
      * this method helps to calculate the available resource displayed on table
