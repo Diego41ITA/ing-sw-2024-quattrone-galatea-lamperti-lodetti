@@ -6,6 +6,8 @@ package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
+
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -102,4 +104,13 @@ public class GoldCard extends PlayableCard{
         if(this.isFront()) {return gamestation.verifyResourcesNeeded(this);} else {return true;}
     }
 
+    /**@author Lorenzo Galatea
+     *
+     * @param playedCard: Map which represents the cards that the player has played
+     * @param availableItems: it is a Map that represents the available objects (in the gamestation associated with the player) and their number
+     * @return int: number of points obtained from placing this card
+     */
+    public int getGoldPoints(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems){
+        return this.numOfPoints * this.goldType.check(playedCard, availableItems, this.resources);
+    }
 }
