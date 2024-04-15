@@ -1,7 +1,3 @@
-/**
- * It defines how GoldCards are implemented
- * @author Lodetti Alessandro
- */
 package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.gameDataManager.GameStation;
@@ -20,7 +16,7 @@ public class GoldCard extends PlayableCard{
     private final HashMap<Item, Integer> resources;;
     private final int numOfPoints;
     private final Item box;
-    private final CheckInterface goldType;
+    private final GoldType goldType;
 
 
     /**
@@ -29,19 +25,19 @@ public class GoldCard extends PlayableCard{
      * @param back same but for the back.
      * @param points these are the points that a player can earn from this card.
      * @param backResource defines the permanent resource in the back.
-     * @param box  it is the item that a player needs to earn points.
      * @param goldType indicates one of the type that a gold card can assume.
      * @param resources indicates the resource that a player need to place this card.
-     * @param typeCard  refer to the super class attribute
+     * @param type refer to the super class attribute
      * @param isFront refer to the super class attribute
      */
-    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource, Item box,
-                    CheckInterface goldType, HashMap<Item, Integer> resources, TypeOfCard typeCard, boolean isFront)
+    public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource,
+                    GoldType goldType, HashMap<Item, Integer> resources,Item box, TypeOfCard type,
+                    boolean isFront)
     {
-        super(TypeOfCard.GOLD, isFront, front, back, backResource);
+        super(type, isFront, front, back, backResource);
         this.numOfPoints = points;
-        this.goldType = goldType;
         this.box = box;
+        this.goldType = goldType;
         this.resources = new HashMap<>(resources);
     }
 
@@ -71,24 +67,24 @@ public class GoldCard extends PlayableCard{
      *
      * @return the type of this particular GoldCard
      */
-    public CheckInterface getGoldType() {
+    public GoldType getGoldType() {
         return goldType;
     }
 
     /**
-     * Indicates the resources that the player should have in order to place this card
-     * @return a list of item.
+     * this method is to use when the type of the gold card is ITEM otherwise the item return doesn't make any sense.
+     * @return the item that gives points.
      */
-    public HashMap<Item, Integer> getNeededResources(){
-         return new HashMap<>(resources);
+    public Item getBox(){
+        return this.box;
     }
 
     /**
-     * Return the item in the box
-     * @return an item
+     * Indicates the resources that the player should have in order to place this card
+     * @return a map of item and their cardinality.
      */
-    public Item getBox(){
-        return box;
+    public HashMap<Item, Integer> getNeededResources(){
+         return new HashMap<>(resources);
     }
 
     /**
@@ -102,15 +98,5 @@ public class GoldCard extends PlayableCard{
     @Override
     public boolean verifyResources(GameStation gamestation){
         if(this.isFront()) {return gamestation.verifyResourcesNeeded(this);} else {return true;}
-    }
-
-    /**@author Lorenzo Galatea
-     *
-     * @param playedCard: Map which represents the cards that the player has played
-     * @param availableItems: it is a Map that represents the available objects (in the gamestation associated with the player) and their number
-     * @return int: number of points obtained from placing this card
-     */
-    public int getGoldPoints(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems){
-        return this.numOfPoints * this.goldType.check(playedCard, availableItems, this.resources);
     }
 }
