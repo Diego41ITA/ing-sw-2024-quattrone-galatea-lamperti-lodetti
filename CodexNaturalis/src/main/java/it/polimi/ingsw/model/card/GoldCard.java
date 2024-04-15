@@ -26,6 +26,7 @@ public class GoldCard extends PlayableCard{
      * @param points these are the points that a player can earn from this card.
      * @param backResource defines the permanent resource in the back.
      * @param goldType indicates one of the type that a gold card can assume.
+     * @param box is the item to consider if the goldType is ITEM
      * @param resources indicates the resource that a player need to place this card.
      * @param type refer to the super class attribute
      * @param isFront refer to the super class attribute
