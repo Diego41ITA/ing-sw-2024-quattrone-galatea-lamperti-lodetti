@@ -204,4 +204,76 @@ public class GameStation {
         Point adjacentPosition = new Point(x, y);
         return playedCards.containsKey(adjacentPosition);
     }
+
+
+    /**
+     * this method works with this precondition: the card passed as parameter should be already placed, otherwise it
+     * returns a wrong value.
+     * Anyway, this method provides a way to get how many points should be added to the player that placed the card
+     * @author Lodetti Alessandro
+     * @param c the card that gives points.
+     * @return the number of points that the placement of the card gave.
+     */
+    public int calculateGoldPoints(GoldCard c){
+        int points;
+        switch (c.getGoldType()){
+            case GoldType.CLASSIC -> points = c.getNumberOfPoints();
+            case GoldType.ANGLE -> points = c.getNumberOfPoints() * cornerCovered(c);
+            case GoldType.ITEM -> points = c.getNumberOfPoints() * itemPresent(c.getBox());
+            default -> points = 0;
+        }
+        return points;
+    }
+
+    /**
+     * it determines how many angle a card covers.
+     * @author Lodetti Alessandro
+     * @param card the card that you want analyze
+     * @return how many angle are covered by the card passed as parameter
+     */
+    private int cornerCovered(PlayableCard card){
+        Point point = findCardPosition(card);
+        int coveredAngles = 0;
+        Point[] adjacentCard = {new Point((int) point.getX()+1, (int) point.getY()+1),
+                new Point((int) point.getX()+1, (int) point.getY()-1),
+                new Point((int) point.getX()-1, (int) point.getY()+1),
+                new Point((int) point.getX()-1, (int) point.getY()-1)};
+        for(Point p: adjacentCard){
+            if(playedCards.containsKey(p))
+                coveredAngles++;
+        }
+        return coveredAngles;
+    }
+
+    /**
+     * this method is useful to know how many specified items are present
+     * @author Lodetti Alessandro
+     * @param item it's the item of which the caller wants to now the cardinality
+     * @return the cardinality of the specified item.
+     */
+    private int itemPresent(Item item){
+        int num = 0;
+        for(Point p: playedCards.keySet()){
+            List<Item> l = playedCards.get(p).getFreeItem();
+            for(Item i: l){
+                if(i == item)
+                    num++;
+            }
+        }
+        return num;
+    }
+
+
+    /**
+     * it defines a fast way to determine which point correspond to a card
+     * @author Lodetti Alessandro
+     * @param card the user wants to know the position of this card
+     * @return a Point object which corresponds to the location of the card
+     */
+    private Point findCardPosition(PlayableCard card){
+        for(Point p: playedCards.keySet()){
+            if(playedCards.get(p).equals(card))
+                return new Point(p);
+        }
+    }
 }
