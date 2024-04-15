@@ -116,10 +116,9 @@ public class GameStation {
                 return false;
             int availableAmount = resources.get(item);
 
-            if(resources.get(item) == 0)
+            if(availableAmount < requiredAmount)
                 return false;
 
-            resources.put(item, availableAmount - 1);
         }
         return true;
     }
