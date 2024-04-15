@@ -16,10 +16,10 @@ public class InitialCard extends PlayableCard {
      * @param back is a HashMap with the angles(from enum Angle) as keys and items(from enum item) as values for the back face
      * @param backResource is a ArrayList with the items in the box of the back face of the InitialCard
      */
-    public InitialCard(TypeOfCard type, boolean isFront, HashMap<Angle,Item> front,
+    public InitialCard(boolean isFront, HashMap<Angle,Item> front,
                        HashMap<Angle,Item> back, List<Item> backResource)
     {
-        super(type, isFront, front, back, backResource);
+        super(TypeOfCard.STARTING, isFront, front, back, backResource);
     }
 
     /**
