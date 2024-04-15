@@ -6,37 +6,30 @@ import java.util.*;
  * this class defines the deck structure as a collection of cards
  * @author Lodetti Alessandro
  */
-public class Deck {
-    private final List<Card> cards;
-
-    /**
-     * default constructor, always useful
-     */
-    public Deck(){
-        this.cards = new ArrayList<>();
-    }
+public class Deck <T extends Card> {
+    private final List<T> cards;
 
     /**
      * this is the basic constructor
      * @param deck is simply the card collection.
      */
-    public Deck(List<Card> deck){
-        this.cards = new ArrayList<>(deck);
+    public Deck(List<T> deck){
+        this.cards = new ArrayList<T>(deck);
     }
 
     /**
      * this is the advanced constructor: it is useful to initialize gameDataManager objects
      * @param d is a deck well-formed.
      */
-    public Deck(Deck d){
-        this.cards = new ArrayList<>(d.getStatus());
+    public Deck(Deck<T> d){
+        this.cards = new ArrayList<T>(d.getStatus());
     }
 
     /**
      * in this implementation the methods removes the last card, in this way it is faster.
      * @return and REMOVES the first card (which is the last in the list)
      */
-    public Card getFirst() throws IllegalStateException{
+    public T getFirst() throws IllegalStateException{
         int index = this.getDimension();
         if(index > 0) {
             return cards.remove(index - 1); //return the last card
@@ -72,11 +65,7 @@ public class Deck {
      * this method is useful when you want to save the match because it returns the update deck.
      * @return a copy of the deck.
      */
-    public List<Card> getStatus(){
-        return new ArrayList<>(cards);
-    }
-
-    public void addCard(Card c) {
-        this.cards.add(c);
+    public List<T> getStatus(){
+        return new ArrayList<T>(cards);
     }
 }

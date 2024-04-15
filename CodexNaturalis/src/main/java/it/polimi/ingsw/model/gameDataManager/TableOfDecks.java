@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
 
-import it.polimi.ingsw.model.card.Card;
-import it.polimi.ingsw.model.card.Deck;
+import it.polimi.ingsw.model.card.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -17,13 +16,13 @@ public class TableOfDecks {
     private ArrayList<Card> cards;
 
     private ArrayList<Card> goals;
-    private Deck deckGold;
+    private Deck<GoldCard> deckGold;
 
-    private Deck deckGoal;
+    private Deck<GoalCard> deckGoal;
 
-    private Deck deckResource;
+    private Deck<ResourceCard> deckResource;
 
-    private Deck deckStart;
+    private Deck<InitialCard> deckStart;
 
     /**
      * default constructor
@@ -43,12 +42,13 @@ public class TableOfDecks {
      * @param cards: the 4 cards face up
      * @param goals:the 2 shared goals
      */
-    public TableOfDecks(Deck deckGold,Deck deckGoal, Deck deckResource, Deck deckStart, ArrayList<Card> cards, ArrayList<Card> goals) {
+    public TableOfDecks(Deck<GoldCard> deckGold,Deck<GoalCard> deckGoal, Deck<ResourceCard> deckResource,
+                        Deck<InitialCard> deckStart, ArrayList<Card> cards, ArrayList<Card> goals) {
         this.cards = new ArrayList<Card>(cards); //this one should be set later
-        this.deckGold =  new Deck(deckGold);
-        this.deckGoal = new Deck(deckGoal);
-        this.deckResource = new Deck(deckResource);
-        this.deckStart = new Deck(deckStart);
+        this.deckGold =  new Deck<>(deckGold);
+        this.deckGoal = new Deck<>(deckGoal);
+        this.deckResource = new Deck<>(deckResource);
+        this.deckStart = new Deck<>(deckStart);
         this.goals = new ArrayList<Card>(goals); //this one should be set later too
     }
 
@@ -58,10 +58,10 @@ public class TableOfDecks {
      */
     public TableOfDecks(TableOfDecks table){
         this.cards = new ArrayList<>(table.getCards());
-        this.deckGoal = new Deck(table.getDeckGoal());
-        this.deckGold = new Deck(table.getDeckGold());
-        this.deckResource = new Deck(table.getDeckResource());
-        this.deckStart = new Deck(table.getDeckStart());
+        this.deckGoal = new Deck<>(table.getDeckGoal());
+        this.deckGold = new Deck<>(table.getDeckGold());
+        this.deckResource = new Deck<>(table.getDeckResource());
+        this.deckStart = new Deck<>(table.getDeckStart());
         this.goals = new ArrayList<>(table.getGoals());
     }
 
@@ -69,7 +69,7 @@ public class TableOfDecks {
      * is the setter of the Goals
      * @param deckGoal: represents the goal deck
      */
-    public void setGoals(Deck deckGoal){
+    public void setGoals(Deck<GoalCard> deckGoal){
             try {
                 goals.add(deckGoal.getFirst());
                 goals.add(deckGoal.getFirst());
@@ -165,16 +165,16 @@ public class TableOfDecks {
      * is the setter of deckResource
      * @param deckResource: the object that represents the deck
      */
-    public void setDeckResource(Deck deckResource){
-        this.deckResource = new Deck(deckResource);
+    public void setDeckResource(Deck<ResourceCard> deckResource){
+        this.deckResource = new Deck<>(deckResource);
     }
 
     /**@author Lorenzo Galatea
      * is the setter of deckGoal
      * @param deckGoal: the object that represents the deck
      */
-    public void setDeckGoal(Deck deckGoal){
-        this.deckGoal = new Deck(deckGoal);
+    public void setDeckGoal(Deck<GoalCard> deckGoal){
+        this.deckGoal = new Deck<>(deckGoal);
 
     }
 
@@ -183,32 +183,32 @@ public class TableOfDecks {
      * is the setter method for deckStart
      * @param deckStart: the object that represents the starting deck
      */
-    public void setDeckStart(Deck deckStart){
-        this.deckStart = new Deck(deckStart);
+    public void setDeckStart(Deck<InitialCard> deckStart){
+        this.deckStart = new Deck<>(deckStart);
     }
 
     /**@author Lorenzo Galatea
      * is the getter of deckResource
      * @return deckResource
      */
-    public Deck getDeckResource(){
-        return new Deck(deckResource);
+    public Deck<ResourceCard> getDeckResource(){
+        return new Deck<>(deckResource);
     }
 
     /**@author Lorenzo Galatea
      * is the getter of deckGoal
      * @return deckGoal
      */
-    public Deck getDeckGoal(){
-        return new Deck(deckGoal);
+    public Deck<GoalCard> getDeckGoal(){
+        return new Deck<>(deckGoal);
     }
 
     /**@author Lorenzo Galatea
      * is the getter of deckGold
      * @return deckGold
      */
-    public Deck getDeckGold(){
-            return new Deck(deckGold);
+    public Deck<GoldCard> getDeckGold(){
+            return new Deck<>(deckGold);
 
     }
 
@@ -217,16 +217,16 @@ public class TableOfDecks {
      * is the getter method of deckStart
      * @return returns a Deck of starting cards.
      */
-    public Deck getDeckStart(){
-        return new Deck(this.deckStart);
+    public Deck<InitialCard> getDeckStart(){
+        return new Deck<>(this.deckStart);
     }
 
     /**@author Lorenzo Galatea
      *  is the setter of deckGold
      * @param deckGold: the object that represents the deck
      */
-    public void setDeckGold(Deck deckGold){
-        this.deckGold = new Deck(deckGold);
+    public void setDeckGold(Deck<GoldCard> deckGold){
+        this.deckGold = new Deck<>(deckGold);
 
     }
 
