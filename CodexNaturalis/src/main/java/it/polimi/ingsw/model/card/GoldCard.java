@@ -16,10 +16,10 @@ import java.util.List;
  */
 public class GoldCard extends PlayableCard{
 
-    private final List<Item> neededResources;
+    private final HashMap<Item, Integer> resources;;
     private final int numOfPoints;
     private final Item box;
-    private final TypeOfGoldCard typeOfGoldCard;
+    private final CheckInterface goldType;
 
 
     /**
@@ -35,13 +35,13 @@ public class GoldCard extends PlayableCard{
      * @param isFront refer to the super class attribute
      */
     public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource, Item box,
-                    TypeOfGoldCard typeGold, List<Item> resources, TypeOfCard typeCard, boolean isFront)
+                    CheckInterface goldType, HashMap<Item, Integer> resources, TypeOfCard typeCard, boolean isFront)
     {
-        super(typeCard, isFront, front, back, backResource);
+        super(TypeOfCard.GOLD, isFront, front, back, backResource);
         this.numOfPoints = points;
-        this.typeOfGoldCard = typeGold;
+        this.goldType = goldType;
         this.box = box;
-        this.neededResources = new ArrayList<>(resources);
+        this.resources = new HashMap<>(resources)
     }
 
     /**
@@ -51,9 +51,9 @@ public class GoldCard extends PlayableCard{
     public GoldCard(GoldCard card){
         super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
         this.numOfPoints = card.getNumberOfPoints();
-        this.neededResources = new ArrayList<>(card.getNeededResources());
+        this.resources = new HashMap<>(card.getNeededResources());
         this.box = card.getBox();
-        this.typeOfGoldCard = card.getTypeOfGoldCard();
+        this.goldType= card.getGoldType();
     }
 
 
@@ -69,16 +69,16 @@ public class GoldCard extends PlayableCard{
      * it's for knowing how to make points with this card.
      * @return the type of this particular GoldCard
      */
-    public TypeOfGoldCard getTypeOfGoldCard() {
-        return typeOfGoldCard;
+    public TypeOfGoldCard getGoldType() {
+        return goldType;
     }
 
     /**
      * Indicates the resources that the player should have in order to place this card
      * @return a list of item.
      */
-    public List<Item> getNeededResources(){
-        return new ArrayList<>(neededResources);
+    public HashMap<Item, Integer> getNeededResources(){
+         return new HashMap<>(resources);
     }
 
     /**
