@@ -4,7 +4,10 @@ import it.polimi.ingsw.model.card.*;
 
 import java.awt.*;
 import java.util.*;
-
+/**@author Luca Lamperti
+ *
+ *
+ */
 public class DiagonalVegetableCheck implements CheckInterface{
     boolean isValid = false;
     int i;

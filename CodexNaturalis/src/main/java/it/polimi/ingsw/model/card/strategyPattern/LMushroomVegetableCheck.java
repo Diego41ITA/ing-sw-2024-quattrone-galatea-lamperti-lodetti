@@ -4,7 +4,10 @@ import it.polimi.ingsw.model.card.*;
 
 import java.awt.*;
 import java.util.*;
-
+/**@author Luca Lamperti
+ *
+ *
+ */
 public class LMushroomVegetableCheck implements CheckInterface{
     Set<Set<Point>> validPlacements = new HashSet<>();
     Set<Point> groupCards = new HashSet<>();

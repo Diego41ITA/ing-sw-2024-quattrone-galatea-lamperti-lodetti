@@ -5,12 +5,17 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 
+/**@author Luca Lamperti
+ *
+ *
+ */
 public class DiagonalMushroomCheck implements CheckInterface {
 
     boolean isValid = false;
     int i;
     Set<Set<Point>> validPlacements = new HashSet<>();
     Set<Point> groupCards = new HashSet<>();
+
     @Override
     public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
         for (Point a : PlayedCard.keySet()){

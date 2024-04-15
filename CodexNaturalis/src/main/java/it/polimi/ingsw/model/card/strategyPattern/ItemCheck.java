@@ -4,7 +4,10 @@ import it.polimi.ingsw.model.card.*;
 
 import java.awt.*;
 import java.util.HashMap;
-
+/**@author Luca Lamperti
+ *
+ *
+ */
 public class ItemCheck implements CheckInterface {
 
     int maxGoal=100;

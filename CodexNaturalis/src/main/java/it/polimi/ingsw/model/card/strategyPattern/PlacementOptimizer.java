@@ -3,7 +3,10 @@ package it.polimi.ingsw.model.card.strategyPattern;
 import java.awt.*;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**@author Luca Lamperti
+ *
+ *
+ */
 public class PlacementOptimizer {
     public static int optimize(Set<Set<Point>> validPlacements){
         for(Set<Point> CoordGroup : validPlacements) {
