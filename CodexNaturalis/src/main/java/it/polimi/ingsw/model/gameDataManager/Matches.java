@@ -195,12 +195,14 @@ public class Matches {
 
         try(FileWriter writer = new FileWriter(playerFilePath)){
             String nick = g.getTurn().getCurrentPlayerNick();
-            Player player = new Player();
+
             for(Player p: g.getPlayers().keySet()){
-                if(p.getNick().equals(nick))
-                    player = p;
+                if(p.getNick().equals(nick)){
+                    Player player = new Player(p);
+                    gson.toJson(player, writer);
+                    break;
+                }
             }
-            gson.toJson(player, writer);
         }
         catch(IOException e){
             e.printStackTrace();
