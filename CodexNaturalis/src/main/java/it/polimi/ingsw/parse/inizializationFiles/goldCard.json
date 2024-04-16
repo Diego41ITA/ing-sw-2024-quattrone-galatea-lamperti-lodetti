@@ -8,7 +8,6 @@
     "box": "FEATHER",
     "typeOfGoldCard": "ANGLE",
     "front": {
-      "HIGHLEFT" : "HIDDEN",
       "HIGHRIGHT" : "EMPTY",
       "DOWNLEFT" : "EMPTY",
       "DOWNRIGHT" : "FEATHER"
@@ -34,7 +33,6 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "POTION",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -59,7 +57,6 @@
       "HIGHLEFT": "PARCHMENT",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -82,7 +79,6 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -107,7 +103,6 @@
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -128,7 +123,6 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
@@ -151,9 +145,7 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "POTION",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -175,8 +167,6 @@
     "front": {
       "HIGHLEFT": "FEATHER",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "HIDDEN",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -196,9 +186,7 @@
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "PARCHMENT",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -220,9 +208,7 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
-      "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
+      "DOWNLEFT": "EMPTY"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -246,7 +232,6 @@
       "HIGHLEFT": "FEATHER",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -269,7 +254,6 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "PARCHMENT",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -291,7 +275,6 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "POTION",
       "DOWNRIGHT": "EMPTY"
     },
@@ -314,7 +297,6 @@
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
@@ -341,7 +323,6 @@
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -363,7 +344,6 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
@@ -386,9 +366,7 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "FEATHER",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -409,9 +387,7 @@
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "PARCHMENT",
-      "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "HIDDEN",
-      "DOWNRIGHT": "HIDDEN"
+      "HIGHRIGHT": "EMPTY"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -431,9 +407,7 @@
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "POTION",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -456,8 +430,6 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "HIDDEN",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -471,7 +443,6 @@
   },
 
   //devi fare le carte da 61 a 80 compresa
-  //box e typeOfGoldCard non guardarli
   //ricorda di mettere le parentesi graffe in neededResources.
 
   {
