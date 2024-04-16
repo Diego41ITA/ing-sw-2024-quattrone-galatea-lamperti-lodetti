@@ -28,7 +28,7 @@ public class Player {
     /**
      * this constructor does nothing
      */
-    public Player(){}
+    //public Player(){}
 
     /** 
     *@author Lorenzo Galatea
@@ -157,12 +157,8 @@ public class Player {
     /**@author Lorenzo Galatea
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
-    *@throws illegalOperationException if the player's hand is empty
     */
-    public List<PlayableCard> showCard() throws illegalOperationException {
-        if (cards.isEmpty()) {
-            throw new illegalOperationException("The player has no cards in his hand");
-        }
+    public List<PlayableCard> showCard(){
         return new ArrayList<>(cards);
     }
 
