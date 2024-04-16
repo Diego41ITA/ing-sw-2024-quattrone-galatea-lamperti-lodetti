@@ -16,7 +16,7 @@ public class GoldCard extends PlayableCard{
     private final HashMap<Item, Integer> resources;;
     private final int numOfPoints;
     private final Item box;
-    private final GoldType goldType;
+    private final GoldType typeOfGoldCard;
 
 
     /**
@@ -38,7 +38,7 @@ public class GoldCard extends PlayableCard{
         super(type, isFront, front, back, backResource);
         this.numOfPoints = points;
         this.box = box;
-        this.goldType = goldType;
+        this.typeOfGoldCard = goldType;
         this.resources = new HashMap<>(resources);
     }
 
@@ -51,7 +51,7 @@ public class GoldCard extends PlayableCard{
         this.numOfPoints = card.getNumberOfPoints();
         this.resources = new HashMap<>(card.getNeededResources());
         this.box = card.getBox();
-        this.goldType= card.getGoldType();
+        this.typeOfGoldCard= card.getGoldType();
     }
 
 
@@ -69,7 +69,7 @@ public class GoldCard extends PlayableCard{
      * @return the type of this particular GoldCard
      */
     public GoldType getGoldType() {
-        return goldType;
+        return typeOfGoldCard;
     }
 
     /**
