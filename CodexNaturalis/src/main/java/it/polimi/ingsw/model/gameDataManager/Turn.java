@@ -14,10 +14,10 @@ public class Turn {
     private Player currentPlayer;
 
     //probabilmente inutile perchè non andrebbe messo nel costruttore base di game. (si usa dopo il set)
-    public Turn(){
-        this.players = new LinkedList<Player>();
-        this.currentPlayer = new Player();
-    }
+    //public Turn(){
+        //this.players = new LinkedList<Player>();
+        //this.currentPlayer = new Player();
+    //}
 
     /**
      * this is the only constructor current player it is initialized as null.
