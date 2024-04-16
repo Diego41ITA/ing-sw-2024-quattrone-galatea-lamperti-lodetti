@@ -74,7 +74,6 @@
       "ANIMAL" : 1
     },
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -97,7 +96,6 @@
       "VEGETABLE" : 1
     },
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -119,7 +117,6 @@
       "MUSHROOM" : 3,
       "INSECT" : 1},
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -141,7 +138,6 @@
       "MUSHROOM" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -162,7 +158,6 @@
       "MUSHROOM" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "FEATHER",
@@ -183,7 +178,6 @@
       "MUSHROOM" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHRIGHT": "PARCHMENT",
@@ -204,7 +198,6 @@
       "MUSHROOM" : 5
     },
     "numOfPoints": 5,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -294,7 +287,6 @@
       "INSECT" : 1
     },
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHRIGHT": "EMPTY",
@@ -317,7 +309,6 @@
       "ANIMAL" : 1
     },
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -340,7 +331,6 @@
       "MUSHROOM" : 1
     },
     "numOfPoints": 2,
-    "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -362,7 +352,6 @@
       "VEGETABLE" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "EMPTY",
@@ -383,7 +372,6 @@
       "VEGETABLE" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "PARCHMENT",
@@ -404,7 +392,6 @@
       "VEGETABLE" : 3
     },
     "numOfPoints": 3,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHRIGHT": "POTION",
@@ -425,7 +412,6 @@
       "VEGETABLE" : 5
     },
     "numOfPoints": 5,
-    "box": "INSECT",
     "typeOfGoldCard": "CLASSIC",
     "front": {
       "HIGHLEFT": "EMPTY",
