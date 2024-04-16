@@ -4,7 +4,7 @@
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "MUSHROOM",
+      "DOWNLEFT": "MUSHROOM"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -124,7 +124,7 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "MUSHROOM",
-      "DOWNLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -175,7 +175,7 @@
     "front": {
       "HIGHLEFT": "VEGETABLE",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "VEGETABLE",
+      "DOWNLEFT": "VEGETABLE"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -294,7 +294,7 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "VEGETABLE",
+      "DOWNLEFT": "VEGETABLE"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
