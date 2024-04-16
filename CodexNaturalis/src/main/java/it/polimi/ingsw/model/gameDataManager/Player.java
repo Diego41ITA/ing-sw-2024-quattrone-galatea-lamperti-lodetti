@@ -15,7 +15,7 @@ public class Player {
     /** nickname is the player's name and is a string */
     private String nickname;
     /** cards is a list and represents the cards the player has in his hand*/
-    private ArrayList<Card> cards;
+    private ArrayList<PlayableCard> cards;
     /** gamestation is an object that represents the level in which the cards played by the player are located*/
     private GameStation gamestation;
     /** color is a data item in an enum and indicates the marker associated with the player*/
@@ -34,12 +34,12 @@ public class Player {
     *@author Lorenzo Galatea
     * is the constructor of the class
     */
-    public Player(String nickname, GameStation gamestation, Color color,Optional<Color> optionalColor, ArrayList<Card> cards) {
-        this.cards = new ArrayList<Card>(cards);
+    public Player(String nickname, GameStation gamestation, Color color, ArrayList<PlayableCard> cards) {
+        this.cards = new ArrayList<>(cards);
         this.nickname = nickname;
         this.gamestation = gamestation;
         this.color = color;
-        this.optionalColor = optionalColor;
+        this.optionalColor = Optional.empty();
     }
 
     public Player(Player player){
@@ -80,7 +80,7 @@ public class Player {
     *@param newGamestation is the instance of the new GameStation to be set
     */
     public void setGameStation(GameStation newGamestation){
-        this.gamestation = newGamestation;
+        this.gamestation = new GameStation(newGamestation);
     }
 
     /** @author Lorenzo Galatea
@@ -95,8 +95,8 @@ public class Player {
     *method that set the maker black if I am the first player
     *@param optionalColor is the black maker or null
     */
-    public void setOptionalColor(Optional<Color> optionalColor) {
-        this.optionalColor = optionalColor;
+    public void setOptionalColor() {
+        this.optionalColor = Optional.of(Color.BLACK);
     }
 
     /**@author Lorenzo Galatea
@@ -128,7 +128,7 @@ public class Player {
     *@param card: one of the 4 cards visible in the TableOfDecks
     *@throws IllegalStateException if the player already has 3 cards
     */
-    public void draw(Card card) {
+    public void draw(PlayableCard card) {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
             } else {
@@ -137,18 +137,19 @@ public class Player {
     }
 
     /**@author Lorenzo Galatea
-    *draw a card from one of the decks of the TableOfDecks
+    *draw a card from one of the decks of the TableOfDecks. This method uses the covariance of generifcs: PlayableCard
+    * is a super-type of GoldCard, InitialCard and ResourceCard; thus, Deck<\GoldCard> is a subtype of Deck<\PlayableCard>
     *@param deck: Deck associated with TableOfDecks
     *@throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
     */
-    public void draw(Deck deck) {
+    public void draw(Deck<PlayableCard> deck) {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
             } else {
                 if (deck.getDimension() == 0) {
                     throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
                 }
-                Card card = deck.getFirst();
+                PlayableCard card = deck.getFirst();
                 cards.add(card);
             }
     }
@@ -158,11 +159,11 @@ public class Player {
     *@return cards is  List of cards in the player's hand
     *@throws illegalOperationException if the player's hand is empty
     */
-    public List<Card> showCard() throws illegalOperationException {
+    public List<PlayableCard> showCard() throws illegalOperationException {
         if (cards.isEmpty()) {
             throw new illegalOperationException("The player has no cards in his hand");
         }
-        return new ArrayList<Card>(cards);
+        return new ArrayList<>(cards);
     }
 
     /**@author Lorenzo Galatea
