@@ -5,7 +5,6 @@
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "MUSHROOM",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -22,7 +21,6 @@
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "MUSHROOM",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -39,7 +37,6 @@
     "numOfPoints": 1,
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "MUSHROOM",
       "DOWNRIGHT": "MUSHROOM"
     },
@@ -56,7 +53,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "MUSHROOM",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "MUSHROOM"
@@ -74,7 +70,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "FEATHER",
       "DOWNLEFT": "VEGETABLE",
       "DOWNRIGHT": "MUSHROOM"
@@ -94,7 +89,6 @@
     "front": {
       "HIGHLEFT": "POTION",
       "HIGHRIGHT": "MUSHROOM",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "ANIMAL"
     },
     "back": {
@@ -131,7 +125,6 @@
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "MUSHROOM",
       "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -147,7 +140,6 @@
     "numOfPoints": 1,
     "front": {
       "HIGHLEFT": "MUSHROOM",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
@@ -164,7 +156,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "MUSHROOM",
       "DOWNRIGHT": "EMPTY"
@@ -185,7 +176,6 @@
       "HIGHLEFT": "VEGETABLE",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "VEGETABLE",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -202,7 +192,6 @@
     "front": {
       "HIGHLEFT": "VEGETABLE",
       "HIGHRIGHT": "VEGETABLE",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "EMPTY"
     },
     "back": {
@@ -219,7 +208,6 @@
     "numOfPoints": 1,
     "front": {
       "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "VEGETABLE",
       "DOWNRIGHT": "VEGETABLE"
     },
@@ -236,7 +224,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "VEGETABLE",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "VEGETABLE"
@@ -254,7 +241,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "INSECT",
       "DOWNLEFT": "FEATHER",
       "DOWNRIGHT": "VEGETABLE"
@@ -274,7 +260,6 @@
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "VEGETABLE",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "POTION"
     },
     "back": {
@@ -291,7 +276,6 @@
     "numOfPoints": 1,
     "front": {
       "HIGHLEFT": "PARCHMENT",
-      "HIGHRIGHT": "HIDDEN",
       "DOWNLEFT": "VEGETABLE",
       "DOWNRIGHT": "ANIMAL"
     },
@@ -311,7 +295,6 @@
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "VEGETABLE",
-      "DOWNRIGHT": "HIDDEN"
     },
     "back": {
       "HIGHLEFT": "EMPTY",
@@ -328,7 +311,6 @@
     "front": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "HIDDEN",
       "DOWNRIGHT": "VEGETABLE"
     },
     "back": {
@@ -344,7 +326,6 @@
   {
     "numOfPoints": 1,
     "front": {
-      "HIGHLEFT": "HIDDEN",
       "HIGHRIGHT": "VEGETABLE",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
