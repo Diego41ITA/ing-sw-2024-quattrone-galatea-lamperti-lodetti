@@ -1,6 +1,9 @@
 [
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "ANIMAL" ],
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "ANIMAL": 1
+    },
     "numOfPoints": 1,
     "box": "FEATHER",
     "typeOfGoldCard": "ANGLE",
@@ -21,7 +24,10 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "VEGETABLE" ],
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "VEGETABLE" : 1
+    },
     "numOfPoints": 1,
     "box": "POTION",
     "typeOfGoldCard": "ANGLE",
@@ -42,7 +48,10 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "INSECT" ],
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "INSECT" : 1
+    },
     "numOfPoints": 1,
     "box": "PARCHMENT",
     "typeOfGoldCard": "ANGLE",
@@ -63,7 +72,10 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM", "ANIMAL" ],
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "ANIMAL" : 1
+    },
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -84,7 +96,10 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM", "VEGETABLE" ],
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "VEGETABLE" : 1
+    },
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -105,7 +120,9 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM", "INSECT" ],
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "INSECT" : 1},
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -126,7 +143,9 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM" ],
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -147,7 +166,9 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM" ],
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -168,7 +189,9 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM" ],
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -189,7 +212,9 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "MUSHROOM", "MUSHROOM", "MUSHROOM", "MUSHROOM", "MUSHROOM" ],
+    "neededResources": {
+      "MUSHROOM" : 5
+    },
     "numOfPoints": 5,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -210,7 +235,10 @@
     "type": "MUSHROOM"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "INSECT" ],
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "INSECT" : 1
+    },
     "numOfPoints": 1,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -231,7 +259,10 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "MUSHROOM" ],
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "MUSHROOM" : 1
+    },
     "numOfPoints": 1,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -252,7 +283,9 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "ANIMAL" ],
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "ANIMAL" : 1},
     "numOfPoints": 1,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -273,7 +306,10 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE", "INSECT" ],
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "INSECT" : 1
+    },
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -294,7 +330,10 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE", "ANIMAL" ],
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "ANIMAL" : 1
+    },
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -315,7 +354,10 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE", "MUSHROOM" ],
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "MUSHROOM" : 1
+    },
     "numOfPoints": 2,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -336,7 +378,9 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE" ],
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -357,7 +401,9 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE" ],
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -378,7 +424,9 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE" ],
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
     "numOfPoints": 3,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -399,7 +447,9 @@
     "type": "VEGETABLE"
   },
   {
-    "neededResources": [ "VEGETABLE", "VEGETABLE", "VEGETABLE", "VEGETABLE", "VEGETABLE" ],
+    "neededResources": {
+      "VEGETABLE" : 5
+    },
     "numOfPoints": 5,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
@@ -422,9 +472,10 @@
 
   //devi fare le carte da 61 a 80 compresa
   //box e typeOfGoldCard non guardarli
+  //ricorda di mettere le parentesi graffe in neededResources.
 
   {
-    "neededResources": [],
+    "neededResources": {},
     "numOfPoints": 0,
     "box": "INSECT",
     "typeOfGoldCard": "ANGLE",
