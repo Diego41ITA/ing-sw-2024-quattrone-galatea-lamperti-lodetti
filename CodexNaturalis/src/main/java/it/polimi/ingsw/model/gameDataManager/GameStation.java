@@ -271,9 +271,11 @@ public class GameStation {
      * @return a Point object which corresponds to the location of the card
      */
     private Point findCardPosition(PlayableCard card){
+        Point point = null;
         for(Point p: playedCards.keySet()){
             if(playedCards.get(p).equals(card))
-                return new Point(p);
+                point = new Point(p);
         }
+        return point;
     }
 }
