@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 /**@author Luca Lamperti
- *
+ * this is the card number 92 so the sixth disposition
  *
  */
 public class ReverseLVegetableInsectCheck implements CheckInterface{

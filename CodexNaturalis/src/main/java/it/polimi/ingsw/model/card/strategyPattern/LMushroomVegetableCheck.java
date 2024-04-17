@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 /**@author Luca Lamperti
- *
+ * this is card number 91 the fifth disposition
  *
  */
 public class LMushroomVegetableCheck implements CheckInterface{

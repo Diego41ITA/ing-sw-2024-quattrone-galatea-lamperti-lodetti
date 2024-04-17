@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 /**@author Luca Lamperti
- *
+ * this is the card number 88, so this is the second disposition
  *
  */
 public class DiagonalVegetableCheck implements CheckInterface{

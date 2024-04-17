@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 
 /**@author Luca Lamperti
- *
+ * this is the card number 89, so this is the third disposition.
  */
 public class DiagonalAnimalCheck implements CheckInterface{
     boolean isValid = false;

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 
 /**@author Luca Lamperti
- *
+ * this is the card number 87, so this is the first disposition.
  *
  */
 public class DiagonalMushroomCheck implements CheckInterface {

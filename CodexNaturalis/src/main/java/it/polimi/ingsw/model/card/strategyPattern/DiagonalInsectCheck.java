@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 
 /**@author Luca Lamperti
- *
+ * this is the card number 90, so this is the fourth disposition
  *
  */
 public class DiagonalInsectCheck implements CheckInterface{
