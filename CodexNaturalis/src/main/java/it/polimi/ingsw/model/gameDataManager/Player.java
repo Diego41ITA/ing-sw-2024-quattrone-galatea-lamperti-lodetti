@@ -28,7 +28,8 @@ public class Player {
     /**
      * this constructor does nothing
      */
-    //public Player(){}
+    //
+    public Player(){}
 
     /** 
     *@author Lorenzo Galatea
