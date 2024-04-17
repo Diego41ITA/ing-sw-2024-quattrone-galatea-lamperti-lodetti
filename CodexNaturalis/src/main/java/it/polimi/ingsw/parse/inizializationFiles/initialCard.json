@@ -50,28 +50,50 @@
     "isFront": false,
     "type": "STARTING"
   },
-
-  //you start from card number 84. REMOVE THIS COMMENT.
-  //REMEMBER THAT THE FRONT IS SWITCHED WITH THE BACK IN THE FILE.
-  // THE BACK IS THE ONE WITH THE BACK RESOURCES.
   {
-    "front": {},
-    "back": {},
-    "backResource": [],
+    "front": {
+      "HIGHLEFT": "VEGETABLE",
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" , "INSECT" ],
     "isFront": false,
     "type": "STARTING"
   },
   {
-    "front": {},
-    "back": {},
-    "backResource": [],
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "HIGHRIGHT": "MUSHROOM",
+      "DOWNLEFT": "VEGETABLE",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" , "INSECT" , "VEGETABLE"],
     "isFront": false,
     "type": "STARTING"
   },
   {
-    "front": {},
-    "back": {},
-    "backResource": [],
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNLEFT": "VEGETABLE",
+      "DOWNRIGHT": "INSECT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" , "ANIMAL" , "MUSHROOM"],
     "isFront": false,
     "type": "STARTING"
   }
