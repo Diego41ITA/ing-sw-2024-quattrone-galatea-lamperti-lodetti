@@ -340,268 +340,344 @@
     "isFront": false,
     "type": "VEGETABLE"
   },
-
-  //io faccio le prime 20 tu le successive
-  //Devi fare dalla 21 in poi (fino alla 41 esclusa)
-
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "ANIMAL",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNLEFT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "ANIMAL"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "ANIMAL",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNRIGHT": "ANIMAL"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "POTION",
+      "DOWNRIGHT": "ANIMAL"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "VEGETABLE",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNRIGHT": "PARCHMENT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "FEATHER",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "MUSHROOM"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "INSECT",
+      "DOWNRIGHT": "INSECT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "DOWNLEFT": "INSECT",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "INSECT",
+      "DOWNRIGHT": "INSECT"
+    } ,
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHRIGHT": "FEATHER",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "INSECT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "PARCHMENT",
+      "HIGHRIGHT": "INSECT",
+      "DOWNRIGHT": "MUSHROOM"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
     "numOfPoints": 0,
-    "front": {},
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNLEFT": "POTION"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "numOfPoints": 0,
-    "front": {},
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "numOfPoints": 0,
-    "front": {},
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "INSECT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "numOfPoints": 0,
-    "front": {},
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "numOfPoints": 0,
-    "front": {},
-    "back": {
-      "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "EMPTY"
-    },
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "numOfPoints": 0,
-    "front": {},
-    "back": {
-      "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "EMPTY"
-    },
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
-  },
-  {
-    "numOfPoints": 0,
-    "front": {},
-    "back": {
-      "HIGHLEFT": "EMPTY",
-      "HIGHRIGHT": "EMPTY",
-      "DOWNLEFT": "EMPTY",
-      "DOWNRIGHT": "EMPTY"
-    },
-    "backResource": [],
-    "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   }
 ]
