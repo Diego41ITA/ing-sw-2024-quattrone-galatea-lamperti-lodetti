@@ -166,9 +166,9 @@ public class Game {
     public boolean checkName(String name){
         for(Player p: players.keySet()){
             if(p.getNick().equals(name))
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
 
     /**
