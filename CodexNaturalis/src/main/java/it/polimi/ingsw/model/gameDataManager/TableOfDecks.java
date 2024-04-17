@@ -255,6 +255,10 @@ public class TableOfDecks {
         this.deckStart.shuffle();
     }
 
+    /**
+     * Initialize the table at the beginning of a new game of CodexNaturalis.
+     * It reads the cards from JSON files, populating the decks and the cards initially displayed on the field.
+     */
     public void initializeTable(){
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
         DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
