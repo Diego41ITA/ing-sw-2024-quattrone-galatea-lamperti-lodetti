@@ -263,6 +263,6 @@ public class TableOfDecks {
 
         this.deckResource = resourceCardReader.readDeckFromJSON("/resourceCard.json");
         this.deckStart = initialCardReader.readDeckFromJSON("/initialCard.json");
-        this.deckGold = goldCardReader.readDeckFromJSON("goldCard.json");
+        this.deckGold = goldCardReader.readDeckFromJSON("/goldCard.json");
     }
 }
