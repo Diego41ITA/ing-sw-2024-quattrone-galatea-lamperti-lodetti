@@ -427,328 +427,435 @@
     "isFront": false,
     "type": "VEGETABLE"
   },
-
-  //devi fare le carte da 61 a 80 compresa
-  //ricorda di mettere le parentesi graffe in neededResources.
-
   {
-    "neededResources": {},
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 2,
+      "INSECT" : 1
+    },
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "POTION",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 2,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "PARCHMENT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 2,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "ANIMAL": 3,
+      "INSECT" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "ANIMAL" : 3,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "ANIMAL": 3,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "POTION"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "FEATHER"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "ANIMAL" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "ANIMAL" ],
     "isFront": false,
     "type": "ANIMAL"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 2,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 2,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 2,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "POTION"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "INSECT" : 3,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "INSECT" : 3,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
+    "neededResources": {
+      "INSECT" : 3,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 2,
     "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "POTION",
+      "DOWNLEFT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "PARCHMENT"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "DOWNLEFT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   },
   {
-    "neededResources": [],
-    "numOfPoints": 0,
-    "box": "INSECT",
-    "typeOfGoldCard": "ANGLE",
-    "front": {},
+    "neededResources": {
+      "INSECT" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY"
+    },
     "back": {
       "HIGHLEFT": "EMPTY",
       "HIGHRIGHT": "EMPTY",
       "DOWNLEFT": "EMPTY",
       "DOWNRIGHT": "EMPTY"
     },
-    "backResource": [],
+    "backResource": [ "INSECT" ],
     "isFront": false,
-    "type": "ANIMAL"
+    "type": "INSECT"
   }
 ]
