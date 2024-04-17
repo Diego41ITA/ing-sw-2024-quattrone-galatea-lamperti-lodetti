@@ -258,11 +258,16 @@ public class TableOfDecks {
     public void initializeTable(){
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
         DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
-        //DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
+        //DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
 
         this.deckResource = resourceCardReader.readDeckFromJSON("/resourceCard.json");
         this.deckStart = initialCardReader.readDeckFromJSON("/initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("/goldCard.json");
+        //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
+
+
+        this.setCards(null);
+        //this.setGoals(this.deckGoal);
     }
 }
