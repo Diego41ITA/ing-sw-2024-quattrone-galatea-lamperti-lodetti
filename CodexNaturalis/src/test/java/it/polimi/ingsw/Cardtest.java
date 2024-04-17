@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CardTest {
+public class Cardtest {
     private Card testCard;
 
     @BeforeEach
@@ -25,3 +25,19 @@ public class CardTest {
     }
 
     @Test
+    public void testConstructorAndGetters() {
+        assertEquals(TypeOfCard.STARTING, testCard.getType());
+        assertTrue(testCard.isFront());
+    }
+
+    @Test
+    public void testFlip() {
+        assertTrue(testCard.isFront());
+        testCard.flip();
+        assertFalse(testCard.isFront());
+
+        testCard.flip();
+        assertTrue(testCard.isFront());
+    }
+
+}
