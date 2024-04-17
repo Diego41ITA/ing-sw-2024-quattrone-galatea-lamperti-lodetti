@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class DiagonalMushroomCheck implements CheckInterface {
 
+    //these attribute could be declared in the method body
     boolean isValid = false;
     int i;
     Set<Set<Point>> validPlacements = new HashSet<>();
