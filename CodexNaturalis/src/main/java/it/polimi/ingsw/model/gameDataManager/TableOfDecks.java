@@ -256,7 +256,7 @@ public class TableOfDecks {
     }
 
     /**
-     * Initialize the table at the beginning of a new game of CodexNaturalis.
+     * Initialize the table, needs to be called at the beginning of a new game of CodexNaturalis.
      * It reads the cards from JSON files, populating the decks and the cards initially displayed on the field.
      */
     public void initializeTable(){
