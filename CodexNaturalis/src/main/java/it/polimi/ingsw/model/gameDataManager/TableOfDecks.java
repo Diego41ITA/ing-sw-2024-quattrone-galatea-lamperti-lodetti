@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
 import it.polimi.ingsw.model.card.*;
-
+import it.polimi.ingsw.parse.DeckReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -256,20 +256,13 @@ public class TableOfDecks {
     }
 
     public void initializeTable(){
-        //allCards = loadCardFromJSON(fileName)
-        //Collections.shuffle(allCards)
-        //for (int i = 0; i < allCards.size(); i++) {
-        //    if (i <= 51) {
-        //         this.deckResource.add(new Card(allCards.get(i))); // idk if we need a deep copy here
-        //    } else if (i <= 103) {
-        //         this.deckGold.add(new Card(allCards.get(i))); // same
-        //            }
-        //      else if (i <= 109) {
-        //         this.deckStart.add((new Card(allCards.get(i))); // same
-        //            }
-        //      else {
-        //          this.deckGoal.add((new Card(allCards.get(i))); // same
-        //            }
-        //}
+        DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
+        DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
+        //DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
+        DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
+
+        this.deckResource = resourceCardReader.readDeckFromJSON("/resourceCard.json");
+        this.deckStart = initialCardReader.readDeckFromJSON("/initialCard.json");
+        this.deckGold = goldCardReader.readDeckFromJSON("goldCard.json");
     }
 }
