@@ -9,6 +9,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 87,
     "isFront": false,
     "type": "GOAL"
   },
@@ -22,6 +23,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 88,
     "isFront": false,
     "type": "GOAL"
   },
@@ -35,6 +37,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 89,
     "isFront": false,
     "type": "GOAL"
   },
@@ -48,6 +51,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 90,
     "isFront": false,
     "type": "GOAL"
   },
@@ -61,6 +65,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 91,
     "isFront": false,
     "type": "GOAL"
   },
@@ -74,6 +79,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 92,
     "isFront": false,
     "type": "GOAL"
   },
@@ -87,6 +93,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 93,
     "isFront": false,
     "type": "GOAL"
   },
@@ -100,6 +107,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 94,
     "isFront": false,
     "type": "GOAL"
   },
@@ -115,6 +123,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 95,
     "isFront": false,
     "type": "GOAL"
   },
@@ -130,6 +139,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 96,
     "isFront": false,
     "type": "GOAL"
   },
@@ -145,6 +155,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 97,
     "isFront": false,
     "type": "GOAL"
   },
@@ -160,6 +171,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 98,
     "isFront": false,
     "type": "GOAL"
   },
@@ -177,6 +189,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 99,
     "isFront": false,
     "type": "GOAL"
   },
@@ -192,6 +205,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 100,
     "isFront": false,
     "type": "GOAL"
   },
@@ -207,6 +221,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 101,
     "isFront": false,
     "type": "GOAL"
   },
@@ -222,6 +237,7 @@
       "validPlacements": [],
       "groupCards": []
     },
+    "cardId" : 102,
     "isFront": false,
     "type": "GOAL"
   }
