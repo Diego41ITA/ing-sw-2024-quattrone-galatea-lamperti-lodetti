@@ -21,13 +21,14 @@ public class GoalCard extends Card {
     /**
      * @author Luca Lamperti
      * the constructor of the GoalCard class
+     * @param id it's the identification of the card
      * @param isFront show how the card is displayed
      * @param points are the points on the GoalCard
      * @param goalType is the requirement type of the GoalCard
      * @param objects is a HashMap that contains the items needed to get points(this is the case of a typeOfGoalCard OBJECT or RESOURCE)
      */
-    public GoalCard(boolean isFront, int points, CheckInterface goalType, HashMap<Item, Integer> objects){
-        super(TypeOfCard.GOAL, isFront);
+    public GoalCard(int id, boolean isFront, int points, CheckInterface goalType, HashMap<Item, Integer> objects){
+        super(id, TypeOfCard.GOAL, isFront);
         this.numOfPoints = points;
         this.goalType = goalType;
         this.listOfObjects = new HashMap<>(objects);
@@ -39,7 +40,7 @@ public class GoalCard extends Card {
      * @param card this is the object read from the json file
      */
     public GoalCard(GoalCard card){
-        super(card.getType(), card.isFront());
+        super(card.getCardId(), card.getType(), card.isFront());
         this.numOfPoints = card.getNumberOfPoints();
         this.listOfObjects = new HashMap<Item, Integer>(card.getListOfObjects());
         this.goalType = card.getGoalType();

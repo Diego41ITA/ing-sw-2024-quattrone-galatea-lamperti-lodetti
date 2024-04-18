@@ -19,11 +19,12 @@ public class ResourceCard extends PlayableCard {
      * @param backResource defines the resource stored in the back of the card. IT IS A LIST.
      * @param type         refer to the super class attribute.
      * @param isFront      refer to the super class attribute.
+     * @param id           refer to the super class attribute.
      */
     public ResourceCard(Map<Angle, Item> front, Map<Angle, Item> back,
-                        List<Item> backResource, TypeOfCard type, boolean isFront)
+                        List<Item> backResource, TypeOfCard type, boolean isFront, int id)
     {
-        super(type, isFront, front, back, backResource);
+        super(id, type, isFront, front, back, backResource);
         this.numOfPoints = 1;
     }
 
@@ -33,7 +34,7 @@ public class ResourceCard extends PlayableCard {
      * @param card it is the object read from the file
      */
     public ResourceCard(ResourceCard card){
-        super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
+        super(card.getCardId(), card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
         this.numOfPoints = card.getNumberOfPoints();
     }
 

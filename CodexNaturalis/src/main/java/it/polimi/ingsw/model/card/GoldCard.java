@@ -30,12 +30,13 @@ public class GoldCard extends PlayableCard{
      * @param resources indicates the resource that a player need to place this card.
      * @param type refer to the super class attribute
      * @param isFront refer to the super class attribute
+     * @param id defines an identification for the card
      */
     public GoldCard(Map<Angle, Item> front, Map<Angle, Item> back, int points, List<Item> backResource,
                     GoldType goldType, HashMap<Item, Integer> resources,Item box, TypeOfCard type,
-                    boolean isFront)
+                    boolean isFront, int id)
     {
-        super(type, isFront, front, back, backResource);
+        super(id, type, isFront, front, back, backResource);
         this.numOfPoints = points;
         this.box = box;
         this.typeOfGoldCard = goldType;
@@ -47,7 +48,7 @@ public class GoldCard extends PlayableCard{
      * @param card it's the object read from the file
      */
     public GoldCard(GoldCard card){
-        super(card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
+        super(card.getCardId(), card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
         this.numOfPoints = card.getNumberOfPoints();
         this.resources = new HashMap<>(card.getNeededResources());
         this.box = card.getBox();
