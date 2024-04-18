@@ -13,6 +13,7 @@
       "DOWNRIGHT" : "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 81,
     "isFront": false,
     "type": "STARTING"
   },
@@ -30,6 +31,7 @@
       "DOWNRIGHT" : "MUSHROOM"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 82,
     "isFront": false,
     "type": "STARTING"
   },
@@ -47,6 +49,7 @@
       "DOWNRIGHT" : "EMPTY"
     },
     "backResource": [ "VEGETABLE", "MUSHROOM" ],
+    "cardId" : 83,
     "isFront": false,
     "type": "STARTING"
   },
@@ -64,6 +67,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" , "INSECT" ],
+    "cardId" : 84,
     "isFront": false,
     "type": "STARTING"
   },
@@ -79,6 +83,7 @@
       "HIGHRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" , "INSECT" , "VEGETABLE"],
+    "cardId" : 85,
     "isFront": false,
     "type": "STARTING"
   },
@@ -94,6 +99,7 @@
       "HIGHRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" , "ANIMAL" , "MUSHROOM"],
+    "cardId" : 86,
     "isFront": false,
     "type": "STARTING"
   }
