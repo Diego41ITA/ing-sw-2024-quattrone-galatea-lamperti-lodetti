@@ -10,18 +10,17 @@ import java.util.stream.Collectors;
 public class PlacementOptimizer {
     public static int optimize(Set<Set<Point>> validPlacements){
         for(Set<Point> CoordGroup : validPlacements) {
-            boolean isContained;
-            isContained = true;
-            outsideLoop:
-            for (Point p : CoordGroup) {
+            boolean isUnique = true;
+            for (Point p : CoordGroup){
+                isUnique = true;
                 for (Set<Point> coordGroupCheck : validPlacements) {
-                    if (!coordGroupCheck.equals(CoordGroup) && !coordGroupCheck.contains(p)) {
-                        isContained = false;
-                        break outsideLoop;
+                    if(!coordGroupCheck.equals(CoordGroup) && coordGroupCheck.contains(p)) {
+                        isUnique = false;
                     }
                 }
+                if(isUnique) break;
             }
-            if(isContained){
+            if(!isUnique){
                 validPlacements.remove(CoordGroup);
             }else {
                 Set<Set<Point>> validPlacementsFiltered;
