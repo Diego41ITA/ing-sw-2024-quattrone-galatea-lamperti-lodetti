@@ -21,7 +21,7 @@ public class Cardtest {
         ArrayList<Item> backResource = new ArrayList<>();
         backResource.add(Item.MUSHROOM);
         backResource.add(Item.VEGETABLE);
-        testCard = new InitialCard(true, frontItems, backItems, backResource);
+        testCard = new InitialCard(1, true, frontItems, backItems, backResource);
     }
 
     @Test
