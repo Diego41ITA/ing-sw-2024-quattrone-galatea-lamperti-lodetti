@@ -1,6 +1,6 @@
 [
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "EMPTY",
@@ -13,11 +13,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 1,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "MUSHROOM",
@@ -30,11 +31,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 2,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "EMPTY",
       "DOWNLEFT": "MUSHROOM",
@@ -47,11 +49,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 3,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHRIGHT": "MUSHROOM",
       "DOWNLEFT": "EMPTY",
@@ -64,11 +67,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 4,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHRIGHT": "FEATHER",
       "DOWNLEFT": "VEGETABLE",
@@ -81,11 +85,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 5,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "POTION",
       "HIGHRIGHT": "MUSHROOM",
@@ -98,11 +103,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 6,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "INSECT",
@@ -116,6 +122,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 7,
     "isFront": false,
     "type": "MUSHROOM"
   },
@@ -133,6 +140,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 8,
     "isFront": false,
     "type": "MUSHROOM"
   },
@@ -150,6 +158,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 9,
     "isFront": false,
     "type": "MUSHROOM"
   },
@@ -167,11 +176,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "MUSHROOM" ],
+    "cardId" : 10,
     "isFront": false,
     "type": "MUSHROOM"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "VEGETABLE",
       "HIGHRIGHT": "EMPTY",
@@ -184,11 +194,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 11,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "VEGETABLE",
       "HIGHRIGHT": "VEGETABLE",
@@ -201,11 +212,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 12,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "EMPTY",
       "DOWNLEFT": "VEGETABLE",
@@ -218,11 +230,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 13,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHRIGHT": "VEGETABLE",
       "DOWNLEFT": "EMPTY",
@@ -235,11 +248,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 14,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHRIGHT": "INSECT",
       "DOWNLEFT": "FEATHER",
@@ -252,11 +266,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 15,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "MUSHROOM",
       "HIGHRIGHT": "VEGETABLE",
@@ -269,11 +284,12 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 16,
     "isFront": false,
     "type": "VEGETABLE"
   },
   {
-    "numOfPoints": 1,
+    "numOfPoints": 0,
     "front": {
       "HIGHLEFT": "PARCHMENT",
       "DOWNLEFT": "VEGETABLE",
@@ -286,6 +302,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 17,
     "isFront": false,
     "type": "VEGETABLE"
   },
@@ -303,6 +320,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 18,
     "isFront": false,
     "type": "VEGETABLE"
   },
@@ -320,6 +338,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 19,
     "isFront": false,
     "type": "VEGETABLE"
   },
@@ -337,6 +356,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "VEGETABLE" ],
+    "cardId" : 20,
     "isFront": false,
     "type": "VEGETABLE"
   },
@@ -354,6 +374,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 21,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -371,6 +392,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 22,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -388,6 +410,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 23,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -405,6 +428,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 24,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -422,6 +446,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 25,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -439,6 +464,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 26,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -456,6 +482,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 27,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -473,6 +500,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 28,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -490,6 +518,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 29,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -507,6 +536,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "ANIMAL" ],
+    "cardId" : 30,
     "isFront": false,
     "type": "ANIMAL"
   },
@@ -524,6 +554,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 31,
     "isFront": false,
     "type": "INSECT"
   },
@@ -541,6 +572,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 32,
     "isFront": false,
     "type": "INSECT"
   },
@@ -558,6 +590,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 33,
     "isFront": false,
     "type": "INSECT"
   },
@@ -575,6 +608,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 34,
     "isFront": false,
     "type": "INSECT"
   },
@@ -592,6 +626,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 35,
     "isFront": false,
     "type": "INSECT"
   },
@@ -609,6 +644,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 36,
     "isFront": false,
     "type": "INSECT"
   },
@@ -626,6 +662,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 37,
     "isFront": false,
     "type": "INSECT"
   },
@@ -643,6 +680,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 38,
     "isFront": false,
     "type": "INSECT"
   },
@@ -660,6 +698,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 39,
     "isFront": false,
     "type": "INSECT"
   },
@@ -677,6 +716,7 @@
       "DOWNRIGHT": "EMPTY"
     },
     "backResource": [ "INSECT" ],
+    "cardId" : 40,
     "isFront": false,
     "type": "INSECT"
   }
