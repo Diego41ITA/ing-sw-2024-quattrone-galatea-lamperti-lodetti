@@ -26,9 +26,9 @@ public class DeckTest{
         ArrayList<Item> backResource1 = new ArrayList<>();
         ArrayList<Item> backResource2 = new ArrayList<>();
         ArrayList<Item> backResource3 = new ArrayList<>();
-        testCardList.add(new InitialCard(true, frontItems1, backItems1, backResource1));
-        testCardList.add(new InitialCard(true, frontItems2, backItems2, backResource2));
-        testCardList.add(new InitialCard(true, frontItems3, backItems3, backResource3));
+        testCardList.add(new InitialCard(81,true, frontItems1, backItems1, backResource1));
+        testCardList.add(new InitialCard(82,true, frontItems2, backItems2, backResource2));
+        testCardList.add(new InitialCard(83,true, frontItems3, backItems3, backResource3));
         testDeck = new Deck<>(testCardList);
     }
 

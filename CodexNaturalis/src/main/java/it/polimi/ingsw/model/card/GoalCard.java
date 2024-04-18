@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
+import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
 
 import java.awt.*;
 import java.util.*;
@@ -45,7 +46,6 @@ public class GoalCard extends Card {
         this.listOfObjects = new HashMap<Item, Integer>(card.getListOfObjects());
         this.goalType = card.getGoalType();
     }
-
     /**
      * @author Luca Lamperti
      * getter for the attribute NumOfPoints
