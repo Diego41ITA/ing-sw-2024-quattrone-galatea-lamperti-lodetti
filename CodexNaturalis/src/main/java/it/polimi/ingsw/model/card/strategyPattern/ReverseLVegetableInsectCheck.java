@@ -9,10 +9,11 @@ import java.util.*;
  *
  */
 public class ReverseLVegetableInsectCheck implements CheckInterface{
-    Set<Set<Point>> validPlacements = new HashSet<>();
-    Set<Point> groupCards = new HashSet<>();
     @Override
     public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
+        Set<Set<Point>> validPlacements = new HashSet<>();
+        Set<Point> groupCards = new HashSet<>();
+
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.INSECT)){
                 groupCards.add(a);

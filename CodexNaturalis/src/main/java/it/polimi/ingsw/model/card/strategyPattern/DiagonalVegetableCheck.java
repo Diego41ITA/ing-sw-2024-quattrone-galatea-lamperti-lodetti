@@ -9,17 +9,17 @@ import java.util.*;
  *
  */
 public class DiagonalVegetableCheck implements CheckInterface{
-    boolean isValid = false;
-    int i;
-    Set<Set<Point>> validPlacements = new HashSet<>();
-    Set<Point> groupCards = new HashSet<>();
     @Override
     public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
+        boolean isValid = false;
+        Set<Set<Point>> validPlacements = new HashSet<>();
+        Set<Point> groupCards = new HashSet<>();
+
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.VEGETABLE)){
                 isValid = true;
                 groupCards.add(a);
-                for (i=1; i<3; i++){
+                for (int i=1; i<3; i++){
                     Point nextPoint = new Point(a.x+i,a.y+i);
                     groupCards.add(nextPoint);
                     if (!PlayedCard.containsKey(nextPoint) || !PlayedCard.get(nextPoint).getType().equals(TypeOfCard.VEGETABLE)){
