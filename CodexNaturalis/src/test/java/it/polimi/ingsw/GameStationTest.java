@@ -65,7 +65,7 @@ public class GameStationTest {
         assertEquals(newFreeCords, gameStation.getFreeCords());
     }
 
-    @Test //mi sa che updatefreecoords è scritto male: mi dice che è piazzabile una carta il cui angolo non esiste
+    @Test //mi sa che updatefreecoords è scritto male: mi dice che è piazzabile una carta su una carta il cui angolo non esiste
     public void testUpdateFreeCoords() {
         //verifies that if I place a card that has an unoccupiable corner then the coordinate will not be available in freecord
         HashMap<Angle, Item> frontResource = new HashMap<>();
