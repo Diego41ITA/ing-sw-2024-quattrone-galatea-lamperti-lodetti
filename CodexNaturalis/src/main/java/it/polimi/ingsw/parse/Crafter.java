@@ -13,64 +13,51 @@ import java.util.*;
  * non serve più
  */
 public class Crafter {
-    public static void main(String[] arg)
+    public static void createGameFile(String id)
     {
+        //create a path to the directory
+        String directoryPath = "/JsonMatches/Game" + id;
+        File directory = new File(directoryPath);
 
-        Gson gson = new Gson();
-        ArrayList<GoldCard> goals = new ArrayList<>();
-        try(FileWriter writer = new FileWriter("goalDeck.json")){
-            gson.toJson(goals, writer);
-            System.out.println("written successfully");
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        /*
-        //per il deck goal
-        String jsonGoal = gson.toJson(goalDeck);
-
-        try(FileWriter write = new FileWriter("nome file")){
-            write.write(json);
-            System.out.println("scrittura ok");
-        }
-        catch(IOException e){
-            e.printStackTrace();
+        if(!directory.exists()){
+            //the directory should be created
+            directory.mkdirs();
         }
 
-        //per il deck gold
-        String jsonGold = gson.toJson(goalDeck);
+        //now the directory surly exists
+        String gameFilePath = "/JsonMatches/Game" + id + "/Game" + id + ".json";
+        File gameFile = new File(gameFilePath);
 
-        try(FileWriter write = new FileWriter("nome file")){
-            write.write(json);
-            System.out.println("scrittura ok");
+        if(!gameFile.exists()){
+            //the file should be created
+            try{
+                gameFile.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
-        catch(IOException e){
-            e.printStackTrace();
-        }
+    }
 
+    public static String getGameFilePath(String id){
+        return "/JsonMatches/Game" + id + "/Game" + id + ".json";
+    }
 
-        //per il deck resources
-        String jsonGoal = gson.toJson(goalDeck);
+    public static void createPlayerFile(String nick, String id){
+        String playerFilePath = "/JsonMatches/Game" + id  + "/" + nick + ".json";
+        File playerFile = new File(playerFilePath);
 
-        try(FileWriter write = new FileWriter("nome file")){
-            write.write(json);
-            System.out.println("scrittura ok");
+        if(!playerFile.exists()){
+            //the player file should be created
+            try{
+                playerFile.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
-        catch(IOException e){
-            e.printStackTrace();
-        }
+    }
 
-        //per il deck start
-        String jsonGoal = gson.toJson(goalDeck);
-
-        try(FileWriter write = new FileWriter("nome file")){
-            write.write(json);
-            System.out.println("scrittura ok");
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        */
+    public static String getPlayerFilePath(String nick, String id){
+        return "/JsonMatches/Game" + id  + "/" + nick + ".json";
     }
 
 }
