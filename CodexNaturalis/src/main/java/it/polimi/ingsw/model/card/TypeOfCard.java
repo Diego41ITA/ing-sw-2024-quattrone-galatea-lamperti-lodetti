@@ -11,6 +11,5 @@ public enum TypeOfCard {
     MUSHROOM,
     INSECT,
     STARTING,
-    GOAL,
-    GOLD
+    GOAL
 }
