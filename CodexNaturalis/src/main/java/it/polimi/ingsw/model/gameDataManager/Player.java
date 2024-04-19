@@ -94,7 +94,6 @@ public class Player {
 
     /**@author Lorenzo Galatea
     *method that set the maker black if I am the first player
-    *@param optionalColor is the black maker or null
     */
     public void setOptionalColor() {
         this.optionalColor = Optional.of(Color.BLACK);
@@ -159,8 +158,12 @@ public class Player {
     *returns the list of cards in the player's hand
     *@return cards is  List of cards in the player's hand
     */
-    public List<PlayableCard> showCard(){
-        return new ArrayList<>(cards);
+    public List<PlayableCard> showCard() {
+        if (cards != null) {
+            return new ArrayList<>(cards);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     /**@author Lorenzo Galatea

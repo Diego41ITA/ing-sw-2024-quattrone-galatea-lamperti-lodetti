@@ -32,8 +32,6 @@ public class Game {
         this.id = id;
         this.players = new HashMap<>();
         this.maxNumberPlayer = 4;   //in the future it could be changed
-        this.tableOfDecks = new TableOfDecks(); //useless you can set it later with setTableOfDecks()
-        this.pointTable = new PointTable(); //useless you can set it later with setPointTable()
         this.status = Status.WAITING;
         //this.turn = new Turn(); //useless you can set it later with setTurn()
     }
@@ -68,6 +66,9 @@ public class Game {
     }
 
     public TableOfDecks getTableOfDecks() {
+        if (this.tableOfDecks == null) {
+            this.tableOfDecks = new TableOfDecks();
+        }
         return new TableOfDecks(this.tableOfDecks);
     }
 
