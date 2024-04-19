@@ -166,46 +166,6 @@ public class GameStation {
     }
 
 
-    /**@author Lorenzo Galatea
-     * checks if a corner of a card is covered by another card
-     * @param card: card which corner must be checked
-     * @param angle: angle of a Card which must be checked
-     * @return true: if the angle is covered, false if the angle is not covered
-     * @author Lorenzo Galatea
-     */
-    public boolean isAngleCovered(PlayableCard card, Angle angle) {
-        Point cardPosition = null;
-        for (Map.Entry<Point, PlayableCard> entry : playedCards.entrySet()) {
-            if (entry.getValue().equals(card)) {
-                cardPosition = entry.getKey();
-                break;
-            }
-        }
-        int x = cardPosition.x;
-        int y = cardPosition.y;
-        switch (angle) {
-            case HIGHLEFT:
-                x--;
-                y++;
-                break;
-            case HIGHRIGHT:
-                x++;
-                y++;
-                break;
-            case DOWNLEFT:
-                x--;
-                y--;
-                break;
-            case DOWNRIGHT:
-                x++;
-                y--;
-                break;
-        }
-        Point adjacentPosition = new Point(x, y);
-        return playedCards.containsKey(adjacentPosition);
-    }
-
-
     /**
      * this method works with this precondition: the card passed as parameter should be already placed, otherwise it
      * returns a wrong value.
