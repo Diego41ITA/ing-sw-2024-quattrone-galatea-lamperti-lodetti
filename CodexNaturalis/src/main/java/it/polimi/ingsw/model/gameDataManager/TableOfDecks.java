@@ -2,11 +2,9 @@ package it.polimi.ingsw.model.gameDataManager;
 
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.parse.DeckReader;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /** @author Lorenzo Galatea
  * this class contains the decks and cards that
@@ -274,9 +272,9 @@ public class TableOfDecks {
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
         //DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
 
-        this.deckResource = resourceCardReader.readDeckFromJSON("/resourceCard.json");
-        this.deckStart = initialCardReader.readDeckFromJSON("/initialCard.json");
-        this.deckGold = goldCardReader.readDeckFromJSON("/goldCard.json");
+        this.deckResource = resourceCardReader.readDeckFromJSON("/JsonCards/resourceCard.json");
+        this.deckStart = initialCardReader.readDeckFromJSON("/JsonCards/initialCard.json");
+        this.deckGold = goldCardReader.readDeckFromJSON("/JsonCards/goldCard.json");
         //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
 
 

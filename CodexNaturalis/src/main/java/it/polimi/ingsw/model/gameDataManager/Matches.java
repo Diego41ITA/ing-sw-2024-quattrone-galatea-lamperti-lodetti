@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
 import com.google.gson.*;
+import it.polimi.ingsw.parse.Crafter;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -148,52 +149,18 @@ public class Matches {
      * @param g it is the game that wants to be saved
      */
     public void save(Game g){
-        //create a path to the directory
-        String directoryPath = "path" + g.getId();
-        File directory = new File(directoryPath);
+        Crafter.createGameFile(g.getId());
+        Crafter.createPlayerFile(g.getTurn().getCurrentPlayerNick(), g.getId());
 
-        if(!directory.exists()){
-            //the directory should be created
-            directory.mkdirs();
-        }
-
-        //now the directory surly exists
-        String gameFilePath = "path" + g.getId() + ".json";
-        File gameFile = new File(gameFilePath);
-
-        if(!gameFile.exists()){
-            //the file should be created
-            try{
-                gameFile.createNewFile();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        //now the game file surly exists
-        String playerFilePath = "path" + g.getTurn().getCurrentPlayerNick() + ".json";
-        File playerFile = new File(playerFilePath);
-
-        if(!playerFile.exists()){
-            //the player file should be created
-            try{
-                playerFile.createNewFile();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        //at this point it's certain that all the file are present
-        //it is possible to save the current status of all.
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try(FileWriter writer = new FileWriter(gameFilePath)){
+        try(FileWriter writer = new FileWriter(Crafter.getGameFilePath(g.getId()))){
             gson.toJson(g, writer);
         }
         catch(IOException e){
             e.printStackTrace();
         }
 
-        try(FileWriter writer = new FileWriter(playerFilePath)){
+        try(FileWriter writer = new FileWriter(Crafter.getPlayerFilePath(g.getTurn().getCurrentPlayerNick(), g.getId()))){
             String nick = g.getTurn().getCurrentPlayerNick();
 
             for(Player p: g.getPlayers().keySet()){
@@ -225,7 +192,7 @@ public class Matches {
                 if(b){
                     //the game is ended and all the players left the lobby
                     //thus, it is deletable.
-                    String directoryPath = "path" + g.getId();
+                    String directoryPath = Crafter.getGameFilePath(g.getId());
                     File directory = new File(directoryPath);
                     deleteDirectory(directory);
                 }
