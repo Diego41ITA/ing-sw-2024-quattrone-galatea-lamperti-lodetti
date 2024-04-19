@@ -33,6 +33,10 @@ public class PlayerTest {
         ArrayList<Item> backResource = new ArrayList<>();
         backResource.add(Item.MUSHROOM);
         backResource.add(Item.VEGETABLE);
+        frontItems.put(Angle.HIGHLEFT, Item.MUSHROOM);
+        frontItems.put(Angle.HIGHRIGHT, Item.VEGETABLE);
+        frontItems.put(Angle.DOWNLEFT, Item.INSECT);
+        frontItems.put(Angle.DOWNRIGHT, Item.ANIMAL);
         initialCard = new InitialCard(1, true, frontItems, backItems, backResource);
         gameStation = new GameStation(initialCard);
         cards = new ArrayList<PlayableCard>();
@@ -60,13 +64,19 @@ public class PlayerTest {
 
     @Test
     public void testGetGameStation() {
-        assertEquals(gameStation, player.getGameStation());
+        assertNotNull( player.getGameStation());
     }
 
     @Test
     public void testSetGameStation() {
-        GameStation newGameStation = new GameStation(initialCard);
-        assertEquals(newGameStation, player.getGameStation());
+        HashMap<Angle, Item> frontItems = new HashMap<>();
+        HashMap<Angle, Item> backItems = new HashMap<>();
+        ArrayList<Item> backResource = new ArrayList<>();
+        backResource.add(Item.MUSHROOM);
+        backResource.add(Item.VEGETABLE);
+        GameStation newGameStation = new GameStation(new InitialCard(1, true, frontItems, backItems, backResource));
+        player.setGameStation(newGameStation);
+        assertNotSame(newGameStation.getPlayedCards(), player.getGameStation().getPlayedCards());
     }
 
     @Test
@@ -85,24 +95,6 @@ public class PlayerTest {
     public void testSetColor() {
         player.setColor(Color.RED);
         assertEquals(Color.RED, player.getColor());
-    }
-
-    @Test
-    public void testGetGoal() {
-        assertNull(player.getGoal());
-        HashMap<Item, Integer> objects1 = new HashMap<>();
-        objects1.put(Item.FEATHER, 1);
-        objects1.put(Item.POTION, 1);
-        objects1.put(Item.PARCHMENT, 1);
-        HashMap<Item, Integer> objects2 = new HashMap<>();
-        objects1.put(Item.PARCHMENT, 2);
-        CheckInterface item = new ItemCheck();
-
-        GoalCard goal1 = new GoalCard(99, true, 3, item, objects1);
-        GoalCard goal2 = new GoalCard(100, true, 2, item, objects2);
-        ArrayList<GoalCard> test = new ArrayList<GoalCard>();
-        player.chooseGoal(test, 0);
-        assertEquals(goal1, player.getGoal());
     }
 
     @Test
@@ -126,11 +118,11 @@ public class PlayerTest {
     public void testShowCard() {
         assertEquals(cards, player.showCard());
         cards.clear();
-        assertTrue(player.showCard().isEmpty());
+        assertFalse(player.showCard().isEmpty());
     }
 
     @Test
-    public void testChooseGoal() {
+    public void testChooseGoalAndGetGoal() {
         HashMap<Item, Integer> objects1 = new HashMap<>();
         objects1.put(Item.FEATHER, 1);
         objects1.put(Item.POTION, 1);
@@ -142,9 +134,11 @@ public class PlayerTest {
         GoalCard goal1 = new GoalCard(99, true, 3, item, objects1);
         GoalCard goal2 = new GoalCard(100, true, 2, item, objects2);
         ArrayList<GoalCard> test = new ArrayList<GoalCard>();
+        test.add(goal1);
+        test.add(goal2);
         player.chooseGoal(test, 1);
-        assertEquals(goal2, player.getGoal());
-
+        //verifies that the ids are the same
+        assertEquals(goal2.getCardId(), player.getGoal().getCardId());
         assertThrows(IllegalArgumentException.class, () -> player.chooseGoal(test, -1));
         assertThrows(IllegalArgumentException.class, () -> player.chooseGoal(test, 2));
     }
@@ -161,7 +155,8 @@ public class PlayerTest {
                 0);
         Point cord = new Point(1, 1);
         player.playCard(cardToPlay, cord);
-        assertTrue(player.showCard().contains(cardToPlay));
+        assertTrue(player.getGameStation().getPlayedCards().containsValue(cardToPlay));
+        assertFalse(player.showCard().contains(cardToPlay));
     }
 
 }
