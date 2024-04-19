@@ -88,9 +88,8 @@ public class Matches {
     /**use to find all the game where there is only one active player
      * @return a list of Game.
      */
-    public List<String> getSuspendedGames(){
+    public List<Game> getSuspendedGames(){
         return games.stream().filter(game -> game.getStatus() == Status.SUSPENDED)
-                .map(Game::getId)
                 .collect(Collectors.toList());
     }
 
@@ -129,18 +128,44 @@ public class Matches {
      * @param gameId it's the key of the game
      * @param player it's the player that wants to join the game.
      */
-    public synchronized void joinGame(String gameId, Player player) {
+    public synchronized boolean joinGame(String gameId, Player player) {
         try {
             this.games.stream()
-                    .filter(g -> g.getId().equals(gameId) && g.checkName(player.getNick()))
+                    .filter(g -> g.getId().equals(gameId) && g.checkName(player.getNick()) && g.getStatus() == Status.WAITING)
                     .findFirst()
                     .ifPresent(g -> g.addPlayer(player));
-            System.out.println("you successfully joined the desired lobby!");
+            return true;
         } catch (IllegalStateException e) {
-            System.out.println("4 player are currently playing in the required lobby.\n" +
-                    " You'll be added to a random lobby.");
-            joinRandomGame(player);
+            return false;
         }
+    }
+
+    /**
+     *this method is useful to rejoin a game. Beware that the result value should be used to manage the case where the
+     * request failed: in this case the player could be added to a random game.
+     * @param gameId is the id of the game that the player wants to join
+     * @param nick is the nickname of the player
+     * @return true if and only if the request is satisfied
+     */
+    public synchronized boolean rejoinGame(String gameId, String nick){
+        try{
+            Optional<Game> game = this.getSuspendedGames().stream()
+                    .filter(g -> g.getId().equals(gameId))
+                    .findFirst();
+            if(game.isPresent()){
+                Map<Player, Boolean> map = game.get().getPlayers();
+                for(Player p: map.keySet()){
+                    if(p.getNick().equals(nick) && !map.get(p)){
+                        map.put(p, true);
+                        game.get().setPlayers(map);
+                        return true;
+                    }
+                }
+            }
+        }catch(IllegalStateException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
