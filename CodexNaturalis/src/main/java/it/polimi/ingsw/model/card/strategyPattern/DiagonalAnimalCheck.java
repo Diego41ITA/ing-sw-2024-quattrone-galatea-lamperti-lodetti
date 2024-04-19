@@ -32,6 +32,6 @@ public class DiagonalAnimalCheck implements CheckInterface{
             }
             groupCards.clear();
         }
-        return PlacementOptimizer.optimize(validPlacements);
+        return PlacementOptimizer.optimize(new HashSet<>(validPlacements));
     }
 }

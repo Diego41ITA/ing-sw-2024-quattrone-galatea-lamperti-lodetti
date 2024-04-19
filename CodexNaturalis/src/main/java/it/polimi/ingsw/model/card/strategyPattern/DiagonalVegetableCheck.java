@@ -20,7 +20,7 @@ public class DiagonalVegetableCheck implements CheckInterface{
                 isValid = true;
                 groupCards.add(a);
                 for (int i=1; i<3; i++){
-                    Point nextPoint = new Point(a.x+i,a.y+i);
+                    Point nextPoint = new Point(a.x+i,a.y-i);
                     groupCards.add(nextPoint);
                     if (!PlayedCard.containsKey(nextPoint) || !PlayedCard.get(nextPoint).getType().equals(TypeOfCard.VEGETABLE)){
                         isValid = false;

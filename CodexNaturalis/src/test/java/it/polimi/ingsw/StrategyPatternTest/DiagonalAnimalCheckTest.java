@@ -47,7 +47,7 @@ public class DiagonalAnimalCheckTest {
 
     private void SetCards(int num){
         for(int i = 1; i<=num; i++){
-            playedCards.put(new Point(i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.ANIMAL, true, 123 + i));
+            playedCards.put(new Point(i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.ANIMAL, true, 123 + i, 0));
         }
     }
 
@@ -75,5 +75,21 @@ public class DiagonalAnimalCheckTest {
         SetCards(9);
         assertEquals(3, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
+    @Test
+    public void TestTwelveCards() {
+        SetCards(12);
+        assertEquals(4, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+    }
 
+    @Test
+    public void TestFifteenCards() {
+        SetCards(15);
+        assertEquals(5, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+    }
+
+    @Test
+    public void TestMaxCards() {
+        SetCards(20);
+        assertEquals(6, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+    }
 }
