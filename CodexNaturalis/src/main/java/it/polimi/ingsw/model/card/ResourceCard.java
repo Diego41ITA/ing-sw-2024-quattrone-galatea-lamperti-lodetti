@@ -22,10 +22,11 @@ public class ResourceCard extends PlayableCard {
      * @param id           refer to the super class attribute.
      */
     public ResourceCard(Map<Angle, Item> front, Map<Angle, Item> back,
-                        List<Item> backResource, TypeOfCard type, boolean isFront, int id)
+                        List<Item> backResource, TypeOfCard type, boolean isFront, int id,
+                        int point)
     {
         super(id, type, isFront, front, back, backResource);
-        this.numOfPoints = 1;
+        this.numOfPoints = point;
     }
 
 
