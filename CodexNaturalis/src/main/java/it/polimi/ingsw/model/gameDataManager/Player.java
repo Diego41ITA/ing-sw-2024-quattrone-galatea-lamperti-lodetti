@@ -38,7 +38,7 @@ public class Player {
     public Player(String nickname, GameStation gamestation, Color color, ArrayList<PlayableCard> cards) {
         this.cards = new ArrayList<>(cards);
         this.nickname = nickname;
-        this.gamestation = gamestation;
+        this.gamestation = new GameStation(gamestation);
         this.color = color;
         this.optionalColor = Optional.empty();
     }
@@ -120,7 +120,7 @@ public class Player {
     @return goal which is the GoalCard chosen by the player
         */
     public GoalCard getGoal() {
-        return goal;
+        return new GoalCard(goal);
     }
 
     /**@author Lorenzo Galatea
