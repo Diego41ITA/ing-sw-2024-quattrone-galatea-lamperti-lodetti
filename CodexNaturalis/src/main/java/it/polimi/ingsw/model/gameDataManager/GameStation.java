@@ -35,8 +35,8 @@ public class GameStation {
 
     public GameStation(GameStation gs) {
         this.playedCards = new HashMap<>();
-        setPlayedCards(gs.getPlayedCards());
-        this.freeCords = new ArrayList<>(gs.getFreeCords());
+        setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
+        this.freeCords = gs != null && gs.getFreeCords() != null ? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
     }
 
     /**

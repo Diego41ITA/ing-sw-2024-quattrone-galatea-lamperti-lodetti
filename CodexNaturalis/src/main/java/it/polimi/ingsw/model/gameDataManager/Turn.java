@@ -24,8 +24,8 @@ public class Turn {
      * @param players it is the list of player that joined a game.
      */
     public Turn(List<Player> players){
-        this.players = new LinkedList<>(players);
-        this.currentPlayer = null;
+        this.players = new ArrayList<>(players);
+        this.sort();
     }
 
     public Turn(Turn t){

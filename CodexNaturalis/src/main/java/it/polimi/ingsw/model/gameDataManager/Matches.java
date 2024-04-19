@@ -50,7 +50,7 @@ public class Matches {
      * @param game it is the new game
      */
     public void addGame(Game game){
-        if(!games.contains(game))
+        if(game != null && games != null && !games.contains(game))
         {
             games.add(new Game(game));
         }

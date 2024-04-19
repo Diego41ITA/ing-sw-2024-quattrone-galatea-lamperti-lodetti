@@ -84,9 +84,12 @@ public class TableOfDecks {
      * is the getter of the 2 goals
      * @return ArrayList which contains the 2 goals
      */
-    public ArrayList<Card> getGoals(){
-        return new ArrayList<Card>(goals);
-
+    public List<Card> getGoals() {
+        if (goals != null) {
+            return new ArrayList<>(goals);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     /** @author Lorenzo Galatea
@@ -157,6 +160,9 @@ public class TableOfDecks {
      * @return ArrayList which contains the 4 showed cards
      */
     public ArrayList<Card> getCards(){
+        if (this.cards == null) {
+            this.cards = new ArrayList<>();
+        }
         return new ArrayList<Card>(this.cards);
 
     }
@@ -199,10 +205,13 @@ public class TableOfDecks {
      * is the getter of deckGoal
      * @return deckGoal
      */
-    public Deck<GoalCard> getDeckGoal(){
-        return new Deck<>(deckGoal);
+    public Deck<GoalCard> getDeckGoal() {
+        if (deckGoal != null) {
+            return new Deck<>(deckGoal);
+        } else {
+            return new Deck<>(new ArrayList<>());
+        }
     }
-
     /**@author Lorenzo Galatea
      * is the getter of deckGold
      * @return deckGold
