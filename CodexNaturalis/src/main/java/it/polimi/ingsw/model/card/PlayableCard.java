@@ -55,20 +55,9 @@ public abstract class PlayableCard extends Card{
     }
 
     /**
-     * this method check if the item in the specified angle is empty
-     * @param a is the angle position to search
-     * @return true if the item is Item.Empty
-     */
-    public boolean checkIfEmpty(Angle a){
-        if(!isFront())
-            return false;
-        else return front.get(a) == Item.EMPTY;
-    }
-
-    /**
      * this method check if the item in the specified angle is hidden
      * @param a is the angle position to search
-     * @return true if the item is Item.Empty
+     * @return true if the item is "Item.HIDDEN"
      */
     public boolean checkIfHidden(Angle a){
         if(!isFront())
