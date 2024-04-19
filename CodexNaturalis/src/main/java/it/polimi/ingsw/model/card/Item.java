@@ -6,5 +6,5 @@ package it.polimi.ingsw.model.card;
  * represent cases of an empty corner (a corner without objects) or a hidden corner (a corner covered)
  */
 public enum Item {
-    VEGETABLE, ANIMAL, INSECT, MUSHROOM, RESOURCE, HIDDEN, EMPTY, POTION, FEATHER, PARCHMENT
+    VEGETABLE, ANIMAL, INSECT, MUSHROOM, HIDDEN, EMPTY, POTION, FEATHER, PARCHMENT
 }
