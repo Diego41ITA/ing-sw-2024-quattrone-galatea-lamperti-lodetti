@@ -13,9 +13,9 @@ import java.util.Optional;
  * players can draw. It is shared by all players in the same game
  */
 public class TableOfDecks {
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cards; //definirle come separatamente semplifica il salvataggio
 
-    private ArrayList<Card> goals;
+    private ArrayList<Card> goals; //definirle come GoalCard semplifica il salvataggio
     private Deck<GoldCard> deckGold;
 
     private Deck<GoalCard> deckGoal;
@@ -31,8 +31,6 @@ public class TableOfDecks {
         //crea semplicemente gli attributi
         //questi verranno settati in una fase iniziale.
     }
-
-
 
     /**@author Lorenzo Galatea
      * this method is the constructor of the class
