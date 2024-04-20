@@ -43,7 +43,7 @@ public abstract class PlayableCard extends Card{
      */
     public Map<Angle, Item> getFreeAngleAndContents() {
         Map<Angle, Item> newMap = new HashMap<>();
-        if(isFront())
+        if(this.isFront())
             newMap.putAll(this.front);
         else
             newMap.putAll(this.back);
