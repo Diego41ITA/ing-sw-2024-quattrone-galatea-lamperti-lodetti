@@ -10,29 +10,26 @@ import java.util.Set;
  */
 public class PlacementOptimizer {
     public static int optimize(Set<Set<Point>> validPlacements) {
+        Set<Set<Point>> AlreadyViewedCoordGroups = new HashSet<>();
         MyIterator iterator = new MyIterator(validPlacements);
         while (iterator.hasNext()) {
             Set<Point> coordGroup = iterator.next();
-            boolean isUnique = true;
+            boolean hasUniquePoint = true;
             for (Point p : coordGroup) {
-                isUnique = true;
-                MyIterator checkIterator = new MyIterator(validPlacements);
-                while (checkIterator.hasNext()){
-                    Set<Point> coordGroupCheck = checkIterator.next();
-                    if (!coordGroupCheck.equals(coordGroup) && coordGroupCheck.contains(p)) {
-                        isUnique = false;
+                hasUniquePoint = true;
+                for(Set<Point> coordGroupCheck : validPlacements){
+                    if ((!coordGroupCheck.equals(coordGroup)) && coordGroupCheck.contains(p)) {
+                        hasUniquePoint = false;
                         break;
                     }
                 }
-                if (isUnique) break;
+                if (hasUniquePoint) break;
             }
-            if (!isUnique){
-                iterator.remove();
-            } else if (iterator.hasNext()){
-                Set<Set<Point>> validPlacementsFiltered = iterator.filter(coordGroup);
-                if(!validPlacementsFiltered.equals(validPlacements)){
-                    iterator = new MyIterator(validPlacementsFiltered);
-                }
+            if (hasUniquePoint && !AlreadyViewedCoordGroups.contains(coordGroup)){
+                AlreadyViewedCoordGroups.add(coordGroup);
+                MyIterator iteratorFilter = new MyIterator(validPlacements);
+                validPlacements = new HashSet<>(iteratorFilter.filter(coordGroup));
+                iterator = new MyIterator(validPlacements);
             }
         }
         return validPlacements.size();
