@@ -17,14 +17,14 @@ public class LMushroomVegetableCheck implements CheckInterface{
 
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.VEGETABLE)){
-                groupCards.add(a);
+//                groupCards.add(a);
                 Point nextPoint = new Point(a.x -1, a.y + 1);
                 if (PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.MUSHROOM)){
                     groupCards.add(nextPoint);
                     nextPoint = new Point(a.x -1, a.y + 3);
                     if(PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.MUSHROOM)){
                         groupCards.add(nextPoint);
-                        validPlacements.add(groupCards);
+                        validPlacements.add(new HashSet<>(groupCards));
                     }
                 }
             }

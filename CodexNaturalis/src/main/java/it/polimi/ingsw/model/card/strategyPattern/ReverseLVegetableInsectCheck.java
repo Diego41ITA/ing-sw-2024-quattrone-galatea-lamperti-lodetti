@@ -16,14 +16,14 @@ public class ReverseLVegetableInsectCheck implements CheckInterface{
 
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.INSECT)){
-                groupCards.add(a);
+                //groupCards.add(a);
                 Point nextPoint = new Point(a.x +1, a.y + 1);
                 if (PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.VEGETABLE)){
                     groupCards.add(nextPoint);
                     nextPoint = new Point(a.x +1, a.y + 3);
                     if(PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.VEGETABLE)){
                         groupCards.add(nextPoint);
-                        validPlacements.add(groupCards);
+                        validPlacements.add(new HashSet<>(groupCards));
                     }
                 }
             }

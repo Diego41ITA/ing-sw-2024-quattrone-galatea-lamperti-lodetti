@@ -15,14 +15,14 @@ public class UpsideDownReverseLInsectAnimalCheck implements CheckInterface{
     public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
         for (Point a : PlayedCard.keySet()){
             if (PlayedCard.get(a).getType().equals(TypeOfCard.ANIMAL)){
-                groupCards.add(a);
+//                groupCards.add(a);
                 Point nextPoint = new Point(a.x +1, a.y - 1);
                 if (PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
                     groupCards.add(nextPoint);
                     nextPoint = new Point(a.x +1, a.y - 3);
                     if(PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
                         groupCards.add(nextPoint);
-                        validPlacements.add(groupCards);
+                        validPlacements.add(new HashSet<>(groupCards));
                     }
                 }
             }
