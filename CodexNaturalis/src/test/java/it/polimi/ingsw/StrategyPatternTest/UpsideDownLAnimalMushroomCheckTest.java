@@ -91,7 +91,7 @@ public class UpsideDownLAnimalMushroomCheckTest {
     }
     @Test
     public void TestFivePointsMixed() {
-        SetCardsMixed(4);
-        assertEquals(4, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+        SetCardsMixed(5);
+        assertEquals(5, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
 }
