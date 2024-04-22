@@ -60,7 +60,7 @@ public abstract class Card {
 
     @Override
     public int hashCode(){
-        return (this.getCardId() * 17) / 31;
+        return Integer.hashCode(this.getCardId());
     }
 
     @Override
