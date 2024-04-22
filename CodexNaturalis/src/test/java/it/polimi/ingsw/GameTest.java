@@ -1,7 +1,13 @@
 package it.polimi.ingsw;
+import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.Item;
+import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
+import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
 import it.polimi.ingsw.model.gameDataManager.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
@@ -78,5 +84,102 @@ public class GameTest {
             assertFalse(game.checkName("Luca"));
             assertTrue(game.checkName("Alessandro"));
         }
+
+    @Test
+    public void testPointTableAttribute() {
+        game.setPointTable(new PointTable());
+        PointTable pointTable = game.getPointTable();
+        assertNotNull(pointTable);
+        assertNotSame(game.getPointTable(), pointTable);
+    }
+
+    @Test
+    public void testGetId() {
+        assertEquals("Game", game.getId());
+    }
+
+    @Test
+    public void testTableOfDecksAttribute() {
+        game.setTableOfDecks(new TableOfDecks());
+        TableOfDecks tableOfDecks = game.getTableOfDecks();
+        assertNotNull(tableOfDecks);
+        assertNotSame(game.getTableOfDecks(), tableOfDecks);
+    }
+
+    @Test
+    public void testTurnAttribute() {
+        ArrayList<Player> players = new ArrayList<>();
+        ArrayList<GoalCard> goals = new ArrayList<>();
+        HashMap<Item, Integer> objects = new HashMap<>();
+        objects.put(Item.FEATHER, 1);
+        objects.put(Item.POTION, 1);
+        objects.put(Item.PARCHMENT, 1);
+        CheckInterface item = new ItemCheck();
+        GoalCard goal = new GoalCard(99, true, 3, item, objects);
+        goals.add(goal);
+        player1.chooseGoal(goals, 0);
+        players.add(player1);
+        Turn turn1= new Turn(players);
+        game.setTurn(turn1);
+        Turn turn2 = game.getTurn();
+        assertNotNull(turn2);
+        assertNotSame(game.getTurn(), turn2);
+        }
+
+    @Test
+    public void testSetStatus() {
+        game.setStatus(Status.ACTIVE);
+        assertEquals(Status.ACTIVE, game.getStatus());
+    }
+
+    @Test
+    public void testSetPlayers() {
+        HashMap<Player, Boolean> players = new HashMap<>();
+        ArrayList<GoalCard> goals = new ArrayList<>();
+        HashMap<Item, Integer> objects = new HashMap<>();
+        objects.put(Item.FEATHER, 1);
+        objects.put(Item.POTION, 1);
+        objects.put(Item.PARCHMENT, 1);
+        CheckInterface item = new ItemCheck();
+        GoalCard goal = new GoalCard(99, true, 3, item, objects);
+        goals.add(goal);
+        player1.chooseGoal(goals, 0);
+        players.put(player1, true);
+        game.setPlayers(players);
+        boolean condition = false;
+        for (Player player : game.getPlayers().keySet()) {
+            if (player.getNick().equals("Lorenzo")) {
+                condition = true;
+                break;
+            }
+        }
+        assertTrue(condition);
+
+        //assertEquals(true, game.getPlayers().get(player1)); manca controllo sul value
+    }
+
+    @Test
+    public void testSetSinglePlayer() {
+        HashMap<Player, Boolean> players = new HashMap<>();
+        ArrayList<GoalCard> goals = new ArrayList<>();
+        HashMap<Item, Integer> objects = new HashMap<>();
+        objects.put(Item.FEATHER, 1);
+        objects.put(Item.POTION, 1);
+        objects.put(Item.PARCHMENT, 1);
+        CheckInterface item = new ItemCheck();
+        GoalCard goal = new GoalCard(99, true, 3, item, objects);
+        goals.add(goal);
+        player2.chooseGoal(goals, 0);
+        game.setSinglePlayer(player2);
+        boolean condition = false;
+        for (Player player : game.getPlayers().keySet()) {
+            if (player.getNick().equals("Alessandro")) {
+                condition = true;
+                break;
+            }
+        }
+        assertTrue(condition);
+    }
+
     }
 

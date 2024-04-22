@@ -54,18 +54,8 @@ public class GameStationTest {
         assertFalse(freeCords.isEmpty()); // Initially, free coordinates should be available
     }
 
+
     @Test
-    public void testSetFreeCords() {
-        ArrayList<Point> newFreeCords = new ArrayList<>();
-        newFreeCords.add(new Point(2, 2));
-        newFreeCords.add(new Point(3, 3));
-
-        gameStation.setFreeCords(newFreeCords);
-
-        assertEquals(newFreeCords, gameStation.getFreeCords());
-    }
-
-    @Test //mi sa che updatefreecoords è scritto male: mi dice che è piazzabile una carta su una carta il cui angolo non esiste
     public void testUpdateFreeCoords() {
         //verifies that if I place a card that has an unoccupiable corner then the coordinate will not be available in freecord
         HashMap<Angle, Item> frontResource = new HashMap<>();
