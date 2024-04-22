@@ -203,5 +203,23 @@ public class Player {
             throw new illegalOperationException("There are not enough resources to play this card");
         }
     }
+
+    @Override
+    public int hashCode(){
+        return this.getNick().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object player){
+        try{
+            Player newPlayer = (Player) player;
+            if(this.getNick().equals(newPlayer.getNick()))
+                return true;
+            else
+                return false;
+        }catch(ClassCastException e){
+            return false;
+        }
+    }
 }
 
