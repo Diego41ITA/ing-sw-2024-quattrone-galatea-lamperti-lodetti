@@ -288,7 +288,8 @@ public class TableOfDecks {
         this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
         //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
 
-
+        ArrayList<Card> start = new ArrayList<>();
+        this.cards = start;
         this.setCards(null);
         //this.setGoals(this.deckGoal);
     }

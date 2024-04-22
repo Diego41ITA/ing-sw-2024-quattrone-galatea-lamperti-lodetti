@@ -1,8 +1,5 @@
 package it.polimi.ingsw;
 import it.polimi.ingsw.model.card.*;
-import it.polimi.ingsw.model.card.Angle;
-import it.polimi.ingsw.model.card.InitialCard;
-import it.polimi.ingsw.model.card.Item;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
 import org.junit.jupiter.api.BeforeEach;
