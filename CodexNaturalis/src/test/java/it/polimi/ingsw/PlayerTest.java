@@ -158,5 +158,23 @@ public class PlayerTest {
         assertTrue(player.getGameStation().getPlayedCards().containsValue(cardToPlay));
         assertFalse(player.showCard().contains(cardToPlay));
     }
+    @Test
+    public void testPlayCard_unsuccessfulPlay() {
+        HashMap<Angle, Item> front = new HashMap<>();
+        HashMap<Angle, Item> back = new HashMap<>();
+        ArrayList<Item> backResourceGold = new ArrayList<>();
+        backResourceGold.add(Item.MUSHROOM);
+        HashMap<Item, Integer> resources = new HashMap<>();
+        resources.put(Item.MUSHROOM, 2);
+        resources.put(Item.ANIMAL,1);
+        PlayableCard cardToPlay = new GoldCard(front, back, 3, backResourceGold, GoldType.ITEM, resources, Item.FEATHER, TypeOfCard.MUSHROOM, true, 1);
+        Point cord = new Point(1, 1);
+        try {
+            player.playCard(cardToPlay, cord);
+            fail("Expected IllegalOperationException to be thrown");
+        } catch (illegalOperationException e) {
+            assertEquals("There are not enough resources to play this card", e.getMessage());
+        }
+    }
 
 }

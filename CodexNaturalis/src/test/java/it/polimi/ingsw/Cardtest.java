@@ -21,7 +21,7 @@ public class Cardtest {
     private GoldCard goldCard;
 
     private ResourceCard resourceCard;
-    CheckInterface item = new ItemCheck();
+    private CheckInterface item = new ItemCheck();
 
     @BeforeEach
     public void setUp() {
