@@ -277,6 +277,7 @@ public class TableOfDecks {
      * It reads the cards from JSON files, populating the decks and the cards initially displayed on the field.
      */
     public void initializeTable(){
+        this.cards = new ArrayList<Card>();
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
         DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
