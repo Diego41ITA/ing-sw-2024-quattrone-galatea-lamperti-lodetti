@@ -222,4 +222,22 @@ public class Game {
             throw new IllegalStateException();
         players.put(player, true);
     }
+
+    @Override
+    public int hashCode(){
+        return this.getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object game){
+        try{
+            Game newGame = (Game) game;
+            if(this.getId().equals(newGame.getId()))
+                return true;
+            else
+                return false;
+        }catch(ClassCastException e){
+            return false;
+        }
+    }
 }
