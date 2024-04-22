@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.card;
 
+import static java.lang.Math.floor;
+
 /**
  * @author Luca Lamperti
  * define a class hierarchy with 'Card' as the superclass of 'InitialCard', 'GoalCard', 'GoldCard', and 'ResourceCard
@@ -54,5 +56,24 @@ public abstract class Card {
      */
     public int getCardId(){
         return this.cardId;
+    }
+
+    @Override
+    public int hashCode(){
+        return (this.getCardId() * 17) / 31;
+    }
+
+    @Override
+    public boolean equals(Object card){
+        try{
+            Card newCard = (Card) card;
+            if(this.getCardId() == newCard.getCardId())
+                return true;
+            else
+                return false;
+
+        }catch(ClassCastException e){
+            return false;
+        }
     }
 }
