@@ -18,6 +18,8 @@ public class GameStation {
      */
     private ArrayList<Point> freeCords;
 
+    private ArrayList<Point> forbiddenCoords;
+
     /**
      * it's a constructor that initialize the gameStation object. It places the initial card and updates the new freeCords
      *
@@ -25,6 +27,7 @@ public class GameStation {
      */
     public GameStation(InitialCard card) {
         playedCards = new HashMap<>();
+        forbiddenCoords = new ArrayList<>();
         playedCards.put(new Point(0, 0), card);
         freeCords = new ArrayList<>();
         freeCords.add(new Point(-1, 1));
@@ -35,6 +38,7 @@ public class GameStation {
 
     public GameStation(GameStation gs) {
         this.playedCards = new HashMap<>();
+        forbiddenCoords = new ArrayList<>();
         setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
         this.freeCords = gs != null && gs.getFreeCords() != null ? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
     }
@@ -88,28 +92,29 @@ public class GameStation {
      * updates the coordinates where its possible to play a new card
      *
      * @param cord is the coordinate of the card played right before calling this method
+     * @author Diego Quattrone, Lorenzo Galatea
      */
     public void updateFreeCoords(Point cord) {
         Point[] offsets = {new Point(-1, -1), new Point(-1, 1), new Point(1, -1), new Point(1, 1)};
         Angle[] angles = {Angle.DOWNLEFT, Angle.HIGHLEFT, Angle.DOWNRIGHT, Angle.HIGHRIGHT};
-        List<Point> forbiddenCoords = new ArrayList<>();
-
         for (int i = 0; i < offsets.length; i++) {
             Point neighbor = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
             if (!forbiddenCoords.contains(neighbor)) {
                 if (!playedCards.containsKey(neighbor)) {
-                    if (!playedCards.get(cord).checkIfHidden(angles[i])) {
-                        freeCords.add(neighbor);
+                    if (playedCards.get(cord).isFront()) {
+                        if (playedCards.get(cord).getFront().containsKey(angles[i])) {
+                            freeCords.add(neighbor);
+
+                        } else {
+                            forbiddenCoords.add(neighbor);
+                        }
                     } else {
-                        forbiddenCoords.add(neighbor);
+                            freeCords.add(neighbor);
+                        }
                     }
-                } else {
-                    playedCards.get(neighbor).hideAngle(angles[(i + 2) % 4]);
                 }
             }
         }
-    }
-
 
     /**
      * @param goldCard it is the card the client wants to play

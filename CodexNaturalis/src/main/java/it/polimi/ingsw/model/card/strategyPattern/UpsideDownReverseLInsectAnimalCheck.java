@@ -12,17 +12,17 @@ public class UpsideDownReverseLInsectAnimalCheck implements CheckInterface{
     Set<Set<Point>> validPlacements = new HashSet<>();
     Set<Point> groupCards = new HashSet<>();
     @Override
-    public int check(HashMap<Point, PlayableCard> PlayedCard, HashMap<Item, Integer> AvailableItems, HashMap<Item, Integer> requirements) {
-        for (Point a : PlayedCard.keySet()){
-            if (PlayedCard.get(a).getType().equals(TypeOfCard.ANIMAL)){
-                groupCards.add(a);
+    public int check(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems, HashMap<Item, Integer> requirements) {
+        for (Point a : playedCard.keySet()){
+            if (playedCard.get(a).getType().equals(TypeOfCard.ANIMAL)){
+//                groupCards.add(a);
                 Point nextPoint = new Point(a.x +1, a.y - 1);
-                if (PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
+                if (playedCard.containsKey(nextPoint) && playedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
                     groupCards.add(nextPoint);
                     nextPoint = new Point(a.x +1, a.y - 3);
-                    if(PlayedCard.containsKey(nextPoint) && PlayedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
+                    if(playedCard.containsKey(nextPoint) && playedCard.get(nextPoint).getType().equals(TypeOfCard.INSECT)){
                         groupCards.add(nextPoint);
-                        validPlacements.add(groupCards);
+                        validPlacements.add(new HashSet<>(groupCards));
                     }
                 }
             }

@@ -1,16 +1,16 @@
 package it.polimi.ingsw.StrategyPatternTest;
+
 import it.polimi.ingsw.model.card.*;
-import it.polimi.ingsw.model.card.strategyPattern.DiagonalAnimalCheck;
+import it.polimi.ingsw.model.card.strategyPattern.ReverseLVegetableInsectCheck;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class DiagonalAnimalCheckTest {
-
+public class ReverseLVegetableInsectCheckTest {
     private HashMap<Point, PlayableCard> playedCards;
     private GoalCard goalCard;
 
@@ -18,7 +18,7 @@ public class DiagonalAnimalCheckTest {
     public void SetUp() {
         playedCards = new HashMap<>();
         playedCards.put(new Point(0, 0), new InitialCard(123, true, setFrontAngles(), SetbackAngles(), SetBack()));
-        goalCard = new GoalCard(0, true, 1, new DiagonalAnimalCheck(), new HashMap<>());
+        goalCard = new GoalCard(0, true, 1, new ReverseLVegetableInsectCheck(), new HashMap<>());
     }
 
     private HashMap<Angle, Item> setFrontAngles(){
@@ -46,8 +46,17 @@ public class DiagonalAnimalCheckTest {
     }
 
     private void SetCards(int num){
-        for(int i = 1; i<=num; i++){
-            playedCards.put(new Point(i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.ANIMAL, true, 123 + i, 0));
+        for(int i = 1; i <= num; i++){
+            playedCards.put(new Point(-i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.VEGETABLE, true, 123, 0));
+            playedCards.put(new Point(-i, i -2), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.VEGETABLE, true, 123, 0));
+            playedCards.put(new Point(-i -1, i-3), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.INSECT, true, 123, 0));
+        }
+    }
+
+    private void SetCardsMixed(int num){
+        for(int i = -num*2 + 1; i <= num*2 -1; i = i +2 ){
+            playedCards.put(new Point(-1, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.VEGETABLE, true, 123, 0));
+            playedCards.put(new Point(-2, i-1), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.INSECT, true, 123, 0));
         }
     }
 
@@ -56,40 +65,33 @@ public class DiagonalAnimalCheckTest {
         assertEquals(0, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
     @Test
-    public void TestOneCard() {
+    public void TestOnePoint() {
         SetCards(1);
-        assertEquals(0, goalCard.getGoalPoints(playedCards, new HashMap<>()));
-    }
-    @Test
-    public void TestThreeCards() {
-        SetCards(3);
         assertEquals(1, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
     @Test
-    public void TestSixCards() {
-        SetCards(6);
+    public void TestTwoPoint() {
+        SetCards(2);
         assertEquals(2, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
     @Test
-    public void TestNineCards() {
-        SetCards(9);
+    public void TestTWoPointsMixed() {
+        SetCardsMixed(2);
+        assertEquals(2, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+    }
+    @Test
+    public void TestThreePointsMixed() {
+        SetCardsMixed(3);
         assertEquals(3, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
     @Test
-    public void TestTwelveCards() {
-        SetCards(12);
+    public void TestFourPointsMixed() {
+        SetCardsMixed(4);
         assertEquals(4, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
-
     @Test
-    public void TestFifteenCards() {
-        SetCards(15);
+    public void TestFivePointsMixed() {
+        SetCardsMixed(5);
         assertEquals(5, goalCard.getGoalPoints(playedCards, new HashMap<>()));
-    }
-
-    @Test
-    public void TestMaxCards() {
-        SetCards(20);
-        assertEquals(6, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
 }

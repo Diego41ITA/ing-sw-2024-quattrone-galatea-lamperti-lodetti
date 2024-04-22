@@ -1,15 +1,15 @@
 package it.polimi.ingsw.StrategyPatternTest;
 import it.polimi.ingsw.model.card.*;
-import it.polimi.ingsw.model.card.strategyPattern.DiagonalAnimalCheck;
+        import it.polimi.ingsw.model.card.strategyPattern.DiagonalAnimalCheck;
+import it.polimi.ingsw.model.card.strategyPattern.DiagonalMushroomCheck;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.*;
-
 import static org.junit.Assert.*;
 
-public class DiagonalAnimalCheckTest {
+public class DiagonalMushroomCheckTest {
 
     private HashMap<Point, PlayableCard> playedCards;
     private GoalCard goalCard;
@@ -18,7 +18,7 @@ public class DiagonalAnimalCheckTest {
     public void SetUp() {
         playedCards = new HashMap<>();
         playedCards.put(new Point(0, 0), new InitialCard(123, true, setFrontAngles(), SetbackAngles(), SetBack()));
-        goalCard = new GoalCard(0, true, 1, new DiagonalAnimalCheck(), new HashMap<>());
+        goalCard = new GoalCard(0, true, 1, new DiagonalMushroomCheck(), new HashMap<>());
     }
 
     private HashMap<Angle, Item> setFrontAngles(){
@@ -47,7 +47,7 @@ public class DiagonalAnimalCheckTest {
 
     private void SetCards(int num){
         for(int i = 1; i<=num; i++){
-            playedCards.put(new Point(i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.ANIMAL, true, 123 + i, 0));
+            playedCards.put(new Point(i, i), new ResourceCard(setFrontAngles(), SetbackAngles(), SetBack(), TypeOfCard.MUSHROOM, true, 123 + i, 0));
         }
     }
 
