@@ -33,12 +33,6 @@ public class ValidPlacementsIterator implements Iterator<Set<Point>> {
         return iterator.next();
     }
     /**
-     * Removes the last element returned by the iterator
-     */
-    public void remove() {
-        iterator.remove();
-    }
-    /**
      * Remove sets of points from the iterator that contains at least one of the points contained in coordGroup
      *
      * @param coordGroup A set of points representing the coordinate used to filter the iterator
