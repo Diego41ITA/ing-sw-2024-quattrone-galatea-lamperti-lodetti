@@ -26,8 +26,8 @@ public class TableOfDecks {
      * default constructor
      */
     public TableOfDecks(){
-        //crea semplicemente gli attributi
-        //questi verranno settati in una fase iniziale.
+        //just create the attributes
+        //these will be set at an early stage.
     }
 
     /**@author Lorenzo Galatea
@@ -194,7 +194,12 @@ public class TableOfDecks {
      * @return deckResource
      */
     public Deck<ResourceCard> getDeckResource(){
-        return new Deck<>(deckResource);
+
+        if (deckResource != null) {
+            return new Deck<>(deckResource);
+        } else {
+            return new Deck<>(new ArrayList<>());
+        }
     }
 
     /**@author Lorenzo Galatea
@@ -213,8 +218,11 @@ public class TableOfDecks {
      * @return deckGold
      */
     public Deck<GoldCard> getDeckGold(){
+        if (deckGold != null) {
             return new Deck<>(deckGold);
-
+        } else {
+            return new Deck<>(new ArrayList<>());
+        }
     }
 
     /**
@@ -223,7 +231,11 @@ public class TableOfDecks {
      * @return returns a Deck of starting cards.
      */
     public Deck<InitialCard> getDeckStart(){
-        return new Deck<>(this.deckStart);
+        if (deckStart != null) {
+            return new Deck<>(deckStart);
+        } else {
+            return new Deck<>(new ArrayList<>());
+        }
     }
 
     /**@author Lorenzo Galatea

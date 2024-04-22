@@ -18,6 +18,9 @@ public class GameStation {
      */
     private ArrayList<Point> freeCords;
 
+    /**is a list of those banned coordinates (where cards cannot be placed because there is no corner)
+     *
+     */
     private ArrayList<Point> forbiddenCoords;
 
     /**
@@ -38,7 +41,7 @@ public class GameStation {
 
     public GameStation(GameStation gs) {
         this.playedCards = new HashMap<>();
-        forbiddenCoords = new ArrayList<>();
+        this.forbiddenCoords = gs != null && gs.getForbiddenCords() != null ? new ArrayList<>(gs.getForbiddenCords()) : new ArrayList<>();
         setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
         this.freeCords = gs != null && gs.getFreeCords() != null ? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
     }
@@ -63,6 +66,13 @@ public class GameStation {
         }
     }
 
+    /** returns the banned coordinates
+     * @author Lorenzo Galatea
+     * @return returns a copy of the forbidden coordinates.
+     */
+    public List<Point> getForbiddenCords() {
+        return new ArrayList<>(this.freeCords);
+    }
     /**
      * returns the free coordinates
      *
@@ -70,10 +80,6 @@ public class GameStation {
      */
     public List<Point> getFreeCords() {
         return new ArrayList<>(this.freeCords);
-    }
-
-    public void setFreeCords(ArrayList<Point> freeCords) {
-        this.freeCords = new ArrayList<>(freeCords);
     }
 
     /**
