@@ -13,7 +13,7 @@ public class Crafter {
     public static void createGameFile(String id)
     {
         //create a path to the directory
-        String directoryPath = "/JsonMatches/Game" + id;
+        String directoryPath = "src/main/resources/JsonMatches/Game" + id;
         File directory = new File(directoryPath);
 
         if(!directory.exists()){
@@ -22,7 +22,7 @@ public class Crafter {
         }
 
         //now the directory surly exists
-        String gameFilePath = "/JsonMatches/Game" + id + "/Game" + id + ".json";
+        String gameFilePath = "src/main/resources/JsonMatches/Game" + id + "/Game" + id + ".json";
         File gameFile = new File(gameFilePath);
 
         if(!gameFile.exists()){
@@ -36,11 +36,11 @@ public class Crafter {
     }
 
     public static String getGameFilePath(String id){
-        return "/JsonMatches/Game" + id + "/Game" + id + ".json";
+        return "src/main/resources/JsonMatches/Game" + id + "/Game" + id + ".json";
     }
 
     public static void createPlayerFile(String nick, String id){
-        String playerFilePath = "/JsonMatches/Game" + id  + "/" + nick + ".json";
+        String playerFilePath = "src/main/resources/JsonMatches/Game" + id  + "/" + nick + ".json";
         File playerFile = new File(playerFilePath);
 
         if(!playerFile.exists()){
@@ -54,7 +54,7 @@ public class Crafter {
     }
 
     public static String getPlayerFilePath(String nick, String id){
-        return "/JsonMatches/Game" + id  + "/" + nick + ".json";
+        return "src/main/resources/JsonMatches/Game" + id  + "/" + nick + ".json";
     }
 
 }
