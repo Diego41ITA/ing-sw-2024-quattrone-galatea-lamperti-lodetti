@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class DiagonalInsectCheck implements CheckInterface{
     /**
-     * Checks if the requirements for diagonal placement of insect cards are satisfied.
+     * Checks if the requirements for diagonal placement of insect cards are satisfied
      *
      * @param playedCard A map showing each card that was played (value) at a specific point (key)
      * @param availableItems A map showing the available items
