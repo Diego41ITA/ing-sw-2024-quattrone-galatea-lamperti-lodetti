@@ -223,11 +223,21 @@ public class Game {
         players.put(player, true);
     }
 
+    /**
+     * this method is an override useful to put a game into a hash-map and to use Map methods like: containsKey() ecc...
+     * @return this method returns the hash code of every Game object with the same gameId.
+     */
     @Override
     public int hashCode(){
         return this.getId().hashCode();
     }
 
+    /**
+     * this method compares this object with another Object passed as parameter.
+     * @param game it's the only parameter and its type is Object. That's because this method override superclass
+     *             method. Be aware that you should pass an object that has the same type of "this"
+     * @return true if the two object have the same id (same gameID), false otherwise.
+     */
     @Override
     public boolean equals(Object game){
         try{

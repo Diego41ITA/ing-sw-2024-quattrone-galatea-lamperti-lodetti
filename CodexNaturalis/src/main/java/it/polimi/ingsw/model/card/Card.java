@@ -58,11 +58,21 @@ public abstract class Card {
         return this.cardId;
     }
 
+    /**
+     * this method is an override useful to put a card into a hash-map and to use Map methods like: containsKey() ecc...
+     * @return this method returns the hash code of every Card object with the same CardId.
+     */
     @Override
     public int hashCode(){
         return Integer.hashCode(this.getCardId());
     }
 
+    /**
+     * this method compares this object with another Object passed as parameter.
+     * @param card it's the only parameter and its type is Object. That's because this method override superclass
+     *             method. Be aware that you should pass an object that has the same type of "this"
+     * @return true if the two object have the same id (same cardID), false otherwise.
+     */
     @Override
     public boolean equals(Object card){
         try{
