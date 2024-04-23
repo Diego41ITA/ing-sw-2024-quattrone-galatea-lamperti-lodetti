@@ -46,7 +46,7 @@ public class PlayerTest {
                 0));
         cards.add(new GoldCard(new HashMap<>(),new HashMap<>(), 1, new ArrayList<>(),
                 GoldType.ITEM, new HashMap<>(),Item.FEATHER, TypeOfCard.MUSHROOM,
-                true, 1));
+                true, 2));
         player = new Player("TestPlayer", gameStation, Color.YELLOW, cards);
 
     }

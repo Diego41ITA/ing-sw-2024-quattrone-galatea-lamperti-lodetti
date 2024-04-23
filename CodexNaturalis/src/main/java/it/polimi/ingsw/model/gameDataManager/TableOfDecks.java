@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
 import it.polimi.ingsw.model.card.*;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.parse.DeckReader;
 
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class TableOfDecks {
      * @param newCard: the card I want to replace
      * it become null if there are no face-up cards that can be drawn by the players
      */
-    public void setCards(Card newCard) {
+    public void setCards(Card newCard) throws IllegalStateException{
         if (cards.isEmpty()) {
             try {
                 cards.add(deckResource.getFirst());
@@ -104,10 +105,10 @@ public class TableOfDecks {
                 cards.clear();
                 System.out.println("some decks are empty");
             }
-        } else {
+        }else {
             if (newCard != null) {
                 if (cards.get(0) != null) {
-                    if (newCard.equals(cards.getFirst())) {
+                    if (newCard.equals(cards.get(0))) {
                         try {
                             cards.set(0, deckResource.getFirst());
                         } catch (IllegalStateException e) {
@@ -146,8 +147,9 @@ public class TableOfDecks {
                         }
                     }
                 }
+            }else{
+                throw new IllegalArgumentException("newcard is not available on the tablea");
             }
-
         }
     }
 
@@ -277,7 +279,6 @@ public class TableOfDecks {
      * It reads the cards from JSON files, populating the decks and the cards initially displayed on the field.
      */
     public void initializeTable(){
-        this.cards = new ArrayList<Card>();
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
         DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
@@ -287,7 +288,7 @@ public class TableOfDecks {
         this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
         //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
-
+        this.goals = new ArrayList<>();
         ArrayList<Card> start = new ArrayList<>();
         this.cards = start;
         this.setCards(null);
