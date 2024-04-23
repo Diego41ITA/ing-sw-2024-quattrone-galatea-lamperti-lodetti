@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.card.strategyPattern.*;
 import java.io.*;
 import java.util.*;
 /**
- * @author Lodetti Alessandro
- * this class crafts the default object from json file that contains all the card or decks.
+ * this class contains static methods useful to save the JSON file
+ * needed for the FA "resilienza alle disconnessioni" and "persistenza alle disconnessioni"
  */
 public class Crafter {
     public static void createGameFile(String id)
