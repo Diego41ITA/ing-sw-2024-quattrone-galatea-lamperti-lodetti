@@ -92,6 +92,27 @@ public class GameStation {
         playedCards.put(cord, card);
         freeCords.remove(cord);
         updateFreeCoords(cord);
+        //hide angle of near cards
+        Point[] offsets = {new Point(-1, -1), new Point(-1, 1), new Point(1, -1), new Point(1, 1)};
+        for (int i = 0; i < offsets.length; i++) {
+            Point point = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
+            //if there is the card then
+            if(getPlayedCards().containsKey(point)){
+                if(i==0){
+                    playedCards.get(point).hideAngle(Angle.HIGHRIGHT);
+
+                }else if(i==1){
+                    playedCards.get(point).hideAngle(Angle.DOWNRIGHT);
+
+                }else if(i==2){
+                    playedCards.get(point).hideAngle(Angle.HIGHLEFT);
+                }else{
+                    playedCards.get(point).hideAngle(Angle.DOWNLEFT);
+
+                }
+            }
+        }
+
     }
 
     /**
