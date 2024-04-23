@@ -113,8 +113,9 @@ public class TableOfDecksTest {
     public void TestJsonExampleResourceCard() {
         Deck<ResourceCard> deckResource = table.getDeckResource();
         Card example = deckResource.getFirst();
-        assertEquals(example.getCardId(), 1);
-        //aggiungere gli altri controlli
+        assertEquals(example.getCardId(), 38);
+        ResourceCard example2 = deckResource.getFirst();
+        assertEquals(example2.getCardId(), 37);
     }
     @Test
     public void TestJsonExampleInitialCard() {

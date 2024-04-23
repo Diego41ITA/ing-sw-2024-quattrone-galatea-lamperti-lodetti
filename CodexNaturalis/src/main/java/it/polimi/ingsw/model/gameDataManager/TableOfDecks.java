@@ -33,7 +33,7 @@ public class TableOfDecks {
 
     /**@author Lorenzo Galatea
      * this method is the constructor of the class
-      * @param deckGold: represents the gold deck
+     * @param deckGold: represents the gold deck
      * @param deckGoal: represents the goal deck
      * @param deckResource: represents the resource deck
      * @param cards: the 4 cards face up
@@ -196,7 +196,6 @@ public class TableOfDecks {
      * @return deckResource
      */
     public Deck<ResourceCard> getDeckResource(){
-
         if (deckResource != null) {
             return new Deck<>(deckResource);
         } else {
@@ -288,9 +287,11 @@ public class TableOfDecks {
         this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
         //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
+
+        shuffle();
+
         this.goals = new ArrayList<>();
-        ArrayList<Card> start = new ArrayList<>();
-        this.cards = start;
+        this.cards = new ArrayList<>();
         this.setCards(null);
         //this.setGoals(this.deckGoal);
     }
