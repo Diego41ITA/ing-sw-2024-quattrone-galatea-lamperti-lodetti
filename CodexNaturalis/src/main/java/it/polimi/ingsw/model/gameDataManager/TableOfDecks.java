@@ -12,9 +12,9 @@ import java.util.List;
  * players can draw. It is shared by all players in the same game
  */
 public class TableOfDecks {
-    private ArrayList<Card> cards; //definirle come separatamente semplifica il salvataggio
+    private ArrayList<Card> cards;
 
-    private ArrayList<Card> goals; //definirle come GoalCard semplifica il salvataggio
+    private ArrayList<Card> goals;
     private Deck<GoldCard> deckGold;
 
     private Deck<GoalCard> deckGoal;
