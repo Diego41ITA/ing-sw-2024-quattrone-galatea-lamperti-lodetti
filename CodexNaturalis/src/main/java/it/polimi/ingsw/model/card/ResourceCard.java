@@ -3,10 +3,10 @@ package it.polimi.ingsw.model.card;
 import java.util.*;
 
 /**
- * @author Lodetti Alessandro
  * In this class I define how ResourceCard is structured.
  * The class has only one constructor which defines a well-formed card. It has also other methods which allow to
  * implement other classes easily; like getFreeCorner() for GameStation.
+ * @author Lodetti Alessandro
  */
 public class ResourceCard extends PlayableCard {
     private final int numOfPoints;

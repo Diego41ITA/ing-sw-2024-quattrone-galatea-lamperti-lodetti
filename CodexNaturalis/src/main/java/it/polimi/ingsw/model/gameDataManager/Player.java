@@ -32,8 +32,8 @@ public class Player {
     public Player(){}
 
     /** 
-    *@author Lorenzo Galatea
-    * is the constructor of the class
+     * is the constructor of the class
+     * @author Lorenzo Galatea
     */
     public Player(String nickname, GameStation gamestation, Color color, ArrayList<PlayableCard> cards) {
         this.cards = new ArrayList<>(cards);
@@ -52,79 +52,89 @@ public class Player {
         this.goal = new GoalCard(player.getGoal()); //this is the safest approach
     }
 
-    /**@author Lorenzo Galatea
-    *is a method that returns the player's nickname
-    * @return nickname a String which is the nickname of the player
+    /**
+     * This is a method that returns the player's nickname
+     * @author Lorenzo Galatea
+     * @return nickname a String which is the nickname of the player
     */
     public String getNick() {
         return nickname;
     }
 
-    /** @author Lorenzo Galatea
-    *Method for set the nickname
-    *@param newNickname is the name of the player
+    /**
+     * Method for set the nickname
+     * @author Lorenzo Galatea
+     *@param newNickname is the name of the player
     */
     public void setNickname(String newNickname){
         this.nickname= newNickname;
     }
 
-    /** @author Lorenzo Galatea
-    *method that returns the gamestation of the player
-    *@return gamestation
+    /**
+     * method that returns the gamestation of the player
+     * @author Lorenzo Galatea
+     * @return gamestation
     */
     public GameStation getGameStation(){
         return new GameStation(this.gamestation);
     }
 
-    /** @author Lorenzo Galatea
-    *method for setting the gamestation
-    *@param newGamestation is the instance of the new GameStation to be set
+    /**
+     * a method for setting the gamestation
+     * @author Lorenzo Galatea
+     * @param newGamestation is the instance of the new GameStation to be set
     */
     public void setGameStation(GameStation newGamestation){
         this.gamestation = new GameStation(newGamestation);
     }
 
-    /** @author Lorenzo Galatea
+    /**
     *method that return the maker of the first player
+     * @author Lorenzo Galatea
     *@return optionalColor that is the maker null or the maker black if is associated with the first player
     */
     public Optional<Color> getOptionalColor() {
         return optionalColor;
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *method that set the maker black if I am the first player
+     * @author Lorenzo Galatea
     */
     public void setOptionalColor() {
         this.optionalColor = Optional.of(Color.BLACK);
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *method return the maker associated with the player
+     * @author Lorenzo Galatea
     @return color is maker of the player
     */
     public Color getColor() {
         return color;
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *setter for the attribute color
+     * @author Lorenzo Galatea
     *@param color: the maker
     */
     public void setColor(Color color) {
         this.color = color;
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *getter of the attribute goal
+     * @author Lorenzo Galatea
     @return goal which is the GoalCard chosen by the player
         */
     public GoalCard getGoal() {
         return new GoalCard(goal);
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *draw a card from the TableOfDecks
+     * @author Lorenzo Galatea
     *@param card: one of the 4 cards visible in the TableOfDecks
     *@throws IllegalStateException if the player already has 3 cards
     */
@@ -136,9 +146,10 @@ public class Player {
             }
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *draw a card from one of the decks of the TableOfDecks. This method uses the covariance of generifcs: PlayableCard
     * is a super-type of GoldCard, InitialCard and ResourceCard; thus, Deck<\GoldCard> is a subtype of Deck<\PlayableCard>
+     *     @author Lorenzo Galatea
     *@param deck: Deck associated with TableOfDecks
     *@throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
     */
@@ -154,8 +165,9 @@ public class Player {
             }
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *returns the list of cards in the player's hand
+     * @author Lorenzo Galatea
     *@return cards is  List of cards in the player's hand
     */
     public List<PlayableCard> showCard() {
@@ -166,8 +178,9 @@ public class Player {
         }
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *choose the goal
+     * @author Lorenzo Galatea
     *@param goals is a list of objective cards
     *@param index is the index of the GoalCard chosen
     *@throws IllegalArgumentException if index is not a number between 0 and 1 (inclusive)
@@ -180,8 +193,9 @@ public class Player {
         }
     }
 
-    /**@author Lorenzo Galatea
+    /**
     *removes cards from the player's hand
+     * @author Lorenzo Galatea
     */
     public void removeCards() {
         cards.clear();

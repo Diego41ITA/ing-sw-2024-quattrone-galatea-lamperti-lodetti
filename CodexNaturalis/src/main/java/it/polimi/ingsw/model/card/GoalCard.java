@@ -7,12 +7,12 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * @author Luca Lamperti
  * define a subClass GoalCard of superclass Card
  * numOfPoints is an int and indicates the number of points on the GoalCard
  * ListOfObjects is a Hashmap used to display the resources needed to earn the points
  * GoalType indicates the type of requirement(from the enum TypeOfGoalCard)
  * positionType indicates the position of the cards needed to earn points(if the TypeOfGoalCard is POSITION) or it is "EMPTY" in the case there are no position requirements
+ * @author Luca Lamperti
  */
 public class GoalCard extends Card {
     private final int numOfPoints;
@@ -20,8 +20,8 @@ public class GoalCard extends Card {
     private final CheckInterface goalType;
 
     /**
-     * @author Luca Lamperti
      * the constructor of the GoalCard class
+     * @author Luca Lamperti
      * @param id it's the identification of the card
      * @param isFront show how the card is displayed
      * @param points are the points on the GoalCard
@@ -36,8 +36,8 @@ public class GoalCard extends Card {
     }
 
     /**
-     * @author Lodetti Alessandro
      * this constructor is useful to initialize the goal card by reading from a json file.
+     * @author Lodetti Alessandro
      * @param card this is the object read from the json file
      */
     public GoalCard(GoalCard card){
@@ -47,8 +47,8 @@ public class GoalCard extends Card {
         this.goalType = card.getGoalType();
     }
     /**
-     * @author Luca Lamperti
      * getter for the attribute NumOfPoints
+     * @author Luca Lamperti
      * @return an int as the points
      */
     public int getNumberOfPoints(){
@@ -56,8 +56,8 @@ public class GoalCard extends Card {
     }
 
     /**
-     * @author Luca Lamperti
      * getter for the attribute GoalType
+     * @author Luca Lamperti
      * @return an enum that indicates the TypeOfGoalCard
      */
     public CheckInterface getGoalType() {
@@ -65,8 +65,8 @@ public class GoalCard extends Card {
     }
 
     /**
-     * @author Luca Lamperti
      * getter for the attribute listOfObjects
+     * @author Luca Lamperti
      * @return an ArrayList that contains the items needed to earn the NumOfPoints of the GoalCard
      */
     public HashMap<Item, Integer> getListOfObjects() {

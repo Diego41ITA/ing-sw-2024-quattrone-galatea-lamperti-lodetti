@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
 /**
  * this class represents the Station where the player places his cards for make point
+ * @author Lodetti Alessandro, Lorenzo Galatea, Diego Quattrone
  */
 public class GameStation {
     /**
@@ -144,10 +145,10 @@ public class GameStation {
         }
 
     /**
+     * Checks if there are enough resources to place the Gold Card
      * @param goldCard it is the card the client wants to play
      * @return true if  it is ok to place the card, false otherwise
      * @author Lodetti Alessandro, Lorenzo Galatea
-     * Checks if there are enough resources to place the Gold Card
      */
     public boolean verifyResourcesNeeded(GoldCard goldCard) {
         Map<Item, Integer> resources = calculateAvailableResources();

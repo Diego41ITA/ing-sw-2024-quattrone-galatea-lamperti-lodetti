@@ -110,8 +110,8 @@ public class Game {
     }
 
     /**
-     * @author Lodetti Alessandro
      * This method update the stats of the player passed as a parameter
+     * @author Lodetti Alessandro
      * @param p is a Player Object with updated stats.
      */
     public void setSinglePlayer(Player p){
@@ -133,8 +133,8 @@ public class Game {
     }
 
     /**
-     * @author Lodetti Alessandro
      *This method sets a new this.pointTable which is a copy of the parameter.
+     * @author Lodetti Alessandro
      * @param pointTable it's the item to copy
      */
     public void setPointTable(PointTable pointTable) {
@@ -142,8 +142,8 @@ public class Game {
     }
 
     /**
-     * @author Lodetti Alessandro
      *This method sets a new this.tableOfDecks which is a copy of the parameter.
+     * @author Lodetti Alessandro
      * @param tableOfDecks it's the item to copy
      */
     public void setTableOfDecks(TableOfDecks tableOfDecks) {
@@ -151,8 +151,8 @@ public class Game {
     }
 
     /**
-     * @author Lodetti Alessandro
      *This method sets a new this.turn which is a copy of the parameter.
+     * @author Lodetti Alessandro
      * @param turn it's the item to copy
      */
     public void setTurn(Turn turn) {
@@ -213,9 +213,9 @@ public class Game {
 
     /**
      * This method add a player to this game only if the number of current player is less then 4
+     * @author Lodetti Alessandro
      * @param player the new player
      * @throws IllegalStateException thrown if there are already 4 players
-     * @author Lodetti Alessandro
      */
     public void addPlayer(Player player) throws IllegalStateException {
         if(players.size() >= this.maxNumberPlayer)

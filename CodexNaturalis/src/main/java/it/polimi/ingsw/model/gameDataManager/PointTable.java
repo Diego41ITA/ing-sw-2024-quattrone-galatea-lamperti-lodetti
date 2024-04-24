@@ -2,16 +2,18 @@ package it.polimi.ingsw.model.gameDataManager;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-/** @author Lorenzo Galatea
-*it is the class that represents the score table associated with each game
-points represents a map where each marker has a score associated with it
+/**
+ * it is the class that represents the score table associated with each game
+ * points represents a map where each marker has a score associated with it
+ * @author Lorenzo Galatea
 */
 
 public class PointTable {
     private final HashMap<Color, Integer> points;
 
-    /** @author Lorenzo Galatea
+    /**
     *is the constructor of the PointTable class
+     * @author Lorenzo Galatea
         */
     public PointTable() {
         points = new HashMap<>();
@@ -33,16 +35,18 @@ public class PointTable {
         return new HashMap<>(points);
     }
 
-    /** @author Lorenzo Galatea
+    /**
     * is the marker setter
+     * @author Lorenzo Galatea
     *@param color: maker of the player
     */
     public void setColorPoints(Color color) {
         points.put(color, 0);
     }
 
-    /** @author Lorenzo Galatea
+    /**
     *is the getter of the score associated with the Player/Maker
+     * @author Lorenzo Galatea
     *@return int which is the point associated with the Player
     *@param player: the player whose score you want to know
     */
@@ -51,8 +55,9 @@ public class PointTable {
         Integer score = points.get(playerColor);
         return (score != null) ? score.intValue() : 0;
     }
-    /**@author Lorenzo Galatea 
+    /**
     *updates the score value
+     * @author Lorenzo Galatea
     @param player: player whose score you want to change
     @param score: int which represents the updated score
     */
@@ -60,8 +65,9 @@ public class PointTable {
         Color playerColor = player.getColor();
         points.put(playerColor, score);
     }
-    /**@author Lorenzo Galatea
+    /**
     *notifies if any player has reached 20 points
+     * @author Lorenzo Galatea
     *@return true if there is a player with more of 20 points 
     */
     public boolean notify20PointReached() {
@@ -72,8 +78,9 @@ public class PointTable {
         }
         return false;
     }
-    /**@author Lorenzo Galatea
+    /**
     * clear the Map points
+     * @author Lorenzo Galatea
     */
     public void resetPoints() {
         points.clear();

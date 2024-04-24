@@ -8,8 +8,8 @@ import java.util.*;
 import java.util.List;
 
 /**
- * @author Lodetti Alessandro
  * It defines how GoldCards are implemented
+ * @author Lodetti Alessandro
  */
 public class GoldCard extends PlayableCard{
 

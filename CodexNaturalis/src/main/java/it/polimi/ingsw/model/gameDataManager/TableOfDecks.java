@@ -7,9 +7,10 @@ import it.polimi.ingsw.parse.DeckReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Lorenzo Galatea
+/**
  * this class contains the decks and cards that
  * players can draw. It is shared by all players in the same game
+ * @author Lorenzo Galatea
  */
 public class TableOfDecks {
     private ArrayList<Card> cards;
@@ -31,8 +32,9 @@ public class TableOfDecks {
         //these will be set at an early stage.
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * this method is the constructor of the class
+     * @author Lorenzo Galatea
      * @param deckGold: represents the gold deck
      * @param deckGoal: represents the goal deck
      * @param deckResource: represents the resource deck
@@ -62,8 +64,9 @@ public class TableOfDecks {
         this.goals = new ArrayList<>(table.getGoals());
     }
 
-    /** @author Lorenzo Galatea
+    /**
      * is the setter of the Goals
+     * @author Lorenzo Galatea
      * @param deckGoal: represents the goal deck
      */
     public void setGoals(Deck<GoalCard> deckGoal){
@@ -77,8 +80,9 @@ public class TableOfDecks {
 
     }
 
-    /** @author Lorenzo Galatea
+    /**
      * is the getter of the 2 goals
+     * @author Lorenzo Galatea
      * @return ArrayList which contains the 2 goals
      */
     public List<Card> getGoals() {
@@ -89,10 +93,10 @@ public class TableOfDecks {
         }
     }
 
-    /** @author Lorenzo Galatea
-     *
+    /**
+     * it becomes null if there are no face-up cards that can be drawn by the players
+     * @author Lorenzo Galatea
      * @param newCard: the card I want to replace
-     * it become null if there are no face-up cards that can be drawn by the players
      */
     public void setCards(Card newCard) throws IllegalStateException{
         if (cards.isEmpty()) {
@@ -153,8 +157,9 @@ public class TableOfDecks {
         }
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * the getter of the cards
+     * @author Lorenzo Galatea
      * @return ArrayList which contains the 4 showed cards
      */
     public ArrayList<Card> getCards(){
@@ -165,16 +170,18 @@ public class TableOfDecks {
 
     }
 
-    /** @author Lorenzo Galatea
+    /**
      * is the setter of deckResource
+     * @author Lorenzo Galatea
      * @param deckResource: the object that represents the deck
      */
     public void setDeckResource(Deck<ResourceCard> deckResource){
         this.deckResource = new Deck<>(deckResource);
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * is the setter of deckGoal
+     * @author Lorenzo Galatea
      * @param deckGoal: the object that represents the deck
      */
     public void setDeckGoal(Deck<GoalCard> deckGoal){
@@ -183,16 +190,17 @@ public class TableOfDecks {
     }
 
     /**
-     * @author Lodetti Alessandro
      * is the setter method for deckStart
+     * @author Lodetti Alessandro
      * @param deckStart: the object that represents the starting deck
      */
     public void setDeckStart(Deck<InitialCard> deckStart){
         this.deckStart = new Deck<>(deckStart);
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * is the getter of deckResource
+     * @author Lorenzo Galatea
      * @return deckResource
      */
     public Deck<ResourceCard> getDeckResource(){
@@ -203,8 +211,9 @@ public class TableOfDecks {
         }
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * is the getter of deckGoal
+     * @author Lorenzo Galatea
      * @return deckGoal
      */
     public Deck<GoalCard> getDeckGoal() {
@@ -214,8 +223,9 @@ public class TableOfDecks {
             return new Deck<>(new ArrayList<>());
         }
     }
-    /**@author Lorenzo Galatea
+    /**
      * is the getter of deckGold
+     * @author Lorenzo Galatea
      * @return deckGold
      */
     public Deck<GoldCard> getDeckGold(){
@@ -227,8 +237,8 @@ public class TableOfDecks {
     }
 
     /**
-     * @author Lodetti Alessandro
      * is the getter method of deckStart
+     * @author Lodetti Alessandro
      * @return returns a Deck of starting cards.
      */
     public Deck<InitialCard> getDeckStart(){
@@ -239,8 +249,9 @@ public class TableOfDecks {
         }
     }
 
-    /**@author Lorenzo Galatea
-     *  is the setter of deckGold
+    /**
+     * is the setter of deckGold
+     * @author Lorenzo Galatea
      * @param deckGold: the object that represents the deck
      */
     public void setDeckGold(Deck<GoldCard> deckGold){
@@ -248,23 +259,25 @@ public class TableOfDecks {
 
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * deletes all cards in goals
+     * @author Lorenzo Galatea
      */
     public void resetGoals(){
         goals.clear();
     }
 
-    /**@author Lorenzo Galatea
+    /**
      * deletes all cards in cards
+     * @author Lorenzo Galatea
      */
     public void resetCards(){
         cards.clear();
     }
 
     /**
-     * @author Lodetti Alessandro
      * this method shuffles all the decks.
+     * @author Lodetti Alessandro
      */
     public void shuffle(){
         this.deckGold.shuffle();
@@ -276,6 +289,7 @@ public class TableOfDecks {
     /**
      * Initialize the table, needs to be called at the beginning of a new game of CodexNaturalis.
      * It reads the cards from JSON files, populating the decks and the cards initially displayed on the field.
+     * @author Diego Quattrone
      */
     public void initializeTable(){
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);

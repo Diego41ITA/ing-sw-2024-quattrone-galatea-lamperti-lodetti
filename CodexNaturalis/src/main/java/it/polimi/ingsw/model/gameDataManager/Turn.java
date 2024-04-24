@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
  * @author Lodetti Alessandro
  * This class defines the object turn, and it has the list of player and another attribute to store the current player.
  * With all the methods defined the attribut turnNumber is totaly useless.
+ * @author Lodetti Alessandro
  */
 public class Turn {
 

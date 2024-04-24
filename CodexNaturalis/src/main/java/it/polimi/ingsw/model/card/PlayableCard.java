@@ -6,10 +6,10 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import java.awt.Point;
 
 /**
-* @author Lodetti Alessandro
 * This class defines a new abstraction level in the Card hierarchy. This particular class is
 * implemented by the three playable card which this game has. The PlayableCard attribute are the Angles linked to
 * their contents, the back resourceS and exposes all the methods needed to make the game playable.
+ * @author Lodetti Alessandro
  */
 public abstract class PlayableCard extends Card{
 
@@ -24,7 +24,7 @@ public abstract class PlayableCard extends Card{
      * @param type refers to the super class attribute
      * @param isFront refers to the super class attribute
      * @param front is the map used to initialize "PlayableCard.front"
-      * @param back is the map used to initialize "PlayableCard.back"
+     * @param back is the map used to initialize "PlayableCard.back"
      * @param backResource is the list used to initialize "PlayableCard.backResource"
      */
     PlayableCard(int cardId, TypeOfCard type, boolean isFront, Map<Angle, Item> front, Map<Angle,
