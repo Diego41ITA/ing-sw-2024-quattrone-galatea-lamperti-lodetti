@@ -295,18 +295,18 @@ public class TableOfDecks {
         DeckReader<ResourceCard> resourceCardReader = new DeckReader<>(ResourceCard.class);
         DeckReader<GoldCard> goldCardReader = new DeckReader<>(GoldCard.class);
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
-        //DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
+        DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
 
         this.deckResource = resourceCardReader.readDeckFromJSON("src/main/resources/JsonCards/resourceCard.json");
         this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
-        //this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
+        this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
 
         shuffle();
 
         this.goals = new ArrayList<>();
         this.cards = new ArrayList<>();
         this.setCards(null);
-        //this.setGoals(this.deckGoal);
+        this.setGoals(this.deckGoal);
     }
 }
