@@ -39,4 +39,12 @@ public class LMushroomVegetableCheck implements CheckInterface{
         }
         return PlacementOptimizer.optimize(validPlacements);
     }
+    /**
+     * useful to know the type of this object.
+     * @return a textual description
+     */
+    @Override
+    public String toString(){
+        return this.getClass().getName();
+    }
 }

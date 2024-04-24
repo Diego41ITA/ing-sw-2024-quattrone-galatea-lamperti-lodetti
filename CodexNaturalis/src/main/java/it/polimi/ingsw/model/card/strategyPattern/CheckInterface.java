@@ -22,4 +22,11 @@ public interface CheckInterface {
      *         how many times, following the rules, the requirements are satisfied
      */
     public int check(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems, HashMap<Item, Integer> requirements);
+
+    /**
+     * useful to return the right type of the object
+     * @return textual description of the object
+     */
+    @Override
+    public String toString();
 }
