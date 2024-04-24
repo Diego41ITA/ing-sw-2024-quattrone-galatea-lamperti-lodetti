@@ -3,11 +3,7 @@
     "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "DiagonalMushroomCheck"
     },
     "cardId" : 87,
     "isFront": false,
@@ -17,11 +13,7 @@
     "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "DiagonalVegetableCheck"
     },
     "cardId" : 88,
     "isFront": false,
@@ -31,11 +23,7 @@
     "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "DiagonalAnimalCheck"
     },
     "cardId" : 89,
     "isFront": false,
@@ -45,11 +33,7 @@
     "numOfPoints": 2,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "DiagonalInsectCheck"
     },
     "cardId" : 90,
     "isFront": false,
@@ -59,11 +43,7 @@
     "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "LMushroomVegetableCheck"
     },
     "cardId" : 91,
     "isFront": false,
@@ -73,11 +53,7 @@
     "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ReverseLVegetableInsectCheck"
     },
     "cardId" : 92,
     "isFront": false,
@@ -87,11 +63,7 @@
     "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "UpsideDownLAnimalMushroomCheck"
     },
     "cardId" : 93,
     "isFront": false,
@@ -101,11 +73,7 @@
     "numOfPoints": 3,
     "listOfObjects": {},
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "UpsideDownReverseLInsectAnimalCheck"
     },
     "cardId" : 94,
     "isFront": false,
@@ -117,11 +85,7 @@
       "MUSHROOM" : 3
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 95,
     "isFront": false,
@@ -133,11 +97,7 @@
       "VEGETABLE" : 3
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 96,
     "isFront": false,
@@ -149,11 +109,7 @@
       "ANIMAL" : 3
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 97,
     "isFront": false,
@@ -165,11 +121,7 @@
       "INSECT" : 3
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 98,
     "isFront": false,
@@ -183,11 +135,7 @@
       "PARCHMENT" : 1
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 99,
     "isFront": false,
@@ -199,11 +147,7 @@
       "PARCHMENT" : 2
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 100,
     "isFront": false,
@@ -215,11 +159,7 @@
       "POTION" : 2
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 101,
     "isFront": false,
@@ -231,11 +171,7 @@
       "FEATHER" : 2
     },
     "goalType": {
-      "isValid": false,
-      "isContained": false,
-      "i": 1,
-      "validPlacements": [],
-      "groupCards": []
+      "type" : "ItemCheck"
     },
     "cardId" : 102,
     "isFront": false,
