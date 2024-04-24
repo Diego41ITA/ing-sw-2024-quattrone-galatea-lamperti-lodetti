@@ -2,7 +2,7 @@ package it.polimi.ingsw.parse;
 import com.google.gson.Gson;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.card.strategyPattern.*;
-
+//le librerie si possono togliere
 import java.io.*;
 import java.util.*;
 /**
