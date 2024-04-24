@@ -41,8 +41,13 @@ public class ReverseLVegetableInsectCheckTest {
         assertEquals(0, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
     @Test
+    public void TestOneCardOnly() {
+        playedCards.put(new Point(-1, -1), new ResourceCard(new HashMap<>(), new HashMap<>(), new ArrayList<>(), TypeOfCard.INSECT, true, 123, 0));
+        assertEquals(0, goalCard.getGoalPoints(playedCards, new HashMap<>()));
+    }
+    @Test
     public void TestSecondCardWrong() {
-        playedCards.put(new Point(-1, -1), new ResourceCard(new HashMap<>(), new HashMap<>(), new ArrayList<>(), TypeOfCard.ANIMAL, true, 123, 0));
+        playedCards.put(new Point(1, -1), new ResourceCard(new HashMap<>(), new HashMap<>(), new ArrayList<>(), TypeOfCard.ANIMAL, true, 123, 0));
         playedCards.put(new Point(-2, -2), new ResourceCard(new HashMap<>(), new HashMap<>(), new ArrayList<>(), TypeOfCard.INSECT, true, 123, 0));
         assertEquals(0, goalCard.getGoalPoints(playedCards, new HashMap<>()));
     }
