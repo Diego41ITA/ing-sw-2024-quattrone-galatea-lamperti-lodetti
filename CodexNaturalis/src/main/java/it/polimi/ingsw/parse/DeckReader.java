@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import it.polimi.ingsw.model.card.*;
+import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 
 public class DeckReader<T extends Card> {
     private final Class<T> cardType;
@@ -22,7 +24,11 @@ public class DeckReader<T extends Card> {
      * @return The Deck initialized with the cards read from the JSON file.
      */
     public Deck<T> readDeckFromJSON(String filePath) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
+                .registerTypeAdapter(CheckInterface.class, new InterfaceDeserializer())
+                .create();
+
         try (FileReader reader = new FileReader(filePath)) {
             Type listType = TypeToken.getParameterized(List.class, cardType).getType();
             List<T> cards = gson.fromJson(reader, listType);
