@@ -26,7 +26,7 @@ public class Matches {
     }
 
     /**
-     * a constructor to restore the list of game in case the server crashes.
+     * it is a constructor to restore the list of game in case the server crashes.
      * @param matches it's the list of the saved ongoing/suspended game.
      */
     public Matches(List<Game> matches){
@@ -85,7 +85,8 @@ public class Matches {
                 .collect(Collectors.toList());
     }
 
-    /**use to find all the game where there is only one active player
+    /**
+     * use to find all the game where there is only one active player
      * @return a list of Game.
      */
     public List<Game> getSuspendedGames(){

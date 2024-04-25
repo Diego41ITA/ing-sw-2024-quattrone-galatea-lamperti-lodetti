@@ -7,9 +7,9 @@ import java.awt.Point;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 /**
-* represents the class associated with the player
-* @author Lorenzo galatea
-*/
+ * represents the class associated with the player
+ * @author Lorenzo galatea
+ */
 public class Player {
 
     /** nickname is the player's name and is a string */
@@ -28,7 +28,6 @@ public class Player {
     /**
      * this constructor does nothing
      */
-    //
     public Player(){}
 
     /** 
@@ -56,7 +55,7 @@ public class Player {
      * This is a method that returns the player's nickname
      * @author Lorenzo Galatea
      * @return nickname a String which is the nickname of the player
-    */
+     */
     public String getNick() {
         return nickname;
     }
@@ -64,8 +63,8 @@ public class Player {
     /**
      * Method for set the nickname
      * @author Lorenzo Galatea
-     *@param newNickname is the name of the player
-    */
+     * @param newNickname is the name of the player
+     */
     public void setNickname(String newNickname){
         this.nickname= newNickname;
     }
@@ -74,7 +73,7 @@ public class Player {
      * method that returns the gamestation of the player
      * @author Lorenzo Galatea
      * @return gamestation
-    */
+     */
     public GameStation getGameStation(){
         return new GameStation(this.gamestation);
     }
@@ -83,61 +82,61 @@ public class Player {
      * a method for setting the gamestation
      * @author Lorenzo Galatea
      * @param newGamestation is the instance of the new GameStation to be set
-    */
+     */
     public void setGameStation(GameStation newGamestation){
         this.gamestation = new GameStation(newGamestation);
     }
 
     /**
-    *method that return the maker of the first player
+     * method that return the maker of the first player
      * @author Lorenzo Galatea
-    *@return optionalColor that is the maker null or the maker black if is associated with the first player
-    */
+     * @return optionalColor that is the maker null or the maker black if is associated with the first player
+     */
     public Optional<Color> getOptionalColor() {
         return optionalColor;
     }
 
     /**
-    *method that set the maker black if I am the first player
+     * method that set the maker black if I am the first player
      * @author Lorenzo Galatea
-    */
+     */
     public void setOptionalColor() {
         this.optionalColor = Optional.of(Color.BLACK);
     }
 
     /**
-    *method return the maker associated with the player
+     * method return the maker associated with the player
      * @author Lorenzo Galatea
-    @return color is maker of the player
-    */
+     * @return color is maker of the player
+     */
     public Color getColor() {
         return color;
     }
 
     /**
-    *setter for the attribute color
+     * setter for the attribute color
      * @author Lorenzo Galatea
-    *@param color: the maker
-    */
+     * @param color: the maker
+     */
     public void setColor(Color color) {
         this.color = color;
     }
 
     /**
-    *getter of the attribute goal
+     * getter of the attribute goal
      * @author Lorenzo Galatea
-    @return goal which is the GoalCard chosen by the player
-        */
+     * @return goal which is the GoalCard chosen by the player
+     */
     public GoalCard getGoal() {
         return new GoalCard(goal);
     }
 
     /**
-    *draw a card from the TableOfDecks
+     * draw a card from the TableOfDecks
      * @author Lorenzo Galatea
-    *@param card: one of the 4 cards visible in the TableOfDecks
-    *@throws IllegalStateException if the player already has 3 cards
-    */
+     * @param card: one of the 4 cards visible in the TableOfDecks
+     * @throws IllegalStateException if the player already has 3 cards
+     */
     public void draw(PlayableCard card) {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
@@ -147,12 +146,12 @@ public class Player {
     }
 
     /**
-    *draw a card from one of the decks of the TableOfDecks. This method uses the covariance of generifcs: PlayableCard
-    * is a super-type of GoldCard, InitialCard and ResourceCard; thus, Deck<\GoldCard> is a subtype of Deck<\PlayableCard>
-     *     @author Lorenzo Galatea
-    *@param deck: Deck associated with TableOfDecks
-    *@throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
-    */
+     * draw a card from one of the decks of the TableOfDecks. This method uses the covariance of generifcs: PlayableCard
+     * is a super-type of GoldCard, InitialCard and ResourceCard; thus, Deck<\GoldCard> is a subtype of Deck<\PlayableCard>
+     * @author Lorenzo Galatea
+     * @param deck: Deck associated with TableOfDecks
+     * @throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
+     */
     public void draw(Deck<PlayableCard> deck) {
             if (cards.size() >= 3) {
                 throw new IllegalStateException("Hand is full. Cannot draw more cards.");
@@ -166,10 +165,10 @@ public class Player {
     }
 
     /**
-    *returns the list of cards in the player's hand
+     * returns the list of cards in the player's hand
      * @author Lorenzo Galatea
-    *@return cards is  List of cards in the player's hand
-    */
+     * @return cards is  List of cards in the player's hand
+     */
     public List<PlayableCard> showCard() {
         if (cards != null) {
             return new ArrayList<>(cards);
@@ -179,12 +178,12 @@ public class Player {
     }
 
     /**
-    *choose the goal
+     * choose the goal
      * @author Lorenzo Galatea
-    *@param goals is a list of objective cards
-    *@param index is the index of the GoalCard chosen
-    *@throws IllegalArgumentException if index is not a number between 0 and 1 (inclusive)
-    */
+     * @param goals is a list of objective cards
+     * @param index is the index of the GoalCard chosen
+     * @throws IllegalArgumentException if index is not a number between 0 and 1 (inclusive)
+     */
     public void chooseGoal(List<GoalCard> goals, int index) {
         if (index >= 0 && index < goals.size()) {
             goal = goals.get(index);
@@ -194,9 +193,9 @@ public class Player {
     }
 
     /**
-    *removes cards from the player's hand
+     * removes cards from the player's hand
      * @author Lorenzo Galatea
-    */
+     */
     public void removeCards() {
         cards.clear();
     }

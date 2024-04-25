@@ -6,15 +6,15 @@ import java.util.Map;
  * it is the class that represents the score table associated with each game
  * points represents a map where each marker has a score associated with it
  * @author Lorenzo Galatea
-*/
+ */
 
 public class PointTable {
     private final HashMap<Color, Integer> points;
 
     /**
-    *is the constructor of the PointTable class
+     * is the constructor of the PointTable class
      * @author Lorenzo Galatea
-        */
+     */
     public PointTable() {
         points = new HashMap<>();
     }
@@ -36,19 +36,19 @@ public class PointTable {
     }
 
     /**
-    * is the marker setter
+     * is the marker setter
      * @author Lorenzo Galatea
-    *@param color: maker of the player
-    */
+     *@param color: maker of the player
+     */
     public void setColorPoints(Color color) {
         points.put(color, 0);
     }
 
     /**
-    *is the getter of the score associated with the Player/Maker
+     * is the getter of the score associated with the Player/Maker
      * @author Lorenzo Galatea
-    *@return int which is the point associated with the Player
-    *@param player: the player whose score you want to know
+     *@return int which is the point associated with the Player
+     *@param player: the player whose score you want to know
     */
     public int getPoint(Player player) {
         Color playerColor = player.getColor();
@@ -56,20 +56,20 @@ public class PointTable {
         return (score != null) ? score.intValue() : 0;
     }
     /**
-    *updates the score value
+     * updates the score value
      * @author Lorenzo Galatea
-    @param player: player whose score you want to change
-    @param score: int which represents the updated score
+     * @param player: player whose score you want to change
+     * @param score: int which represents the updated score
     */
     public void updatePoint(Player player, int score) {
         Color playerColor = player.getColor();
         points.put(playerColor, score);
     }
     /**
-    *notifies if any player has reached 20 points
+     * notifies if any player has reached 20 points
      * @author Lorenzo Galatea
-    *@return true if there is a player with more of 20 points 
-    */
+     * @return true if there is a player with more of 20 points
+     */
     public boolean notify20PointReached() {
         for (int score : points.values()) {
             if (score >= 20) {
@@ -79,9 +79,9 @@ public class PointTable {
         return false;
     }
     /**
-    * clear the Map points
+     * clear the Map points
      * @author Lorenzo Galatea
-    */
+     */
     public void resetPoints() {
         points.clear();
     }
