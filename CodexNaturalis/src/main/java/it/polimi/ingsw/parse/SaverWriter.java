@@ -5,7 +5,18 @@ import com.google.gson.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * this class defines two static methods that write on the correct file the status of the player
+ * and game objects.
+ * @author Lodetti Alessandro
+ */
 public class SaverWriter {
+    /**
+     * this method save the object game on the correct file. It has the precondition that the directory
+     * (where the game is going to be saved) should already exists (as for the file)
+     * @param game the object you want to save
+     * @return it returns true if and only if the object is correctly saved.
+     */
     public static boolean saveGame(Game game){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
@@ -19,6 +30,12 @@ public class SaverWriter {
         }
     }
 
+    /**
+     * this method save the object player on the correct file. It has the precondition that the directory
+     * (where the player is going to be saved) should already exists (as for the file)
+     * @param player it's the object that you want to be saved
+     * @return it returns true if and only if the object it's correctly saved
+     */
     public static boolean savePlayer(Player player){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())

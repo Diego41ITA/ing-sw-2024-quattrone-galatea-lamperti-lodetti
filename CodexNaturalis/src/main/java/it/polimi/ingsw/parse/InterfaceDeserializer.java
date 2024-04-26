@@ -5,7 +5,20 @@ import it.polimi.ingsw.model.card.strategyPattern.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * This class implements serialize method, useful to register a correct type adapter for
+ * CheckInterface.
+ * @author Lodetti Alessandro
+ */
 class InterfaceDeserializer implements JsonDeserializer<CheckInterface>{
+    /**
+     * this method defines how to deserialize the CheckInterface in a correct way: it replaces the
+     * string with a concrete implementation, to do that it use a simple switch statement.
+     * @param json it's the JsonElement read from the Json file.
+     * @param typeOfT we do not use this parameter
+     * @param context we do not use this parameter.
+     * @return it returns a concrete implementation of CheckInterface.
+     */
     @Override
     public CheckInterface deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context){
         JsonObject jsonObject = json.getAsJsonObject();
