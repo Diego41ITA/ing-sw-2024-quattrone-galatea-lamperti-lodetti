@@ -10,9 +10,21 @@ public class FSM {
         state = new StartingState(this);
     }
 
-    public void setState(State state){
+    public FSM(State state){
+        //si crea uno stato di quel tipo si potrebbe utilizzare uno switch o qualche libreria che
+        //costruisce uno stato del tipo adatto.
+        state = new State();
+    }
+
+    //metodo per cambiare stato
+    public void changeState(State state){
         this.state = state;
     }
 
-    //now we should add a description of the functionality this class has.
+    //bisogna definire quali metodi sono generati dall'utente (tutti)
+    //qui ci sono i metodi tipo clickOnDeck ecc..
+
+    // qui sotto vengono implementati eventuali metodi di servizio specifici di un
+    // determinato contesto.
+
 }
