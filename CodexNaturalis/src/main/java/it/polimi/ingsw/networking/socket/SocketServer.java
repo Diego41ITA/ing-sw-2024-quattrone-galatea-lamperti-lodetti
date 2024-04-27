@@ -3,7 +3,6 @@ package it.polimi.ingsw.networking.socket;
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.model.gameDataManager.Game;
 
-import java.io.*;
 import java.net.*;
 
 //manca gestione cambio state
@@ -17,7 +16,7 @@ public class SocketServer {
             while(true){
                 Socket client = serverSocket.accept();
                 System.out.println("Client connected");
-                new Thread(new SocketClient(client, new StartingState())).start();
+                new Thread(new SocketClientHandler(client, new StartingState())).start();
             }
         }catch (Exception e){
             //Exception da gestire

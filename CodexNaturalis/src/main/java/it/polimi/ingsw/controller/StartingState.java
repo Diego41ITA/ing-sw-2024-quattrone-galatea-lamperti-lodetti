@@ -6,15 +6,13 @@ import java.util.Scanner;
 public class StartingState extends State{
 
     @Override
-    public void HandleInput(String input){
-        switch(input){
-            case "join":
-
-                break;
-        }
+    public String HandleInput(String input){
+        //metodi per aggiunta player nel model (input è il nickname)
+        return "nextState";
     }
+
     @Override
     public String start(){
-        return "start!!!";
+        return "Enter NickName: ";
     }
 }
