@@ -1,10 +1,18 @@
 package it.polimi.ingsw.controller;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class StartingState extends State{
-    public StartingState(FSM fsm){}
-    //le classi implementano dei metodi che possono essere scatenati da determinati eventi
+
     @Override
-    public void HandleInput(String input){}
+    public void HandleInput(String input){
+        switch(input){
+            case "join":
+
+                break;
+        }
+    }
     @Override
     public String start(){
         return "start!!!";

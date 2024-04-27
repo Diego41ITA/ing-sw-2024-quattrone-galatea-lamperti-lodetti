@@ -8,7 +8,7 @@ public class PlayerTurn extends State{
 
             //logica per gestire il turno del giocatore
         } else{
-            FSM.getInstance().changeState(UpdateGame);
+//            FSM.getInstance().changeState(UpdateGame);
         }
     }
 

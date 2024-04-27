@@ -7,13 +7,13 @@ public class FSM {
     private State state;
 
     public FSM(){
-        state = new StartingState(this);
+//        state = new StartingState(this);
     }
 
     public FSM(State state){
         //si crea uno stato di quel tipo si potrebbe utilizzare uno switch o qualche libreria che
         //costruisce uno stato del tipo adatto.
-        state = new State();
+//        state = new State();
     }
 
     //metodo per cambiare stato
