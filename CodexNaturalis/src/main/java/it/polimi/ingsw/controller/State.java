@@ -1,11 +1,8 @@
 package it.polimi.ingsw.controller;
-//questa potrebbe essere pure un'interfaccia.
-abstract public class State {
-    protected FSM fsm;
-    public State(FSM fsm){
-        this.fsm = fsm;
-    }
 
+abstract public class State {
+
+    public abstract void HandleInput(String input);
     //now we should define all the methods.
     public abstract String start();
 }
