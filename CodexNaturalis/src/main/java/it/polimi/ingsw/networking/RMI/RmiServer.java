@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking.RMI;
+package it.polimi.ingsw.networking.rmi;
 
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.controller.FSM.*;
@@ -28,28 +28,7 @@ public class RmiServer implements VirtualServer {
 
     @Override
     public String start() throws RemoteException {
-//        System.err.println("start request");
         return this.controller.start();
-
-        /*
-        if (this.controller.start()) {
-            State current = this.controller.getCurrentState();
-            // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
-            synchronized (this.clients) {
-                for (var c : this.clients) {
-                    c.notifica(current.toString());
-                }
-            }
-        } else {
-            // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
-            synchronized (this.clients) {
-                for (var c : this.clients) {
-                    c.reportError("method failed");
-                }
-            }
-        }
-
-         */
     }
 
     @Override
