@@ -1,6 +1,6 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
-public class UntilFinish extends State{
+public class UntilFinish extends State {
 
     @Override
     public void HandleInput(String input) {

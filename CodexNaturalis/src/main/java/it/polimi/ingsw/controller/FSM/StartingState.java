@@ -1,9 +1,8 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
-import java.io.*;
-import java.util.Scanner;
+import State;
 
-public class StartingState extends State{
+public class StartingState extends State {
 
     @Override
     public String HandleInput(String input){

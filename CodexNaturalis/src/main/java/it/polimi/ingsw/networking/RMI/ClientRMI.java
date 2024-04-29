@@ -1,6 +1,5 @@
 package it.polimi.ingsw.networking.RMI;
 
-import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import java.util.Scanner;
 import java.rmi.registry.LocateRegistry;

@@ -1,6 +1,8 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
-public class CalculateWinner extends State{
+import State;
+
+public class CheckPoint extends State {
     @Override
     public void HandleInput(String input) {
 

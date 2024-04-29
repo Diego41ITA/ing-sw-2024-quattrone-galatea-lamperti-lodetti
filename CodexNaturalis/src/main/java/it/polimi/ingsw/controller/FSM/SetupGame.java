@@ -1,11 +1,12 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
-public class UpdateGame extends State{
+import State;
+
+public class SetupGame extends State {
     @Override
     public void HandleInput(String input) {
 
     }
-
     @Override
     public String start() {
         return null;

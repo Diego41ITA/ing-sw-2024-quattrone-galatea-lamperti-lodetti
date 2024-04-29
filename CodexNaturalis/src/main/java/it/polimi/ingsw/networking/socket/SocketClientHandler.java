@@ -1,6 +1,6 @@
 package it.polimi.ingsw.networking.socket;
 
-import it.polimi.ingsw.controller.State;
+import State;
 import it.polimi.ingsw.model.gameDataManager.Game;
 
 import java.io.*;

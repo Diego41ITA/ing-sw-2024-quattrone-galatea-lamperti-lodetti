@@ -1,6 +1,8 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
-public class PlayerTurn extends State{
+import State;
+
+public class PlayerTurn extends State {
     @Override
     public void HandleInput(String input) {
         // Logica per gestire l'input durante il turno del giocatore

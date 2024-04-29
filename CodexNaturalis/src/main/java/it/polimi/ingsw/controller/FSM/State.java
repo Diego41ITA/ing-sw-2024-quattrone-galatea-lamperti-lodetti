@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.FSM;
 
 abstract public class State {
     static State SetupGame, PlayerTurn, CheckPoint, CalculateWinner,  UpdateGame;
