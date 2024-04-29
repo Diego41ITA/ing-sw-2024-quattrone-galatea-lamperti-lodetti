@@ -1,6 +1,6 @@
 package it.polimi.ingsw.networking.socket;
 
-import State;
+import it.polimi.ingsw.controller.FSM.*;
 import it.polimi.ingsw.model.gameDataManager.Game;
 
 import java.io.*;
@@ -30,7 +30,7 @@ public class SocketClientHandler implements Runnable {
                     response = currentState.HandleInput(input);
                 } while (!response.equals("nextState"));
                 //metodo per annunciare agli altri client in partita della modifica del model?
-                currentState.NextState(); //metodo da aggiungere a State
+               // currentState.NextState(); //metodo da aggiungere a State
             }
         }catch (Exception e){
             // gestire Exception

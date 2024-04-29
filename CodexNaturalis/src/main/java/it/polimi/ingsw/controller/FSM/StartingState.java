@@ -1,7 +1,5 @@
 package it.polimi.ingsw.controller.FSM;
 
-import State;
-
 public class StartingState extends State {
 
     @Override

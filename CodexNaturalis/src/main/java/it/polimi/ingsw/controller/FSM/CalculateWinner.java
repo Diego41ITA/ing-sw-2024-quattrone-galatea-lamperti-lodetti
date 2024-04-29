@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller.FSM;
 
-import State;
 
 public class CalculateWinner extends State {
     @Override
