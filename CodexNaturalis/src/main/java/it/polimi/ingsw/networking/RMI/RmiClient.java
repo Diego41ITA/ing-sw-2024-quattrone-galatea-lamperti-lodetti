@@ -1,6 +1,4 @@
-package it.polimi.ingsw.networking.rmiNew;
-
-import it.polimi.ingsw.controller.FSM.State;
+package it.polimi.ingsw.networking.rmi;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

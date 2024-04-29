@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking.rmiNew;
+package it.polimi.ingsw.networking.rmi;
 
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.controller.FSM.*;
