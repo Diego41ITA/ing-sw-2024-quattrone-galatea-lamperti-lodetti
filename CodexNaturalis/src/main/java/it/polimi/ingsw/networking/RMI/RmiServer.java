@@ -27,8 +27,11 @@ public class RmiServer implements VirtualServer {
     }
 
     @Override
-    public void start() throws RemoteException {
-        System.err.println("start request");
+    public String start() throws RemoteException {
+//        System.err.println("start request");
+        return this.controller.start();
+
+        /*
         if (this.controller.start()) {
             State current = this.controller.getCurrentState();
             // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
@@ -45,27 +48,28 @@ public class RmiServer implements VirtualServer {
                 }
             }
         }
+
+         */
     }
 
     @Override
-    public void handleInput(String input) throws RemoteException {
-        System.err.println("input request");
+    public int handleInput(String input) throws RemoteException {
         String current = this.controller.handleInput(input);
         if (!current.equals("nextState")) {
             // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
             synchronized (this.clients) {
                 for (var c : this.clients) {
-                    c.notifica("");
+                    c.notifica(current);
                 }
             }
+            return 0;
         } else {
-            // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
-            synchronized (this.clients) {
-                for (var c : this.clients) {
-                    c.reportError("state Change");
-                }
-            }
+            return 1;
         }
+    }
+
+    public void changeState() throws RemoteException{
+        this.controller.changeState();
     }
 
     public static void main(String[] args) throws RemoteException {
@@ -75,6 +79,6 @@ public class RmiServer implements VirtualServer {
         VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(engine, 0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(name, stub);
-        System.out.println("Adder bound");
+        System.out.println("Server on");
     }
 }

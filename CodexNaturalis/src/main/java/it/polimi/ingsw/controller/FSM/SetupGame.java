@@ -1,15 +1,16 @@
-/*
 package it.polimi.ingsw.controller.FSM;
 
+import it.polimi.ingsw.model.gameDataManager.Game;
+
 public class SetupGame extends State {
+
     @Override
-    public String HandleInput(String input) {
-        return null;
+    public String handleInput(Game game, String input) {
+        return input;
     }
+
     @Override
-    public String start() {
-        return null;
+    public String start(Game game) {
+        return "stato di setup";
     }
 }
-
- */

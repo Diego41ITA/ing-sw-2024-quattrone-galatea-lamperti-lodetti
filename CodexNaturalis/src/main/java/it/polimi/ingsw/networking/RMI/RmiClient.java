@@ -10,6 +10,7 @@ import java.util.Scanner;
 //
 public class RmiClient extends UnicastRemoteObject implements VirtualView {
     final VirtualServer server;
+    private Object lock = new Object();
 
     protected RmiClient(VirtualServer server) throws RemoteException {
         this.server = server;
@@ -22,25 +23,30 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("NickName:");
+        int flag=0;
+        String command;
         while (true) {
-            //inserire possibili messaggi per ogni stato
-            String command = scan.next();
-            server.handleInput(command);
-            //in base al messaggio scrivere quali messaggi da invocare su RmiServer
+            System.out.println(server.start());
+            do{
+                command = scan.next();
+                flag = server.handleInput(command);
+            }while(flag==0);
+            server.changeState();//stato successivo
         }
     }
 
         @Override
         public void notifica (String current) throws RemoteException {
-            // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
-            System.out.println(current);
+            synchronized(lock) {
+                System.out.println(current);
+            }
         }
 
         @Override
-        public void reportError (String details) throws RemoteException {
-            // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
-            System.err.println("[ERROR] " + details);
+        public synchronized void reportError (String details) throws RemoteException {
+            synchronized(lock) {
+                System.err.println("[ERROR] " + details);
+            }
         }
 
         public static void main (String[]args) throws RemoteException, NotBoundException {

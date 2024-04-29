@@ -1,8 +1,7 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.controller.FSM.StartingState;
-import it.polimi.ingsw.controller.FSM.State;
+import it.polimi.ingsw.controller.FSM.*;
 import it.polimi.ingsw.model.gameDataManager.*;
 
 public class GameController {
@@ -20,13 +19,19 @@ public class GameController {
         return currentState;
     }
 
-    public Boolean start(){
-        currentState.start();
-        return true; // da sistemare, ritorna true se successo false altrimenti
+    public String start(){
+        return currentState.start(game);
     }
 
     public String handleInput(String input){
-        return currentState.handleInput(input);
+        return currentState.handleInput(game, input);
+    }
+
+    public void changeState(){
+        switch (currentState.toString()) {
+            case ("StartingState") :
+                currentState = new SetupGame();
+        }
     }
 
 }

@@ -9,8 +9,10 @@ public interface VirtualServer extends Remote {
 
     public void connect(VirtualView client) throws RemoteException;
 
-    public void start() throws RemoteException;
+    public String start() throws RemoteException;
 
-    public void handleInput(String input) throws RemoteException;
+    public int handleInput(String input) throws RemoteException;
+
+    public void changeState()throws RemoteException;
 
 }
