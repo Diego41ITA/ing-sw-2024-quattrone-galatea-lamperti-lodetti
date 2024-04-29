@@ -1,17 +1,31 @@
-/*
 package it.polimi.ingsw.controller.FSM;
 
-public class UntilFinish extends State {
+import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.model.gameDataManager.Game;
 
+public class UntilFinish extends State {
+    public UntilFinish(GameController gameController){
+        super(gameController);
+    }
     @Override
-    public String HandleInput(String input) {
+    public String handleInput(Game game, String input) {
         return null;
     }
 
     @Override
-    public String start() {
+    public String start(Game game) {
         return null;
+    }
+
+    @Override
+    public void goNextState() {
+
+    }
+
+    @Override
+    public void goToSpecifiedState(State state) {
+
     }
 }
 
- */
+

@@ -3,24 +3,23 @@ package it.polimi.ingsw.controller.FSM;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.gameDataManager.Game;
 
-public class SetupGame extends State {
-    public SetupGame(GameController gameController){
+public class PlayerConnected extends State{
+    public PlayerConnected(GameController gameController){
         super(gameController);
     }
     @Override
     public String handleInput(Game game, String input) {
-        return input;
+        return null;
     }
 
     @Override
     public String start(Game game) {
-        gameController.getGame().getTableOfDecks().initializeTable();
-        return "The Table has been initialized";
+        return null;
     }
 
     @Override
     public void goNextState() {
-        gameController.setCurrentState(new PlayerTurn(gameController));
+
     }
 
     @Override

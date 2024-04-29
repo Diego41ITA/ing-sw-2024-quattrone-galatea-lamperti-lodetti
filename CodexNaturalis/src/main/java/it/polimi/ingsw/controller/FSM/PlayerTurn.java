@@ -1,25 +1,31 @@
-/*
 package it.polimi.ingsw.controller.FSM;
 
+import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.model.gameDataManager.Game;
+
 public class PlayerTurn extends State {
+    public PlayerTurn(GameController gameController){
+        super(gameController);
+    }
     @Override
-    public String HandleInput(String input) {
+    public String handleInput(Game game, String input) {
         return null;
-        /*
-        // Logica per gestire l'input durante il turno del giocatore
-        if (input.equals("disconnect")) {
-
-            //logica per gestire il turno del giocatore
-        } else{
-            FSM.getInstance().changeState(UpdateGame);
-        }
-
     }
 
     @Override
-    public String start() {
+    public String start(Game game) {
         return null;
+    }
+
+    @Override
+    public void goNextState() {
+    }
+
+    @Override
+    public void goToSpecifiedState(State state) {
+
     }
 }
- */
+
+
 

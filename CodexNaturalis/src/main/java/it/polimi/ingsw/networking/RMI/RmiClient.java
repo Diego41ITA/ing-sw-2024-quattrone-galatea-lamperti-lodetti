@@ -31,7 +31,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 command = scan.next();
                 flag = server.handleInput(command);
             }while(flag==0);
-            server.changeState();//stato successivo
+            server.goNextState();//stato successivo
         }
     }
 

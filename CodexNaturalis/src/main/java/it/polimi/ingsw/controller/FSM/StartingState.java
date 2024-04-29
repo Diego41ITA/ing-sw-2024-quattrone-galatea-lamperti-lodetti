@@ -1,11 +1,18 @@
 package it.polimi.ingsw.controller.FSM;
 
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 
 public class StartingState extends State {
     static int players = 0;
+    public StartingState(GameController gameController){
+        super(gameController);
+    }
+    public StartingState() {
+        super();
+    }
     @Override
     public String handleInput(Game game,  String input) {
         if (players != 3) { //game.getMaxNumberPlayer()-1
@@ -16,9 +23,17 @@ public class StartingState extends State {
             return "next-state";
         }
     }
-
-        @Override
+    @Override
     public String start(Game game){
         return "Nickname: ";
+    }
+    @Override
+    public void goNextState() {
+        gameController.setCurrentState(new PlayerConnected(gameController));
+    }
+
+    @Override
+    public void goToSpecifiedState(State state) {
+
     }
 }

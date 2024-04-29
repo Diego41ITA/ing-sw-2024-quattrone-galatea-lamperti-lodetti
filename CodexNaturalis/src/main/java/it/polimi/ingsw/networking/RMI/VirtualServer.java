@@ -1,5 +1,7 @@
 package it.polimi.ingsw.networking.RMI;
 
+import it.polimi.ingsw.controller.FSM.State;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -13,6 +15,8 @@ public interface VirtualServer extends Remote {
 
     public int handleInput(String input) throws RemoteException;
 
-    public void changeState()throws RemoteException;
+    public void goNextState()throws RemoteException;
+
+    public void goToSpecifiedState(State state);
 
 }

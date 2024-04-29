@@ -9,10 +9,12 @@ public class GameController {
     private State currentState;
 
     public GameController() {
-
         this.game = new Game("123");
         currentState = new StartingState();
+    }
 
+    public Game getGame() {
+        return game;
     }
 
     public State getCurrentState() {
@@ -27,11 +29,8 @@ public class GameController {
         return currentState.handleInput(game, input);
     }
 
-    public void changeState(){
-        switch (currentState.toString()) {
-            case ("StartingState") :
-                currentState = new SetupGame();
-        }
+    public void setCurrentState(State state){
+        this.currentState = state;
     }
 
 }

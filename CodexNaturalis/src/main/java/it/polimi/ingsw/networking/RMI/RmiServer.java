@@ -68,8 +68,13 @@ public class RmiServer implements VirtualServer {
         }
     }
 
-    public void changeState() throws RemoteException{
-        this.controller.changeState();
+    public void goNextState() throws RemoteException{
+        this.controller.getCurrentState().goNextState();
+    }
+
+    @Override
+    public void goToSpecifiedState(State state) {
+        this.controller.getCurrentState().goToSpecifiedState(state);
     }
 
     public static void main(String[] args) throws RemoteException {
