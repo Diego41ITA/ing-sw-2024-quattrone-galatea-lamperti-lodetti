@@ -34,7 +34,7 @@ public class RmiServer implements VirtualServer {
             // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
             synchronized (this.clients) {
                 for (var c : this.clients) {
-                    c.notifica(current);
+                    c.notifica(current.toString());
                 }
             }
         } else {
@@ -42,6 +42,27 @@ public class RmiServer implements VirtualServer {
             synchronized (this.clients) {
                 for (var c : this.clients) {
                     c.reportError("method failed");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void handleInput(String input) throws RemoteException {
+        System.err.println("input request");
+        String current = this.controller.handleInput(input);
+        if (!current.equals("nextState")) {
+            // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
+            synchronized (this.clients) {
+                for (var c : this.clients) {
+                    c.notifica("");
+                }
+            }
+        } else {
+            // soluzione migliore può fare update non bloccante dei clients(usare blockingQueue)
+            synchronized (this.clients) {
+                for (var c : this.clients) {
+                    c.reportError("state Change");
                 }
             }
         }

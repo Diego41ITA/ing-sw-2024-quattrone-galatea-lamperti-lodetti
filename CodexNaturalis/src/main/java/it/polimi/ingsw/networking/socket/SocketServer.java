@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.networking.socket;
 
 import it.polimi.ingsw.controller.FSM.StartingState;
@@ -28,4 +29,6 @@ public class SocketServer {
         server.start(1234);
     }
 }
+
+ */
 

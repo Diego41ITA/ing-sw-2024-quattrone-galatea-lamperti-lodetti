@@ -24,30 +24,31 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException {
         Scanner scan = new Scanner(System.in);
+        System.out.println("NickName:");
         while (true) {
-            server.start();
             //inserire possibili messaggi per ogni stato
             String command = scan.next();
+            server.handleInput(command);
             //in base al messaggio scrivere quali messaggi da invocare su RmiServer
         }
     }
 
-    @Override
-    public void notifica(State current) throws RemoteException {
-        // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
-        System.out.println(current.toString());
-    }
+        @Override
+        public void notifica (String current) throws RemoteException {
+            // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
+            System.out.println(current);
+        }
 
-    @Override
-    public void reportError(String details) throws RemoteException {
-        // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
-        System.err.println("[ERROR] " + details);
-    }
+        @Override
+        public void reportError (String details) throws RemoteException {
+            // da sistemare per possibili data race con il thread dell'interfaccia o un altro thread
+            System.err.println("[ERROR] " + details);
+        }
 
-    public static void main(String[] args) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(args[0], 1234);
-        VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
+        public static void main (String[]args) throws RemoteException, NotBoundException {
+            Registry registry = LocateRegistry.getRegistry(args[0], 1234);
+            VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
 
-        new RmiClient(server).run();
+            new RmiClient(server).run();
+        }
     }
-}

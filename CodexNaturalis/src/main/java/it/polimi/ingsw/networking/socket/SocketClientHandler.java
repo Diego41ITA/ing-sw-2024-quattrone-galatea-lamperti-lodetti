@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.networking.socket;
 
 import it.polimi.ingsw.controller.FSM.*;
@@ -37,3 +38,5 @@ public class SocketClientHandler implements Runnable {
         }
     }
 }
+
+ */

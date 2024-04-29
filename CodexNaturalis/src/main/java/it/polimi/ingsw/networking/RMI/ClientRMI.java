@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.networking.RMI;
 
 import it.polimi.ingsw.model.gameDataManager.Game;
@@ -39,3 +40,5 @@ public class ClientRMI {
         }
     }
 }
+
+ */

@@ -1,9 +1,10 @@
+/*
 package it.polimi.ingsw.controller.FSM;
 
 public class UpdateGame extends State {
     @Override
-    public void HandleInput(String input) {
-
+    public String HandleInput(String input) {
+        return null;
     }
 
     @Override
@@ -11,3 +12,5 @@ public class UpdateGame extends State {
         return null;
     }
 }
+
+ */

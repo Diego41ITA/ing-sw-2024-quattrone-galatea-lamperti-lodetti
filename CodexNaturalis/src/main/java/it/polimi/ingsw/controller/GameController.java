@@ -25,5 +25,8 @@ public class GameController {
         return true; // da sistemare, ritorna true se successo false altrimenti
     }
 
+    public String handleInput(String input){
+        return currentState.handleInput(input);
+    }
 
 }

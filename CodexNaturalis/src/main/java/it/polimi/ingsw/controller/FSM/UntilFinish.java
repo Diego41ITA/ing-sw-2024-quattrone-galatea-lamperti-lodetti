@@ -1,10 +1,11 @@
+/*
 package it.polimi.ingsw.controller.FSM;
 
 public class UntilFinish extends State {
 
     @Override
-    public void HandleInput(String input) {
-
+    public String HandleInput(String input) {
+        return null;
     }
 
     @Override
@@ -12,3 +13,5 @@ public class UntilFinish extends State {
         return null;
     }
 }
+
+ */

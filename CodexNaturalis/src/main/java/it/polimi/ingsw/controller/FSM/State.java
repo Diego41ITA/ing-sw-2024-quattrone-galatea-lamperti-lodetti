@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller.FSM;
 abstract public class State {
     static State SetupGame, PlayerTurn, CheckPoint, CalculateWinner,  UpdateGame;
 
-    public abstract String HandleInput(String input);
+    public abstract String handleInput(String input);
     //now we should define all the methods.
-    public abstract String start();
+    public abstract void start();
 }

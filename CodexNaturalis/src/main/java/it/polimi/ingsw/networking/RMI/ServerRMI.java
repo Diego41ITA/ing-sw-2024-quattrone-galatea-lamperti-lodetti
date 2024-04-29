@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.networking.RMI;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.networking.socket.SocketClient;
@@ -49,3 +50,5 @@ public class ServerRMI{
         server.start(1099);
     }
 }
+
+ */
