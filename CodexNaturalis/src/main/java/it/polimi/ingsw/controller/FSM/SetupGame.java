@@ -8,13 +8,12 @@ public class SetupGame extends State {
     }
     @Override
     public String handleInput() {
-        return input;
+        return null;
     }
 
     @Override
     public void start() {
         gameController.getGame().getTableOfDecks().initializeTable();
-        return "The Table has been initialized";
     }
 
     @Override
