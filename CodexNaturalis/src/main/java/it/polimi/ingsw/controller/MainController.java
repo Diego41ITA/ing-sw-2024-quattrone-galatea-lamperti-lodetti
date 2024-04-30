@@ -14,8 +14,6 @@ import java.util.List;
 public class MainController {
     private List<GameController> GameControllers;
 
-    private List<TextualUI> views;
-
     public MainController(Game game) {
         this.model = game;
     }
