@@ -108,7 +108,7 @@ public class Turn {
      * return the current player
      * @return a copy of the private attribute.
      */
-    private Player getCurrentPlayer(){
+    public Player getCurrentPlayer(){
         return new Player(this.currentPlayer);
     }
 }
