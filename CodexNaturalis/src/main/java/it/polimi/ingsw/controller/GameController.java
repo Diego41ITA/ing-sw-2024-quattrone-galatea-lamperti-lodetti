@@ -22,11 +22,12 @@ public class GameController {
     }
 
     public String start(){
-        return currentState.start(game);
+        currentState.start();
+        return null;
     }
 
     public String handleInput(String input){
-        return currentState.handleInput(game, input);
+        return currentState.handleInput();
     }
 
     public void setCurrentState(State state){
