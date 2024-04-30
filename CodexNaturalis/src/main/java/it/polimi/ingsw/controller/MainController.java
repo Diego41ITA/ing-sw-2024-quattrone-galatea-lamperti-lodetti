@@ -2,30 +2,21 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.FSM.StartingState;
 import it.polimi.ingsw.controller.FSM.State;
+import it.polimi.ingsw.model.ImmutableGame;
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Matches;
+import it.polimi.ingsw.view.TextualUI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainController {
-    //controller principale
-    private Matches onGoingMatches;
-    private ArrayList<GameController> runningGames;
-    private State currentState;
+    private List<GameController> GameControllers;
 
-    public MainController(){
-        runningGames = new ArrayList<>();
-    }
+    private List<TextualUI> views;
 
-    public Matches getOnGoingMatches() {
-        return onGoingMatches;
-    }
-
-    public void start(){
-        this.currentState= new StartingState();
-        this.currentState.start();
-    }
-
-    public State getCurrentState(){
-        return this.currentState;
+    public MainController(Game game) {
+        this.model = game;
     }
 }
