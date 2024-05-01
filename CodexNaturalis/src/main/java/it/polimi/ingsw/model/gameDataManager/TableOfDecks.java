@@ -28,8 +28,8 @@ public class TableOfDecks {
      * default constructor
      */
     public TableOfDecks(){
-        //just create the attributes
-        //these will be set at an early stage.
+        this.cards = new ArrayList<Card>(); //this one should be set later
+        this.goals = new ArrayList<Card>();
     }
 
     /**

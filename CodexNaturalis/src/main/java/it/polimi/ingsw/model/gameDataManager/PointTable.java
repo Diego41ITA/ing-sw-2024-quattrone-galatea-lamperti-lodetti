@@ -63,7 +63,7 @@ public class PointTable {
     */
     public void updatePoint(Player player, int score) {
         Color playerColor = player.getColor();
-        points.put(playerColor, score);
+        points.replace(playerColor, score);
     }
     /**
      * notifies if any player has reached 20 points

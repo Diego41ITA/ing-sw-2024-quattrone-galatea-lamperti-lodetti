@@ -34,6 +34,8 @@ public abstract class Card {
         this.isFront = !isFront;
     }
 
+    public void changeIsFront(Boolean value){ this.isFront= value;}
+
     /**
      * getter for the attribute isFront
      * @author Luca Lamperti
