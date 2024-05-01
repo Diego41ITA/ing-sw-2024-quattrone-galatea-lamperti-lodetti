@@ -30,6 +30,14 @@ public class Player {
      */
     public Player(){}
 
+    /**
+     * constructor needed by the controller when creating a game and joining it
+     * @param nickname chosen by the player
+     */
+    public Player(String nickname){
+        this.nickname = nickname;
+    }
+
     /** 
      * is the constructor of the class
      * @author Lorenzo Galatea
