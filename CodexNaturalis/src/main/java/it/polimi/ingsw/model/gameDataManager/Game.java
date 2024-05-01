@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Game {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
-    private final Map<Player, Boolean> players;
+    private Map<Player, Boolean> players;
     /**the maximum number of players that can partecipate to a game. */
     private int maxNumberPlayer;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
@@ -102,11 +102,8 @@ public class Game {
      * @param players map of players and their status: active (true), inactive (false)
      */
     public void setPlayers(Map<Player, Boolean> players) {
-        for(Player p: players.keySet())
-        {
-            if(!this.players.containsKey(p))
-                this.players.put(new Player(p), true);
-        }
+        this.players.clear();
+        this.players.putAll(players);
     }
 
     /**
