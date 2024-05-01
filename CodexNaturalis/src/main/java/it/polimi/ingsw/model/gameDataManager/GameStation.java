@@ -173,7 +173,7 @@ public class GameStation {
      *
      * @return a map with items and their cardinality.
      */
-    private Map<Item, Integer> calculateAvailableResources() {
+    public Map<Item, Integer> calculateAvailableResources() {
         Map<Item, Integer> resources = new HashMap<>();
 
         for (PlayableCard c : this.playedCards.values()) {
