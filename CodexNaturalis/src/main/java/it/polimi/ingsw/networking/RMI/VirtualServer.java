@@ -1,7 +1,6 @@
 package it.polimi.ingsw.networking.rmi;
 
 import it.polimi.ingsw.controller.FSM.State;
-import it.polimi.ingsw.controller.MainController;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

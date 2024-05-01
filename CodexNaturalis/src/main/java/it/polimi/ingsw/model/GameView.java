@@ -1,5 +1,4 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.gameDataManager.*;
 import java.util.*;
 import java.io.Serializable;
@@ -9,7 +8,7 @@ import java.util.stream.Collectors;
  * this class make an immutable copy of a Game Object, and exposes only getter methods.
  * @author Lodetti Alessandro
  */
-public class ImmutableGame implements Serializable {
+public class GameView implements Serializable {
     private final Map<Player, Boolean> players;
     private final TableOfDecks tableOfDecks;
     private final PointTable points;
@@ -19,7 +18,7 @@ public class ImmutableGame implements Serializable {
     private final String id;
 
 
-    public ImmutableGame(){
+    public GameView(){
         this.players = new HashMap<>();
         this.tableOfDecks = new TableOfDecks();
         this.points = new PointTable();
@@ -28,7 +27,7 @@ public class ImmutableGame implements Serializable {
         this.turn = null;
         this.id = "Default-Game";
     }
-    public ImmutableGame(Game game){
+    public GameView(Game game){
         this.players = new HashMap<>(game.getPlayers());
         this.tableOfDecks = new TableOfDecks(game.getTableOfDecks());
         this.points = new PointTable(game.getPointTable());

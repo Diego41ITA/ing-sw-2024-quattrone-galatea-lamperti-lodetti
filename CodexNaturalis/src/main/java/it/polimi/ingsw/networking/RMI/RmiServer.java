@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 @SuppressWarnings("LanguageDetectionInspection")
-public class RmiServer implements VirtualServer {
+public class RmiServer extends UnicastRemoteObject implements VirtualServer {
     final GameController controller;
     final List<VirtualView> clients = new ArrayList<>();
 
