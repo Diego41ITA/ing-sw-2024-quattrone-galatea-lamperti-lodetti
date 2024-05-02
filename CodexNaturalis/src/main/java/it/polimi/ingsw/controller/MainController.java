@@ -83,7 +83,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
         // Filter available games
         for (GameController gameController : activeGames) {
-            if (gameController.getStatus().equals(Status.WAITING) && !gameController.checkIfFull) {
+            if (gameController.getStatus().equals(Status.WAITING) && !gameController.checkIfFull()) {
                 availableGames.add(gameController);
             }
         }
@@ -100,7 +100,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 printActiveGames();
                 return randomAvailableGame;
             } catch (MaxPlayersInException | PlayerAlreadyInException e) {
-                randomAvailableGame.removeObserver(lis, player);
+                randomAvailableGame.removeObserver(obs, player);
                 obs.genericErrorWhenEnteringGame(e.getMessage());
             }
         } else {
@@ -122,9 +122,9 @@ public class MainController implements Serializable, MainControllerInterface /*,
         for (GameController game : activeGames) {
             if (game.getGameId().equals(GameID)) {
                 try {
-                    for (Player player : game.getPlayers()) {
-                        if (player.getNickname().equals(nick)) {
-                            game.addListener(obs, player);
+                    for (Player player : game.getPlayers().keySet()) {
+                        if (player.getNick().equals(nick)) {
+                            game.addObserver(obs, player);
                             game.reconnectPlayer(player);
                             return game;
                         }
@@ -156,7 +156,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         for (GameController game : activeGames) {
             if (game.getGameId().equals(GameID)) {
                 game.leave(obs, nick);
-                printAsync("\t>Game " + ris.get(0).getGameId() + " player: \"" + nick + "\" decided to leave");
+                printAsync("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
                 printActiveGames();
 
                 if (game.getNumOfOnlinePlayers() == 0) {

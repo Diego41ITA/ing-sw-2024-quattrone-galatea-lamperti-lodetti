@@ -5,13 +5,11 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.observer.HandleObserver;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 //IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME, LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
 //DEL GIOCATORE E NON SULL'OGGETTO PLAYER
@@ -31,7 +29,7 @@ public class GameController implements GameControllerInterface, Serializable {
         observers = new ArrayList<>(); //creare il costruttore
     }
     //aggiunge observer al model
-    public void addListener(GameObserver obs, Player p) {
+    public void addObserver(GameObserver obs, Player p) {
         game.addObs(obs);//modificare model niente getter e setter
         for (GameObserver othersObserver : model.getObservers()) {
             p.addObs(othersObserver);//modificare model niente getter e setter
@@ -44,7 +42,7 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     //rimuove observer dal model
-    public void removeListener(GameObserver obs, Player p) {
+    public void removeObserver(GameObserver obs, Player p) {
         game.removeObs(obs);//modificare model niente getter e setter
 
         p.getObservers().clear();
