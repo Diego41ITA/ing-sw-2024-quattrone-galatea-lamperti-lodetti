@@ -8,7 +8,6 @@ import java.rmi.RemoteException;
 import java.util.*;
 import java.io.Serializable;
 
-// questa classe rappresenta semplicemente il controller per la creazione ed eliminazione delle partite
 public class MainController implements Serializable, MainControllerInterface /*, Runnable*/ {
     /**
      * List of all the activeGames, represented by their controllers
@@ -60,7 +59,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         activeGames.add(controller);
 
         printAsync("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
-        printRunningGames();
+        printActiveGames();
 
         try {
             controller.addPlayer(player);
@@ -71,6 +70,13 @@ public class MainController implements Serializable, MainControllerInterface /*,
         return controller;
     }
 
+    /**
+     * Allows Player to join a random game from the activeGame list
+     * @param obs GameObserver associated with the player who is joining the game
+     * @param nick Player's nickname
+     * @return GameControllerInterface of the created game
+     * @throws RemoteException
+     */
     @Override
     public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException {
         List<GameController> availableGames = new ArrayList<>();
@@ -91,7 +97,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 randomAvailableGame.addPlayer(player);
 
                 printAsync("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
-                printRunningGames();
+                printActiveGames();
                 return randomAvailableGame;
             } catch (MaxPlayersInException | PlayerAlreadyInException e) {
                 randomAvailableGame.removeObserver(lis, player);
@@ -104,7 +110,14 @@ public class MainController implements Serializable, MainControllerInterface /*,
         return null;
     }
 
-
+    /**
+     * Allows Player to rejoin the game after being disconnected
+     * @param obs GameObserver associated with the player who is rejoining the game
+     * @param nick Player's nickname
+     * @param GameID univoque ID of the game to rejoin
+     * @return GameControllerInterface of the joined game
+     * @throws RemoteException
+     */
     public synchronized GameControllerInterface rejoin(GameObserver obs, String nick, String GameID) throws RemoteException {
         for (GameController game : activeGames) {
             if (game.getGameId().equals(GameID)) {
@@ -129,15 +142,56 @@ public class MainController implements Serializable, MainControllerInterface /*,
         return null;
     }
 
-
-
+    /**
+     * Allows a player to leave a game
+     *
+     * @param obs GameObserver associated with the player who is rejoining the game
+     * @param nick Player's nickname
+     * @param GameID univoque ID of the game to leave
+     * @return
+     * @throws RemoteException
+     */
     @Override
-    public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException {
+    public GameControllerInterface leaveGame(GameObserver obs, String nick, String GameID) throws RemoteException {
+        for (GameController game : activeGames) {
+            if (game.getGameId().equals(GameID)) {
+                game.leave(obs, nick);
+                printAsync("\t>Game " + ris.get(0).getGameId() + " player: \"" + nick + "\" decided to leave");
+                printActiveGames();
+
+                if (game.getNumOfOnlinePlayers() == 0) {
+                    deleteGame(idGame);
+                }
+            }
+        }
         return null;
     }
 
-    //stessa cosa per tutti gli altri.
+    /**
+     * Remove the @param idGame from the {@link MainController#activeGames}
+     *
+     * @param GameID univoque ID of the game to delete
+     */
+    public synchronized void deleteGame(String GameID) {
+        for (GameController game : activeGames) {
+            if (game.getGameId().equals(GameID)) {
+                activeGames.remove(game);
+                printAsync("\t>Game " + GameID + " removed from activeGames");
+                printActiveGames();
+            }
+        }
+    }
+
+    /**
+     * Print all games currently running
+     */
+    private void printActiveGames() {
+        printAsyncNoLine("\t\trunningGames: ");
+        for (GameController game : activeGames) {
+            printAsync(game.getGameId() + " "));
+        }
+        printAsync("");
+    }
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).
-
 }
