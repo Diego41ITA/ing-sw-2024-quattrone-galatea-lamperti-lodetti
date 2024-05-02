@@ -83,7 +83,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
         // Filter available games
         for (GameController gameController : activeGames) {
-            if (gameController.getStatus().equals(Status.WAITING) && !gameController.checkIfFull()) {
+            if (gameController.getStatus().equals(Status.WAITING) && !gameController.checkIfStart()) {
                 availableGames.add(gameController);
             }
         }
