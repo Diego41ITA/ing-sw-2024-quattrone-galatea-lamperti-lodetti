@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller2;
+package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;

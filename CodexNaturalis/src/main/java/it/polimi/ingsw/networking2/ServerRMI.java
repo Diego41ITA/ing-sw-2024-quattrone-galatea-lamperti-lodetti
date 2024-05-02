@@ -1,12 +1,10 @@
 package it.polimi.ingsw.networking2;
 
-import it.polimi.ingsw.controller2.GameController;
-import it.polimi.ingsw.controller2.GameControllerInterface;
-import it.polimi.ingsw.controller2.MainController;
-import it.polimi.ingsw.controller2.MainControllerInterface;
+import it.polimi.ingsw.controller.GameControllerInterface;
+import it.polimi.ingsw.controller.MainController;
+import it.polimi.ingsw.controller.MainControllerInterface;
 import it.polimi.ingsw.observer.GameObserver;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

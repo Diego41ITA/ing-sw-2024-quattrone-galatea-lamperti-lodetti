@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller2;
+package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -173,7 +173,7 @@ public class GameController implements Serializable {
             point = player.getGoal().getGoalPoints((HashMap) player.getGameStation().getPlayedCards(), (HashMap) player.getGameStation().calculateAvailableResources());
             ArrayList<GoalCard> goals = (ArrayList) game.getTableOfDecks().getGoals();
             for (GoalCard goalCard : goals) {
-                point = point + goalCard.getGoalPoints((HashMap) player.getGameStation().getPlayedCards(), (HashMap) player.getGameStation().calculateAvailableResources())
+                point = point + goalCard.getGoalPoints((HashMap) player.getGameStation().getPlayedCards(), (HashMap) player.getGameStation().calculateAvailableResources());
             }
             point = point + pointTable.getPoint(player);
             pointTable.updatePoint(player, point);
