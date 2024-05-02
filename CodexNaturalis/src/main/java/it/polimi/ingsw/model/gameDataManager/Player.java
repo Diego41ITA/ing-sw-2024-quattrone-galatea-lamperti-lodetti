@@ -36,6 +36,7 @@ public class Player {
      */
     public Player(String nickname){
         this.nickname = nickname;
+        this.cards = new ArrayList<>();
     }
 
     /** 
@@ -252,5 +253,6 @@ public class Player {
             return false;
         }
     }
+
 }
 
