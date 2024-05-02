@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking2;
+package it.polimi.ingsw.networking;
 
 //questa interfaccia indica tutte le azioni possibili effettuabili da un client
 //notate che rappresenta il punto di contatto tra ClientRMI e ClientSocket perchè entrambi la estenderanno

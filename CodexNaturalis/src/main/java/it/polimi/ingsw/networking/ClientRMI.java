@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking2;
+package it.polimi.ingsw.networking;
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.GameFlow;

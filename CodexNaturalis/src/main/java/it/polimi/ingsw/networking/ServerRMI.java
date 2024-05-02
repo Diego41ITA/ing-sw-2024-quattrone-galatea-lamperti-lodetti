@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking2;
+package it.polimi.ingsw.networking;
 
 import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainController;
