@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.view.UI;
 
+import java.util.HashMap;
+
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 public class Cli implements UI {
@@ -112,18 +114,39 @@ public class Cli implements UI {
 
     @Override
     public void show_playableCard(PlayableCard card) {
+        String FHL = safeString(card.getFront().get(Angle.HIGHLEFT));
+        String FHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
+        String FDL = safeString(card.getFront().get(Angle.DOWNLEFT));
+        String FDR = safeString(card.getFront().get(Angle.DOWNRIGHT));
+        String BHL = safeString(card.getFront().get(Angle.HIGHLEFT));
+        String BHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
+        String BDL = safeString(card.getFront().get(Angle.DOWNLEFT));
+        String BDR = safeString(card.getFront().get(Angle.DOWNRIGHT));
+
         if(card instanceof GoldCard){
             Println("""
-                    ┌──────────────────────┐
-                    │""" + card.getFront().get(Angle.HIGHLEFT) + "                      " + card.getFront().get(Angle.HIGHRIGHT) +"│"+"""
-                    │                      │
-                    │""" + card.getFront().get(Angle.DOWNLEFT) + "                      " + card.getFront().get(Angle.DOWNRIGHT) +"│"+"""
-                    └──────────────────────┘
+                    MAIN RESOURCE: """ + card.getType().toString() + """
+                    POINTS: """ + ((GoldCard) card).getNumberOfPoints() + """
+                    REQUIREMENTS:
+                    
+                    FRONT                      BACK
+                    ┌──────────────────────┐   ┌──────────────────────┐
+                    │""" + FHL + " ".repeat(22-FHL.length()-FHR.length()) + FHR + "│"+ "   " + "│" + BHL + " ".repeat(22-BHL.length()-BHR.length()) + BHR + "│\n"+"""
+                    │                      │   │                      │
+                    │""" + FDL + " ".repeat(22-FDL.length()-FDR.length()) + FDR + "│"+ "   " + "│" + BDL + " ".repeat(22-BDL.length()-BDR.length()) + BDR + "│\n"+"""
+                    └──────────────────────┘   └──────────────────────┘
                     """);
 
         } else if (card instanceof ResourceCard) {
             Println("""
+                    MAIN RESOURCE: """ + card.getType().toString() + """
                     
+                    FRONT                      BACK
+                    ┌──────────────────────┐   ┌──────────────────────┐
+                    │""" + FHL + " ".repeat(22-FHL.length()-FHR.length()) + FHR + "│"+ "   " + "│" + BHL + " ".repeat(22-BHL.length()-BHR.length()) + BHR + "│\n"+"""
+                    │                      │   │                      │
+                    │""" + FDL + " ".repeat(22-FDL.length()-FDR.length()) + FDR + "│"+ "   " + "│" + BDL + " ".repeat(22-BDL.length()-BDR.length()) + BDR + "│\n"+"""
+                    └──────────────────────┘   └──────────────────────┘
                     """);
         }
     }
@@ -142,5 +165,13 @@ public class Cli implements UI {
 
     @Override
     public void show_gameOver() {
+    }
+
+    private static String safeString(Object o){
+        if(o == null){
+            return "";
+        }else {
+            return o.toString();
+        }
     }
 }
