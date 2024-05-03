@@ -6,7 +6,7 @@ import it.polimi.ingsw.observer.GameObserver;
 public class GameFlow implements Runnable, ClientAction, GameObserver {
     private ClientAction client;
     private String nickname;
-    private final Ui ui;
+    private final UI ui;
 
     //tutto il flusso di gioco....
 
