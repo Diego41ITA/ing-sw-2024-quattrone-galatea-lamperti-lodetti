@@ -9,6 +9,7 @@ import it.polimi.ingsw.observer.HandleObserver;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,14 +31,13 @@ public class GameController implements GameControllerInterface, Serializable {
         observers = new HashMap<>();
     }
     //aggiunge observer al model
-    public void addObserver(GameObserver obs, Player p) {
+    public void addObserver(GameObserver obs, Player p) throws RemoteException {
         if (observers.containsKey(p.getNick())){
             observers.remove(p.getNick());
             observers.put(p.getNick(), (new HandleObserver(obs)));
         } else {
             observers.put(p.getNick(), (new HandleObserver(obs)));
         }
-    }
     }
 
     //rimuove observer dal model
@@ -55,7 +55,7 @@ public class GameController implements GameControllerInterface, Serializable {
         player.setNickname(name);
         game.setSinglePlayer(player);
         game.setMaxNumberPlayer(max);
-        observers.get(name).notify_setMaxnumberPlayers();//metodo da mettere nella gameListe
+        observers.get(name).notify_setMaxNumberPlayers(game);//metodo da mettere nella gameListe
     }
 
     //viene messo il colore nella pointtable e nel player
@@ -72,9 +72,8 @@ public class GameController implements GameControllerInterface, Serializable {
             game.setPlayers(players);
             game.setPointTable(pointTable);
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-                String chiave = entry.getKey();
                 HandleObserver obs = entry.getValue();
-                obs.notifycolor();//capire che argomenti mettergi
+                obs.notify_color(game);
             }
         }
     }
@@ -84,18 +83,25 @@ public class GameController implements GameControllerInterface, Serializable {
     public void playCard(PlayableCard card, Point cord, String nick) throws illegalOperationException {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
+        GameStation gamestation;
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                player.playCard(card, cord);//l'rmi dovrà gestire l'eccezione o il gameflow evita che venga inserita una
-                //coordinata non valida
+                try {
+                    player.playCard(card, cord);
+                    gamestation = player.getGameStation();
+                }catch {
+                    observers.get(nick).notify_notEnoughResource();
+                    return;
+                }//manca gestire la coordinata non valida
             }
 
         }
         game.setPlayers(players);
+
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyPlayCard();//capire che argomenti mettergli
+            obs.notify_PlayCard(game,gamestation);
         }
     }
 
@@ -138,9 +144,8 @@ public class GameController implements GameControllerInterface, Serializable {
             }
         }
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyDrawCard();//capire che argomenti mettergli
+            obs.notify_DrawCard(game);
         }
     }
 
@@ -164,9 +169,8 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setTableOfDecks(table);
         game.setPlayers(players);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyDrawCard();//capire che argomenti mettergli
+            obs.notify_DrawCard(game);
         }
     }
 
@@ -183,9 +187,8 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         game.setPlayers(players);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyChangedPlayerStatus();//capire che argomenti mettergli
+            obs.notify_ChangedPlayerStatus(game);
         }
     }
 
@@ -206,9 +209,8 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setTurn(turn);
         game.setTableOfDecks(table);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyInitializeTable();//capire che argomenti mettergli
+            obs.notify_InitializeTable(game);//capire che argomenti mettergli
         }
     }
 @Override
@@ -240,9 +242,8 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         game.setPointTable(pointTable);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyFinalsPoint();//capire che argomenti mettergli
+            obs.notify_FinalsPoint(game);
         }
 
         return winner;
@@ -260,9 +261,8 @@ public class GameController implements GameControllerInterface, Serializable {
         turn.goOn();
         game.setTurn(turn);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyCurrentPlayer();//capire che argomenti mettergli
+            obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
         }
     }
 
@@ -301,7 +301,7 @@ public class GameController implements GameControllerInterface, Serializable {
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyUpdatePoints();//capire che argomenti mettergli
+            obs.notify_UpdatePoints(game);
         }
 
     }
@@ -331,7 +331,7 @@ public class GameController implements GameControllerInterface, Serializable {
                 player.chooseGoal(goals, num);
             }
             game.setPlayers(players);
-            observers.get(nick).notify_chooseGoal();//capire che argomenti mettere
+            observers.get(nick).notify_chooseGoal(game);
         }
     }
     @Override
@@ -355,7 +355,7 @@ public class GameController implements GameControllerInterface, Serializable {
             }
 
         }
-        observers.get(nick).notify_updatatedPlayerhand();//capire che argomenti mettere
+        observers.get(nick).notify_updatedHandAndTable(game);//capire che argomenti mettere
 
 
     }
@@ -377,7 +377,7 @@ public class GameController implements GameControllerInterface, Serializable {
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
-            obs.notifyadddedPlayer();//capire che argomenti mettergli
+            obs.notify_AddedPlayer(game);
         }
     }
 //controlla se abbiamo raggiunto il numero massimo di giocatori e possiamo iniziare
