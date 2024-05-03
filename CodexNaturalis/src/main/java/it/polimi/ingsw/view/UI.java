@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.GoldCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 
 /**
@@ -40,7 +42,7 @@ public interface UI {
 
     public void show_invalidPlay();
 
-    public void show_goalCard(GameView immutableModel);
+    public void show_goalCard(GoalCard card);
 
     public void show_playableCard(PlayableCard card);
 
