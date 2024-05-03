@@ -3,6 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.view.PrintlnThread;
 
 import java.rmi.RemoteException;
 import java.util.*;
@@ -28,7 +30,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * Default constructor that initialize the ArrayList for the activeGames
      */
     private MainController(){
-        this.activeGames = new ArrayList<>();
+        this.activeGames = new ArrayList<GameController>();
     }
 
     /**
@@ -43,7 +45,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
     /**
      * Create a new game by creating his gameController and
-     * allows a Player to join to it
+     * allows a Player to join it
      *
      * @param obs GameObserver associated with the player who is creating the game
      * @param nick Player's nickname
@@ -58,7 +60,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         controller.addObserver(obs, player);
         activeGames.add(controller);
 
-        printAsync("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
+        PrintlnThread.Println("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
         printActiveGames();
 
         try {
