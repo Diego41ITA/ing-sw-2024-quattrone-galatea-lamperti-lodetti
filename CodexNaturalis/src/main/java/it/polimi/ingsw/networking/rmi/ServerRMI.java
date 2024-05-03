@@ -1,4 +1,4 @@
-package it.polimi.ingsw.networking;
+package it.polimi.ingsw.networking.rmi;
 
 import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainController;
@@ -20,7 +20,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         try{
             server = new ServerRMI();
 
-            registry = LocateRegistry.createRegistry(/* numero porta */);
+            registry = LocateRegistry.createRegistry("porta su cui comunicare");
             getRegistry().rebind( "server name", server);
         }catch(RemoteException e){
             //...
@@ -33,7 +33,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         mainController = MainController.getMainController();
     }
 
-    public synchronized ServerRMI getServer(){
+    public static synchronized ServerRMI getServer(){
         if(server == null){
             try{
                 server = new ServerRMI();
@@ -43,13 +43,13 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         }
         return server;
     }
-    public synchronized Registry getRegistry(){
+    public static synchronized Registry getRegistry(){
         return registry;
     }
 
     //a questo punto abbiamo fatto la parte di creazione del server rimangono da implementare i metodi di
     // MainControllerInterface; sono quindi quei metodi per la creazione accessibili da un client connesso.
-
+    @Override
     public GameControllerInterface createGame(GameObserver obs, String nick) throws RemoteException{
         GameControllerInterface stub = server.mainController.createGame(obs, nick);
 
@@ -62,4 +62,39 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
 
         return stub;
     }
+
+    @Override
+    public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException{
+        GameControllerInterface stub = server.mainController.joinRandomGame(obs, nick);
+        try{
+            UnicastRemoteObject.exportObject(stub, 0);
+        }catch(RemoteException e){
+            //...
+        }
+        return stub;
+    }
+
+    @Override
+    public GameControllerInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException{
+        GameControllerInterface stub = server.mainController.rejoin(obs, nick, gameId);
+        try{
+            UnicastRemoteObject.exportObject(stub, 0);
+        }catch(RemoteException e){
+            //...
+        }
+        return stub;
+    }
+
+    @Override
+    public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException{
+        GameControllerInterface stub = server.mainController.leaveGame(obs, nick, gameId);
+        try{
+            UnicastRemoteObject.exportObject(stub, 0);
+        }catch(RemoteException e){
+            //...
+        }
+        return stub;
+    }
+
+
 }
