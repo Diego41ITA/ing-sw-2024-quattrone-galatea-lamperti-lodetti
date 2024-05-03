@@ -89,7 +89,7 @@ public class GameController implements GameControllerInterface, Serializable {
                 try {
                     player.playCard(card, cord);
                     gamestation = player.getGameStation();
-                }catch {
+                }catch(illegalOperationException e) {
                     observers.get(nick).notify_notEnoughResource();
                     return;
                 }//manca gestire la coordinata non valida
