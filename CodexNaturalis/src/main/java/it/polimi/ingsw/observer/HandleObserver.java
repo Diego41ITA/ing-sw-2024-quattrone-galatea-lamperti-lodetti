@@ -1,78 +1,122 @@
 package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.model.GameView;
-import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.gameDataManager.*;
-import it.polimi.ingsw.model.GameView;
-
 import java.rmi.RemoteException;
-import java.util.*;
 
 public class HandleObserver {
-    private GameObserver observer;
+    private final GameObserver observer;
 
-    public HandleObserver(GameObserver obs) throws RemoteException {
+    public HandleObserver(GameObserver obs){
         this.observer = obs;
     }
 
-    public synchronized List<GameObserver> getObservers(){
+    public synchronized GameObserver getObservers(){
         return observer;
     }
 
-    public synchronized void  notify_setMaxNumberPlayers(Game game){
-        observer.updatePlayerAndMaxNumberPlayer(new GameView(game));
+    public void  notify_setMaxNumberPlayers(Game game){
+        try {
+            observer.updatePlayerAndMaxNumberPlayer(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
     }
 
-    public synchronized void  notify_notEnoughResource() throws RemoteException {
-        observer.notEnoughResource();
+    public void  notify_notEnoughResource(){
+        try {
+            observer.notEnoughResource();
+        }catch(RemoteException e){
+            //
+        }
     }
 
-    public synchronized void notify_color(Game game){
-        observer.updateColor(new GameView(game));
-
+    public void notify_color(Game game) {
+        try {
+            observer.updateColor(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
     }
     //game mi serve per aggiornare l'oggetto immutabile Game, e gamestation serve alla UI
-    public synchronized void notify_PlayCard(Game game, GameStation gamestation){
-        observer.updateGamestation(new GameView(game), gamestation);
+    public void notify_PlayCard(Game game, GameStation gamestation){
+        try {
+            observer.updateGamestation(new GameView(game), gamestation);
+        }catch (RemoteException e){
+            //
+        }
     }
 
-    public synchronized void notify_DrawCard(Game game){
-        observer.updateTableOfDecks(new GameView(game));
-
+    public void notify_DrawCard(Game game){
+        try {
+            observer.updateTableOfDecks(new GameView(game));
+        }catch(RemoteException e){
+        //
+        }
     }
 
-    public synchronized void notify_ChangedPlayerStatus(Game game){
-        observer.updatePlayerStatus(new GameView(game));
-
+    public void notify_ChangedPlayerStatus(Game game){
+        try {
+            observer.updatePlayerStatus(new GameView(game));
+        }catch(RemoteException e){
+        //
+        }
     }
 
-    public synchronized void notify_InitializeTable(Game game){
-        observer.updateTableAndTurn(new GameView(game));
+    public void notify_InitializeTable(Game game){
+        try {
+            observer.updateTableAndTurn(new GameView(game));
+        }catch(RemoteException e){
+        //
+        }
     }
 
-    public synchronized void notify_FinalsPoint(Game game){
-        observer.updatePoints(new GameView(game));
-
-    }
-
-    public synchronized void notify_CurrentPlayerUpdated(Game game){
-        observer.updateCurrentPlayer(new GameView(game));
-    }
-
-    public synchronized void notify_UpdatePoints(Game game){
+    public void notify_FinalsPoint(Game game){
+        try {
             observer.updatePoints(new GameView(game));
+        }catch(RemoteException e){
+        //
+        }
     }
 
-    public synchronized void notify_chooseGoal(Game game){
-        observer.updateGoalPlayer(new GameView(game));
+    public void notify_CurrentPlayerUpdated(Game game){
+        try {
+            observer.updateCurrentPlayer(new GameView(game));
+        }catch(RemoteException e){
+        //
+        }
+    }
+
+    public void notify_UpdatePoints(Game game){
+        try {
+            observer.updatePoints(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
+    }
+
+    public void notify_chooseGoal(Game game){
+        try {
+            observer.updateGoalPlayer(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
     }
 
 
     public synchronized void notify_updatedHandAndTable(Game game){
-        observer.updateHandAndTable(new GameView(game));
+        try {
+            observer.updateHandAndTable(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
     }
 
     public synchronized void notify_AddedPlayer(Game game){
-        observer.updatePlayerInGame(new GameView(game));
+        try {
+            observer.updatePlayerInGame(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
     }
 }
