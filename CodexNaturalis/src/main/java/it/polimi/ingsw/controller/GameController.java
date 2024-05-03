@@ -83,7 +83,7 @@ public class GameController implements GameControllerInterface, Serializable {
     public void playCard(PlayableCard card, Point cord, String nick) throws illegalOperationException {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
-        GameStation gamestation;
+        GameStation gamestation = null;
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 try {
