@@ -46,9 +46,13 @@ public interface GameControllerInterface extends Remote {
     //mette nella mano del giocatore 2 carte risorsa e 1 carta oro
     public void initializeHandPlayer(String nick);
 
+
     //ritorna la lista di goalcard che l'utente può scegliere
-    public ArrayList<GoalCard> getPossibleGoals();
-//aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
+    public ArrayList<GoalCard> getPossibleGoals(); //va aggiunta una notify
+
+
+
+ //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
     public void addPlayer(Player p) throws IllegalStateException;
 //metodo che ritorna i punti della carta risorsa
     public int getResourcePoint(ResourceCard card);
