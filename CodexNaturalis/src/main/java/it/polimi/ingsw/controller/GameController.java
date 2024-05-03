@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.observer.HandleObserver;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -18,40 +19,30 @@ public class GameController implements GameControllerInterface, Serializable {
      * the game to control
      */
     private Game game;
-
-    private ArrayList<GameObserver> observers;
+    //ho una hashMap di string(nome del player) e di handleObserver
+    private HashMap<String, HandleObserver> observers;
 
     public GameController(String id) {
         game = new Game(id);
         game.setPointTable(new PointTable());
         game.setTableOfDecks(new TableOfDecks());
         game.setTurn(new Turn(new ArrayList<Player>()));
-        observers = new ArrayList<>(); //creare il costruttore
+        observers = new HashMap<>();
     }
     //aggiunge observer al model
     public void addObserver(GameObserver obs, Player p) {
-        game.addObs(obs);//modificare model niente getter e setter
-        for (GameObserver othersObserver : model.getObservers()) {
-            p.addObs(othersObserver);//modificare model niente getter e setter
+        if (observers.containsKey(p.getNick())){
+            observers.remove(p.getNick());
+            observers.put(p.getNick(), (new HandleObserver(obs)));
+        } else {
+            observers.put(p.getNick(), (new HandleObserver(obs)));
         }
-        for (Player otherPlayer : game.getPlayers().keySet()) {
-            if (!otherPlayer.equals(p)) {
-                otherPlayer.addObs(obs);
-            }
-        }
+    }
     }
 
     //rimuove observer dal model
-    public void removeObserver(GameObserver obs, Player p) {
-        game.removeObs(obs);//modificare model niente getter e setter
-
-        p.getObservers().clear();
-
-        for (Player otherPlayer : game.getPlayers().keySet()) {
-            if (!otherPlayer.equals(p)) {
-                otherPlayer.removeObs(obs);
-            }
-        }
+    public void removeObserver(Player p) {
+       observers.remove(p.getNick());
     }
 
     //dire a diego che quando fa joinRandomgame deve aggiungere un giocatore alla partita
@@ -64,6 +55,7 @@ public class GameController implements GameControllerInterface, Serializable {
         player.setNickname(name);
         game.setSinglePlayer(player);
         game.setMaxNumberPlayer(max);
+        observers.get(name).notify_setMaxnumberPlayers();//metodo da mettere nella gameListe
     }
 
     //viene messo il colore nella pointtable e nel player
@@ -79,7 +71,11 @@ public class GameController implements GameControllerInterface, Serializable {
             }
             game.setPlayers(players);
             game.setPointTable(pointTable);
-
+            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                String chiave = entry.getKey();
+                HandleObserver obs = entry.getValue();
+                obs.notifycolor();//capire che argomenti mettergi
+            }
         }
     }
 
@@ -96,6 +92,11 @@ public class GameController implements GameControllerInterface, Serializable {
 
         }
         game.setPlayers(players);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyPlayCard();//capire che argomenti mettergli
+        }
     }
 
     //pescaggio da deck:
@@ -136,6 +137,11 @@ public class GameController implements GameControllerInterface, Serializable {
                 game.setPlayers(players);
             }
         }
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyDrawCard();//capire che argomenti mettergli
+        }
     }
 
     public synchronized void draw(Card cardSelected, String nick) {
@@ -157,6 +163,11 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         game.setTableOfDecks(table);
         game.setPlayers(players);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyDrawCard();//capire che argomenti mettergli
+        }
     }
 
     //cambia lo stato dei giocatori(connesso o non connesso)
@@ -171,6 +182,11 @@ public class GameController implements GameControllerInterface, Serializable {
             }
         }
         game.setPlayers(players);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyChangedPlayerStatus();//capire che argomenti mettergli
+        }
     }
 
     //cambia il modo di piazzare la carta
@@ -189,6 +205,11 @@ public class GameController implements GameControllerInterface, Serializable {
         Turn turn = new Turn(keysList);
         game.setTurn(turn);
         game.setTableOfDecks(table);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyInitializeTable();//capire che argomenti mettergli
+        }
     }
 @Override
     public boolean notify20PointReached() {
@@ -218,6 +239,12 @@ public class GameController implements GameControllerInterface, Serializable {
             }
         }
         game.setPointTable(pointTable);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyFinalsPoint();//capire che argomenti mettergli
+        }
+
         return winner;
     }
 
@@ -232,6 +259,11 @@ public class GameController implements GameControllerInterface, Serializable {
         Turn turn = game.getTurn();
         turn.goOn();
         game.setTurn(turn);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyCurrentPlayer();//capire che argomenti mettergli
+        }
     }
 
     //forse inutile vedere come funziona il patter observable
@@ -266,6 +298,11 @@ public class GameController implements GameControllerInterface, Serializable {
 
         }
         game.setPointTable(pointTable);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyUpdatePoints();//capire che argomenti mettergli
+        }
 
     }
 
@@ -294,6 +331,7 @@ public class GameController implements GameControllerInterface, Serializable {
                 player.chooseGoal(goals, num);
             }
             game.setPlayers(players);
+            observers.get(nick).notify_chooseGoal();//capire che argomenti mettere
         }
     }
     @Override
@@ -317,6 +355,7 @@ public class GameController implements GameControllerInterface, Serializable {
             }
 
         }
+        observers.get(nick).notify_updatatedPlayerhand();//capire che argomenti mettere
 
 
     }
@@ -335,6 +374,11 @@ public class GameController implements GameControllerInterface, Serializable {
     @Override
     public void addPlayer(Player p) throws IllegalStateException{
         game.addPlayer(p);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            String chiave = entry.getKey();
+            HandleObserver obs = entry.getValue();
+            obs.notifyadddedPlayer();//capire che argomenti mettergli
+        }
     }
 //controlla se abbiamo raggiunto il numero massimo di giocatori e possiamo iniziare
     public synchronized boolean checkIfStart(){

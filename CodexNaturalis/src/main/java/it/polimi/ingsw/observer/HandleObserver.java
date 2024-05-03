@@ -7,14 +7,10 @@ import java.util.*;
 
 //questa è una collezione di GameObserver
 public class HandleObserver {
-    private List<GameObserver> observers;
+    private GameObserver observer;
 
-    public HandleObserver(){
-        this.observers = new ArrayList<>();
-    }
-
-    public synchronized void addObserver(GameObserver obs){
-        this.observers.add(obs);
+    public HandleObserver(GameObserver obs){
+        this.observer = obs;
     }
 
     public synchronized List<GameObserver> getObservers(){

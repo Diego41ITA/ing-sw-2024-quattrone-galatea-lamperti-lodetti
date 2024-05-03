@@ -100,7 +100,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 printActiveGames();
                 return randomAvailableGame;
             } catch (MaxPlayersInException | PlayerAlreadyInException e) {
-                randomAvailableGame.removeObserver(obs, player);
+                randomAvailableGame.removeObserver(player);
                 obs.genericErrorWhenEnteringGame(e.getMessage());
             }
         } else {
