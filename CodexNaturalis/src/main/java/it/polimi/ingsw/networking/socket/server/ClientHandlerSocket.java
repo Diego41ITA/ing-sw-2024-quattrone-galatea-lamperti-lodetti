@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking.socket.server;
 
 import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainController;
+import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.networking.socket.client.message.Message;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 import it.polimi.ingsw.view.PrintlnThread;
@@ -13,6 +14,7 @@ import java.io.InterruptedIOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -72,6 +74,8 @@ public class ClientHandlerSocket extends Thread{
             }catch(InterruptedException e){
                 Println("no action");
 
+            } catch (GameEndedException | RemoteException e) {
+                Println("client disconnected");
             }
         }
     }
