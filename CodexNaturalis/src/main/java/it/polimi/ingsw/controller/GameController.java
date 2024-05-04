@@ -389,7 +389,7 @@ public class GameController implements GameControllerInterface, Serializable {
         return goals;
 
     }
-//aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
+    //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
     @Override
     public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException {
         game.addPlayer(p);
@@ -423,17 +423,15 @@ public class GameController implements GameControllerInterface, Serializable {
         return this.game.getStatus();
     }
 
-
-    //metodi da implementare
     public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {
-        try {this.game.reconnectPlayer(player);} catch (PlayerReconnectionException e) {
-            throw new RuntimeException(e);
-        }
+        this.game.reconnectPlayer(player);
     }
-    public void leave(GameObserver obs, String nick){}
+    public void leave(String nick){
+        this.observers.remove(nick);
+        this.game.removePlayer(nick);
+    }
 
-    public int getNumOfOnlinePlayers(){
-        return this.game.getNumOfOnlinePlayers();}
+    public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
 
 }
 

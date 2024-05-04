@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.view.PrintlnThread;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
@@ -159,7 +158,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
     public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
         for (GameController game : activeGames) {
             if (game.getGameId().equals(gameID)) {
-                game.leave(obs, nick);
+                game.leave(nick);
                 Println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
                 printActiveGames();
 
