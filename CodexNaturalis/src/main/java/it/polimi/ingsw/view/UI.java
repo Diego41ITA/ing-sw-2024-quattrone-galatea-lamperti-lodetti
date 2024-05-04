@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.GoldCard;
 import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.gameDataManager.Player;
 
 /**
  * This is interface is implemented by the GUI and TUI
@@ -38,7 +39,7 @@ public interface UI {
 
     public void show_playerHand(GameView immutableModel);
 
-    public void show_gameStation(GameView immutableModel);
+    public void show_gameStation(Player player);
 
     public void show_invalidPlay();
 

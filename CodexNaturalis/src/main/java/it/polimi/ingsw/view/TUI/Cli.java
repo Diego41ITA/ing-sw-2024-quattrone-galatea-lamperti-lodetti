@@ -4,15 +4,17 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.card.strategyPattern.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.UI;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 public class Cli implements UI {
-    private final Object lock = new Object();
 
     @Override
     public void show_startingMenu() {
@@ -105,7 +107,93 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_gameStation(GameView immutableModel) {
+    public void show_gameStation(Player player){
+        Map<Point, PlayableCard> playedCards = player.getGameStation().getPlayedCards();
+
+        int spaces;
+
+        int maxRow = (findMaxValue(playedCards.keySet(), "x") +1) *2 +1;
+        int maxColumn = (findMaxValue(playedCards.keySet(), "y") +1) *2 +1;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("GAME STATION\n");
+        stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+        for(int row = 1; row <= maxRow; row++){
+            stringBuilder.append("|");
+            for(int column = 1; column <= maxColumn; column++){
+                String value = determineValue(player.getGameStation(), new Point(column - maxColumn + 2, maxRow - row - 2));
+                spaces = Math.round(2 - value.length()/2);
+                stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+                stringBuilder.append("|");
+            }
+            stringBuilder.append("\n");
+            stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+        }
+
+        stringBuilder.append("\n");
+
+        for(PlayableCard card: playedCards.values()){
+            stringBuilder.append(cardDraw(card));
+        }
+
+        Println(stringBuilder.toString());
+    }
+
+    private static int findMaxValue(Set<Point> set, String coord) {
+        if(coord.equals("x")) {
+            Point maxPoint = set.stream()
+                    .reduce((p1, p2) -> Math.abs(p1.getX()) > Math.abs(p2.getX()) ? p1 : p2)
+                    .orElse(new Point(0,0));
+            return Math.abs(maxPoint.x);
+        }else if(coord.equals("y")) {
+            Point maxPoint = set.stream()
+                    .reduce((p1, p2) -> Math.abs(p1.getY()) > Math.abs(p2.getY()) ? p1 : p2)
+                    .orElse(new Point(0, 0));
+            return Math.abs(maxPoint.y);
+        }
+        return 0;
+    }
+
+    private static String determineValue(GameStation gameStation, Point point){
+        if(gameStation.getPlayedCards().containsKey(point)){
+            return String.valueOf(gameStation.getPlayedCards().get(point).getCardId());
+        }else if(gameStation.getFreeCords().contains(point)){
+            return point.x + "," + point.y;
+        }else {
+            return "X";
+        }
+    }
+
+    private static String cardDraw(PlayableCard card){
+        String HL;
+        String HR;
+        String DL;
+        String DR;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("GAME ID: ").append(card.getCardId()).append("\n");
+
+        if(card.isFront()){
+            HL = safeString(card.getFront().get(Angle.HIGHLEFT));
+            HR = safeString(card.getFront().get(Angle.HIGHRIGHT));
+            DL = safeString(card.getFront().get(Angle.DOWNLEFT));
+            DR = safeString(card.getFront().get(Angle.DOWNRIGHT));
+        }else{
+            stringBuilder.append(listToString(card.getAListOfBackResource()));
+            HL = safeString(card.getBack().get(Angle.HIGHLEFT));
+            HR = safeString(card.getBack().get(Angle.HIGHRIGHT));
+            DL = safeString(card.getBack().get(Angle.DOWNLEFT));
+            DR = safeString(card.getBack().get(Angle.DOWNRIGHT));
+        }
+        stringBuilder.append("""
+                ┌──────────────────────┐
+                │""" + HL + " ".repeat(22 - HL.length() - HR.length()) + HR + "│\n" + """
+                │                      │
+                │""" + DL + " ".repeat(22 - DL.length() - DR.length()) + DR + "│\n" + """
+                └──────────────────────┘
+                """);
+        return stringBuilder.toString();
     }
 
     @Override
@@ -117,15 +205,22 @@ public class Cli implements UI {
 
     @Override
     public void show_goalCard(GoalCard card) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("GOAL CARD\n\n").append("GAME ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
+        stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card));
+        Println(stringBuilder.toString());
+        /*
         Println("""
                 GOAL CARD
                 
-                CARD ID: """ + card.getCardId() + """
-                POINTS: """ + card.getNumberOfPoints() + "EACH TIME THE REQUIREMENT IS SATISFIED" + """
+                CARD ID:""" + card.getCardId() + "\n" + """
+                POINTS:""" + card.getNumberOfPoints() + " EACH TIME THE REQUIREMENT IS SATISFIED" + "\n" + """
                 REQUIREMENT:
-                """ + goalPoint(card) + """
+                """ + "\n" + goalPoint(card) + """
                 
                 """);
+                */
+
     }
 
     @Override
@@ -134,20 +229,19 @@ public class Cli implements UI {
         String FHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
         String FDL = safeString(card.getFront().get(Angle.DOWNLEFT));
         String FDR = safeString(card.getFront().get(Angle.DOWNRIGHT));
-        String BHL = safeString(card.getFront().get(Angle.HIGHLEFT));
-        String BHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
-        String BDL = safeString(card.getFront().get(Angle.DOWNLEFT));
-        String BDR = safeString(card.getFront().get(Angle.DOWNRIGHT));
+        String BHL = safeString(card.getBack().get(Angle.HIGHLEFT));
+        String BHR = safeString(card.getBack().get(Angle.HIGHRIGHT));
+        String BDL = safeString(card.getBack().get(Angle.DOWNLEFT));
+        String BDR = safeString(card.getBack().get(Angle.DOWNRIGHT));
 
         if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
             Println("""
                     GOLD CARD
                     
-                    CARD ID: """ + card.getCardId() + """
-                    PERMANENT RESOURCE: """ + ((GoldCard) card).getBackResource().toString() + """
-                    POINTS: """ + goldPoint((GoldCard) card) + """
-                    REQUIREMENTS:"""
-                    + mapToString(((GoldCard) card).getNeededResources()) + """
+                    CARD ID: """ + card.getCardId() + "\n" + """
+                    PERMANENT RESOURCE: """ + ((GoldCard) card).getBackResource().toString() + "\n" + """
+                    POINTS: """ + goldPoint((GoldCard) card) + "\n" + """
+                    REQUIREMENTS: """ + "\n" + mapToString(((GoldCard) card).getNeededResources()) + """
                     
                     FRONT                      BACK
                     ┌──────────────────────┐   ┌──────────────────────┐
@@ -161,9 +255,9 @@ public class Cli implements UI {
             Println("""
                     RESOURCE CARD
                     
-                    CARD ID: """ + card.getCardId() + """
-                    PERMANENT RESOURCE: """ + ((ResourceCard) card).getBackResource() + """
-                    POINTS: """ + ((ResourceCard) card).getNumberOfPoints() + """
+                    CARD ID:""" + card.getCardId() + "\n" + """
+                    PERMANENT RESOURCE:""" + ((ResourceCard) card).getBackResource() + "\n" + """
+                    POINTS:""" + ((ResourceCard) card).getNumberOfPoints() + "\n" + """
                     
                     FRONT                      BACK
                     ┌──────────────────────┐   ┌──────────────────────┐
@@ -176,8 +270,8 @@ public class Cli implements UI {
             Println("""
                     INITIAL CARD
                     
-                    CARD ID: """ + card.getCardId() + """
-                    BACK RESOURCES  : """ + listToString(((InitialCard) card).getBackResources()) + """
+                    CARD ID:""" + card.getCardId() + "\n" + """
+                    BACK RESOURCES:""" + listToString(((InitialCard) card).getBackResources()) + "\n" + """
                     
                     FRONT                      BACK
                     ┌──────────────────────┐   ┌──────────────────────┐
