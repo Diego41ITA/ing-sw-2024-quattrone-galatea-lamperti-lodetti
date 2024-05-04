@@ -23,5 +23,8 @@ public interface GameObserver extends Remote{
     void updateHandAndTable(GameView game)throws RemoteException;
     void updatePlayerInGame(GameView game)throws RemoteException;
 
+    void genericErrorWhenEnteringGame(String msg) throws RemoteException;
+    void gameIdNotExists(String gameId) throws RemoteException;
+
 }
 
