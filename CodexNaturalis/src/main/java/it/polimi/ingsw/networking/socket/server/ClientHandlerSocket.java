@@ -62,10 +62,10 @@ public class ClientHandlerSocket extends Thread{
                 Message msg = this.queue.take();
 
                 //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
-                if(msg.forMainController){
+                if(msg.isForMainController()){
                     game = msg.execute(notify, MainController.getMainController());
                     if(game != null)
-                        nick = msg.nickname;
+                        nick = msg.getNickname();
                 }else {
                     msg.execute(game);
                 }
