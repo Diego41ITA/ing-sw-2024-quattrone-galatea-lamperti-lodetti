@@ -151,9 +151,9 @@ public class MainController implements Serializable, MainControllerInterface /*,
      *
      * @param obs GameObserver associated with the player who is rejoining the game
      * @param nick Player's nickname
-     * @param GameID univoque ID of the game to leave
-     * @return
-     * @throws RemoteException
+     * @param gameID unique ID of the game to leave
+     * @return the new game controller interface
+     * @throws RemoteException it could throw it if something goes wrong
      */
     @Override
     public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
@@ -174,7 +174,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
     /**
      * Remove the @param idGame from the {@link MainController#activeGames}
      *
-     * @param GameID univoque ID of the game to delete
+     * @param GameID unique ID of the game to delete
      */
     public synchronized void deleteGame(String GameID) {
         for (GameController game : activeGames) {
