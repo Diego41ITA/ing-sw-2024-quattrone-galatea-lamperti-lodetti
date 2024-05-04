@@ -161,16 +161,35 @@ public class Player {
      * @param deck: Deck associated with TableOfDecks
      * @throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
      */
-    public void draw(Deck<PlayableCard> deck) {
-            if (cards.size() >= 3) {
-                throw new IllegalStateException("Hand is full. Cannot draw more cards.");
-            } else {
-                if (deck.getDimension() == 0) {
-                    throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
-                }
-                PlayableCard card = deck.getFirst();
-                cards.add(card);
+    public void drawGold(Deck<GoldCard> deck) {
+        if (cards.size() >= 3) {
+            throw new IllegalStateException("Hand is full. Cannot draw more cards.");
+        } else {
+            if (deck.getDimension() == 0) {
+                throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
             }
+            PlayableCard card = deck.getFirst();
+            cards.add(card);
+        }
+    }
+
+    /**
+     * draw a card from a ResourceDeck of the TableOfDecks. This method uses the covariance of generics: PlayableCard
+     * is a super-type of GoldCard, InitialCard and ResourceCard; thus, Deck<\GoldCard> is a subtype of Deck<\PlayableCard>
+     * @author Lorenzo Galatea
+     * @param deck: Deck associated with TableOfDecks
+     * @throws IllegalStateException if the player already has 3 cards in his hand or the deck is empty
+     */
+    public void drawResource(Deck<ResourceCard> deck) {
+        if (cards.size() >= 3) {
+            throw new IllegalStateException("Hand is full. Cannot draw more cards.");
+        } else {
+            if (deck.getDimension() == 0) {
+                throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
+            }
+            PlayableCard card = deck.getFirst();
+            cards.add(card);
+        }
     }
 
     /**
