@@ -61,9 +61,8 @@ public class GameController implements GameControllerInterface, Serializable {
     //viene messo il colore nella pointtable e nel player
     @Override
     public void setColor(String color, String name) {
-        HashMap<Player, Boolean> players;
         PointTable pointTable = game.getPointTable();
-        players = (HashMap) game.getPlayers();
+        HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(name)) {
                 player.setColor(Color.valueOf(color.toUpperCase()));
@@ -99,7 +98,7 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setPlayers(players);
 
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
+            //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_PlayCard(game,gamestation);
         }
@@ -107,38 +106,50 @@ public class GameController implements GameControllerInterface, Serializable {
 
     //pescaggio da deck:
 //immagino che il giocatore inserisca una stringa da riga di comando in cui dice il tipo di deck da cui vuole pescare
-    public synchronized void draw(String tipo, String nick) {
+
+    /**
+     * this method draw a card from tableOfDecks and put it in the hand of the player. It manages also the consistency
+     * of the model.
+     * @param typo is the textual representation of the deck type.
+     * @param nick is the nickname of the player
+     */
+    public synchronized void drawFromDeck(String typo, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                if (tipo.equals("gold")) {
-                    Deck deck = table.getDeckGold();
-                    player.draw(deck);
-                    table.setDeckGold(deck);
-                    game.setTableOfDecks(table);
+                switch (typo) {
+                    case "gold" -> {
+                        Deck<GoldCard> deck = table.getDeckGold();
+                        player.drawGold(deck);
+                        table.setDeckGold(deck);
+                        game.setTableOfDecks(table);
 
-                } else if (tipo.equals("goal")) {
-                    Deck deck = table.getDeckGoal();
-                    player.draw(deck);
-                    table.setDeckGoal(deck);
-                    game.setTableOfDecks(table);
+                    }
+                    case "goal" -> {
+                        Deck<GoalCard> deck = table.getDeckGoal();
+                        player.drawGoal(deck);
+                        table.setDeckGoal(deck);
+                        game.setTableOfDecks(table);
 
-                } else if (tipo.equals("resource")) {
-                    Deck deck = table.getDeckResource();
-                    player.draw(deck);
-                    table.setDeckResource(deck);
-                    game.setTableOfDecks(table);
+                    }
+                    case "resource" -> {
+                        Deck<ResourceCard> deck = table.getDeckResource();
+                        player.drawResource(deck);
+                        table.setDeckResource(deck);
+                        game.setTableOfDecks(table);
 
-                } else if (tipo.equals("initial")) {
-                    Deck deck = table.getDeckStart();
-                    player.draw(deck);
-                    table.setDeckStart(deck);
-                    game.setTableOfDecks(table);
-                } else {
-                    //gestire l'eccezzione in cui non viene inserita una string corretta(se vogliamo)
-
+                    }
+                    case "initial" -> {
+                        Deck<InitialCard> deck = table.getDeckStart();
+                        player.drawInitial(deck);
+                        table.setDeckStart(deck);
+                        game.setTableOfDecks(table);
+                    }
+                    default -> {
+                        //gestire l'eccezzione in cui non viene inserita una string corretta(se vogliamo)
+                    }
                 }
                 game.setPlayers(players);
             }
@@ -149,7 +160,8 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    public synchronized void draw(Card cardSelected, String nick) {
+    //public synchronized void drawFromTable(int cardSelected, String nick)
+    public synchronized void drawFromTable(Card cardSelected, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
@@ -181,7 +193,7 @@ public class GameController implements GameControllerInterface, Serializable {
         players = (HashMap<Player, Boolean>) game.getPlayers();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                Boolean status = players.remove(player);
+                //Boolean status = players.remove(player); non serve perchè il valore viene sostituito da put()
                 players.put(player, value);
             }
         }
@@ -224,14 +236,21 @@ public class GameController implements GameControllerInterface, Serializable {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         PointTable pointTable = game.getPointTable();
-        String winner = "nessuno";
+        String winner = "nobody";
         int maxpoint = 0;
         for (Player player : players.keySet()) {
             int point = 0;
-            point = player.getGoal().getGoalPoints((HashMap) player.getGameStation().getPlayedCards(), (HashMap) player.getGameStation().calculateAvailableResources());
-            ArrayList<GoalCard> goals = (ArrayList) game.getTableOfDecks().getGoals();
+            point = player.getGoal()
+                    .getGoalPoints(
+                            (HashMap<Point, PlayableCard>) player.getGameStation().getPlayedCards(),
+                            (HashMap<Item, Integer>) player.getGameStation().calculateAvailableResources()
+                    );
+            ArrayList<GoalCard> goals = (ArrayList<GoalCard>) game.getTableOfDecks().getGoals();
             for (GoalCard goalCard : goals) {
-                point = point + goalCard.getGoalPoints((HashMap) player.getGameStation().getPlayedCards(), (HashMap) player.getGameStation().calculateAvailableResources());
+                point = point + goalCard.getGoalPoints(
+                                (HashMap<Point, PlayableCard>) player.getGameStation().getPlayedCards(),
+                                (HashMap<Item, Integer>) player.getGameStation().calculateAvailableResources()
+                        );
             }
             point = point + pointTable.getPoint(player);
             pointTable.updatePoint(player, point);
@@ -299,7 +318,7 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         game.setPointTable(pointTable);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
+            //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_UpdatePoints(game);
         }
@@ -342,14 +361,14 @@ public class GameController implements GameControllerInterface, Serializable {
         PointTable pointTable = game.getPointTable();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                Deck deck = table.getDeckGold();
-                player.draw(deck);
+                Deck<GoldCard> deck = table.getDeckGold();
+                player.drawGold(deck);
                 table.setDeckGold(deck);
                 table.setDeckGold(deck);
-                deck = table.getDeckResource();
-                player.draw(deck);
-                player.draw(deck);
-                table.setDeckResource(deck);
+                Deck<ResourceCard> deckR = table.getDeckResource();
+                player.drawResource(deckR);
+                player.drawResource(deckR);
+                table.setDeckResource(deckR);
                 game.setPlayers(players);
                 game.setTableOfDecks(table);
             }
@@ -375,7 +394,7 @@ public class GameController implements GameControllerInterface, Serializable {
     public void addPlayer(Player p) throws IllegalStateException{
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            String chiave = entry.getKey();
+            //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_AddedPlayer(game);
         }

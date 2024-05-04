@@ -15,7 +15,7 @@ import java.util.List;
 public class TableOfDecks {
     private ArrayList<Card> cards;
 
-    private ArrayList<Card> goals;
+    private ArrayList<GoalCard> goals;
     private Deck<GoldCard> deckGold;
 
     private Deck<GoalCard> deckGoal;
@@ -29,7 +29,7 @@ public class TableOfDecks {
      */
     public TableOfDecks(){
         this.cards = new ArrayList<Card>(); //this one should be set later
-        this.goals = new ArrayList<Card>();
+        this.goals = new ArrayList<GoalCard>();
     }
 
     /**
@@ -42,13 +42,13 @@ public class TableOfDecks {
      * @param goals:the 2 shared goals
      */
     public TableOfDecks(Deck<GoldCard> deckGold,Deck<GoalCard> deckGoal, Deck<ResourceCard> deckResource,
-                        Deck<InitialCard> deckStart, ArrayList<Card> cards, ArrayList<Card> goals) {
+                        Deck<InitialCard> deckStart, ArrayList<Card> cards, ArrayList<GoalCard> goals) {
         this.cards = new ArrayList<Card>(cards); //this one should be set later
         this.deckGold =  new Deck<>(deckGold);
         this.deckGoal = new Deck<>(deckGoal);
         this.deckResource = new Deck<>(deckResource);
         this.deckStart = new Deck<>(deckStart);
-        this.goals = new ArrayList<Card>(goals); //this one should be set later too
+        this.goals = new ArrayList<GoalCard>(goals); //this one should be set later too
     }
 
     /**
@@ -85,9 +85,9 @@ public class TableOfDecks {
      * @author Lorenzo Galatea
      * @return ArrayList which contains the 2 goals
      */
-    public List<Card> getGoals() {
+    public List<GoalCard> getGoals() {
         if (goals != null) {
-            return new ArrayList<>(goals);
+            return new ArrayList<GoalCard>(goals);
         } else {
             return new ArrayList<>();
         }
@@ -112,7 +112,7 @@ public class TableOfDecks {
         }else {
             if (newCard != null) {
                 if (cards.get(0) != null) {
-                    if (newCard.equals(cards.get(0))) {
+                    if (newCard.equals(cards.getFirst())) {
                         try {
                             cards.set(0, deckResource.getFirst());
                         } catch (IllegalStateException e) {
