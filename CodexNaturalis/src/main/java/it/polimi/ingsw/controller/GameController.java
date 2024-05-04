@@ -399,7 +399,8 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_AddedPlayer(game);
         }
     }
-//controlla se abbiamo raggiunto il numero massimo di giocatori e possiamo iniziare
+
+    //controlla se abbiamo raggiunto il numero massimo di giocatori e possiamo iniziare
     public synchronized boolean checkIfStart(){
         return game.getPlayers().size()==game.getMaxNumberPlayer();
     }
@@ -416,6 +417,10 @@ public class GameController implements GameControllerInterface, Serializable {
     @Override
     public HashMap<Player, Boolean> getPlayers(){
         return (HashMap<Player, Boolean>) game.getPlayers();
+    }
+
+    public Status getStatus(){
+        return this.game.getStatus();
     }
 
 }
