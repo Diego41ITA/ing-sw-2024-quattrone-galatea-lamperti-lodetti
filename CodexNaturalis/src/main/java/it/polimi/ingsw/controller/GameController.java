@@ -423,6 +423,12 @@ public class GameController implements GameControllerInterface, Serializable {
         return this.game.getStatus();
     }
 
+
+    //metodi da implementare
+    public void reconnectPlayer(Player player){}
+    public void leave(GameObserver obs, String nick){}
+    public int getNumOfOnlinePlayers(){return 0;}
+
 }
 
 
