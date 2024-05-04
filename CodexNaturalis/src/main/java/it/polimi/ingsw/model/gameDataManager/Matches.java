@@ -14,7 +14,7 @@ import java.io.*;
  * gameID that the client can use to join or to operate on that particular game.
  * @author Lodetti Alessandro
  */
-public class Matches {
+public class Matches implements Serializable{
     private final List<Game> games;
     private static int number = 0;
 

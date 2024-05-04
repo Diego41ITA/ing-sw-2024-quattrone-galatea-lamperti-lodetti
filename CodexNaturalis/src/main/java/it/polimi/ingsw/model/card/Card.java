@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.card;
 
+import java.io.Serializable;
+
 import static java.lang.Math.floor;
 
 /**
@@ -8,7 +10,7 @@ import static java.lang.Math.floor;
  * type indicates the type of the card (using the enum TypeOfCard)
  * @author Luca Lamperti
  */
-public abstract class Card {
+public abstract class Card implements Serializable {
     private final int cardId;
     private boolean isFront;
     private final TypeOfCard type;

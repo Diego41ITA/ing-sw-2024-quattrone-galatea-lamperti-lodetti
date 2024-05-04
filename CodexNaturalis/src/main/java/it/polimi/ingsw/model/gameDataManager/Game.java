@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model.gameDataManager;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * this class represents a single game of CodexNaturalis.
  * @author Quattrone Diego
  */
-public class Game {
+public class Game implements Serializable {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
     private Map<Player, Boolean> players;
     /**the maximum number of players that can partecipate to a game. */

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 import java.awt.Point;
@@ -10,7 +11,7 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
  * represents the class associated with the player
  * @author Lorenzo galatea
  */
-public class Player {
+public class Player implements Serializable {
 
     /** nickname is the player's name and is a string */
     private String nickname;

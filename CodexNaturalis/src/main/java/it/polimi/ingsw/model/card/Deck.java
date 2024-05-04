@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model.card;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * this class defines the deck structure as a collection of cards
  * @author Lodetti Alessandro
  */
-public class Deck <T extends Card> {
+public class Deck <T extends Card> implements Serializable {
     private final List<T> cards;
 
     /**

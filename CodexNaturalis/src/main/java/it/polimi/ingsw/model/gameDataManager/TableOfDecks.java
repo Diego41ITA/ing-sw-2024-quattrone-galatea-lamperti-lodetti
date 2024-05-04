@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.parse.DeckReader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * players can draw. It is shared by all players in the same game
  * @author Lorenzo Galatea
  */
-public class TableOfDecks {
+public class TableOfDecks implements Serializable {
     private ArrayList<Card> cards;
 
     private ArrayList<GoalCard> goals;

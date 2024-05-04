@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 import it.polimi.ingsw.model.card.*;
+
+import java.io.Serializable;
 import java.util.*;
 import java.awt.Point;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -8,7 +10,7 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
  * this class represents the Station where the player places his cards for make point
  * @author Lodetti Alessandro, Lorenzo Galatea, Diego Quattrone
  */
-public class GameStation {
+public class GameStation implements Serializable {
     /**
      * It's a map that associates each card that has been played with its coordinates.
      * The coordinates refer to the center of the card

@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.gameDataManager;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
  * With all the methods defined the attribut turnNumber is totaly useless.
  * @author Lodetti Alessandro
  */
-public class Turn {
+public class Turn implements Serializable {
 
     //it is possible to do this with nicknames only.
     private List<Player> players;

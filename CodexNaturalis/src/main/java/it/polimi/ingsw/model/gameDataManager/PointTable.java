@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameDataManager;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -8,7 +9,7 @@ import java.util.Map;
  * @author Lorenzo Galatea
  */
 
-public class PointTable {
+public class PointTable implements Serializable {
     private final HashMap<Color, Integer> points;
 
     /**
