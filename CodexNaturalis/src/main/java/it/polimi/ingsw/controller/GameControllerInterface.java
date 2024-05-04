@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.Player;
 
@@ -53,7 +55,7 @@ public interface GameControllerInterface extends Remote {
 
 
  //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
-    public void addPlayer(Player p) throws IllegalStateException;
+    public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException;
 //metodo che ritorna i punti della carta risorsa
     public int getResourcePoint(ResourceCard card);
 // metodo che ritorna id del game

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
+import it.polimi.ingsw.model.exceptions.GameEndedException;
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
@@ -391,7 +394,7 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
     @Override
-    public void addPlayer(Player p) throws IllegalStateException{
+    public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException {
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             //String chiave = entry.getKey();
@@ -425,7 +428,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
 
     //metodi da implementare
-    public void reconnectPlayer(Player player){}
+    public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {}
     public void leave(GameObserver obs, String nick){}
     public int getNumOfOnlinePlayers(){return 0;}
 
