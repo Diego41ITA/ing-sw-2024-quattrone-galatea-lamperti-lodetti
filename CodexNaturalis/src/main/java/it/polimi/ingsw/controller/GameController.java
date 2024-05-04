@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
-import it.polimi.ingsw.model.exceptions.GameEndedException;
-import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
-import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
-import it.polimi.ingsw.model.exceptions.illegalOperationException;
+import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
@@ -428,9 +425,15 @@ public class GameController implements GameControllerInterface, Serializable {
 
 
     //metodi da implementare
-    public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {}
+    public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {
+        try {this.game.reconnectPlayer(player);} catch (PlayerReconnectionException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void leave(GameObserver obs, String nick){}
-    public int getNumOfOnlinePlayers(){return 0;}
+
+    public int getNumOfOnlinePlayers(){
+        return this.game.getNumOfOnlinePlayers();}
 
 }
 

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
+import it.polimi.ingsw.model.exceptions.PlayerReconnectionException;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -219,6 +221,26 @@ public class Game implements Serializable {
         if(players.size() >= this.maxNumberPlayer)
             throw new IllegalStateException();
         players.put(player, true);
+    }
+
+    public void reconnectPlayer(Player p) throws PlayerReconnectionException {
+        for(Player player : this.players.keySet()){
+            if(player.getNick().equals(p.getNick()) && this.players.get(player)) {
+                this.players.put(player, true);
+                return;
+            }
+        }
+        throw new PlayerReconnectionException("Error during reconnection.");
+    }
+
+    public int getNumOfOnlinePlayers(){
+        int count = 0;
+        for (Boolean value : players.values()) {
+            if (value) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
