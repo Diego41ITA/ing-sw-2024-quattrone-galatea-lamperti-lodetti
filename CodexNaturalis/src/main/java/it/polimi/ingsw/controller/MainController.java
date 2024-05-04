@@ -1,10 +1,14 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.exceptions.GameEndedException;
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.view.PrintlnThread;
+import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.rmi.RemoteException;
 import java.util.*;
@@ -50,7 +54,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param obs GameObserver associated with the player who is creating the game
      * @param nick Player's nickname
      * @return GameControllerInterface of the created game
-     * @throws RemoteException
+     * @throws RemoteException it could throw this exception if something goes wrong
      */
     @Override
     public synchronized GameControllerInterface createGame(GameObserver obs, String nick) throws RemoteException{
@@ -77,7 +81,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param obs GameObserver associated with the player who is joining the game
      * @param nick Player's nickname
      * @return GameControllerInterface of the created game
-     * @throws RemoteException
+     * @throws RemoteException it could throw this exception when something goes wrong
      */
     @Override
     public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException {
@@ -98,7 +102,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 randomAvailableGame.addObserver(obs, player);
                 randomAvailableGame.addPlayer(player);
 
-                printAsync("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
+                Println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
                 printActiveGames();
                 return randomAvailableGame;
             } catch (MaxPlayersInException | PlayerAlreadyInException e) {
@@ -118,7 +122,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param nick Player's nickname
      * @param GameID univoque ID of the game to rejoin
      * @return GameControllerInterface of the joined game
-     * @throws RemoteException
+     * @throws RemoteException it could throw this when something goes wrong
      */
     public synchronized GameControllerInterface rejoin(GameObserver obs, String nick, String GameID) throws RemoteException {
         for (GameController game : activeGames) {
@@ -133,9 +137,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                     }
                     obs.genericErrorWhenEnteringGame("The nickname used was not connected in the running game.");
                     return null;
-                } catch (MaxPlayersInException e) {
-                    throw new RuntimeException(e);
-                } catch (GameEndedException e) {
+                } catch (MaxPlayersInException | GameEndedException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -154,15 +156,15 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @throws RemoteException
      */
     @Override
-    public GameControllerInterface leaveGame(GameObserver obs, String nick, String GameID) throws RemoteException {
+    public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
         for (GameController game : activeGames) {
-            if (game.getGameId().equals(GameID)) {
+            if (game.getGameId().equals(gameID)) {
                 game.leave(obs, nick);
-                printAsync("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
+                Println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
                 printActiveGames();
 
                 if (game.getNumOfOnlinePlayers() == 0) {
-                    deleteGame(idGame);
+                    deleteGame(gameID);
                 }
             }
         }
@@ -178,7 +180,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         for (GameController game : activeGames) {
             if (game.getGameId().equals(GameID)) {
                 activeGames.remove(game);
-                printAsync("\t>Game " + GameID + " removed from activeGames");
+                Println("\t>Game " + GameID + " removed from activeGames");
                 printActiveGames();
             }
         }
@@ -188,11 +190,11 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * Print all games currently running
      */
     private void printActiveGames() {
-        printAsyncNoLine("\t\trunningGames: ");
+        Println("\t\trunningGames: ");
         for (GameController game : activeGames) {
-            printAsync(game.getGameId() + " "));
+            Println(game.getGameId() + " ");
         }
-        printAsync("");
+        Println("");
     }
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).
