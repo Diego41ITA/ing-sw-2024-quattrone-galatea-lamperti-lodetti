@@ -1,6 +1,7 @@
 package it.polimi.ingsw.networking.socket.server;
 
 import it.polimi.ingsw.controller.GameControllerInterface;
+import it.polimi.ingsw.controller.MainController;
 import it.polimi.ingsw.networking.socket.client.message.Message;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 import it.polimi.ingsw.view.PrintlnThread;
@@ -43,12 +44,14 @@ public class ClientHandlerSocket extends Thread{
     @Override
     public void run(){
         //devo lanciare un thread che processi i messaggi letti. in modo che questo thread sia sempre all'ascolto.
+        Thread thread = new Thread(this::manageRequests);
+        thread.start();
         while(true){
             try{
                 Message incomingMessage = (Message) input.readObject();
                 this.queue.add(incomingMessage);
             }catch(IOException | ClassNotFoundException e){
-                Println("No comunication with the client");
+                Println("No communication with the client");
             }
         }
     }
@@ -59,8 +62,13 @@ public class ClientHandlerSocket extends Thread{
                 Message msg = this.queue.take();
 
                 //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
-                msg.execute(GameController);
-
+                if(msg.forMainController){
+                    game = msg.execute(notify, MainController.getMainController());
+                    if(game != null)
+                        nick = msg.nickname;
+                }else {
+                    msg.execute(game);
+                }
             }catch(InterruptedException e){
                 Println("no action");
 
