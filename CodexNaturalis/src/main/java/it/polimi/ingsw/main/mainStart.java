@@ -11,14 +11,15 @@ public class mainStart{
         public static void main(String[] args) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                boolean exit = false;
+                boolean exit;
                 do {
                     System.out.println("Enter the desired configuration type (rmi/socket) followed by (gui/tui):");
                     String input = scanner.nextLine().trim();
                     String[] config = input.split(" ");
+                    exit = true;
                     if (config.length != 2) {
                         System.out.println("Insufficient number of arguments");
-                        exit = true;
+                        exit = false;
                     }
                     if (exit) {
                         if(config[0].equals("rmi") && config[1].equals("gui")) {
