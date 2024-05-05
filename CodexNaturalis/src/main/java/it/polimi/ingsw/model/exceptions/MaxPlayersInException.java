@@ -6,6 +6,6 @@ public class MaxPlayersInException extends Exception{
     }
 
     public MaxPlayersInException(String msg){
-        super(msg);
+        super("Max players already in exception");
     }
 }

@@ -20,6 +20,6 @@ public class CreateGameMessage extends Message{
 
     @Override
     public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
-        return operation.createGame(obs, this.nickname);
+        return operation.createGame(obs, this.nickname, );
     }
 }

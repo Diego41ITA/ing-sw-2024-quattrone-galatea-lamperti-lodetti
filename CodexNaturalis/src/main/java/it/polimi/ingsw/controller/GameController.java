@@ -23,8 +23,9 @@ public class GameController implements GameControllerInterface, Serializable {
     //ho una hashMap di string(nome del player) e di handleObserver
     private HashMap<String, HandleObserver> observers;
 
-    public GameController(String id) {
+    public GameController(String id, int maxNumPlayers) {
         game = new Game(id);
+        game.setMaxNumberPlayer(maxNumPlayers);
         game.setPointTable(new PointTable());
         game.setTableOfDecks(new TableOfDecks());
         game.setTurn(new Turn(new ArrayList<Player>()));
@@ -105,15 +106,17 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     //pescaggio da deck:
-//immagino che il giocatore inserisca una stringa da riga di comando in cui dice il tipo di deck da cui vuole pescare
+    //immagino che il giocatore inserisca una stringa da riga di comando in cui dice il tipo di deck da
+    // cui vuole pescare
 
     /**
-     * this method draw a card from tableOfDecks and put it in the hand of the player. It manages also the consistency
-     * of the model.
+     * this method draw a PlayableCard from tableOfDecks and put it in the hand of the player.
+     * It manages also the consistency of the model.
      * @param typo is the textual representation of the deck type.
      * @param nick is the nickname of the player
      */
-    public synchronized void drawFromDeck(String typo, String nick) {
+    @Override
+    public synchronized void drawPlayableCardFromTableOfDecks(String typo, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
@@ -127,25 +130,12 @@ public class GameController implements GameControllerInterface, Serializable {
                         game.setTableOfDecks(table);
 
                     }
-                    case "goal" -> {
-                        Deck<GoalCard> deck = table.getDeckGoal();
-                        player.drawGoal(deck);
-                        table.setDeckGoal(deck);
-                        game.setTableOfDecks(table);
-
-                    }
                     case "resource" -> {
                         Deck<ResourceCard> deck = table.getDeckResource();
                         player.drawResource(deck);
                         table.setDeckResource(deck);
                         game.setTableOfDecks(table);
 
-                    }
-                    case "initial" -> {
-                        Deck<InitialCard> deck = table.getDeckStart();
-                        player.drawInitial(deck);
-                        table.setDeckStart(deck);
-                        game.setTableOfDecks(table);
                     }
                     default -> {
                         //gestire l'eccezzione in cui non viene inserita una string corretta(se vogliamo)
@@ -174,8 +164,6 @@ public class GameController implements GameControllerInterface, Serializable {
                         table.setCards(card);
                     }
                 }
-
-
             }
         }
         game.setTableOfDecks(table);
@@ -425,6 +413,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
     public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {
         this.game.reconnectPlayer(player);
+        changePlayerStatus(player.getNick(), true);
     }
     public void leave(String nick){
         this.observers.remove(nick);
@@ -433,6 +422,8 @@ public class GameController implements GameControllerInterface, Serializable {
 
     public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
 
+    //implemtare:
+    //initializePlayer, getObservers, notify de
 }
 
 

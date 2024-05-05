@@ -25,7 +25,10 @@ public interface GameControllerInterface extends Remote {
     public void setColor(String color, String name);
     //pgioca una carta sul tavolo da gioco
     public void playCard(PlayableCard card, Point cord, String nick) throws illegalOperationException;
-    //cambia lo stato dei giocatori(connesso o non connesso)
+
+ void drawPlayableCardFromTableOfDecks(String typo, String nick);
+
+ //cambia lo stato dei giocatori(connesso o non connesso)
     public void changePlayerStatus(String nick, Boolean value);
     //cambia il modo di piazzare la carta
     public Card cardIsFrontChanger(Card card, Boolean value);

@@ -221,6 +221,15 @@ public class Game implements Serializable {
         players.put(player, true);
     }
 
+    /**
+     * Remove a player from the game
+     * @param nick Nickname of the player to remove
+     */
+    public void removePlayer(String nick) {
+        this.players.entrySet().removeIf(entry -> entry.getKey().getNick().equals(nick));
+    }
+
+
     public void reconnectPlayer(Player p) {
         for(Player player : this.players.keySet()){
             if(player.getNick().equals(p.getNick()) && this.players.get(player)) {

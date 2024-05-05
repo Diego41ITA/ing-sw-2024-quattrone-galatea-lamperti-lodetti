@@ -50,8 +50,8 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     //a questo punto abbiamo fatto la parte di creazione del server rimangono da implementare i metodi di
     // MainControllerInterface; sono quindi quei metodi per la creazione accessibili da un client connesso.
     @Override
-    public GameControllerInterface createGame(GameObserver obs, String nick) throws RemoteException{
-        GameControllerInterface stub = server.mainController.createGame(obs, nick);
+    public GameControllerInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException{
+        GameControllerInterface stub = server.mainController.createGame(obs, nick, );
 
         try{
             //si prova ad esportare l'oggetto creato sulla porta 0 (dove è connesso il client per la ricezione degli input)

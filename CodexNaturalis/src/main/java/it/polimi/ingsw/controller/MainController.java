@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
 import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
@@ -50,16 +51,17 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * Create a new game by creating his gameController and
      * allows a Player to join it
      *
-     * @param obs GameObserver associated with the player who is creating the game
-     * @param nick Player's nickname
+     * @param obs           GameObserver associated with the player who is creating the game
+     * @param nick          Player's nickname
+     * @param maxNumPlayers Max number of players selected during game creation
      * @return GameControllerInterface of the created game
      * @throws RemoteException it could throw this exception if something goes wrong
      */
     @Override
-    public synchronized GameControllerInterface createGame(GameObserver obs, String nick) throws RemoteException{
+    public synchronized GameControllerInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException{
         Player player = new Player(nick);
         String gameID = "Game" + (activeGames.size() + 1);
-        GameController controller = new GameController(gameID);
+        GameController controller = new GameController(gameID, maxNumPlayers);
         controller.addObserver(obs, player);
         activeGames.add(controller);
 
@@ -81,19 +83,20 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param nick Player's nickname
      * @return GameControllerInterface of the created game
      * @throws RemoteException it could throw this exception when something goes wrong
+     * @throws NoAvailableGameToJoinException if there are no available game to join
      */
     @Override
-    public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException {
-        List<GameController> availableGames = new ArrayList<>();
+    public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException, NoAvailableGameToJoinException {
+        List<GameController> availableGames = activeGames.stream()
+                .filter(gameController ->
+                        gameController.getStatus().equals(Status.WAITING) &&
+                                !gameController.checkIfStart() &&
+                                gameController.getPlayers().keySet().stream()
+                                        .noneMatch(player -> player.getNick().equals(nick))
+                )
+                .toList();
 
-        // Filter available games
-        for (GameController gameController : activeGames) {
-            if (gameController.getStatus().equals(Status.WAITING) && !gameController.checkIfStart()) {
-                availableGames.add(gameController);
-            }
-        }
-
-        // If there are available games, try to join the first one
+        // If there are available games, try to join one
         if (!availableGames.isEmpty()) {
             GameController randomAvailableGame = availableGames.get(random.nextInt(availableGames.size()));
             Player player = new Player(nick);
@@ -111,6 +114,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         } else {
             // No available games
             obs.genericErrorWhenEnteringGame("No games currently available to join...");
+            throw new NoAvailableGameToJoinException();
         }
         return null;
     }

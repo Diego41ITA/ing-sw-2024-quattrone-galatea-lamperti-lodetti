@@ -1,6 +1,5 @@
 package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.*;
-import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.GameFlow;
@@ -54,7 +53,7 @@ public class ClientRMI implements ClientAction {
     public void createGame(String nick) throws RemoteException{
         registry = LocateRegistry.getRegistry(/*...*/);
         request = (MainControllerInterface) registry.lookup("server name");
-        gameController = request.createGame(notificationGetter, nick);
+        gameController = request.createGame(notificationGetter, nick, );
         nickname = nick;
     }
 
