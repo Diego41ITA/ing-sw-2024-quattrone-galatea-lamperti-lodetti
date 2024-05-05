@@ -16,4 +16,10 @@ public class GameFlow implements Runnable, ClientAction, GameObserver {
     //implementa runnable perché il cuore starà dentro ad un thread
 
     //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
+
+    public GameFlow(String nick, UI ui, ClientAction client){
+        this.nickname = nick;
+        this.ui = ui;
+        this.client = client;
+    }
 }

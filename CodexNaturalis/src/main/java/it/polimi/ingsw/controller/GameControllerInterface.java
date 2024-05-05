@@ -55,9 +55,7 @@ public interface GameControllerInterface extends Remote {
     //ritorna la lista di goalcard che l'utente può scegliere
     public ArrayList<GoalCard> getPossibleGoals(); //va aggiunta una notify
 
-
-
- //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
+  //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
     public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException;
 //metodo che ritorna i punti della carta risorsa
     public int getResourcePoint(ResourceCard card);
