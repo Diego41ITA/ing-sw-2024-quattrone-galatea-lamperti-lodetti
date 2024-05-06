@@ -20,6 +20,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * the game to control
      */
     private Game game;
+
     //ho una hashMap di string(nome del player) e di handleObserver
     private HashMap<String, HandleObserver> observers;
 
@@ -369,7 +370,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
     //ritorna la lista di goalcard che l'utente può scegliere(dubbio, bisogna creare qualcosa del genere nel model e poi usare il
     //pattern observer?)
-     @Override
+    @Override
     public ArrayList<GoalCard> getPossibleGoals() {
         ArrayList<GoalCard> goals = new ArrayList<>();
         goals.add((GoalCard) game.getTableOfDecks().getGoals().getFirst());
@@ -422,8 +423,12 @@ public class GameController implements GameControllerInterface, Serializable {
 
     public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
 
+    public HashMap<String, HandleObserver> getObservers() {
+        return observers;
+    }
+
     //implemtare:
-    //initializePlayer, getObservers, notify de
+    //initializePlayer, notify de
 }
 
 
