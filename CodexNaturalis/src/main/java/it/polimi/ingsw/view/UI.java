@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.GoldCard;
 import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.gameDataManager.Game;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 
 /**
@@ -15,6 +17,8 @@ public interface UI {
 
     public void show_startingMenu();
 
+    public void show_message(String message);
+
     public void show_joinRandomGame();
 
     public void show_noAvailableGames();
@@ -22,6 +26,10 @@ public interface UI {
     public void show_createNewGame();
 
     public void show_reconnectGame();
+
+    public void show_invalidIdGame();
+
+    public void show_currentPlayersStatus(GameView gameView);
 
     public void show_RequestPlayerNickName();
 
@@ -39,9 +47,11 @@ public interface UI {
 
     public void show_playerHand(GameView immutableModel);
 
-    public void show_gameStation(Player player);
+    public void show_gameStation(GameStation gameStation);
 
     public void show_invalidPlay();
+
+    public void show_notEnoughResources();
 
     public void show_goalCard(GoalCard card);
 

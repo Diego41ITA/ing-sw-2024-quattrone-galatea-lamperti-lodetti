@@ -28,6 +28,11 @@ public class Cli implements UI {
     }
 
     @Override
+    public void show_message(String message) {
+        Println(message);
+    }
+
+    @Override
     public void show_joinRandomGame() {
         Println("""
                 JOINING A GAME...
@@ -56,6 +61,22 @@ public class Cli implements UI {
         Println("""
                 RECONNECTING TO THE GAME...
                 """);
+    }
+
+    @Override
+    public void show_invalidIdGame() {
+        Println("""
+                INVALID GAME ID!!!
+                """);
+    }
+
+    @Override
+    public void show_currentPlayersStatus(GameView gameView) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Player p : gameView.getPlayers().keySet()){
+            stringBuilder.append(p.getNick()).append(" color: " + p.getColor()).append(", status: ").append(gameView.getPlayers().get(p)).append('\n');
+        }
+        Println(stringBuilder.toString());
     }
 
     @Override
@@ -107,8 +128,8 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_gameStation(Player player){
-        Map<Point, PlayableCard> playedCards = player.getGameStation().getPlayedCards();
+    public void show_gameStation(GameStation gameStation){
+        Map<Point, PlayableCard> playedCards = gameStation.getPlayedCards();
 
         int spaces;
 
@@ -121,7 +142,7 @@ public class Cli implements UI {
         for(int row = 1; row <= maxRow; row++){
             stringBuilder.append("|");
             for(int column = 1; column <= maxColumn; column++){
-                String value = determineValue(player.getGameStation(), new Point(column - maxColumn + 2, maxRow - row - 2));
+                String value = determineValue(gameStation, new Point(column - maxColumn + 2, maxRow - row - 2));
                 spaces = Math.round(2 - value.length()/2);
                 stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
                 if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
@@ -200,6 +221,13 @@ public class Cli implements UI {
     public void show_invalidPlay() {
         Println("""
                 INVALID PLAY...
+                """);
+    }
+
+    @Override
+    public void show_notEnoughResources() {
+        Println("""
+                NOT ENOUGH RESOURCES!!!
                 """);
     }
 

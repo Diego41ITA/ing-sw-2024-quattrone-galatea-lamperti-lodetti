@@ -351,6 +351,7 @@ public class GameController implements GameControllerInterface, Serializable {
             observers.get(nick).notify_chooseGoal(game);
         }
     }
+
     @Override
     public void initializeHandPlayer(String nick) {
         HashMap<Player, Boolean> players;
@@ -372,7 +373,7 @@ public class GameController implements GameControllerInterface, Serializable {
             }
 
         }
-        observers.get(nick).notify_updatedHandAndTable(game);//capire che argomenti mettere
+        observers.get(nick).notify_updatedHandAndTable(game, nick);//capire che argomenti mettere
 
 
     }

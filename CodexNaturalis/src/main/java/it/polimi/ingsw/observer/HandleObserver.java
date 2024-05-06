@@ -120,9 +120,9 @@ public class HandleObserver {
     }
 
 
-    public synchronized void notify_updatedHandAndTable(Game game){
+    public synchronized void notify_updatedHandAndTable(Game game, String nick){
         try {
-            observer.updateHandAndTable(new GameView(game));
+            observer.updateHandAndTable(new GameView(game), nick);
         }catch(RemoteException e){
             //
         }
