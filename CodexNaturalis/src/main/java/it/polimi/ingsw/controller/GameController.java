@@ -63,25 +63,27 @@ public class GameController implements GameControllerInterface, Serializable {
     //viene messo il colore nella pointtable e nel player
     @Override
     public void setColor(String color, String name) {
-        PointTable pointTable = game.getPointTable();
-        HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
+        synchronized (this.game) {
+            PointTable pointTable = game.getPointTable();
+            HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
 
-        if (!this.game.isColorAvailable(color)) {
-            System.out.println("Color " + color + " is not available.");
-            this.game.printAvailableColors();
-            return;
-        }
-
-        for (Player player : players.keySet()) {
-            if (player.getNick().equals(name)) {
-                player.setColor(Color.valueOf(color.toUpperCase()));
-                pointTable.setColorPoints(Color.valueOf(color.toUpperCase()));
+            if (!this.game.isColorAvailable(color)) {
+                System.out.println("Color " + color + " is not available.");
+                this.game.printAvailableColors();
+                return;
             }
-            game.setPlayers(players);
-            game.setPointTable(pointTable);
-            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-                HandleObserver obs = entry.getValue();
-                obs.notify_color(game);
+
+            for (Player player : players.keySet()) {
+                if (player.getNick().equals(name)) {
+                    player.setColor(Color.valueOf(color.toUpperCase()));
+                    pointTable.setColorPoints(Color.valueOf(color.toUpperCase()));
+                }
+                game.setPlayers(players);
+                game.setPointTable(pointTable);
+                for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                    HandleObserver obs = entry.getValue();
+                    obs.notify_color(game);
+                }
             }
         }
     }
