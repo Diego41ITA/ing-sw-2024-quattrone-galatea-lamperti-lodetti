@@ -50,10 +50,10 @@ public class ClientRMI implements ClientAction {
 
     //bisogna implementare i metodi di ClientAction
     @Override
-    public void createGame(String nick) throws RemoteException{
+    public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException{
         registry = LocateRegistry.getRegistry(/*...*/);
         request = (MainControllerInterface) registry.lookup("server name");
-        gameController = request.createGame(notificationGetter, nick, );
+        gameController = request.createGame(notificationGetter, nick, maxNumberOfPlayers);
         nickname = nick;
     }
 

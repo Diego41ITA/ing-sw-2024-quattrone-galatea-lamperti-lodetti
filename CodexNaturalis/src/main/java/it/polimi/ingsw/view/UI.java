@@ -31,6 +31,10 @@ public interface UI {
 
     public void show_currentPlayersStatus(GameView gameView);
 
+    public void show_playerColors(GameView gameView);
+
+    public void show_GameStatus(GameView gameView);
+
     public void show_RequestPlayerNickName();
 
     public void show_RequestGameId();

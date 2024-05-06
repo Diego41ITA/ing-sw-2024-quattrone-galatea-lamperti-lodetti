@@ -21,6 +21,8 @@ public class Cli implements UI {
         Println("""
                 STARTING MENU
                 
+                CHOOSE AN OPTION:
+                
                 A- JOIN RANDOM GAME
                 B- RECONNECT TO AN EXISTING GAME
                 
@@ -43,6 +45,8 @@ public class Cli implements UI {
     public void show_noAvailableGames() {
         Println("""
                 NO GAMES AVAILABLE
+                
+                CHOOSE AN OPTION:
                 
                 A-CREATE A NEW GAME
                 B-EXIT
@@ -74,9 +78,23 @@ public class Cli implements UI {
     public void show_currentPlayersStatus(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
         for(Player p : gameView.getPlayers().keySet()){
-            stringBuilder.append(p.getNick()).append(" color: " + p.getColor()).append(", status: ").append(gameView.getPlayers().get(p)).append('\n');
+            stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getPlayers().get(p)).append('\n');
         }
         Println(stringBuilder.toString());
+    }
+
+    @Override
+    public void show_playerColors(GameView gameView) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Player p : gameView.getPlayers().keySet()){
+            stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
+        }
+        Println(stringBuilder.toString());
+    }
+
+    @Override
+    public void show_GameStatus(GameView gameView){
+        Println(gameView.getStatus().toString());
     }
 
     @Override

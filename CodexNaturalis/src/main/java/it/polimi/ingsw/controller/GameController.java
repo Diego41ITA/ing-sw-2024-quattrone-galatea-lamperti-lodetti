@@ -107,7 +107,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
         }
         game.setPlayers(players);
-
+//non dovrebbe avvertire solo il player che ha piazzato la carta?
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();

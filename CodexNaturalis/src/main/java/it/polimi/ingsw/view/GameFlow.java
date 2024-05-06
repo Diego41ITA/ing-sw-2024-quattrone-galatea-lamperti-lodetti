@@ -13,6 +13,7 @@ import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
 import java.rmi.RemoteException;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private ClientAction client;
@@ -24,7 +25,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     boolean stay = true;
 
     //metto 4 attributi State
-    private StateWaiting state1;
+    private StateWaiting state1 = new StateWaiting();
     private StateActive state2;
     private StateSuspended state3;
     private StateFinished state4;
@@ -38,18 +39,40 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
 
-    public GameFlow(String nick, UI ui, ClientAction client){
-        this.nickname = nick;
+    public GameFlow(/*String nick,*/ UI ui, ClientAction client){
+        //this.nickname = nick;       il nickName quando viene inserito?
         this.ui = ui;
         this.client = client;
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public GameView getView(){
+        return view;
+    }
+
+    public ClientAction getClient() {
+        return client;
+    }
+
+    public String getNickname(){
+        return nickname;
     }
 
     public void run(){
         boolean stay = true;
 
-        while(stay) {
+        state1.setFlow(this);
+        ui.show_RequestPlayerNickName();
+        Scanner scanner = new Scanner(System.in);
+        nickname = scanner.nextLine();
+
+        while(stay) {//ad ogni ciclo farà qualcosa, quando lo status cambierà cambierà anche l'azione effettuata
             if(view.getStatus() == Status.WAITING) {
-                state1.execute();   //ad ogni ciclo farà qualcosa, quando lo status cambierà cambierà anche l'azione effettuata
+                state1.execute();
+                //avanzamento di stato
             } else if (view.getStatus() == Status.ACTIVE) {
                 state2.execute();
             } else if (view.getStatus() == Status.SUSPENDED) {
@@ -68,23 +91,27 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         this.view = game;
     }
 
+    //IMPORTANTE
+    //la gameView viene aggiornata ad ogni notifica oppure in momenti determinati(e quindi mostriamo solo con la TUI gli aggiornamenti)?
+    //cosa pià importante manca una notifica quando il game viene creato per inizializzare la gameView
+
     @Override
     public void notEnoughResource() throws RemoteException {
         ui.show_notEnoughResources();
     }
 
-    /* basta notificare che la partita è stata creata
+    //basta notificare che la partita è stata creata?
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game) throws RemoteException {
-
     }
-     */
 
+    //  solo quando è il mio turno vedo il tavolo aggiornato? ( ora mentre giocano gli altri vedo gli aggiornamenti in diretta)
     @Override
     public void updateTableOfDecks(GameView game) throws RemoteException {
         ui.show_tableOfDecks(game);
     }
 
+    //dubbio in GameController per quanto riguarda a chi viene notificato il cambiamento
     @Override
     public void updateGamestation(GameView game, GameStation gameStation) throws RemoteException {
         ui.show_gameStation(gameStation);
@@ -95,11 +122,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_currentPlayersStatus(game);
     }
 
-    /* unire in updatePlayerStatus
     @Override
     public void updateColor(GameView game) throws RemoteException {
+        ui.show_playerColors(game);
     }
-     */
 
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
@@ -131,20 +157,41 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_currentPlayersStatus(game);
     }
 
-    /*
+    //manca
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
     }
-     */
 
     @Override
     public void updateGameStatus(GameView game) throws RemoteException {
-        //come comunico a tutti i client
+        ui.show_GameStatus(game);
     }
 
     @Override
     public void genericErrorWhenEnteringGame(String msg) throws RemoteException {
-        ui.show_message(msg);
+        Scanner scanner = new Scanner(System.in);
+        String input;
+                switch (msg){
+                    case("No games currently available to join..."):
+                        ui.show_noAvailableGames();
+                        input = scanner.nextLine();
+                        switch (input){
+                            case ("A"):
+                                ui.show_RequestNumberOfPlayers();
+                                int numberOfPlayer = scanner.nextInt();
+                                client.createGame(nickname, numberOfPlayer);
+                                break;
+                            case ("B"):
+                                exit();
+                                break;
+                        }
+                        break;
+                    case (""): //invalid maxNumberOfPlayer
+                        break;
+                    case (""): //playerAlreadyIn
+                        break;
+
+        }
     }
 
     @Override

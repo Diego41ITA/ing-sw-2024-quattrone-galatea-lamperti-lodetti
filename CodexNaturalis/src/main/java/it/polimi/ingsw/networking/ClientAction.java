@@ -9,7 +9,7 @@ import java.util.List;
 //questa interfaccia indica tutte le azioni possibili effettuabili da un client
 //notate che rappresenta il punto di contatto tra ClientRMI e ClientSocket perchè entrambi la estenderanno
 public interface ClientAction {
-    void createGame(String nick) throws RemoteException;
+    void createGame(String nick, int maxNumberOfPlayers) throws RemoteException;
     void joinRandomGame(String nick) throws RemoteException;
     void rejoin(String nick, String gameId) throws RemoteException;
     void setMaxNumOfPlayer(String name, int max);
