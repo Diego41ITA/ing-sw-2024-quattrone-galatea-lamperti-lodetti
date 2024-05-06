@@ -15,6 +15,22 @@ public class HandleObserver {
         return observer;
     }
 
+    public void notify_updateGameStations(Game game){
+        try {
+            observer.updateGameStations(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
+    }
+
+    public void notify_changedGameStatus(Game game){
+        try {
+            observer.updateGameStatus(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
+    }
+
     public void  notify_setMaxNumberPlayers(Game game){
         try {
             observer.updatePlayerAndMaxNumberPlayer(new GameView(game));

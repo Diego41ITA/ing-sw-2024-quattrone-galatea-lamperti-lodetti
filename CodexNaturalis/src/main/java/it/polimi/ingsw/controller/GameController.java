@@ -376,8 +376,8 @@ public class GameController implements GameControllerInterface, Serializable {
         goals.add((GoalCard) game.getTableOfDecks().getGoals().getFirst());
         goals.add((GoalCard) game.getTableOfDecks().getGoals().getFirst());
         return goals;
-
     }
+
     //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
     @Override
     public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException {
@@ -421,14 +421,51 @@ public class GameController implements GameControllerInterface, Serializable {
         this.game.removePlayer(nick);
     }
 
+    public InitialCard drawInitialCard(){
+        TableOfDecks table;
+        table = this.game.getTableOfDecks();
+        InitialCard card = table.getDeckStart().getFirst();
+        this.game.setTableOfDecks(table);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver allObs = entry.getValue();
+            allObs.notify_DrawCard(game);
+        }
+        return card;
+    }
+
+    public void setGameStation(String nick, InitialCard card){
+        this.game.getPlayerByNick(nick).setGameStation(new GameStation(card));
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver allObs = entry.getValue();
+            allObs.notify_updateGameStations(game);
+        }
+    }
+
+    public void setGameStatus(Status status){
+        this.game.setStatus(status);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver allObs = entry.getValue();
+            allObs.notify_changedGameStatus(game);
+        }
+    }
+
+    public void assignBlackColor(){
+        String nick = this.game.getTurn().getFirstPlayerNick();
+        HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) this.game.getPlayers();
+        for (Player player : players.keySet()) {
+            if (player.getNick().equals(nick)) {
+                player.setOptionalColor();
+                this.game.setPlayers(players);
+                observers.get(nick).notify_color(game);
+            }
+        }
+    }
+
     public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
 
     public HashMap<String, HandleObserver> getObservers() {
         return observers;
     }
-
-    //implemtare:
-    //initializePlayer, notify de
 }
 
 

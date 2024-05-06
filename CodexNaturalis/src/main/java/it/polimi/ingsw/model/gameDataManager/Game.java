@@ -170,6 +170,15 @@ public class Game implements Serializable {
         return false;
     }
 
+    public Player getPlayerByNick(String name){
+        for(Player p: players.keySet()){
+            if(p.getNick().equals(name))
+                return p;
+        }
+        System.err.println("No player with nick:" + name + "founded");
+        return null;
+    }
+
     /**
      * this method starts the game by assigning active status to "this.status"
      */
