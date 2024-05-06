@@ -65,6 +65,13 @@ public class GameController implements GameControllerInterface, Serializable {
     public void setColor(String color, String name) {
         PointTable pointTable = game.getPointTable();
         HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
+
+        if (!this.game.isColorAvailable(color)) {
+            System.out.println("Color " + color + " is not available.");
+            this.game.printAvailableColors();
+            return;
+        }
+
         for (Player player : players.keySet()) {
             if (player.getNick().equals(name)) {
                 player.setColor(Color.valueOf(color.toUpperCase()));

@@ -259,6 +259,31 @@ public class Game implements Serializable {
         return count;
     }
 
+    public boolean isColorAvailable(String color) {
+        for (Player player : players.keySet()) {
+            if (player.getColor() != null && player.getColor().toString().equalsIgnoreCase(color)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void printAvailableColors() {
+        System.out.println("Available colors:");
+        Set<Color> chosenColors = new HashSet<>();
+        for (Player player : players.keySet()) {
+            Color playerColor = player.getColor();
+            if (playerColor != null) {
+                chosenColors.add(playerColor);
+            }
+        }
+        for (Color color : Color.values()) {
+            if (!chosenColors.contains(color)) {
+                System.out.println(color);
+            }
+        }
+    }
+
     /**
      * this method is an override useful to put a game into a hash-map and to use Map methods like: containsKey() ecc...
      * @return this method returns the hash code of every Game object with the same gameId.
