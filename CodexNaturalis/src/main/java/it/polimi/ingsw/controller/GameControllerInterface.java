@@ -29,7 +29,7 @@ public interface GameControllerInterface extends Remote {
     void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException;
     void drawPlayableCardFromTableOfDecks(String typo, String nick);
 
- //cambia lo stato dei giocatori(connesso o non connesso)
+    //cambia lo stato dei giocatori(connesso o non connesso)
     public void changePlayerStatus(String nick, Boolean value);
     //cambia il modo di piazzare la carta
     public Card cardIsFrontChanger(Card card, Boolean value);
