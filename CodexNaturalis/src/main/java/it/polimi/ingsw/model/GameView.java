@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.gameDataManager.*;
+
+import java.io.Closeable;
 import java.util.*;
 import java.io.Serializable;
 import java.util.stream.Collectors;
@@ -35,6 +37,15 @@ public class GameView implements Serializable {
         this.status = game.getStatus();
         this.turn = new Turn(game.getTurn());
         this.id = game.getId();
+    }
+    public GameView(GameView view){
+        this.players = new HashMap<>(view.players);
+        this.tableOfDecks = new TableOfDecks(view.tableOfDecks);
+        this.points = new PointTable(view.points);
+        this.maxNumOfPlayer = view.maxNumOfPlayer;
+        this.status = view.status;
+        this.turn = view.turn;
+        this.id = view.id;
     }
 
     public Status getStatus(){
@@ -76,4 +87,10 @@ public class GameView implements Serializable {
         }
         return null;
     }
+
+    public String getId() {
+        return id;
+    }
+
+
 }

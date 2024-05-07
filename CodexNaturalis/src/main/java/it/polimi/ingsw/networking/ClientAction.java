@@ -18,7 +18,7 @@ public interface ClientAction {
 
     void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException;
 
-    void joinRandomGame(String nick) throws RemoteException, NotBoundException, NoAvailableGameToJoinException;
+    void joinRandomGame(String nick) throws RemoteException, NotBoundException/*,NoAvailableGameToJoinException*/;
     void rejoin(String nick, String gameId) throws RemoteException, NotBoundException;
     void setMaxNumOfPlayer(String name, int max);
     void playCard(int card, Point cord, String nick,boolean front) throws illegalOperationException;

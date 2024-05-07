@@ -29,6 +29,10 @@ public interface UI {
 
     public void show_invalidIdGame();
 
+    public void show_NickAlreadyUsed(GameView gameView);
+
+    public void show_invalidNickToReconnect(GameView gameView);
+
     public void show_currentPlayersStatus(GameView gameView);
 
     public void show_playerColors(GameView gameView);

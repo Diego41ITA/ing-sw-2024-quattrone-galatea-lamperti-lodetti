@@ -75,6 +75,24 @@ public class Cli implements UI {
     }
 
     @Override
+    public void show_NickAlreadyUsed(GameView gameView) {
+        StringBuilder str = new StringBuilder();
+        str.append("NICKNAME ALREADY USED!\n").append("\n").append("ALREADY USED NICKNAMES:\n");
+        for(Player p : gameView.getPlayers().keySet()) {
+            str.append(p.getNick()).append('\n');
+        }
+        Println(str.toString());
+    }
+
+    @Override
+    public void show_invalidNickToReconnect(GameView gameView){
+        StringBuilder str = new StringBuilder();
+        str.append("IN GAME WITH ID: ").append(gameView.getId()).append(" THERE WASN'T A PLAYER WITH THIS NICK\n");
+        str.append("CHECK AND TRY AGAIN...");
+        Println(str.toString());
+    }
+
+    @Override
     public void show_currentPlayersStatus(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
         for(Player p : gameView.getPlayers().keySet()){

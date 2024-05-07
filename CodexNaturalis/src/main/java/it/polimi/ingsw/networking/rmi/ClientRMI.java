@@ -75,7 +75,7 @@ public class ClientRMI implements ClientAction {
     }
 
     @Override
-    public void joinRandomGame(String nick) throws RemoteException, NotBoundException, NoAvailableGameToJoinException {
+    public void joinRandomGame(String nick) throws RemoteException, NotBoundException/*, NoAvailableGameToJoinException */{
         registry = LocateRegistry.getRegistry("localhost", 1099);
         request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notificationGetter, nick);

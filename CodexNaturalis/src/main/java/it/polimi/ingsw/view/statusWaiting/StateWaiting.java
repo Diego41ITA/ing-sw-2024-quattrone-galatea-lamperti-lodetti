@@ -34,7 +34,7 @@ public class StateWaiting {
                 ui.show_joinRandomGame();
                 try {
                     client.joinRandomGame(nickName);
-                }catch (RemoteException | NoAvailableGameToJoinException | NotBoundException e){
+                }catch (RemoteException | NotBoundException e){
                     //exception da gestire (ma in teoria dovrebbe essere già gestita dal main controller che invia notify)
                 }
                 break;

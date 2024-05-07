@@ -103,67 +103,80 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //basta notificare che la partita è stata creata?
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game) throws RemoteException {
+        view = new GameView(game);
     }
 
     //  solo quando è il mio turno vedo il tavolo aggiornato? ( ora mentre giocano gli altri vedo gli aggiornamenti in diretta)
     @Override
     public void updateTableOfDecks(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_tableOfDecks(game);
     }
 
     //dubbio in GameController per quanto riguarda a chi viene notificato il cambiamento
     @Override
     public void updateGamestation(GameView game, GameStation gameStation) throws RemoteException {
+        view = new GameView(game);
         ui.show_gameStation(gameStation);
     }
 
     @Override
     public void updatePlayerStatus(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_currentPlayersStatus(game);
     }
 
     @Override
     public void updateColor(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_playerColors(game);
     }
 
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_tableOfDecks(game);
     }
 
     @Override
     public void updateCurrentPlayer(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_isYourTurn(game);
     }
 
     @Override
     public void updatePoints(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_pointTable(game);
     }
 
     @Override
     public void updateGoalPlayer(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_goalCard(game.getCurrentPlayer().getGoal());
     }
 
     @Override
     public void updateHandAndTable(GameView game, String nick) throws RemoteException {
+        view = new GameView(game);
         ui.show_gameStation(game.getMyGameStation(nick));
     }
 
     @Override
     public void updatePlayerInGame(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_currentPlayersStatus(game);
     }
 
     //manca
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
+        view = new GameView(game);
     }
 
     @Override
     public void updateGameStatus(GameView game) throws RemoteException {
+        view = new GameView(game);
         ui.show_GameStatus(game);
     }
 
@@ -191,9 +204,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 break;
                         }
                         break;
-                    case (""): //invalid maxNumberOfPlayer
+                    case ("NickName already in use"):
+                        ui.show_NickAlreadyUsed(); //devo controllare per i parametri
+                        String nick = scanner.nextLine();
+                            //manca metodo nel caso in cui il nome non è valido per rientrare nella partita dove ha già provato a connetersi
                         break;
-                    case (""): //playerAlreadyIn
+                    case ("The nickname used was not connected in the running game."):
+                        ui.show_invalidNickToReconnect(); //devo controllare per i parametri (potrebbe offrire anche possibilità di uscire)
                         break;
 
         }

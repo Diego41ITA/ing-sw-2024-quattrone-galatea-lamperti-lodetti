@@ -86,7 +86,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @throws NoAvailableGameToJoinException if there are no available game to join
      */
     @Override
-    public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException, NoAvailableGameToJoinException {
+    public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException*/ {
         List<GameController> availableGames = activeGames.stream()
                 .filter(gameController ->
                         gameController.getStatus().equals(Status.WAITING) &&
@@ -115,7 +115,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
             // No available games
             //invece della stringa usare direttamente l'exception?
             obs.genericErrorWhenEnteringGame("No games currently available to join...");
-            throw new NoAvailableGameToJoinException();
+            //throw new NoAvailableGameToJoinException();
         }
         return null;
     }
