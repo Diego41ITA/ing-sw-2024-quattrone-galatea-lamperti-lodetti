@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
 import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.Player;
+import it.polimi.ingsw.model.gameDataManager.Status;
 
 import java.awt.*;
 import java.rmi.Remote;
@@ -23,10 +24,10 @@ public interface GameControllerInterface extends Remote {
     public void setMaxNumberPlayers(String name, int max);
     //viene messo il colore nella pointtable e nel player
     public void setColor(String color, String name);
-    //pgioca una carta sul tavolo da gioco
-    public void playCard(PlayableCard card, Point cord, String nick) throws illegalOperationException;
 
- void drawPlayableCardFromTableOfDecks(String typo, String nick);
+    //pgioca una carta sul tavolo da gioco
+    void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException;
+    void drawPlayableCardFromTableOfDecks(String typo, String nick);
 
  //cambia lo stato dei giocatori(connesso o non connesso)
     public void changePlayerStatus(String nick, Boolean value);
@@ -63,6 +64,9 @@ public interface GameControllerInterface extends Remote {
     public String getGameId();
 //METODO CHE ritorna i players
     public HashMap<Player, Boolean> getPlayers();
-
-
+    void drawFromTable(int card, String nick);
+    void setGameStation(String nick, int numberOfCard,boolean front);
+    public int getNumOfOnlinePlayers();
+    public void assignBlackColor();
+    public void setGameStatus(Status status);
 }

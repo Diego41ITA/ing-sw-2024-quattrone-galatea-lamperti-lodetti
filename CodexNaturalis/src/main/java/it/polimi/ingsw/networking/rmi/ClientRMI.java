@@ -1,15 +1,20 @@
 package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.*;
+import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 //si occupa di implementare le azioni del client lavorando sulla rete.
 public class ClientRMI implements ClientAction {
@@ -24,6 +29,7 @@ public class ClientRMI implements ClientAction {
     private String nickname;
     private Registry registry;
     private GameFlow flow;
+    private Boolean firstCard;
 
     //ora ho il costruttore piu dei metodi ausiliari.
     public ClientRMI(GameFlow flow){
@@ -32,13 +38,14 @@ public class ClientRMI implements ClientAction {
         connect(); //connette il client con il server RMI
 
         this.flow = flow;
+        firstCard = true;
     }
 
     public void connect(){
         //va reso più solido chiaramente
         try{
-            registry = LocateRegistry.getRegistry(/*...*/);
-            request = (MainControllerInterface) registry.lookup("nome del server");
+            registry = LocateRegistry.getRegistry("localhost", 1099);
+            request = (MainControllerInterface) registry.lookup("server name");
 
             notificationGetter = (GameObserver) UnicastRemoteObject.exportObject(gameObserverHandler, 0);
 
@@ -50,27 +57,38 @@ public class ClientRMI implements ClientAction {
 
     //bisogna implementare i metodi di ClientAction
     @Override
-    public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException{
-        registry = LocateRegistry.getRegistry(/*...*/);
+    public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException, NotBoundException {
+        registry = LocateRegistry.getRegistry("localhost", 1099);
         request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.createGame(notificationGetter, nick, maxNumberOfPlayers);
         nickname = nick;
     }
 
     @Override
-    public void joinRandomGame(String nick) throws  RemoteException{
-        registry = LocateRegistry.getRegistry(/*...*/);
+    public void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException {
+        registry = LocateRegistry.getRegistry("localhost", 1099);
+        request = (MainControllerInterface) registry.lookup("server name");
+        request.leaveGame(notificationGetter, nick, idGame);
+        gameController = null;
+        nickname = null;
+        firstCard = false;
+    }
+
+    @Override
+    public void joinRandomGame(String nick) throws RemoteException, NotBoundException, NoAvailableGameToJoinException {
+        registry = LocateRegistry.getRegistry("localhost", 1099);
         request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notificationGetter, nick);
         nickname = nick;
     }
 
     @Override
-    public void rejoin(String nick, String gameId) throws RemoteException{
-        registry = LocateRegistry.getRegistry(/*...*/);
+    public void rejoin(String nick, String gameId) throws RemoteException, NotBoundException {
+        registry = LocateRegistry.getRegistry("localhost", 1099);
         request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.rejoin(notificationGetter, nick, gameId);
         nickname = nick;
+        firstCard = false;
     }
 
     //metodi del GameController
@@ -79,28 +97,47 @@ public class ClientRMI implements ClientAction {
         gameController.setMaxNumberPlayers(name, max);
     }
 
-    @Override
-    public void playCard(int numberOfCard, Point cord, String nick){
-        gameController.playCard(numberOfCard, cord, nick); //per visualizzazione (anche TUI) sarebbe meglio
-        //lavorare con degli int piuttosto che con tutto l'oggetto card (tanto il controller sa quali carte
-        // ha in mano il giocatore).
+    @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
+    public void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException {
+        if(firstCard){
+            gameController.setGameStation(nick, 0,front);
+            firstCard = false;
+        }
+        gameController.playCard(numberOfCard, cord, nick, front);
     }
 
     @Override
-    public void chooseGoal()...
-
-    @Override
-    public void pass(String nick){
-        //...
+    public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick){
+        gameController.chooseGoal(goals, num, nick);
     }
 
     @Override
-    public void drawFromDeck(String nick, String deck){
-        ...
+    public void goOn(){
+        gameController.goOn();
+    }
+
+    @Override//serve a pescare dai deck
+    public void drawPlayableCardFromTableOfDecks(String nick, String deck){
+        gameController.drawPlayableCardFromTableOfDecks(deck,nick);
     }
 
     @Override
     public void drawFromTable(String nick, int card){
-        ...
+        gameController.drawFromTable(card, nick);
+    }
+
+    @Override
+    public void setColor(String color, String name){
+        gameController.setColor(color, name);
+    }
+
+    @Override
+    public void initializeHandPlayer(String nick){
+        gameController.initializeHandPlayer(nick);
+    }
+
+    @Override
+    public String calculateWinner(){
+        return gameController.calculateWinner();
     }
 }

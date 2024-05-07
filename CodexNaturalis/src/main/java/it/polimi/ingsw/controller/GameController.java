@@ -10,8 +10,7 @@ import it.polimi.ingsw.observer.HandleObserver;
 import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 //IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME, LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
 //DEL GIOCATORE E NON SULL'OGGETTO PLAYER
@@ -88,16 +87,30 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //pgioca una carta sul tavolo da gioco
+    //pgioca una carta sul tavolo da gioco e aggiunge i punti a seconda se sia gold o ressource
     @Override
-    public void playCard(PlayableCard card, Point cord, String nick) throws illegalOperationException {
+    public void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 try {
+                    ArrayList<PlayableCard> cards = (ArrayList<PlayableCard>) player.showCard();
+                    PlayableCard card = cards.get(numberOfCard);
+                    cards.remove(numberOfCard);
+                    card = (PlayableCard) cardIsFrontChanger(card, front);
+                    player.setCards(cards);
                     player.playCard(card, cord);
+                    if(card.getCardId()> 40 && front){
+                        addPoints2Player(nick,calculateGoldPoints((GoldCard) card,nick));
+
+                    }else{
+                        Set<Integer> validCardIds = new HashSet<>(Arrays.asList(8, 9, 10, 19, 20, 20, 28, 29, 30, 38, 39, 40));
+                        if(front && validCardIds.contains(card.getCardId())) {
+                            addPoints2Player(nick, 1);
+                        }
+                    }
                     gamestation = player.getGameStation();
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_notEnoughResource();
@@ -147,6 +160,12 @@ public class GameController implements GameControllerInterface, Serializable {
                         game.setTableOfDecks(table);
 
                     }
+                    case "initial" ->{
+                        Deck<InitialCard> deck = table.getDeckStart();
+                        player.drawInitial(deck);
+                        table.setDeckStart(deck);
+                        game.setTableOfDecks(table);
+                    }
                     default -> {
                         //gestire l'eccezzione in cui non viene inserita una string corretta(se vogliamo)
                     }
@@ -161,19 +180,16 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     //public synchronized void drawFromTable(int cardSelected, String nick)
-    public synchronized void drawFromTable(Card cardSelected, String nick) {
+    public synchronized void drawFromTable(int cardSelected, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         ArrayList<Card> cards = table.getCards();
         for (Player player : players.keySet()) {//attenzione non viene gestita l'eccezzione in cui non c'è il giocatore con tale nick
-            if (player.getNick().equals(nick)) {
-                for (Card card : cards) {  //attenzione non viene gestita l'eccezzione in cui non c'è tale carta
-                    if (card.equals(cardSelected)) {
-                        player.draw((PlayableCard) card);
-                        table.setCards(card);
-                    }
-                }
+            if (player.getNick().equals(nick)) { //attenzione non viene gestita l'eccezzione in cui non c'è tale carta
+                Card card = table.getCards().get(cardSelected);
+                player.draw((PlayableCard) card);
+                table.setCards(card);
             }
         }
         game.setTableOfDecks(table);
@@ -347,9 +363,9 @@ public class GameController implements GameControllerInterface, Serializable {
             if (player.getNick().equals(nick)) {
                 player.chooseGoal(goals, num);
             }
+        }
             game.setPlayers(players);
             observers.get(nick).notify_chooseGoal(game);
-        }
     }
 
     @Override
@@ -431,26 +447,25 @@ public class GameController implements GameControllerInterface, Serializable {
         this.game.removePlayer(nick);
     }
 
-    public InitialCard drawInitialCard(){
-        TableOfDecks table;
-        table = this.game.getTableOfDecks();
-        InitialCard card = table.getDeckStart().getFirst();
-        this.game.setTableOfDecks(table);
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver allObs = entry.getValue();
-            allObs.notify_DrawCard(game);
+    //la carta iniziale si trova in mano al giocatore come prima carta
+    @Override
+    public void setGameStation(String nick, int num, boolean front) {
+        HashMap<Player, Boolean> players;
+        players = (HashMap<Player, Boolean>) game.getPlayers();
+        for (Player player : players.keySet()) {
+            if (player.getNick().equals(nick)) {
+                Card card =player.showCard().get(0);
+                cardIsFrontChanger(card,front);
+                player.setGameStation(new GameStation((InitialCard) card));
+                player.setCards(new ArrayList<>());
+                this.game.setPlayers(players);
+            }
         }
-        return card;
-    }
-
-    public void setGameStation(String nick, InitialCard card){
-        this.game.getPlayerByNick(nick).setGameStation(new GameStation(card));
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver allObs = entry.getValue();
             allObs.notify_updateGameStations(game);
         }
     }
-
     public void setGameStatus(Status status){
         this.game.setStatus(status);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {

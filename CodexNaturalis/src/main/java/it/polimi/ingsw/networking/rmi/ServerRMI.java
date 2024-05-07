@@ -3,8 +3,9 @@ package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainController;
 import it.polimi.ingsw.controller.MainControllerInterface;
+import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
 import it.polimi.ingsw.observer.GameObserver;
-
+import it.polimi.ingsw.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,11 +20,11 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     public static ServerRMI bind(){
         try{
             server = new ServerRMI();
-
-            registry = LocateRegistry.createRegistry("porta su cui comunicare");
+            registry = LocateRegistry.createRegistry(1099);//default local host
             getRegistry().rebind( "server name", server);
+            System.out.println("the server is ready(RMI)");
         }catch(RemoteException e){
-            //...
+            System.err.println("Server error");
         }
         return getServer();
     }
@@ -38,7 +39,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
             try{
                 server = new ServerRMI();
             }catch(RemoteException e){
-                //...
+                System.err.println("error getServer");
             }
         }
         return server;
@@ -64,7 +65,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     }
 
     @Override
-    public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException{
+    public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException, NoAvailableGameToJoinException {
         GameControllerInterface stub = server.mainController.joinRandomGame(obs, nick);
         try{
             UnicastRemoteObject.exportObject(stub, 0);
@@ -87,13 +88,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
 
     @Override
     public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException{
-        GameControllerInterface stub = server.mainController.leaveGame(obs, nick, gameId);
-        try{
-            UnicastRemoteObject.exportObject(stub, 0);
-        }catch(RemoteException e){
-            //...
-        }
-        return stub;
+        return  server.mainController.leaveGame(obs, nick, gameId);
     }
 
 

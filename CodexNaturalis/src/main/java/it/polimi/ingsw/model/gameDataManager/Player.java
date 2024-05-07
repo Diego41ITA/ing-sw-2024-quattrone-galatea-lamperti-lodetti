@@ -193,6 +193,18 @@ public class Player implements Serializable {
         }
     }
 
+    public void drawInitial(Deck<InitialCard> deck) {
+        if (cards.size() >= 3) {
+            throw new IllegalStateException("Hand is full. Cannot draw more cards.");
+        } else {
+            if (deck.getDimension() == 0) {
+                throw new IllegalStateException("Deck is empty. Cannot draw more cards.");
+            }
+            PlayableCard card = deck.getFirst();
+            cards.add(card);
+        }
+    }
+
     /**
      * returns the list of cards in the player's hand
      * @author Lorenzo Galatea
@@ -273,6 +285,10 @@ public class Player implements Serializable {
             return false;
         }
     }
+    public void setCards(ArrayList<PlayableCard> cards) {
+        this.cards = new ArrayList<>(cards);
+    }
+
 
 }
 
