@@ -11,6 +11,7 @@ import it.polimi.ingsw.view.statusFinished.StateFinished;
 import it.polimi.ingsw.view.statusSuspended.StateSuspended;
 import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -39,8 +40,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
 
-    public GameFlow(/*String nick,*/ UI ui, ClientAction client){
-        //this.nickname = nick;       il nickName quando viene inserito?
+    public GameFlow(UI ui, ClientAction client){
         this.ui = ui;
         this.client = client;
     }
@@ -167,6 +167,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_GameStatus(game);
     }
 
+    //si potrebbe gestire con i messaggi delle exception (o le exception)
     @Override
     public void genericErrorWhenEnteringGame(String msg) throws RemoteException {
         Scanner scanner = new Scanner(System.in);
@@ -179,7 +180,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                             case ("A"):
                                 ui.show_RequestNumberOfPlayers();
                                 int numberOfPlayer = scanner.nextInt();
-                                client.createGame(nickname, numberOfPlayer);
+                                try {
+                                    client.createGame(nickname, numberOfPlayer);
+                                } catch (NotBoundException e) {
+                                    //gestione exception
+                                }
                                 break;
                             case ("B"):
                                 exit();
