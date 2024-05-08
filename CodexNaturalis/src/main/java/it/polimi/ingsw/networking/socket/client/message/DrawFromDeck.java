@@ -4,24 +4,24 @@ import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainControllerInterface;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.observer.GameObserver;
+import jdk.swing.interop.DragSourceContextWrapper;
 
 import java.rmi.RemoteException;
 
-public class CreateGameMessage extends Message{
-    private final int numPlayer;
-    public CreateGameMessage(String nick, int numPlayer){
-        super.nickname = nick;
-        this.forMainController = true;
-        this.numPlayer = numPlayer;
+public class DrawFromDeck extends Message{
+    private final String deck;
+    public DrawFromDeck(String nick, String deck){
+        this.nickname = nick;
+        this.forMainController = false;
+        this.deck = deck;
     }
-
     @Override
     public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
-        //... no operations need to be implemented
+        game.drawPlayableCardFromTableOfDecks(this.deck, this.nickname);
     }
 
     @Override
     public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
-        return operation.createGame(obs, this.nickname, this.numPlayer); //aggiungere il numero massimo di giocatori.
+        return null;
     }
 }

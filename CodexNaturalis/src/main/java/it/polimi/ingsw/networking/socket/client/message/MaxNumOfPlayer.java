@@ -7,21 +7,21 @@ import it.polimi.ingsw.observer.GameObserver;
 
 import java.rmi.RemoteException;
 
-public class CreateGameMessage extends Message{
-    private final int numPlayer;
-    public CreateGameMessage(String nick, int numPlayer){
-        super.nickname = nick;
-        this.forMainController = true;
-        this.numPlayer = numPlayer;
+public class MaxNumOfPlayer extends Message{
+    private final int max;
+    public MaxNumOfPlayer(String nick, int max){
+        this.nickname = nick;
+        this.max = max;
+        this.forMainController = false;
     }
 
     @Override
     public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
-        //... no operations need to be implemented
+        game.setMaxNumberPlayers(this.nickname, this.max);
     }
 
     @Override
     public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
-        return operation.createGame(obs, this.nickname, this.numPlayer); //aggiungere il numero massimo di giocatori.
+        return null;
     }
 }
