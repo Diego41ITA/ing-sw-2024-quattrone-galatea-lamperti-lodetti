@@ -70,8 +70,8 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
         try {
             controller.addPlayer(player);
-        } catch (MaxPlayersInException | PlayerAlreadyInException e) {
-            obs.genericErrorWhenEnteringGame(e.getMessage());
+        } catch (MaxPlayersInException e) {
+            obs.genericErrorWhenEnteringGame(e.getMessage(), gameID);
         }
 
         return controller;
@@ -83,7 +83,6 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param nick Player's nickname
      * @return GameControllerInterface of the created game
      * @throws RemoteException it could throw this exception when something goes wrong
-     * @throws NoAvailableGameToJoinException if there are no available game to join
      */
     @Override
     public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException*/ {
@@ -107,15 +106,12 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 Println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
                 printActiveGames();
                 return randomAvailableGame;
-            } catch (MaxPlayersInException | PlayerAlreadyInException e) {
+            } catch (MaxPlayersInException e) {
                 randomAvailableGame.removeObserver(player);
-                obs.genericErrorWhenEnteringGame(e.getMessage());
+                obs.genericErrorWhenEnteringGame(e.getMessage(), randomAvailableGame.getGameId());
             }
         } else {
-            // No available games
-            //invece della stringa usare direttamente l'exception?
-            obs.genericErrorWhenEnteringGame("No games currently available to join...");
-            //throw new NoAvailableGameToJoinException();
+            obs.genericErrorWhenEnteringGame("No games currently available to join...", null);
         }
         return null;
     }
@@ -124,7 +120,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * Allows Player to rejoin the game after being disconnected
      * @param obs GameObserver associated with the player who is rejoining the game
      * @param nick Player's nickname
-     * @param GameID univoque ID of the game to rejoin
+     * @param GameID unique ID of the game to rejoin
      * @return GameControllerInterface of the joined game
      * @throws RemoteException it could throw this when something goes wrong
      */
@@ -139,10 +135,10 @@ public class MainController implements Serializable, MainControllerInterface /*,
                             return game;
                         }
                     }
-                    obs.genericErrorWhenEnteringGame("The nickname used was not connected in the running game.");
+                    obs.genericErrorWhenEnteringGame("The player" + nick + "was not connected in the running game.", GameID);
                     return null;
                 } catch (MaxPlayersInException | GameEndedException e) {
-                    throw new RuntimeException(e);
+                    obs.genericErrorWhenEnteringGame("An error occured during reconnection to the game", GameID);
                 }
             }
         }

@@ -406,7 +406,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
     //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
     @Override
-    public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException {
+    public void addPlayer(Player p) throws MaxPlayersInException {
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             //String chiave = entry.getKey();
