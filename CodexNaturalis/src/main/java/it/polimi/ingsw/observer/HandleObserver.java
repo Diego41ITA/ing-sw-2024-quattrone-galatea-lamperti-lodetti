@@ -130,6 +130,22 @@ public class HandleObserver {
         }
     }
 
+    public synchronized void notify_gameReadyToStart(String gameId){
+        try {
+            observer.gameReadyToStart(gameId);
+        }catch(RemoteException e){
+            //
+        }
+    }
+
+    public synchronized void notify_startGame(Game game){
+        try {
+            observer.startGame(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
+    }
+
     public synchronized void notify_goalCardsDrawed(ArrayList<GoalCard> cards){
         try {
             observer.goalCardsDrawed(cards);
