@@ -122,7 +122,7 @@ public class HandleObserver {
     }
 
 
-    public synchronized void notify_updatedHandAndTable(Game game, String nick){
+    public void notify_updatedHandAndTable(Game game, String nick){
         try {
             observer.updateHandAndTable(new GameView(game), nick);
         }catch(RemoteException e){
@@ -130,7 +130,7 @@ public class HandleObserver {
         }
     }
 
-    public synchronized void notify_gameReadyToStart(String gameId){
+    public void notify_gameReadyToStart(String gameId){
         try {
             observer.gameReadyToStart(gameId);
         }catch(RemoteException e){
@@ -138,7 +138,7 @@ public class HandleObserver {
         }
     }
 
-    public synchronized void notify_startGame(Game game){
+    public void notify_startGame(Game game){
         try {
             observer.startGame(new GameView(game));
         }catch(RemoteException e){
@@ -146,7 +146,7 @@ public class HandleObserver {
         }
     }
 
-    public synchronized void notify_goalCardsDrawed(ArrayList<GoalCard> cards){
+    public void notify_goalCardsDrawed(ArrayList<GoalCard> cards){
         try {
             observer.goalCardsDrawed(cards);
         }catch(RemoteException e){
@@ -154,7 +154,7 @@ public class HandleObserver {
         }
     }
 
-    public synchronized void notify_AddedPlayer(Game game){
+    public void notify_AddedPlayer(Game game){
         try {
             observer.updatePlayerInGame(new GameView(game));
         }catch(RemoteException e){
