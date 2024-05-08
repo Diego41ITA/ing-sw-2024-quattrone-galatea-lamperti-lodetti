@@ -70,6 +70,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
         try {
             controller.addPlayer(player);
+            obs.newGameCreated(gameID);
         } catch (MaxPlayersInException e) {
             obs.genericErrorWhenEnteringGame(e.getMessage(), gameID);
         }
@@ -105,6 +106,8 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
                 Println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
                 printActiveGames();
+
+                obs.randomGameJoined(randomAvailableGame.getGameId());
                 return randomAvailableGame;
             } catch (MaxPlayersInException e) {
                 randomAvailableGame.removeObserver(player);
