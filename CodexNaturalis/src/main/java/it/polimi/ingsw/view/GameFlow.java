@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
@@ -13,6 +14,7 @@ import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -40,8 +42,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
 
-    public GameFlow(UI ui, ClientAction client){
+    public GameFlow(UI ui){
         this.ui = ui;
+        this.client = client;
+    }
+
+    public void setClient(ClientAction client){
         this.client = client;
     }
 
@@ -178,6 +184,29 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void updateGameStatus(GameView game) throws RemoteException {
         view = new GameView(game);
         ui.show_GameStatus(game);
+    }
+
+    @Override
+    public void newGameCreated(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+    }
+
+    @Override
+    public void randomGameJoined(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+    }
+
+    @Override
+    public void reconnectedToGame(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+    }
+
+    @Override
+    public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
+        for(GoalCard goalCard : cards){
+            ui.show_goalCard(goalCard);
+        }
+        //scelta carte
     }
 
     //si potrebbe gestire con i messaggi delle exception (o le exception)

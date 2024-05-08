@@ -1,5 +1,10 @@
 package it.polimi.ingsw.main;
 
+import it.polimi.ingsw.model.gameDataManager.Game;
+import it.polimi.ingsw.networking.rmi.ClientRMI;
+import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.TUI.Cli;
+
 import java.util.Scanner;
 //chiede all'utente che tipo di configurazione vuole:
 //1) rmi + gui
@@ -27,7 +32,8 @@ public class mainStart{
                             //lancia gameflow
                         } else if (config[0].equals("rmi") && config[1].equals("tui")) {
                             System.out.println("game starting");
-                            //lancia gameflow
+                            GameFlow flow = new GameFlow(new Cli());
+                            flow.setClient(new ClientRMI(flow));
                         } else if (config[0].equals("socket") && config[1].equals("gui")) {
                             System.out.println("game starting");
                             //lancia gameflow
