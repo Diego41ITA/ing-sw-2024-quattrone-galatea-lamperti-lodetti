@@ -85,9 +85,9 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_invalidNickToReconnect(GameView gameView){
+    public void show_invalidNickToReconnect(String id){
         StringBuilder str = new StringBuilder();
-        str.append("IN GAME WITH ID: ").append(gameView.getId()).append(" THERE WASN'T A PLAYER WITH THIS NICK\n");
+        str.append("IN GAME WITH ID: ").append(id).append(" THERE WASN'T A PLAYER WITH THIS NICK\n");
         str.append("CHECK AND TRY AGAIN...");
         Println(str.toString());
     }

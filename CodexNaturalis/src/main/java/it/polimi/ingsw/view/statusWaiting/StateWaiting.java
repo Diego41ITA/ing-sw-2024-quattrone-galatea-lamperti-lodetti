@@ -35,7 +35,13 @@ public class StateWaiting {
                 try {
                     client.joinRandomGame(nickName);
                 }catch (RemoteException | NotBoundException e){
-                    //exception da gestire (ma in teoria dovrebbe essere già gestita dal main controller che invia notify)
+                    ui.show_message("CONNECTION ERROR, GAME OVER...");
+                    try {
+                        flow.wait(100); // non sono sicuro
+                        flow.exit();
+                    }catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 break;
             case "B":
@@ -44,7 +50,13 @@ public class StateWaiting {
                 try {
                     client.rejoin(nickName, gameID);
                 }catch (RemoteException | NotBoundException e){
-                    //exception da gestire (ma in teoria dovrebbe essere già gestita dal main controller che invia notify)
+                    ui.show_message("CONNECTION ERROR, GAME OVER...");
+                    try {
+                        flow.wait(100); // non sono sicuro
+                        flow.exit();
+                    }catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
         }
     }

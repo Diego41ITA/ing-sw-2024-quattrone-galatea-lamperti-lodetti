@@ -182,7 +182,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //si potrebbe gestire con i messaggi delle exception (o le exception)
     @Override
-    public void genericErrorWhenEnteringGame(String msg) throws RemoteException {
+    public void genericErrorWhenEnteringGame(String msg, String id) throws RemoteException {
         Scanner scanner = new Scanner(System.in);
         String input;
                 switch (msg){
@@ -196,7 +196,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 try {
                                     client.createGame(nickname, numberOfPlayer);
                                 } catch (NotBoundException e) {
-                                    //gestione exception
+                                    ui.show_message("CONNECTION ERROR, GAME OVER...");
+                                    try {
+                                        this.wait(100); // non sono sicuro
+                                        this.exit();
+                                    }catch (InterruptedException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
                                 }
                                 break;
                             case ("B"):
@@ -204,15 +210,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 break;
                         }
                         break;
-                    case ("NickName already in use"):
-                        ui.show_NickAlreadyUsed(); //devo controllare per i parametri
-                        String nick = scanner.nextLine();
-                            //manca metodo nel caso in cui il nome non è valido per rientrare nella partita dove ha già provato a connetersi
-                        break;
                     case ("The nickname used was not connected in the running game."):
-                        ui.show_invalidNickToReconnect(); //devo controllare per i parametri (potrebbe offrire anche possibilità di uscire)
+                        ui.show_invalidNickToReconnect(id);
                         break;
-
         }
     }
 
