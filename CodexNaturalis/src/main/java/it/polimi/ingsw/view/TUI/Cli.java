@@ -137,8 +137,8 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_playerJoined(String playerNickName) {
-        Println( playerNickName + " JOINED");
+    public void show_playerJoined(String id) {
+        Println("JOINED GAME: " + id);
     }
 
     @Override

@@ -45,7 +45,7 @@ public interface UI {
 
     public void show_RequestNumberOfPlayers();
 
-    public void show_playerJoined(String playerNickName);
+    public void show_playerJoined(String id);
 
     public void show_playerLeft(String playerNickName);
 
