@@ -6,8 +6,8 @@ import it.polimi.ingsw.observer.GameObserver;
 
 import java.rmi.RemoteException;
 
-public class JoinRandom extends Message{
-    public JoinRandom(String nick){
+public class JoinRandomMessage extends Message{
+    public JoinRandomMessage(String nick){
         this.nickname = nick;
         this.forMainController = true;
     }
