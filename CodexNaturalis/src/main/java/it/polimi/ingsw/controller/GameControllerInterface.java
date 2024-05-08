@@ -9,7 +9,6 @@ import it.polimi.ingsw.model.gameDataManager.Status;
 
 import java.awt.*;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -54,7 +53,7 @@ public interface GameControllerInterface extends Remote {
 
 
     //ritorna la lista di goalcard che l'utente può scegliere
-    public ArrayList<GoalCard> getPossibleGoals(); //va aggiunta una notify
+    public void getPossibleGoals(String nickname); //va aggiunta una notify
 
   //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
     public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException;

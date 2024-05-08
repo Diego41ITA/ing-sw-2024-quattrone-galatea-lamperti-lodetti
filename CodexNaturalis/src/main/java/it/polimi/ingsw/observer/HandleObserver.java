@@ -1,8 +1,10 @@
 package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.*;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class HandleObserver {
     private final GameObserver observer;
@@ -123,6 +125,14 @@ public class HandleObserver {
     public synchronized void notify_updatedHandAndTable(Game game, String nick){
         try {
             observer.updateHandAndTable(new GameView(game), nick);
+        }catch(RemoteException e){
+            //
+        }
+    }
+
+    public synchronized void notify_goalCardsDrawed(ArrayList<GoalCard> cards){
+        try {
+            observer.goalCardsDrawed(cards);
         }catch(RemoteException e){
             //
         }

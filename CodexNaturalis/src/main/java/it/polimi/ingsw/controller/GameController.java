@@ -397,11 +397,18 @@ public class GameController implements GameControllerInterface, Serializable {
     //ritorna la lista di goalcard che l'utente può scegliere(dubbio, bisogna creare qualcosa del genere nel model e poi usare il
     //pattern observer?)
     @Override
-    public ArrayList<GoalCard> getPossibleGoals() {
+    public void getPossibleGoals(String nickname) {
         ArrayList<GoalCard> goals = new ArrayList<>();
-        goals.add((GoalCard) game.getTableOfDecks().getGoals().getFirst());
-        goals.add((GoalCard) game.getTableOfDecks().getGoals().getFirst());
-        return goals;
+        TableOfDecks table = game.getTableOfDecks();
+        goals.add((GoalCard) table.getGoals().getFirst());
+        goals.add((GoalCard) table.getGoals().getFirst());
+        this.game.setTableOfDecks(table);
+        HandleObserver observer = observers.get(nickname);
+        observer.notify_goalCardsDrawed(goals);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver obs = entry.getValue();
+            obs.notify_DrawCard(game);
+        }
     }
 
     //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)

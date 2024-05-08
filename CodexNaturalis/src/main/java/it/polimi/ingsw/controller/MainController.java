@@ -135,6 +135,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                         if (player.getNick().equals(nick)) {
                             game.addObserver(obs, player);
                             game.reconnectPlayer(player);
+                            obs.reconnectedToGame(GameID);
                             return game;
                         }
                     }
@@ -165,7 +166,6 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 game.leave(nick);
                 Println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
                 printActiveGames();
-
                 if (game.getNumOfOnlinePlayers() == 0) {
                     deleteGame(gameID);
                 }

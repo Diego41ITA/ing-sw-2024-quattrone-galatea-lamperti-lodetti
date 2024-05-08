@@ -1,9 +1,11 @@
 package it.polimi.ingsw.observer;
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 //questa interfaccia è usata per notificare al client qualcosa: server -> client
 public interface GameObserver extends Remote{
@@ -26,6 +28,9 @@ public interface GameObserver extends Remote{
     void updateGameStatus(GameView game)throws  RemoteException;
     void newGameCreated(String GameID)throws RemoteException;
     void randomGameJoined(String GameID)throws RemoteException;
+    void reconnectedToGame(String GameID)throws RemoteException;
+    void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException;
+
     void genericErrorWhenEnteringGame(String msg, String GameID) throws RemoteException;
     void gameIdNotExists(String gameId) throws RemoteException;
 
