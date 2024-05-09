@@ -130,11 +130,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void maxNumberOfPlayersReached(String GameID) throws RemoteException {
-        ui.show_gameStarting(GameID);
-    }
-
-    @Override
     public void notEnoughResource() throws RemoteException {
         ui.show_notEnoughResources();
     }
@@ -219,6 +214,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             ui.show_goalCard(goalCard);
         }
         //scelta carte
+    }
+
+    @Override
+    public void startGame(GameView game) throws RemoteException {
+        ui.show_gameStarting(game.getId());
     }
 
     //si potrebbe gestire con i messaggi delle exception (o le exception)

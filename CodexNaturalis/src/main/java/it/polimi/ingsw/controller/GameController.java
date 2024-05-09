@@ -427,11 +427,6 @@ public class GameController implements GameControllerInterface, Serializable {
             //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_AddedPlayer(game);
-            if(game.getMaxNumberPlayer() == game.getNumOfOnlinePlayers()){
-                obs.notify_maxNumberOfPlayersReached(game);
-                game.setStatus(Status.ACTIVE);
-                obs.notify_changedGameStatus(game);
-            }
         }
     }
 
