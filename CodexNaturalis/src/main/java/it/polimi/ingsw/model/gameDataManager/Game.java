@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -222,11 +224,11 @@ public class Game implements Serializable {
      * This method add a player to this game only if the number of current player is less then 4
      * @author Lodetti Alessandro
      * @param player the new player
-     * @throws IllegalStateException thrown if there are already 4 players
+     * @throws MaxPlayersInException thrown if there are already 4 players
      */
-    public void addPlayer(Player player) throws IllegalStateException {
+    public void addPlayer(Player player) throws MaxPlayersInException {
         if(players.size() >= this.maxNumberPlayer)
-            throw new IllegalStateException();
+            throw new MaxPlayersInException();
         players.put(player, true);
     }
 
