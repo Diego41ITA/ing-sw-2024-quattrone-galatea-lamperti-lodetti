@@ -107,10 +107,10 @@ public class PlayerTest {
 
     @Test
     public void testDrawDeck() {
-        List<PlayableCard> cardList = new ArrayList<>();
-        Deck<PlayableCard> deck = new Deck<>(cardList);
+        List<GoldCard> cardList = new ArrayList<>();
+        Deck<GoldCard> deck = new Deck<>(cardList);
         assertEquals(3, player.showCard().size());
-        assertThrows(IllegalStateException.class, () -> player.draw(deck));
+        assertThrows(IllegalStateException.class, () -> player.drawGold(deck));
         assertEquals(3, player.showCard().size());
     }
 

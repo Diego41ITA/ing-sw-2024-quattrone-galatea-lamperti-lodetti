@@ -3,6 +3,7 @@ import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.Item;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
 import it.polimi.ingsw.model.gameDataManager.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ public class GameTest {
         }
 
         @Test
-        public void testAddPlayer() {
+        public void testAddPlayer() throws MaxPlayersInException {
             game.addPlayer(player1);
             game.addPlayer(player2);
             assertEquals(2, game.getPlayers().size());
@@ -39,7 +40,7 @@ public class GameTest {
         }
 
         @Test
-        public void testGameStatusTransitions() {
+        public void testGameStatusTransitions() throws MaxPlayersInException {
             assertEquals(Status.WAITING, game.getStatus());
             game.addPlayer(player1);
             game.addPlayer(player2);
@@ -55,7 +56,7 @@ public class GameTest {
         }
 
         @Test
-        public void testPlayerConnection() {
+        public void testPlayerConnection() throws MaxPlayersInException {
             game.addPlayer(player1);
             game.addPlayer(player2);
             assertTrue(game.isConnected(player1));
@@ -63,7 +64,7 @@ public class GameTest {
         }
 
         @Test
-        public void testSetMaxNumberPlayer() {
+        public void testSetMaxNumberPlayer() throws MaxPlayersInException {
             game.setMaxNumberPlayer(2);
             game.addPlayer(player1);
             game.addPlayer(player2);
@@ -76,7 +77,7 @@ public class GameTest {
         }
 
         @Test
-        public void testCheckName() {
+        public void testCheckName() throws MaxPlayersInException {
             game.addPlayer(player1);
             game.addPlayer(player2);
 

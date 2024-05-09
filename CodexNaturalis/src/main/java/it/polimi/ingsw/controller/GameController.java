@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.List;
 
 //IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME, LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
 //DEL GIOCATORE E NON SULL'OGGETTO PLAYER
@@ -45,9 +46,9 @@ public class GameController implements GameControllerInterface, Serializable {
     public void removeObserver(Player p) {
        observers.remove(p.getNick());
     }
-
     public void startGame(){
         this.game.setStatus(Status.ACTIVE);
+        game.setTurn(new Turn(new ArrayList<>(game.getPlayers().keySet())));
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_startGame(game);

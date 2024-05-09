@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameDataManager;
 
 import com.google.gson.*;
+import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
 import it.polimi.ingsw.parse.Crafter;
 
 import java.util.*;
@@ -106,7 +107,7 @@ public class Matches implements Serializable{
      * this method allows to join a random game
      * @param player is the only parameter and indicates the player that wants to play
      */
-    public synchronized void joinRandomGame(Player player){
+    public synchronized void joinRandomGame(Player player) throws MaxPlayersInException {
         Optional <Game> g = this.games.stream()
                 .filter(game -> (game.getStatus() == Status.WAITING && game.checkName(player.getNick())))
                 .findFirst();
@@ -134,7 +135,13 @@ public class Matches implements Serializable{
             this.games.stream()
                     .filter(g -> g.getId().equals(gameId) && g.checkName(player.getNick()) && g.getStatus() == Status.WAITING)
                     .findFirst()
-                    .ifPresent(g -> g.addPlayer(player));
+                    .ifPresent(g -> {
+                        try {
+                            g.addPlayer(player);
+                        } catch (MaxPlayersInException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
             return true;
         } catch (IllegalStateException e) {
             return false;
