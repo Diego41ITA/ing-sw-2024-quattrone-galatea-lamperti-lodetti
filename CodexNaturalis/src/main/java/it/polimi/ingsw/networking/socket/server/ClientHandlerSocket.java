@@ -45,7 +45,7 @@ public class ClientHandlerSocket extends Thread{
      */
     @Override
     public void run(){
-        //devo lanciare un thread che processi i messaggi letti. in modo che questo thread sia sempre all'ascolto.
+        //devo lanciare un thread che processi i messaggi letti. In modo che questo thread sia sempre all'ascolto.
         Thread thread = new Thread(this::manageRequests);
         thread.start();
         while(true){

@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.testModel;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;

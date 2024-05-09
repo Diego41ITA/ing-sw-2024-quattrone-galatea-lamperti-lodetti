@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.testModel;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import org.junit.jupiter.api.BeforeEach;

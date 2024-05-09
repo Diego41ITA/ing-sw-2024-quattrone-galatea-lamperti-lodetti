@@ -46,6 +46,14 @@ public class GameController implements GameControllerInterface, Serializable {
        observers.remove(p.getNick());
     }
 
+    public void startGame(){
+        this.game.setStatus(Status.ACTIVE);
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver obs = entry.getValue();
+            obs.notify_startGame(game);
+        }
+    }
+
     //dire a diego che quando fa joinRandomgame deve aggiungere un giocatore alla partita
     //controllare gli attributi che vengono cambiati
     //all'interno di questo metodo vengono aggiunti i player all'interno della partita e anche il numero massimo di giocatori

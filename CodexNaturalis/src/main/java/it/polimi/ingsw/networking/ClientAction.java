@@ -27,7 +27,12 @@ public interface ClientAction {
     void setColor(String color, String name);
     void drawPlayableCardFromTableOfDecks(String nick, String deck);
     void drawFromTable(String nick, int card);
+
+    //questo metodo non so quanto senso possa avere (ci pensa il controller a capire quando inizializzare la partita)
     void initializeHandPlayer(String nick);
+
+    //Questo metodo non ha proprio senso. Quando il controller si accorge che la partita sta finendo valuta gli ultimi
+    //gli ultimi giocatori e successivamente calcola il vincitore notificandolo ai player.
     String calculateWinner();
 
 }
