@@ -12,14 +12,11 @@ import java.util.Scanner;
 
 public class StateWaiting {
     private GameFlow flow;
-    private GameView view = flow.getView();
     private UI ui = flow.getUi();
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
-    public StateWaiting() {}
-
-    public void setFlow(GameFlow flow) {
+    public StateWaiting(GameFlow flow) {
         this.flow = flow;
     }
 
