@@ -28,8 +28,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     boolean stay = true;
 
     //metto 4 attributi State
-    private StateWaiting state1 = new StateWaiting();
-    private StateActive state2;
+    private StateWaiting state1 = new StateWaiting(this);
+    private StateActive state2 = new StateActive();
     private StateSuspended state3;
     private StateFinished state4;
 
@@ -70,7 +70,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void run(){
         boolean stay = true;
 
-        state1.setFlow(this);
         ui.show_RequestPlayerNickName();
         Scanner scanner = new Scanner(System.in);
         nickname = scanner.nextLine();
@@ -78,13 +77,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         while(stay) {//ad ogni ciclo farà qualcosa, quando lo status cambierà cambierà anche l'azione effettuata
             if(view.getStatus() == Status.WAITING) {
                 state1.execute();
-                //avanzamento di stato
             } else if (view.getStatus() == Status.ACTIVE) {
                 state2.execute();
             } else if (view.getStatus() == Status.SUSPENDED) {
-                state3.execute();
+                //state3.execute();
             } else if (view.getStatus() == Status.FINISHED) {
-                state4.execute();
+                //state4.execute();
             }
         }
     }
@@ -97,9 +95,44 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         this.view = game;
     }
 
+
     //IMPORTANTE
     //la gameView viene aggiornata ad ogni notifica oppure in momenti determinati(e quindi mostriamo solo con la TUI gli aggiornamenti)?
     //cosa pià importante manca una notifica quando il game viene creato per inizializzare la gameView
+
+    @Override
+    public void newGameCreated(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+        ui.show_requestPlayerColor(view);
+        Scanner scanner = new Scanner(System.in);
+        String color = scanner.nextLine();
+        client.setColor(color, nickname);
+    }
+
+    @Override
+    public void randomGameJoined(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+        ui.show_requestPlayerColor(view);
+        Scanner scanner = new Scanner(System.in);
+        String color = scanner.nextLine();
+        client.setColor(color, nickname);
+    }
+
+    @Override
+    public void reconnectedToGame(String GameID) throws RemoteException {
+        ui.show_playerJoined(GameID);
+    }
+
+    @Override
+    public void updatePlayerStatus(GameView game) throws RemoteException {
+        setGameView(game);
+        ui.show_currentPlayersStatus(game);
+    }
+
+    @Override
+    public void maxNumberOfPlayersReached(String GameID) throws RemoteException {
+        ui.show_gameStarting(GameID);
+    }
 
     @Override
     public void notEnoughResource() throws RemoteException {
@@ -109,96 +142,75 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //basta notificare che la partita è stata creata?
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
     }
 
     //  solo quando è il mio turno vedo il tavolo aggiornato? ( ora mentre giocano gli altri vedo gli aggiornamenti in diretta)
     @Override
     public void updateTableOfDecks(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_tableOfDecks(game);
     }
 
     //dubbio in GameController per quanto riguarda a chi viene notificato il cambiamento
     @Override
     public void updateGamestation(GameView game, GameStation gameStation) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_gameStation(gameStation);
     }
 
     @Override
-    public void updatePlayerStatus(GameView game) throws RemoteException {
-        view = new GameView(game);
-        ui.show_currentPlayersStatus(game);
-    }
-
-    @Override
     public void updateColor(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_playerColors(game);
     }
 
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_tableOfDecks(game);
     }
 
     @Override
     public void updateCurrentPlayer(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_isYourTurn(game);
     }
 
     @Override
     public void updatePoints(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_pointTable(game);
     }
 
     @Override
     public void updateGoalPlayer(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_goalCard(game.getCurrentPlayer().getGoal());
     }
 
     @Override
     public void updateHandAndTable(GameView game, String nick) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_gameStation(game.getMyGameStation(nick));
     }
 
     @Override
     public void updatePlayerInGame(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_currentPlayersStatus(game);
     }
 
     //manca
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
     }
 
     @Override
     public void updateGameStatus(GameView game) throws RemoteException {
-        view = new GameView(game);
+        setGameView(game);
         ui.show_GameStatus(game);
-    }
-
-    @Override
-    public void newGameCreated(String GameID) throws RemoteException {
-        ui.show_playerJoined(GameID);
-    }
-
-    @Override
-    public void randomGameJoined(String GameID) throws RemoteException {
-        ui.show_playerJoined(GameID);
-    }
-
-    @Override
-    public void reconnectedToGame(String GameID) throws RemoteException {
-        ui.show_playerJoined(GameID);
     }
 
     @Override

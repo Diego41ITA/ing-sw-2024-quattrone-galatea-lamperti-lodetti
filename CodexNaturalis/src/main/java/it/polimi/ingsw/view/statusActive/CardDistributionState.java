@@ -5,7 +5,7 @@ import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
-public class DrawCardState extends StateActive{
+public class CardDistributionState extends StateActive{
 
     private GameFlow flow;
     private GameView view = flow.getView();
@@ -13,19 +13,17 @@ public class DrawCardState extends StateActive{
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
-    public DrawCardState(GameFlow flow){
+    protected CardDistributionState(GameFlow flow) {
         super(flow);
     }
 
     @Override
-    public void execute(){
-        //here it does its logic
+    public void execute() {
+        client.initializeHandPlayer(nickName);
     }
 
     @Override
-    public void nextState(){
-
+    public void nextState() {
+        PlaceCardState.execute();
     }
-
-    //other method that helps to implement the logic
 }

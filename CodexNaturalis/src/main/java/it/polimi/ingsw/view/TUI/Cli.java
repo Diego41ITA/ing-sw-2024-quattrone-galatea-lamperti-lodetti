@@ -42,6 +42,34 @@ public class Cli implements UI {
     }
 
     @Override
+    public void show_requestPlayerColor(GameView gameView) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("CHOOSE A COLOR:\n");
+
+        for (Color c : freeColors(gameView)) {
+            stringBuilder.append(c + ", ");
+        }
+
+        stringBuilder.setLength(stringBuilder.length() - 2);
+
+        Println(stringBuilder.toString());
+    }
+
+    private static ArrayList<Color> freeColors(GameView gameView){
+        ArrayList freeColors = new ArrayList<>();
+        freeColors.add(Color.YELLOW);
+        freeColors.add(Color.RED);
+        freeColors.add(Color.BLUE);
+        freeColors.add(Color.GREEN);
+        if(gameView != null) {
+            for (Player p : gameView.getPlayers().keySet()) {
+                freeColors.remove(p.getColor());
+            }
+        }
+        return freeColors;
+    }
+
+    @Override
     public void show_noAvailableGames() {
         Println("""
                 NO GAMES AVAILABLE

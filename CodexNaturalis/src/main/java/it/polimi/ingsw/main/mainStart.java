@@ -31,9 +31,9 @@ public class mainStart{
                             System.out.println("game starting");
                             //lancia gameflow
                         } else if (config[0].equals("rmi") && config[1].equals("tui")) {
-                            System.out.println("game starting");
                             GameFlow flow = new GameFlow(new Cli());
                             flow.setClient(new ClientRMI(flow));
+                            flow.run();
                         } else if (config[0].equals("socket") && config[1].equals("gui")) {
                             System.out.println("game starting");
                             //lancia gameflow

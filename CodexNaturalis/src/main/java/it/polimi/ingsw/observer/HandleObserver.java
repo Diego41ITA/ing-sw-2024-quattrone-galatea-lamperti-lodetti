@@ -33,6 +33,14 @@ public class HandleObserver {
         }
     }
 
+    public void notify_maxNumberOfPlayersReached(Game game){
+        try {
+            observer.maxNumberOfPlayersReached(game.getId());
+        }catch (RemoteException e){
+            //
+        }
+    }
+
     public void  notify_setMaxNumberPlayers(Game game){
         try {
             observer.updatePlayerAndMaxNumberPlayer(new GameView(game));
