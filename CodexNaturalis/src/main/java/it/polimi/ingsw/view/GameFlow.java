@@ -78,6 +78,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             if(view.getStatus() == Status.WAITING) {
                 state1.execute();
             } else if (view.getStatus() == Status.ACTIVE) {
+                client.initializeHandPlayer(nickname);
                 state2.execute();
             } else if (view.getStatus() == Status.SUSPENDED) {
                 //state3.execute();
@@ -167,15 +168,19 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void updateCurrentPlayer(GameView game) throws RemoteException {
+    public void updateHandAndTable(GameView game, String nick) throws RemoteException {
         setGameView(game);
-        ui.show_isYourTurn(game);
+        ui.show_gameStation(game.getMyGameStation(nick));
     }
 
     @Override
-    public void updatePoints(GameView game) throws RemoteException {
-        setGameView(game);
-        ui.show_pointTable(game);
+    public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
+        for(GoalCard goalCard : cards){
+            ui.show_goalCard(goalCard);
+        }
+        Scanner scanner = new Scanner(System.in);
+        int cardId = scanner.nextInt();
+        client.chooseGoal(cards, cardId, nickname);
     }
 
     @Override
@@ -185,9 +190,15 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void updateHandAndTable(GameView game, String nick) throws RemoteException {
+    public void updateCurrentPlayer(GameView game) throws RemoteException {
         setGameView(game);
-        ui.show_gameStation(game.getMyGameStation(nick));
+        ui.show_isYourTurn(game);
+    }
+
+    @Override
+    public void updatePoints(GameView game) throws RemoteException {
+        setGameView(game);
+        ui.show_pointTable(game);
     }
 
     @Override
@@ -206,14 +217,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void updateGameStatus(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_GameStatus(game);
-    }
-
-    @Override
-    public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
-        for(GoalCard goalCard : cards){
-            ui.show_goalCard(goalCard);
-        }
-        //scelta carte
     }
 
     @Override

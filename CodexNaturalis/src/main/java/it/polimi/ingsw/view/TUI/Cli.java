@@ -298,7 +298,7 @@ public class Cli implements UI {
     @Override
     public void show_goalCard(GoalCard card) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("GOAL CARD\n\n").append("GAME ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
+        stringBuilder.append("GOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card));
         Println(stringBuilder.toString());
         /*

@@ -79,10 +79,13 @@ public class GameController implements GameControllerInterface, Serializable {
      */
     public void startGame(){
         this.game.setStatus(Status.ACTIVE);
-        game.setTurn(new Turn(new ArrayList<>(game.getPlayers().keySet())));
+        this.initializeTable();
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_startGame(game);
+        }
+        for (Player p : game.getPlayers().keySet()){
+            this.getPossibleGoals(p.getNick());
         }
     }
 
