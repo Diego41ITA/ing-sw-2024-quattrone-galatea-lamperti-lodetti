@@ -232,7 +232,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param cardSelected The index of the card to be drawn.
      * @param nick The nickname of the Player that draws the card.
      */
-    public synchronized void drawFromTable(int cardSelected, String nick) {
+    public synchronized void drawFromTable(int cardSelected, String nick) { //stesso problema dell'indice (per ora passo la carta che voglio prendere)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
