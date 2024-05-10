@@ -22,8 +22,8 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
 
     //Override di tutti gli altri messaggi che il server può mandare al client
     @Override
-    public void notEnoughResource()throws RemoteException{
-        flow.notEnoughResource();
+    public void invalidCardPlacement()throws RemoteException{
+        flow.invalidCardPlacement();
     }
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException{

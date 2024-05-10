@@ -249,12 +249,12 @@ public class Player implements Serializable {
      * @throws IllegalStateException if it's not possible to play the card
      */
     public void playCard(PlayableCard card, Point cord) throws illegalOperationException {
-        if (card.verifyResources(this.gamestation)) {
+        if (card.verifyResources(this.gamestation) && this.gamestation.getFreeCords().contains(cord)) {
             this.gamestation.placeCard(card, cord);
             this.cards.remove(card);
         }
         else {
-            throw new illegalOperationException("There are not enough resources to play this card");
+            throw new illegalOperationException("Invalid card placement");
         }
     }
 

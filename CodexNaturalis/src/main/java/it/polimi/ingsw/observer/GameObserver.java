@@ -10,7 +10,7 @@ import java.util.ArrayList;
 //questa interfaccia è usata per notificare al client qualcosa: server -> client
 public interface GameObserver extends Remote{
     //lancia il messaggio in cui non ci siano abbastanza risorse per piazzare le carte
-    void notEnoughResource()throws RemoteException;
+    void invalidCardPlacement()throws RemoteException;
     void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException;
     void updateTableOfDecks(GameView game)throws RemoteException;
     void updateGamestation(GameView game, GameStation gameStation)throws RemoteException;

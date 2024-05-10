@@ -140,7 +140,7 @@ public class GameController implements GameControllerInterface, Serializable {
                     }
                     gamestation = player.getGameStation();
                 }catch(illegalOperationException e) {
-                    observers.get(nick).notify_notEnoughResource();
+                    observers.get(nick).notify_invalidCardPlacement();
                     return;
                 }//manca gestire la coordinata non valida
             }

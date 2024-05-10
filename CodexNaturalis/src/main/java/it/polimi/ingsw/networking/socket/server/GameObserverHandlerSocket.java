@@ -29,7 +29,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     //Bisogna fare l' override dei metodi di gameObserver, come per GameObserverHandlerClient bisognerà inviare un
     //messaggio questo verrà scritto sull' OutputStream
     @Override
-    public void notEnoughResource()throws RemoteException{
+    public void invalidCardPlacement()throws RemoteException{
         try{
             out.writeObject(new NotEnoughResource());
             completeForwarding();

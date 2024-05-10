@@ -130,7 +130,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void notEnoughResource() throws RemoteException {
+    public void invalidCardPlacement() throws RemoteException {
         ui.show_notEnoughResources();
     }
 

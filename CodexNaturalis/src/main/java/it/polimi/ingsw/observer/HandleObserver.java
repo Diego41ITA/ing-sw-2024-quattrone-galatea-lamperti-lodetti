@@ -41,9 +41,9 @@ public class HandleObserver {
         }
     }
 
-    public void  notify_notEnoughResource(){
+    public void notify_invalidCardPlacement(){
         try {
-            observer.notEnoughResource();
+            observer.invalidCardPlacement();
         }catch(RemoteException e){
             //
         }
@@ -121,18 +121,9 @@ public class HandleObserver {
         }
     }
 
-
     public void notify_updatedHandAndTable(Game game, String nick){
         try {
             observer.updateHandAndTable(new GameView(game), nick);
-        }catch(RemoteException e){
-            //
-        }
-    }
-
-    public void notify_gameReadyToStart(String gameId){
-        try {
-            observer.gameReadyToStart(gameId);
         }catch(RemoteException e){
             //
         }
