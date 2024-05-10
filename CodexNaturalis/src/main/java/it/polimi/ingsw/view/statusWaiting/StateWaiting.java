@@ -55,6 +55,10 @@ public class StateWaiting {
                         throw new RuntimeException(ex);
                     }
                 }
+                break;
+            default:
+                ui.show_message("INVALID COMMAND\n");
+                break;
         }
     }
 }

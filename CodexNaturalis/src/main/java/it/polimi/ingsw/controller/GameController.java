@@ -132,7 +132,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param front A boolean flag indicating whether the card should be played facing front or not.
      */
     @Override
-    public void playCard(int numberOfCard, Point cord, String nick, boolean front){
+    public void playCard(int numberOfCard, Point cord, String nick, boolean front){ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;

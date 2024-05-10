@@ -85,7 +85,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             if(view.getStatus() == Status.WAITING) {
                 state1.execute();
             } else if (view.getStatus() == Status.ACTIVE) {
-                if(view.getCurrentPlayer().equals(nickname)) {
+                if(view.getCurrentPlayer().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
                     state2.execute();
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
@@ -216,7 +216,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void invalidCardPlacement() throws RemoteException {
-        //ci sono varie situazioni da gestire ma nel controller viene gestita solo la coordinata sbgaliata (manca CardId errato)
+        ui.show_invalidPlay();
+        //metodo correzione coordinata oppure riinvoco playCard ma va modificato il catch in gameController
     }
 
     @Override
@@ -261,7 +262,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 break;
                         }
                         break;
-                    case ("The nickname used was not connected in the running game."): //da sistemare (manca procedura dopo che viene comunicato che il nickname è errato)
+                    case ("The nickname used was not connected in the running game."):
                         ui.show_invalidNickToReconnect(id);
                         break;
         }

@@ -284,7 +284,7 @@ public class Cli implements UI {
     @Override
     public void show_invalidPlay() {
         Println("""
-                INVALID PLAY...
+                INVALID PLAY...CHOOSE A VALID COORDINATE!!!
                 """);
     }
 
