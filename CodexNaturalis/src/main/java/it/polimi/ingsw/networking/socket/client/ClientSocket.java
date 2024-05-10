@@ -116,19 +116,6 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //ora scrivo tutti i metodi per cooperare con il GameController
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
-    public void setMaxNumOfPlayer(String name, int max){
-        int num = max;
-        if(num > 4)
-            num = 4;
-        else if(num < 2)
-            num = 2;
-        try{
-            out.writeObject(new MaxNumOfPlayer(name, num));
-            completeForwarding();
-        }catch(IOException e){
-            //throw new RemoteException();
-        }
-    }
 
     @Override
     public void playCard(int card, Point cord, String nick, boolean front) throws illegalOperationException{

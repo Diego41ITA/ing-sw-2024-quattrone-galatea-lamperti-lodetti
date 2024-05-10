@@ -6,24 +6,34 @@ import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
+import it.polimi.ingsw.view.GameFlow;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
-import java.util.List;
 
-//IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME, LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
+//IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME,
+// LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
 //DEL GIOCATORE E NON SULL'OGGETTO PLAYER
+
+/**
+ * This class handles all the operations relative to a single CodexNaturalis game, exposing
+ * several methods that are called by {@link GameFlow}. Each method is also in charge to correctly
+ * notify the Players affected the action performed.
+ */
 public class GameController implements GameControllerInterface, Serializable {
-    /**
-     * the game to control
-     */
+    /**The model of the game to control*/
     private Game game;
 
-    //ho una hashMap di string(nome del player) e di handleObserver
+    /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
 
+    /**
+     * Constructor of the class. It's called by {@link MainController} when creating a new game
+     * @param id unique code associated with the specific game
+     * @param maxNumPlayers maximum number of players in the game
+     */
     public GameController(String id, int maxNumPlayers) {
         game = new Game(id);
         game.setMaxNumberPlayer(maxNumPlayers);
@@ -32,7 +42,14 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setTurn(new Turn(new ArrayList<Player>()));
         observers = new HashMap<>();
     }
-    //aggiunge observer al model
+
+    /**
+     * Adds a {@link Player}, specifying its nickname, and a {@link GameObserver} to the
+     * {@link GameController#observers} HashMap
+     * @param obs Observer of the Player
+     * @param p Player
+     * @throws RemoteException
+     */
     public void addObserver(GameObserver obs, Player p) throws RemoteException {
         if (observers.containsKey(p.getNick())){
             observers.remove(p.getNick());
@@ -42,10 +59,19 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //rimuove observer dal model
+    /**
+     * Remove a {@link Player}, specifying its nickname from the {@link GameController#observers} HashMap
+     * @param p Player
+     * @throws RemoteException
+     */
     public void removeObserver(Player p) {
        observers.remove(p.getNick());
     }
+
+    /**
+     * Method that sets the {@link GameController#game} Status to {@link Status#ACTIVE} and notify all the Players about
+     * the beginning.
+     */
     public void startGame(){
         this.game.setStatus(Status.ACTIVE);
         game.setTurn(new Turn(new ArrayList<>(game.getPlayers().keySet())));
@@ -55,20 +81,12 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //dire a diego che quando fa joinRandomgame deve aggiungere un giocatore alla partita
-    //controllare gli attributi che vengono cambiati
-    //all'interno di questo metodo vengono aggiunti i player all'interno della partita e anche il numero massimo di giocatori
-    @Override
-    public void setMaxNumberPlayers(String name, int max) {
-        game.setStatus(Status.WAITING);
-        Player player = new Player();
-        player.setNickname(name);
-        game.setSinglePlayer(player);
-        game.setMaxNumberPlayer(max);
-        observers.get(name).notify_setMaxNumberPlayers(game);//metodo da mettere nella gameListe
-    }
 
-    //viene messo il colore nella pointtable e nel player
+    /**
+     * Set the Player's color
+     * @param color {@link Color} chosen by the Player
+     * @param name nickname of the Player
+     */
     @Override
     public void setColor(String color, String name) {
         synchronized (this.game) {

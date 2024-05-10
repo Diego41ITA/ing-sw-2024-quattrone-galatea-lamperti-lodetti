@@ -18,9 +18,6 @@ public interface GameControllerInterface extends Remote {
     //in game controller ci sono anche i metodi per pescare/ottenere il giocatore attuale/vedere se si può iniziare la partita
     // questi metodi essendo synchronized non me li fa aggiungere qua
 
-
-   // all'interno di questo metodo vengono aggiunti i player all'interno della partita e anche il numero massimo di giocatori
-    public void setMaxNumberPlayers(String name, int max);
     //viene messo il colore nella pointtable e nel player
     public void setColor(String color, String name);
 
