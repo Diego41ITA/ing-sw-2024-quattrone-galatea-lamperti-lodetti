@@ -267,6 +267,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         }
     }
 
+    @Override
+    public void winner(GameView game, String winner){
+        this.winner = winner;
+        this.view = game;
+        notifyAll();
+    }
+
     //serve la notifica per il vincitore
 
 
