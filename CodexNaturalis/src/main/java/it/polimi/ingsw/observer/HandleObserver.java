@@ -113,6 +113,14 @@ public class HandleObserver {
         }
     }
 
+    public void notify_winner(Game game, String nick){
+        try {
+            observer.winner(new GameView(game), nick);
+        }catch(RemoteException e){
+            //
+        }
+    }
+
     public void notify_chooseGoal(Game game){
         try {
             observer.updateGoalPlayer(new GameView(game));

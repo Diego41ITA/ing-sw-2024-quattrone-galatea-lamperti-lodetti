@@ -155,6 +155,12 @@ public class GameController implements GameControllerInterface, Serializable {
                         }
                     }
                     gamestation = player.getGameStation();
+                    if(notify20PointReached() && !this.game.getTurn().checkIfLast()){
+                        Turn turn = this.game.getTurn();
+                        turn.setIsLast(true);
+                        turn.setEndingPlayer(nick);
+                        this.game.setTurn(turn);
+                    }
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();
                     return;
@@ -363,6 +369,14 @@ public class GameController implements GameControllerInterface, Serializable {
     public void goOn() {
         Turn turn = game.getTurn();
         turn.goOn();
+        if(turn.checkIfLast() && turn.getCurrentPlayer().getNick().equals(turn.getEndingPlayer())){
+            this.game.setStatus(Status.FINISHED);
+            String winner = calculateWinner();
+            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                HandleObserver obs = entry.getValue();
+                obs.notify_winner(game, winner);//capire che argomenti mettergli
+            }
+        }
         game.setTurn(turn);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
