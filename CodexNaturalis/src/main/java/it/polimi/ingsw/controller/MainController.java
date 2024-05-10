@@ -47,6 +47,9 @@ public class MainController implements Serializable, MainControllerInterface /*,
             mainController = new MainController();
         return mainController;
     }
+    public List<GameController> getActiveGames(){
+        return activeGames;
+    }
 
     /**
      * Create a new game by creating his gameController and
