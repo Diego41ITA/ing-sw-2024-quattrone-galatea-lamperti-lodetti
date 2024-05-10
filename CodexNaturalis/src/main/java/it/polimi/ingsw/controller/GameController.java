@@ -85,8 +85,10 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_startGame(game);
         }
         for (Player p : game.getPlayers().keySet()){
+            this.initializeHandPlayer(p.getNick());
             this.getPossibleGoals(p.getNick());
         }
+        observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
     }
 
 
