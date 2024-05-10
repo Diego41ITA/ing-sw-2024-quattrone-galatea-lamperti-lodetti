@@ -426,7 +426,12 @@ public class GameController implements GameControllerInterface, Serializable {
         return null;
     }
 
-    //metodo per scegliere la carta obiettivo
+    /**
+     * This method sets the personal {@link GoalCard}s of a Player.
+     * @param goals The two possible {@link GoalCard}.
+     * @param num The index of the selected {@link GoalCard}
+     * @param nick The nickname of the Player.
+     */
     @Override
     public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) {//bisogna gestire l'eccezione nel caso num non vada bene(se vogliamo)
         HashMap<Player, Boolean> players;
@@ -440,6 +445,10 @@ public class GameController implements GameControllerInterface, Serializable {
             observers.get(nick).notify_chooseGoal(game);
     }
 
+    /**
+     * This method initializes the Player's hand
+     * @param nick Nickname of the Player.
+     */
     @Override
     public void initializeHandPlayer(String nick) {
         HashMap<Player, Boolean> players;
@@ -462,12 +471,15 @@ public class GameController implements GameControllerInterface, Serializable {
 
         }
         observers.get(nick).notify_updatedHandAndTable(game, nick);//capire che argomenti mettere
-
-
     }
 
     //ritorna la lista di goalcard che l'utente può scegliere(dubbio, bisogna creare qualcosa del genere nel model e poi usare il
     //pattern observer?)
+
+    /**
+     * This method draws two {@link GoalCard} from the {@link TableOfDecks} to let the Player decide which one to choose.
+     * @param nickname Nickname of the Player.
+     */
     @Override
     public void getPossibleGoals(String nickname) {
         ArrayList<GoalCard> goals = new ArrayList<>();
@@ -483,21 +495,28 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //aggiunge un giocatore alla partita(gestire il caso in cui non si possa aggiungere)
+    /**
+     * This method adds a Player to a {@link Game}
+     * @param p Player to be added
+     * @throws MaxPlayersInException
+     */
     @Override
     public void addPlayer(Player p) throws MaxPlayersInException {
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_AddedPlayer(game);
         }
     }
 
-    //controlla se abbiamo raggiunto il numero massimo di giocatori e possiamo iniziare
+    /**
+     * This method check if there are enough player to start the Game.
+     * @return boolean flag.
+     */
     public synchronized boolean checkIfStart(){
         return game.getPlayers().size()==game.getMaxNumberPlayer();
     }
+
     //metodo che ritorna i punti della carta risorsa
     @Override
     public int getResourcePoint(ResourceCard card){
@@ -517,10 +536,21 @@ public class GameController implements GameControllerInterface, Serializable {
         return this.game.getStatus();
     }
 
+    /**
+     * This method reconnects a {@link Player} to a {@link Game}
+     * @param player Player to be reconnected
+     * @throws GameEndedException
+     * @throws MaxPlayersInException
+     */
     public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {
         this.game.reconnectPlayer(player);
         changePlayerStatus(player.getNick(), true);
     }
+
+    /**
+     * This method allows a Player to leave the Game.
+     * @param nick Player that wants to leave.
+     */
     public void leave(String nick){
         this.observers.remove(nick);
         this.game.removePlayer(nick);
@@ -553,6 +583,9 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
+    /**
+     * This method assigns the black color to the first Player.
+     */
     public void assignBlackColor(){
         String nick = this.game.getTurn().getFirstPlayerNick();
         HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) this.game.getPlayers();
