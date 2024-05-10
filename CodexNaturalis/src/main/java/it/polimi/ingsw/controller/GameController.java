@@ -59,6 +59,11 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
+    //lasciate questo metodo che mi serve per i test sul controller
+    public Game returnGame(){
+        return game;
+    }
+
     /**
      * Remove a {@link Player}, specifying its nickname from the {@link GameController#observers} HashMap
      * @param p Player
