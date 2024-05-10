@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusFinished.StateFinished;
 import it.polimi.ingsw.view.statusSuspended.StateSuspended;
@@ -29,7 +30,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //metto 4 attributi State
     private StateWaiting state1 = new StateWaiting(this);
-    private StateActive state2 = new StateActive();
+    private StateActive state2 = new PlaceCardState(this);
     private StateSuspended state3;
     private StateFinished state4;
 
@@ -74,12 +75,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         Scanner scanner = new Scanner(System.in);
         nickname = scanner.nextLine();
 
-        while(stay) {//ad ogni ciclo farà qualcosa, quando lo status cambierà cambierà anche l'azione effettuata
+        while(stay) {
             if(view.getStatus() == Status.WAITING) {
                 state1.execute();
             } else if (view.getStatus() == Status.ACTIVE) {
-                client.initializeHandPlayer(nickname);
-                state2.execute();
+                if(view.getCurrentPlayer().equals(nickname)) {
+                    state2.execute();
+                }
             } else if (view.getStatus() == Status.SUSPENDED) {
                 //state3.execute();
             } else if (view.getStatus() == Status.FINISHED) {
@@ -95,11 +97,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void setGameView(GameView game){
         this.view = game;
     }
-
-
-    //IMPORTANTE
-    //la gameView viene aggiornata ad ogni notifica oppure in momenti determinati(e quindi mostriamo solo con la TUI gli aggiornamenti)?
-    //cosa pià importante manca una notifica quando il game viene creato per inizializzare la gameView
 
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
@@ -125,14 +122,31 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
+    public void gameIdNotExists(String gameId) throws RemoteException { //da sistemare manca procedura dopo notifica errore
+        ui.show_invalidIdGame();
+    }
+
+    @Override
+    public void updatePlayerInGame(GameView game) throws RemoteException {
+        setGameView(game);
+        ui.show_currentPlayersStatus(game);
+    }
+
+    @Override
     public void updatePlayerStatus(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_currentPlayersStatus(game);
     }
 
     @Override
-    public void invalidCardPlacement() throws RemoteException {
-        ui.show_notEnoughResources();
+    public void updateGameStatus(GameView game) throws RemoteException {
+        setGameView(game);
+        ui.show_GameStatus(game);
+    }
+
+    @Override
+    public void startGame(GameView game) throws RemoteException {
+        ui.show_gameStarting(game.getId());
     }
 
     //basta notificare che la partita è stata creata?
@@ -141,14 +155,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         setGameView(game);
     }
 
-    //  solo quando è il mio turno vedo il tavolo aggiornato? ( ora mentre giocano gli altri vedo gli aggiornamenti in diretta)
     @Override
     public void updateTableOfDecks(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_tableOfDecks(game);
     }
 
-    //dubbio in GameController per quanto riguarda a chi viene notificato il cambiamento
     @Override
     public void updateGamestation(GameView game, GameStation gameStation) throws RemoteException {
         setGameView(game);
@@ -196,32 +208,20 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void updatePoints(GameView game) throws RemoteException {
-        setGameView(game);
-        ui.show_pointTable(game);
+    public void invalidCardPlacement() throws RemoteException {
+        //ci sono varie situazioni da gestire ma nel controller viene gestita solo la coordinata sbgaliata (manca CardId errato)
     }
 
-    @Override
-    public void updatePlayerInGame(GameView game) throws RemoteException {
-        setGameView(game);
-        ui.show_currentPlayersStatus(game);
-    }
-
-    //manca
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
+        ui.show_gameStation(game.getMyGameStation(game.getCurrentPlayer().getNick())); //da sistemare (fare in modo che mostri gamestation con nome)
     }
 
     @Override
-    public void updateGameStatus(GameView game) throws RemoteException {
+    public void updatePoints(GameView game) throws RemoteException {
         setGameView(game);
-        ui.show_GameStatus(game);
-    }
-
-    @Override
-    public void startGame(GameView game) throws RemoteException {
-        ui.show_gameStarting(game.getId());
+        ui.show_pointTable(game);
     }
 
     //si potrebbe gestire con i messaggi delle exception (o le exception)
@@ -254,17 +254,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 break;
                         }
                         break;
-                    case ("The nickname used was not connected in the running game."):
+                    case ("The nickname used was not connected in the running game."): //da sistemare (manca procedura dopo che viene comunicato che il nickname è errato)
                         ui.show_invalidNickToReconnect(id);
                         break;
         }
     }
-
-    @Override
-    public void gameIdNotExists(String gameId) throws RemoteException {
-        ui.show_invalidIdGame();
-    }
-
     //bisogna implementare le robe di GameObserver e bisogna capire se gestire con eventi che contengono il tipo di
     //notifica o che fanno operazioni dirette in teoria sarebbe meglio utilizzare una coda ordinata poichè in questo
     //modo ogni evento è gestito dallo stato specifico.

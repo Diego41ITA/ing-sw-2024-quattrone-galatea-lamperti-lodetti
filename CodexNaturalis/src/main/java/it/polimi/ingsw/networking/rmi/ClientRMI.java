@@ -91,12 +91,6 @@ public class ClientRMI implements ClientAction {
         firstCard = false;
     }
 
-    //metodi del GameController
-    @Override
-    public void setMaxNumOfPlayer(String name, int max){
-        gameController.setMaxNumberPlayers(name, max);
-    }
-
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
     public void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException {
         if(firstCard){
