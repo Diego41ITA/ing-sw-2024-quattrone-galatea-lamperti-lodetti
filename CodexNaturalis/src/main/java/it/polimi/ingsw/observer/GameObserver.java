@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface GameObserver extends Remote{
     //lancia il messaggio in cui non ci siano abbastanza risorse per piazzare le carte
     void invalidCardPlacement()throws RemoteException;
+    void winner(GameView game, String nick)throws RemoteException;
     void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException;
     void updateTableOfDecks(GameView game)throws RemoteException;
     void updateGamestation(GameView game, GameStation gameStation)throws RemoteException;

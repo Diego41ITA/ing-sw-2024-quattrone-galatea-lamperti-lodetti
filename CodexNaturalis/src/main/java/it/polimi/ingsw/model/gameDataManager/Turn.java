@@ -14,6 +14,24 @@ public class Turn implements Serializable {
     //it is possible to do this with nicknames only.
     private List<Player> players;
     private Player currentPlayer;
+    private boolean isLast = false;
+    private String endingPlayerNick = null;
+
+    public void setEndingPlayer(String nick){
+        this.endingPlayerNick = nick;
+    }
+
+    public String getEndingPlayer(){
+        return this.endingPlayerNick;
+    }
+
+    public void setIsLast(boolean flag){
+        this.isLast=flag;
+    }
+
+    public boolean checkIfLast(){
+        return this.isLast;
+    }
 
     //probabilmente inutile perchè non andrebbe messo nel costruttore base di game. (si usa dopo il set)
     //public Turn(){
