@@ -83,5 +83,17 @@ public class GameView implements Serializable {
         return id;
     }
 
-
+    /**
+     * This method returns an object player by passing his nickname
+     * @param nick is the nickname of the player that you want
+     * @return a player object.
+     */
+    public Player getPlayer(String nick){
+        Player player = null;
+        for(Player p: players.keySet()){
+            if(p.getNick().equals(nick))
+                player = p;
+        }
+        return player;
+    }
 }
