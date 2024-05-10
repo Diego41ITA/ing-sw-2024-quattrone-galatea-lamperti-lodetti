@@ -301,7 +301,7 @@ public class TableOfDecks implements Serializable {
         this.deckResource = resourceCardReader.readDeckFromJSON("src/main/resources/JsonCards/resourceCard.json");
         this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
-        this.deckGoal = goalCardReader.readDeckFromJSON("/goalCard.json");
+        this.deckGoal = goalCardReader.readDeckFromJSON("src/main/resources/JsonCards/goalCard.json");
 
         shuffle();
 

@@ -114,9 +114,15 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //pgioca una carta sul tavolo da gioco e aggiunge i punti a seconda se sia gold o ressource
+    /**
+     * Play a {@link PlayableCard} in a specific coordinate of the Player's {@link GameStation}
+     * @param numberOfCard The index of the card to be played from the player's hand.
+     * @param cord A {@link Point} object representing the chosen coordinate.
+     * @param nick The Player's nickname.
+     * @param front A boolean flag indicating whether the card should be played facing front or not.
+     */
     @Override
-    public void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException {
+    public void playCard(int numberOfCard, Point cord, String nick, boolean front){
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;
@@ -142,12 +148,11 @@ public class GameController implements GameControllerInterface, Serializable {
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();
                     return;
-                }//manca gestire la coordinata non valida
+                }
             }
-
         }
         game.setPlayers(players);
-//non dovrebbe avvertire solo il player che ha piazzato la carta?
+
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
@@ -160,7 +165,7 @@ public class GameController implements GameControllerInterface, Serializable {
     // cui vuole pescare
 
     /**
-     * this method draw a PlayableCard from tableOfDecks and put it in the hand of the player.
+     * This method draw a PlayableCard from tableOfDecks and put it in the hand of the player.
      * It manages also the consistency of the model.
      * @param typo is the textual representation of the deck type.
      * @param nick is the nickname of the player
@@ -206,14 +211,18 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //public synchronized void drawFromTable(int cardSelected, String nick)
+    /**
+     * This method draws a {@link PlayableCard} from the face-up cards in {@link TableOfDecks}
+     * @param cardSelected The index of the card to be drawn.
+     * @param nick The nickname of the Player that draws the card.
+     */
     public synchronized void drawFromTable(int cardSelected, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         ArrayList<Card> cards = table.getCards();
-        for (Player player : players.keySet()) {//attenzione non viene gestita l'eccezzione in cui non c'è il giocatore con tale nick
-            if (player.getNick().equals(nick)) { //attenzione non viene gestita l'eccezzione in cui non c'è tale carta
+        for (Player player : players.keySet()) {
+            if (player.getNick().equals(nick)) {
                 Card card = table.getCards().get(cardSelected);
                 player.draw((PlayableCard) card);
                 table.setCards(card);
@@ -227,7 +236,11 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //cambia lo stato dei giocatori(connesso o non connesso)
+    /**
+     * This method changes the {@link Player}'s connection status.
+     * @param nick The nickname of the Player.
+     * @param value A boolean flag representing the connection status.
+     */
     @Override
     public void changePlayerStatus(String nick, Boolean value) {
         HashMap<Player, Boolean> players;
@@ -245,14 +258,21 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //cambia il modo di piazzare la carta
+    /**
+     * This method changes the attribute of the card related to whether it is played front or back.
+     * @param card The card to be modified.
+     * @param value A boolean flag: true for front, false for back.
+     * @return The modified card
+     */
     @Override
     public Card cardIsFrontChanger(Card card, Boolean value) {
         card.changeIsFront(value);
         return card;
     }
 
-    //inizializza il tavolo da gioco, compreso i giocatori nei turni
+    /**
+     * This method initializes the {@link TableOfDecks} and the {@link Turn} object
+     */
     @Override
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
@@ -266,12 +286,22 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_InitializeTable(game);//capire che argomenti mettergli
         }
     }
-@Override
+
+    /**
+     * This method checks if the 20 point threshold is reached.
+     * @return A boolean flag representing the reaching of the threshold.
+     */
+    @Override
     public boolean notify20PointReached() {
         return game.getPointTable().notify20PointReached();
     }
 
     //calcola i punti dei giocatori attraverso le carte obbiettivo, aggiorna la point table e ritorna  il giocatore con il punteggio più alto
+
+    /**
+     * This method calculates each Player's point and updates the {@link PointTable}.
+     * @return The nickname of the winner.
+     */
     @Override
     public String calculateWinner() {
         HashMap<Player, Boolean> players;
@@ -309,12 +339,16 @@ public class GameController implements GameControllerInterface, Serializable {
         return winner;
     }
 
-    //ritorna il nick del giocatore attuale
+    /**
+     * @return The nickname of the current Player.
+     */
     public synchronized String getCurrentPlayer() {
         return game.getTurn().getCurrentPlayerNick();
     }
 
-    //passa al giocatore successivo cambiando il giocatore corrente
+    /**
+     * This method allows the transition to the next player at the end of each turn
+     */
     @Override
     public void goOn() {
         Turn turn = game.getTurn();
@@ -327,12 +361,17 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     //forse inutile vedere come funziona il patter observable
-//ritorna le carte visibili sul TableOfDecks(quelle che il giocatore può pescare)
-    public synchronized ArrayList<Card> cardsOnTableOfDecks() {
+    //ritorna le carte visibili sul TableOfDecks(quelle che il giocatore può pescare)
+    public synchronized ArrayList<Card> getCardsOnTableOfDecks() {
         return game.getTableOfDecks().getCards();
     }
 
-    //calcola i punti della carta oro e li ritorna
+    /**
+     * Support method for the internal logic of {@link GameController} class. It calculates the score of a specific gold card.
+     * @param card Specified card.
+     * @param nick Nickname of the Player.
+     * @return Calculated points.
+     */
     @Override
     public int calculateGoldPoints(GoldCard card, String nick) {
         HashMap<Player, Boolean> players;
@@ -344,7 +383,12 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         return 0;
     }
-    //somma ai punti del giocatore tot punti
+
+    /**
+     * Support method for the internal logic of {@link GameController} class. It increments the points of a specific Player.
+     * @param nick Nickname of the Player.
+     * @param point Amount of point to be added.
+     */
     @Override
     public void addPoints2Player(String nick, int point) {
         HashMap<Player, Boolean> players;
@@ -355,27 +399,28 @@ public class GameController implements GameControllerInterface, Serializable {
                 point = point + pointTable.getPoint(player);
                 pointTable.updatePoint(player, point);
             }
-
         }
+
         game.setPointTable(pointTable);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            //String chiave = entry.getKey();
             HandleObserver obs = entry.getValue();
             obs.notify_UpdatePoints(game);
         }
 
     }
 
-    //forse inutile vedere come funziona il patter observable
+    /**
+     * Getter method.
+     * @param nick Nickname of the Player.
+     * @return The Player's hand.
+     */
     @Override
     public ArrayList<PlayableCard> showPlayerHand(String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
-        PointTable pointTable = game.getPointTable();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 return (ArrayList<PlayableCard>) player.showCard();
-
             }
         }
         return null;
