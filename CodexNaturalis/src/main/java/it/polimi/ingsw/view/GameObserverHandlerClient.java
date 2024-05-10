@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //funziona sia con socket che con Rmi
 public class GameObserverHandlerClient implements GameObserver, Serializable {
-    private GameFlow flow;
+    private final GameFlow flow;
     public GameObserverHandlerClient(GameFlow flow){
         this.flow = flow;
     }
@@ -75,6 +75,7 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
     @Override
     public void updateGameStatus(GameView game)throws  RemoteException{
+        notifyAll();    //the GameFlow thread could be waiting
         flow.updateGameStatus(game);
     }
     @Override
@@ -93,10 +94,7 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     public void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException{
         flow.goalCardsDrawed(cards);
     }
-    @Override
-    public void gameReadyToStart(String gameID)throws RemoteException /*non ha molto senso basta mandare sempre StartGame*/{
-        flow.gameReadyToStart(gameID);
-    }
+
     @Override
     public void startGame(GameView game)throws RemoteException{
         flow.startGame(game);
