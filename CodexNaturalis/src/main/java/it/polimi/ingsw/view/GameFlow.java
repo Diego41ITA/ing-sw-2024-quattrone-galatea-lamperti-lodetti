@@ -25,6 +25,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private final UI ui;
     private GameView view;
 
+    private String winner = null;
+
     //un attributo per uscire dal ciclo (viene settato dall'ultimo stato)
     boolean stay = true;
 
@@ -45,7 +47,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     public GameFlow(UI ui){
         this.ui = ui;
-        this.client = client;
+        //this.client = client;
     }
 
     public void setClient(ClientAction client){
@@ -68,6 +70,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         return nickname;
     }
 
+    public String getWinner(){
+        return this.winner;
+    }
+
     public void run(){
         boolean stay = true;
 
@@ -83,9 +89,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     state2.execute();
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
-                //state3.execute();
+                state3.execute();
             } else if (view.getStatus() == Status.FINISHED) {
-                //state4.execute();
+                state4.execute();
+                stay = false;
             }
         }
     }
@@ -259,6 +266,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         break;
         }
     }
+
+    //serve la notifica per il vincitore
+
+
     //bisogna implementare le robe di GameObserver e bisogna capire se gestire con eventi che contengono il tipo di
     //notifica o che fanno operazioni dirette in teoria sarebbe meglio utilizzare una coda ordinata poichè in questo
     //modo ogni evento è gestito dallo stato specifico.

@@ -422,6 +422,7 @@ public class Cli implements UI {
 
     @Override
     public void show_gameOver() {//solo scritta gameover o anche nome vincitore?
+        Println("the game is over now we are calculating the winner...");
     }
 
     private static String safeString(Object o){
