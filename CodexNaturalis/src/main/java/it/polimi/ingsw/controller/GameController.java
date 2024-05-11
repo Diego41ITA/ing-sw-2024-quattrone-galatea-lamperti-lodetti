@@ -126,31 +126,28 @@ public class GameController implements GameControllerInterface, Serializable {
 
     /**
      * Play a {@link PlayableCard} in a specific coordinate of the Player's {@link GameStation}
-     * @param numberOfCard The index of the card to be played from the player's hand.
-     * @param cord A {@link Point} object representing the chosen coordinate.
-     * @param nick The Player's nickname.
-     * @param front A boolean flag indicating whether the card should be played facing front or not.
+     *
+     * @param playedCard
+     * @param nick       The Player's nickname.
+     * @param front      A boolean flag indicating whether the card should be played facing front or not.
+     * @param cord       A {@link Point} object representing the chosen coordinate.
      */
     @Override
-    public void playCard(int numberOfCard, Point cord, String nick, boolean front){ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
+    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord){ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 try {
-                    ArrayList<PlayableCard> cards = (ArrayList<PlayableCard>) player.showCard();
-                    PlayableCard card = cards.get(numberOfCard);
-                    cards.remove(numberOfCard);
-                    card = (PlayableCard) cardIsFrontChanger(card, front);
-                    player.setCards(cards);
-                    player.playCard(card, cord);
-                    if(card.getCardId()> 40 && front){
-                        addPoints2Player(nick,calculateGoldPoints((GoldCard) card,nick));
+                    cardIsFrontChanger(playedCard, front);
+                    player.playCard(playedCard, cord);
+                    if(playedCard.getCardId()> 40 && front){
+                        addPoints2Player(nick,calculateGoldPoints((GoldCard) playedCard,nick));
 
                     }else{
                         Set<Integer> validCardIds = new HashSet<>(Arrays.asList(8, 9, 10, 19, 20, 21, 28, 29, 30, 38, 39, 40));
-                        if(front && validCardIds.contains(card.getCardId())) {
+                        if(front && validCardIds.contains(playedCard.getCardId())) {
                             addPoints2Player(nick, 1);
                         }
                     }
@@ -276,14 +273,13 @@ public class GameController implements GameControllerInterface, Serializable {
 
     /**
      * This method changes the attribute of the card related to whether it is played front or back.
-     * @param card The card to be modified.
+     *
+     * @param card  The card to be modified.
      * @param value A boolean flag: true for front, false for back.
-     * @return The modified card
      */
     @Override
-    public Card cardIsFrontChanger(Card card, Boolean value) {
+    public void cardIsFrontChanger(Card card, Boolean value) {
         card.changeIsFront(value);
-        return card;
     }
 
     /**

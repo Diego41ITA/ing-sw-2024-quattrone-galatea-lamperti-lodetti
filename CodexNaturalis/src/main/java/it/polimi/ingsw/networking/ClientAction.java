@@ -2,14 +2,12 @@ package it.polimi.ingsw.networking;
 
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
 import java.awt.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 //questa interfaccia indica tutte le azioni possibili effettuabili da un client
 //notate che rappresenta il punto di contatto tra ClientRMI e ClientSocket perchè entrambi la estenderanno
@@ -20,7 +18,7 @@ public interface ClientAction {
 
     void joinRandomGame(String nick) throws RemoteException, NotBoundException/*,NoAvailableGameToJoinException*/;
     void rejoin(String nick, String gameId) throws RemoteException, NotBoundException;
-    void playCard(int card, Point cord, String nick,boolean front) throws illegalOperationException;
+    void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException;
     void chooseGoal(ArrayList<GoalCard> goals, int num, String nick);
     void goOn();
     void setColor(String color, String name);

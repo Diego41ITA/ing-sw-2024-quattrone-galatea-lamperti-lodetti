@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.statusActive;
 
 import it.polimi.ingsw.model.GameView;
-import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
@@ -69,7 +68,7 @@ public class PlaceCardState extends StateActive{
         int y = scanner.nextInt();
         Point coord = new Point(x, y);
         try {
-            client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
+            client.playCard(, cardCheck.get(), coord, nickName, isFrontOrBack);
         } catch (illegalOperationException e) {
             //non dovrebbe arrivare qui l'exception o sbaglio? (dovrebbe esser gestita con le notify)
         }

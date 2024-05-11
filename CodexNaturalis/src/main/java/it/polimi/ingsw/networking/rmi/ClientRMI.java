@@ -1,7 +1,7 @@
 package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.model.card.GoalCard;
-import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
+import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
@@ -92,12 +92,12 @@ public class ClientRMI implements ClientAction {
     }
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
-    public void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException {
+    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException {
         if(firstCard){
             gameController.setGameStation(nick, 0,front);
             firstCard = false;
         }
-        gameController.playCard(numberOfCard, cord, nick, front);
+        gameController.playCard(playedCard, nick, front, cord);
     }
 
     @Override

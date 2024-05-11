@@ -22,13 +22,13 @@ public interface GameControllerInterface extends Remote {
     public void setColor(String color, String name);
 
     //pgioca una carta sul tavolo da gioco
-    void playCard(int numberOfCard, Point cord, String nick, boolean front) throws illegalOperationException;
+    void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws illegalOperationException;
     void drawPlayableCardFromTableOfDecks(String typo, String nick);
 
     //cambia lo stato dei giocatori(connesso o non connesso)
     public void changePlayerStatus(String nick, Boolean value);
     //cambia il modo di piazzare la carta
-    public Card cardIsFrontChanger(Card card, Boolean value);
+    public void cardIsFrontChanger(Card card, Boolean value);
     //inizializza il tavolo da gioco, compreso i giocatori nei turni
     public void initializeTable();
 

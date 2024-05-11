@@ -1,6 +1,7 @@
 package it.polimi.ingsw.networking.socket.client;
 
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.socket.client.message.*;
@@ -118,9 +119,9 @@ public class ClientSocket extends Thread implements ClientAction {
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
 
     @Override
-    public void playCard(int card, Point cord, String nick, boolean front) throws illegalOperationException{
+    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException{
         try{
-            out.writeObject(new PlayCard(nick, card, cord, front));
+            out.writeObject(new PlayCard(nick, playedCard, cord, front));
             completeForwarding();
         }catch(IOException e){
             throw new illegalOperationException("errore");
