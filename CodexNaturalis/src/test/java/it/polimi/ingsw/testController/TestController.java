@@ -242,7 +242,8 @@ public class TestController {
         gameController.addPlayer(player1);
         Game game1 = gameController.returnGame();
         int num = game1.getTableOfDecks().getCards().get(0).getCardId();
-        gameController.drawFromTable(0, "Player1");
+        Card card = game1.getTableOfDecks().getCards().get(0);
+        gameController.drawFromTable(card, "Player1");
         ArrayList<Player> players = new ArrayList<>(gameController.getPlayers().keySet());
         assertEquals(players.get(0).showCard().size(), 1);
         Game game2 = gameController.returnGame();
