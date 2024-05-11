@@ -15,13 +15,17 @@ import java.util.Scanner;
 public class PlaceCardState extends StateActive{
 
     private GameFlow flow;
-    private GameView view = flow.getView();
-    private UI ui = flow.getUi();
-    private ClientAction client = flow.getClient();
-    private String nickName = flow.getNickname();
+    private GameView view;
+    private UI ui;
+    private ClientAction client;
+    private String nickName;
 
     public PlaceCardState(GameFlow flow) {
         super(flow);
+        view = flow.getView();
+        ui = flow.getUi();
+        client = flow.getClient();
+        nickName = flow.getNickname();
     }
 
     @Override
