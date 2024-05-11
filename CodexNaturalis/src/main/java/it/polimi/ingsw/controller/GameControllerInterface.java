@@ -60,7 +60,7 @@ public interface GameControllerInterface extends Remote {
     public String getGameId();
 //METODO CHE ritorna i players
     public HashMap<Player, Boolean> getPlayers();
-    void drawFromTable(int card, String nick);
+    void drawFromTable(Card card, String nick);
     void setGameStation(String nick, int numberOfCard,boolean front);
     public int getNumOfOnlinePlayers();
     public void assignBlackColor();

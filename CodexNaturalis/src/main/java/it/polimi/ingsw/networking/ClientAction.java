@@ -1,5 +1,6 @@
 package it.polimi.ingsw.networking;
 
+import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -23,7 +24,7 @@ public interface ClientAction {
     void goOn();
     void setColor(String color, String name);
     void drawPlayableCardFromTableOfDecks(String nick, String deck);
-    void drawFromTable(String nick, int card);
+    void drawFromTable(String nick, Card card);
 
     //questo metodo non so quanto senso possa avere (ci pensa il controller a capire quando inizializzare la partita)
     void initializeHandPlayer(String nick);

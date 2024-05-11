@@ -230,19 +230,17 @@ public class GameController implements GameControllerInterface, Serializable {
 
     /**
      * This method draws a {@link PlayableCard} from the face-up cards in {@link TableOfDecks}
-     * @param cardSelected The index of the card to be drawn.
+     * @param cardSelected The card drawn.
      * @param nick The nickname of the Player that draws the card.
      */
-    public synchronized void drawFromTable(int cardSelected, String nick) { //stesso problema dell'indice (per ora passo la carta che voglio prendere)
+    public synchronized void drawFromTable(Card cardSelected, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
-        ArrayList<Card> cards = table.getCards();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                Card card = table.getCards().get(cardSelected);
-                player.draw((PlayableCard) card);
-                table.setCards(card);
+                player.draw((PlayableCard) cardSelected);
+                table.setCards(cardSelected);
             }
         }
         game.setTableOfDecks(table);

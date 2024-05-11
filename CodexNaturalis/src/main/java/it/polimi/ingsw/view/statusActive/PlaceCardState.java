@@ -68,7 +68,7 @@ public class PlaceCardState extends StateActive{
         int y = scanner.nextInt();
         Point coord = new Point(x, y);
         try {
-            client.playCard(, cardCheck.get(), coord, nickName, isFrontOrBack);
+            client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
         } catch (illegalOperationException e) {
             //non dovrebbe arrivare qui l'exception o sbaglio? (dovrebbe esser gestita con le notify)
         }

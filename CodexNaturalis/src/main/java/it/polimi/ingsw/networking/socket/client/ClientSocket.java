@@ -1,5 +1,6 @@
 package it.polimi.ingsw.networking.socket.client;
 
+import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -169,7 +170,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void drawFromTable(String nick, int card){
+    public void drawFromTable(String nick, Card card){
         try{
             out.writeObject(new DrawFromTable(nick, card));
             completeForwarding();

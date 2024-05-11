@@ -1,5 +1,6 @@
 package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.*;
+import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -116,7 +117,7 @@ public class ClientRMI implements ClientAction {
     }
 
     @Override
-    public void drawFromTable(String nick, int card){
+    public void drawFromTable(String nick, Card card){
         gameController.drawFromTable(card, nick);
     }
 
