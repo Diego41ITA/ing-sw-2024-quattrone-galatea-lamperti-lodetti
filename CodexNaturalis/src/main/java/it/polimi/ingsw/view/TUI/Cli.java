@@ -56,11 +56,7 @@ public class Cli implements UI {
     }
 
     private static ArrayList<Color> freeColors(GameView gameView){
-        ArrayList freeColors = new ArrayList<>();
-        freeColors.add(Color.YELLOW);
-        freeColors.add(Color.RED);
-        freeColors.add(Color.BLUE);
-        freeColors.add(Color.GREEN);
+        ArrayList<Color> freeColors = new ArrayList<>(Arrays.asList(Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN));
         if(gameView != null) {
             for (Player p : gameView.getPlayers().keySet()) {
                 freeColors.remove(p.getColor());
