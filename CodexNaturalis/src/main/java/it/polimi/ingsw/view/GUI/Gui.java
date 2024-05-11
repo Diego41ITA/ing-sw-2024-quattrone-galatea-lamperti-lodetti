@@ -8,7 +8,7 @@ import it.polimi.ingsw.view.UI;
 
 /* questa classe in base al metodo dovrà runnare la grafica su thread e bisognerà
  */
-public class Gui extends UI {
+public class Gui implements UI {
 
     @Override
     public void show_startingMenu() {
@@ -22,6 +22,11 @@ public class Gui extends UI {
 
     @Override
     public void show_joinRandomGame() {
+
+    }
+
+    @Override
+    public void show_requestPlayerColor(GameView gameView) {
 
     }
 
