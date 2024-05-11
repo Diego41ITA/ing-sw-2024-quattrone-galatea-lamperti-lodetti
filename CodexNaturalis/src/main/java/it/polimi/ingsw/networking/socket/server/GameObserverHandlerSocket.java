@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking.socket.server;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.*;
 import it.polimi.ingsw.observer.GameObserver;
@@ -11,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 
 /*
 questa classe serve a notificare al client tutti i cambiamenti
@@ -192,15 +194,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
             //does something
         }
     }
-    @Override
-    public void gameReadyToStart(String gameID)throws RemoteException{
-        try{
-            out.writeObject(new GameReadyToStart(gameID));
-            completeForwarding();
-        }catch(IOException e){
-            //does something
-        }
-    }
+
     @Override
     public void startGame(GameView game)throws RemoteException{
         try{
@@ -228,5 +222,15 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }catch(IOException e){
             //does something
         }
+    }
+
+    @Override
+    public void winner(GameView view, String winner){
+        //does nothing for now;
+    }
+
+    @Override
+    public void update20PointsReached(GameView game)throws RemoteException{
+        //does nothing for now;
     }
 }

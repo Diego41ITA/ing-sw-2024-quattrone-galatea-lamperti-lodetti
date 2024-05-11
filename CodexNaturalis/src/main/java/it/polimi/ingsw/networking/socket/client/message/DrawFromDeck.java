@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainControllerInterface;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.observer.GameObserver;
-import jdk.swing.interop.DragSourceContextWrapper;
+//import jdk.swing.interop.DragSourceContextWrapper;
 
 import java.rmi.RemoteException;
 
