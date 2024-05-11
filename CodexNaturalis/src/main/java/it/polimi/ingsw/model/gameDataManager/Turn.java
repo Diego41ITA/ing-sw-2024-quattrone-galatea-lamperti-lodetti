@@ -45,13 +45,13 @@ public class Turn implements Serializable {
      */
     public Turn(List<Player> players){
         this.players = new ArrayList<>(players);
-        this.sort();
+        if(!this.players.isEmpty()) this.sort();
     }
 
     public Turn(Turn t){
         this.players = new ArrayList<>();
         setPlayers(t.getPlayers());
-        this.currentPlayer = new Player(t.getCurrentPlayer());
+        if(!t.getPlayers().isEmpty()) this.currentPlayer = new Player(t.getCurrentPlayer());
     }
 
     /**

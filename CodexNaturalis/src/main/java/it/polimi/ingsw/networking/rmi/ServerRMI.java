@@ -65,10 +65,12 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     @Override
     public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException */{
         GameControllerInterface stub = server.mainController.joinRandomGame(obs, nick);
-        try{
+        try{//manca da gestire exception per cui stub = null
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(RemoteException e){
             //...
+        }catch (NullPointerException e){
+            obs.genericErrorWhenEnteringGame("No games currently available to join...", null);
         }
         return stub;
     }

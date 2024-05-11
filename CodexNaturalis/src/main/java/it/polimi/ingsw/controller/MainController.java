@@ -122,7 +122,6 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 obs.genericErrorWhenEnteringGame(e.getMessage(), randomAvailableGame.getGameId());
             }
         } else {
-            obs.genericErrorWhenEnteringGame("No games currently available to join...", null);
         }
         return null;
     }

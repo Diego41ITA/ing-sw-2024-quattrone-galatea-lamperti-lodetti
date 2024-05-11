@@ -11,7 +11,7 @@ public class MainServer {
             ServerRMI.bind();
 
             SocketServer socket = new SocketServer();
-            socket.startConnection(0 /* need to add the port number*/);
+            socket.startConnection(50000);
         }catch(Exception e){
             e.printStackTrace();
         }
