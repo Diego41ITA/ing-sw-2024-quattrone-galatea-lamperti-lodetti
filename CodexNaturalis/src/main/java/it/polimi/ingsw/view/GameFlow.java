@@ -85,7 +85,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             if(view.getStatus() == Status.WAITING) {
                 state1.execute();
             } else if (view.getStatus() == Status.ACTIVE) {
-                if(view.getCurrentPlayer().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
+                if(view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
                     state2.execute();
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
@@ -160,6 +160,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game) throws RemoteException {
         setGameView(game);
+    }
+
+    @Override
+    public void update20PointsReached(GameView game) throws RemoteException {
+        ui.show_lastTurn();
     }
 
     @Override

@@ -25,10 +25,22 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     public void invalidCardPlacement()throws RemoteException{
         flow.invalidCardPlacement();
     }
+
+    @Override
+    public void winner(GameView game, String nick) throws RemoteException {
+        flow.winner(game, nick);
+    }
+
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException{
         flow.updatePlayerAndMaxNumberPlayer(game);
     }
+
+    @Override
+    public void update20PointsReached(GameView game) throws RemoteException {
+        flow.update20PointsReached(game);
+    }
+
     @Override
     public void updateTableOfDecks(GameView game)throws RemoteException{
         flow.updateTableOfDecks(game);
