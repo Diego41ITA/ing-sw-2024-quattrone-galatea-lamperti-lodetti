@@ -157,6 +157,10 @@ public class GameController implements GameControllerInterface, Serializable {
                         turn.setIsLast(true);
                         turn.setEndingPlayer(nick);
                         this.game.setTurn(turn);
+                        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                            HandleObserver obs = entry.getValue();
+                            obs.notify_20PointsReached(game);
+                        }
                     }
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();

@@ -13,6 +13,7 @@ public interface GameObserver extends Remote{
     void invalidCardPlacement()throws RemoteException;
     void winner(GameView game, String nick)throws RemoteException;
     void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException;
+    void update20PointsReached(GameView game)throws RemoteException;
     void updateTableOfDecks(GameView game)throws RemoteException;
     void updateGamestation(GameView game, GameStation gameStation)throws RemoteException;
     void updatePlayerStatus(GameView game)throws RemoteException;

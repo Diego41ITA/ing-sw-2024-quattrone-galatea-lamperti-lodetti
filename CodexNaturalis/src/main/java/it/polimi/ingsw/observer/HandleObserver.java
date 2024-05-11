@@ -81,6 +81,14 @@ public class HandleObserver {
         }
     }
 
+    public void notify_20PointsReached(Game game){
+        try {
+            observer.update20PointsReached(new GameView(game));
+        }catch(RemoteException e){
+            //
+        }
+    }
+
     public void notify_InitializeTable(Game game){
         try {
             observer.updateTableAndTurn(new GameView(game));
