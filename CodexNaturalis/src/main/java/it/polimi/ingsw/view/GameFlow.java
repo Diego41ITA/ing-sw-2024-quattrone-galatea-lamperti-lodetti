@@ -25,13 +25,18 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private final UI ui;
     private GameView view;
 
+    public GameFlow(UI ui){
+        this.ui = ui;
+        //this.client = client;
+    }
+
     private String winner = null;
 
     //un attributo per uscire dal ciclo (viene settato dall'ultimo stato)
     boolean stay = true;
 
     //metto 4 attributi State
-    private StateWaiting state1 = new StateWaiting(this);
+    private StateWaiting state1 = new StateWaiting();
     private StateActive state2 = new PlaceCardState(this);
     private StateSuspended state3;
     private StateFinished state4;
@@ -44,11 +49,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //implementa runnable perché il cuore starà dentro ad un thread
 
     //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
-
-    public GameFlow(UI ui){
-        this.ui = ui;
-        //this.client = client;
-    }
 
     public void setClient(ClientAction client){
         this.client = client;
@@ -82,7 +82,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         nickname = scanner.nextLine();
 
         while(stay) {
-            if(view.getStatus() == Status.WAITING) {
+            if(view == null || view.getStatus() == Status.WAITING) {
+                state1.setFlow(this);
                 state1.execute();
             } else if (view.getStatus() == Status.ACTIVE) {
                 if(view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno

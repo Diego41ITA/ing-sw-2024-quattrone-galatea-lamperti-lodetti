@@ -16,11 +16,14 @@ public class StateWaiting {
     private ClientAction client;
     private String nickName;
 
-    public StateWaiting(GameFlow flow) {
+    public StateWaiting() {
+    }
+
+    public void setFlow(GameFlow flow) {
         this.flow = flow;
-        ui = flow.getUi();
-        client = flow.getClient();
-        nickName = flow.getNickname();
+        ui = this.flow.getUi();
+        client = this.flow.getClient();
+        nickName = this.flow.getNickname();
     }
 
     public void execute(){
