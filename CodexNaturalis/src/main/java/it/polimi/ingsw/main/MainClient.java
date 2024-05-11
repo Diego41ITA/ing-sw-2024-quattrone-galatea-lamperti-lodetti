@@ -1,6 +1,5 @@
 package it.polimi.ingsw.main;
 
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.TUI.Cli;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 //3) socket + gui
 //4) socket + tui
 //questo main è il primo a dover essere avviato
-public class mainStart{
+public class MainClient {
         public static void main(String[] args) {
             try {
                 Scanner scanner = new Scanner(System.in);
