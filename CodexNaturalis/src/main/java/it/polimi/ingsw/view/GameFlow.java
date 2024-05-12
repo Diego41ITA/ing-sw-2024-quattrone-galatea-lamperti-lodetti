@@ -9,7 +9,6 @@ import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.statusActive.DrawCardState;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
-import it.polimi.ingsw.view.statusFinished.StateFinished;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
@@ -40,7 +39,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //metto 4 attributi State
     private StateWaiting state1 = new StateMenu(this);
     private StateActive state2 = new PlaceCardState(this);
-    private StateFinished state3;
 
     //costruttore
     public GameFlow(UI ui){
@@ -162,7 +160,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void initializeStates(){
         state1 = new StateMenu(this);
         state2 = new PlaceCardState(this);
-        state3 = new StateFinished(this);
     }
 
     //serve ad andare allo waiting state successivo
