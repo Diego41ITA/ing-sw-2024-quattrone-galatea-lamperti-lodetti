@@ -202,7 +202,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
     private void printActiveGames() {
         Println("\t\trunningGames: ");
         for (GameController game : activeGames) {
-            Println(game.getGameId() + " ");
+            Println("\t\t" + game.getGameId() + " ");
         }
         Println("");
     }
