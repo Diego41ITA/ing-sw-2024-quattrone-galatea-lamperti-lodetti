@@ -64,6 +64,10 @@ public class GameView implements Serializable {
         return this.players;
     }
 
+    public int getMaxNumOfPlayer(){
+        return this.maxNumOfPlayer;
+    }
+
     public List<GameStation> getAllGameStation(){
         return this.players.keySet().stream()
                 .map(Player::getGameStation)

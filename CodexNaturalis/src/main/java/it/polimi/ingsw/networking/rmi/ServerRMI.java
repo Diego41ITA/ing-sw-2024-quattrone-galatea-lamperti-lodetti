@@ -7,6 +7,7 @@ import it.polimi.ingsw.observer.GameObserver;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
@@ -69,7 +70,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     @Override
     public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException */{
         GameControllerInterface stub = server.mainController.joinRandomGame(obs, nick);
-        /*try{//manca da gestire exception per cui stub = null
+        try{//manca da gestire exception per cui stub = null
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(ExportException e){
             Println("object already exported");
@@ -80,18 +81,18 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         }catch(RemoteException e){
             e.printStackTrace();
             e.getCause();
-        }*/
+        }
         return stub;
     }
 
     @Override
     public GameControllerInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException{
         GameControllerInterface stub = server.mainController.rejoin(obs, nick, gameId);
-        /*try{
+        try{
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(RemoteException e){
             //...
-        }*/
+        }
         return stub;
     }
 

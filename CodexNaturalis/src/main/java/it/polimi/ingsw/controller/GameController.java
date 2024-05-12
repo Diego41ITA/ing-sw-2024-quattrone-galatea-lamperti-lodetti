@@ -291,9 +291,9 @@ public class GameController implements GameControllerInterface, Serializable {
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
         table.initializeTable();
-        ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
-        Turn turn = new Turn(keysList);
-        game.setTurn(turn);
+       // ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet()); non posso inizializzare turn senza goalCards
+       // Turn turn = new Turn(keysList);
+       // game.setTurn(turn);
         game.setTableOfDecks(table);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
@@ -626,5 +626,3 @@ public class GameController implements GameControllerInterface, Serializable {
         return observers;
     }
 }
-
-

@@ -123,7 +123,6 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 randomAvailableGame.removeObserver(player);
                 obs.genericErrorWhenEnteringGame(e.getMessage(), randomAvailableGame.getGameId());
             }
-        } else {
         }
         return null;
     }
