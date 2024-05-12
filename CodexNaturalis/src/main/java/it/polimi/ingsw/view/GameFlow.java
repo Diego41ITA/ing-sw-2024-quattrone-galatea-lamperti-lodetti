@@ -14,6 +14,9 @@ import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -97,10 +100,36 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         }
                     }
                 } else if (view.getStatus() == Status.FINISHED) {
-                    state3.execute();
+                    ui.show_GameStatus(view);
+                    ui.show_gameOver();
+                    while(winner == null) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    ui.show_message("the winner is: " + winner);
+                    if(winner.equals(nickname))
+                        ui.show_message("congrats you won");
+                    else
+                        ui.show_message("loser");
+                    askToLeave();
                     stay = false;
                 }
             }
+        }
+    }
+
+    private void askToLeave(){
+        ui.show_message("press any button to leave the game");
+        //Bisogna verificare che la ui sia una cli
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            char character = (char) reader.read();
+            client.leaveGame(nickname, view.getId());
+        } catch (IOException | NotBoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
