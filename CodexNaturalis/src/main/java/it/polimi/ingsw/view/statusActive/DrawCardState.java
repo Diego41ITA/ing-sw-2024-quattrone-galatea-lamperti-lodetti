@@ -2,11 +2,11 @@ package it.polimi.ingsw.view.statusActive;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.Card;
-import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -48,7 +48,11 @@ public class DrawCardState extends StateActive{
 
         switch (input){
             case "A":
-                client.drawPlayableCardFromTableOfDecks(nickName,typeOfCard.toLowerCase());
+                try {
+                    client.drawPlayableCardFromTableOfDecks(nickName,typeOfCard.toLowerCase());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case "B":
                 Optional<Card> cardCheck;
@@ -62,7 +66,11 @@ public class DrawCardState extends StateActive{
 
                 }while (!cardCheck.isPresent());
 
-                client.drawFromTable(nickName,cardCheck.get());
+                try {
+                    client.drawFromTable(nickName,cardCheck.get());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 ui.show_message("""
@@ -74,7 +82,11 @@ public class DrawCardState extends StateActive{
 
     @Override
     public void nextState(){
-        client.goOn();
+        try {
+            client.goOn();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

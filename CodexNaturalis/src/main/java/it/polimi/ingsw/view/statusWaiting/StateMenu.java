@@ -4,8 +4,8 @@ import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
+import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class StateMenu extends StateWaiting {
@@ -33,7 +33,7 @@ public class StateMenu extends StateWaiting {
                 ui.show_joinRandomGame();
                 try {
                     client.joinRandomGame(nickName);
-                } catch (RemoteException | NotBoundException e) {
+                } catch (NotBoundException | IOException | InterruptedException e) {
                     ui.show_message("CONNECTION ERROR, GAME OVER...");
                     try {
                         StateWaiting.flow.wait(100); // non sono sicuro
@@ -48,7 +48,7 @@ public class StateMenu extends StateWaiting {
                 String gameID = sc.nextLine();
                 try {
                     client.rejoin(nickName, gameID);
-                } catch (RemoteException | NotBoundException e) {
+                } catch (NotBoundException | IOException | InterruptedException e) {
                     ui.show_message("CONNECTION ERROR, GAME OVER...");
                     try {
                         StateWaiting.flow.wait(100); // non sono sicuro
@@ -74,7 +74,7 @@ public class StateMenu extends StateWaiting {
                     int numberOfPlayer = scanner.nextInt();
                     try {
                         client.createGame(StateWaiting.flow.getNickname(), numberOfPlayer);
-                    } catch (NotBoundException | RemoteException e) {
+                    } catch (NotBoundException | IOException | InterruptedException e) {
                         ui.show_message("CONNECTION ERROR, GAME OVER...");
                         try {
                             StateWaiting.flow.wait(100); // non sono sicuro

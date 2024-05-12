@@ -4,6 +4,7 @@ import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class StateColor extends StateWaiting {
@@ -24,7 +25,11 @@ public class StateColor extends StateWaiting {
         Scanner scanner = new Scanner(System.in);
         String color = scanner.nextLine();
         String colorParsed = color.toLowerCase();
-        client.setColor(colorParsed, StateWaiting.flow.getNickname());
+        try {
+            client.setColor(colorParsed, StateWaiting.flow.getNickname());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
 
         StateWaiting.flow.waitingForNewPlayers = true;
     }

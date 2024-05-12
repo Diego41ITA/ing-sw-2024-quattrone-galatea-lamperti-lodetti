@@ -8,6 +8,7 @@ import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -72,7 +73,11 @@ public class PlaceCardState extends StateActive{
         int y = scanner.nextInt();
         Point coord = new Point(x, y);
         try {
-            client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
+            try {
+                client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } catch (illegalOperationException e) {
             //non dovrebbe arrivare qui l'exception o sbaglio? (dovrebbe esser gestita con le notify)
         }

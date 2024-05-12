@@ -52,12 +52,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         synchronized (lock) {
             boolean stay = true;
 
-            //inizializza gli state di partenza.
-            initializeStates();
-
             ui.show_RequestPlayerNickName();
             Scanner scanner = new Scanner(System.in);
             nickname = scanner.nextLine();
+
+            //inizializza gli state di partenza.
+            initializeStates();
 
             while (stay) {
                 if (view == null || view.getStatus() == Status.WAITING) {
@@ -126,7 +126,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         try {
             char character = (char) reader.read();
             client.leaveGame(nickname, view.getId());
-        } catch (IOException | NotBoundException e) {
+        } catch (IOException | NotBoundException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -188,10 +188,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
-        ui.show_requestPlayerColor(view);
+        /*ui.show_requestPlayerColor(view);
         Scanner scanner = new Scanner(System.in);
         String color = scanner.nextLine();
-        client.setColor(color, nickname);
+        client.setColor(color, nickname);*/
     }
 
     @Override

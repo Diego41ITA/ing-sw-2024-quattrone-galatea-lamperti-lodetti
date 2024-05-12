@@ -59,7 +59,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     //bisogna implementare i metodi di ClientAction
     @Override
-    public void createGame(String nick, int maxNumberOfPlayers) throws  NotBoundException {
+    public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException, NotBoundException {
 
         try {
             registry = LocateRegistry.getRegistry("localhost", 1099);
@@ -102,7 +102,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
-    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException {
+    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException, illegalOperationException {
         if(firstCard){
             gameController.setGameStation(nick, 0,front);
             firstCard = false;
@@ -111,37 +111,37 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
-    public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick){
+    public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) throws RemoteException{
         gameController.chooseGoal(goals, num, nick);
     }
 
     @Override
-    public void goOn(){
+    public void goOn() throws RemoteException{
         gameController.goOn();
     }
 
     @Override//serve a pescare dai deck
-    public void drawPlayableCardFromTableOfDecks(String nick, String deck){
+    public void drawPlayableCardFromTableOfDecks(String nick, String deck) throws RemoteException{
         gameController.drawPlayableCardFromTableOfDecks(deck, nick);
     }
 
     @Override
-    public void drawFromTable(String nick, Card card){
+    public void drawFromTable(String nick, Card card) throws RemoteException{
         gameController.drawFromTable(card, nick);
     }
 
     @Override
-    public void setColor(String color, String name){
+    public void setColor(String color, String name) throws RemoteException{
         gameController.setColor(color, name);
     }
 
     @Override
-    public void initializeHandPlayer(String nick){
+    public void initializeHandPlayer(String nick) throws RemoteException{
         gameController.initializeHandPlayer(nick);
     }
 
     @Override
-    public String calculateWinner(){
+    public String calculateWinner() throws RemoteException{
         return gameController.calculateWinner();
     }
 }
