@@ -3,10 +3,12 @@ package it.polimi.ingsw.observer;
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.*;
+
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class HandleObserver {
+public class HandleObserver implements Serializable {
     private final GameObserver observer;
 
     public HandleObserver(GameObserver obs){
