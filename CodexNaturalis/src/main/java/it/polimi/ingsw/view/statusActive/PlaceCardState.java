@@ -79,7 +79,6 @@ public class PlaceCardState extends StateActive{
     }
 
     @Override
-    public void nextState() {
-        new DrawCardState(flow).execute();
+    public void nextState() {new DrawCardState(flow).execute();
     }
 }

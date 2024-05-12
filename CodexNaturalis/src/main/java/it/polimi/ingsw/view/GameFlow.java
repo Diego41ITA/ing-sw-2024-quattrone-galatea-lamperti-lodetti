@@ -3,52 +3,106 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
-import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.view.statusActive.DrawCardState;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusFinished.StateFinished;
-import it.polimi.ingsw.view.statusSuspended.StateSuspended;
-import it.polimi.ingsw.view.statusWaiting.StateWaiting;
+import it.polimi.ingsw.view.statusWaiting.StateMenu;
+import it.polimi.ingsw.view.statusWaiting.*;
+import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
+
+    public boolean waitingForNewPlayers = false;
+    private final Object lock = new Object();
     private ClientAction client;
     private String nickname;
     private final UI ui;
     private GameView view;
-
-    public GameFlow(UI ui){
-        this.ui = ui;
-        //this.client = client;
-    }
+    public boolean inGame;
 
     private String winner = null;
 
     //un attributo per uscire dal ciclo (viene settato dall'ultimo stato)
-    boolean stay = true;
+    private boolean stay = true;
 
     //metto 4 attributi State
-    private StateWaiting state1 = new StateWaiting();
+    private StateWaiting state1 = new StateMenu(this);
     private StateActive state2 = new PlaceCardState(this);
-    private StateSuspended state3;
-    private StateFinished state4;
+    private StateFinished state3;
 
-    //tutto il flusso di gioco...
+    //costruttore
+    public GameFlow(UI ui){
+        this.ui = ui;
+        inGame = false;
+    }
 
-    //implementa i metodi di gameObserver per svolgere finalmente delle operazioni concrete in risposta alle notifiche
-    //che arrivano dal model
 
-    //implementa runnable perché il cuore starà dentro ad un thread
+    //contiene tutto il flusso di gioco.
+    public void run(){
+        synchronized (lock) {
+            boolean stay = true;
 
-    //implementa clientAction perchè chiamerà quei metodi sull'oggetto client (Socket o RMI)
+            //inizializza gli state di partenza.
+            initializeStates();
+
+            ui.show_RequestPlayerNickName();
+            Scanner scanner = new Scanner(System.in);
+            nickname = scanner.nextLine();
+
+            while (stay) {
+                if (view == null || view.getStatus() == Status.WAITING) {
+                    //state1.setFlow(this);
+                    state1.execute();
+                    Println("waiting for new players");
+                    while (waitingForNewPlayers) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            Println("this game is aborted");
+                        }
+                    }
+                } else if (view.getStatus() == Status.ACTIVE) {
+                    if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
+                        state2.execute();
+                    }
+                    while(!view.getCurrentPlayer().getNick().equals(nickname)){
+                        try{
+                            lock.wait();
+                        }catch(InterruptedException e){
+                            Println("game interrupted");
+                        }
+                    }
+                } else if (view.getStatus() == Status.SUSPENDED) {
+                    ui.show_GameStatus(view);
+                    ui.show_message("this game is temporally suspended :(\n");
+                    ui.show_message("these are your cards, goal and game station.");
+                    ui.show_goalCard(view.getPlayer(nickname).getGoal());
+                    ui.show_gameStation(view.getMyGameStation(nickname));
+                    ui.show_playerHand(view);
+
+                    while(view.getStatus() == Status.SUSPENDED) {
+                        try {
+                            lock.wait();    //need to add some notify when the gameStatus change.
+                        } catch (InterruptedException e) {
+                            Println("this game got interrupted");
+                        }
+                    }
+                } else if (view.getStatus() == Status.FINISHED) {
+                    state3.execute();
+                    stay = false;
+                }
+            }
+        }
+    }
 
     public void setClient(ClientAction client){
         this.client = client;
@@ -74,28 +128,22 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         return this.winner;
     }
 
-    public void run(){
-        boolean stay = true;
 
-        ui.show_RequestPlayerNickName();
-        Scanner scanner = new Scanner(System.in);
-        nickname = scanner.nextLine();
+    //serve a inizializzare gli stati
+    public void initializeStates(){
+        state1 = new StateMenu(this);
+        state2 = new PlaceCardState(this);
+        state3 = new StateFinished(this);
+    }
 
-        while(stay) {
-            if(view == null || view.getStatus() == Status.WAITING) {
-                state1.setFlow(this);
-                state1.execute();
-            } else if (view.getStatus() == Status.ACTIVE) {
-                if(view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
-                    state2.execute();
-                }
-            } else if (view.getStatus() == Status.SUSPENDED) {
-                state3.execute();
-            } else if (view.getStatus() == Status.FINISHED) {
-                state4.execute();
-                stay = false;
-            }
-        }
+    //serve ad andare allo waiting state successivo
+    public void setWaitingState(StateWaiting sw){
+        this.state1 = sw;
+    }
+
+    //serve ad andare allo stato attivo successivo.
+    public void setActiveState(StateActive sa){
+        this.state2 = sa;
     }
 
     public void exit(){
@@ -109,10 +157,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
-        ui.show_requestPlayerColor(view);
-        Scanner scanner = new Scanner(System.in);
-        String color = scanner.nextLine();
-        client.setColor(color, nickname);
     }
 
     @Override
@@ -149,11 +193,18 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateGameStatus(GameView game) throws RemoteException {
         setGameView(game);
+        if(game.getStatus() == Status.ACTIVE)
+            waitingForNewPlayers = false;
+        notifyAll();
         ui.show_GameStatus(game);
     }
 
     @Override
     public void startGame(GameView game) throws RemoteException {
+        setGameView(game);
+        if(game.getStatus() == Status.ACTIVE)
+            waitingForNewPlayers = false;
+        notifyAll();
         ui.show_gameStarting(game.getId());
     }
 
@@ -189,6 +240,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
         setGameView(game);
+        state2 = new PlaceCardState(this);
+        notifyAll();
         ui.show_tableOfDecks(game);
     }
 
@@ -241,36 +294,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //si potrebbe gestire con i messaggi delle exception (o le exception)
     @Override
     public void genericErrorWhenEnteringGame(String msg, String id) throws RemoteException {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-                switch (msg){
-                    case("No games currently available to join..."):
-                        ui.show_noAvailableGames();
-                        input = scanner.nextLine();
-                        switch (input){
-                            case ("A"):
-                                ui.show_RequestNumberOfPlayers();
-                                int numberOfPlayer = scanner.nextInt();
-                                try {
-                                    client.createGame(nickname, numberOfPlayer);
-                                } catch (NotBoundException e) {
-                                    ui.show_message("CONNECTION ERROR, GAME OVER...");
-                                    try {
-                                        this.wait(100); // non sono sicuro
-                                        this.exit();
-                                    }catch (InterruptedException ex) {
-                                        throw new RuntimeException(ex);
-                                    }
-                                }
-                                break;
-                            case ("B"):
-                                exit();
-                                break;
-                        }
-                        break;
-                    case ("The nickname used was not connected in the running game."):
-                        ui.show_invalidNickToReconnect(id);
-                        break;
+        switch (msg){
+            case("No games currently available to join..."):
+                this.inGame = false;
+                break;
+            case ("The nickname used was not connected in the running game."):
+                ui.show_invalidNickToReconnect(id);
+                break;
         }
     }
 

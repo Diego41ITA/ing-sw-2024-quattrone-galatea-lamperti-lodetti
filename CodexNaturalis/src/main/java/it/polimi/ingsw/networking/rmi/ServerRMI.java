@@ -58,6 +58,9 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(RemoteException e){
             Println("damn");
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
         }
 
         return stub;

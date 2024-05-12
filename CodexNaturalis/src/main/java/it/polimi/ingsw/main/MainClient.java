@@ -26,18 +26,18 @@ public class MainClient {
                         exit = false;
                     }
                     if (exit) {
-                        if(config[0].equals("rmi") && config[1].equals("gui")) {
+                        if(config[0].equalsIgnoreCase("rmi") && config[1].equalsIgnoreCase("gui")) {
                             System.out.println("game starting");
                             //lancia gameflow
-                        } else if (config[0].equals("rmi") && config[1].equals("tui")) {
+                        } else if (config[0].equalsIgnoreCase("rmi") && config[1].equalsIgnoreCase("tui")) {
                             GameFlow flow = new GameFlow(new Cli());
                             flow.setClient(new ClientRMI(flow));
                             flow.run();
-                        } else if (config[0].equals("socket") && config[1].equals("gui")) {
+                        } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("gui")) {
                             System.out.println("game starting");
                             //lancia gameflow
                             return;
-                        } else if (config[0].equals("socket") && config[1].equals("tui")) {
+                        } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("tui")) {
                             System.out.println("game starting");
                             //lancia game flow
                         } else {

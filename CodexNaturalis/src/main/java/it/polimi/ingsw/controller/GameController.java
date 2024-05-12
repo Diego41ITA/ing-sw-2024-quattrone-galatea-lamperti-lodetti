@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class GameController implements GameControllerInterface, Serializable {
     /**The model of the game to control*/
-    private Game game;
+    private final Game game;
 
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
@@ -188,7 +188,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param nick is the nickname of the player
      */
     @Override
-    public synchronized void drawPlayableCardFromTableOfDecks(String typo, String nick) {
+    public /*synchronized*/ void drawPlayableCardFromTableOfDecks(String typo, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
@@ -233,7 +233,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param cardSelected The card drawn.
      * @param nick The nickname of the Player that draws the card.
      */
-    public synchronized void drawFromTable(Card cardSelected, String nick) {
+    public /*synchronized*/ void drawFromTable(Card cardSelected, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
@@ -256,7 +256,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param nick The nickname of the Player.
      * @param value A boolean flag representing the connection status.
      */
-    @Override
+    //@Override
     public void changePlayerStatus(String nick, Boolean value) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
@@ -279,7 +279,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param card  The card to be modified.
      * @param value A boolean flag: true for front, false for back.
      */
-    @Override
+    //@Override
     public void cardIsFrontChanger(Card card, Boolean value) {
         card.changeIsFront(value);
     }
@@ -287,7 +287,7 @@ public class GameController implements GameControllerInterface, Serializable {
     /**
      * This method initializes the {@link TableOfDecks} and the {@link Turn} object
      */
-    @Override
+    //@Override
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
         table.initializeTable();
@@ -305,7 +305,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * This method checks if the 20 point threshold is reached.
      * @return A boolean flag representing the reaching of the threshold.
      */
-    @Override
+    //@Override
     public boolean notify20PointReached() {
         return game.getPointTable().notify20PointReached();
     }
@@ -394,7 +394,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param nick Nickname of the Player.
      * @return Calculated points.
      */
-    @Override
+    //@Override
     public int calculateGoldPoints(GoldCard card, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
@@ -411,7 +411,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param nick Nickname of the Player.
      * @param point Amount of point to be added.
      */
-    @Override
+    //@Override
     public void addPoints2Player(String nick, int point) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
@@ -436,7 +436,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param nick Nickname of the Player.
      * @return The Player's hand.
      */
-    @Override
+    //@Override
     public ArrayList<PlayableCard> showPlayerHand(String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
@@ -522,7 +522,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param p Player to be added
      * @throws MaxPlayersInException
      */
-    @Override
+    //@Override
     public void addPlayer(Player p) throws MaxPlayersInException {
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
@@ -540,16 +540,16 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     //metodo che ritorna i punti della carta risorsa
-    @Override
+    //@Override
     public int getResourcePoint(ResourceCard card){
         return card.getNumberOfPoints();
     }
     //ritorna id del gioco
-    @Override
+    //@Override
     public String getGameId() {
         return game.getId();
     }
-    @Override
+    //@Override
     public HashMap<Player, Boolean> getPlayers(){
         return (HashMap<Player, Boolean>) game.getPlayers();
     }

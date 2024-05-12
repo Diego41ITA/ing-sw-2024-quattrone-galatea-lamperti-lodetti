@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class DrawCardState extends StateActive{
 
-    private GameFlow flow;
     private GameView view = flow.getView();
     private UI ui = flow.getUi();
     private ClientAction client = flow.getClient();
@@ -20,6 +19,10 @@ public class DrawCardState extends StateActive{
 
     public DrawCardState(GameFlow flow){
         super(flow);
+        this.view = flow.getView();
+        this.ui = flow.getUi();
+        this.client = flow.getClient();
+        this.nickName = flow.getNickname();
     }
 
     @Override

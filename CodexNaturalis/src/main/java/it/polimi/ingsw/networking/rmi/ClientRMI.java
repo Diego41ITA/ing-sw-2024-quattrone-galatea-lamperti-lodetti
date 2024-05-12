@@ -122,7 +122,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     @Override//serve a pescare dai deck
     public void drawPlayableCardFromTableOfDecks(String nick, String deck){
-        gameController.drawPlayableCardFromTableOfDecks(deck,nick);
+        gameController.drawPlayableCardFromTableOfDecks(deck, nick);
     }
 
     @Override

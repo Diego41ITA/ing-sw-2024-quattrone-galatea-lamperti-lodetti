@@ -25,22 +25,24 @@ public interface GameControllerInterface extends Remote {
     void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws illegalOperationException;
     void drawPlayableCardFromTableOfDecks(String typo, String nick);
 
-    //cambia lo stato dei giocatori(connesso o non connesso)
-    public void changePlayerStatus(String nick, Boolean value);
-    //cambia il modo di piazzare la carta
-    public void cardIsFrontChanger(Card card, Boolean value);
-    //inizializza il tavolo da gioco, compreso i giocatori nei turni
-    public void initializeTable();
+    /*cambia lo stato dei giocatori(connesso o non connesso)
+    public void changePlayerStatus(String nick, Boolean value);*/
 
-    public boolean notify20PointReached();
+    /*cambia il modo di piazzare la carta
+    public void cardIsFrontChanger(Card card, Boolean value);*/
+
+    /*inizializza il tavolo da gioco, compreso i giocatori nei turni
+    public void initializeTable();*/
+
+    /*public boolean notify20PointReached();*/
     //calcola i punti dei giocatori attraverso le carte obbiettivo, aggiorna la point table e ritorna  il giocatore con il punteggio più alto
     public String calculateWinner();
 
-    public int calculateGoldPoints(GoldCard card, String nick);
+    /*public int calculateGoldPoints(GoldCard card, String nick);
     //somma ai punti del giocatore tot punti
-    public void addPoints2Player(String nick, int point);
+    public void addPoints2Player(String nick, int point);*/
 
-    public ArrayList<PlayableCard> showPlayerHand(String nick);
+    /*public ArrayList<PlayableCard> showPlayerHand(String nick);*/
 
     public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick);
     //passa al giocatore successivo cambiando il giocatore corrente
@@ -52,17 +54,18 @@ public interface GameControllerInterface extends Remote {
     //ritorna la lista di goalcard che l'utente può scegliere
     public void getPossibleGoals(String nickname); //va aggiunta una notify
 
-  //aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
-    public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException;
-//metodo che ritorna i punti della carta risorsa
+  /*aggiunge un giocatore alla partita(bisogna gestire il caso in cui non si possa aggiungere)
+    public void addPlayer(Player p) throws MaxPlayersInException, PlayerAlreadyInException;*/
+
+/*metodo che ritorna i punti della carta risorsa
     public int getResourcePoint(ResourceCard card);
 // metodo che ritorna id del game
-    public String getGameId();
+    public String getGameId();*/
 //METODO CHE ritorna i players
-    public HashMap<Player, Boolean> getPlayers();
+    /*public HashMap<Player, Boolean> getPlayers();*/
     void drawFromTable(Card card, String nick);
-    void setGameStation(String nick, int numberOfCard,boolean front);
+    void setGameStation(String nick, int numberOfCard,boolean front);/*
     public int getNumOfOnlinePlayers();
     public void assignBlackColor();
-    public void setGameStatus(Status status);
+    public void setGameStatus(Status status);*/
 }
