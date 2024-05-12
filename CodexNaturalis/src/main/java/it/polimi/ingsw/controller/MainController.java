@@ -83,7 +83,8 @@ public class MainController implements Serializable, MainControllerInterface /*,
     }
 
     /**
-     * Allows Player to join a random game from the activeGame list
+     * Allows Player to join a random game from the activeGame list. If the number of connected players
+     * is equal to the maxNumberPlayer, this method start the game.
      * @param obs GameObserver associated with the player who is joining the game
      * @param nick Player's nickname
      * @return GameControllerInterface of the created game
@@ -116,6 +117,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 if (randomAvailableGame.checkIfStart()){
                     randomAvailableGame.startGame();
                 }
+
                 return randomAvailableGame;
             } catch (MaxPlayersInException e) {
                 randomAvailableGame.removeObserver(player);
@@ -202,7 +204,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
     private void printActiveGames() {
         Println("\t\trunningGames: ");
         for (GameController game : activeGames) {
-            Println(game.getGameId() + " ");
+            Println("\t\t" + game.getGameId() + " ");
         }
         Println("");
     }
