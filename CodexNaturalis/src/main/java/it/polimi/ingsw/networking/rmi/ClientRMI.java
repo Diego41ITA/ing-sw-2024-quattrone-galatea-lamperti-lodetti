@@ -18,7 +18,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 //si occupa di implementare le azioni del client lavorando sulla rete.
-public class ClientRMI implements ClientAction {
+public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     //tutti i client istanziati su questa macchina avranno lo stesso riferimento
     private static MainControllerInterface request;
     private GameControllerInterface gameController = null;
@@ -33,7 +33,7 @@ public class ClientRMI implements ClientAction {
     private Boolean firstCard;
 
     //ora ho il costruttore piu dei metodi ausiliari.
-    public ClientRMI(GameFlow flow){
+    public ClientRMI(GameFlow flow) throws RemoteException {
         super();
         gameObserverHandler = new GameObserverHandlerClient(flow);
         connect(); //connette il client con il server RMI
