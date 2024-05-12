@@ -188,6 +188,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
+        inGame = true;
         /*ui.show_requestPlayerColor(view);
         Scanner scanner = new Scanner(System.in);
         String color = scanner.nextLine();

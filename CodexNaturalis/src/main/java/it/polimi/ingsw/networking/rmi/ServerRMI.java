@@ -43,7 +43,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         }
         return server;
     }
-    public static synchronized Registry getRegistry(){
+    public static synchronized Registry getRegistry() throws RemoteException{
         return registry;
     }
 
@@ -69,24 +69,29 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
     @Override
     public GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException */{
         GameControllerInterface stub = server.mainController.joinRandomGame(obs, nick);
-        try{//manca da gestire exception per cui stub = null
+        /*try{//manca da gestire exception per cui stub = null
             UnicastRemoteObject.exportObject(stub, 0);
-        }catch(RemoteException e){
-            Println("damn random game");
+        }catch(ExportException e){
+            Println("object already exported");
+            e.printStackTrace();
+            e.getCause();
         }catch (NullPointerException e){
             obs.genericErrorWhenEnteringGame("No games currently available to join...", null);
-        }
+        }catch(RemoteException e){
+            e.printStackTrace();
+            e.getCause();
+        }*/
         return stub;
     }
 
     @Override
     public GameControllerInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException{
         GameControllerInterface stub = server.mainController.rejoin(obs, nick, gameId);
-        try{
+        /*try{
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(RemoteException e){
             //...
-        }
+        }*/
         return stub;
     }
 
