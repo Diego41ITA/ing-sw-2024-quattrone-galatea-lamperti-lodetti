@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
@@ -82,8 +83,8 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
 
     @Override
-    public void updateInitialCardsDrawn(GameView game) throws RemoteException {
-        flow.updateInitialCardsDrawn(game);
+    public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
+        flow.updateInitialCardsDrawn(card);
     }
 
     @Override

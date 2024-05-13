@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking.socket.server;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.Game;
@@ -171,9 +172,9 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateInitialCardsDrawn(GameView game) throws RemoteException{
+    public void updateInitialCardsDrawn(InitialCard card) throws RemoteException{
         try{
-            out.writeObject(new UpdateInitialCard(game));
+            out.writeObject(new UpdateInitialCard(card));
             completeForwarding();
         }catch(IOException e){
             //does something

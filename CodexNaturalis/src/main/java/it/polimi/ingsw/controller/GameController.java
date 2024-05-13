@@ -79,19 +79,18 @@ public class GameController implements GameControllerInterface, Serializable {
 
     @Override
     public void initializePlayers(String nick){
+
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         Deck<InitialCard> deck = table.getDeckStart();
-        for (Player player : players.keySet()) {
-            if (player.getNick().equals(nick)) {
-                player.drawInitial(deck);
-                game.setPlayers(players);
-                game.setTableOfDecks(table);
-            }
 
+        for(Player p : players.keySet()){
+            InitialCard card = deck.getFirst();
+            observers.get(p.getNick()).notify_initialCardsDrawn(card);
         }
-        observers.get(nick).notify_initialCardsDrawn(game);//capire che argomenti mettere
+        this.game.setPlayers(players);
+        this.game.setTableOfDecks(table);
     }
 
     /**
@@ -107,8 +106,8 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_startGame(game);
         }
         this.initializeTable();
-
         for (Player p : game.getPlayers().keySet()){
+            this.initializePlayers(p.getNick());
             this.getPossibleGoals(p.getNick());
             this.initializeHandPlayer(p.getNick());
         }
@@ -631,16 +630,18 @@ public class GameController implements GameControllerInterface, Serializable {
 
     //la carta iniziale si trova in mano al giocatore come prima carta
     @Override
-    public void setGameStation(String nick, boolean front) {
+    public void setGameStation(String nick, InitialCard card, boolean front) {
+
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
+        TableOfDecks table = game.getTableOfDecks();
+
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                Card card =player.showCard().get(0);
-                cardIsFrontChanger(card,front);
-                player.setGameStation(new GameStation((InitialCard) card));
-                player.setCards(new ArrayList<>());
+                cardIsFrontChanger(card, front);
+                player.setGameStation(new GameStation(card));
                 this.game.setPlayers(players);
+                this.game.setTableOfDecks(table);
             }
         }
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
@@ -648,6 +649,7 @@ public class GameController implements GameControllerInterface, Serializable {
             allObs.notify_updateGameStations(game);
         }
     }
+
     public void setGameStatus(Status status){
         this.game.setStatus(status);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {

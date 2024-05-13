@@ -2,13 +2,12 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.view.statusActive.DrawCardState;
-import it.polimi.ingsw.view.statusActive.InitializePlayerState;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
@@ -40,7 +39,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //metto 4 attributi State
     private StateWaiting state1 = new StateMenu(this);
-    private StateActive state2 = new InitializePlayerState(this);
+    private StateActive state2 = new PlaceCardState(this);
 
     //costruttore
     public GameFlow(UI ui){
@@ -175,7 +174,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //serve a inizializzare gli stati
     public void initializeStates(){
         state1 = new StateMenu(this);
-        state2 = new InitializePlayerState(this);
+        state2 = new PlaceCardState(this);
     }
 
     //serve ad andare allo waiting state successivo
@@ -295,7 +294,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
         setGameView(game);
-        state2 = new InitializePlayerState(this);
+        state2 = new PlaceCardState(this);
         ui.show_tableOfDecks(game);
     }
 
@@ -328,9 +327,20 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void updateInitialCardsDrawn(GameView game) throws RemoteException {
-        setGameView(game);
-        ui.show_playerHand(game);
+    public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
+
+        Scanner scanner = new Scanner(System.in);
+        Boolean isFrontOrBack = true;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nTHIS IS YOUR INITIAL CARD\n").append(ui.show_playableCard(card)).append("""
+                DO YOU WANNA PLAY IT FRONT OR BACK:
+                
+                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
+                """);
+        ui.show_message(stringBuilder.toString());
+        isFrontOrBack = scanner.nextBoolean();
+        client.setGameStation(nickname, card, isFrontOrBack);
     }
 
     @Override

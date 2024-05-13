@@ -2,6 +2,7 @@ package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.view.PrintlnThread;
 
@@ -149,9 +150,9 @@ public class HandleObserver implements Serializable {
         }
     }
 
-    public void notify_initialCardsDrawn(Game game){
+    public void notify_initialCardsDrawn(InitialCard card){
         try {
-            observer.updateInitialCardsDrawn(new GameView(game));
+            observer.updateInitialCardsDrawn(card);
         }catch(RemoteException e){
             //
         }

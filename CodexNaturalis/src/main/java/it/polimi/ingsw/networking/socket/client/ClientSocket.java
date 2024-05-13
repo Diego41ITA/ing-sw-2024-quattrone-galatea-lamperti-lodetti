@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking.socket.client;
 
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
@@ -190,19 +191,9 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void setGameStation(String nick,boolean isFront){
+    public void setGameStation(String nick, InitialCard card, boolean isFront){
         try{
-            out.writeObject(new SetGameStation(nick, isFront));
-            completeForwarding();
-        }catch(IOException e){
-            //
-        }
-    }
-
-    @Override
-    public void initializePlayers(String nick){
-        try{
-            out.writeObject(new InitializePlayers(nick));
+            out.writeObject(new SetGameStation(nick, card, isFront));
             completeForwarding();
         }catch(IOException e){
             //

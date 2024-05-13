@@ -1,6 +1,7 @@
 package it.polimi.ingsw.observer;
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 
@@ -26,7 +27,7 @@ public interface GameObserver extends Remote{
     void updateCurrentPlayer(GameView game)throws RemoteException;
     void updatePoints(GameView game)throws RemoteException;
     void updateGoalPlayer(GameView game, GoalCard card)throws RemoteException;
-    void updateInitialCardsDrawn(GameView game)throws RemoteException;
+    void updateInitialCardsDrawn(InitialCard card)throws RemoteException;
     void updateHandAndTable(GameView game, String nick)throws RemoteException;
     void updatePlayerInGame(GameView game)throws RemoteException;
     void updateGameStations(GameView game)throws RemoteException;
