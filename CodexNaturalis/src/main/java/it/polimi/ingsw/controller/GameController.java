@@ -534,8 +534,8 @@ public class GameController implements GameControllerInterface, Serializable {
     public void getPossibleGoals(String nickname) {
         ArrayList<GoalCard> goals = new ArrayList<>();
         TableOfDecks table = game.getTableOfDecks();
-        goals.add((GoalCard) table.getGoals().getFirst());
-        goals.add((GoalCard) table.getGoals().getFirst());
+        goals.add(table.getDeckGoal().getFirst());
+        goals.add(table.getDeckGoal().getFirst());
         this.game.setTableOfDecks(table);
         HandleObserver observer = observers.get(nickname);
         observer.notify_goalCardsDrawed(goals);
