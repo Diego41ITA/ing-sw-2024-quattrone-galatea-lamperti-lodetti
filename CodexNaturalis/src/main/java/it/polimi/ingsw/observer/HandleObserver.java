@@ -141,9 +141,9 @@ public class HandleObserver implements Serializable {
         }
     }
 
-    public void notify_chooseGoal(Game game){
+    public void notify_chooseGoal(Game game, GoalCard card){
         try {
-            observer.updateGoalPlayer(new GameView(game));
+            observer.updateGoalPlayer(new GameView(game), card);
         }catch(RemoteException e){
             //
         }

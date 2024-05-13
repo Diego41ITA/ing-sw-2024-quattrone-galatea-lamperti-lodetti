@@ -77,8 +77,8 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
         flow.updatePoints(game);
     }
     @Override
-    public void updateGoalPlayer(GameView game)throws RemoteException{
-        flow.updateGoalPlayer(game);
+    public void updateGoalPlayer(GameView game, GoalCard card)throws RemoteException{
+        flow.updateGoalPlayer(game, card);
     }
     @Override
     public void updateHandAndTable(GameView game, String nick)throws RemoteException{

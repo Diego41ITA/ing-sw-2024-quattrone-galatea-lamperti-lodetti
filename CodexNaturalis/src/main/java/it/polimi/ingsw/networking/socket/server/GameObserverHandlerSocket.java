@@ -125,9 +125,9 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateGoalPlayer(GameView game)throws RemoteException{
+    public void updateGoalPlayer(GameView game, GoalCard card)throws RemoteException{
         try{
-            out.writeObject(new UpdateGoalPlayer(game));
+            out.writeObject(new UpdateGoalPlayer(game, card));
             completeForwarding();
         }catch(IOException e){
             //does something

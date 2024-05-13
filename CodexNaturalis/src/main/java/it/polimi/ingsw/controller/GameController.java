@@ -97,6 +97,7 @@ public class GameController implements GameControllerInterface, Serializable {
         //prova per sistemare turn
         ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
         Turn turn = new Turn(keysList);
+        turn.sort();
         game.setTurn(turn);
 
         observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
@@ -486,13 +487,15 @@ public class GameController implements GameControllerInterface, Serializable {
     public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) {//bisogna gestire l'eccezione nel caso num non vada bene(se vogliamo)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
+        GoalCard card = null;
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 player.chooseGoal(goals, num);
+                card = new GoalCard(player.getGoal());
             }
         }
-            game.setPlayers(players);
-            observers.get(nick).notify_chooseGoal(game);
+        game.setPlayers(players);
+        observers.get(nick).notify_chooseGoal(game, card);
     }
 
     /**
