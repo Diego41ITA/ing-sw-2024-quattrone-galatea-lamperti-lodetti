@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class GoldCard extends PlayableCard{
 
-    private final HashMap<Item, Integer> resources;;
+    private final HashMap<Item, Integer> neededResources;
     private final int numOfPoints;
     private final Item box;
     private final GoldType typeOfGoldCard;
@@ -40,7 +40,7 @@ public class GoldCard extends PlayableCard{
         this.numOfPoints = points;
         this.box = box;
         this.typeOfGoldCard = goldType;
-        this.resources = new HashMap<>(resources);
+        this.neededResources = new HashMap<>(resources);
     }
 
     /**
@@ -50,7 +50,7 @@ public class GoldCard extends PlayableCard{
     public GoldCard(GoldCard card){
         super(card.getCardId(), card.getType(), card.isFront(), card.getFront(), card.getBack(), card.getAListOfBackResource());
         this.numOfPoints = card.getNumberOfPoints();
-        this.resources = new HashMap<>(card.getNeededResources());
+        this.neededResources = new HashMap<>(card.getNeededResources());
         this.box = card.getBox();
         this.typeOfGoldCard= card.getGoldType();
     }
@@ -86,7 +86,7 @@ public class GoldCard extends PlayableCard{
      * @return a map of item and their cardinality.
      */
     public HashMap<Item, Integer> getNeededResources(){
-         return new HashMap<>(resources);
+         return new HashMap<>(neededResources);
     }
 
     /**
