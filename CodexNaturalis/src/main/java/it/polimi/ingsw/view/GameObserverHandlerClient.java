@@ -104,10 +104,6 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
 
     @Override
-    public void updateInitialCardsDrawn(GameView game) throws RemoteException{
-        flow.updateInitialCardsDrawn(game);
-    }
-    @Override
     public void newGameCreated(String gameID)throws RemoteException{
         flow.newGameCreated(gameID);
     }
