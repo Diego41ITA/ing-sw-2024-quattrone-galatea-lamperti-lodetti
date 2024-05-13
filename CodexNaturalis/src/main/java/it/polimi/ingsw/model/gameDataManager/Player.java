@@ -226,11 +226,14 @@ public class Player implements Serializable {
      * @throws IllegalArgumentException if index is not a number between 0 and 1 (inclusive)
      */
     public void chooseGoal(List<GoalCard> goals, int index) {
-        if (index >= 0 && index < goals.size()) {
-            goal = goals.get(index);
-        } else {
-            throw new IllegalArgumentException("Index out of bounds");
+
+        for(GoalCard gc: goals) {
+            if(gc.getCardId() == index)
+                goal = gc;
         }
+
+        if(goal == null)
+            throw new IllegalStateException("index out of bound");
     }
 
     /**
