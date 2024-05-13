@@ -304,12 +304,15 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
-        for(GoalCard goalCard : cards){
-            ui.show_message("""
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("""
                    CHOOSE A GOAL CARD
-                   ENTER CARD ID:
-                   """ + ui.show_goalCard(goalCard));
+                   """);
+        for(GoalCard goalCard : cards){
+            stringBuilder.append(ui.show_goalCard(goalCard));
         }
+        stringBuilder.append("ENTER CARD ID:\n");
+        ui.show_message(stringBuilder.toString());
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
         client.chooseGoal(cards, cardId, nickname);
