@@ -65,7 +65,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     state1.execute();
 
                     //se la view ha i giocatori giusti la partita può iniziare
-                    if(view.getPlayers().size() == view.getMaxNumOfPlayer()){
+                    if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
                         try {
                             client.startGame();
                         } catch (IOException e) { // da sistemare non dovrebbe riceverla
