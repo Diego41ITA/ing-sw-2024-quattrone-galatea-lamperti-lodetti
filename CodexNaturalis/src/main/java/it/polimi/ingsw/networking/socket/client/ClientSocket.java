@@ -189,6 +189,26 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    @Override
+    public void setGameStation(String nick,boolean isFront){
+        try{
+            out.writeObject(new SetGameStation(nick, isFront));
+            completeForwarding();
+        }catch(IOException e){
+            //
+        }
+    }
+
+    @Override
+    public void initializePlayers(String nick){
+        try{
+            out.writeObject(new InitializePlayers(nick));
+            completeForwarding();
+        }catch(IOException e){
+            //
+        }
+    }
+
     //questo metodo non ha senso
     @Override
     public String calculateWinner(){
