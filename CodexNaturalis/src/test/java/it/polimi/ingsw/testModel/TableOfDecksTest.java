@@ -52,9 +52,9 @@ public class TableOfDecksTest {
         // Set goals on the table
         table.setGoals(deck);
         // Assert that goals have been set correctly
-        assertEquals(2, table.getGoals().size());
-        assertEquals(goalCard1, table.getGoals().get(1));
-        assertEquals(goalCard2, table.getGoals().get(0));
+        assertEquals(4, table.getGoals().size());
+        assertEquals(goalCard1, table.getGoals().get(3));
+        assertEquals(goalCard2, table.getGoals().get(2));
     }
     @Test
     public void testSetCards() {
