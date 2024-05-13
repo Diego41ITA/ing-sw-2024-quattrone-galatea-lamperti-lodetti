@@ -30,7 +30,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     public ClientSocket(GameFlow flow){
         this.flow = flow;
-        connect("server ip", 0 /*port socket*/);
+        connect("127.0.0.1", 50000 );
     }
 
     private void connect(String ip, int port){

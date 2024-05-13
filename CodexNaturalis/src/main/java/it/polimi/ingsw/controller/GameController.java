@@ -79,7 +79,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * the beginning.
      */
     //prova
-    public void startGame() throws RemoteException{
+    public void start_Game() throws RemoteException{
         this.game.setStatus(Status.ACTIVE);
         this.initializeTable();
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {

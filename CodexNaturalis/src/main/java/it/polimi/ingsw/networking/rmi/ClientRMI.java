@@ -10,7 +10,6 @@ import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
-import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -148,6 +147,6 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     @Override //prova
     public void startGame() throws RemoteException {
-        gameController.startGame();
+        gameController.start_Game();
     }
 }

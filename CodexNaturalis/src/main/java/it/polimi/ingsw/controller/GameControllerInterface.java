@@ -1,17 +1,11 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
-import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
-import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
-import it.polimi.ingsw.model.exceptions.illegalOperationException;
-import it.polimi.ingsw.model.gameDataManager.Player;
-import it.polimi.ingsw.model.gameDataManager.Status;
 
 import java.awt.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /*
 
@@ -46,6 +40,6 @@ public interface GameControllerInterface extends Remote {
     void setGameStation(String nick, int numberOfCard,boolean front) throws RemoteException;
 
     //prova
-    void startGame() throws RemoteException;
+    void start_Game() throws RemoteException;
 
 }

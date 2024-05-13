@@ -62,7 +62,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
             while (stay) {
                 if (view == null || view.getStatus() == Status.WAITING) {
-                    //state1.setFlow(this);
+
                     state1.execute();
 
                     while (waitingForNewPlayers) {
@@ -233,7 +233,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         setGameView(game);
         ui.show_gameStarting(game.getId());
         waitingForNewPlayers = false;
-        lock.notify();
+        notifyAll();
     }
 
     //basta notificare che la partita è stata creata?
