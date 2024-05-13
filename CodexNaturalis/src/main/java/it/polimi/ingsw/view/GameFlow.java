@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
@@ -63,7 +64,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                 if (view == null || view.getStatus() == Status.WAITING) {
                     //state1.setFlow(this);
                     state1.execute();
-                    Println("waiting for new players");
+
                     while (waitingForNewPlayers) {
                         try {
                             lock.wait();
@@ -261,7 +262,17 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateColor(GameView game) throws RemoteException {
         setGameView(game);
+        waitingForNewPlayers = true;
         ui.show_playerColors(game);
+        Println("waiting for new players");
+    }
+
+    @Override
+    public void updateSetAvailableColors(GameView game, ArrayList<Color> colors) throws RemoteException{
+        setGameView(game);
+        waitingForNewPlayers = false;
+        Println("the choose color is not available anymore! please, select another one");
+        state1 = new StateColor(this);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.main;
 
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
+import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.TUI.Cli;
 
@@ -39,7 +41,9 @@ public class MainClient {
                             return;
                         } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("tui")) {
                             System.out.println("game starting");
-                            //lancia game flow
+                            GameFlow flow = new GameFlow(new Cli());
+                            flow.setClient(new ClientSocket(flow));
+                            flow.run();
                         } else {
                             System.out.println("Invalid configuration, try again");
                             exit = false;

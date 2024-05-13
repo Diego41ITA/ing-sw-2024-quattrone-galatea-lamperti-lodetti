@@ -58,6 +58,15 @@ public class HandleObserver implements Serializable {
             //
         }
     }
+
+    public void notify_colorTaken(Game game, ArrayList<Color> availableColors){
+        try{
+            observer.updateSetAvailableColors(new GameView(game), availableColors);
+        }catch (RemoteException e){
+            //
+        }
+    }
+
     //game mi serve per aggiornare l'oggetto immutabile Game, e gamestation serve alla UI
     public void notify_PlayCard(Game game, GameStation gamestation){
         try {

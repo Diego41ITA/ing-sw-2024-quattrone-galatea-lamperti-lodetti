@@ -43,13 +43,12 @@ public class StateColor extends StateWaiting {
                 throw new RuntimeException(e);
             }
         }else {
-            StateWaiting.flow.waitingForNewPlayers = true;
+            //StateWaiting.flow.waitingForNewPlayers = true;
         }
-
     }
 
     @Override
     public void nextState(){
-        //
+        //it does nothing
     }
 }

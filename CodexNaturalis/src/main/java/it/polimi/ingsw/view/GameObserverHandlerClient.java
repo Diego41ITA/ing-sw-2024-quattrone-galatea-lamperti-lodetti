@@ -2,6 +2,8 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.observer.GameObserver;
 
@@ -56,6 +58,11 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     @Override
     public void updateColor(GameView game)throws RemoteException{
         flow.updateColor(game);
+    }
+
+    @Override
+    public void updateSetAvailableColors(GameView game, ArrayList<Color> colors) throws RemoteException{
+        flow.updateSetAvailableColors(game, colors);
     }
     @Override
     public void updateTableAndTurn(GameView game)throws RemoteException{

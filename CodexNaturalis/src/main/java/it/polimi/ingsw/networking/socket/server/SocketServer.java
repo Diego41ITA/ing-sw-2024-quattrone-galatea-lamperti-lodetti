@@ -21,7 +21,7 @@ public class SocketServer extends Thread {
             server = new ServerSocket(port);
             clients = new ArrayList<>();
             this.start();
-            Println("server is active");
+            Println("server  socket is active");
         }catch(IOException e){
             Println("something goes wrong the server is down :( ...");
         }
@@ -36,8 +36,8 @@ public class SocketServer extends Thread {
             try{
                 ClientHandlerSocket newClient = new ClientHandlerSocket(server.accept());
                 //now we need to start that specific connection so...
-                clients.getLast().start();
                 clients.add(newClient);
+                clients.getLast().start();
             }catch(IOException e){
                 Println("something goes wrong");
             }

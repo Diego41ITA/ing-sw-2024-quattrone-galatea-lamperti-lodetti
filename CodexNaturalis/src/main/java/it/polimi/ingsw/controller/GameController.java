@@ -12,6 +12,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 //IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME,
 // LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
@@ -112,6 +113,23 @@ public class GameController implements GameControllerInterface, Serializable {
             if (!this.game.isColorAvailable(color)) {
                 System.out.println("Color " + color + " is not available.");
                 this.game.printAvailableColors();
+
+                ArrayList<Color> notAvailableColor = new ArrayList<>(game.getPlayers().keySet().stream()
+                        .map(Player::getColor)
+                        .collect(Collectors.toList()));
+
+                ArrayList<Color> availableColor = new ArrayList<>();
+
+                for(Color c: Color.values()){
+                    if(!notAvailableColor.contains(c))
+                        availableColor.add(c);
+                }
+
+                for(HashMap.Entry<String, HandleObserver> entry : observers.entrySet()){
+                    HandleObserver obs = entry.getValue();
+                    if(entry.getKey().equals(name))
+                        obs.notify_colorTaken(game, availableColor );
+                }
                 return;
             }
 
