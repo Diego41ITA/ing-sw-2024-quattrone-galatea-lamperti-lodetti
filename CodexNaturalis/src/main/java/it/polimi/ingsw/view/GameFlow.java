@@ -86,17 +86,18 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         }
                 } else if (view.getStatus() == Status.ACTIVE) {
                     if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
-                    if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
-                        state2.setView(view);
-                        state2.execute();
-                    }
-                    while(!view.getCurrentPlayer().getNick().equals(nickname)){
-                        try{
-                            lock.wait();
-                        }catch(InterruptedException e){
-                            Println("game interrupted");
+                        if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
+                            state2.setView(view);
+                            state2.execute();
                         }
-                    }
+                        while(!view.getCurrentPlayer().getNick().equals(nickname)){
+                            Println("it's not your turn. Wait");
+                            try{
+                                lock.wait();
+                            }catch(InterruptedException e){
+                                Println("game interrupted");
+                            }
+                        }
                     }
                 } else if (view.getStatus() == Status.SUSPENDED) {
                     ui.show_GameStatus(view);
