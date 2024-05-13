@@ -295,7 +295,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
         setGameView(game);
-        state2 = new PlaceCardState(this);
+        state2 = new InitializePlayerState(this);
         ui.show_tableOfDecks(game);
     }
 
