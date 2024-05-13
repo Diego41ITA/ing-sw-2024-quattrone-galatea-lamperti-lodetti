@@ -376,12 +376,12 @@ public class Cli implements UI {
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nPLAYABLE CARDS\n");
+        stringBuilder.append("\nTABLE OF DECKS\n").append("\nPLAYABLE CARDS\n\n");
         for(Card card : immutableModel.getTableOfDecks().getCards()){
             stringBuilder.append(show_playableCard((PlayableCard) card));
         }
 
-        stringBuilder.append("\nGOAL CARDS\n");
+        stringBuilder.append("\nGOAL CARDS\n\n");
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             stringBuilder.append(show_goalCard((GoalCard) card));
         }

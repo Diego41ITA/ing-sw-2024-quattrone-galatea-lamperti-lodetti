@@ -302,7 +302,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateHandAndTable(GameView game, String nick) throws RemoteException {
         setGameView(game);
-        ui.show_gameStation(game.getMyGameStation(nick));
+        //ui.show_gameStation(game.getMyGameStation(nick));
     }
 
     @Override
