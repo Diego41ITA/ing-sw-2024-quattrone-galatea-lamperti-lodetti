@@ -374,12 +374,12 @@ public class Cli implements UI {
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
 
-        Println("PLAYABLE CARDS");
+        //Println("PLAYABLE CARDS");
         for(Card card : immutableModel.getTableOfDecks().getCards()){
             show_playableCard((PlayableCard) card);
         }
 
-        Println("GOAL CARDS");
+        //Println("GOAL CARDS");
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             show_goalCard((GoalCard) card);
         }
@@ -439,8 +439,13 @@ public class Cli implements UI {
 
     private static String mapToString(Map<Item, Integer> map){
         StringBuilder stringBuilder = new StringBuilder();
-        for(Item i : map.keySet()){
-            stringBuilder.append(i.toString()).append(": ").append(map.get(i)).append('\n');
+        if(map != null) {
+            for (Item i : map.keySet()) {
+                stringBuilder.append(i.toString()).append(": ").append(map.get(i)).append('\n');
+            }
+            return stringBuilder.toString();
+        }else {
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
