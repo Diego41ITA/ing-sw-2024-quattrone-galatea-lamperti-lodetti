@@ -34,7 +34,7 @@ public class DeckReader<T extends Card> {
             List<T> cards = gson.fromJson(reader, listType);
 
             // Log the number of cards read from the JSON
-            System.out.println("Number of cards read: " + cards.size());
+            System.out.println("Number of cards " + cards.getFirst().getClass().getName() + "read: " + cards.size());
 
             // Create a new deck with the list of cards loaded from JSON
             return new Deck<>(cards);
