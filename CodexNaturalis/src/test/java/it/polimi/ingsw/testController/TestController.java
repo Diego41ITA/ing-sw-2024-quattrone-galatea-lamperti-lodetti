@@ -103,6 +103,7 @@ public class TestController {
         GameObserver obs = new GameFlow(ui);
         Player player = new Player("Player1");
         gameController.addObserver(obs, player);
+        gameController.removeObserver(player);
         assertFalse(gameController.getObservers().containsKey(player.getNick()));
     }
 
@@ -229,7 +230,7 @@ public class TestController {
         assertTrue(players.get(0).showCard().get(1).getCardId() < 40);
         gameController.drawPlayableCardFromTableOfDecks("initial", "Player1");
         assertEquals(players.get(0).showCard().size(), 3);
-        assertTrue(players.get(0).showCard().get(1).getCardId() > 80);
+        assertTrue(players.get(0).showCard().get(2).getCardId() > 80);
 
     }
 
