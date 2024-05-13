@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -14,7 +15,7 @@ import java.util.*;
  * positionType indicates the position of the cards needed to earn points(if the TypeOfGoalCard is POSITION) or it is "EMPTY" in the case there are no position requirements
  * @author Luca Lamperti
  */
-public class GoalCard extends Card {
+public class GoalCard extends Card implements Serializable {
     private final int numOfPoints;
     private final HashMap<Item, Integer> listOfObjects;
     private final CheckInterface goalType;

@@ -3,6 +3,7 @@ package it.polimi.ingsw.observer;
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.*;
+import it.polimi.ingsw.view.PrintlnThread;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -168,7 +169,9 @@ public class HandleObserver implements Serializable {
         try {
             observer.goalCardsDrawed(cards);
         }catch(RemoteException e){
-            //
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
         }
     }
 

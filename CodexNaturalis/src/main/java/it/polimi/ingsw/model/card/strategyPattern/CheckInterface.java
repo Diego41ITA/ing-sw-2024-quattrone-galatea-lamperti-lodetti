@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.card.strategyPattern;
 import it.polimi.ingsw.model.card.Item;
 import it.polimi.ingsw.model.card.PlayableCard;
 
+import java.io.Serializable;
 import java.util.*;
 import java.awt.*;
 
@@ -11,7 +12,7 @@ import java.awt.*;
  * Define an interface to implement strategy pattern for GoalCards
  * It includes a method to check if the requirements of the GoalCard are satisfied
  */
-public interface CheckInterface {
+public interface CheckInterface extends Serializable {
     /**
      * check if the requirements of the GoalCard are satisfied
      *

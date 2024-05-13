@@ -50,7 +50,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //contiene tutto il flusso di gioco.
     public void run(){
-        synchronized (lock) {
             boolean stay = true;
 
             ui.show_RequestPlayerNickName();
@@ -76,14 +75,17 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
                         //se invece i giocatori non sono ancora del numero corretto si aspetta
                         while (waitingForNewPlayers) {
-                            try {
-                                lock.wait();
-                            } catch (InterruptedException e) {
-                                Println("this game is aborted");
-                            }
+
+                                try {
+                                    synchronized (lock) {
+                                        lock.wait();
+                                    }
+                                } catch (InterruptedException e) {
+                                    Println("this game is aborted");
+                                }
                         }
                 } else if (view.getStatus() == Status.ACTIVE) {
-                    if(view.getTurn() != null){
+                    if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
                     if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
                         state2.execute();
                     }
@@ -129,7 +131,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     stay = false;
                 }
             }
-        }
     }
 
     private void askToLeave(){
@@ -242,11 +243,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void startGame(GameView game) throws RemoteException {
-        synchronized (lock){
         setGameView(game);
         ui.show_gameStarting(game.getId());
         waitingForNewPlayers = false;
-        lock.notifyAll();}
+        synchronized (lock){
+            lock.notify();
+        }
     }
 
     //basta notificare che la partita è stata creata?
@@ -292,7 +294,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void updateTableAndTurn(GameView game) throws RemoteException {
         setGameView(game);
         state2 = new PlaceCardState(this);
-        notifyAll();
         ui.show_tableOfDecks(game);
     }
 
