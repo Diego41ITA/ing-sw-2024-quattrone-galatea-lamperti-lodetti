@@ -188,10 +188,12 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * @param GameID unique ID of the game to delete
      */
     public synchronized void deleteGame(String GameID) {
-        for (GameController game : activeGames) {
+        Iterator<GameController> iterator = activeGames.iterator();
+        while (iterator.hasNext()) {
+            GameController game = iterator.next();
             if (game.getGameId().equals(GameID)) {
-                activeGames.remove(game);
-                Println("\t>Game " + GameID + " removed from activeGames");
+                iterator.remove();
+                System.out.println("\t>Game " + GameID + " removed from activeGames");
                 printActiveGames();
             }
         }

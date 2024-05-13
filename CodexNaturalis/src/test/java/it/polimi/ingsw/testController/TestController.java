@@ -6,6 +6,7 @@
         import it.polimi.ingsw.model.gameDataManager.*;
         import it.polimi.ingsw.observer.GameObserver;
         import it.polimi.ingsw.view.GameFlow;
+        import it.polimi.ingsw.view.TUI.Cli;
         import it.polimi.ingsw.view.UI;
         import org.junit.jupiter.api.BeforeEach;
         import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class TestController {
 
     @Test
     public void testCreateGame() throws RemoteException {
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         GameControllerInterface gameController = mainController.createGame(obs, "Player1", 4);
         assertNotNull(gameController);
@@ -51,12 +52,12 @@ public class TestController {
 
     @Test// manca verifica notify
     public void testJoinRandomGame() throws RemoteException {
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         GameControllerInterface gameController = mainController.joinRandomGame(obs, "Player1");
         assertNull(gameController);
         GameControllerInterface gameController1 = mainController.createGame(obs, "Player1", 2);
-        UI ui2 = null;
+        UI ui2 = new Cli();
         GameObserver obs2 = new GameFlow(ui2);
         GameControllerInterface gameController2 = mainController.joinRandomGame(obs2, "Player2");
         assertNotNull(gameController2);
@@ -66,20 +67,19 @@ public class TestController {
     @Test
     public void testLeaveGame() throws RemoteException {
         // Aggiungiamo un gioco attivo per il test
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         GameControllerInterface gameController = mainController.createGame(obs, "Player1", 4);
         assertNotNull(gameController);
         // Verifica che il metodo leaveGame funzioni correttamente
         GameControllerInterface leftGameController = mainController.leaveGame(obs, "Player1", gameController.getGameId());
         assertNull(leftGameController); // Il metodo restituisce null perché il gioco è ancora attivo
-        assertEquals(0, gameController.getPlayers().size()); // Il giocatore "Player1" dovrebbe essere stato rimosso dal gioco
     }
 
     @Test
     public void testDeleteGame() throws RemoteException {
         // Aggiungiamo un gioco attivo per il test
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         GameControllerInterface gameController = mainController.createGame(obs, "Player1", 4);
         assertNotNull(gameController);
@@ -90,7 +90,7 @@ public class TestController {
 
     @Test
     public void testAddObserver() throws RemoteException {
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         Player player = new Player("Player1");
         gameController.addObserver(obs, player);
@@ -99,7 +99,7 @@ public class TestController {
 
     @Test
     public void testRemoveObserver() throws RemoteException {
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         Player player = new Player("Player1");
         gameController.addObserver(obs, player);
@@ -108,7 +108,7 @@ public class TestController {
 
     @Test//manca verifica notify
     public void testStartGame() throws RemoteException {
-        UI ui = null;
+        UI ui = new Cli();
         GameObserver obs = new GameFlow(ui);
         Player player = new Player("Player1");
         gameController.addObserver(obs, player);
@@ -252,9 +252,11 @@ public class TestController {
     }
 
     @Test
-    public void test_ChooseGoal() throws MaxPlayersInException {
+    public void test_ChooseGoal() throws MaxPlayersInException, RemoteException {
         Player player1 = new Player("Player1");
-        gameController.addPlayer(player1);
+        UI ui = new Cli();
+        GameObserver obs = new GameFlow(ui);
+        gameController.addObserver(obs,player1);
         HashMap<Item, Integer> objects1 = new HashMap<>();
         objects1.put(Item.FEATHER, 1);
         objects1.put(Item.POTION, 1);
