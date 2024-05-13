@@ -13,6 +13,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+
+       QUI CI STANNO ******SOLO****** I METODI CHE INTERESSANO AL CLIENT!!!!
+
+*/
 //questa interfaccia contiene le azioni che un player può fare all'interno di una partita
 //quando programmeremo la RMI vedremo quali di questi metodi servono davvero, quelli che non servono li toglliamo
 public interface GameControllerInterface extends Remote {
@@ -43,7 +48,4 @@ public interface GameControllerInterface extends Remote {
     //prova
     void startGame() throws RemoteException;
 
-    HashMap<Player, Boolean> getPlayers();
-
-    String getGameId();
 }
