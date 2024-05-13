@@ -84,11 +84,11 @@ public class GameController implements GameControllerInterface, Serializable {
     //prova
     public void start_Game() throws RemoteException{
         this.game.setStatus(Status.ACTIVE);
-        this.initializeTable();
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_startGame(game);
         }
+        this.initializeTable();
         for (Player p : game.getPlayers().keySet()){
             this.getPossibleGoals(p.getNick());
             this.initializeHandPlayer(p.getNick());

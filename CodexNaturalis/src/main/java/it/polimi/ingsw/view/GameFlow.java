@@ -74,15 +74,16 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         }
                     }
 
-                    //se invece i giocatori non sono ancora del numero corretto si aspetta
-                    while (waitingForNewPlayers) {
-                        try {
-                            lock.wait();
-                        } catch (InterruptedException e) {
-                            Println("this game is aborted");
+                        //se invece i giocatori non sono ancora del numero corretto si aspetta
+                        while (waitingForNewPlayers) {
+                            try {
+                                lock.wait();
+                            } catch (InterruptedException e) {
+                                Println("this game is aborted");
+                            }
                         }
-                    }
                 } else if (view.getStatus() == Status.ACTIVE) {
+                    if(view.getTurn() != null){
                     if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
                         state2.execute();
                     }
@@ -92,6 +93,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         }catch(InterruptedException e){
                             Println("game interrupted");
                         }
+                    }
                     }
                 } else if (view.getStatus() == Status.SUSPENDED) {
                     ui.show_GameStatus(view);

@@ -100,4 +100,8 @@ public class GameView implements Serializable {
         }
         return player;
     }
+
+    public Turn getTurn() {
+        return turn;
+    }
 }
