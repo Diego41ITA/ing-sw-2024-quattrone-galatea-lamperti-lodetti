@@ -17,7 +17,7 @@ public class InitializePlayers extends Message{
     }
     @Override
     public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
-        game.initializePlayers();
+        game.initializePlayers(nickname);
     }
 
     @Override
