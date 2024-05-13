@@ -77,7 +77,8 @@ public class GameController implements GameControllerInterface, Serializable {
      * Method that sets the {@link GameController#game} Status to {@link Status#ACTIVE} and notify all the Players about
      * the beginning.
      */
-    public void startGame(){
+    //prova
+    public void startGame() throws RemoteException{
         this.game.setStatus(Status.ACTIVE);
         this.initializeTable();
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
@@ -85,9 +86,14 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_startGame(game);
         }
         for (Player p : game.getPlayers().keySet()){
-            this.initializeHandPlayer(p.getNick());
             this.getPossibleGoals(p.getNick());
+            this.initializeHandPlayer(p.getNick());
         }
+        //prova per sistemare turn
+        ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
+        Turn turn = new Turn(keysList);
+        game.setTurn(turn);
+
         observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
     }
 
@@ -114,13 +120,13 @@ public class GameController implements GameControllerInterface, Serializable {
                     player.setColor(Color.valueOf(color.toUpperCase()));
                     pointTable.setColorPoints(Color.valueOf(color.toUpperCase()));
                 }
+            }
                 game.setPlayers(players);
                 game.setPointTable(pointTable);
                 for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                     HandleObserver obs = entry.getValue();
                     obs.notify_color(game);
                 }
-            }
         }
     }
 
@@ -291,9 +297,9 @@ public class GameController implements GameControllerInterface, Serializable {
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
         table.initializeTable();
-       // ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet()); non posso inizializzare turn senza goalCards
-       // Turn turn = new Turn(keysList);
-       // game.setTurn(turn);
+        //ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet()); //non posso inizializzare turn senza goalCards
+        //Turn turn = new Turn(keysList);
+        //game.setTurn(turn);
         game.setTableOfDecks(table);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();

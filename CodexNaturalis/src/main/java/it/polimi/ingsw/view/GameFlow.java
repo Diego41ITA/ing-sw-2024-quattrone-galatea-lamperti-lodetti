@@ -218,21 +218,21 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void updateGameStatus(GameView game) throws RemoteException {
+    public void updateGameStatus(GameView game) throws RemoteException { //non va bene
         setGameView(game);
-        if(game.getStatus() == Status.ACTIVE)
-            waitingForNewPlayers = false;
-        notifyAll();
         ui.show_GameStatus(game);
+        if(view.getMaxNumOfPlayer() == view.getPlayers().size()) {
+            waitingForNewPlayers = false;
+            lock.notify();
+        }
     }
 
     @Override
     public void startGame(GameView game) throws RemoteException {
         setGameView(game);
-        if(game.getStatus() == Status.ACTIVE)
-            waitingForNewPlayers = false;
-        notifyAll();
         ui.show_gameStarting(game.getId());
+        waitingForNewPlayers = false;
+        lock.notify();
     }
 
     //basta notificare che la partita è stata creata?

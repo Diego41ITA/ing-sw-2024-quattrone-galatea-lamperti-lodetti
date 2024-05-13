@@ -298,10 +298,16 @@ public class TableOfDecks implements Serializable {
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
         DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
 
-        this.deckResource = resourceCardReader.readDeckFromJSON("src/main/resources/JsonCards/resourceCard.json");
-        this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
-        this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
-        this.deckGoal = goalCardReader.readDeckFromJSON("src/main/resources/JsonCards/goalCard.json");
+        this.deckResource = resourceCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\resourceCard.json");
+        this.deckStart = initialCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\initialCard.json");
+        this.deckGold = goldCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\goldCard.json");
+        this.deckGoal = goalCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\goalCard.json");
+
+
+//        this.deckResource = resourceCardReader.readDeckFromJSON("src/main/resources/JsonCards/resourceCard.json");
+//        this.deckStart = initialCardReader.readDeckFromJSON("src/main/resources/JsonCards/initialCard.json");
+//        this.deckGold = goldCardReader.readDeckFromJSON("src/main/resources/JsonCards/goldCard.json");
+//        this.deckGoal = goalCardReader.readDeckFromJSON("src/main/resources/JsonCards/goalCard.json");
 
         shuffle();
 

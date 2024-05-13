@@ -11,7 +11,6 @@ import java.awt.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 //questa interfaccia contiene le azioni che un player può fare all'interno di una partita
@@ -40,6 +39,9 @@ public interface GameControllerInterface extends Remote {
 
     void drawFromTable(Card card, String nick) throws RemoteException;
     void setGameStation(String nick, int numberOfCard,boolean front) throws RemoteException;
+
+    //prova
+    void startGame() throws RemoteException;
 
     HashMap<Player, Boolean> getPlayers();
 

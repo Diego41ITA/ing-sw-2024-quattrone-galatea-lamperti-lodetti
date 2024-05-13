@@ -201,4 +201,9 @@ public class ClientSocket extends Thread implements ClientAction {
 
         return "ciao";
     }
+
+    @Override //prova
+    public void startGame() throws IOException {
+
+    }
 }

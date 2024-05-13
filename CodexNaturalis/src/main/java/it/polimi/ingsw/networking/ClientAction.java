@@ -34,5 +34,8 @@ public interface ClientAction {
     //gli ultimi giocatori e successivamente calcola il vincitore notificandolo ai player.
     String calculateWinner() throws IOException;
 
+    //prova
+    void startGame() throws IOException;
+
 }
 

@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.statusWaiting;
 
+import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.statusActive.PlaceCardState;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -11,12 +14,14 @@ public class StateColor extends StateWaiting {
     private UI ui;
     private ClientAction client;
     private String nick;
+    private GameView view;
 
     public StateColor(GameFlow flow){
         super(flow);
         this.ui = flow.getUi();
         this.client = flow.getClient();
         this.nick = flow.getNickname();
+        view = flow.getView();
     }
 
     @Override
@@ -31,11 +36,20 @@ public class StateColor extends StateWaiting {
             throw new RuntimeException(e);
         }
 
-        StateWaiting.flow.waitingForNewPlayers = true;
+        if(view.getPlayers().size() == view.getMaxNumOfPlayer()){
+            try {
+                client.startGame();
+            } catch (IOException e) { // da sistemare non dovrebbe riceverla
+                throw new RuntimeException(e);
+            }
+        }else {
+            StateWaiting.flow.waitingForNewPlayers = true;
+        }
+
     }
 
     @Override
     public void nextState(){
-        //it does nothing
+        //
     }
 }

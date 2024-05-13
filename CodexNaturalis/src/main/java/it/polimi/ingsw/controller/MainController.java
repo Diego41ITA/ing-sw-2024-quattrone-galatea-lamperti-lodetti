@@ -115,7 +115,11 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 obs.randomGameJoined(randomAvailableGame.getGameId());
 
                 if (randomAvailableGame.checkIfStart()){
-                    randomAvailableGame.startGame();
+                    for (Player p : randomAvailableGame.getPlayers().keySet()){
+                        HandleObserver obs2 = randomAvailableGame.getObservers().get(p.getNick());
+                        obs2.notify_startGame(randomAvailableGame.returnGame());
+
+                    }
                 }
 
                 return randomAvailableGame;
