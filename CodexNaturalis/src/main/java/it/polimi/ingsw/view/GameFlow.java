@@ -65,6 +65,16 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
                     state1.execute();
 
+                    //se la view ha i giocatori giusti la partita può iniziare
+                    if(view.getPlayers().size() == view.getMaxNumOfPlayer()){
+                        try {
+                            client.startGame();
+                        } catch (IOException e) { // da sistemare non dovrebbe riceverla
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    //se invece i giocatori non sono ancora del numero corretto si aspetta
                     while (waitingForNewPlayers) {
                         try {
                             lock.wait();
@@ -230,10 +240,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void startGame(GameView game) throws RemoteException {
+        synchronized (lock){
         setGameView(game);
         ui.show_gameStarting(game.getId());
         waitingForNewPlayers = false;
-        notifyAll();
+        lock.notifyAll();}
     }
 
     //basta notificare che la partita è stata creata?

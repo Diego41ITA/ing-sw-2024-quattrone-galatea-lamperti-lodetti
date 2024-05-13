@@ -38,8 +38,11 @@ public class GameController implements GameControllerInterface, Serializable {
     public GameController(String id, int maxNumPlayers) {
         game = new Game(id);
         game.setMaxNumberPlayer(maxNumPlayers);
+
         game.setPointTable(new PointTable());
+
         game.setTableOfDecks(new TableOfDecks());
+
         game.setTurn(new Turn(new ArrayList<Player>()));
         observers = new HashMap<>();
     }

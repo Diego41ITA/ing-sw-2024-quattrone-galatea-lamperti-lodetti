@@ -94,7 +94,6 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
     @Override
     public void updateGameStatus(GameView game)throws  RemoteException{
-        notifyAll();    //the GameFlow thread could be waiting
         flow.updateGameStatus(game);
     }
     @Override

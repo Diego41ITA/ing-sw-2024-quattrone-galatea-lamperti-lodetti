@@ -35,16 +35,6 @@ public class StateColor extends StateWaiting {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-
-        if(view.getPlayers().size() == view.getMaxNumOfPlayer()){
-            try {
-                client.startGame();
-            } catch (IOException e) { // da sistemare non dovrebbe riceverla
-                throw new RuntimeException(e);
-            }
-        }else {
-            //StateWaiting.flow.waitingForNewPlayers = true;
-        }
     }
 
     @Override
