@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking.rmi;
 import it.polimi.ingsw.controller.*;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
@@ -104,7 +105,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
     public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException, illegalOperationException {
         if(firstCard){
-            gameController.setGameStation(nick, 0,front);
+            gameController.setGameStation(nick, front);
             firstCard = false;
         }
         gameController.playCard(playedCard, nick, front, cord);
@@ -128,6 +129,11 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     @Override
     public void drawFromTable(String nick, Card card) throws RemoteException{
         gameController.drawFromTable(card, nick);
+    }
+
+    @Override
+    public void setGameStation(String nick, boolean isFront) throws RemoteException {
+        gameController.setGameStation(nick, isFront);
     }
 
     @Override

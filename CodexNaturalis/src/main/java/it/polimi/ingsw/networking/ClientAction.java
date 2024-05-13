@@ -2,6 +2,7 @@ package it.polimi.ingsw.networking;
 
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
@@ -26,6 +27,7 @@ public interface ClientAction {
     void setColor(String color, String name) throws RemoteException;
     void drawPlayableCardFromTableOfDecks(String nick, String deck) throws IOException;
     void drawFromTable(String nick, Card card) throws IOException;
+    void setGameStation(String nick, boolean isFront) throws RemoteException;
 
     //questo metodo non so quanto senso possa avere (ci pensa il controller a capire quando inizializzare la partita)
     void initializeHandPlayer(String nick) throws IOException;

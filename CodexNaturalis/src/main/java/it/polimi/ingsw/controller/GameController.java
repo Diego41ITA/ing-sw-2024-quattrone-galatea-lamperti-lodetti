@@ -77,6 +77,21 @@ public class GameController implements GameControllerInterface, Serializable {
        observers.remove(p.getNick());
     }
 
+    public void initializePlayers(){
+        for (Player p : game.getPlayers().keySet()){
+            TableOfDecks table = this.game.getTableOfDecks();
+            Deck<InitialCard> deck = table.getDeckStart();
+            p.drawInitial(deck);
+            table.setDeckStart(deck);
+            this.game.setTableOfDecks(table);
+        }
+
+        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+            HandleObserver obs = entry.getValue();
+            obs.notify_initialCardsDrawn(game);
+        }
+    }
+
     /**
      * Method that sets the {@link GameController#game} Status to {@link Status#ACTIVE} and notify all the Players about
      * the beginning.
@@ -90,10 +105,12 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_startGame(game);
         }
         this.initializeTable();
+
         for (Player p : game.getPlayers().keySet()){
             this.getPossibleGoals(p.getNick());
             this.initializeHandPlayer(p.getNick());
         }
+
         //prova per sistemare turn
         ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
         Turn turn = new Turn(keysList);
@@ -612,7 +629,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
     //la carta iniziale si trova in mano al giocatore come prima carta
     @Override
-    public void setGameStation(String nick, int num, boolean front) {
+    public void setGameStation(String nick, boolean front) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         for (Player player : players.keySet()) {

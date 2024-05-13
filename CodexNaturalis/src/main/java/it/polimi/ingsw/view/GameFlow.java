@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.statusActive.DrawCardState;
+import it.polimi.ingsw.view.statusActive.InitializePlayerState;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
@@ -39,7 +40,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //metto 4 attributi State
     private StateWaiting state1 = new StateMenu(this);
-    private StateActive state2 = new PlaceCardState(this);
+    private StateActive state2 = new InitializePlayerState(this);
 
     //costruttore
     public GameFlow(UI ui){
@@ -324,6 +325,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void updateGoalPlayer(GameView game, GoalCard card) throws RemoteException {
         setGameView(game);
         ui.show_goalCard(card);
+    }
+
+    @Override
+    public void updateInitialCardsDrawn(GameView game) throws RemoteException {
+        setGameView(game);
+        ui.show_playerHand(game);
     }
 
     @Override
