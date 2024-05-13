@@ -183,7 +183,7 @@ public class Cli implements UI {
     @Override
     public void show_playerHand(GameView immutableModel) {
         for(PlayableCard c : immutableModel.getCurrentPlayer().showCard()){
-            show_playableCard(c);
+            Println(show_playableCard(c));
         }
     }
 
@@ -292,11 +292,11 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_goalCard(GoalCard card) {
+    public String show_goalCard(GoalCard card) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("GOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card));
-        Println(stringBuilder.toString());
+        return (stringBuilder.toString());
         /*
         Println("""
                 GOAL CARD
@@ -312,7 +312,8 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_playableCard(PlayableCard card) {
+    public String show_playableCard(PlayableCard card) {
+        StringBuilder stringBuilder = new StringBuilder();
         String FHL = safeString(card.getFront().get(Angle.HIGHLEFT));
         String FHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
         String FDL = safeString(card.getFront().get(Angle.DOWNLEFT));
@@ -323,7 +324,7 @@ public class Cli implements UI {
         String BDR = safeString(card.getBack().get(Angle.DOWNRIGHT));
 
         if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
-            Println("""
+            stringBuilder.append("""
                     GOLD CARD
                     
                     CARD ID: """ + card.getCardId() + "\n" + """
@@ -340,7 +341,7 @@ public class Cli implements UI {
                     """);
 
         } else if (card instanceof ResourceCard) {
-            Println("""
+            stringBuilder.append("""
                     RESOURCE CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
@@ -355,7 +356,7 @@ public class Cli implements UI {
                     └──────────────────────┘   └──────────────────────┘
                     """);
         } else if (card instanceof InitialCard) {
-            Println("""
+            stringBuilder.append("""
                     INITIAL CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
@@ -369,20 +370,22 @@ public class Cli implements UI {
                     └──────────────────────┘   └──────────────────────┘
                     """);
         }
+        return stringBuilder.toString();
     }
 
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
-
-        //Println("PLAYABLE CARDS");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nPLAYABLE CARDS\n");
         for(Card card : immutableModel.getTableOfDecks().getCards()){
-            show_playableCard((PlayableCard) card);
+            stringBuilder.append(show_playableCard((PlayableCard) card));
         }
 
-        //Println("GOAL CARDS");
+        stringBuilder.append("\nGOAL CARDS\n");
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
-            show_goalCard((GoalCard) card);
+            stringBuilder.append(show_goalCard((GoalCard) card));
         }
+        Println(stringBuilder.toString());
     }
 
     @Override

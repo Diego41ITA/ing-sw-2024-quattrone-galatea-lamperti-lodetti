@@ -2,11 +2,8 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
-import it.polimi.ingsw.model.card.GoldCard;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
-import it.polimi.ingsw.model.gameDataManager.Player;
 
 /**
  * This is interface is implemented by the GUI and TUI
@@ -55,11 +52,11 @@ public interface UI {
 
     public void show_isYourTurn(GameView immutableModel);
 
-    public void show_goalCard(GoalCard card);
+    public String show_goalCard(GoalCard card);
 
     public void show_playerHand(GameView immutableModel);
 
-    public void show_playableCard(PlayableCard card);
+    public String show_playableCard(PlayableCard card);
 
     public void show_gameStation(GameStation gameStation);
 

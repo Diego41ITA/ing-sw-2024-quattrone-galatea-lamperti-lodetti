@@ -131,13 +131,15 @@ public class Gui implements UI {
     }
 
     @Override
-    public void show_goalCard(GoalCard card) {
+    public String show_goalCard(GoalCard card) {
 
+        return null;
     }
 
     @Override
-    public void show_playableCard(PlayableCard card) {
+    public String show_playableCard(PlayableCard card) {
 
+        return null;
     }
 
     @Override

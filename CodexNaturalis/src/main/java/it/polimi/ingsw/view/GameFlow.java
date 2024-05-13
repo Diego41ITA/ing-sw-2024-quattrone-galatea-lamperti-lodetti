@@ -100,8 +100,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                 } else if (view.getStatus() == Status.SUSPENDED) {
                     ui.show_GameStatus(view);
                     ui.show_message("this game is temporally suspended :(\n");
-                    ui.show_message("these are your cards, goal and game station.");
-                    ui.show_goalCard(view.getPlayer(nickname).getGoal());
+                    ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
                     ui.show_gameStation(view.getMyGameStation(nickname));
                     ui.show_playerHand(view);
 
@@ -306,7 +305,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
         for(GoalCard goalCard : cards){
-            ui.show_goalCard(goalCard);
+            ui.show_message("""
+                   CHOOSE A GOAL CARD
+                   ENTER CARD ID:
+                   """ + ui.show_goalCard(goalCard));
         }
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
