@@ -358,7 +358,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
-        ui.show_gameStation(game.getMyGameStation(game.getCurrentPlayer().getNick())); //da sistemare (fare in modo che mostri gamestation con nome)
+        //ui.show_gameStation(game.getMyGameStation(game.getCurrentPlayer().getNick())); //da sistemare (fare in modo che mostri gamestation con nome)
     }
 
     @Override

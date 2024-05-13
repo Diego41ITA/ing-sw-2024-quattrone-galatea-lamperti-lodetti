@@ -80,16 +80,10 @@ public class GameController implements GameControllerInterface, Serializable {
     @Override
     public void initializePlayers(String nick){
 
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         Deck<InitialCard> deck = table.getDeckStart();
-
-        for(Player p : players.keySet()){
-            InitialCard card = deck.getFirst();
-            observers.get(p.getNick()).notify_initialCardsDrawn(card);
-        }
-        this.game.setPlayers(players);
+        InitialCard card = deck.getFirst();
+        observers.get(nick).notify_initialCardsDrawn(card);
         this.game.setTableOfDecks(table);
     }
 
