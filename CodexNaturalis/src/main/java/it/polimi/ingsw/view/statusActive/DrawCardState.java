@@ -89,4 +89,9 @@ public class DrawCardState extends StateActive{
         }
     }
 
+    @Override
+    public void setView(GameView view) {
+        this.view = view;
+    }
+
 }

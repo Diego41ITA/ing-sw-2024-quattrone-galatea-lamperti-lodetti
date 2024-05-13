@@ -42,6 +42,7 @@ public class GameView implements Serializable {
     public Status getStatus(){
         return this.status;
     }
+
     public Player getCurrentPlayer(){
         return this.turn.getCurrentPlayer();
     }
