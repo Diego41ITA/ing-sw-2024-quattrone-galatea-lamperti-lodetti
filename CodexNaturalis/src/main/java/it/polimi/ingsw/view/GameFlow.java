@@ -175,7 +175,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //serve a inizializzare gli stati
     public void initializeStates(){
         state1 = new StateMenu(this);
-        state2 = new PlaceCardState(this);
+        state2 = new InitializePlayerState(this);
     }
 
     //serve ad andare allo waiting state successivo
