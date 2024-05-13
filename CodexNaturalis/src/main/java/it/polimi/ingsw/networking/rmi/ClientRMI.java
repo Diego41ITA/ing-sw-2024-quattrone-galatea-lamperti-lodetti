@@ -137,8 +137,8 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
-    public void initializePlayers() throws RemoteException {
-        gameController.initializePlayers();
+    public void initializePlayers(String nick) throws RemoteException {
+        gameController.initializePlayers(nick);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class InitializePlayerState extends StateActive{
     @Override
     public void execute() {
         try {
-            client.initializePlayers();
+            client.initializePlayers(nickName);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
