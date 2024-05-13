@@ -219,7 +219,7 @@ public class TableOfDecks implements Serializable {
      */
     public Deck<GoalCard> getDeckGoal() {
         if (deckGoal != null) {
-            return new Deck<>(deckGoal);
+            return deckGoal;
         } else {
             return new Deck<>(new ArrayList<>());
         }
