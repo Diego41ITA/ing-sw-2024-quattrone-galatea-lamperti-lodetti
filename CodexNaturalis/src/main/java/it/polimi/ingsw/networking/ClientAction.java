@@ -28,7 +28,7 @@ public interface ClientAction {
     void drawPlayableCardFromTableOfDecks(String nick, String deck) throws IOException;
     void drawFromTable(String nick, Card card) throws IOException;
     void setGameStation(String nick, boolean isFront) throws RemoteException;
-
+    void initializePlayers() throws RemoteException;
     //questo metodo non so quanto senso possa avere (ci pensa il controller a capire quando inizializzare la partita)
     void initializeHandPlayer(String nick) throws IOException;
 

@@ -7,6 +7,7 @@ import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -28,6 +29,11 @@ public class InitializePlayerState extends StateActive{
 
     @Override
     public void execute() {
+        try {
+            client.initializePlayers();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         Scanner scanner = new Scanner(System.in);
         Boolean isFrontOrBack = true;
         boolean isBooleanValid = false;

@@ -39,6 +39,8 @@ public interface GameControllerInterface extends Remote {
     void drawFromTable(Card card, String nick) throws RemoteException;
     void setGameStation(String nick, boolean front) throws RemoteException;
 
+    void initializePlayers();
+
     //prova
     void start_Game() throws RemoteException;
 

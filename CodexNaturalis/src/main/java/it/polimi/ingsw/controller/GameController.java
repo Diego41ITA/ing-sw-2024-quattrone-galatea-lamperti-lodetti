@@ -77,6 +77,7 @@ public class GameController implements GameControllerInterface, Serializable {
        observers.remove(p.getNick());
     }
 
+    @Override
     public void initializePlayers(){
         for (Player p : game.getPlayers().keySet()){
             TableOfDecks table = this.game.getTableOfDecks();

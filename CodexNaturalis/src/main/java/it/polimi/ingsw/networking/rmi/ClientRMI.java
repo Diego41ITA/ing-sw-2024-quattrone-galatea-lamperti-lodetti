@@ -137,6 +137,11 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
+    public void initializePlayers() throws RemoteException {
+        gameController.initializePlayers();
+    }
+
+    @Override
     public void setColor(String color, String name) throws RemoteException{
         gameController.setColor(color, name);
     }
