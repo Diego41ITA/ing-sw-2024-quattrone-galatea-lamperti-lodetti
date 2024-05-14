@@ -88,7 +88,6 @@ public class DrawCardState extends StateActive{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.nextState();
     }
 
     @Override
