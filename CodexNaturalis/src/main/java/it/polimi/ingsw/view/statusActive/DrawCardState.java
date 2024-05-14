@@ -78,6 +78,7 @@ public class DrawCardState extends StateActive{
                         """);
                 this.execute();
         }
+        nextState();
     }
 
     @Override
