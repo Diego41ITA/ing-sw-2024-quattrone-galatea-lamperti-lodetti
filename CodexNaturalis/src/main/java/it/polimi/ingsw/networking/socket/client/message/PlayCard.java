@@ -25,7 +25,11 @@ public class PlayCard extends Message{
     @Override
     public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
         //if first card, I maybe need to set the GameStation
-        game.playCard(playedCard, nickname, isFront, point); //illegal operation exception needs to be transformed in
+        try {
+            game.playCard(playedCard, nickname, isFront, point); //illegal operation exception needs to be transformed in
+        } catch (illegalOperationException e) {
+            throw new RuntimeException(e);
+        }
         //RemoteException
     }
 

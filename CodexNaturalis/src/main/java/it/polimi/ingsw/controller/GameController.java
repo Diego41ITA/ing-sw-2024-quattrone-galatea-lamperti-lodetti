@@ -175,7 +175,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param cord       A {@link Point} object representing the chosen coordinate.
      */
     @Override
-    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord){ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
+    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException, illegalOperationException { //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;
@@ -206,7 +206,7 @@ public class GameController implements GameControllerInterface, Serializable {
                     }
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();
-                    return;
+                    throw new illegalOperationException("invalid card placementent");
                 }
             }
         }

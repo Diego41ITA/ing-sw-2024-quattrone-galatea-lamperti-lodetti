@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 
 import java.awt.*;
 import java.rmi.Remote;
@@ -22,7 +23,7 @@ public interface GameControllerInterface extends Remote {
     public void setColor(String color, String name) throws RemoteException;
 
     //pgioca una carta sul tavolo da gioco
-    void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException;
+    void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException, illegalOperationException;
     void drawPlayableCardFromTableOfDecks(String typo, String nick) throws RemoteException;
 
     //calcola i punti dei giocatori attraverso le carte obbiettivo, aggiorna la point table e ritorna  il giocatore con il punteggio più alto
