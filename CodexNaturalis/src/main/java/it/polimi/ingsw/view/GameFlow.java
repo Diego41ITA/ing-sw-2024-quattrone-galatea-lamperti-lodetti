@@ -160,6 +160,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         }
     }
 
+    //---------------------------------------------------------------------
+    //Getter, setter and initializer methods
+    //---------------------------------------------------------------------
     public void setClient(ClientAction client){
         this.client = client;
     }
@@ -208,6 +211,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void setGameView(GameView game){
         this.view = game;
     }
+
+    //----------------------------------------------------------------
+    //Notification from the server
+    //----------------------------------------------------------------
 
     @Override
     public void newGameCreated(String GameID) throws RemoteException {

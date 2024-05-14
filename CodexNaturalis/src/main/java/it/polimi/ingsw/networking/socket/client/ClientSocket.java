@@ -21,6 +21,9 @@ import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
@@ -29,9 +32,14 @@ public class ClientSocket extends Thread implements ClientAction {
     private GameObserverHandlerClient gameObserverHandler;
     private GameFlow flow;
 
+    private BlockingQueue<ServerNotification> notificationQueue;
+
     public ClientSocket(GameFlow flow){
         this.flow = flow;
         connect("127.0.0.1", 50000 );
+        gameObserverHandler = new GameObserverHandlerClient(flow);
+        notificationQueue = new LinkedBlockingQueue<>();
+        this.start();
     }
 
     private void connect(String ip, int port){
@@ -55,9 +63,11 @@ public class ClientSocket extends Thread implements ClientAction {
         while(true){
             try{
                 ServerNotification notification = (ServerNotification) in.readObject();
-                notification.execute(gameObserverHandler);
-            }catch(IOException | ClassNotFoundException | InterruptedException e){
+                notificationQueue.put(notification);
+            }catch(IOException | ClassNotFoundException e){
                 PrintlnThread.Println("something went wrong :( ...");
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -74,6 +84,16 @@ public class ClientSocket extends Thread implements ClientAction {
         out.reset();
     }
 
+    public void waitForNotification() throws InterruptedException{
+        ServerNotification notification = notificationQueue.take();
+        try {
+            notification.execute(gameObserverHandler);
+        } catch (IOException e) {
+            PrintlnThread.Println("something went wrong ...");
+            throw new RuntimeException(e);
+        }
+    }
+
     //tutte le operazioni, sono quelle presenti nel client RMI, con la differenza che ora scriveranno sull'out un
     // messaggio che riflette il tipo di operazione che si vuole eseguire.
 
@@ -82,7 +102,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try {
             out.writeObject(new CreateGameMessage(nick, maxNumberOfPlayer));
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }
@@ -92,7 +114,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new JoinRandomMessage(nick));
             completeForwarding();
-        }catch(IOException e){
+            //waitForNotification();
+        }catch(IOException /*| InterruptedException*/ e){
             throw new RemoteException();
         }
     }
@@ -102,7 +125,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new LeaveGameMessage(nick, gameId));
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }
@@ -112,7 +136,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new RejoinMessage(nick, gameID));
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }
@@ -121,12 +146,13 @@ public class ClientSocket extends Thread implements ClientAction {
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
 
     @Override
-    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException{
+    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException, RemoteException {
         try{
             out.writeObject(new PlayCard(nick, playedCard, cord, front));
             completeForwarding();
-        }catch(IOException e){
-            throw new illegalOperationException("errore");
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            throw new RemoteException();
         }
     }
 
@@ -135,9 +161,11 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new ChooseGoal(nick, num, goals));
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             //throw new RemoteException();
         }
+
     }
 
     @Override
@@ -145,7 +173,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new Pass());
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             //nothing
         }
     }
@@ -155,8 +184,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new Color(nick, color));
             completeForwarding();
-        }catch(IOException e){
-            //it should throw a new exception.
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
     }
 
@@ -165,8 +195,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new DrawFromDeck(nick, deck));
             completeForwarding();
-        }catch(IOException e){
-            //it should throw a new Exception
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
     }
 
@@ -175,8 +206,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new DrawFromTable(nick, card));
             completeForwarding();
-        }catch(IOException e){
-            //
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
     }
 
@@ -185,8 +217,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new InitializeHand(nick));
             completeForwarding();
-        }catch (IOException e){
-            //
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
     }
 
@@ -195,8 +228,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new SetGameStation(nick, card, isFront));
             completeForwarding();
-        }catch(IOException e){
-            //
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
     }
 
@@ -206,8 +240,9 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new CalculateWinner());
             completeForwarding();
-        }catch(IOException e){
-            //
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
         }
 
         return "ciao";
@@ -215,6 +250,12 @@ public class ClientSocket extends Thread implements ClientAction {
 
     @Override //prova
     public void startGame() throws IOException {
-
+        try{
+            out.writeObject(new StartGame());
+            completeForwarding();
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
+            //nothing
+        }
     }
 }
