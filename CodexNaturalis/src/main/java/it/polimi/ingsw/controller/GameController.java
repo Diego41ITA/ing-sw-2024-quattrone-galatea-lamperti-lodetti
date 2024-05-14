@@ -230,12 +230,14 @@ public class GameController implements GameControllerInterface, Serializable {
      */
     @Override
     public /*synchronized*/ void drawPlayableCardFromTableOfDecks(String typo, String nick) {
+        String parsedTypo = typo.toLowerCase();
+
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
-                switch (typo) {
+                switch (parsedTypo) {
                     case "gold" -> {
                         Deck<GoldCard> deck = table.getDeckGold();
                         player.drawGold(deck);

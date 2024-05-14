@@ -94,7 +94,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         while(!view.getCurrentPlayer().getNick().equals(nickname)){
                             Println("it's not your turn. Wait");
                             try{
-                                lock.wait();
+                                synchronized (lock) {
+                                    lock.wait();
+                                }
                             }catch(InterruptedException e){
                                 Println("game interrupted");
                             }
@@ -109,7 +111,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
                     while(view.getStatus() == Status.SUSPENDED) {
                         try {
-                            lock.wait();    //need to add some notify when the gameStatus change.
+                            synchronized (lock) {
+                                lock.wait();
+                            }    //need to add some notify when the gameStatus change.
                         } catch (InterruptedException e) {
                             Println("this game got interrupted");
                         }
@@ -119,7 +123,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     ui.show_gameOver();
                     while(winner == null) {
                         try {
-                            lock.wait();
+                            synchronized (lock) {
+                                lock.wait();
+                            }
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -347,6 +353,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateCurrentPlayer(GameView game) throws RemoteException {
         setGameView(game);
+        synchronized (lock) {
+            lock.notifyAll();
+        }
         ui.show_isYourTurn(game);
     }
 
