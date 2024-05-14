@@ -202,17 +202,33 @@ public class Cli implements UI {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("GAME STATION\n");
         stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
-        for(int row = 1; row <= maxRow; row++){
-            stringBuilder.append("|");
-            for(int column = 1; column <= maxColumn; column++){
-                String value = determineValue(gameStation, new Point(column - maxColumn + 2, maxRow - row - 2));
-                spaces = Math.round(2 - value.length()/2);
-                stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
-                if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+
+        if(maxRow == 3 && maxColumn==3){
+            for(int row = 1; row <= maxRow; row++){
                 stringBuilder.append("|");
+                for(int column = 1; column <= maxColumn; column++){
+                    String value = determineValue(gameStation, new Point(column - maxColumn + 1, maxRow - row - 1));
+                    spaces = Math.round(2 - value.length()/2);
+                    stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                    if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+                    stringBuilder.append("|");
+                }
+                stringBuilder.append("\n");
+                stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
             }
-            stringBuilder.append("\n");
-            stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+        }else{
+            for(int row = 1; row <= maxRow; row++){
+                stringBuilder.append("|");
+                for(int column = 1; column <= maxColumn; column++){
+                    String value = determineValue(gameStation, new Point(column - maxColumn + 2, maxRow - row - 2));
+                    spaces = Math.round(2 - value.length()/2);
+                    stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                    if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+                    stringBuilder.append("|");
+                }
+                stringBuilder.append("\n");
+                stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+            }
         }
 
         stringBuilder.append("\n");
