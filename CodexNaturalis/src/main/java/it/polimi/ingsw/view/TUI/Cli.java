@@ -19,13 +19,12 @@ public class Cli implements UI {
     @Override
     public void show_startingMenu() {
         Println("""
-                STARTING MENU
+                \nSTARTING MENU
                 
                 CHOOSE AN OPTION:
                 
                 A- JOIN RANDOM GAME
                 B- RECONNECT TO AN EXISTING GAME
-                
                 """);
     }
 
@@ -37,20 +36,21 @@ public class Cli implements UI {
     @Override
     public void show_joinRandomGame() {
         Println("""
-                JOINING A GAME...
+                \nJOINING A GAME...
                 """);
     }
 
     @Override
     public void show_requestPlayerColor(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("CHOOSE A COLOR:\n");
+        stringBuilder.append("\nCHOOSE A COLOR:\n");
 
         for (Color c : freeColors(gameView)) {
             stringBuilder.append(c + ", ");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 2);
+        stringBuilder.append("\n");
 
         Println(stringBuilder.toString());
     }
@@ -119,6 +119,7 @@ public class Cli implements UI {
     @Override
     public void show_currentPlayersStatus(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
         for(Player p : gameView.getPlayers().keySet()){
             stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getPlayers().get(p)).append('\n');
         }
@@ -128,6 +129,7 @@ public class Cli implements UI {
     @Override
     public void show_playerColors(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
         for(Player p : gameView.getPlayers().keySet()){
             stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
         }
@@ -141,9 +143,7 @@ public class Cli implements UI {
 
     @Override
     public void show_RequestPlayerNickName() {
-        Println("""
-                ENTER A NICKNAME:
-                """);
+        Println("\nENTER A NICKNAME:\n");
     }
 
     @Override
@@ -156,7 +156,7 @@ public class Cli implements UI {
     @Override
     public void show_RequestNumberOfPlayers() {
         Println("""
-                ENTER A NUMBER OF PLAYERS:
+                \nENTER A NUMBER OF PLAYERS:
                 """);
     }
 
@@ -172,19 +172,22 @@ public class Cli implements UI {
 
     @Override
     public void show_gameStarting(String id) {
-        Println("GAME " + id + " STARTING");
+        Println("\nGAME: " + id + " IS STARTING");
     }
 
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-            Println(immutableModel.getCurrentPlayer().getNick() + "IS YOUR TURN");
+            Println(immutableModel.getCurrentPlayer().getNick() + " IS YOUR TURN");
     }
 
     @Override
     public void show_playerHand(GameView immutableModel) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nTHESE ARE YOUR CARDS:\n");
         for(PlayableCard c : immutableModel.getCurrentPlayer().showCard()){
-            Println(show_playableCard(c));
+            stringBuilder.append(show_playableCard(c));
         }
+        Println(stringBuilder.toString());
     }
 
     @Override
@@ -294,7 +297,7 @@ public class Cli implements UI {
     @Override
     public String show_goalCard(GoalCard card) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("GOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
+        stringBuilder.append("\nGOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card));
         return (stringBuilder.toString());
         /*
@@ -325,7 +328,7 @@ public class Cli implements UI {
 
         if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
             stringBuilder.append("""
-                    GOLD CARD
+                    \nGOLD CARD
                     
                     CARD ID: """ + card.getCardId() + "\n" + """
                     PERMANENT RESOURCE: """ + ((GoldCard) card).getBackResource().toString() + "\n" + """
@@ -342,7 +345,7 @@ public class Cli implements UI {
 
         } else if (card instanceof ResourceCard) {
             stringBuilder.append("""
-                    RESOURCE CARD
+                    \nRESOURCE CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
                     PERMANENT RESOURCE:""" + ((ResourceCard) card).getBackResource() + "\n" + """
@@ -357,7 +360,7 @@ public class Cli implements UI {
                     """);
         } else if (card instanceof InitialCard) {
             stringBuilder.append("""
-                    INITIAL CARD
+                    \nINITIAL CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
                     BACK RESOURCES:""" + listToString(((InitialCard) card).getBackResources()) + "\n" + """
@@ -376,12 +379,12 @@ public class Cli implements UI {
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTABLE OF DECKS\n").append("\nPLAYABLE CARDS\n\n");
+        stringBuilder.append("\nTABLE OF DECKS\n").append("\nPLAYABLE CARDS\n");
         for(Card card : immutableModel.getTableOfDecks().getCards()){
             stringBuilder.append(show_playableCard((PlayableCard) card));
         }
 
-        stringBuilder.append("\nGOAL CARDS\n\n");
+        stringBuilder.append("\nGOAL CARDS\n");
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             stringBuilder.append(show_goalCard((GoalCard) card));
         }
