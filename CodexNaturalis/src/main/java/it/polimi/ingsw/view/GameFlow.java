@@ -87,6 +87,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                 } else if (view.getStatus() == Status.ACTIVE) {
                     if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
                         if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
+                            state2 = new PlaceCardState(this);
                             state2.setView(view);
                             state2.execute();
                         }
