@@ -6,4 +6,6 @@ public interface GetInput {
     public String getOption();
 
     public String getGameId();
+
+    public int getNumberOfPlayer();
 }
