@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.input;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputUi implements GetInput{
@@ -21,6 +22,16 @@ public class InputUi implements GetInput{
     @Override
     public String getGameId() {
         return scannerInput();
+    }
+
+    @Override
+    public int getNumberOfPlayer() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        }catch (InputMismatchException e){
+            return 0;
+        }
     }
 
 

@@ -71,14 +71,16 @@ public class StateMenu extends StateWaiting {
             validInput=false;
             do {
             ui.show_noAvailableGames();
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
+            input = inputGetter.getOption();
             inputParsed = input.toUpperCase();
             switch (inputParsed) {
                 case ("A"):
+                    int numberOfPlayer;
                     validInput = true;
+                    do{
                     ui.show_RequestNumberOfPlayers();
-                    int numberOfPlayer = scanner.nextInt();
+                    numberOfPlayer = inputGetter.getNumberOfPlayer();
+                    if(numberOfPlayer != 0){
                     try {
                         client.createGame(StateWaiting.flow.getNickname(), numberOfPlayer);
                     } catch (NotBoundException | IOException | InterruptedException e) {
@@ -90,6 +92,11 @@ public class StateMenu extends StateWaiting {
                             throw new RuntimeException(ex);
                         }
                     }
+                    }else {
+                        ui.show_message("INVALID INPUT\n"); //problema da risolvere su ordine di stampa
+                    }
+                    }while (numberOfPlayer == 0);
+
                     break;
                 case ("B"):
                     validInput = true;
