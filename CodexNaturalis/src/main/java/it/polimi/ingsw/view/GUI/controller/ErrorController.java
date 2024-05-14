@@ -13,12 +13,10 @@ import javafx.scene.control.Label;
         private Label error;
         @FXML
         private Button button;
-        private boolean needToExitApp;
         //fa vedere i nodi dell'interfaccia
         public void showError(String msg){
             error.setText(msg);
             error.setVisible(true);
-            button.setVisible(true);// forse per i button show visible non serve
         }
 
         public void actionMenu(ActionEvent e) {

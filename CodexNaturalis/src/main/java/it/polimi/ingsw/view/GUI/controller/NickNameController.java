@@ -1,4 +1,5 @@
 package it.polimi.ingsw.view.GUI.controller;
+import it.polimi.ingsw.view.GUI.Gui;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -7,13 +8,13 @@ import javafx.scene.input.KeyCode;
 
 import java.awt.event.ActionEvent;
 
-public class NickNameController {
+public class NickNameController extends Gui {
     @FXML
     private TextField nickName;
     @FXML
     private Button enter;
     public void OkButton(javafx.event.ActionEvent actionEvent) {
-        //bisogna utilizzare una classe astratta che viene estesa da questo controller
-        //questo classe astratta si occuperà di leggere gli input da tastiera
+        //fa in modo che mi lanci l'interfaccia menù di gioco
+        show_createNewGame();
     }
 }

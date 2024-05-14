@@ -4,9 +4,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
+import javafx.scene.text.Text;
 public class EndController {
     @FXML
-    private Label winner;
+    private Text winner;
     @FXML
     private Button exit;
 
@@ -14,8 +15,6 @@ public class EndController {
     public void show(String name) {
         winner.setText(name);
         winner.setVisible(true);
-        winner.setTextFill(Color.WHITE);
-        exit.setVisible(true);
     }
 
     //Quando clicco il mouse eseguo questo metodo che mi esce dall'app
