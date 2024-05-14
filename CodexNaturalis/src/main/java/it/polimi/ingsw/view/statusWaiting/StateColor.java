@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.GetInput;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 
 import java.io.IOException;
@@ -16,8 +17,8 @@ public class StateColor extends StateWaiting {
     private String nick;
     private GameView view;
 
-    public StateColor(GameFlow flow){
-        super(flow);
+    public StateColor(GameFlow flow, GetInput input){
+        super(flow, input);
         this.ui = flow.getUi();
         this.client = flow.getClient();
         this.nick = flow.getNickname();

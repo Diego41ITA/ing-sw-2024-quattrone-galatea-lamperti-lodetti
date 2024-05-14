@@ -41,7 +41,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private boolean stay = true;
 
     //metto 4 attributi State
-    private StateWaiting state1 = new StateMenu(this);
+    private StateWaiting state1 = new StateMenu(this, this.input);
     private StateActive state2 = new PlaceCardState(this);
 
     //costruttore
@@ -183,7 +183,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //serve a inizializzare gli stati
     public void initializeStates(){
-        state1 = new StateMenu(this);
+        state1 = new StateMenu(this, this.input);
         state2 = new PlaceCardState(this);
     }
 
@@ -298,7 +298,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         setGameView(game);
         waitingForNewPlayers = false;
         Println("the choose color is not available anymore! please, select another one");
-        state1 = new StateColor(this);
+        state1 = new StateColor(this, this.input);
     }
 
     @Override

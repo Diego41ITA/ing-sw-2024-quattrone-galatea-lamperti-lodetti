@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.statusWaiting;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.GetInput;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -13,8 +14,8 @@ public class StateMenu extends StateWaiting {
     private ClientAction client;
     private String nickName;
 
-    public StateMenu(GameFlow flow) {
-        super(flow);
+    public StateMenu(GameFlow flow, GetInput input) {
+        super(flow, input);
         ui = flow.getUi();
         client = flow.getClient();
         nickName = flow.getNickname();
@@ -23,11 +24,10 @@ public class StateMenu extends StateWaiting {
     @Override
     public void execute() {
         Boolean validInput = false;
-        Scanner sc = new Scanner(System.in);
         String input, inputParsed;
         do {
         ui.show_startingMenu();
-        input = sc.nextLine();
+        input = inputGetter.getOption();
         inputParsed = input.toUpperCase();
         switch (inputParsed) {
             case "A":
@@ -48,7 +48,7 @@ public class StateMenu extends StateWaiting {
             case "B":
                 validInput = true;
                 ui.show_RequestGameId();
-                String gameID = sc.nextLine();
+                String gameID = inputGetter.getGameId();
                 try {
                     client.rejoin(nickName, gameID);
                 } catch (NotBoundException | IOException | InterruptedException e) {
@@ -106,6 +106,6 @@ public class StateMenu extends StateWaiting {
     }
     @Override
     public void nextState(){
-        new StateColor(StateWaiting.flow).execute();
+        new StateColor(StateWaiting.flow, inputGetter).execute();
     }
 }

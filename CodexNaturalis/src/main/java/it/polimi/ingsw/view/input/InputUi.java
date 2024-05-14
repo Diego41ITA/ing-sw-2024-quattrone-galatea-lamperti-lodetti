@@ -14,7 +14,14 @@ public class InputUi implements GetInput{
     }
 
     @Override
-    public String GetOption() {
+    public String getOption() {
         return scannerInput();
     }
+
+    @Override
+    public String getGameId() {
+        return scannerInput();
+    }
+
+
 }
