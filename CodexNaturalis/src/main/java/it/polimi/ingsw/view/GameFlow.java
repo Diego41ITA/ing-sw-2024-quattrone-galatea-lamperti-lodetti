@@ -3,6 +3,8 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
+import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
@@ -15,12 +17,14 @@ import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
@@ -366,6 +370,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void invalidCardPlacement() throws RemoteException {
         ui.show_invalidPlay();
         //metodo correzione coordinata oppure riinvoco playCard ma va modificato il catch in gameController
+        state2.execute();
     }
 
     @Override
