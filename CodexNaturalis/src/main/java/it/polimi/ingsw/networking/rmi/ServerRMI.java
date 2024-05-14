@@ -73,9 +73,9 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
         try{//manca da gestire exception per cui stub = null
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(ExportException e){
-            Println("object already exported");
+            /*Println("object already exported");
             e.printStackTrace();
-            e.getCause();
+            e.getCause();*/
         }catch (NullPointerException e){
             obs.genericErrorWhenEnteringGame("No games currently available to join...", null);
         }catch(RemoteException e){
