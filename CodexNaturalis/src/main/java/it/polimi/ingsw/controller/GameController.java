@@ -84,6 +84,7 @@ public class GameController implements GameControllerInterface, Serializable {
         Deck<InitialCard> deck = table.getDeckStart();
         InitialCard card = deck.getFirst();
         observers.get(nick).notify_initialCardsDrawn(card);
+        table.setDeckStart(deck);
         this.game.setTableOfDecks(table);
     }
 
@@ -338,10 +339,12 @@ public class GameController implements GameControllerInterface, Serializable {
         //Turn turn = new Turn(keysList);
         //game.setTurn(turn);
         game.setTableOfDecks(table);
+        /* non mostro all'inizio la table of deck
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_InitializeTable(game);//capire che argomenti mettergli
         }
+        */
     }
 
     /**
@@ -557,10 +560,12 @@ public class GameController implements GameControllerInterface, Serializable {
         this.game.setTableOfDecks(table);
         HandleObserver observer = observers.get(nickname);
         observer.notify_goalCardsDrawed(goals);
+        /*
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_DrawCard(game);
         }
+         */
     }
 
     /**

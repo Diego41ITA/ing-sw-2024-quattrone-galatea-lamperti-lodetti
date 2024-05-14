@@ -220,6 +220,7 @@ public class Cli implements UI {
         for(PlayableCard card: playedCards.values()){
             stringBuilder.append(cardDraw(card));
         }
+        stringBuilder.append("\n");
 
         Println(stringBuilder.toString());
     }
@@ -438,8 +439,9 @@ public class Cli implements UI {
     private static String listToString(List<Item> list){
         StringBuilder stringBuilder = new StringBuilder();
         for(Item i : list){
-            stringBuilder.append(i.toString());
+            stringBuilder.append(i.toString()).append(", ");
         }
+        stringBuilder.setLength(stringBuilder.length() - 2);
         return stringBuilder.toString();
     }
 
