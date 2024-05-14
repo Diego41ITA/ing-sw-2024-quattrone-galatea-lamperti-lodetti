@@ -22,14 +22,16 @@ public class StateMenu extends StateWaiting {
 
     @Override
     public void execute() {
+        Boolean validInput = false;
         Scanner sc = new Scanner(System.in);
         String input, inputParsed;
-
+        do {
         ui.show_startingMenu();
         input = sc.nextLine();
         inputParsed = input.toUpperCase();
         switch (inputParsed) {
             case "A":
+                validInput = true;
                 ui.show_joinRandomGame();
                 try {
                     client.joinRandomGame(nickName);
@@ -44,6 +46,7 @@ public class StateMenu extends StateWaiting {
                 }
                 break;
             case "B":
+                validInput = true;
                 ui.show_RequestGameId();
                 String gameID = sc.nextLine();
                 try {
@@ -59,17 +62,21 @@ public class StateMenu extends StateWaiting {
                 }
                 break;
             default:
-                ui.show_message("INVALID COMMAND\n");
+                ui.show_message("INVALID COMMAND");
                 break;
         }
+        }while(!validInput);
 
         if (StateWaiting.flow.inGame == false) {
+            validInput=false;
+            do {
             ui.show_noAvailableGames();
             Scanner scanner = new Scanner(System.in);
             input = scanner.nextLine();
             inputParsed = input.toUpperCase();
             switch (inputParsed) {
                 case ("A"):
+                    validInput = true;
                     ui.show_RequestNumberOfPlayers();
                     int numberOfPlayer = scanner.nextInt();
                     try {
@@ -85,9 +92,14 @@ public class StateMenu extends StateWaiting {
                     }
                     break;
                 case ("B"):
+                    validInput = true;
                     StateWaiting.flow.exit();
                     break;
+                default:
+                    ui.show_message("INVALID COMMAND\n");
+                    break;
             }
+        }while(!validInput);
         }
 
         nextState();
