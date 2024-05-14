@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.view.input.GetInput;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
@@ -32,6 +33,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private GameView view;
     public boolean inGame;
 
+    private GetInput input;
+
     private String winner = null;
 
     //un attributo per uscire dal ciclo (viene settato dall'ultimo stato)
@@ -42,8 +45,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private StateActive state2 = new PlaceCardState(this);
 
     //costruttore
-    public GameFlow(UI ui){
+    public GameFlow(UI ui, GetInput input){
         this.ui = ui;
+        this.input = input;
         inGame = false;
     }
 
@@ -53,8 +57,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             boolean stay = true;
 
             ui.show_RequestPlayerNickName();
-            Scanner scanner = new Scanner(System.in);
-            nickname = scanner.nextLine();
+            nickname = input.getNickName();
 
             //inizializza gli state di partenza.
             initializeStates();

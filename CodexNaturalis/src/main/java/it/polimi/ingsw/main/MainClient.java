@@ -5,6 +5,7 @@ import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.TUI.Cli;
+import it.polimi.ingsw.view.input.InputUi;
 
 import java.util.Scanner;
 //chiede all'utente che tipo di configurazione vuole:
@@ -32,7 +33,7 @@ public class MainClient {
                             System.out.println("game starting");
                             //lancia gameflow
                         } else if (config[0].equalsIgnoreCase("rmi") && config[1].equalsIgnoreCase("tui")) {
-                            GameFlow flow = new GameFlow(new Cli());
+                            GameFlow flow = new GameFlow(new Cli(), new InputUi());
                             flow.setClient(new ClientRMI(flow));
                             flow.run();
                         } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("gui")) {
@@ -41,7 +42,7 @@ public class MainClient {
                             return;
                         } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("tui")) {
                             System.out.println("game starting");
-                            GameFlow flow = new GameFlow(new Cli());
+                            GameFlow flow = new GameFlow(new Cli(), new InputUi());
                             flow.setClient(new ClientSocket(flow));
                             flow.run();
                         } else {
