@@ -370,7 +370,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void invalidCardPlacement() throws RemoteException {
         ui.show_invalidPlay();
         //metodo correzione coordinata oppure riinvoco playCard ma va modificato il catch in gameController
-        state2.execute();
     }
 
     @Override
