@@ -15,7 +15,6 @@ import java.util.Scanner;
 
 public class PlaceCardState extends StateActive{
 
-    private GameFlow flow;
     private GameView view;
     private UI ui;
     private ClientAction client;
@@ -81,6 +80,7 @@ public class PlaceCardState extends StateActive{
         } catch (illegalOperationException e) {
             //non dovrebbe arrivare qui l'exception o sbaglio? (dovrebbe esser gestita con le notify)
         }
+        this.nextState();
     }
 
     @Override
