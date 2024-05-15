@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.GUI.controller;
+package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.model.gameDataManager.*;
 //questa classe serve ad associare gli oggetti del model con la loro rappresentazione png
 //ImageAssociator viene impiegata per associare le carte con la loro rappresentazione grafica
