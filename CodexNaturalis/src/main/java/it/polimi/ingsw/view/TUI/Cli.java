@@ -44,9 +44,10 @@ public class Cli implements UI {
     @Override
     public void show_joinRandomGame() {
         Println("""
-                   █ ▄▀▄ █ █▄ █ █ █▄ █ ▄▀    ▄▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀     \s
-                 ▀▄█ ▀▄▀ █ █ ▀█ █ █ ▀█ ▀▄█   █▀█   ▀▄█ █▀█ █ ▀ █ █▄▄ ▄ ▄ ▄
-                                
+                   
+                   █ ▄▀▄ █ █▄ █ █ █▄ █ ▄▀    ▄▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀
+                 ▀▄█ ▀▄▀ █ █ ▀█ █ █ ▀█ ▀▄█   █▀█   ▀▄█ █▀█ █ ▀ █ █▄▄
+                                                                
                 """);
     }
 
@@ -173,9 +174,10 @@ public class Cli implements UI {
     @Override
     public void show_playerJoined(String id) {
         Println("""
-                   █ ▄▀▄ █ █▄ █ ██▀ █▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀
-                 ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀   ▀▄█ █▀█ █ ▀ █ █▄▄
-                                
+                   
+                   █ ▄▀▄ █ █▄ █ ██▀ █▀▄   ▀█▀ █▄█ ██▀   ▄▀  ▄▀▄ █▄ ▄█ ██▀
+                 ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀    █  █ █ █▄▄   ▀▄█ █▀█ █ ▀ █ █▄▄
+                                                                
                 """);
         Println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
     }
@@ -190,6 +192,7 @@ public class Cli implements UI {
                 StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(""" 
                  
+                 
                          
                 ▀██▀                ▄    █                    ▄                     ▄               ▀██                     ██                     ▄█▄\s
                  ██         ▄▄▄▄  ▄██▄      ▄▄▄▄      ▄▄▄▄  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄     ▄▄▄ ▄▄▄   ██   ▄▄▄▄    ▄▄▄▄ ▄▄▄ ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄   ███\s
@@ -198,7 +201,7 @@ public class Cli implements UI {
                 ▄██▄▄▄▄▄█  ▀█▄▄▄▀  ▀█▄▀    █▀▄▄█▀    █▀▄▄█▀  ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀     ██▄▄▄▀  ▄██▄ ▀█▄▄▀█▀     ▀█    ▄██▄ ▄██▄ ██▄  ▀████▄    ▀ \s
                                                                                             ██                    ▄▄  █                   ▄█▄▄▄▄▀  ▀█▀\s
                                                                                            ▀▀▀▀                     ▀▀                               \s
-                                                                                             
+                                                                          
                             
                 """).append("\nTHIS IS YOUR INITIAL CARD\n").append(show_playableCard(card)).append("""
                 DO YOU WANNA PLAY IT FRONT OR BACK:
@@ -222,10 +225,20 @@ public class Cli implements UI {
     @Override
     public void show_playerHand(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTHESE ARE YOUR CARDS:\n");
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """).append("""
+                 
+                 ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀▄▀ ▄▀▄ █ █ █▀▄   █▄█ ▄▀▄ █▄ █ █▀▄
+                  █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
+                                
+                """);
         for(PlayableCard c : immutableModel.getCurrentPlayer().showCard()){
             stringBuilder.append(show_playableCard(c));
         }
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
@@ -429,21 +442,42 @@ public class Cli implements UI {
                     └──────────────────────┘   └──────────────────────┘
                     """);
         }
+
+        stringBuilder.append("""
+                
+                ---------------------------------------------------------------------------------
+                
+                """ );
         return stringBuilder.toString();
     }
 
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTABLE OF DECKS\n").append("\nPLAYABLE CARDS\n");
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """).append("""
+                 
+                 ▄▀▀ ▄▀▄ █▄ ▄█ █▄ ▄█ ▄▀▄ █▄ █   █▀▄ █▀▄ ▄▀▄ █   █ ▄▀▄ ██▄ █   ██▀   ▄▀▀ ▄▀▄ █▀▄ █▀▄ ▄▀▀
+                 ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   █▄▀ █▀▄ █▀█ ▀▄▀▄▀ █▀█ █▄█ █▄▄ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
+                                
+                """);
         for(Card card : immutableModel.getTableOfDecks().getCards()){
             stringBuilder.append(show_playableCard((PlayableCard) card));
         }
 
-        stringBuilder.append("\nGOAL CARDS\n");
+        stringBuilder.append("""
+                 
+                 ▄▀▀ ▄▀▄ █▄ ▄█ █▄ ▄█ ▄▀▄ █▄ █   ▄▀  ▄▀▄ ▄▀▄ █     ▄▀▀ ▄▀▄ █▀▄ █▀▄ ▄▀▀
+                 ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   ▀▄█ ▀▄▀ █▀█ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
+                                
+                """);
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             stringBuilder.append(show_goalCard((GoalCard) card));
         }
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
