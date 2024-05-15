@@ -44,7 +44,7 @@ public class GameView implements Serializable {
     }
 
     public Player getCurrentPlayer(){
-        return this.turn.getCurrentPlayer();
+        return getPlayerByNick(this.turn.getCurrentPlayerNick());
     }
 
     public boolean isMyTurn(String nick){
@@ -100,6 +100,15 @@ public class GameView implements Serializable {
                 player = p;
         }
         return player;
+    }
+
+    public Player getPlayerByNick(String name) {
+        for (Player p : players.keySet()) {
+            if (p.getNick().equals(name))
+                return p;
+        }
+        System.err.println("No player with nick:" + name + "founded");
+        return null;
     }
 
     public Turn getTurn() {
