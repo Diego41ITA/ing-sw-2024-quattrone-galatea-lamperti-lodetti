@@ -342,17 +342,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
-
         Scanner scanner = new Scanner(System.in);
         Boolean isFrontOrBack = true;
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTHIS IS YOUR INITIAL CARD\n").append(ui.show_playableCard(card)).append("""
-                DO YOU WANNA PLAY IT FRONT OR BACK:
-                
-                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
-                """);
-        ui.show_message(stringBuilder.toString());
+        ui.show_initialCard(card);
         isFrontOrBack = scanner.nextBoolean();
         client.setGameStation(nickname, card, isFrontOrBack);
     }

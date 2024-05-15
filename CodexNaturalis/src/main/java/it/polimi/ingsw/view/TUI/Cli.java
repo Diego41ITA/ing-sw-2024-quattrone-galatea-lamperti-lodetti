@@ -19,8 +19,16 @@ public class Cli implements UI {
     @Override
     public void show_startingMenu() {
         Println("""
-                \nSTARTING MENU
+                 
+                 ▄█▀▀▀▄█    ▄                     ▄    ██                                                          \s
+                 ██▄▄  ▀  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄  ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄    ▄▄ ▄▄ ▄▄     ▄▄▄▄  ▄▄ ▄▄▄   ▄▄▄ ▄▄▄ \s
+                  ▀▀███▄   ██   ▀▀ ▄██   ██▀ ▀▀  ██    ██   ██  ██   ██ ██      ██ ██ ██  ▄█▄▄▄██  ██  ██   ██  ██ \s
+                ▄     ▀██  ██   ▄█▀ ██   ██      ██    ██   ██  ██    █▀▀       ██ ██ ██  ██       ██  ██   ██  ██ \s
+                █▀▄▄▄▄█▀   ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀ ▄██▄ ▄██▄ ██▄  ▀████▄    ▄██ ██ ██▄  ▀█▄▄▄▀ ▄██▄ ██▄  ▀█▄▄▀█▄\s
+                                                                    ▄█▄▄▄▄▀                                        \s
+                                                                                                                   \s
                 
+                                                                                                                                              
                 CHOOSE AN OPTION:
                 
                 A- JOIN RANDOM GAME
@@ -36,7 +44,9 @@ public class Cli implements UI {
     @Override
     public void show_joinRandomGame() {
         Println("""
-                \nJOINING A GAME...
+                   █ ▄▀▄ █ █▄ █ █ █▄ █ ▄▀    ▄▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀     \s
+                 ▀▄█ ▀▄▀ █ █ ▀█ █ █ ▀█ ▀▄█   █▀█   ▀▄█ █▀█ █ ▀ █ █▄▄ ▄ ▄ ▄
+                                
                 """);
     }
 
@@ -162,12 +172,40 @@ public class Cli implements UI {
 
     @Override
     public void show_playerJoined(String id) {
-        Println("JOINED GAME: " + id);
+        Println("""
+                   █ ▄▀▄ █ █▄ █ ██▀ █▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀
+                 ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀   ▀▄█ █▀█ █ ▀ █ █▄▄
+                                
+                """);
+        Println("THE ID IS: " + id);
     }
 
     @Override
     public void show_playerLeft(String playerNickName) {
         Println(playerNickName + " LEFT");
+    }
+
+    @Override
+    public void show_initialCard(InitialCard card){
+                StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("""
+                
+                
+                ▀██▀                ▄    █                    ▄                     ▄   ▄█▄\s
+                 ██         ▄▄▄▄  ▄██▄      ▄▄▄▄      ▄▄▄▄  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄  ███\s
+                 ██       ▄█▄▄▄██  ██      ██▄ ▀     ██▄ ▀   ██   ▀▀ ▄██   ██▀ ▀▀  ██   ▀█▀\s
+                 ██       ██       ██      ▄ ▀█▄▄    ▄ ▀█▄▄  ██   ▄█▀ ██   ██      ██    █ \s
+                ▄██▄▄▄▄▄█  ▀█▄▄▄▀  ▀█▄▀    █▀▄▄█▀    █▀▄▄█▀  ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀  ▄ \s
+                                                                                        ▀█▀\s
+                                                                                           \s
+                                
+                """).append("\nTHIS IS YOUR INITIAL CARD\n").append(show_playableCard(card)).append("""
+                DO YOU WANNA PLAY IT FRONT OR BACK:
+                
+                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
+                """);
+        show_message(stringBuilder.toString());
+
     }
 
     @Override

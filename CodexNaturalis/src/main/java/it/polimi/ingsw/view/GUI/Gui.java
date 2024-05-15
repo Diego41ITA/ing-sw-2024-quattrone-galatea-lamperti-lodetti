@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
@@ -17,6 +18,11 @@ public class Gui implements UI {
 
     @Override
     public void show_message(String message) {
+
+    }
+
+    @Override
+    public void show_initialCard(InitialCard card) {
 
     }
 
