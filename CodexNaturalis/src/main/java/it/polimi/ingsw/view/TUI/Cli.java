@@ -188,17 +188,18 @@ public class Cli implements UI {
     @Override
     public void show_initialCard(InitialCard card){
                 StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("""
-                
-                
-                ▀██▀                ▄    █                    ▄                     ▄   ▄█▄\s
-                 ██         ▄▄▄▄  ▄██▄      ▄▄▄▄      ▄▄▄▄  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄  ███\s
-                 ██       ▄█▄▄▄██  ██      ██▄ ▀     ██▄ ▀   ██   ▀▀ ▄██   ██▀ ▀▀  ██   ▀█▀\s
-                 ██       ██       ██      ▄ ▀█▄▄    ▄ ▀█▄▄  ██   ▄█▀ ██   ██      ██    █ \s
-                ▄██▄▄▄▄▄█  ▀█▄▄▄▀  ▀█▄▀    █▀▄▄█▀    █▀▄▄█▀  ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀  ▄ \s
-                                                                                        ▀█▀\s
-                                                                                           \s
-                                
+        stringBuilder.append(""" 
+                 
+                         
+                  ▀██▀                ▄    █                    ▄                     ▄               ▀██                     ██                     ▄█▄\s
+                   ██         ▄▄▄▄  ▄██▄      ▄▄▄▄      ▄▄▄▄  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄     ▄▄▄ ▄▄▄   ██   ▄▄▄▄    ▄▄▄▄ ▄▄▄ ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄   ███\s
+                   ██       ▄█▄▄▄██  ██      ██▄ ▀     ██▄ ▀   ██   ▀▀ ▄██   ██▀ ▀▀  ██       ██▀  ██  ██  ▀▀ ▄██    ▀█▄  █   ██   ██  ██   ██ ██    ▀█▀\s
+                   ██       ██       ██      ▄ ▀█▄▄    ▄ ▀█▄▄  ██   ▄█▀ ██   ██      ██       ██    █  ██  ▄█▀ ██     ▀█▄█    ██   ██  ██    █▀▀      █ \s
+                  ▄██▄▄▄▄▄█  ▀█▄▄▄▀  ▀█▄▀    █▀▄▄█▀    █▀▄▄█▀  ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀     ██▄▄▄▀  ▄██▄ ▀█▄▄▀█▀     ▀█    ▄██▄ ▄██▄ ██▄  ▀████▄    ▀ \s
+                                                                                              ██                    ▄▄  █                   ▄█▄▄▄▄▀  ▀█▀\s
+                                                                                             ▀▀▀▀                     ▀▀                               \s
+                                                                                             
+                            
                 """).append("\nTHIS IS YOUR INITIAL CARD\n").append(show_playableCard(card)).append("""
                 DO YOU WANNA PLAY IT FRONT OR BACK:
                 
