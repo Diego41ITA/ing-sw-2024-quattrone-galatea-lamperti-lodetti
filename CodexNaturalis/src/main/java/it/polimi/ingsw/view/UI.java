@@ -59,7 +59,7 @@ public interface UI {
 
     public String show_playableCard(PlayableCard card);
 
-    public void show_gameStation(GameStation gameStation);
+    public void show_gameStation(GameView view);
 
     public void show_notEnoughResources();
 

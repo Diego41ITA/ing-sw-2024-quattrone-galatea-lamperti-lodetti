@@ -132,7 +132,7 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_gameStation(GameStation gameStation) {
+    public void show_gameStation(GameView view) {
 
     }
 

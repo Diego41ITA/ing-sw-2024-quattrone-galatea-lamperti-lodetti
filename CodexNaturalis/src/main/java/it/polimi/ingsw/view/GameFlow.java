@@ -113,7 +113,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     ui.show_GameStatus(view);
                     ui.show_message("this game is temporally suspended :(\n");
                     ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
-                    ui.show_gameStation(view.getMyGameStation(nickname));
+                    ui.show_gameStation(view);
                     ui.show_playerHand(view);
 
                     while(view.getStatus() == Status.SUSPENDED) {
@@ -286,7 +286,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateGamestation(GameView game, GameStation gameStation) throws RemoteException {
         setGameView(game);
-        ui.show_gameStation(gameStation);
+        ui.show_gameStation(game);
     }
 
     @Override
