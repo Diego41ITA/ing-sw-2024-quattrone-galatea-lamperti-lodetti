@@ -177,7 +177,7 @@ public class Cli implements UI {
                  ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀   ▀▄█ █▀█ █ ▀ █ █▄▄
                                 
                 """);
-        Println("THE ID IS: " + id);
+        Println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
     }
 
     @Override
