@@ -450,6 +450,7 @@ public class GameController implements GameControllerInterface, Serializable {
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
                 obs.notify_winner(game, winnerNick);//capire che argomenti mettergli
+                return;
             }
         }
         game.setTurn(turn);
