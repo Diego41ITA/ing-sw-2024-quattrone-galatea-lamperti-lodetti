@@ -88,16 +88,15 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     }
 
                         //se invece i giocatori non sono ancora del numero corretto si aspetta
-                        while (waitingForNewPlayers) {
-
-                                try {
-                                    synchronized (lock) {
-                                        lock.wait();
-                                    }
-                                } catch (InterruptedException e) {
-                                    Println("this game is aborted");
-                                }
+                    while (waitingForNewPlayers) {
+                        try {
+                            synchronized (lock) {
+                                lock.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            Println("this game is aborted");
                         }
+                    }
                 } else if (view.getStatus() == Status.ACTIVE) {
                     if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
                         if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) { //da inserire gestione caso che non è il tuo turno

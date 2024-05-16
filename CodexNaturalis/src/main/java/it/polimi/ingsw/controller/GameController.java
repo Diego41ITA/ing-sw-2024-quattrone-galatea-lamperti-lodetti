@@ -31,9 +31,9 @@ public class GameController implements GameControllerInterface, Serializable {
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
 
-    private String clientNick = "invalidName";
+    //private String clientNick = "invalidName";
 
-    //private final Semaphore semaphore = new Semaphore(0);
+    private final Semaphore semaphore = new Semaphore(0);
 
     /**
      * Constructor of the class. It's called by {@link MainController} when creating a new game
@@ -109,23 +109,23 @@ public class GameController implements GameControllerInterface, Serializable {
         for (Player p : game.getPlayers().keySet()) {
             this.initializePlayers(p.getNick());
 
-            /*va fermato
+            //va fermato
             try {
                 semaphore.acquire();
             } catch (InterruptedException e) {
                 throw new RemoteException();
-            }*/
-            while(!clientNick.equals(p.getNick())){}
-            this.clientNick = "invalidName";
+            }
+            //while(!clientNick.equals(p.getNick())){}
+            //this.clientNick = "invalidName";
             this.getPossibleGoals(p.getNick());
 
-            /*lo si ferma di nuovo
+            //lo si ferma di nuovo
             try {
                 semaphore.acquire();
             } catch (InterruptedException e) {
                 throw new RemoteException();
-            }*/
-            while(!clientNick.equals(p.getNick())){}
+            }
+            //while(!clientNick.equals(p.getNick())){}
 
             this.initializeHandPlayer(p.getNick());
         }
@@ -543,8 +543,8 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setPlayers(players);
         observers.get(nick).notify_chooseGoal(game, card);
 
-        //semaphore.release();
-        clientNick = nick;
+        semaphore.release();
+        //clientNick = nick;
     }
 
     /**
@@ -684,8 +684,8 @@ public class GameController implements GameControllerInterface, Serializable {
         }*/
         observers.get(nick).notify_updateGameStations(game);
         //rilascia un semaforo
-        //semaphore.release();
-        clientNick = nick;
+        semaphore.release();
+        //clientNick = nick;
     }
 
     public void setGameStatus(Status status){
