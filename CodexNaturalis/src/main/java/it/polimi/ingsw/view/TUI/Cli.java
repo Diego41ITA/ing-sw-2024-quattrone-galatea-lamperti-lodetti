@@ -81,8 +81,8 @@ public class Cli implements UI {
                 return "\uD83E\uDEB6";
             case PARCHMENT:
                 return "\uD83D\uDCC4";
-            case null, default:
-                return "  ";
+            case null:
+                return "\uD83D\uDEAB";
         }
     }
 
