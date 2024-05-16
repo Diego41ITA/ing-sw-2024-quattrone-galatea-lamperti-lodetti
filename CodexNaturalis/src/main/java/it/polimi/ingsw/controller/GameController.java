@@ -218,7 +218,7 @@ public class GameController implements GameControllerInterface, Serializable {
                         }
                     }
                     gamestation = player.getGameStation();
-                    if(notify20PointReached() && !this.game.getTurn().checkIfLast()){
+                    if(notify20PointReached() && !turn.checkIfLast()){
                         turn.setIsLast(true);
                         turn.setEndingPlayer(nick);
                         this.game.setTurn(turn);
@@ -396,7 +396,7 @@ public class GameController implements GameControllerInterface, Serializable {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         PointTable pointTable = game.getPointTable();
-        String winner = "nobody";
+        String winnerNick = "nobody";
         int maxpoint = 0;
         for (Player player : players.keySet()) {
             int point = 0;
@@ -416,7 +416,7 @@ public class GameController implements GameControllerInterface, Serializable {
             pointTable.updatePoint(player, point);
             if (point > maxpoint) {
                 maxpoint = point;
-                winner = player.getNick();
+                winnerNick = player.getNick();
             }
         }
         game.setPointTable(pointTable);
@@ -425,7 +425,7 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_FinalsPoint(game);
         }
 
-        return winner;
+        return winnerNick;
     }
 
     /**
@@ -444,10 +444,10 @@ public class GameController implements GameControllerInterface, Serializable {
         turn.goOn();
         if(turn.checkIfLast() && turn.getCurrentPlayerNick().equals(turn.getEndingPlayer())){
             this.game.setStatus(Status.FINISHED);
-            String winner = calculateWinner();
+            String winnerNick = calculateWinner();
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
-                obs.notify_winner(game, winner);//capire che argomenti mettergli
+                obs.notify_winner(game, winnerNick);//capire che argomenti mettergli
             }
         }
         game.setTurn(turn);
