@@ -442,7 +442,9 @@ public class GameController implements GameControllerInterface, Serializable {
     public void goOn() {
         Turn turn = game.getTurn();
         turn.goOn();
-        if(turn.checkIfLast() && turn.getCurrentPlayerNick().equals(turn.getEndingPlayer())){
+        String currentPlayer = turn.getCurrentPlayerNick();
+        String endingPlayer = turn.getEndingPlayer();
+        if(turn.checkIfLast() && currentPlayer.equals(endingPlayer)){
             this.game.setStatus(Status.FINISHED);
             String winnerNick = calculateWinner();
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
