@@ -13,6 +13,8 @@ import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static it.polimi.ingsw.view.statusWaiting.StateWaiting.inputGetter;
+
 public class PlaceCardState extends StateActive{
 
     private GameView view;
@@ -54,19 +56,25 @@ public class PlaceCardState extends StateActive{
 
                 }while (!cardCheck.isPresent());
 
+                String input, inputParsed;
+                boolean validInput = false;
                 do {
                     ui.show_message("""
-                YOU WANNA PLAY IT FRONT OR BACK:
-                
-                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
+                SELECT AN OPTION OF PLACEMENT:
+                A - FRONT-SIDED 
+                B - BACK-SIDED
                 """);
-                    try {
-                        isFrontOrBack = scanner.nextBoolean();
-                        isBooleanValid = true;
-                    }catch (InputMismatchException e){
-                        isBooleanValid = false;
+                    input = inputGetter.getOption();
+                    inputParsed = input.toUpperCase();
+                    switch (inputParsed) {
+                        case "A":
+                            validInput = true;
+                            isFrontOrBack = true;
+                        case "B":
+                            validInput = true;
+                            isFrontOrBack = false;
                     }
-                }while (!isBooleanValid);
+                }while (!validInput);
 
                 ui.show_message("""
                 CHOOSE A COORD:
