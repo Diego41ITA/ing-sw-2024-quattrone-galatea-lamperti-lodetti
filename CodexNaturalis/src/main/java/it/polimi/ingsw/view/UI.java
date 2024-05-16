@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 
@@ -13,7 +14,7 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 public interface UI {
 
     public void show_message(String message);
-
+    public void show_initialCard(InitialCard card);
     public void show_RequestPlayerNickName();
 
     public void show_startingMenu();

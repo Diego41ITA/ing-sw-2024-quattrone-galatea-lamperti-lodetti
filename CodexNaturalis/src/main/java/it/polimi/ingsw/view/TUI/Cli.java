@@ -16,11 +16,74 @@ import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 public class Cli implements UI {
 
+    private static String mapToEmoji(HashMap<Item, Integer> resources) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<Item, Integer> entry : resources.entrySet()) {
+            Item resourceType = entry.getKey();
+            int count = entry.getValue();
+            String emoji = getResourceEmoji(resourceType);
+            stringBuilder.append(emoji).append(" x ").append(count).append(", ");
+        }
+        // Remove the trailing comma and space
+        if (!stringBuilder.isEmpty()) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+    private static String listToEmoji(List<Item> resources) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Item resourceType : resources) {
+            String emoji = getResourceEmoji(resourceType);
+            stringBuilder.append(emoji).append(", ");
+        }
+        // Remove the trailing comma and space
+        if (!stringBuilder.isEmpty()) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+
+    private static String getResourceEmoji(Item resourceType) {
+        switch (resourceType) {
+            case VEGETABLE:
+                return "\uD83C\uDF40";
+            case ANIMAL:
+                return "\uD83E\uDD8A";
+            case INSECT:
+                return "\uD83E\uDD8B";
+            case MUSHROOM:
+                return "\uD83C\uDF44";
+            case HIDDEN:
+                return "\u2753";
+            case EMPTY:
+                return "\u274C";
+            case POTION:
+                return "\uD83E\uDED9";
+            case FEATHER:
+                return "\uD83E\uDDB6";
+            case PARCHMENT:
+                return "\uD83D\uDCC4";
+            case null, default:
+                return "   ";
+        }
+    }
+
+
     @Override
     public void show_startingMenu() {
         Println("""
-                \nSTARTING MENU
+                 
+                 ▄█▀▀▀▄█    ▄                     ▄    ██                                                          \s
+                 ██▄▄  ▀  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄  ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄    ▄▄ ▄▄ ▄▄     ▄▄▄▄  ▄▄ ▄▄▄   ▄▄▄ ▄▄▄ \s
+                  ▀▀███▄   ██   ▀▀ ▄██   ██▀ ▀▀  ██    ██   ██  ██   ██ ██      ██ ██ ██  ▄█▄▄▄██  ██  ██   ██  ██ \s
+                ▄     ▀██  ██   ▄█▀ ██   ██      ██    ██   ██  ██    █▀▀       ██ ██ ██  ██       ██  ██   ██  ██ \s
+                █▀▄▄▄▄█▀   ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀ ▄██▄ ▄██▄ ██▄  ▀████▄    ▄██ ██ ██▄  ▀█▄▄▄▀ ▄██▄ ██▄  ▀█▄▄▀█▄\s
+                                                                    ▄█▄▄▄▄▀                                        \s
+                                                                                                                   \s
                 
+                                                                                                                                              
                 CHOOSE AN OPTION:
                 
                 A- JOIN RANDOM GAME
@@ -36,7 +99,10 @@ public class Cli implements UI {
     @Override
     public void show_joinRandomGame() {
         Println("""
-                \nJOINING A GAME...
+                   
+                   █ ▄▀▄ █ █▄ █ █ █▄ █ ▄▀    ▄▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀
+                 ▀▄█ ▀▄▀ █ █ ▀█ █ █ ▀█ ▀▄█   █▀█   ▀▄█ █▀█ █ ▀ █ █▄▄
+                                                                
                 """);
     }
 
@@ -162,12 +228,43 @@ public class Cli implements UI {
 
     @Override
     public void show_playerJoined(String id) {
-        Println("JOINED GAME: " + id);
+        Println("""
+                   
+                   █ ▄▀▄ █ █▄ █ ██▀ █▀▄   ▀█▀ █▄█ ██▀   ▄▀  ▄▀▄ █▄ ▄█ ██▀
+                 ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀    █  █ █ █▄▄   ▀▄█ █▀█ █ ▀ █ █▄▄
+                                                                
+                """);
+        Println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
     }
 
     @Override
     public void show_playerLeft(String playerNickName) {
         Println(playerNickName + " LEFT");
+    }
+
+    @Override
+    public void show_initialCard(InitialCard card){
+                StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(""" 
+                 
+                 
+                         
+                ▀██▀                ▄    █                    ▄                     ▄               ▀██                     ██                     ▄█▄\s
+                 ██         ▄▄▄▄  ▄██▄      ▄▄▄▄      ▄▄▄▄  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄     ▄▄▄ ▄▄▄   ██   ▄▄▄▄    ▄▄▄▄ ▄▄▄ ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄   ███\s
+                 ██       ▄█▄▄▄██  ██      ██▄ ▀     ██▄ ▀   ██   ▀▀ ▄██   ██▀ ▀▀  ██       ██▀  ██  ██  ▀▀ ▄██    ▀█▄  █   ██   ██  ██   ██ ██    ▀█▀\s
+                 ██       ██       ██      ▄ ▀█▄▄    ▄ ▀█▄▄  ██   ▄█▀ ██   ██      ██       ██    █  ██  ▄█▀ ██     ▀█▄█    ██   ██  ██    █▀▀      █ \s
+                ▄██▄▄▄▄▄█  ▀█▄▄▄▀  ▀█▄▀    █▀▄▄█▀    █▀▄▄█▀  ▀█▄▀ ▀█▄▄▀█▀ ▄██▄     ▀█▄▀     ██▄▄▄▀  ▄██▄ ▀█▄▄▀█▀     ▀█    ▄██▄ ▄██▄ ██▄  ▀████▄    ▀ \s
+                                                                                            ██                    ▄▄  █                   ▄█▄▄▄▄▀  ▀█▀\s
+                                                                                           ▀▀▀▀                     ▀▀                               \s
+                                                                          
+                            
+                """).append("\nTHIS IS YOUR INITIAL CARD\n").append(show_playableCard(card)).append("""
+                DO YOU WANNA PLAY IT FRONT OR BACK:
+                
+                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
+                """);
+        show_message(stringBuilder.toString());
+
     }
 
     @Override
@@ -183,10 +280,20 @@ public class Cli implements UI {
     @Override
     public void show_playerHand(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTHESE ARE YOUR CARDS:\n");
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """).append("""
+                 
+                 ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀▄▀ ▄▀▄ █ █ █▀▄   █▄█ ▄▀▄ █▄ █ █▀▄
+                  █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
+                                
+                """);
         for(PlayableCard c : immutableModel.getCurrentPlayer().showCard()){
             stringBuilder.append(show_playableCard(c));
         }
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
@@ -276,22 +383,22 @@ public class Cli implements UI {
         stringBuilder.append("GAME ID: ").append(card.getCardId()).append("\n");
 
         if(card.isFront()){
-            HL = safeString(card.getFront().get(Angle.HIGHLEFT));
-            HR = safeString(card.getFront().get(Angle.HIGHRIGHT));
-            DL = safeString(card.getFront().get(Angle.DOWNLEFT));
-            DR = safeString(card.getFront().get(Angle.DOWNRIGHT));
+            HL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
+            HR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
+            DL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
+            DR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
         }else{
             stringBuilder.append(listToString(card.getAListOfBackResource()));
-            HL = safeString(card.getBack().get(Angle.HIGHLEFT));
-            HR = safeString(card.getBack().get(Angle.HIGHRIGHT));
-            DL = safeString(card.getBack().get(Angle.DOWNLEFT));
-            DR = safeString(card.getBack().get(Angle.DOWNRIGHT));
+            HL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
+            HR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
+            DL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
+            DR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
         }
         stringBuilder.append("""
                 ┌──────────────────────┐
-                │""" + HL + " ".repeat(22 - HL.length() - HR.length()) + HR + "│\n" + """
+                │""" + HL + " ".repeat(18 ) + HR + "│\n" + """
                 │                      │
-                │""" + DL + " ".repeat(22 - DL.length() - DR.length()) + DR + "│\n" + """
+                │""" + DL + " ".repeat(18 ) + DR + "│\n" + """
                 └──────────────────────┘
                 """);
         return stringBuilder.toString();
@@ -334,30 +441,30 @@ public class Cli implements UI {
     @Override
     public String show_playableCard(PlayableCard card) {
         StringBuilder stringBuilder = new StringBuilder();
-        String FHL = safeString(card.getFront().get(Angle.HIGHLEFT));
-        String FHR = safeString(card.getFront().get(Angle.HIGHRIGHT));
-        String FDL = safeString(card.getFront().get(Angle.DOWNLEFT));
-        String FDR = safeString(card.getFront().get(Angle.DOWNRIGHT));
-        String BHL = safeString(card.getBack().get(Angle.HIGHLEFT));
-        String BHR = safeString(card.getBack().get(Angle.HIGHRIGHT));
-        String BDL = safeString(card.getBack().get(Angle.DOWNLEFT));
-        String BDR = safeString(card.getBack().get(Angle.DOWNRIGHT));
+        String FHL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
+        String FHR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
+        String FDL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
+        String FDR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
+        String BHL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
+        String BHR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
+        String BDL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
+        String BDR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
 
         if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
             stringBuilder.append("""
                     \nGOLD CARD
                     
                     CARD ID: """ + card.getCardId() + "\n" + """
-                    PERMANENT RESOURCE: """ + ((GoldCard) card).getBackResource().toString() + "\n" + """
+                    PERMANENT RESOURCE: """ + getResourceEmoji(((GoldCard) card).getBackResource()) + "\n" + """
                     POINTS: """ + goldPoint((GoldCard) card) + "\n" + """
-                    REQUIREMENTS: """ + "\n" + mapToString(((GoldCard) card).getNeededResources()) + """
+                    REQUIREMENTS: """ + "\n" + mapToEmoji(((GoldCard) card).getNeededResources()) + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐   ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(22 - FHL.length() - FHR.length()) + FHR + "│" + "   " + "│" + BHL + " ".repeat(22 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                      │
-                    │""" + FDL + " ".repeat(22 - FDL.length() - FDR.length()) + FDR + "│" + "   " + "│" + BDL + " ".repeat(22 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘   └──────────────────────┘
+                    ┌──────────────────────┐    ┌──────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
+                    │                      │   │                        │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
+                    └──────────────────────┘    └──────────────────────┘
                     """);
 
         } else if (card instanceof ResourceCard) {
@@ -365,46 +472,67 @@ public class Cli implements UI {
                     \nRESOURCE CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
-                    PERMANENT RESOURCE:""" + ((ResourceCard) card).getBackResource() + "\n" + """
+                    PERMANENT RESOURCE:""" + getResourceEmoji(((ResourceCard) card).getBackResource()) + "\n" + """
                     POINTS:""" + ((ResourceCard) card).getNumberOfPoints() + "\n" + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐   ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(22 - FHL.length() - FHR.length()) + FHR + "│" + "   " + "│" + BHL + " ".repeat(22 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                      │
-                    │""" + FDL + " ".repeat(22 - FDL.length() - FDR.length()) + FDR + "│" + "   " + "│" + BDL + " ".repeat(22 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘   └──────────────────────┘
+                    ┌──────────────────────┐    ┌──────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
+                    │                      │   │                        │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
+                    └──────────────────────┘    └──────────────────────┘
                     """);
         } else if (card instanceof InitialCard) {
             stringBuilder.append("""
                     \nINITIAL CARD
                     
                     CARD ID:""" + card.getCardId() + "\n" + """
-                    BACK RESOURCES:""" + listToString(((InitialCard) card).getBackResources()) + "\n" + """
+                    BACK RESOURCES:""" + listToEmoji(((InitialCard) card).getBackResources()) + "\n" + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐   ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(22 - FHL.length() - FHR.length()) + FHR + "│" + "   " + "│" + BHL + " ".repeat(22 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                      │
-                    │""" + FDL + " ".repeat(22 - FDL.length() - FDR.length()) + FDR + "│" + "   " + "│" + BDL + " ".repeat(22 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘   └──────────────────────┘
+                    ┌──────────────────────┐    ┌──────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
+                    │                      │   │                        │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
+                    └──────────────────────┘    └──────────────────────┘
                     """);
         }
+
+        stringBuilder.append("""
+                
+                ---------------------------------------------------------------------------------
+                
+                """ );
         return stringBuilder.toString();
     }
 
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTABLE OF DECKS\n").append("\nPLAYABLE CARDS\n");
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """).append("""
+                 
+                 ▄▀▀ ▄▀▄ █▄ ▄█ █▄ ▄█ ▄▀▄ █▄ █   █▀▄ █▀▄ ▄▀▄ █   █ ▄▀▄ ██▄ █   ██▀   ▄▀▀ ▄▀▄ █▀▄ █▀▄ ▄▀▀
+                 ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   █▄▀ █▀▄ █▀█ ▀▄▀▄▀ █▀█ █▄█ █▄▄ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
+                                
+                """);
         for(Card card : immutableModel.getTableOfDecks().getCards()){
             stringBuilder.append(show_playableCard((PlayableCard) card));
         }
 
-        stringBuilder.append("\nGOAL CARDS\n");
+        stringBuilder.append("""
+                 
+                 ▄▀▀ ▄▀▄ █▄ ▄█ █▄ ▄█ ▄▀▄ █▄ █   ▄▀  ▄▀▄ ▄▀▄ █     ▄▀▀ ▄▀▄ █▀▄ █▀▄ ▄▀▀
+                 ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   ▀▄█ ▀▄▀ █▀█ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
+                                
+                """);
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             stringBuilder.append(show_goalCard((GoalCard) card));
         }
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
@@ -498,76 +626,76 @@ public class Cli implements UI {
         if(checkInterface instanceof DiagonalAnimalCheck){
             return """
                                                ┌────────────┐
-                                   ┌───────────│   ANIMAL   │
-                       ┌───────────│   ANIMAL  └────────────┘
-                       │   ANIMAL  └────────────┘
+                                   ┌───────────│     🦊     │
+                       ┌───────────│     🦊    └────────────┘
+                       │     🦊    └────────────┘
                        └────────────┘
                        """;
         } else if (checkInterface instanceof DiagonalMushroomCheck){
             return """
                                                ┌────────────┐
-                                   ┌───────────│  MUSHROOM  │
-                       ┌───────────│  MUSHROOM └────────────┘
-                       │  MUSHROOM └────────────┘
+                                   ┌───────────│     🍄     │
+                       ┌───────────│     🍄    └────────────┘
+                       │     🍄    └────────────┘
                        └────────────┘
                        """;
         }else if (checkInterface instanceof DiagonalInsectCheck){
             return """
                        ┌────────────┐
-                       │   INSECT  ┌────────────┐
-                       └───────────│   INSECT  ┌────────────┐
-                                   └───────────│   INSECT   │
+                       │     🦋    ┌────────────┐
+                       └───────────│     🦋    ┌────────────┐
+                                   └───────────│     🦋     │
                                                └────────────┘
                        """;
         }else if (checkInterface instanceof DiagonalVegetableCheck){
             return """
                        ┌─────────────┐
-                       │  VEGETABLE  ┌─────────────┐
-                       └─────────────│  VEGETABLE ┌─────────────┐
-                                     └────────────│  VEGETABLE  │
+                       │     🍀      ┌─────────────┐
+                       └─────────────│     🍀     ┌─────────────┐
+                                     └────────────│     🍀      │
                                                   └─────────────┘
                        """;
         }else if (checkInterface instanceof LMushroomVegetableCheck){
             return """
                        ┌────────────┐
-                       │  MUSHROOM  │
+                       │     🍄     │
                        └────────────┘
                        ┌────────────┐
-                       │  MUSHROOM ┌─────────────┐
-                       └───────────│  VEGETABLE  │
+                       │     🍄    ┌─────────────┐
+                       └───────────│      🍀     │
                                    └─────────────┘
                        """;
         }
         else if (checkInterface instanceof ReverseLVegetableInsectCheck){
             return """
                                    ┌─────────────┐
-                                   │  VEGETABLE  │
+                                   │     🍀      │
                                    └─────────────┘
                                    ┌─────────────┐
-                       ┌────────────┐ VEGETABLE  │
-                       │   INSECT   │────────────┘
+                       ┌────────────┐    🍀      │
+                       │     🦋     │────────────┘
                        └────────────┘
                        """;
         }
         else if (checkInterface instanceof UpsideDownLAnimalMushroomCheck){
             return """
                                    ┌────────────┐
-                       ┌───────────│  MUSHROOM  │
-                       │   ANIMAL  └────────────┘
+                       ┌───────────│     🍄     │
+                       │     🦊    └────────────┘
                        └────────────┘
                        ┌────────────┐
-                       │   ANIMAL   │
+                       │     🦊     │
                        └────────────┘
                        """;
         }
         else if (checkInterface instanceof UpsideDownReverseLInsectAnimalCheck){
             return """
                        ┌────────────┐
-                       │   ANIMAL   │───────────┐
-                       └────────────┘  INSECT   │
+                       │     🦊     │───────────┐
+                       └────────────┘    🦋     │
                                    └────────────┘
                                    ┌────────────┐
-                                   │   INSECT   │
+                                   │     🦋     │
                                    └────────────┘
                        """;
         }

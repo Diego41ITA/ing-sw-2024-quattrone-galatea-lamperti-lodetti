@@ -192,16 +192,17 @@ public class GameController implements GameControllerInterface, Serializable {
     /**
      * Play a {@link PlayableCard} in a specific coordinate of the Player's {@link GameStation}
      *
-     * @param playedCard
+     * @param playedCard The PlayableCard to play.
      * @param nick       The Player's nickname.
      * @param front      A boolean flag indicating whether the card should be played facing front or not.
      * @param cord       A {@link Point} object representing the chosen coordinate.
      */
     @Override
-    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord){ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
+    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException, illegalOperationException { //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         GameStation gamestation = null;
+        Turn turn = game.getTurn();
         for (Player player : players.keySet()) {
             if (player.getNick().equals(nick)) {
                 try {
@@ -218,7 +219,6 @@ public class GameController implements GameControllerInterface, Serializable {
                     }
                     gamestation = player.getGameStation();
                     if(notify20PointReached() && !this.game.getTurn().checkIfLast()){
-                        Turn turn = this.game.getTurn();
                         turn.setIsLast(true);
                         turn.setEndingPlayer(nick);
                         this.game.setTurn(turn);
@@ -240,7 +240,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();
-                    return;
+                    throw new illegalOperationException("invalid card placement");
                 }
             }
         }
@@ -442,7 +442,7 @@ public class GameController implements GameControllerInterface, Serializable {
     public void goOn() {
         Turn turn = game.getTurn();
         turn.goOn();
-        if(turn.checkIfLast() && turn.getCurrentPlayer().getNick().equals(turn.getEndingPlayer())){
+        if(turn.checkIfLast() && turn.getCurrentPlayerNick().equals(turn.getEndingPlayer())){
             this.game.setStatus(Status.FINISHED);
             String winner = calculateWinner();
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {

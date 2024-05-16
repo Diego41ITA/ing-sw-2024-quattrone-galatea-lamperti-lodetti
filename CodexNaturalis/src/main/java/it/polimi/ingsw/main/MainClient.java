@@ -17,41 +17,76 @@ import java.util.Scanner;
 public class MainClient {
         public static void main(String[] args) {
             try {
+                int selection;
+                boolean flag = true;
                 Scanner scanner = new Scanner(System.in);
-                boolean exit;
+                System.out.println("""
+                                            
+                                            ██     ██  ███████  ██        ██████   ██████   ███    ███  ███████     ████████  ██████ \s
+                                            ██     ██  ██       ██       ██       ██    ██  ████  ████  ██             ██    ██    ██
+                                            ██  █  ██  █████    ██       ██       ██    ██  ██ ████ ██  █████          ██    ██    ██
+                                            ██ ███ ██  ██       ██       ██       ██    ██  ██  ██  ██  ██             ██    ██    ██
+                                             ███ ███   ███████  ███████   ██████   ██████   ██      ██  ███████        ██     ██████
+                                                                                                                                     \s
+                                               
+                         ██████╗  ██████╗  ██████╗  ███████╗ ██╗  ██╗    ███╗   ██╗  █████╗  ████████╗ ██╗   ██╗ ██████╗   █████╗  ██╗      ██╗ ███████╗
+                        ██╔════╝ ██╔═══██╗ ██╔══██╗ ██╔════╝ ╚██╗██╔╝    ████╗  ██║ ██╔══██╗ ╚══██╔══╝ ██║   ██║ ██╔══██╗ ██╔══██╗ ██║      ██║ ██╔════╝
+                        ██║      ██║   ██║ ██║  ██║ █████╗    ╚███╔╝     ██╔██╗ ██║ ███████║    ██║    ██║   ██║ ██████╔╝ ███████║ ██║      ██║ ███████╗
+                        ██║      ██║   ██║ ██║  ██║ ██╔══╝    ██╔██╗     ██║╚██╗██║ ██╔══██║    ██║    ██║   ██║ ██╔══██╗ ██╔══██║ ██║      ██║ ╚════██║
+                        ╚██████╗ ╚██████╔╝ ██████╔╝ ███████╗ ██╔╝ ██╗    ██║ ╚████║ ██║  ██║    ██║    ╚██████╔╝ ██║  ██║ ██║  ██║ ███████╗ ██║ ███████║
+                         ╚═════╝  ╚═════╝  ╚═════╝  ╚══════╝ ╚═╝  ╚═╝    ╚═╝  ╚═══╝ ╚═╝  ╚═╝    ╚═╝     ╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚══════╝ ╚═╝ ╚══════╝
+                                        
+                                        
+                                        
+                                        
+                                             ██████   ██████    ██████   ██    ██  ██████      ██████    █████   ██████   ███████   ██
+                                            ██        ██   ██  ██    ██  ██    ██  ██   ██     ██   ██  ██       ██   ██       ██ ████
+                                            ██   ███  ██████   ██    ██  ██    ██  ██████      ██████   ███████  ██████   ███████   ██
+                                            ██    ██  ██   ██  ██    ██  ██    ██  ██          ██            ██  ██       ██        ██
+                                             ██████   ██   ██   ██████    ██████   ██          ██        █████   ██       ███████   ██
+                                
+                         
+                        """);
+                System.out.println("Enter the desired configuration");
                 do {
-                    System.out.println("Enter the desired configuration type (rmi/socket) followed by (gui/tui):");
-                    String input = scanner.nextLine().trim();
-                    String[] config = input.split(" ");
-                    exit = true;
-                    if (config.length != 2) {
-                        System.out.println("Insufficient number of arguments");
-                        exit = false;
+                    System.out.println("""
+                        Select option:
+                        \t 1- TUI + Socket
+                        \t 2- TUI + RMI
+                        \t
+                        \t 3- GUI + Socket
+                        \t 4- GUI + RMI
+                        """);
+                    String input = scanner.nextLine();
+                    try {
+                        selection = Integer.parseInt(input);
+                        if((selection != 1 && selection != 2 && selection != 3 && selection != 4)){
+                            System.out.println("invalid configuration. Try again");
+                            flag = false;
+                        }else{flag = true;};
+                    } catch (NumberFormatException e) {
+                        selection = -1;
+                        System.out.println("Nan");
                     }
-                    if (exit) {
-                        if(config[0].equalsIgnoreCase("rmi") && config[1].equalsIgnoreCase("gui")) {
-                            System.out.println("game starting");
-                            //lancia gameflow
-                        } else if (config[0].equalsIgnoreCase("rmi") && config[1].equalsIgnoreCase("tui")) {
-                            GameFlow flow = new GameFlow(new Cli(), new InputUi());
-                            flow.setClient(new ClientRMI(flow));
-                            flow.run();
-                        } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("gui")) {
-                            System.out.println("game starting");
-                            //lancia gameflow
-                            return;
-                        } else if (config[0].equalsIgnoreCase("socket") && config[1].equalsIgnoreCase("tui")) {
-                            System.out.println("game starting");
-                            GameFlow flow = new GameFlow(new Cli(), new InputUi());
-                            flow.setClient(new ClientSocket(flow));
-                            flow.run();
-                        } else {
-                            System.out.println("Invalid configuration, try again");
-                            exit = false;
-                        }
-                    }
-                } while(!exit);
-                scanner.close();
+                } while (!flag);
+
+                if(selection == 1) {
+                    GameFlow flow = new GameFlow(new Cli(), new InputUi());
+                    flow.setClient(new ClientSocket(flow));
+                    flow.run();
+                } else if (selection == 2) {
+                    GameFlow flow = new GameFlow(new Cli(), new InputUi());
+                    flow.setClient(new ClientRMI(flow));
+                    flow.run();
+                } else if (selection == 3) {
+                    System.out.println("game starting");
+                    //lancia gameflow
+                    return;
+                } else if (selection == 4) {
+                    //
+                }
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

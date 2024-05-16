@@ -202,7 +202,11 @@ public class TestController {
         gameController.addPlayer(players.get(0));
         gameController.setColor("blue", "testPlayer");
         Point cord = new Point(1, 1);
-        gameController.playCard(resourceCard, "testPlayer", true, cord);
+        try {
+            gameController.playCard(resourceCard, "testPlayer", true, cord);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         Game game = gameController.returnGame();
         assertEquals(game.getPointTable().getPoint(players.get(0)), 1);
         ArrayList<Player> players3 = new ArrayList<>(gameController.getPlayers().keySet());

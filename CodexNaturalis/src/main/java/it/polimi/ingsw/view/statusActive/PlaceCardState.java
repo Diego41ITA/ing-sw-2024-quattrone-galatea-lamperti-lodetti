@@ -37,48 +37,53 @@ public class PlaceCardState extends StateActive{
 
         ui.show_playerHand(view);
         ui.show_gameStation(view.getMyGameStation(nickName));
-        do {
-            ui.show_message("""
+
+        boolean flag = false;
+
+        while(!flag) {
+            try {
+                do {
+                    ui.show_message("""
                     CHOOSE A CARD ID:
                     """);
-            int cardIdInput = scanner.nextInt();
+                    int cardIdInput = scanner.nextInt();
 
-            cardCheck = view.getCurrentPlayer().showCard().stream()
-                    .filter(card -> card.getCardId() == cardIdInput)
-                    .findFirst();
+                    cardCheck = view.getCurrentPlayer().showCard().stream()
+                            .filter(card -> card.getCardId() == cardIdInput)
+                            .findFirst();
 
-        }while (!cardCheck.isPresent());
+                }while (!cardCheck.isPresent());
 
-        do {
-        ui.show_message("""
+                do {
+                    ui.show_message("""
                 YOU WANNA PLAY IT FRONT OR BACK:
                 
                 ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
                 """);
-        try {
-            isFrontOrBack = scanner.nextBoolean();
-            isBooleanValid = true;
-        }catch (InputMismatchException e){
-            isBooleanValid = false;
-        }
-        }while (!isBooleanValid);
-        ui.show_message("""
+                    try {
+                        isFrontOrBack = scanner.nextBoolean();
+                        isBooleanValid = true;
+                    }catch (InputMismatchException e){
+                        isBooleanValid = false;
+                    }
+                }while (!isBooleanValid);
+
+                ui.show_message("""
                 CHOOSE A COORD:
                 
                 ENTER X COORDINATE THAN Y COORDINATE:
                 """);
 
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
-        Point coord = new Point(x, y);
-        try {
-            try {
+                int x = scanner.nextInt();
+                int y = scanner.nextInt();
+                Point coord = new Point(x, y);
                 client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
+                flag = true;
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (illegalOperationException e) {
+                flag = false;
             }
-        } catch (illegalOperationException e) {
-            //non dovrebbe arrivare qui l'exception o sbaglio? (dovrebbe esser gestita con le notify)
         }
         this.nextState();
     }

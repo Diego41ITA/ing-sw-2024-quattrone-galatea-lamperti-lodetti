@@ -2,13 +2,24 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
+import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 
-/* questa classe in base al metodo dovrà runnare la grafica su thread e bisognerà
+/* All'interno di questa classe implementerò i metodi della UI per la GUI.
+All'interno di questi metodi mi preoccuperò anche di caricare la scena attraverso un FXMLLoader.
+Userò all'interno di questi metodi i vari controllers delle scene.
+La grafica verrà runnata su thread
  */
-public class Gui implements UI {
+public class Gui extends Application implements UI {
+    @Override
+    public void start(Stage stage) throws Exception {
+
+    }
 
     @Override
     public void show_startingMenu() {
@@ -17,6 +28,11 @@ public class Gui implements UI {
 
     @Override
     public void show_message(String message) {
+
+    }
+
+    @Override
+    public void show_initialCard(InitialCard card) {
 
     }
 

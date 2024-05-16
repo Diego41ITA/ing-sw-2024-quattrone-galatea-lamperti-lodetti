@@ -112,7 +112,7 @@ public class Turn implements Serializable {
      * add all the player passed checking for homonyms.
      * @param l is a list of player.
      */
-    private void setPlayers(List<Player> l){
+    public void setPlayers(List<Player> l){
         for(Player p: l) {
             if (!this.players.stream()
                     .map(Player::getNick)
