@@ -9,6 +9,7 @@ import it.polimi.ingsw.view.UI;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class PlaceCardState extends StateActive{
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         Optional<PlayableCard> cardCheck;
-        Boolean isFrontOrBack = true;
+        boolean isFrontOrBack = true;
         boolean isBooleanValid = false;
 
         ui.show_playerHand(view);
@@ -55,25 +56,18 @@ public class PlaceCardState extends StateActive{
 
                 }while (!cardCheck.isPresent());
 
-                String input, inputParsed;
-                boolean validInput = false;
                 do {
                     ui.show_message("""
-                SELECT AN OPTION OF PLACEMENT:
-                A - FRONT SIDE 
-                B - BACK SIDE
+                YOU WANNA PLAY IT FRONT OR BACK:
+                    
+                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
                 """);
-                    input = inputGetter.getOption();
-                    inputParsed = input.toUpperCase();
-                    switch (inputParsed) {
-                        case "A":
-                            validInput = true;
-                            isFrontOrBack = true;
-                        case "B":
-                            validInput = true;
-                            isFrontOrBack = false;
-                    }
-                }while (!validInput);
+                    try {
+                        isFrontOrBack = scanner.nextBoolean();
+                        isBooleanValid = true;
+                    }catch (InputMismatchException e){
+                        isBooleanValid = false;}
+                }while (!isBooleanValid);
 
                 ui.show_message("""
                 CHOOSE A COORD:
