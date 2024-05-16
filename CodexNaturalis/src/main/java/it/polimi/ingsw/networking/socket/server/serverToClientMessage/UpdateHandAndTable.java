@@ -9,6 +9,7 @@ public class UpdateHandAndTable extends ServerNotification{
     private final GameView game;
     private final String nick;
     public UpdateHandAndTable(GameView g, String nick){
+        super(false);
         this.game = g;
         this.nick = nick;
     }

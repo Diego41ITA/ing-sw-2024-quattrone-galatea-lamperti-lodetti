@@ -1,5 +1,4 @@
 package it.polimi.ingsw.networking.socket.server;
-import it.polimi.ingsw.networking.socket.server.ClientHandlerSocket;
 import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.util.*;
@@ -12,13 +11,13 @@ import java.util.ArrayList;
  * to manage the specific client. In order to manage all the incoming requests this class should extend Thread class.
  * @author Lodetti Alessandro
  */
-public class SocketServer extends Thread {
-    private ServerSocket server;
+public class ServerS extends Thread {
+    private ServerSocket serverSocket;
     private List<ClientHandlerSocket> clients;
 
     public void startConnection(int port) throws IOException{
         try{
-            server = new ServerSocket(port);
+            serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
             this.start();
             Println("server  socket is active");
@@ -31,16 +30,22 @@ public class SocketServer extends Thread {
      * the run() methods is always active, and it accepts all the incoming requests.
      */
     public void run(){
-        while(true)//sistemare questa condizione
-        {
-            try{
-                ClientHandlerSocket newClient = new ClientHandlerSocket(server.accept());
+
+        try{
+            while(!Thread.interrupted()) {
+                ClientHandlerSocket newClient = new ClientHandlerSocket(serverSocket.accept());
                 //now we need to start that specific connection so...
                 clients.add(newClient);
                 clients.getLast().start();
-            }catch(IOException e){
-                Println("something goes wrong");
             }
+        }catch(IOException e){
+            Println("something goes wrong");
+        }
+
+        try{
+            serverSocket.close();
+        }catch(IOException e){
+            throw new RuntimeException();
         }
     }
 

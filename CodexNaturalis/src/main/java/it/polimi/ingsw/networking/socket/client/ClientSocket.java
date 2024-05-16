@@ -29,7 +29,7 @@ public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private GameObserverHandlerClient gameObserverHandler;
+    private final GameObserverHandlerClient gameObserverHandler;    //invoca i metodi di gameFlow
     private GameFlow flow;
 
     private BlockingQueue<ServerNotification> notificationQueue;
@@ -43,7 +43,6 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     private void connect(String ip, int port){
-
         boolean attempt = false;
         do{
             try{
@@ -63,7 +62,10 @@ public class ClientSocket extends Thread implements ClientAction {
         while(true){
             try{
                 ServerNotification notification = (ServerNotification) in.readObject();
-                notificationQueue.put(notification);
+                if(notification.isSynchronous())
+                    notificationQueue.put(notification);
+                else
+                    notification.execute(gameObserverHandler);
             }catch(IOException | ClassNotFoundException e){
                 PrintlnThread.Println("something went wrong :( ...");
                 throw new RuntimeException(e);
@@ -103,7 +105,6 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new CreateGameMessage(nick, maxNumberOfPlayer));
             completeForwarding();
             waitForNotification();
-            waitForNotification();
         }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
@@ -114,8 +115,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new JoinRandomMessage(nick));
             completeForwarding();
-            //waitForNotification();
-        }catch(IOException /*| InterruptedException*/ e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }
@@ -125,8 +126,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new LeaveGameMessage(nick, gameId));
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+        }catch(IOException e){
             throw new RemoteException();
         }
     }
@@ -217,12 +217,17 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new InitializeHand(nick));
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+        }catch(IOException e){
             //nothing
         }
     }
 
+    /**
+     * PER SETTARE LA PRIMA CARTA
+     * @param nick
+     * @param card
+     * @param isFront
+     */
     @Override
     public void setGameStation(String nick, InitialCard card, boolean isFront){
         try{
@@ -230,7 +235,8 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             waitForNotification();
         }catch(IOException | InterruptedException e){
-            //nothing
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
@@ -240,8 +246,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new CalculateWinner());
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+        }catch(IOException e){
             //nothing
         }
 
@@ -253,8 +258,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new StartGame());
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+        }catch(IOException e){
             //nothing
         }
     }

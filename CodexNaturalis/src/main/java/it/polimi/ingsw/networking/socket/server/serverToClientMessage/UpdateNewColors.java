@@ -17,6 +17,7 @@ public class UpdateNewColors extends ServerNotification {
     private final ArrayList<Color> freeColors;
 
     public UpdateNewColors(GameView g, ArrayList<Color> colors){
+        super(true);
         this.game = g;
         this.freeColors = colors;
     }

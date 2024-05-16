@@ -8,6 +8,7 @@ import java.io.IOException;
 public class StartGame extends ServerNotification{
     private final GameView game;
     public StartGame(GameView g){
+        super(false);
         this.game = g;
     }
 

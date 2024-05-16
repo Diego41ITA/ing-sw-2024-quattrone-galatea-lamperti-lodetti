@@ -8,6 +8,7 @@ import java.io.InterruptedIOException;
 public class GameIdNotExists extends ServerNotification{
     private final String gameId;
     public GameIdNotExists(String gameId){
+        super(true);
         this.gameId = gameId;
     }
 

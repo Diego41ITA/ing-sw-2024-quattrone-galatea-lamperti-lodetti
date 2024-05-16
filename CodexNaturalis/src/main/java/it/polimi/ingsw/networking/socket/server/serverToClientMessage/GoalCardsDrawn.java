@@ -10,6 +10,7 @@ import java.util.List;
 public class GoalCardsDrawn extends ServerNotification{
     private final ArrayList<GoalCard> goals;
     public GoalCardsDrawn(ArrayList<GoalCard> goals){
+        super(false);
         this.goals = goals;
     }
 
