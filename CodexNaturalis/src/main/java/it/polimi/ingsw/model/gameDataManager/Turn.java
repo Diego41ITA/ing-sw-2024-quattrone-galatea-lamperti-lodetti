@@ -52,6 +52,8 @@ public class Turn implements Serializable {
         this.players = new ArrayList<>();
         setPlayers(t.getPlayers());
         if(!t.getPlayers().isEmpty()) this.currentPlayer = new Player(t.getCurrentPlayer());
+        this.endingPlayerNick = t.endingPlayerNick;
+        this.isLast = t.isLast;
     }
 
     /**

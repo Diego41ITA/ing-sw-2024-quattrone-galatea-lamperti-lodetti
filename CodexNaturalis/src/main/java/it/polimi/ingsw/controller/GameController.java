@@ -212,7 +212,7 @@ public class GameController implements GameControllerInterface, Serializable {
                         addPoints2Player(nick,calculateGoldPoints((GoldCard) playedCard,nick));
 
                     }else{
-                        Set<Integer> validCardIds = new HashSet<>(Arrays.asList(8, 9, 10, 19, 20, 21, 28, 29, 30, 38, 39, 40));
+                        Set<Integer> validCardIds = new HashSet<>(Arrays.asList(8, 9, 10, 18, 19, 20, 28, 29, 30, 38, 39, 40));
                         if(front && validCardIds.contains(playedCard.getCardId())) {
                             addPoints2Player(nick, 1);
                         }

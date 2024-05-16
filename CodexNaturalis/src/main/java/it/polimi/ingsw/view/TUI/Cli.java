@@ -480,11 +480,11 @@ public class Cli implements UI {
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
-                    ┌───────────────────────┐    ┌────────────────────────┐3
+                    ┌──────────────────────┐    ┌────────────────────────┐
                     │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append(ansiCode).append("""
-                    │                       │    │                        │
+                    │                      │    │                        │
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
-                    └───────────────────────┘    └────────────────────────┘
+                    └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
 
         } else if (card instanceof ResourceCard) {

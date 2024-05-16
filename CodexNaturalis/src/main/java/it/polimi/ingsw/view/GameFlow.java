@@ -345,7 +345,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_message(stringBuilder.toString());
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
-        ui.show_message("wait for other players to choose their goal card...");
+        ui.show_message("waiting for other players...");
         client.chooseGoal(cards, cardId, nickname);
     }
 
@@ -411,7 +411,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void winner(GameView game, String winner){
         this.winner = winner;
         this.view = game;
-        notifyAll();
     }
 
     //serve la notifica per il vincitore
