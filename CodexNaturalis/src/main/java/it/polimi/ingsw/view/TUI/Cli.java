@@ -60,13 +60,13 @@ public class Cli implements UI {
             case EMPTY:
                 return "\u274C";
             case POTION:
-                return "\uD83E\uDED9";
+                return "\uD83D\uDCA7";
             case FEATHER:
                 return "\uD83E\uDDB6";
             case PARCHMENT:
                 return "\uD83D\uDCC4";
             case null, default:
-                return "   ";
+                return "  ";
         }
     }
 
@@ -195,7 +195,7 @@ public class Cli implements UI {
     @Override
     public void show_playerColors(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n");
+        stringBuilder.append("\n").append("Connected player: \n");
         for(Player p : gameView.getPlayers().keySet()){
             stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
         }
@@ -460,11 +460,11 @@ public class Cli implements UI {
                     REQUIREMENTS: """ + "\n" + mapToEmoji(((GoldCard) card).getNeededResources()) + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐    ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                        │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘    └──────────────────────┘
+                    ┌──────────────────────┐    ┌───────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    │                      │   │                         │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    └──────────────────────┘    └───────────────────────┘
                     """);
 
         } else if (card instanceof ResourceCard) {
@@ -476,11 +476,11 @@ public class Cli implements UI {
                     POINTS:""" + ((ResourceCard) card).getNumberOfPoints() + "\n" + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐    ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                        │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘    └──────────────────────┘
+                    ┌──────────────────────┐    ┌───────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    │                      │   │                         │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    └──────────────────────┘    └───────────────────────┘
                     """);
         } else if (card instanceof InitialCard) {
             stringBuilder.append("""
@@ -490,11 +490,11 @@ public class Cli implements UI {
                     BACK RESOURCES:""" + listToEmoji(((InitialCard) card).getBackResources()) + "\n" + """
                     
                     FRONT                      BACK
-                    ┌──────────────────────┐    ┌──────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 - BHL.length() - BHR.length()) + BHR + "│\n" + """
-                    │                      │   │                        │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 - BDL.length() - BDR.length()) + BDR + "│\n" + """
-                    └──────────────────────┘    └──────────────────────┘
+                    ┌──────────────────────┐    ┌───────────────────────┐
+                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    │                      │   │                         │
+                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    └──────────────────────┘    └───────────────────────┘
                     """);
         }
 
