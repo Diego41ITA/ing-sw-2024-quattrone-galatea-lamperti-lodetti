@@ -440,7 +440,7 @@ public class Cli implements UI {
     public String show_goalCard(GoalCard card) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nGOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
-        stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card));
+        stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card)).append("\n");
         return (stringBuilder.toString());
         /*
         Println("""
@@ -639,7 +639,7 @@ public class Cli implements UI {
 
     private static String goalPoint(GoalCard card){
         if (card.getGoalType() instanceof ItemCheck){
-            return mapToString(card.getListOfObjects());
+            return mapToEmoji(card.getListOfObjects());
         } else {
             return drawGoalRequirement(card.getGoalType());
         }
