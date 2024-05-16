@@ -517,9 +517,9 @@ public class Cli implements UI {
                     FRONT                      BACK
                     """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌────────────────────────┐
-                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append(ansiCode).append("""
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append(" │").append(BHL).append(" ".repeat(19)).append(BHR).append("│\n").append(ansiCode).append("""
                     │                      │    │                        │
-                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
 
@@ -534,9 +534,9 @@ public class Cli implements UI {
                     FRONT                      BACK
                     """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌────────────────────────┐
-                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append(" │").append(BHL).append(" ".repeat(19)).append(BHR).append("│\n").append("""
                     │                      │    │                        │
-                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
         } else if (card instanceof InitialCard) {
@@ -549,9 +549,9 @@ public class Cli implements UI {
                     FRONT                      BACK
                     """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌────────────────────────┐
-                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append(" │").append(BHL).append(" ".repeat(19)).append(BHR).append("│\n").append("""
                     │                      │    │                        │
-                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
         }

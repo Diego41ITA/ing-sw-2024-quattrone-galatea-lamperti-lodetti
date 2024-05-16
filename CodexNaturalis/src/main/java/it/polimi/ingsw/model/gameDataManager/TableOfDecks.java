@@ -298,17 +298,18 @@ public class TableOfDecks implements Serializable {
         DeckReader<InitialCard> initialCardReader = new DeckReader<>(InitialCard.class);
         DeckReader<GoalCard> goalCardReader = new DeckReader<>(GoalCard.class);
 
-        /*
+
         this.deckResource = resourceCardReader.readDeckFromJSON(TableOfDecks.class.getClassLoader().getResource("JsonCards/resourceCard.json").getPath());
         this.deckStart = initialCardReader.readDeckFromJSON(TableOfDecks.class.getClassLoader().getResource("JsonCards/initialCard.json").getPath());
         this.deckGold = goldCardReader.readDeckFromJSON(TableOfDecks.class.getClassLoader().getResource("JsonCards/goldCard.json").getPath());
         this.deckGoal = goalCardReader.readDeckFromJSON(TableOfDecks.class.getClassLoader().getResource("JsonCards/goalCard.json").getPath());
 
-         */
+        /*
         this.deckResource = resourceCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\resourceCard.json");
         this.deckStart = initialCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\initialCard.json");
         this.deckGold = goldCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\goldCard.json");
         this.deckGoal = goalCardReader.readDeckFromJSON("C:\\Users\\Utente\\Desktop\\scuola\\Università\\Lezioni\\Anno 3\\ingegneria del software\\Programmi\\ing-sw-2024-quattrone-galatea-lamperti-lodetti\\CodexNaturalis\\src\\main\\resources\\JsonCards\\goalCard.json");
+        */
 
         shuffle();
 

@@ -411,6 +411,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void winner(GameView game, String winner){
         this.winner = winner;
         this.view = game;
+        synchronized (lock){
+            notifyAll();
+        }
     }
 
     //serve la notifica per il vincitore

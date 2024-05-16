@@ -66,7 +66,6 @@ public class MainClient {
                         }else{flag = true;};
                     } catch (NumberFormatException e) {
                         selection = -1;
-                        System.out.println("Nan");
                     }
                 } while (!flag);
 
