@@ -9,7 +9,6 @@ import it.polimi.ingsw.view.UI;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -61,8 +60,8 @@ public class PlaceCardState extends StateActive{
                 do {
                     ui.show_message("""
                 SELECT AN OPTION OF PLACEMENT:
-                A - FRONT-SIDED 
-                B - BACK-SIDED
+                A - FRONT SIDE 
+                B - BACK SIDE
                 """);
                     input = inputGetter.getOption();
                     inputParsed = input.toUpperCase();
