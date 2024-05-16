@@ -44,6 +44,22 @@ public class Cli implements UI {
         return stringBuilder.toString();
     }
 
+    public static String getAnsiCode(TypeOfCard type) {
+        switch (type) {
+            case ANIMAL:
+                return "\u001B[36m"; // Light Blue
+            case VEGETABLE:
+                return "\u001B[32m"; // Green
+            case MUSHROOM:
+                return "\u001B[31m"; // Red
+            case INSECT:
+                return "\u001B[35m"; // Purple
+            case STARTING:
+                return "\u001B[33m"; // Yellow
+            default:
+                return "\u001B[0m"; // Default to reset color
+        }
+    }
 
     private static String getResourceEmoji(Item resourceType) {
         switch (resourceType) {
@@ -62,7 +78,7 @@ public class Cli implements UI {
             case POTION:
                 return "\uD83D\uDCA7";
             case FEATHER:
-                return "\uD83E\uDDB6";
+                return "\uD83E\uDEB6";
             case PARCHMENT:
                 return "\uD83D\uDCC4";
             case null, default:
@@ -382,6 +398,8 @@ public class Cli implements UI {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("GAME ID: ").append(card.getCardId()).append("\n");
 
+        String ansiCode = getAnsiCode(card.getType());
+
         if(card.isFront()){
             HL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
             HR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
@@ -394,13 +412,13 @@ public class Cli implements UI {
             DL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
             DR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
         }
-        stringBuilder.append("""
+        stringBuilder.append(ansiCode).append("""
                 ┌──────────────────────┐
-                │""" + HL + " ".repeat(18 ) + HR + "│\n" + """
+                │""").append(HL).append(" ".repeat(18)).append(HR).append("│\n").append("""
                 │                      │
-                │""" + DL + " ".repeat(18 ) + DR + "│\n" + """
+                │""").append(DL).append(" ".repeat(18)).append(DR).append("│\n").append("""
                 └──────────────────────┘
-                """);
+                """).append("\u001B[0m");
         return stringBuilder.toString();
     }
 
@@ -449,53 +467,58 @@ public class Cli implements UI {
         String BHR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
         String BDL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
         String BDR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
+        String ansiCode = getAnsiCode(card.getType());
 
         if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
             stringBuilder.append("""
                     \nGOLD CARD
-                    
-                    CARD ID: """ + card.getCardId() + "\n" + """
-                    PERMANENT RESOURCE: """ + getResourceEmoji(((GoldCard) card).getBackResource()) + "\n" + """
-                    POINTS: """ + goldPoint((GoldCard) card) + "\n" + """
-                    REQUIREMENTS: """ + "\n" + mapToEmoji(((GoldCard) card).getNeededResources()) + """
-                    
+                                        
+                    CARD ID: """).append(card.getCardId()).append("\n").append("""
+                    PERMANENT RESOURCE: """).append(getResourceEmoji(((GoldCard) card).getBackResource())).append("\n").append("""
+                    POINTS: """).append(goldPoint((GoldCard) card)).append("\n").append("""
+                    REQUIREMENTS: """).append("\n").append(mapToEmoji(((GoldCard) card).getNeededResources())).append("""
+                                        
                     FRONT                      BACK
+                    """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌───────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    """).append("""
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append(ansiCode).append("""
                     │                      │   │                         │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └───────────────────────┘
-                    """);
+                    """).append("\u001B[0m");
 
         } else if (card instanceof ResourceCard) {
             stringBuilder.append("""
                     \nRESOURCE CARD
-                    
-                    CARD ID:""" + card.getCardId() + "\n" + """
-                    PERMANENT RESOURCE:""" + getResourceEmoji(((ResourceCard) card).getBackResource()) + "\n" + """
-                    POINTS:""" + ((ResourceCard) card).getNumberOfPoints() + "\n" + """
-                    
+                                        
+                    CARD ID:""").append(card.getCardId()).append("\n").append("""
+                    PERMANENT RESOURCE:""").append(getResourceEmoji(((ResourceCard) card).getBackResource())).append("\n").append("""
+                    POINTS:""").append(((ResourceCard) card).getNumberOfPoints()).append("\n").append("""
+                                        
                     FRONT                      BACK
+                    """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌───────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
                     │                      │   │                         │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └───────────────────────┘
-                    """);
+                    """).append("\u001B[0m");
         } else if (card instanceof InitialCard) {
             stringBuilder.append("""
                     \nINITIAL CARD
-                    
-                    CARD ID:""" + card.getCardId() + "\n" + """
-                    BACK RESOURCES:""" + listToEmoji(((InitialCard) card).getBackResources()) + "\n" + """
-                    
+                                        
+                    CARD ID:""").append(card.getCardId()).append("\n").append("""
+                    BACK RESOURCES:""").append(listToEmoji(((InitialCard) card).getBackResources())).append("\n").append("""
+                                        
                     FRONT                      BACK
+                    """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌───────────────────────┐
-                    │""" + FHL + " ".repeat(18 ) + FHR + "│" + "   " + "│" + BHL + " ".repeat(20 ) + BHR + "│\n" + """
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
                     │                      │   │                         │
-                    │""" + FDL + " ".repeat(18 ) + FDR + "│" + "   " + "│" + BDL + " ".repeat(20 ) + BDR + "│\n" + """
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └───────────────────────┘
-                    """);
+                    """).append("\u001B[0m");
         }
 
         stringBuilder.append("""
