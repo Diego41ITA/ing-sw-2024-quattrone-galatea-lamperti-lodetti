@@ -274,7 +274,7 @@ public class Cli implements UI {
 
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-            Println(immutableModel.getCurrentPlayer().getNick() + " IS YOUR TURN");
+            Println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
     }
 
     @Override

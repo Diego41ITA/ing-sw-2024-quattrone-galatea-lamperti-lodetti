@@ -345,8 +345,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_message(stringBuilder.toString());
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
-        client.chooseGoal(cards, cardId, nickname);
         ui.show_message("wait for other players to choose their goal card...");
+        client.chooseGoal(cards, cardId, nickname);
     }
 
     @Override
