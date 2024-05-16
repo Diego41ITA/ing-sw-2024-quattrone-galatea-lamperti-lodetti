@@ -314,55 +314,91 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_gameStation(GameStation gameStation){
-        Map<Point, PlayableCard> playedCards = gameStation.getPlayedCards();
-
-        int spaces;
-
-        int maxRow = (findMaxValue(playedCards.keySet(), "x") +1) *2 +1;
-        int maxColumn = (findMaxValue(playedCards.keySet(), "y") +1) *2 +1;
+    public void show_gameStation(GameView view){
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("GAME STATION\n");
-        stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+        stringBuilder.append("GAME STATION\n\n");
 
-        if(maxRow == 3 && maxColumn==3){
-            for(int row = 1; row <= maxRow; row++){
-                stringBuilder.append("|");
-                for(int column = 1; column <= maxColumn; column++){
-                    String value = determineValue(gameStation, new Point(column - maxColumn + 1, maxRow - row - 1));
-                    spaces = Math.round(2 - value.length()/2);
-                    stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
-                    if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
-                    stringBuilder.append("|");
-                }
-                stringBuilder.append("\n");
-                stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
+        HashMap<String, Point> gameDimension = new HashMap<>();
+
+        int maxRow = 0;
+
+        for(Player p : view.getPlayers().keySet()){
+            Map<Point, PlayableCard> playedCards = p.getGameStation().getPlayedCards();
+
+            int row = (findMaxValue(playedCards.keySet(), "x") +1) *2 +1;
+            int column = (findMaxValue(playedCards.keySet(), "y") +1) *2 +1;
+
+            if(row > maxRow){
+                maxRow = row;
             }
-        }else{
-            for(int row = 1; row <= maxRow; row++){
-                stringBuilder.append("|");
-                for(int column = 1; column <= maxColumn; column++){
-                    String value = determineValue(gameStation, new Point(column - maxColumn + 2, maxRow - row - 2));
-                    spaces = Math.round(2 - value.length()/2);
-                    stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
-                    if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
-                    stringBuilder.append("|");
-                }
-                stringBuilder.append("\n");
-                stringBuilder.append("_".repeat(maxColumn*6 +1)).append("\n");
-            }
+
+            gameDimension.put(p.getNick(), new Point(row, column));
+
+            stringBuilder.append(p.getNick()).append(" ".repeat((gameDimension.get(p.getNick()).y*6+1)-p.getNick().length() + 3)); //lascio 3 spazi tra una GM e quella successiva
+
         }
+        maxRow = maxRow + 1;
 
         stringBuilder.append("\n");
 
+        for(String nick : gameDimension.keySet()){
+
+            stringBuilder.append("_".repeat(gameDimension.get(nick).y*6 +1)).append(" ".repeat(3));
+
+        }
+        stringBuilder.append("\n");
+
+        for(int row = 1; row <= maxRow; row++){
+            for(Player p : view.getPlayers().keySet()){
+                if(gameDimension.get(p.getNick()).x + 1 == row) {
+                    stringBuilder.append("_".repeat(gameDimension.get(p.getNick()).y*6 +1));
+                } else if (gameDimension.get(p.getNick()).x < row){
+                    stringBuilder.append(" ".repeat(gameDimension.get(p.getNick()).y * 6 + 1));
+                } else if(gameDimension.get(p.getNick()).x == 3 && gameDimension.get(p.getNick()).y==3){
+                    int spaces;
+
+                    stringBuilder.append("|");
+
+                    for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
+                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 1, gameDimension.get(p.getNick()).x - row - 1));
+                        spaces = Math.round(2 - value.length()/2);
+                        stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                        if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+                        stringBuilder.append("|");
+                    }
+
+                }else{
+
+
+                    int spaces;
+
+                    stringBuilder.append("|");
+
+                    for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
+                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 2, gameDimension.get(p.getNick()).x - row - 2));
+                        spaces = Math.round(2 - value.length()/2);
+                        stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                        if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
+                        stringBuilder.append("|");
+                    }
+                }
+                stringBuilder.append(" ".repeat(3));
+            }
+            stringBuilder.append("\n");
+        }
+
+        /*
         for(PlayableCard card: playedCards.values()){
             stringBuilder.append(cardDraw(card));
         }
         stringBuilder.append("\n");
 
+         */
+
         Println(stringBuilder.toString());
     }
+
 
     private static int findMaxValue(Set<Point> set, String coord) {
         if(coord.equals("x")) {

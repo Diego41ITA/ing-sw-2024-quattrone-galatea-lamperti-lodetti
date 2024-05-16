@@ -36,7 +36,7 @@ public class PlaceCardState extends StateActive{
         boolean isBooleanValid = false;
 
         ui.show_playerHand(view);
-        ui.show_gameStation(view.getMyGameStation(nickName));
+        ui.show_gameStation(view);
 
         boolean flag = false;
 
