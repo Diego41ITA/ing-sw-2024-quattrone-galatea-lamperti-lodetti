@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <tabs>
+        <Tab text="YourGameStation">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Pane layoutX="50.0" layoutY="30.0" prefHeight="938.0" prefWidth="1842.0">
+                            <children>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="SecondPlaterGamestation">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="50.0" layoutY="30.0" prefHeight="938.0" prefWidth="1842.0" />
+               </children></AnchorPane>
+            </content>
+        </Tab>
+      <Tab text="YourHand">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="519.0" layoutY="138.0" prefHeight="606.0" prefWidth="796.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="298.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="PointTable">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="617.0" layoutY="255.0" prefHeight="636.0" prefWidth="591.0" />
+                   <ImageView fx:id="imageView" fitHeight="469.0" fitWidth="512.0" layoutX="328.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@images/plateau.png" />
+                       </image>
+                   </ImageView>
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="372.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="427.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="483.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="509.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="456.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="402.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="335.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="509.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="456.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="402.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="341.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="509.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="446.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="402.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="341.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="509.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="28.0" fitWidth="37.0" layoutX="456.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="391.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="341.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="509.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="427.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="341.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="341.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="354.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="373.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="427.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="483.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="509.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="509.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="24.0" fitWidth="37.0" layoutX="427.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    </tabs>
+</TabPane>
