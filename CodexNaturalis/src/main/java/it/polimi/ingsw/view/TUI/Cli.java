@@ -238,7 +238,7 @@ public class Cli implements UI {
     @Override
     public void show_RequestNumberOfPlayers() {
         Println("""
-                \nENTER A NUMBER OF PLAYERS:
+                \nENTER MAX NUMBER OF PLAYERS. IT NEEDS TO BE >=2 AND <=4
                 """);
     }
 
@@ -549,12 +549,11 @@ public class Cli implements UI {
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
-                    ┌──────────────────────┐    ┌───────────────────────┐
-                    """).append("""
+                    ┌───────────────────────┐    ┌────────────────────────┐3
                     │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append(ansiCode).append("""
-                    │                      │   │                         │
+                    │                       │    │                        │
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
-                    └──────────────────────┘    └───────────────────────┘
+                    └───────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
 
         } else if (card instanceof ResourceCard) {
@@ -567,11 +566,11 @@ public class Cli implements UI {
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
-                    ┌──────────────────────┐    ┌───────────────────────┐
+                    ┌──────────────────────┐    ┌────────────────────────┐
                     │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
-                    │                      │   │                         │
+                    │                      │    │                        │
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
-                    └──────────────────────┘    └───────────────────────┘
+                    └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
         } else if (card instanceof InitialCard) {
             stringBuilder.append("""
@@ -582,11 +581,11 @@ public class Cli implements UI {
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
-                    ┌──────────────────────┐    ┌───────────────────────┐
+                    ┌──────────────────────┐    ┌────────────────────────┐
                     │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append("│").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
-                    │                      │   │                         │
+                    │                      │    │                        │
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append("│").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
-                    └──────────────────────┘    └───────────────────────┘
+                    └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
         }
 
@@ -631,7 +630,12 @@ public class Cli implements UI {
     @Override
     public void show_lastTurn() {
         Println("""
-                LAST TURN!!!
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                
+                 ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀█▀ █▄█ ██▀   █   ▄▀▄ ▄▀▀ ▀█▀   ▀█▀ █ █ █▀▄ █▄ █   █
+                  █  █ █ █ ▄██   █ ▄██    █  █ █ █▄▄   █▄▄ █▀█ ▄██  █     █  ▀▄█ █▀▄ █ ▀█   ▄
+                                
+                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
                 """);
     }
 
@@ -653,9 +657,16 @@ public class Cli implements UI {
         }
 
         Println("""
-                RANKING
                 
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                 
+                 █▀▄ ▄▀▄ █▄ █ █▄▀ █ █▄ █ ▄▀\s
+                 █▀▄ █▀█ █ ▀█ █ █ █ █ ▀█ ▀▄█
+                
+                                
                 """ + stringBuilder + """
+                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+                
                 """);
     }
 
