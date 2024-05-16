@@ -8,6 +8,7 @@ import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.view.GameFlow;
 
+import java.util.concurrent.Semaphore;
 import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -29,6 +30,10 @@ public class GameController implements GameControllerInterface, Serializable {
 
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
+
+    //private String clientNick = "invalidName";
+
+    private final Semaphore semaphore = new Semaphore(0);
 
     /**
      * Constructor of the class. It's called by {@link MainController} when creating a new game
@@ -93,7 +98,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * the beginning.
      */
     //prova
-    public void start_Game() throws RemoteException{
+    public void start_Game() throws RemoteException {
         this.game.setStatus(Status.ACTIVE);
 
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
@@ -101,9 +106,27 @@ public class GameController implements GameControllerInterface, Serializable {
             obs.notify_startGame(game);
         }
         this.initializeTable();
-        for (Player p : game.getPlayers().keySet()){
+        for (Player p : game.getPlayers().keySet()) {
             this.initializePlayers(p.getNick());
+
+            //va fermato
+            try {
+                semaphore.acquire();
+            } catch (InterruptedException e) {
+                throw new RemoteException();
+            }
+            //while(!clientNick.equals(p.getNick())){}
+            //this.clientNick = "invalidName";
             this.getPossibleGoals(p.getNick());
+
+            //lo si ferma di nuovo
+            try {
+                semaphore.acquire();
+            } catch (InterruptedException e) {
+                throw new RemoteException();
+            }
+            //while(!clientNick.equals(p.getNick())){}
+
             this.initializeHandPlayer(p.getNick());
         }
 
@@ -115,7 +138,6 @@ public class GameController implements GameControllerInterface, Serializable {
 
         observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
     }
-
 
     /**
      * Set the Player's color
@@ -161,7 +183,8 @@ public class GameController implements GameControllerInterface, Serializable {
                 game.setPointTable(pointTable);
                 for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                     HandleObserver obs = entry.getValue();
-                    obs.notify_color(game);
+                    if(entry.getKey().equals(name))
+                        obs.notify_color(game);
                 }
         }
     }
@@ -204,18 +227,22 @@ public class GameController implements GameControllerInterface, Serializable {
                             obs.notify_20PointsReached(game);
                         }
                     }
+                    //ora notifico che la carta è stata pescata
+                    game.setPlayers(players);
+
+                    for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                        //String chiave = entry.getKey();
+                        HandleObserver obs = entry.getValue();
+                        if(entry.getKey().equals(nick))
+                            obs.notify_PlayCard(game,gamestation);
+                    }
+                    break;
+
                 }catch(illegalOperationException e) {
                     observers.get(nick).notify_invalidCardPlacement();
                     throw new illegalOperationException("invalid card placement");
                 }
             }
-        }
-        game.setPlayers(players);
-
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            //String chiave = entry.getKey();
-            HandleObserver obs = entry.getValue();
-            obs.notify_PlayCard(game,gamestation);
         }
     }
 
@@ -268,7 +295,8 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
-            obs.notify_DrawCard(game);
+            if(entry.getKey().equals(nick))
+                obs.notify_DrawCard(game);
         }
     }
 
@@ -291,7 +319,8 @@ public class GameController implements GameControllerInterface, Serializable {
         game.setPlayers(players);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
-            obs.notify_DrawCard(game);
+            if(entry.getKey().equals(nick))
+                obs.notify_DrawCard(game);
         }
     }
 
@@ -513,6 +542,9 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         game.setPlayers(players);
         observers.get(nick).notify_chooseGoal(game, card);
+
+        semaphore.release();
+        //clientNick = nick;
     }
 
     /**
@@ -555,7 +587,7 @@ public class GameController implements GameControllerInterface, Serializable {
         ArrayList<GoalCard> goals = new ArrayList<>();
         TableOfDecks table = game.getTableOfDecks();
         goals.add(table.getDeckGoal().getFirst());
-            this.game.setTableOfDecks(table);
+        this.game.setTableOfDecks(table);
         goals.add(table.getDeckGoal().getFirst());
         this.game.setTableOfDecks(table);
         HandleObserver observer = observers.get(nickname);
@@ -645,10 +677,15 @@ public class GameController implements GameControllerInterface, Serializable {
                 this.game.setTableOfDecks(table);
             }
         }
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+        /*for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver allObs = entry.getValue();
-            allObs.notify_updateGameStations(game);
-        }
+            if(entry.getKey().equals(nick))
+                allObs.notify_updateGameStations(game);
+        }*/
+        observers.get(nick).notify_updateGameStations(game);
+        //rilascia un semaforo
+        semaphore.release();
+        //clientNick = nick;
     }
 
     public void setGameStatus(Status status){

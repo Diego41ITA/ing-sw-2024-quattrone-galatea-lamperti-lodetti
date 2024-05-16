@@ -48,35 +48,41 @@ public class ClientHandlerSocket extends Thread{
         //devo lanciare un thread che processi i messaggi letti. In modo che questo thread sia sempre all'ascolto.
         Thread thread = new Thread(this::manageRequests);
         thread.start();
-        while(true){
-            try{
-                Message incomingMessage = (Message) input.readObject();
+
+        try{
+            Message incomingMessage;
+            while(!this.isInterrupted()) {
+                incomingMessage = (Message) input.readObject();
                 this.queue.add(incomingMessage);
-            }catch(IOException | ClassNotFoundException e){
-                Println("No communication with the client");
             }
+        }catch(IOException | ClassNotFoundException e){
+            Println("No communication with the client");
         }
     }
 
     public void manageRequests(){
-        while(true){
-            try{
-                Message msg = this.queue.take();
+
+        try{
+            Message msg;
+
+            while(!this.isInterrupted()) {
+
+                msg = this.queue.take();
 
                 //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
-                if(msg.isForMainController()){
+                if (msg.isForMainController()) {
                     game = msg.execute(notify, MainController.getMainController());
-                    if(game != null)
+                    if (game != null)
                         nick = msg.getNickname();
-                }else {
+                } else {
                     msg.execute(game);
                 }
-            }catch(InterruptedException e){
-                Println("no action");
-
-            } catch (GameEndedException | RemoteException e) {
-                Println("client disconnected");
             }
+        }catch(InterruptedException e){
+            Println("no action");
+
+        } catch (GameEndedException | RemoteException e) {
+            Println("client disconnected");
         }
     }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 public class UpdateGameStations extends ServerNotification{
     private final GameView game;
     public UpdateGameStations(GameView g){
+        super(true);
         this.game = g;
     }
 

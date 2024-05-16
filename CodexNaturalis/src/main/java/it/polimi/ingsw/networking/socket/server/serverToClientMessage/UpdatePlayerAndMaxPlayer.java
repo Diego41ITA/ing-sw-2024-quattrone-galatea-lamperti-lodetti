@@ -8,6 +8,7 @@ import java.io.IOException;
 public class UpdatePlayerAndMaxPlayer extends ServerNotification{
     private final GameView game;
     public UpdatePlayerAndMaxPlayer(GameView g){
+        super(false);       //viene messo in create game il max number of player.
         this.game = g;
     }
 

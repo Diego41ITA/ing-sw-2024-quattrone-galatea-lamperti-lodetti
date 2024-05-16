@@ -159,7 +159,9 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
             out.writeObject(new UpdateGameStations(game));
             completeForwarding();
         }catch(IOException e){
-            //does something
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
         }
     }
     @Override
@@ -248,7 +250,11 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
 
     @Override
     public void winner(GameView view, String winner){
-        //does nothing for now;
+        try{
+            out.writeObject(new Winner(view, winner));
+        }catch(IOException e){
+            //does something
+        }
     }
 
     @Override

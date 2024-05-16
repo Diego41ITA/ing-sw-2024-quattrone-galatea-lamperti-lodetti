@@ -8,6 +8,7 @@ public class GenericError extends ServerNotification{
     private final String message;
     private final String gameId;
     public GenericError(String message, String gameId){
+        super(true);
         this.message = message;
         this.gameId = gameId;
     }

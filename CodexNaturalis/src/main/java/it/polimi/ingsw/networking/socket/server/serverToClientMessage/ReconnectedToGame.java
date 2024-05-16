@@ -7,6 +7,7 @@ import java.io.IOException;
 public class ReconnectedToGame extends ServerNotification{
     private final String gameId;
     public ReconnectedToGame(String gameId){
+        super(true);
         this.gameId = gameId;
     }
     @Override

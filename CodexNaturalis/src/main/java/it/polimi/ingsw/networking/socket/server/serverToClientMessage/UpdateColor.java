@@ -8,6 +8,7 @@ import java.io.IOException;
 public class UpdateColor extends ServerNotification{
     private final GameView game;
     public UpdateColor(GameView g){
+        super(true);
         this.game = g;
     }
 

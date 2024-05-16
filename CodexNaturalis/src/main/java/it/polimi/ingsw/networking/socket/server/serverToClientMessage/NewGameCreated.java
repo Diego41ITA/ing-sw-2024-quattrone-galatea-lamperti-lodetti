@@ -7,6 +7,7 @@ import java.io.IOException;
 public class NewGameCreated extends ServerNotification{
     private final String gameId;
     public NewGameCreated(String gameId){
+        super(true);
         this.gameId = gameId;
     }
     @Override

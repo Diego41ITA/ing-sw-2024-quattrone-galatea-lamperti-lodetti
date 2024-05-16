@@ -11,6 +11,7 @@ public class UpdateGoalPlayer extends ServerNotification{
     private GoalCard card = null;
 
     public UpdateGoalPlayer(GameView g, GoalCard card){
+        super(true);
         this.game = g;
         this.card = card;
     }

@@ -30,6 +30,8 @@ import java.util.Scanner;
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     public boolean waitingForNewPlayers = false;
+    public boolean notStarted;
+    public boolean myTurn;
     private final Object lock = new Object();
     private ClientAction client;
     private String nickname;
@@ -53,6 +55,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         this.ui = ui;
         this.input = input;
         inGame = false;
+        notStarted = true;
+        myTurn = false;
     }
 
 
@@ -69,34 +73,37 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             while (stay) {
                 if (view == null || view.getStatus() == Status.WAITING) {
 
-                    state1.execute();
+                    if(notStarted)
+                        state1.execute();
 
                     //se la view ha i giocatori giusti la partita può iniziare
                     if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
                         try {
                             client.startGame();
+                            notStarted = false;
+
                         } catch (IOException e) { // da sistemare non dovrebbe riceverla
                             throw new RuntimeException(e);
                         }
                     }
 
                         //se invece i giocatori non sono ancora del numero corretto si aspetta
-                        while (waitingForNewPlayers) {
-
-                                try {
-                                    synchronized (lock) {
-                                        lock.wait();
-                                    }
-                                } catch (InterruptedException e) {
-                                    Println("this game is aborted");
-                                }
+                    while (waitingForNewPlayers) {
+                        try {
+                            synchronized (lock) {
+                                lock.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            Println("this game is aborted");
                         }
+                    }
                 } else if (view.getStatus() == Status.ACTIVE) {
                     if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
-                        if (view.getCurrentPlayer().getNick().equals(nickname)) { //da inserire gestione caso che non è il tuo turno
+                        if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) { //da inserire gestione caso che non è il tuo turno
                             state2 = new PlaceCardState(this);
                             state2.setView(view);
                             state2.execute();
+                            myTurn = false;
                         }
                         while(!view.getCurrentPlayer().getNick().equals(nickname)){
                             Println("it's not your turn. Wait");
@@ -160,6 +167,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         }
     }
 
+    //---------------------------------------------------------------------
+    //Getter, setter and initializer methods
+    //---------------------------------------------------------------------
     public void setClient(ClientAction client){
         this.client = client;
     }
@@ -208,6 +218,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void setGameView(GameView game){
         this.view = game;
     }
+
+    //----------------------------------------------------------------
+    //Notification from the server
+    //----------------------------------------------------------------
 
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
@@ -262,7 +276,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_gameStarting(game.getId());
         waitingForNewPlayers = false;
         synchronized (lock){
-            lock.notify();
+            lock.notifyAll();
         }
     }
 
@@ -331,6 +345,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         ui.show_message(stringBuilder.toString());
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
+        ui.show_message("wait for other players to choose their goal card...");
         client.chooseGoal(cards, cardId, nickname);
     }
 
@@ -356,6 +371,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             lock.notifyAll();
         }
         ui.show_isYourTurn(game);
+        if(game.getCurrentPlayer().getNick().equals(nickname))
+            myTurn = true;
     }
 
     @Override
@@ -367,6 +384,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
+        ui.show_message("wait for other players to initialize their GameStation.");
         //ui.show_gameStation(game.getMyGameStation(game.getCurrentPlayer().getNick())); //da sistemare (fare in modo che mostri gamestation con nome)
     }
 
