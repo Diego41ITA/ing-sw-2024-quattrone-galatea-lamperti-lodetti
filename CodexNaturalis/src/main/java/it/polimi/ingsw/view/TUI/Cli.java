@@ -297,18 +297,92 @@ public class Cli implements UI {
     public void show_playerHand(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("""
-                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """).append("""
                  
                  ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀▄▀ ▄▀▄ █ █ █▀▄   █▄█ ▄▀▄ █▄ █ █▀▄
                   █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
                                 
                 """);
-        for(PlayableCard c : immutableModel.getCurrentPlayer().showCard()){
-            stringBuilder.append(show_playableCard(c));
+//57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            if (card instanceof GoldCard) {
+                stringBuilder.append("GOLD CARD").append(" ".repeat(46));
+            } else if (card instanceof ResourceCard) {
+                stringBuilder.append("RESOURCE CARD").append(" ".repeat(42));
+            }
         }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            stringBuilder.append("CARD ID: ").append(card.getCardId()).append(" ".repeat(46 - String.valueOf(card.getCardId()).length()));
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            if (card instanceof GoldCard) {
+                stringBuilder.append("PERMANENT RESOURCE: ").append(getResourceEmoji(((GoldCard) card).getBackResource())).append(" ".repeat(33));
+            } else if (card instanceof ResourceCard) {
+                stringBuilder.append("PERMANENT RESOURCE: ").append(getResourceEmoji(((ResourceCard) card).getBackResource())).append(" ".repeat(33));
+            }
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            if (card instanceof GoldCard) {
+                stringBuilder.append("POINTS: ").append(goldPoint((GoldCard) card)).append(" ".repeat(46));
+                if(((GoldCard) card).getGoldType().equals(GoldType.ANGLE)){
+                    stringBuilder.setLength(stringBuilder.length() - 23);
+                }else if(((GoldCard) card).getGoldType().equals(GoldType.ITEM)){
+                    stringBuilder.setLength(stringBuilder.length() - 10 - ((GoldCard) card).getBox().toString().length());
+                }
+            } else if (card instanceof ResourceCard) {
+                stringBuilder.append("POINTS: ").append(((ResourceCard) card).getNumberOfPoints()).append(" ".repeat(46));
+            }
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            if (card instanceof GoldCard) {
+                int spaces = ((GoldCard) card).getNeededResources().size();
+                stringBuilder.append("REQUIREMENTS: ").append(mapToEmoji(((GoldCard) card).getNeededResources())).append(" ".repeat(43 - spaces*5 - (spaces-1)*2));
+            } else if (card instanceof ResourceCard) {
+                stringBuilder.append(" ".repeat(57));
+            }
+        }
+        stringBuilder.append("\n");
+
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            stringBuilder.append("FRONT").append(" ".repeat(23)).append("BACK").append(" ".repeat(23));
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            stringBuilder.append("┌──────────────────────┐    ┌──────────────────────┐").append("   ");
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            String FHL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
+            String FHR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
+            String BHL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
+            String BHR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
+            stringBuilder.append("│").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("    ").append("│").append(BHL).append(" ".repeat(18)).append(BHR).append("│").append("   ");
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            stringBuilder.append("│                      │    │                      │").append("   ");
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            String BDL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
+            String BDR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
+            String FDL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
+            String FDR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
+
+            stringBuilder.append("│").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("    ").append("│").append(BDL).append(" ".repeat(18)).append(BDR).append("│").append("   ");
+        }
+        stringBuilder.append("\n");
+        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+            stringBuilder.append("└──────────────────────┘    └──────────────────────┘").append("   ");
+        }
+        stringBuilder.append("\n");
         stringBuilder.append("""
-                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
         Println(stringBuilder.toString());
     }
@@ -388,14 +462,7 @@ public class Cli implements UI {
             stringBuilder.append("\n");
         }
 
-        /*
-        for(PlayableCard card: playedCards.values()){
-            stringBuilder.append(cardDraw(card));
-        }
-        stringBuilder.append("\n");
-
-         */
-
+        stringBuilder.append(cardDraw(view));
         Println(stringBuilder.toString());
     }
 
@@ -425,36 +492,59 @@ public class Cli implements UI {
         }
     }
 
-    private static String cardDraw(PlayableCard card){
+    private static String cardDraw(GameView view){
+
         String HL;
         String HR;
         String DL;
         String DR;
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("GAME ID: ").append(card.getCardId()).append("\n");
 
-        String ansiCode = getAnsiCode(card.getType());
-
-        if(card.isFront()){
-            HL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
-            HR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
-            DL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
-            DR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
-        }else{
-            stringBuilder.append(listToString(card.getAListOfBackResource()));
-            HL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
-            HR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
-            DL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
-            DR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
+        for(Player p : view.getPlayers().keySet()){
+            stringBuilder.append(p.getNick()).append(" CARDS PLAYED: \n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+                stringBuilder.append("CARD ID: ").append(c.getCardId()).append(" ".repeat(18));
+            }
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+                stringBuilder.append("┌──────────────────────┐").append("   ");
+            }
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+            if(c.isFront()){
+                HL = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHLEFT)));
+                HR = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHRIGHT)));
+            }else{
+                stringBuilder.append(listToString(c.getAListOfBackResource()));
+                HL = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHLEFT)));
+                HR = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHRIGHT)));
+            }
+                stringBuilder.append("│").append(HL).append(" ".repeat(18)).append(HR).append("│").append("   ");
+            }
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+                stringBuilder.append("│                      │").append("   ");
+            }
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+            if(c.isFront()){
+                DL = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNLEFT)));
+                DR = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNRIGHT)));
+            }else{
+                stringBuilder.append(listToString(c.getAListOfBackResource()));
+                DL = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNLEFT)));
+                DR = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNRIGHT)));
+            }
+                stringBuilder.append("│").append(DL).append(" ".repeat(18)).append(DR).append("│").append("   ");
+            }
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+                stringBuilder.append("└──────────────────────┘").append("   ");
+            }
+            stringBuilder.append("\n");
         }
-        stringBuilder.append(ansiCode).append("""
-                ┌──────────────────────┐
-                │""").append(HL).append(" ".repeat(18)).append(HR).append("│\n").append("""
-                │                      │
-                │""").append(DL).append(" ".repeat(18)).append(DR).append("│\n").append("""
-                └──────────────────────┘
-                """).append("\u001B[0m");
+
         return stringBuilder.toString();
     }
 
@@ -478,18 +568,6 @@ public class Cli implements UI {
         stringBuilder.append("\nGOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card)).append("\n");
         return (stringBuilder.toString());
-        /*
-        Println("""
-                GOAL CARD
-                
-                CARD ID:""" + card.getCardId() + "\n" + """
-                POINTS:""" + card.getNumberOfPoints() + " EACH TIME THE REQUIREMENT IS SATISFIED" + "\n" + """
-                REQUIREMENT:
-                """ + "\n" + goalPoint(card) + """
-                
-                """);
-                */
-
     }
 
     @Override
