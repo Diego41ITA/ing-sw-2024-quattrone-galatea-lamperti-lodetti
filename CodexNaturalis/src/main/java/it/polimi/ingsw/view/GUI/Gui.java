@@ -10,12 +10,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-/* All'interno di questa classe implementerò i metodi della UI per la GUI.
-All'interno di questi metodi mi preoccuperò anche di caricare la scena attraverso un FXMLLoader.
-Userò all'interno di questi metodi i vari controllers delle scene.
+/* All'interno di questa classe implementeremo i metodi della UI per la GUI.
+All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
+Useremo all'interno di questi metodi i vari controllers delle scene.
 La grafica verrà runnata su thread
  */
 public class Gui extends Application implements UI {
+    protected MultipleResponses multipleResponses = new MultipleResponses();
     @Override
     public void start(Stage stage) throws Exception {
 

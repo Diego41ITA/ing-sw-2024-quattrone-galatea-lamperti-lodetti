@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
         //fa vedere i nodi dell'interfaccia
         public void showError(String msg){
             error.setText(msg);
-            error.setVisible(true);
         }
 
         public void actionMenu(ActionEvent e) {

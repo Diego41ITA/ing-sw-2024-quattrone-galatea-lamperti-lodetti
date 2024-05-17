@@ -14,7 +14,6 @@ public class EndController {
     //mi fa vedere il label e il bottone dell'interfaccia utente
     public void show(String name) {
         winner.setText(name);
-        winner.setVisible(true);
     }
 
     //Quando clicco il mouse eseguo questo metodo che mi esce dall'app

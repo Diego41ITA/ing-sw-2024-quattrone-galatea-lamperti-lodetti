@@ -8,21 +8,39 @@ import java.util.ArrayList;
 //le stringhe in input
 //si salvano i valori di input all'interno di questa classe che po verranno adoperati dal gameflow
 //per svolgere la logica di gioco
-public class MultipleResponses extends Gui {
+//questa classe verrà messa nella gui come attributo
+public class MultipleResponses{
 
-    static ArrayList<String> Responses;
+    private ArrayList<String> Responses;
     public MultipleResponses(){
         Responses = new ArrayList<String>();
     }
 
-    protected static void add(String c) {
+    public void add(String c) {
         Responses.add(c);
     }
 
     public ArrayList<String> getResponses() {
         return Responses;
     }
-    public String GetFirst(){
+    public String getFirst(){
         return Responses.getFirst();
     }
+
+    public String getLast(){
+        return Responses.getLast();
+    }
+
+    public void clearResponses(){
+        Responses.clear();
+    }
+
+    public String get(int n){
+        return Responses.get(n);
+    }
+    public int size(){
+        return Responses.size();
+
+    }
+
 }

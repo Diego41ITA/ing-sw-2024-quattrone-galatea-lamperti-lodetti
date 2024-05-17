@@ -14,7 +14,8 @@ public class NickNameController extends Gui {
     @FXML
     private Button enter;
     public void OkButton(javafx.event.ActionEvent actionEvent) {
-        //fa in modo che mi lanci l'interfaccia menù di gioco
-        show_createNewGame();
+        //nel gameflow si può mettere un ciclo while che fin quando in multipleResponses non abbiamo
+        //la stringa ok il gameflow aspetta
+        multipleResponses.add("ok");
     }
 }
