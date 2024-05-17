@@ -43,14 +43,25 @@ public abstract class PlayableCard extends Card{
      */
     public Map<Angle, Item> getFreeAngleAndContents() {
         Map<Angle, Item> newMap = new HashMap<>();
-        if(this.isFront())
+        if (this.isFront()) {
             newMap.putAll(this.front);
-        else
+        } else {
             newMap.putAll(this.back);
+        }
 
-        for (Angle a : newMap.keySet())
-            if (newMap.get(a) == Item.HIDDEN)
-                newMap.remove(a);
+        // Collect keys to be removed
+        List<Angle> keysToRemove = new ArrayList<>();
+        for (Angle a : newMap.keySet()) {
+            if (newMap.get(a) == Item.HIDDEN) {
+                keysToRemove.add(a);
+            }
+        }
+
+        // Remove keys after iteration
+        for (Angle a : keysToRemove) {
+            newMap.remove(a);
+        }
+
         return newMap;
     }
 

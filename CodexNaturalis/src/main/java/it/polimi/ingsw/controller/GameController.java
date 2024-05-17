@@ -444,8 +444,10 @@ public class GameController implements GameControllerInterface, Serializable {
         turn.goOn();
         String currentPlayer = turn.getCurrentPlayerNick();
         String endingPlayer = turn.getEndingPlayer();
+        game.setTurn(turn);
+
         if(turn.checkIfLast() && currentPlayer.equals(endingPlayer)){
-            this.game.setStatus(Status.FINISHED);
+            game.setStatus(Status.FINISHED);
             String winnerNick = calculateWinner();
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
@@ -453,7 +455,6 @@ public class GameController implements GameControllerInterface, Serializable {
                 return;
             }
         }
-        game.setTurn(turn);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli

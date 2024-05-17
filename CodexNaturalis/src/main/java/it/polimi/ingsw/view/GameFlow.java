@@ -105,7 +105,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                             state2.execute();
                             myTurn = false;
                         }
-                        while(!view.getCurrentPlayer().getNick().equals(nickname)){
+                        while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
                             Println("it's not your turn. Wait");
                             try{
                                 synchronized (lock) {
@@ -135,20 +135,37 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                 } else if (view.getStatus() == Status.FINISHED) {
                     ui.show_GameStatus(view);
                     ui.show_gameOver();
-                    while(winner == null) {
-                        try {
-                            synchronized (lock) {
-                                lock.wait();
-                            }
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+
+                    synchronized (lock) {
+                        lock.notifyAll();
                     }
+
                     ui.show_message("the winner is: " + winner);
                     if(winner.equals(nickname))
-                        ui.show_message("congrats you won");
+                        ui.show_message("""
+                                 
+                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄     ▄ ▄▄▄▄▄▄▄ ▄▄    ▄       ███\s
+                                █  █ █  █       █  █ █  █  █ █ ▄ █ █       █  █  █ █         █
+                                █  █▄█  █   ▄   █  █ █  █  █ ██ ██ █   ▄   █   █▄█ █   ██    █
+                                █       █  █ █  █  █▄█  █  █       █  █ █  █       █         █
+                                █▄     ▄█  █▄█  █       █  █       █  █▄█  █  ▄    █   ██    █
+                                  █   █ █       █       █  █   ▄   █       █ █ █   █         █
+                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄█ █▄▄█▄▄▄▄▄▄▄█▄█  █▄▄█      ███
+                                 
+                                                                """);
                     else
-                        ui.show_message("loser");
+                        ui.show_message("""
+                                
+                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄        ███
+                                █  █ █  █       █  █ █  █  █   █   █       █       █       █      █
+                                █  █▄█  █   ▄   █  █ █  █  █   █   █   ▄   █  ▄▄▄▄▄█▄     ▄█  ██  █
+                                █       █  █ █  █  █▄█  █  █   █   █  █ █  █ █▄▄▄▄▄  █   █        █
+                                █▄     ▄█  █▄█  █       █  █   █▄▄▄█  █▄█  █▄▄▄▄▄  █ █   █    ██  █
+                                  █   █ █       █       █  █       █       █▄▄▄▄▄█ █ █   █        █
+                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█         ███
+                                                                
+                                
+                                """);
                     askToLeave();
                     stay = false;
                 }
@@ -410,10 +427,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void winner(GameView game, String winner){
         this.winner = winner;
-        this.view = game;
-        synchronized (lock){
-            notifyAll();
-        }
+        setGameView(game);
+        System.out.println(this.view.getStatus().toString());
     }
 
     //serve la notifica per il vincitore
