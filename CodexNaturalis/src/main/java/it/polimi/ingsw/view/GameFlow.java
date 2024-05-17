@@ -136,9 +136,16 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     ui.show_GameStatus(view);
                     ui.show_gameOver();
 
-                    synchronized (lock) {
-                        lock.notifyAll();
+                    while(winner == null) {
+                        try {
+                            synchronized (lock) {
+                                lock.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+
 
                     ui.show_message("the winner is: " + winner);
                     if(winner.equals(nickname))
@@ -428,7 +435,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void winner(GameView game, String winner){
         this.winner = winner;
         setGameView(game);
-        System.out.println(this.view.getStatus().toString());
+        synchronized (lock){
+            lock.notify();
+        }
+        System.out.println("pippo");
     }
 
     //serve la notifica per il vincitore
