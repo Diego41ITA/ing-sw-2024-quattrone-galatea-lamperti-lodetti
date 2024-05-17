@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.PlayerGoalController">
+   <children>
+      <Text fx:id="title" layoutX="716.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your goal">
+         <font>
+            <Font size="69.0" />
+         </font>
+      </Text>
+      <Separator layoutX="957.0" layoutY="213.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="957.0" layoutY="413.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="957.0" layoutY="613.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Text fx:id="firstGoal" layoutX="670.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Goal">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fx:id="secondGoal" layoutX="1179.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Second Goal">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Line endX="100.0" layoutX="736.0" layoutY="343.0" startX="-124.79998779296875" />
+      <Line endX="128.7999267578125" layoutX="1225.0" layoutY="342.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="727.0" layoutY="539.0" startX="-124.79998779296875" />
+      <Line endX="100.0" layoutX="1252.0" layoutY="538.0" startX="-124.79998779296875" />
+      <ImageView fx:id="firstImage" fitHeight="168.0" fitWidth="226.0" layoutX="603.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="secondImage" fitHeight="168.0" fitWidth="226.0" layoutX="1126.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>
