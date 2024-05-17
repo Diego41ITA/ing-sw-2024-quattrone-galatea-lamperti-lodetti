@@ -438,7 +438,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         synchronized (lock){
             lock.notify();
         }
-        System.out.println("pippo");
     }
 
     //serve la notifica per il vincitore

@@ -73,7 +73,7 @@ public class PointTable implements Serializable {
      */
     public boolean notify20PointReached() {
         for (int score : points.values()) {
-            if (score >= 1) {
+            if (score >= 20) {
                 return true;
             }
         }
