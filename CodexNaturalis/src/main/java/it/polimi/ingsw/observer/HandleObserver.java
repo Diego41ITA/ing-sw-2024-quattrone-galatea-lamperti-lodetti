@@ -4,12 +4,17 @@ import it.polimi.ingsw.model.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.*;
+import it.polimi.ingsw.networking.socket.server.GameObserverHandlerSocket;
 import it.polimi.ingsw.view.PrintlnThread;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Contains all the notifications that can be thrown and calls the correspondent
+ * {@link GameObserverHandlerSocket} for the sockets.
+ */
 public class HandleObserver implements Serializable {
     private final GameObserver observer;
 

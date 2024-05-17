@@ -17,10 +17,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
-/*
-questa classe serve a notificare al client tutti i cambiamenti
+/**
+ * Notifies to the client all the update in the game. It writes the on the outputStream the
+ * message (it extends ServerNotification)
  */
 public class GameObserverHandlerSocket implements GameObserver, Serializable {
+    /**The server's stream output */
     private final ObjectOutputStream out;
     public GameObserverHandlerSocket(ObjectOutputStream o){
         this.out = o;

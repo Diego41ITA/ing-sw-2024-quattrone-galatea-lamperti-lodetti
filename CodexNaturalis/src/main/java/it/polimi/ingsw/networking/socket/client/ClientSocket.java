@@ -25,6 +25,10 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Receives all the incoming notifications from the server, and it processes them by passing
+ * {@link GameObserverHandlerClient}, that calls the methods of {@link GameFlow}
+ */
 public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
     private ObjectOutputStream out;
