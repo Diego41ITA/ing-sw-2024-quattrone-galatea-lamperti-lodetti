@@ -348,24 +348,26 @@ public class Cli implements UI {
         }
         stringBuilder.append("\n");
 
+        int count = 1;
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
             stringBuilder.append("FRONT").append(" ".repeat(23)).append("BACK").append(" ".repeat(23));
         }
         stringBuilder.append("\n");
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
-            stringBuilder.append("┌──────────────────────┐    ┌──────────────────────┐").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("┌──────────────────────┐    ┌──────────────────────┐").append("\u001B[0m").append("   ");
         }
+
         stringBuilder.append("\n");
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
             String FHL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
             String FHR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
             String BHL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
             String BHR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
-            stringBuilder.append("│").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("    ").append("│").append(BHL).append(" ".repeat(18)).append(BHR).append("│").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("    ").append("│").append(BHL).append(" ".repeat(17)).append(BHR).append("│").append("\u001B[0m").append("   ");
         }
         stringBuilder.append("\n");
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
-            stringBuilder.append("│                      │    │                      │").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("│                      │    │                      │").append("\u001B[0m").append("   ");
         }
         stringBuilder.append("\n");
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
@@ -374,11 +376,11 @@ public class Cli implements UI {
             String FDL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
             String FDR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
 
-            stringBuilder.append("│").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("    ").append("│").append(BDL).append(" ".repeat(18)).append(BDR).append("│").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("    ").append("│").append(BDL).append(" ".repeat(17)).append(BDR).append("│").append("\u001B[0m").append("   ");
         }
         stringBuilder.append("\n");
         for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
-            stringBuilder.append("└──────────────────────┘    └──────────────────────┘").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("└──────────────────────┘    └──────────────────────┘").append("\u001B[0m").append("   ");
         }
         stringBuilder.append("\n");
         stringBuilder.append("""
