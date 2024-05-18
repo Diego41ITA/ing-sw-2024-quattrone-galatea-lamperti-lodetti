@@ -17,7 +17,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 //si occupa di implementare le azioni del client lavorando sulla rete.
 public class ClientRMI extends UnicastRemoteObject implements ClientAction {
@@ -68,7 +67,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
             gameController = request.createGame(notificationGetter, nick, maxNumberOfPlayers);
             nickname = nick;
         } catch (RemoteException e) {
-            Println("qualcosa non è andato");
+            System.out.println("qualcosa non è andato");
             e.getMessage();
             e.printStackTrace();
             e.getCause();

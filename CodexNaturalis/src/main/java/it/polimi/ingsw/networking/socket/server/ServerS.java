@@ -1,5 +1,4 @@
 package it.polimi.ingsw.networking.socket.server;
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.util.*;
 import java.io.IOException;
@@ -20,9 +19,9 @@ public class ServerS extends Thread {
             serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
             this.start();
-            Println("server  socket is active");
+            System.out.println("server  socket is active");
         }catch(IOException e){
-            Println("something goes wrong the server is down :( ...");
+            System.out.println("something goes wrong the server is down :( ...");
         }
     }
 
@@ -39,7 +38,7 @@ public class ServerS extends Thread {
                 clients.getLast().start();
             }
         }catch(IOException e){
-            Println("something goes wrong");
+            System.out.println("something goes wrong");
         }
 
         try{

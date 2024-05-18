@@ -7,7 +7,6 @@ import it.polimi.ingsw.networking.socket.client.message.Message;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 import it.polimi.ingsw.view.PrintlnThread;
 
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -56,7 +55,7 @@ public class ClientHandlerSocket extends Thread{
                 this.queue.add(incomingMessage);
             }
         }catch(IOException | ClassNotFoundException e){
-            Println("No communication with the client");
+            System.out.println("No communication with the client");
         }
     }
 
@@ -79,10 +78,10 @@ public class ClientHandlerSocket extends Thread{
                 }
             }
         }catch(InterruptedException e){
-            Println("no action");
+            System.out.println("no action");
 
         } catch (GameEndedException | RemoteException e) {
-            Println("client disconnected");
+            System.out.println("client disconnected");
         }
     }
 }

@@ -55,7 +55,7 @@ public class ClientSocket extends Thread implements ClientAction {
                 in = new ObjectInputStream(client.getInputStream());
                 attempt = false;
             }catch(IOException e){
-                PrintlnThread.Println("something went wrong :( ...");
+                System.out.println("something went wrong :( ...");
                 attempt = true;
             }
         }while(attempt);
@@ -71,7 +71,7 @@ public class ClientSocket extends Thread implements ClientAction {
                 else
                     notification.execute(gameObserverHandler);
             }catch(IOException | ClassNotFoundException e){
-                PrintlnThread.Println("something went wrong :( ...");
+                System.out.println("something went wrong :( ...");
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -95,7 +95,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try {
             notification.execute(gameObserverHandler);
         } catch (IOException e) {
-            PrintlnThread.Println("something went wrong ...");
+            System.out.println("something went wrong ...");
             throw new RuntimeException(e);
         }
     }

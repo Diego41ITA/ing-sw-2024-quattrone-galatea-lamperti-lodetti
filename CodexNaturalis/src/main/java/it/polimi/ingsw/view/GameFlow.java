@@ -15,7 +15,6 @@ import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -94,7 +93,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 lock.wait();
                             }
                         } catch (InterruptedException e) {
-                            Println("this game is aborted");
+                            System.out.println("this game is aborted");
                         }
                     }
                 } else if (view.getStatus() == Status.ACTIVE) {
@@ -106,13 +105,13 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                             myTurn = false;
                         }
                         while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
-                            Println("it's not your turn. Wait");
+                            System.out.println("it's not your turn. Wait");
                             try{
                                 synchronized (lock) {
                                     lock.wait();
                                 }
                             }catch(InterruptedException e){
-                                Println("game interrupted");
+                                System.out.println("game interrupted");
                             }
                         }
                     }
@@ -129,7 +128,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                                 lock.wait();
                             }    //need to add some notify when the gameStatus change.
                         } catch (InterruptedException e) {
-                            Println("this game got interrupted");
+                            System.out.println("this game got interrupted");
                         }
                     }
                 } else if (view.getStatus() == Status.FINISHED) {
@@ -332,14 +331,14 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         setGameView(game);
         waitingForNewPlayers = true;
         ui.show_playerColors(game);
-        Println("waiting for new players");
+        System.out.println("waiting for new players");
     }
 
     @Override
     public void updateSetAvailableColors(GameView game, ArrayList<Color> colors) throws RemoteException{
         setGameView(game);
         waitingForNewPlayers = false;
-        Println("the choose color is not available anymore! please, select another one");
+        System.out.println("the choose color is not available anymore! please, select another one");
         state1 = new StateColor(this, this.input);
     }
 

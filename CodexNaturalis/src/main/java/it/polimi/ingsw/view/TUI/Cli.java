@@ -12,8 +12,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import static it.polimi.ingsw.view.PrintlnThread.Println;
-
 public class Cli implements UI {
 
     private static String mapToEmoji(HashMap<Item, Integer> resources) {
@@ -86,10 +84,9 @@ public class Cli implements UI {
         }
     }
 
-
     @Override
     public void show_startingMenu() {
-        Println("""
+        System.out.println("""
                  
                  ▄█▀▀▀▄█    ▄                     ▄    ██                                                          \s
                  ██▄▄  ▀  ▄██▄   ▄▄▄▄   ▄▄▄ ▄▄  ▄██▄  ▄▄▄  ▄▄ ▄▄▄     ▄▄▄ ▄    ▄▄ ▄▄ ▄▄     ▄▄▄▄  ▄▄ ▄▄▄   ▄▄▄ ▄▄▄ \s
@@ -109,12 +106,12 @@ public class Cli implements UI {
 
     @Override
     public void show_message(String message) {
-        Println(message);
+        System.out.println(message);
     }
 
     @Override
     public void show_joinRandomGame() {
-        Println("""
+        System.out.println("""
                    
                    █ ▄▀▄ █ █▄ █ █ █▄ █ ▄▀    ▄▀▄   ▄▀  ▄▀▄ █▄ ▄█ ██▀
                  ▀▄█ ▀▄▀ █ █ ▀█ █ █ ▀█ ▀▄█   █▀█   ▀▄█ █▀█ █ ▀ █ █▄▄
@@ -134,7 +131,7 @@ public class Cli implements UI {
         stringBuilder.setLength(stringBuilder.length() - 2);
         stringBuilder.append("\n");
 
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
     private static ArrayList<Color> freeColors(GameView gameView){
@@ -149,7 +146,7 @@ public class Cli implements UI {
 
     @Override
     public void show_noAvailableGames() {
-        Println("""
+        System.out.println("""
                 NO GAMES AVAILABLE
                 
                 CHOOSE AN OPTION:
@@ -161,21 +158,21 @@ public class Cli implements UI {
 
     @Override
     public void show_createNewGame() {
-        Println("""
+        System.out.println("""
                 CREATING A NEW GAME...
                 """);
     }
 
     @Override
     public void show_reconnectGame() {
-        Println("""
+        System.out.println("""
                 RECONNECTING TO THE GAME...
                 """);
     }
 
     @Override
     public void show_invalidIdGame() {
-        Println("""
+        System.out.println("""
                 INVALID GAME ID!!!
                 """);
     }
@@ -187,7 +184,7 @@ public class Cli implements UI {
         for(Player p : gameView.getPlayers().keySet()) {
             str.append(p.getNick()).append('\n');
         }
-        Println(str.toString());
+        System.out.println(str.toString());
     }
 
     @Override
@@ -195,7 +192,7 @@ public class Cli implements UI {
         StringBuilder str = new StringBuilder();
         str.append("IN GAME WITH ID: ").append(id).append(" THERE WASN'T A PLAYER WITH THIS NICK\n");
         str.append("CHECK AND TRY AGAIN...");
-        Println(str.toString());
+        System.out.println(str.toString());
     }
 
     @Override
@@ -205,7 +202,7 @@ public class Cli implements UI {
         for(Player p : gameView.getPlayers().keySet()){
             stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getPlayers().get(p)).append('\n');
         }
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
     @Override
@@ -215,47 +212,47 @@ public class Cli implements UI {
         for(Player p : gameView.getPlayers().keySet()){
             stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
         }
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
     @Override
     public void show_GameStatus(GameView gameView){
-        Println(gameView.getStatus().toString());
+        System.out.println(gameView.getStatus().toString());
     }
 
     @Override
     public void show_RequestPlayerNickName() {
-        Println("\nENTER A NICKNAME:\n");
+        System.out.println("\nENTER A NICKNAME:\n");
     }
 
     @Override
     public void show_RequestGameId() {
-        Println("""
+        System.out.println("""
                 ENTER A GAME ID:
                 """);
     }
 
     @Override
     public void show_RequestNumberOfPlayers() {
-        Println("""
+        System.out.println("""
                 \nENTER MAX NUMBER OF PLAYERS. IT NEEDS TO BE >=2 AND <=4
                 """);
     }
 
     @Override
     public void show_playerJoined(String id) {
-        Println("""
+        System.out.println("""
                    
                    █ ▄▀▄ █ █▄ █ ██▀ █▀▄   ▀█▀ █▄█ ██▀   ▄▀  ▄▀▄ █▄ ▄█ ██▀
                  ▀▄█ ▀▄▀ █ █ ▀█ █▄▄ █▄▀    █  █ █ █▄▄   ▀▄█ █▀█ █ ▀ █ █▄▄
                                                                 
                 """);
-        Println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
+        System.out.println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
     }
 
     @Override
     public void show_playerLeft(String playerNickName) {
-        Println(playerNickName + " LEFT");
+        System.out.println(playerNickName + " LEFT");
     }
 
     @Override
@@ -285,12 +282,12 @@ public class Cli implements UI {
 
     @Override
     public void show_gameStarting(String id) {
-        Println("\nGAME: " + id + " IS STARTING");
+        System.out.println("\nGAME: " + id + " IS STARTING");
     }
 
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-            Println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
+            System.out.println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
     }
 
     public StringBuilder draw_playableCards(List<PlayableCard> cards){
@@ -395,7 +392,7 @@ public class Cli implements UI {
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
     @Override
@@ -480,7 +477,7 @@ public class Cli implements UI {
         }
 
         stringBuilder.append(cardDraw(view));
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
 
@@ -567,14 +564,14 @@ public class Cli implements UI {
 
     @Override
     public void show_invalidPlay() {
-        Println("""
+        System.out.println("""
                 INVALID PLAY...CHOOSE A VALID COORDINATE!!!
                 """);
     }
 
     @Override
     public void show_notEnoughResources() {
-        Println("""
+        System.out.println("""
                 NOT ENOUGH RESOURCES!!!
                 """);
     }
@@ -700,12 +697,12 @@ public class Cli implements UI {
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
-        Println(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 
     @Override
     public void show_lastTurn() {
-        Println("""
+        System.out.println("""
                 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
                 
                  ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀█▀ █▄█ ██▀   █   ▄▀▄ ▄▀▀ ▀█▀   ▀█▀ █ █ █▀▄ █▄ █   █
@@ -732,7 +729,7 @@ public class Cli implements UI {
             rank++;
         }
 
-        Println("""
+        System.out.println("""
                 
                 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
                  
@@ -748,7 +745,7 @@ public class Cli implements UI {
 
     @Override
     public void show_gameOver() {//solo scritta gameover o anche nome vincitore?
-        Println("the game is over now we are calculating the winner...");
+        System.out.println("the game is over now we are calculating the winner...");
     }
 
     private static String safeString(Object o){

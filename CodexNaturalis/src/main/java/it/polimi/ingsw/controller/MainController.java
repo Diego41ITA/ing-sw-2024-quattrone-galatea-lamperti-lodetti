@@ -8,8 +8,6 @@ import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
-import it.polimi.ingsw.view.PrintlnThread;
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 import java.rmi.RemoteException;
 import java.util.*;
@@ -69,7 +67,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         controller.addObserver(obs, player);
         activeGames.add(controller);
 
-        PrintlnThread.Println("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
+        System.out.println("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
         printActiveGames();
 
         try {
@@ -109,7 +107,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
                 randomAvailableGame.addObserver(obs, player);
                 randomAvailableGame.addPlayer(player);
 
-                Println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
+                System.out.println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
                 printActiveGames();
 
                 obs.randomGameJoined(randomAvailableGame.getGameId());
@@ -179,7 +177,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         for (GameController game : activeGames) {
             if (game.getGameId().equals(gameID)) {
                 game.leave(nick);
-                Println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
+                System.out.println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
                 printActiveGames();
                 if (game.getNumOfOnlinePlayers() == 0) {
                     deleteGame(gameID);
@@ -210,11 +208,11 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * Print all games currently running
      */
     private void printActiveGames() {
-        Println("\t\trunningGames: ");
+        System.out.println("\t\trunningGames: ");
         for (GameController game : activeGames) {
-            Println("\t\t" + game.getGameId() + " ");
+            System.out.println("\t\t" + game.getGameId() + " ");
         }
-        Println("");
+        System.out.println("");
     }
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).

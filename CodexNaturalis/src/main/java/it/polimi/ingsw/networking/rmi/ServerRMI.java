@@ -9,7 +9,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
-import static it.polimi.ingsw.view.PrintlnThread.Println;
 
 public class ServerRMI extends UnicastRemoteObject implements MainControllerInterface {
     private final MainControllerInterface mainController;
@@ -22,7 +21,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
             server = new ServerRMI();
             registry = LocateRegistry.createRegistry(1099);//default local host
             getRegistry().rebind( "server name", server);
-            Println("the server is ready(RMI)");
+            System.out.println("the server is ready(RMI)");
         }catch(RemoteException e){
             System.err.println("Server error");
         }
@@ -58,7 +57,7 @@ public class ServerRMI extends UnicastRemoteObject implements MainControllerInte
             //si prova ad esportare l'oggetto creato sulla porta 0 (dove è connesso il client per la ricezione degli input)
             UnicastRemoteObject.exportObject(stub, 0);
         }catch(RemoteException e){
-            Println("damn");
+            System.out.println("damn");
             e.printStackTrace();
             e.getCause();
             e.getMessage();
