@@ -4,12 +4,9 @@ import it.polimi.ingsw.controller.GameControllerInterface;
 import it.polimi.ingsw.controller.MainController;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.networking.socket.client.message.Message;
-import it.polimi.ingsw.view.GameObserverHandlerClient;
-import it.polimi.ingsw.view.PrintlnThread;
 
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;

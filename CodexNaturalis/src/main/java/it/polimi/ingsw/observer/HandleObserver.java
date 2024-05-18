@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.networking.socket.server.GameObserverHandlerSocket;
-import it.polimi.ingsw.view.PrintlnThread;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;

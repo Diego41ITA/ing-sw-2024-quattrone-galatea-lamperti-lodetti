@@ -11,7 +11,6 @@ import it.polimi.ingsw.networking.socket.client.message.Color;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.ServerNotification;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
-import it.polimi.ingsw.view.PrintlnThread;
 
 import java.awt.*;
 import java.io.ObjectInputStream;
@@ -21,7 +20,6 @@ import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
