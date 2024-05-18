@@ -2,13 +2,14 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.GUI.Gui;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 
-public class SetColorController extends Gui {
+public class SetColorController extends InputGui {
     @FXML
     private Button yellow;
     @FXML

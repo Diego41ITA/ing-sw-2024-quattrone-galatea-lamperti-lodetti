@@ -16,7 +16,6 @@ Useremo all'interno di questi metodi i vari controllers delle scene.
 La grafica verrà runnata su thread
  */
 public class Gui extends Application implements UI {
-    protected MultipleResponses multipleResponses = new MultipleResponses();
     @Override
     public void start(Stage stage) throws Exception {
 
