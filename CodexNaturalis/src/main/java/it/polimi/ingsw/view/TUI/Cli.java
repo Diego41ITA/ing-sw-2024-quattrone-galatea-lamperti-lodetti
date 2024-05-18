@@ -529,11 +529,11 @@ public class Cli implements UI {
                 HL = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHLEFT)));
                 HR = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHRIGHT)));
             }
-                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(HL).append(" ".repeat(18)).append(HR).append("│").append("\u001B[0m").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append(HL).append(" ".repeat(19)).append(HR).append(" ").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-                stringBuilder.append(getAnsiCode(c.getType())).append("│                      │").append("\u001B[0m").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("                        ").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
@@ -545,7 +545,7 @@ public class Cli implements UI {
                 DL = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNLEFT)));
                 DR = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNRIGHT)));
             }
-                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(DL).append(" ".repeat(18)).append(DR).append("│").append("\u001B[0m").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append(DL).append(" ".repeat(19)).append(DR).append(" ").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
@@ -576,8 +576,14 @@ public class Cli implements UI {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nGOAL CARD\n\n").append("CARD ID: ").append(card.getCardId()).append("\n").append("POINTS: ").append(card.getNumberOfPoints());
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card)).append("\n");
+        stringBuilder.append("""
+                
+                ---------------------------------------------------------------------------------
+                
+                """ );
         return (stringBuilder.toString());
     }
+
 
     @Override
     public String show_playableCard(PlayableCard card) {
