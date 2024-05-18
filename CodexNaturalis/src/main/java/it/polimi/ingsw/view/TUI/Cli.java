@@ -392,6 +392,9 @@ public class Cli implements UI {
 //57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
         stringBuilder.append(draw_playableCards(immutableModel.getCurrentPlayer().showCard()));
         stringBuilder.append("\n");
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
@@ -694,6 +697,9 @@ public class Cli implements UI {
         for(Card card : immutableModel.getTableOfDecks().getGoals()){
             stringBuilder.append(show_goalCard((GoalCard) card));
         }
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """);
         Println(stringBuilder.toString());
     }
 
