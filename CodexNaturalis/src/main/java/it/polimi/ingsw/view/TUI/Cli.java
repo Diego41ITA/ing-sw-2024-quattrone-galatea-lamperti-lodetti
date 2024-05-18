@@ -517,7 +517,7 @@ public class Cli implements UI {
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-                stringBuilder.append(getAnsiCode(c.getType())).append("┌──────────────────────┐").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("┌──────────────────────┐").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
@@ -529,11 +529,11 @@ public class Cli implements UI {
                 HL = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHLEFT)));
                 HR = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHRIGHT)));
             }
-                stringBuilder.append("│").append(HL).append(" ".repeat(18)).append(HR).append("│").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(HL).append(" ".repeat(18)).append(HR).append("│").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-                stringBuilder.append("│                      │").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("│                      │").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
@@ -545,11 +545,11 @@ public class Cli implements UI {
                 DL = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNLEFT)));
                 DR = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNRIGHT)));
             }
-                stringBuilder.append("│").append(DL).append(" ".repeat(18)).append(DR).append("│").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(DL).append(" ".repeat(18)).append(DR).append("│").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-                stringBuilder.append("└──────────────────────┘").append("\u001B[0m").append("   ");
+                stringBuilder.append(getAnsiCode(c.getType())).append("└──────────────────────┘").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
         }
