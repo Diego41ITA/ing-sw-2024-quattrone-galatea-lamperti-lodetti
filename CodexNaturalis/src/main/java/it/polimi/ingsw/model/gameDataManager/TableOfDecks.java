@@ -171,6 +171,29 @@ public class TableOfDecks implements Serializable {
 
     }
 
+
+    /**
+     * Getter method, used by the CLI
+     * @return the two shown ResourceCards
+     */
+    public ArrayList<PlayableCard> getResourceCards(){
+        ArrayList<PlayableCard> cards = new ArrayList<PlayableCard>();
+        cards.add((PlayableCard) this.cards.get(0));
+        cards.add((PlayableCard) this.cards.get(1));
+        return new ArrayList<PlayableCard>(cards);
+    }
+
+    /**
+     * Getter method, used by the CLI
+     * @return the two shown GoldCards
+     */
+    public ArrayList<PlayableCard> getGoldCards(){
+        ArrayList<PlayableCard> cards = new ArrayList<PlayableCard>();
+        cards.add((PlayableCard) this.cards.get(2));
+        cards.add((PlayableCard) this.cards.get(3));
+        return new ArrayList<PlayableCard>(cards);
+    }
+
     /**
      * is the setter of deckResource
      * @author Lorenzo Galatea

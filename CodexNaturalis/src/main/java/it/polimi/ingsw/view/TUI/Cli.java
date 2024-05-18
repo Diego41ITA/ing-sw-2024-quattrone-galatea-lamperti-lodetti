@@ -293,19 +293,9 @@ public class Cli implements UI {
             Println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
     }
 
-    @Override
-    public void show_playerHand(GameView immutableModel) {
+    public StringBuilder draw_playableCards(List<PlayableCard> cards){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("""
-                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-                """).append("""
-                 
-                 ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀▄▀ ▄▀▄ █ █ █▀▄   █▄█ ▄▀▄ █▄ █ █▀▄
-                  █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
-                                
-                """);
-//57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             if (card instanceof GoldCard) {
                 stringBuilder.append("GOLD CARD").append(" ".repeat(46));
             } else if (card instanceof ResourceCard) {
@@ -313,11 +303,11 @@ public class Cli implements UI {
             }
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             stringBuilder.append("CARD ID: ").append(card.getCardId()).append(" ".repeat(46 - String.valueOf(card.getCardId()).length()));
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             if (card instanceof GoldCard) {
                 stringBuilder.append("PERMANENT RESOURCE: ").append(getResourceEmoji(((GoldCard) card).getBackResource())).append(" ".repeat(33));
             } else if (card instanceof ResourceCard) {
@@ -325,7 +315,7 @@ public class Cli implements UI {
             }
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             if (card instanceof GoldCard) {
                 stringBuilder.append("POINTS: ").append(goldPoint((GoldCard) card)).append(" ".repeat(46));
                 if(((GoldCard) card).getGoldType().equals(GoldType.ANGLE)){
@@ -338,10 +328,10 @@ public class Cli implements UI {
             }
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             if (card instanceof GoldCard) {
                 int spaces = ((GoldCard) card).getNeededResources().size();
-                stringBuilder.append("REQUIREMENTS: ").append(mapToEmoji(((GoldCard) card).getNeededResources())).append(" ".repeat(43 - spaces*5 - (spaces-1)*2));
+                stringBuilder.append("REQUIREMENTS: ").append(mapToEmoji(((GoldCard) card).getNeededResources())).append(" ".repeat(40 - spaces*5 - (spaces-1)*2));
             } else if (card instanceof ResourceCard) {
                 stringBuilder.append(" ".repeat(57));
             }
@@ -349,16 +339,16 @@ public class Cli implements UI {
         stringBuilder.append("\n");
 
 
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             stringBuilder.append("FRONT").append(" ".repeat(23)).append("BACK").append(" ".repeat(23));
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             stringBuilder.append(getAnsiCode(card.getType())).append("┌──────────────────────┐    ┌──────────────────────┐").append("\u001B[0m").append("   ");
         }
 
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             String FHL = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHLEFT)));
             String FHR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
             String BHL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
@@ -367,12 +357,12 @@ public class Cli implements UI {
 
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             stringBuilder.append(getAnsiCode(card.getType())).append("│                      │    │                      │").append("\u001B[0m").append("   ");
         }
 
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             String BDL = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNLEFT)));
             String BDR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
             String FDL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
@@ -382,9 +372,25 @@ public class Cli implements UI {
 
         }
         stringBuilder.append("\n");
-        for(PlayableCard card : immutableModel.getCurrentPlayer().showCard()){
+        for(PlayableCard card : cards){
             stringBuilder.append(getAnsiCode(card.getType())).append("└──────────────────────┘    └──────────────────────┘").append("\u001B[0m").append("   ");
         }
+        return stringBuilder;
+    }
+
+    @Override
+    public void show_playerHand(GameView immutableModel) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("""
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+                """).append("""
+                 
+                 ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀▄▀ ▄▀▄ █ █ █▀▄   █▄█ ▄▀▄ █▄ █ █▀▄
+                  █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
+                                
+                """);
+//57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
+        stringBuilder.append(draw_playableCards(immutableModel.getCurrentPlayer().showCard()));
         stringBuilder.append("\n");
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
@@ -397,6 +403,8 @@ public class Cli implements UI {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("""
+                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+                 
                  ▄▀  ▄▀▄ █▄ ▄█ ██▀   ▄▀▀ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █ ▄▀▀
                  ▀▄█ █▀█ █ ▀ █ █▄▄   ▄██  █  █▀█  █  █ ▀▄▀ █ ▀█ ▄██
                                 
@@ -578,7 +586,7 @@ public class Cli implements UI {
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card)).append("\n");
         stringBuilder.append("""
                 
-                --------------------------------------------------------------------------------------------------------
+                ---------------------------------------------------------------------------------------------------------------------
                 
                 """ );
         return (stringBuilder.toString());
@@ -651,7 +659,7 @@ public class Cli implements UI {
 
         stringBuilder.append("""
                 
-                --------------------------------------------------------------------------------------------------------
+                ---------------------------------------------------------------------------------------------------------------------
                 
                 """ );
         return stringBuilder.toString();
@@ -661,16 +669,24 @@ public class Cli implements UI {
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("""
-                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """).append("""
                  
                  ▄▀▀ ▄▀▄ █▄ ▄█ █▄ ▄█ ▄▀▄ █▄ █   █▀▄ █▀▄ ▄▀▄ █   █ ▄▀▄ ██▄ █   ██▀   ▄▀▀ ▄▀▄ █▀▄ █▀▄ ▄▀▀
                  ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   █▄▀ █▀▄ █▀█ ▀▄▀▄▀ █▀█ █▄█ █▄▄ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
                                 
                 """);
-        for(Card card : immutableModel.getTableOfDecks().getCards()){
-            stringBuilder.append(show_playableCard((PlayableCard) card));
-        }
+
+        ArrayList<PlayableCard> resourceCards = immutableModel.getTableOfDecks().getResourceCards();
+        ArrayList<PlayableCard> goldCards = immutableModel.getTableOfDecks().getGoldCards();
+        stringBuilder.append(draw_playableCards(resourceCards));
+        stringBuilder.append("""
+                
+                ---------------------------------------------------------------------------------------------------------------------
+                
+                """);
+        stringBuilder.append(draw_playableCards(goldCards));
+        stringBuilder.append("\n\n");
 
         stringBuilder.append("""
                  
@@ -682,7 +698,7 @@ public class Cli implements UI {
             stringBuilder.append(show_goalCard((GoalCard) card));
         }
         stringBuilder.append("""
-                ████████████████████████████████████████████████████████████████████████████████████████████████████████
+                ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
         Println(stringBuilder.toString());
     }
@@ -690,12 +706,12 @@ public class Cli implements UI {
     @Override
     public void show_lastTurn() {
         Println("""
-                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
                 
                  ▀█▀ █▄█ █ ▄▀▀   █ ▄▀▀   ▀█▀ █▄█ ██▀   █   ▄▀▄ ▄▀▀ ▀█▀   ▀█▀ █ █ █▀▄ █▄ █   █
                   █  █ █ █ ▄██   █ ▄██    █  █ █ █▄▄   █▄▄ █▀█ ▄██  █     █  ▀▄█ █▀▄ █ ▀█   ▄
                                 
-                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
                 """);
     }
 
@@ -718,14 +734,14 @@ public class Cli implements UI {
 
         Println("""
                 
-                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
                  
                  █▀▄ ▄▀▄ █▄ █ █▄▀ █ █▄ █ ▄▀\s
                  █▀▄ █▀█ █ ▀█ █ █ █ █ ▀█ ▀▄█
                 
                                 
                 """ + stringBuilder + """
-                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+                ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
                 
                 """);
     }
