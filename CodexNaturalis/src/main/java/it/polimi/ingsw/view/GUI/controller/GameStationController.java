@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.GUI.Gui;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -15,7 +16,7 @@ import javafx.scene.text.Text;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 //non è definitivo ma è una buona base
-public class GameStationController extends Gui {
+public class GameStationController extends InputGui {
     @FXML
     private Text gameId;
     @FXML
@@ -105,8 +106,7 @@ public class GameStationController extends Gui {
 
     }
 
-    @FXML // mi crea la grindPane per 2 giocatori(per ora funziona solo per 2 giocoatori) inoltre mi inserisce le carte iniziali nella gamestation
-    //il tag@FXML indica che questo metodo verrà lanciato in automatico quando si aprirà l'interfaccia associata a questo controller
+    // mi crea la grindPane per 2 giocatori(per ora funziona solo per 2 giocoatori) inoltre mi inserisce le carte iniziali nella gamestation
     public void initialize(int num1, int num2, boolean front1, boolean front2, Color color1, Color color2) {
         //rende invisibile il messaggio di last turn
         yourLastTurn.setVisible(false);
@@ -266,6 +266,7 @@ public class GameStationController extends Gui {
 
     }
     //inserisce le image0 all'interno del imageView array
+    //il tag@FXML indica che questo metodo verrà lanciato in automatico quando si aprirà l'interfaccia associata a questo controller
     @FXML
     public void initializeImageArray(){
         imageViews[0] = image0;

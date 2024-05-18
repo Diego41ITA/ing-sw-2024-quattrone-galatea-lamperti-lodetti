@@ -2,13 +2,14 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.GUI.MultipleResponses;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController extends Gui  implements Initializable {
+public class MenuController extends InputGui implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

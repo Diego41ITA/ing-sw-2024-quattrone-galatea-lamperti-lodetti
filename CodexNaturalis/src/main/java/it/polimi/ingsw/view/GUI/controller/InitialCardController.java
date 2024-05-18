@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.GUI.Gui;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -14,7 +15,7 @@ import javafx.scene.text.Text;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
-public class InitialCardController extends Gui{
+public class InitialCardController extends InputGui {
 
     @FXML
     ImageView imageFront;

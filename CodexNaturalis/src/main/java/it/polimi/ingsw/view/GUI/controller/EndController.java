@@ -11,7 +11,7 @@ public class EndController {
     @FXML
     private Button exit;
 
-    //mi fa vedere il label e il bottone dell'interfaccia utente
+    //mi fa vedere il nome del vincitore
     public void show(String name) {
         winner.setText(name);
     }

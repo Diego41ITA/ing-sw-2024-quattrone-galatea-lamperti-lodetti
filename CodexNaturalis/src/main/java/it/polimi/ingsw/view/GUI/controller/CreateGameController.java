@@ -1,16 +1,18 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.GUI.Gui;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
 
-public class CreateGameController extends Gui {
+public class CreateGameController extends InputGui {
     public void exit(ActionEvent e){
         System.exit(-1);;
     }
     //mi fa vedere l'interfaccia relativa al setting dei giocatori
     public void createGame(ActionEvent e){
-        //fin quando in multiplesResponses non abbiamo "GameCreated" allora il gameflow rimane nello stesso punto
-        //nel gameflow dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses nella ui
+        //fin quando in multiplesResponses non abbiamo "GameCreated" allora il GUIinput rimane nello stesso punto
+        //nel gGuiInput dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses.
         multipleResponses.add("GameCreated");
     }
+
 }
