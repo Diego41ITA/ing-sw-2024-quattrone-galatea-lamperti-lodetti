@@ -578,7 +578,7 @@ public class Cli implements UI {
         stringBuilder.append(" EACH TIME THE REQUIREMENT IS SATISFIED").append("\n").append("REQUIREMENT:\n").append(goalPoint(card)).append("\n");
         stringBuilder.append("""
                 
-                ---------------------------------------------------------------------------------
+                --------------------------------------------------------------------------------------------------------
                 
                 """ );
         return (stringBuilder.toString());
@@ -651,7 +651,7 @@ public class Cli implements UI {
 
         stringBuilder.append("""
                 
-                ---------------------------------------------------------------------------------
+                --------------------------------------------------------------------------------------------------------
                 
                 """ );
         return stringBuilder.toString();
