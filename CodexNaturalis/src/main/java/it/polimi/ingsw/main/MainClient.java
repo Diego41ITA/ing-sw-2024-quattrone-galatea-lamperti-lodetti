@@ -1,6 +1,5 @@
 package it.polimi.ingsw.main;
 
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GameFlow;
@@ -8,12 +7,14 @@ import it.polimi.ingsw.view.TUI.Cli;
 import it.polimi.ingsw.view.input.InputUi;
 
 import java.util.Scanner;
-//chiede all'utente che tipo di configurazione vuole:
-//1) rmi + gui
-//2) rmi + tui
-//3) socket + gui
-//4) socket + tui
-//questo main è il primo a dover essere avviato
+
+/**
+ * this class starts the client and asks him which configuration he wants:
+ * 1) socket + tui
+ * 2) rmi + tui
+ * 3) socket + gui
+ * 4) rmi + tui
+ */
 public class MainClient {
         public static void main(String[] args) {
             try {
