@@ -104,7 +104,6 @@ public class ClientSocket extends Thread implements ClientAction {
     public void waitForNotification() throws InterruptedException{
         ServerNotification notification = notificationQueue.take();
         try {
-            System.out.println("ho eseguito: " + notification.getClass().getName());
             notification.execute(gameObserverHandler);
         } catch (IOException e) {
             System.out.println("something went wrong ...");
