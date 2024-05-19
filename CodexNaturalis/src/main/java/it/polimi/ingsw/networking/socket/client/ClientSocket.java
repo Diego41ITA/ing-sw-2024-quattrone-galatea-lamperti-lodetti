@@ -64,16 +64,29 @@ public class ClientSocket extends Thread implements ClientAction {
         while(true){
             try{
                 ServerNotification notification = (ServerNotification) in.readObject();
+                //System.out.println("ho ricevuto: " + notification.getClass().getName());
                 if(notification.isSynchronous())
                     notificationQueue.put(notification);
-                else
-                    notification.execute(gameObserverHandler);
+                else{
+                    Thread trd = new Thread(() -> executeAsync(notification));
+                    trd.start();
+                }
             }catch(IOException | ClassNotFoundException e){
                 System.out.println("something went wrong :( ...");
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    public void executeAsync(ServerNotification notification){
+        try {
+            notification.execute(gameObserverHandler);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            System.out.println("something went wrong during the execution of: " + notification.getClass().getName());
         }
     }
 
@@ -91,6 +104,7 @@ public class ClientSocket extends Thread implements ClientAction {
     public void waitForNotification() throws InterruptedException{
         ServerNotification notification = notificationQueue.take();
         try {
+            System.out.println("ho eseguito: " + notification.getClass().getName());
             notification.execute(gameObserverHandler);
         } catch (IOException e) {
             System.out.println("something went wrong ...");
@@ -163,7 +177,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new ChooseGoal(nick, num, goals));
             completeForwarding();
-            waitForNotification();
+            waitForNotification();  //aspetta quella di turn o quella di updateGameStations
         }catch(IOException | InterruptedException e){
             //throw new RemoteException();
         }
@@ -214,6 +228,7 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    //forse va messo waitForNotification però è no usage
     @Override
     public void initializeHandPlayer(String nick){
         try{
@@ -235,8 +250,7 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new SetGameStation(nick, card, isFront));
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+        }catch(IOException e){
             e.printStackTrace();
             e.getCause();
         }
@@ -262,6 +276,30 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
         }catch(IOException e){
             //nothing
+        }
+    }
+
+    //aggiunti per risolvere i problemi dei socket
+    @Override
+    public void initializeTurn(String nick) throws RemoteException{
+        try{
+            out.writeObject(new InitializeTurn(nick));
+            completeForwarding();
+        }catch(IOException e){
+            //
+        }
+    }
+
+    @Override
+    public void definePlayer(String nick) throws RemoteException{
+        try{
+            out.writeObject(new DefinePlayer(nick));
+            completeForwarding();
+            waitForNotification();  //aspetta updateInitialCard
+            waitForNotification(); //aspetta goalCardsDrawed
+            waitForNotification(); //aspetta updateHandAndTable
+        }catch(IOException | InterruptedException e){
+            //
         }
     }
 }

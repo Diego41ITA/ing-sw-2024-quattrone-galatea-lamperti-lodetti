@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public interface GameObserver extends Remote{
     void randomGameJoined(String gameID)throws RemoteException;
     void reconnectedToGame(String gameID)throws RemoteException; //deve ritornare anche una GameView
     void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException;
-    void startGame(GameView game)throws RemoteException;
+    void startGame(GameView game)throws IOException;
 
     void genericErrorWhenEnteringGame(String msg, String gameID) throws RemoteException;
     void gameIdNotExists(String gameId) throws RemoteException;

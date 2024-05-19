@@ -5,10 +5,11 @@ import it.polimi.ingsw.observer.GameObserver;
 
 import java.io.IOException;
 
+//notifica inviata come conferma della carta iniziale posizionata.
 public class UpdateGameStations extends ServerNotification{
     private final GameView game;
     public UpdateGameStations(GameView g){
-        super(true);
+        super(false);
         this.game = g;
     }
 

@@ -11,7 +11,7 @@ public class UpdateInitialCard extends ServerNotification{
     private final InitialCard card;
 
     public UpdateInitialCard(InitialCard card){
-        super(false);
+        super(true);
         this.card = card;
     }
 

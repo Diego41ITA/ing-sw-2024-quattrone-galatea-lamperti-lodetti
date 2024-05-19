@@ -45,4 +45,8 @@ public interface GameControllerInterface extends Remote {
     //prova
     void start_Game() throws RemoteException;
 
+    //metodi aggiunti per risolvere socket
+    void definePlayer(String nick) throws RemoteException;
+    void initializeTurn(String nick) throws RemoteException;
+
 }

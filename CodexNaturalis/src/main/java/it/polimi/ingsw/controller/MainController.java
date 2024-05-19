@@ -65,6 +65,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
         String gameID = "Game" + (activeGames.size() + 1);
         GameController controller = new GameController(gameID, maxNumPlayers);
         controller.addObserver(obs, player);
+        controller.readiness.put(nick, 0);
         activeGames.add(controller);
 
         System.out.println("\t>Game " + controller.getGameId() + " added to runningGames, created by player:\"" + nick + "\"");
@@ -106,6 +107,8 @@ public class MainController implements Serializable, MainControllerInterface /*,
             try {
                 randomAvailableGame.addObserver(obs, player);
                 randomAvailableGame.addPlayer(player);
+
+                randomAvailableGame.readiness.put(nick, 0);
 
                 System.out.println("\t>Game " + randomAvailableGame.getGameId() + " player:\"" + nick + "\" entered player");
                 printActiveGames();

@@ -49,6 +49,7 @@ public class ClientHandlerSocket extends Thread{
             Message incomingMessage;
             while(!this.isInterrupted()) {
                 incomingMessage = (Message) input.readObject();
+                System.out.println("Ho ricevuto: " + incomingMessage.getClass().getName());
                 this.queue.add(incomingMessage);
             }
         }catch(IOException | ClassNotFoundException e){
@@ -64,6 +65,7 @@ public class ClientHandlerSocket extends Thread{
             while(!this.isInterrupted()) {
 
                 msg = this.queue.take();
+                System.out.println("Ho letto: " + msg.getClass().getName());
 
                 //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
                 if (msg.isForMainController()) {

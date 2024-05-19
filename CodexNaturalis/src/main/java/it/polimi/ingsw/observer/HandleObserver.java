@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.networking.socket.server.GameObserverHandlerSocket;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -173,7 +174,7 @@ public class HandleObserver implements Serializable {
     public void notify_startGame(Game game){
         try {
             observer.startGame(new GameView(game));
-        }catch(RemoteException e){
+        }catch(IOException e){
             //
         }
     }

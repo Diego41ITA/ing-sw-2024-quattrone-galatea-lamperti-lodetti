@@ -294,10 +294,11 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     @Override
-    public void startGame(GameView game) throws RemoteException {
+    public void startGame(GameView game) throws IOException {
         setGameView(game);
         ui.show_gameStarting(game.getId());
         waitingForNewPlayers = false;
+        client.definePlayer(nickname);
         synchronized (lock){
             lock.notifyAll();
         }

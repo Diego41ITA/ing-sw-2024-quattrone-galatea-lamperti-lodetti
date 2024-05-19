@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.observer.GameObserver;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
 
     @Override
-    public void startGame(GameView game)throws RemoteException{
+    public void startGame(GameView game)throws IOException {
         flow.startGame(game);
     }
 

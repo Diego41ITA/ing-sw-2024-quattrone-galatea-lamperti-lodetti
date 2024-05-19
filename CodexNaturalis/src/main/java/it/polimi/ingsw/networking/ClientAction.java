@@ -38,5 +38,9 @@ public interface ClientAction {
     //prova
     void startGame() throws IOException;
 
+    //messaggi nuovi per risolvere il problema socket
+    void definePlayer(String nick) throws IOException;
+    void initializeTurn(String nick) throws IOException;
+
 }
 

@@ -8,7 +8,6 @@ import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.view.GameFlow;
 
-import java.util.concurrent.Semaphore;
 import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -30,10 +29,10 @@ public class GameController implements GameControllerInterface, Serializable {
 
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
+    public final HashMap<String, Integer> readiness = new HashMap<>();
 
     //private String clientNick = "invalidName";
 
-    private final Semaphore semaphore = new Semaphore(0);
 
     /**
      * Constructor of the class. It's called by {@link MainController} when creating a new game
@@ -101,42 +100,39 @@ public class GameController implements GameControllerInterface, Serializable {
     public void start_Game() throws RemoteException {
         this.game.setStatus(Status.ACTIVE);
 
+        this.initializeTable();
+
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_startGame(game);
         }
-        this.initializeTable();
-        for (Player p : game.getPlayers().keySet()) {
-            this.initializePlayers(p.getNick());
 
-            //va fermato
-            try {
-                semaphore.acquire();
-            } catch (InterruptedException e) {
-                throw new RemoteException();
-            }
-            //while(!clientNick.equals(p.getNick())){}
-            //this.clientNick = "invalidName";
-            this.getPossibleGoals(p.getNick());
+    }
 
-            //lo si ferma di nuovo
-            try {
-                semaphore.acquire();
-            } catch (InterruptedException e) {
-                throw new RemoteException();
-            }
-            //while(!clientNick.equals(p.getNick())){}
+    @Override
+    public void definePlayer(String nick) throws RemoteException{
+        this.initializePlayers(nick);
+        this.getPossibleGoals(nick);
+        this.initializeHandPlayer(nick);
+        //i player sono inizializzati.
+    }
 
-            this.initializeHandPlayer(p.getNick());
-        }
-
+    @Override
+    public synchronized void initializeTurn(String nick) throws RemoteException{
         //prova per sistemare turn
-        ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
-        Turn turn = new Turn(keysList);
-        turn.sort();
-        game.setTurn(turn);
+        boolean check = true;
+        for(String n: readiness.keySet())
+            if(readiness.get(n) < 2 )
+                check = false;
 
-        observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
+        if(check) {
+            ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
+            Turn turn = new Turn(keysList);
+            turn.sort();
+            game.setTurn(turn);
+
+            observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
+        }
     }
 
     /**
@@ -545,10 +541,16 @@ public class GameController implements GameControllerInterface, Serializable {
             }
         }
         game.setPlayers(players);
+
+        readiness.put(nick, readiness.get(nick) + 1);
+
         observers.get(nick).notify_chooseGoal(game, card);
 
-        semaphore.release();
-        //clientNick = nick;
+        try {
+            this.initializeTurn(nick);
+        } catch (RemoteException e) {
+            System.out.println("something went wrong during turn initialization process");
+        }
     }
 
     /**
@@ -686,10 +688,15 @@ public class GameController implements GameControllerInterface, Serializable {
             if(entry.getKey().equals(nick))
                 allObs.notify_updateGameStations(game);
         }*/
+
+        readiness.put(nick, readiness.get(nick) + 1);
+
         observers.get(nick).notify_updateGameStations(game);
-        //rilascia un semaforo
-        semaphore.release();
-        //clientNick = nick;
+        try {
+            this.initializeTurn(nick);
+        } catch (RemoteException e) {
+            System.out.println("something went wrong in turn initialization process");
+        }
     }
 
     public void setGameStatus(Status status){
