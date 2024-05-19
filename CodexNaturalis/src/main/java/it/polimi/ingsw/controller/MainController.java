@@ -13,6 +13,9 @@ import java.rmi.RemoteException;
 import java.util.*;
 import java.io.Serializable;
 
+/**
+ * this class exposes all the MainControllerInterface methods to operate on a list of GameController
+ */
 public class MainController implements Serializable, MainControllerInterface /*, Runnable*/ {
     /**
      * List of all the activeGames, represented by their controllers
@@ -115,13 +118,6 @@ public class MainController implements Serializable, MainControllerInterface /*,
 
                 obs.randomGameJoined(randomAvailableGame.getGameId());
 
-                /*if (randomAvailableGame.checkIfStart()){
-                    for (Player p : randomAvailableGame.getPlayers().keySet()){
-                        HandleObserver obs2 = randomAvailableGame.getObservers().get(p.getNick());
-                        obs2.notify_startGame(randomAvailableGame.returnGame());
-
-                    }
-                }*/
 
                 return randomAvailableGame;
             } catch (MaxPlayersInException e) {

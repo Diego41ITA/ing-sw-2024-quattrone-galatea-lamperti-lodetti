@@ -14,10 +14,6 @@ import java.rmi.RemoteException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//IMPORTANTISSIMO!!!! LATO SERVER FAREMO UNA HASHMAP DI CLIENT E NICKNAME,
-// LA MAGGIORPARTE DI QUESTI METODI SI BASA SUL NICKNAME
-//DEL GIOCATORE E NON SULL'OGGETTO PLAYER
-
 /**
  * This class handles all the operations relative to a single CodexNaturalis game, exposing
  * several methods that are called by {@link GameFlow}. Each method is also in charge to correctly
@@ -67,7 +63,11 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //lasciate questo metodo che mi serve per i test sul controller
+    /**
+     * This class is only used for test.
+     * @deprecated
+     * @return the game saved in this controller
+     */
     public Game returnGame(){
         return game;
     }
@@ -81,6 +81,10 @@ public class GameController implements GameControllerInterface, Serializable {
        observers.remove(p.getNick());
     }
 
+    /**
+     * this method is called by this.definePlayer(nick) and it notifies the client that the initial card got drawn.
+     * @param nick is the name of the client that it will notify.
+     */
     @Override
     public void initializePlayers(String nick){
 
@@ -96,7 +100,6 @@ public class GameController implements GameControllerInterface, Serializable {
      * Method that sets the {@link GameController#game} Status to {@link Status#ACTIVE} and notify all the Players about
      * the beginning.
      */
-    //prova
     public void start_Game() throws RemoteException {
         this.game.setStatus(Status.ACTIVE);
 
@@ -109,14 +112,24 @@ public class GameController implements GameControllerInterface, Serializable {
 
     }
 
+    /**
+     * this method is used to initialize the player object to avoid NullPointerException.
+     * @param nick it's the name of the client that has called this method.
+     * @throws RemoteException
+     */
     @Override
     public void definePlayer(String nick) throws RemoteException{
         this.initializePlayers(nick);
         this.getPossibleGoals(nick);
         this.initializeHandPlayer(nick);
-        //i player sono inizializzati.
+        //player are initialized now.
     }
 
+    /**
+     * this method initializes the Turn object only after all the players have been initialized.
+     * @param nick
+     * @throws RemoteException
+     */
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
         //prova per sistemare turn
@@ -136,12 +149,12 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     /**
-     * Set the Player's color
+     * Set the Player's color and it notifies the player (nick).
      * @param color {@link Color} chosen by the Player
      * @param name nickname of the Player
      */
     @Override
-    public void setColor(String color, String name) {
+    public synchronized void setColor(String color, String name) {
         synchronized (this.game) {
             PointTable pointTable = game.getPointTable();
             HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
@@ -241,10 +254,6 @@ public class GameController implements GameControllerInterface, Serializable {
             }
         }
     }
-
-    //pescaggio da deck:
-    //immagino che il giocatore inserisca una stringa da riga di comando in cui dice il tipo di deck da
-    // cui vuole pescare
 
     /**
      * This method draw a PlayableCard from tableOfDecks and put it in the hand of the player.
@@ -348,15 +357,13 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param card  The card to be modified.
      * @param value A boolean flag: true for front, false for back.
      */
-    //@Override
     public void cardIsFrontChanger(Card card, Boolean value) {
         card.changeIsFront(value);
     }
 
     /**
-     * This method initializes the {@link TableOfDecks} and the {@link Turn} object
+     * This method initializes the {@link TableOfDecks}
      */
-    //@Override
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
         table.initializeTable();
@@ -376,12 +383,9 @@ public class GameController implements GameControllerInterface, Serializable {
      * This method checks if the 20 point threshold is reached.
      * @return A boolean flag representing the reaching of the threshold.
      */
-    //@Override
     public boolean notify20PointReached() {
         return game.getPointTable().notify20PointReached();
     }
-
-    //calcola i punti dei giocatori attraverso le carte obbiettivo, aggiorna la point table e ritorna  il giocatore con il punteggio più alto
 
     /**
      * This method calculates each Player's point and updates the {@link PointTable}.
@@ -432,7 +436,8 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     /**
-     * This method allows the transition to the next player at the end of each turn
+     * This method allows the transition to the next player at the end of each turn it's invoked by the client.
+     * This method also notifies all the player about the new current player.
      */
     @Override
     public void goOn() {
@@ -457,12 +462,6 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
-    //forse inutile vedere come funziona il patter observable
-    //ritorna le carte visibili sul TableOfDecks(quelle che il giocatore può pescare)
-    public synchronized ArrayList<Card> getCardsOnTableOfDecks() {
-        return game.getTableOfDecks().getCards();
-    }
-
     /**
      * Support method for the internal logic of {@link GameController} class. It calculates the score of a specific gold card.
      * @param card Specified card.
@@ -470,7 +469,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @return Calculated points.
      */
     //@Override
-    public int calculateGoldPoints(GoldCard card, String nick) {
+    private int calculateGoldPoints(GoldCard card, String nick) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         for (Player player : players.keySet()) {
@@ -487,7 +486,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param point Amount of point to be added.
      */
     //@Override
-    public void addPoints2Player(String nick, int point) {
+    private void addPoints2Player(String nick, int point) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         PointTable pointTable = game.getPointTable();
@@ -506,6 +505,7 @@ public class GameController implements GameControllerInterface, Serializable {
 
     }
 
+    //----------------------------------------------------------------------------------------------------------
     /**
      * Getter method.
      * @param nick Nickname of the Player.
@@ -522,9 +522,12 @@ public class GameController implements GameControllerInterface, Serializable {
         }
         return null;
     }
+    //----------------------------------------------------------------------------------------------------------
+
 
     /**
-     * This method sets the personal {@link GoalCard}s of a Player.
+     * This method sets the personal {@link GoalCard}s of a Player. It is invoked by the player and it notifies him
+     * that the card got actually chosen.
      * @param goals The two possible {@link GoalCard}.
      * @param num The index of the selected {@link GoalCard}
      * @param nick The nickname of the Player.
@@ -554,7 +557,7 @@ public class GameController implements GameControllerInterface, Serializable {
     }
 
     /**
-     * This method initializes the Player's hand
+     * This method initializes the Player's hand, it is called by GameController.definePlayer(nick).
      * @param nick Nickname of the Player.
      */
     @Override
@@ -578,11 +581,8 @@ public class GameController implements GameControllerInterface, Serializable {
             }
 
         }
-        observers.get(nick).notify_updatedHandAndTable(game, nick);//capire che argomenti mettere
+        observers.get(nick).notify_updatedHandAndTable(game, nick);
     }
-
-    //ritorna la lista di goalcard che l'utente può scegliere(dubbio, bisogna creare qualcosa del genere nel model e poi usare il
-    //pattern observer?)
 
     /**
      * This method draws two {@link GoalCard} from the {@link TableOfDecks} to let the Player decide which one to choose.
@@ -598,20 +598,13 @@ public class GameController implements GameControllerInterface, Serializable {
         this.game.setTableOfDecks(table);
         HandleObserver observer = observers.get(nickname);
         observer.notify_goalCardsDrawed(goals);
-        /*
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver obs = entry.getValue();
-            obs.notify_DrawCard(game);
-        }
-         */
     }
 
     /**
-     * This method adds a Player to a {@link Game}
+     * This method adds a Player to a {@link Game} and notify other players that a new player joined the game.
      * @param p Player to be added
      * @throws MaxPlayersInException
      */
-    //@Override
     public void addPlayer(Player p) throws MaxPlayersInException {
         game.addPlayer(p);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
@@ -628,17 +621,11 @@ public class GameController implements GameControllerInterface, Serializable {
         return game.getPlayers().size()==game.getMaxNumberPlayer();
     }
 
-    //metodo che ritorna i punti della carta risorsa
-    //@Override
-    public int getResourcePoint(ResourceCard card){
-        return card.getNumberOfPoints();
-    }
+    //----------------------------------------------------------------------------------------------------------
     //ritorna id del gioco
-    //@Override
     public String getGameId() {
         return game.getId();
     }
-    //@Override
     public HashMap<Player, Boolean> getPlayers(){
         return (HashMap<Player, Boolean>) game.getPlayers();
     }
@@ -646,6 +633,8 @@ public class GameController implements GameControllerInterface, Serializable {
     public Status getStatus(){
         return this.game.getStatus();
     }
+    //----------------------------------------------------------------------------------------------------------
+
 
     /**
      * This method reconnects a {@link Player} to a {@link Game}
@@ -667,7 +656,14 @@ public class GameController implements GameControllerInterface, Serializable {
         this.game.removePlayer(nick);
     }
 
-    //la carta iniziale si trova in mano al giocatore come prima carta
+    /**
+     * This method is called by the client when he chose the initial card (the side where he likes to place it);
+     * and it sets the card on the player's GameStation and at the end it notifies the client about the success
+     * of the operation.
+     * @param nick it is the name of the client
+     * @param card it is the initial card to place
+     * @param front indicates if the card needs to be displaced on its front or its back.
+     */
     @Override
     public void setGameStation(String nick, InitialCard card, boolean front) {
 
@@ -683,11 +679,6 @@ public class GameController implements GameControllerInterface, Serializable {
                 this.game.setTableOfDecks(table);
             }
         }
-        /*for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver allObs = entry.getValue();
-            if(entry.getKey().equals(nick))
-                allObs.notify_updateGameStations(game);
-        }*/
 
         readiness.put(nick, readiness.get(nick) + 1);
 
@@ -696,14 +687,6 @@ public class GameController implements GameControllerInterface, Serializable {
             this.initializeTurn(nick);
         } catch (RemoteException e) {
             System.out.println("something went wrong in turn initialization process");
-        }
-    }
-
-    public void setGameStatus(Status status){
-        this.game.setStatus(status);
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver allObs = entry.getValue();
-            allObs.notify_changedGameStatus(game);
         }
     }
 
@@ -722,8 +705,15 @@ public class GameController implements GameControllerInterface, Serializable {
         }
     }
 
+    /**
+     * @return it returns the number of online player.
+     */
     public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
 
+    /**
+     * it's a getter method for the observer map
+     * @return the observer map: so the name and the object that's used to notify the observer.
+     */
     public HashMap<String, HandleObserver> getObservers() {
         return observers;
     }
