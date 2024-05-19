@@ -9,12 +9,16 @@ public class InputGui implements GetInput{
     //non hanno un valori validi aspettano a restiture qualcosa
     //esempio:
     @Override
-    public String getNickName() {
-        while(!(multipleResponses.get(multipleResponses.size()-1).length()>1)){
-           //ciclo infinito fin quando non ho un nome(cioè una stringa di lunghezza >1)
+    public int getNumberOfPlayer() {
+        //ciclo infinito fin quando l'ultimo elemento dell'array non è un numero
+        while(!(Character.isDigit(multipleResponses.get(multipleResponses.size()-1).charAt(0)))){
         }
-        //ritorno il nome
-        return multipleResponses.get(multipleResponses.size()-1);
+        //ritorno il numero
+        return Integer.parseInt(multipleResponses.get(multipleResponses.size()-1));
+    }
+    @Override
+    public String getNickName() { return null;
+
     }
 
     @Override
@@ -27,8 +31,4 @@ public class InputGui implements GetInput{
         return null;
     }
 
-    @Override
-    public int getNumberOfPlayer() {
-        return 0;
-    }
 }
