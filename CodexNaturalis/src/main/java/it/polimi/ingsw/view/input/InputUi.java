@@ -34,5 +34,15 @@ public class InputUi implements GetInput{
         }
     }
 
+    @Override
+    public boolean getSideOfTheCard() {
+        return false;
+    }
+
+    @Override
+    public int getCardId() {
+        return 0;
+    }
+
 
 }

@@ -245,5 +245,13 @@ public class Gui extends Application implements UI {
 
     }
 
+    @Override
+    public void show_waitingOtherPlayers() {
+        System.out.println("WAITING FOR OTHER PLAYERS...");
+    }
 
+    @Override
+    public void show_requestToLeave(){
+        System.out.println("Press any button to leave the game...");
+    }
 }

@@ -16,6 +16,18 @@ public class InputGui implements GetInput{
         //ritorno il numero
         return Integer.parseInt(multipleResponses.get(multipleResponses.size()-1));
     }
+
+    //devono essere implementati
+    @Override
+    public boolean getSideOfTheCard() {
+        return false;
+    }
+
+    @Override
+    public int getCardId() {
+        return 0;
+    }
+
     @Override
     public String getNickName() { return null;
 

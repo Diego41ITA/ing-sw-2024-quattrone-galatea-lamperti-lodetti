@@ -156,7 +156,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     }
 
     private void askToLeave(){
-        ui.show_message("press any button to leave the game");
+        ui.show_requestToLeave();
         //Bisogna verificare che la ui sia una cli
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -371,7 +371,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
-        ui.show_message("wait for other players to initialize their GameStation.");
+        ui.show_waitingOtherPlayers();
     }
 
     @Override

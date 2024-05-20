@@ -89,4 +89,6 @@ public interface UI {
     public void show_connectionError();
     public void show_invalidInput();
     public void show_invalidCommand();
+    public void show_waitingOtherPlayers();
+    public void show_requestToLeave();
 }
