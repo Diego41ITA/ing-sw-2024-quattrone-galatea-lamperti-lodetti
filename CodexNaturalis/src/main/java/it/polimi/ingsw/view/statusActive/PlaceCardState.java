@@ -9,8 +9,10 @@ import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -64,9 +66,12 @@ public class PlaceCardState extends StateActive{
                         isBooleanValid = false;}
                 }while (!isBooleanValid);
 
-                ui.show_requestCoordinates();
+                Point coord;
+                do {
+                    ui.show_requestCoordinates();
+                    coord = inputGetter.getCoordinate();
+                }while(!checkCoordinate(coord));
 
-                Point coord = inputGetter.getCoordinate();  //getCoordinate()
                 client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
                 flag = true;
             } catch (IOException e) {
@@ -85,5 +90,10 @@ public class PlaceCardState extends StateActive{
     @Override
     public void setView(GameView view) {
         this.view = view;
+    }
+
+    private boolean checkCoordinate(Point coord){
+        ArrayList<Point> freeCoords = (ArrayList<Point>) this.view.getMyGameStation(nickName).getFreeCords();
+        return freeCoords.contains(coord);
     }
 }

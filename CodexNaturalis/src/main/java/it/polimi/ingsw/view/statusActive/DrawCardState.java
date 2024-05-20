@@ -30,12 +30,17 @@ public class DrawCardState extends StateActive{
     @Override
     public void execute(){ //manca exception in gameController
         Scanner scanner = new Scanner(System.in);
+        String typeOfCard, input;
         ui.show_tableOfDecks(view);
-        ui.show_requestTypeToDraw();
-        String typeOfCard = inputGetter.getTypeOfCard();
+        do {
+            ui.show_requestTypeToDraw();
+            typeOfCard = inputGetter.getTypeOfCard();
+        }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));
 
         ui.show_drawFromWhere();
-        String input = inputGetter.getDrawFromDeckOrTable().toUpperCase(); //getDrawFromDeckOrTable()
+        do {
+            input = inputGetter.getDrawFromDeckOrTable().toUpperCase(); //getDrawFromDeckOrTable()
+        }while(!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("B")));
 
         switch (input){
             case "A":

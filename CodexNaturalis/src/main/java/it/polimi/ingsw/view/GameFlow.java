@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
@@ -16,13 +17,14 @@ import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
@@ -329,11 +331,22 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
-        ui.show_requestGoalCard(cards);
 
-        int cardId = input.getCardId();
+        int cardId;
+        do {
+            ui.show_requestGoalCard(cards);
+            cardId = input.getCardId();
+        }while(!checkIfValidId(cards, cardId));
+
+        ui.show_waitingOtherPlayers();
 
         client.chooseGoal(cards, cardId, nickname);
+    }
+    private boolean checkIfValidId(ArrayList<GoalCard> cards, int cardId){
+        List<Integer> id = cards.stream()
+                .map(Card::getCardId)
+                .toList();
+        return id.contains(cardId);
     }
 
     @Override
@@ -345,7 +358,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
         ui.show_initialCard(card);
-        Boolean isFrontOrBack = input.getSideOfTheCard();
+        boolean isFrontOrBack;
+        isFrontOrBack = input.getSideOfTheCard();
         client.setGameStation(nickname, card, isFrontOrBack);
     }
 
