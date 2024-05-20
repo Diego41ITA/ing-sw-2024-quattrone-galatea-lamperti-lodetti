@@ -2,7 +2,9 @@ package it.polimi.ingsw.view.input;
 
 import it.polimi.ingsw.view.GUI.MultipleResponses;
 
-public class InputGui implements GetInput{
+import java.awt.*;
+
+public class InputGui implements InputParser {
     //questa arrayList contiene i valori degli input che l'utente ha inserito tramite i bottoni della gui
     protected MultipleResponses multipleResponses = new MultipleResponses();
     //idea: creare dei metodi che ciclano sugli ultimi elementi dell'array multipleResponses e fin quando
@@ -26,6 +28,26 @@ public class InputGui implements GetInput{
     @Override
     public int getCardId() {
         return 0;
+    }
+
+    @Override
+    public String getColor() {
+        return null;
+    }
+
+    @Override
+    public String getTypeOfCard() {
+        return null;
+    }
+
+    @Override
+    public String getDrawFromDeckOrTable() {
+        return null;
+    }
+
+    @Override
+    public Point getCoordinate() {
+        return null;
     }
 
     @Override

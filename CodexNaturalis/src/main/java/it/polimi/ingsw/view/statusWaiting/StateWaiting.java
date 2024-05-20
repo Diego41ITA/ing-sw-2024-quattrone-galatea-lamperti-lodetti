@@ -1,13 +1,13 @@
 package it.polimi.ingsw.view.statusWaiting;
 
 import it.polimi.ingsw.view.GameFlow;
-import it.polimi.ingsw.view.input.GetInput;
+import it.polimi.ingsw.view.input.InputParser;
 
 public abstract class StateWaiting {
 
     public static GameFlow flow;
-    public static GetInput inputGetter;
-    protected StateWaiting(GameFlow flow, GetInput input){
+    public static InputParser inputGetter;
+    protected StateWaiting(GameFlow flow, InputParser input){
         StateWaiting.flow = flow;
         StateWaiting.inputGetter = input;
     }

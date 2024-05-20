@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.statusWaiting;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
-import it.polimi.ingsw.view.input.GetInput;
+import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -14,7 +14,7 @@ public class StateMenu extends StateWaiting {
     private ClientAction client;
     private String nickName;
 
-    public StateMenu(GameFlow flow, GetInput input) {
+    public StateMenu(GameFlow flow, InputParser input) {
         super(flow, input);
         ui = flow.getUi();
         client = flow.getClient();

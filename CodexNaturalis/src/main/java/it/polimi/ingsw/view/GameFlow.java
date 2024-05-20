@@ -10,7 +10,7 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.view.input.GetInput;
+import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
@@ -24,7 +24,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
@@ -38,7 +37,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private GameView view;
     public boolean inGame;
 
-    private GetInput input;
+    private InputParser input;
 
     private String winner = null;
 
@@ -47,10 +46,10 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //metto 4 attributi State
     private StateWaiting state1 = new StateMenu(this, this.input);
-    private StateActive state2 = new PlaceCardState(this);
+    private StateActive state2 = new PlaceCardState(this, this.input);
 
     //costruttore
-    public GameFlow(UI ui, GetInput input){
+    public GameFlow(UI ui, InputParser input){
         this.ui = ui;
         this.input = input;
         inGame = false;
@@ -99,7 +98,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                 } else if (view.getStatus() == Status.ACTIVE) {
                     if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
                         if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) { //da inserire gestione caso che non è il tuo turno
-                            state2 = new PlaceCardState(this);
+                            state2 = new PlaceCardState(this, input);
                             state2.setView(view);
                             state2.execute();
                             myTurn = false;
@@ -198,7 +197,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     //serve a inizializzare gli stati
     public void initializeStates(){
         state1 = new StateMenu(this, this.input);
-        state2 = new PlaceCardState(this);
+        state2 = new PlaceCardState(this, this.input);
     }
 
     //serve ad andare allo waiting state successivo
@@ -319,7 +318,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateTableAndTurn(GameView game) throws RemoteException {
         setGameView(game);
-        state2 = new PlaceCardState(this);
+        state2 = new PlaceCardState(this, input);
         ui.show_tableOfDecks(game);
     }
 
@@ -331,8 +330,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
         ui.show_requestGoalCard(cards);
-        Scanner scanner = new Scanner(System.in);
-        int cardId = scanner.nextInt();
+
+        int cardId = input.getCardId();
 
         client.chooseGoal(cards, cardId, nickname);
     }
@@ -345,10 +344,8 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     @Override
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
-        Scanner scanner = new Scanner(System.in);
-        Boolean isFrontOrBack = true;
         ui.show_initialCard(card);
-        isFrontOrBack = scanner.nextBoolean();
+        Boolean isFrontOrBack = input.getSideOfTheCard();
         client.setGameStation(nickname, card, isFrontOrBack);
     }
 
@@ -362,7 +359,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         if(game.getCurrentPlayer().getNick().equals(nickname))
             myTurn = true;
     }
-
     @Override
     public void invalidCardPlacement() throws RemoteException {
         ui.show_invalidPlay();

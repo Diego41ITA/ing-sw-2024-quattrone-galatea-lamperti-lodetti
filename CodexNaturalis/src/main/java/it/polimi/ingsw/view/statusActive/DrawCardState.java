@@ -5,8 +5,10 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -17,8 +19,8 @@ public class DrawCardState extends StateActive{
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
-    public DrawCardState(GameFlow flow){
-        super(flow);
+    public DrawCardState(GameFlow flow, InputParser input){
+        super(flow, input);
         this.view = flow.getView();
         this.ui = flow.getUi();
         this.client = flow.getClient();
@@ -30,10 +32,10 @@ public class DrawCardState extends StateActive{
         Scanner scanner = new Scanner(System.in);
         ui.show_tableOfDecks(view);
         ui.show_requestTypeToDraw();
-        String typeOfCard = scanner.nextLine();
+        String typeOfCard = inputGetter.getTypeOfCard();
 
         ui.show_drawFromWhere();
-        String input = scanner.nextLine();
+        String input = inputGetter.getDrawFromDeckOrTable().toUpperCase(); //getDrawFromDeckOrTable()
 
         switch (input){
             case "A":
@@ -47,7 +49,7 @@ public class DrawCardState extends StateActive{
                 Optional<Card> cardCheck;
                 do {
                     ui.show_requestCardId();
-                    int cardId = scanner.nextInt();
+                    int cardId = inputGetter.getCardId();
 
                     cardCheck = view.getTableOfDecks().getCards().stream()
                             .filter(card -> card.getCardId()==cardId)

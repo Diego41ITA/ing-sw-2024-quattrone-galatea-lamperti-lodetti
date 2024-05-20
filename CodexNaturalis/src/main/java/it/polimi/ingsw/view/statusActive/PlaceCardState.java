@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.InputParser;
+import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,8 +24,8 @@ public class PlaceCardState extends StateActive{
     private ClientAction client;
     private String nickName;
 
-    public PlaceCardState(GameFlow flow) {
-        super(flow);
+    public PlaceCardState(GameFlow flow, InputParser input) {
+        super(flow, input);
         view = flow.getView();
         ui = flow.getUi();
         client = flow.getClient();
@@ -32,7 +34,6 @@ public class PlaceCardState extends StateActive{
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         Optional<PlayableCard> cardCheck;
         boolean isFrontOrBack = true;
         boolean isBooleanValid = false;
@@ -46,7 +47,7 @@ public class PlaceCardState extends StateActive{
             try {
                 do {
                     ui.show_requestCardId();
-                    int cardIdInput = scanner.nextInt();
+                    int cardIdInput = inputGetter.getCardId();
 
                     cardCheck = view.getCurrentPlayer().showCard().stream()
                             .filter(card -> card.getCardId() == cardIdInput)
@@ -57,7 +58,7 @@ public class PlaceCardState extends StateActive{
                 do {
                     ui.show_requestSide();
                     try {
-                        isFrontOrBack = scanner.nextBoolean();
+                        isFrontOrBack = inputGetter.getSideOfTheCard();
                         isBooleanValid = true;
                     }catch (InputMismatchException e){
                         isBooleanValid = false;}
@@ -65,9 +66,7 @@ public class PlaceCardState extends StateActive{
 
                 ui.show_requestCoordinates();
 
-                int x = scanner.nextInt();
-                int y = scanner.nextInt();
-                Point coord = new Point(x, y);
+                Point coord = inputGetter.getCoordinate();  //getCoordinate()
                 client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
                 flag = true;
             } catch (IOException e) {
@@ -80,7 +79,7 @@ public class PlaceCardState extends StateActive{
     }
 
     @Override
-    public void nextState() {new DrawCardState(flow).execute();
+    public void nextState() {new DrawCardState(flow, StateWaiting.inputGetter).execute();
     }
 
     @Override
