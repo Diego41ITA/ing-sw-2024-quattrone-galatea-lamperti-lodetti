@@ -1,6 +1,7 @@
 package it.polimi.ingsw.parse;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.card.Card;
+import it.polimi.ingsw.parse.*;
 import com.google.gson.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class SaverWriter {
     /**
      * this method save the object game on the correct file. It has the precondition that the directory
-     * (where the game is going to be saved) should already exists (as for the file)
+     * (where the game is going to be saved) should already exist (as for the file)
      * @param game the object you want to save
      * @return it returns true if and only if the object is correctly saved.
      */
@@ -21,7 +22,7 @@ public class SaverWriter {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
                 .create();
-        try(FileWriter writer = new FileWriter("resources/directory/file")){
+        try(FileWriter writer = new FileWriter(Crafter.getGameFilePath(game.getId()))){
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
             return true;
@@ -36,11 +37,11 @@ public class SaverWriter {
      * @param player it's the object that you want to be saved
      * @return it returns true if and only if the object it's correctly saved
      */
-    public static boolean savePlayer(Player player){
+    public static boolean savePlayer(Game game, Player player){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
                 .create();
-        try(FileWriter writer = new FileWriter("resources/directory/file")){
+        try(FileWriter writer = new FileWriter(Crafter.getPlayerFilePath(player.getNick(), game.getId()))){
             String serializedObject = gson.toJson(player);
             writer.write(serializedObject);
             return true;

@@ -28,7 +28,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
     private static MainController mainController;
 
     /**
-     * Useful to generate a random Number
+     * Useful to generate a random number
      */
     private final Random random = new Random();
 
