@@ -195,5 +195,55 @@ public class Gui extends Application implements UI {
 
     }
 
+    @Override
+    public void show_requestCardId() {
+
+    }
+
+    @Override
+    public void show_winner(String name) {
+
+    }
+
+    @Override
+    public void show_requestTypeToDraw() {
+
+    }
+
+    @Override
+    public void show_drawFromWhere() {
+
+    }
+
+    @Override
+    public void show_invalidChoice() {
+
+    }
+
+    @Override
+    public void show_requestSide() {
+
+    }
+
+    @Override
+    public void show_requestCoordinates() {
+
+    }
+
+    @Override
+    public void show_connectionError() {
+
+    }
+
+    @Override
+    public void show_invalidInput() {
+
+    }
+
+    @Override
+    public void show_invalidCommand() {
+
+    }
+
 
 }

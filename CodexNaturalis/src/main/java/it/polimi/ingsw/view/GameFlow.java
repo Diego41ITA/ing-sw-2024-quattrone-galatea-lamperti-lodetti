@@ -117,7 +117,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                     }
                 } else if (view.getStatus() == Status.SUSPENDED) {
                     ui.show_GameStatus(view);
-                    ui.show_message("this game is temporally suspended :(\n");
                     ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
                     ui.show_gameStation(view);
                     ui.show_playerHand(view);
@@ -145,8 +144,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
                         }
                     }
 
-
-                    ui.show_message("the winner is: " + winner);
+                    ui.show_winner(winner);
                     if(winner.equals(nickname))
                         ui.show_youWin();
                     else
@@ -336,7 +334,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
 
-        ui.show_message("waiting for other players...");
         client.chooseGoal(cards, cardId, nickname);
     }
 
@@ -404,13 +401,4 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             lock.notify();
         }
     }
-
-    //serve la notifica per il vincitore
-
-
-    //bisogna implementare le robe di GameObserver e bisogna capire se gestire con eventi che contengono il tipo di
-    //notifica o che fanno operazioni dirette in teoria sarebbe meglio utilizzare una coda ordinata poichè in questo
-    //modo ogni evento è gestito dallo stato specifico.
-    //
-
 }

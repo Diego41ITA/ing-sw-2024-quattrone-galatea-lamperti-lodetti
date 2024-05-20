@@ -29,21 +29,10 @@ public class DrawCardState extends StateActive{
     public void execute(){ //manca exception in gameController
         Scanner scanner = new Scanner(System.in);
         ui.show_tableOfDecks(view);
-        ui.show_message("""
-                WHICH TYPE OF CARD DO YOU WANT TO DRAW:
-                
-                RESOURCE
-                GOLD
-                """);
+        ui.show_requestTypeToDraw();
         String typeOfCard = scanner.nextLine();
 
-        ui.show_message("""
-                FROM WHERE DO YOU WANT DRAW A CARD:
-                
-                A-DECK
-                B-TABLE
-                
-                """);
+        ui.show_drawFromWhere();
         String input = scanner.nextLine();
 
         switch (input){
@@ -57,7 +46,7 @@ public class DrawCardState extends StateActive{
             case "B":
                 Optional<Card> cardCheck;
                 do {
-                    ui.show_message("ENTER CARD ID");
+                    ui.show_requestCardId();
                     int cardId = scanner.nextInt();
 
                     cardCheck = view.getTableOfDecks().getCards().stream()
@@ -73,9 +62,7 @@ public class DrawCardState extends StateActive{
                 }
                 break;
             default:
-                ui.show_message("""
-                        INVALID CHOICE...
-                        """);
+                ui.show_invalidChoice();
                 this.execute();
         }
         nextState();

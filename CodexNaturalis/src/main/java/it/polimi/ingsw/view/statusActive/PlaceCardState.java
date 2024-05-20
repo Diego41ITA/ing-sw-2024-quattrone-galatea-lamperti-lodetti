@@ -45,9 +45,7 @@ public class PlaceCardState extends StateActive{
         while(!flag) {
             try {
                 do {
-                    ui.show_message("""
-                    CHOOSE A CARD ID:
-                    """);
+                    ui.show_requestCardId();
                     int cardIdInput = scanner.nextInt();
 
                     cardCheck = view.getCurrentPlayer().showCard().stream()
@@ -57,11 +55,7 @@ public class PlaceCardState extends StateActive{
                 }while (!cardCheck.isPresent());
 
                 do {
-                    ui.show_message("""
-                YOU WANNA PLAY IT FRONT OR BACK:
-                    
-                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
-                """);
+                    ui.show_requestSide();
                     try {
                         isFrontOrBack = scanner.nextBoolean();
                         isBooleanValid = true;
@@ -69,11 +63,7 @@ public class PlaceCardState extends StateActive{
                         isBooleanValid = false;}
                 }while (!isBooleanValid);
 
-                ui.show_message("""
-                CHOOSE A COORD:
-                
-                ENTER X COORDINATE THAN Y COORDINATE:
-                """);
+                ui.show_requestCoordinates();
 
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();

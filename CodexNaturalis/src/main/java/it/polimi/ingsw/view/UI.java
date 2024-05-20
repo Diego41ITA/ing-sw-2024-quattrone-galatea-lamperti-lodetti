@@ -77,4 +77,16 @@ public interface UI {
     public void show_youWin();
     public void show_youLose();
     public void show_requestGoalCard(ArrayList<GoalCard> cards);
+    public void show_requestCardId();
+    public void show_winner(String name);
+
+    public void show_requestTypeToDraw();
+    public void show_drawFromWhere();
+    public void show_invalidChoice();
+
+    public void show_requestSide();
+    public void show_requestCoordinates();
+    public void show_connectionError();
+    public void show_invalidInput();
+    public void show_invalidCommand();
 }

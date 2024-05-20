@@ -814,9 +814,14 @@ public class Cli implements UI {
                        ┌───────────│     🍄    └────────────┘
                        │     🍄    └────────────┘
                        └────────────┘
-                       """;
-        }else if (checkInterface instanceof DiagonalInsectCheck){
-            return """
+                       """;System.out.println(
+
+            );
+        }else if (System.out.println(
+
+        );e instanceof DiagonalInsectCheck){
+            return """System.out.println(
+                       );
                        ┌────────────┐
                        │     🦋    ┌────────────┐
                        └───────────│     🦋    ┌────────────┐
@@ -920,5 +925,76 @@ public class Cli implements UI {
         }
         stringBuilder.append("ENTER CARD ID:\n");
         System.out.println(stringBuilder.toString());
+    }
+
+    @Override
+    public void show_requestCardId() {
+        System.out.println("ENTER CARD ID:");
+    }
+
+    @Override
+    public void show_winner(String winner){
+        show_message("the winner is: " + winner);
+    }
+
+    @Override
+    public void show_requestTypeToDraw() {
+        show_message("""
+                WHICH TYPE OF CARD DO YOU WANT TO DRAW:
+                
+                RESOURCE
+                GOLD
+                """);
+    }
+
+    @Override
+    public void show_drawFromWhere() {
+        show_message("""
+                FROM WHERE DO YOU WANT DRAW A CARD:
+                
+                A-DECK
+                B-TABLE
+                
+                """);
+    }
+
+    @Override
+    public void show_invalidChoice() {
+        show_message("""
+                        INVALID CHOICE...
+                        """);
+    }
+
+    @Override
+    public void show_requestSide() {
+        System.out.println("""
+                YOU WANNA PLAY IT FRONT OR BACK:
+                    
+                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
+                """);
+    }
+
+    @Override
+    public void show_requestCoordinates() {
+        System.out.println("""
+                CHOOSE A COORD:
+                
+                ENTER X COORDINATE THAN Y COORDINATE:
+                """);
+    }
+
+    @Override
+    public void show_connectionError() {
+        System.out.println("CONNECTION ERROR, GAME OVER...");
+    }
+
+    @Override
+    public void show_invalidInput() {
+        System.out.println("INVALID INPUT\n");
+    }
+
+    @Override
+    public void show_invalidCommand() {
+        System.out.println("INVALID COMMAND\n");
     }
 }
