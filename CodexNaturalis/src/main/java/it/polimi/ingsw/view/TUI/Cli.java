@@ -814,13 +814,10 @@ public class Cli implements UI {
                        ┌───────────│     🍄    └────────────┘
                        │     🍄    └────────────┘
                        └────────────┘
-                       """;System.out.println(
+                       """;
 
-            );
-        }else if (System.out.println(
-
-        );e instanceof DiagonalInsectCheck){
-            return """System.out.println(
+        }else if (checkInterface instanceof DiagonalInsectCheck){
+            return """
                        );
                        ┌────────────┐
                        │     🦋    ┌────────────┐
