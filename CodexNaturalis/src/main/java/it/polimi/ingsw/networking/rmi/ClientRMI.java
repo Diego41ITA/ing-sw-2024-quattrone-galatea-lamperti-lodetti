@@ -31,16 +31,16 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     private String nickname;
     private Registry registry;
     private GameFlow flow;
-    private Boolean firstCard;
+    //private Boolean firstCard;
 
     //ora ho il costruttore piu dei metodi ausiliari.
     public ClientRMI(GameFlow flow) throws RemoteException {
-        super();
+        //super();
         gameObserverHandler = new GameObserverHandlerClient(flow);
         connect(); //connette il client con il server RMI
 
         this.flow = flow;
-        firstCard = true;
+        //firstCard = true;
     }
 
     public void connect(){
@@ -61,44 +61,39 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     @Override
     public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException, NotBoundException {
 
-        try {
-            registry = LocateRegistry.getRegistry("localhost", 1099);
-            request = (MainControllerInterface) registry.lookup("server name");
+
+            //registry = LocateRegistry.getRegistry("localhost", 1099);
+            //request = (MainControllerInterface) registry.lookup("server name");
             gameController = request.createGame(notificationGetter, nick, maxNumberOfPlayers);
             nickname = nick;
-        } catch (RemoteException e) {
-            System.out.println("qualcosa non è andato");
-            e.getMessage();
-            e.printStackTrace();
-            e.getCause();
-        }
+
     }
 
     @Override
     public void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException {
-        registry = LocateRegistry.getRegistry("localhost", 1099);
-        request = (MainControllerInterface) registry.lookup("server name");
+        //registry = LocateRegistry.getRegistry("localhost", 1099);
+        //request = (MainControllerInterface) registry.lookup("server name");
         request.leaveGame(notificationGetter, nick, idGame);
         gameController = null;
         nickname = null;
-        firstCard = false;
+        //firstCard = false;
     }
 
     @Override
     public void joinRandomGame(String nick) throws RemoteException, NotBoundException/*, NoAvailableGameToJoinException */{
-        registry = LocateRegistry.getRegistry("localhost", 1099);
-        request = (MainControllerInterface) registry.lookup("server name");
+        //registry = LocateRegistry.getRegistry("localhost", 1099);
+        // request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notificationGetter, nick);
         nickname = nick;
     }
 
     @Override
     public void rejoin(String nick, String gameId) throws RemoteException, NotBoundException {
-        registry = LocateRegistry.getRegistry("localhost", 1099);
-        request = (MainControllerInterface) registry.lookup("server name");
+        //registry = LocateRegistry.getRegistry("localhost", 1099);
+        //request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.rejoin(notificationGetter, nick, gameId);
         nickname = nick;
-        firstCard = false;
+        //firstCard = false;
     }
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)

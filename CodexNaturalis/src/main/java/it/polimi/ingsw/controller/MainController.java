@@ -10,13 +10,14 @@ import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 import java.io.Serializable;
 
 /**
  * this class exposes all the MainControllerInterface methods to operate on a list of GameController
  */
-public class MainController implements Serializable, MainControllerInterface /*, Runnable*/ {
+public class MainController extends UnicastRemoteObject implements /*Serializable,*/ MainControllerInterface /*, Runnable*/ {
     /**
      * List of all the activeGames, represented by their controllers
      */
@@ -35,7 +36,8 @@ public class MainController implements Serializable, MainControllerInterface /*,
     /**
      * Default constructor that initialize the ArrayList for the activeGames
      */
-    private MainController(){
+    private MainController() throws RemoteException{
+        super();
         this.activeGames = new ArrayList<GameController>();
     }
 
@@ -43,7 +45,7 @@ public class MainController implements Serializable, MainControllerInterface /*,
      * SingleTon pattern: allows to have only 1 instance of the MainController class
      * @return the only possible instance
      */
-    public synchronized static MainController getMainController(){
+    public synchronized static MainController getMainController() throws RemoteException {
         if(mainController == null)
             mainController = new MainController();
         return mainController;

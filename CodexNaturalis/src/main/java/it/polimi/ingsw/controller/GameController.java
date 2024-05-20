@@ -11,6 +11,7 @@ import it.polimi.ingsw.view.GameFlow;
 import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
  * several methods that are called by {@link GameFlow}. Each method is also in charge to correctly
  * notify the Players affected the action performed.
  */
-public class GameController implements GameControllerInterface, Serializable {
+public class GameController extends UnicastRemoteObject implements GameControllerInterface/*, Serializable*/ {
     /**The model of the game to control*/
     private final Game game;
 
@@ -35,7 +36,7 @@ public class GameController implements GameControllerInterface, Serializable {
      * @param id unique code associated with the specific game
      * @param maxNumPlayers maximum number of players in the game
      */
-    public GameController(String id, int maxNumPlayers) {
+    public GameController(String id, int maxNumPlayers) throws  RemoteException{
         game = new Game(id);
         game.setMaxNumberPlayer(maxNumPlayers);
 

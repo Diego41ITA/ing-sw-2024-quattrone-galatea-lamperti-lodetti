@@ -9,7 +9,7 @@ import it.polimi.ingsw.networking.socket.server.ServerS;
 public class MainServer {
     public static void main(String[] args){
         try{
-            ServerRMI.bind();
+            ServerRMI.startServer();
 
             ServerS socket = new ServerS();
             socket.startConnection(50000);
