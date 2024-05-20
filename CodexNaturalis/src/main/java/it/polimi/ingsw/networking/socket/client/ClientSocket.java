@@ -188,8 +188,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new Pass());
             completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
+            //waitForNotification();
+        }catch(IOException /*| InterruptedException*/ e){
             //nothing
         }
     }

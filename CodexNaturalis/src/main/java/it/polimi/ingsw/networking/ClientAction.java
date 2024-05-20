@@ -12,15 +12,50 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-//questa interfaccia indica tutte le azioni possibili effettuabili da un client
-//notate che rappresenta il punto di contatto tra ClientRMI e ClientSocket perchè entrambi la estenderanno
+/**
+ * this interface defines all the possible actions that a client can perform on the server.
+ */
 public interface ClientAction {
+    /**
+     * this method asks to create a new game
+     * @param nick the name of the client
+     * @param maxNumberOfPlayers the number max number of player that can join this game.
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws NotBoundException
+     */
     void createGame(String nick, int maxNumberOfPlayers) throws IOException, InterruptedException, NotBoundException;
 
+    /**
+     * this method asks to leave the game
+     * @param nick the name of the client
+     * @param idGame the id of the game that the client wants to leave
+     * @throws NotBoundException
+     * @throws IOException
+     * @throws InterruptedException
+     */
     void leaveGame(String nick, String idGame) throws NotBoundException, IOException, InterruptedException;
 
-    void joinRandomGame(String nick) throws IOException, InterruptedException, NotBoundException/*,NoAvailableGameToJoinException*/;
+    /**
+     * this method asks to join a random game
+     * @param nick the name of the client
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws NotBoundException
+     */
+    void joinRandomGame(String nick) throws IOException, InterruptedException, NotBoundException;
+
+    /**
+     * this method asks to rejoin a specific game
+     * @param nick the name of the client
+     * @param gameId the id of the game that the client wants to rejoin
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws NotBoundException
+     */
     void rejoin(String nick, String gameId) throws IOException, InterruptedException, NotBoundException;
+
+
     void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws IOException, illegalOperationException;
     void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) throws RemoteException;
     void goOn() throws IOException;
