@@ -22,10 +22,10 @@ public class SetNumberOfPlayersController extends InputGui {
         game.setText(id);
 
     }
-    //fin quando in multiplesResponses non abbiamo "setPlayers" allora il gameflow/GUiinput rimane nello stesso punto
+    //fin quando in multiplesResponses non abbiamo un numero valido allora il gameflow/GUiinput rimane nello stesso punto
     //nella GuiInput dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses
     public void getNumber(ActionEvent actionEvent) {
-        multipleResponses.add("setPlayers");
+        multipleResponses.add(textField.getText());
     }
 
 }
