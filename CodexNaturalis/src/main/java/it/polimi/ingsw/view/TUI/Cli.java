@@ -877,4 +877,48 @@ public class Cli implements UI {
         }
         return "error";
     }
+
+    @Override
+    public void show_youWin(){
+        show_message("""
+                                 
+                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄     ▄ ▄▄▄▄▄▄▄ ▄▄    ▄       ███\s
+                                █  █ █  █       █  █ █  █  █ █ ▄ █ █       █  █  █ █         █
+                                █  █▄█  █   ▄   █  █ █  █  █ ██ ██ █   ▄   █   █▄█ █   ██    █
+                                █       █  █ █  █  █▄█  █  █       █  █ █  █       █         █
+                                █▄     ▄█  █▄█  █       █  █       █  █▄█  █  ▄    █   ██    █
+                                  █   █ █       █       █  █   ▄   █       █ █ █   █         █
+                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄█ █▄▄█▄▄▄▄▄▄▄█▄█  █▄▄█      ███
+                                 
+                                                                """);
+    }
+
+    @Override
+    public void show_youLose(){
+        show_message("""
+                                
+                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄        ███
+                                █  █ █  █       █  █ █  █  █   █   █       █       █       █      █
+                                █  █▄█  █   ▄   █  █ █  █  █   █   █   ▄   █  ▄▄▄▄▄█▄     ▄█  ██  █
+                                █       █  █ █  █  █▄█  █  █   █   █  █ █  █ █▄▄▄▄▄  █   █        █
+                                █▄     ▄█  █▄█  █       █  █   █▄▄▄█  █▄█  █▄▄▄▄▄  █ █   █    ██  █
+                                  █   █ █       █       █  █       █       █▄▄▄▄▄█ █ █   █        █
+                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█         ███
+                                                                
+                                
+                                """);
+    }
+
+    @Override
+    public void show_requestGoalCard(ArrayList<GoalCard> cards){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("""
+                   CHOOSE A GOAL CARD
+                   """);
+        for(GoalCard goalCard : cards){
+            stringBuilder.append(show_goalCard(goalCard));
+        }
+        stringBuilder.append("ENTER CARD ID:\n");
+        System.out.println(stringBuilder.toString());
+    }
 }

@@ -10,6 +10,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.util.ArrayList;
+
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
 Useremo all'interno di questi metodi i vari controllers delle scene.
@@ -177,4 +179,21 @@ public class Gui extends Application implements UI {
     public void show_gameOver() {
 
     }
+
+    @Override
+    public void show_youWin() {
+
+    }
+
+    @Override
+    public void show_youLose() {
+
+    }
+
+    @Override
+    public void show_requestGoalCard(ArrayList<GoalCard> cards) {
+
+    }
+
+
 }

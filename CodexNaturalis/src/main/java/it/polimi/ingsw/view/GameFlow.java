@@ -148,30 +148,9 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
                     ui.show_message("the winner is: " + winner);
                     if(winner.equals(nickname))
-                        ui.show_message("""
-                                 
-                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄     ▄ ▄▄▄▄▄▄▄ ▄▄    ▄       ███\s
-                                █  █ █  █       █  █ █  █  █ █ ▄ █ █       █  █  █ █         █
-                                █  █▄█  █   ▄   █  █ █  █  █ ██ ██ █   ▄   █   █▄█ █   ██    █
-                                █       █  █ █  █  █▄█  █  █       █  █ █  █       █         █
-                                █▄     ▄█  █▄█  █       █  █       █  █▄█  █  ▄    █   ██    █
-                                  █   █ █       █       █  █   ▄   █       █ █ █   █         █
-                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄█ █▄▄█▄▄▄▄▄▄▄█▄█  █▄▄█      ███
-                                 
-                                                                """);
+                        ui.show_youWin();
                     else
-                        ui.show_message("""
-                                
-                                 ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄    ▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄        ███
-                                █  █ █  █       █  █ █  █  █   █   █       █       █       █      █
-                                █  █▄█  █   ▄   █  █ █  █  █   █   █   ▄   █  ▄▄▄▄▄█▄     ▄█  ██  █
-                                █       █  █ █  █  █▄█  █  █   █   █  █ █  █ █▄▄▄▄▄  █   █        █
-                                █▄     ▄█  █▄█  █       █  █   █▄▄▄█  █▄█  █▄▄▄▄▄  █ █   █    ██  █
-                                  █   █ █       █       █  █       █       █▄▄▄▄▄█ █ █   █        █
-                                  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█         ███
-                                                                
-                                
-                                """);
+                        ui.show_youLose();
                     askToLeave();
                     stay = false;
                 }
@@ -255,10 +234,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
         inGame = true;
-        /*ui.show_requestPlayerColor(view);
-        Scanner scanner = new Scanner(System.in);
-        String color = scanner.nextLine();
-        client.setColor(color, nickname);*/
     }
 
     @Override
@@ -353,22 +328,14 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateHandAndTable(GameView game, String nick) throws RemoteException {
         setGameView(game);
-        //ui.show_gameStation(game.getMyGameStation(nick));
     }
 
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("""
-                   CHOOSE A GOAL CARD
-                   """);
-        for(GoalCard goalCard : cards){
-            stringBuilder.append(ui.show_goalCard(goalCard));
-        }
-        stringBuilder.append("ENTER CARD ID:\n");
-        ui.show_message(stringBuilder.toString());
+        ui.show_requestGoalCard(cards);
         Scanner scanner = new Scanner(System.in);
         int cardId = scanner.nextInt();
+
         ui.show_message("waiting for other players...");
         client.chooseGoal(cards, cardId, nickname);
     }
@@ -402,14 +369,12 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void invalidCardPlacement() throws RemoteException {
         ui.show_invalidPlay();
-        //metodo correzione coordinata oppure riinvoco playCard ma va modificato il catch in gameController
     }
 
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_message("wait for other players to initialize their GameStation.");
-        //ui.show_gameStation(game.getMyGameStation(game.getCurrentPlayer().getNick())); //da sistemare (fare in modo che mostri gamestation con nome)
     }
 
     @Override
