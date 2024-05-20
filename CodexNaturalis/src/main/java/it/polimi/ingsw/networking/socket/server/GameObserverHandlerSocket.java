@@ -261,6 +261,10 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
 
     @Override
     public void update20PointsReached(GameView game)throws RemoteException{
-        //does nothing for now;
+        try{
+            out.writeObject(new Update20Points(game));
+        }catch(IOException e){
+            //
+        }
     }
 }
