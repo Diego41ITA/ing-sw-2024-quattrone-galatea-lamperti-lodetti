@@ -994,4 +994,14 @@ public class Cli implements UI {
     public void show_invalidCommand() {
         System.out.println("INVALID COMMAND\n");
     }
+
+    @Override
+    public void show_waitingOtherPlayers() {
+        System.out.println("Waiting for other players...");
+    }
+
+    @Override
+    public void show_requestToLeave() {
+        System.out.println("press any button to leave...");
+    }
 }
