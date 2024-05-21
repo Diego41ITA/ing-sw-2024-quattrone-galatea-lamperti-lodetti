@@ -149,7 +149,6 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
             }
         }
         System.out.println("application is closing...");
-        System.exit(0);
     }
 
     private void askToLeave(){

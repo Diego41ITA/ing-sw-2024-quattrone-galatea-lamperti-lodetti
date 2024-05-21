@@ -183,6 +183,8 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
                 if (game.getNumOfOnlinePlayers() == 0) {
                     deleteGame(gameID);
                 }
+                if(activeGames.isEmpty())
+                    break;
             }
         }
         return null;
