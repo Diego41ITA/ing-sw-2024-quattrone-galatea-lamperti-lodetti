@@ -228,13 +228,18 @@ public class GameController extends UnicastRemoteObject implements GameControlle
                         }
                     }
                     gamestation = player.getGameStation();
+                    //now checks if it isn't the last lap and if someone has reached 20 points.
                     if(notify20PointReached() && !turn.checkIfLast()){
                         turn.setIsLast(true);
-                        turn.setEndingPlayer(nick);
+                        turn.setEndingPlayer(turn.getFirstPlayerNick());
                         this.game.setTurn(turn);
-                        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-                            HandleObserver obs = entry.getValue();
-                            obs.notify_20PointsReached(game);
+
+                        //if the player that reached 20 points is the last player I don't forward any notification to the other clients.
+                        if(!turn.getLastPlayerNick().equals(nick)) {
+                            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                                HandleObserver obs = entry.getValue();
+                                obs.notify_20PointsReached(game);
+                            }
                         }
                     }
                     //ora notifico che la carta è stata pescata
