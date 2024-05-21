@@ -21,7 +21,7 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
     /**
      * List of all the activeGames, represented by their controllers
      */
-    private List<GameController> activeGames;
+    private final List<GameController> activeGames;
 
     /**
      * Attribute for the SingleTon pattern
@@ -39,6 +39,10 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
     private MainController() throws RemoteException{
         super();
         this.activeGames = new ArrayList<GameController>();
+
+        //it starts a routine operation
+        Thread routineDelete = new Thread(new RoutineDelete(this));
+        routineDelete.start();
     }
 
     /**
@@ -219,4 +223,8 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
     }
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).
+    //some getter:
+    public List<GameController> getActiveGame(){
+        return this.activeGames;
+    }
 }

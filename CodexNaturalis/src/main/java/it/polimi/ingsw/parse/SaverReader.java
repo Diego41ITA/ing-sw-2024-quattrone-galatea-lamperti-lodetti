@@ -1,5 +1,6 @@
 package it.polimi.ingsw.parse;
 import com.google.gson.*;
+import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.card.*;
 
@@ -19,6 +20,8 @@ public class SaverReader {
     public static Game gameReader(String filePath){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
+                .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
+                .registerTypeAdapter(CheckInterface.class, new InterfaceDeserializer())
                 .create();
         try(FileReader reader = new FileReader(filePath)) {
             return gson.fromJson(reader, Game.class);

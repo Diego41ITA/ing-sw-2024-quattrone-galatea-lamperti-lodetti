@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
+import it.polimi.ingsw.parse.SaverWriter;
 import it.polimi.ingsw.view.GameFlow;
 
 import java.awt.*;
@@ -466,6 +467,9 @@ public class GameController extends UnicastRemoteObject implements GameControlle
             HandleObserver obs = entry.getValue();
             obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
         }
+
+        //this should save the entire game.
+        Thread thread = new Thread(()-> SaverWriter.saveGame(this.game));
     }
 
     /**

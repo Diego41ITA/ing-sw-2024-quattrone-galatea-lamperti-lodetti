@@ -1,4 +1,5 @@
 package it.polimi.ingsw.parse;
+import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.parse.*;
@@ -18,16 +19,17 @@ public class SaverWriter {
      * @param game the object you want to save
      * @return it returns true if and only if the object is correctly saved.
      */
-    public static boolean saveGame(Game game){
+    public static void saveGame(Game game){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
+                .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
+                .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
                 .create();
         try(FileWriter writer = new FileWriter(Crafter.getGameFilePath(game.getId()))){
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
-            return true;
         }catch(IOException e){
-            return false;
+            //
         }
     }
 
