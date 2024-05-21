@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +20,8 @@ import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 public class GameStationController extends InputGui {
     @FXML
     private Text gameId;
+    @FXML
+    private Tab secondPlayer;
     @FXML
     private Pane anchor1;
     @FXML
@@ -100,10 +103,13 @@ public class GameStationController extends InputGui {
     //mi serve per poter selezionare la imageview corrispondente al punteggio
     private ImageView[] imageViews = new ImageView[29];
 
+    public void setSecondPlayer(String name){
+        secondPlayer.setText(name);
+    }
+
     //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
     public void setGameId(String id){
         gameId.setText(id);
-
     }
 
     // mi crea la grindPane per 2 giocatori(per ora funziona solo per 2 giocoatori) inoltre mi inserisce le carte iniziali nella gamestation
@@ -169,19 +175,27 @@ public class GameStationController extends InputGui {
                     }
         }
         }
-                    //metto nella gamestation anche il segnalino
+                    //metto nella gamestation anche il segnalino(compreso quello nero)
         ImageView imageView3 = createImageView(makerAssociator(color1));
         ImageView imageView4 = createImageView(makerAssociator(color2));
+        ImageView imageView5 = createImageView(makerAssociator(Color.BLACK));
         imageView3.setFitHeight(20.0);
+        imageView3.setFitWidth(20.0);
+        imageView4.setFitHeight(20.0);
         imageView4.setFitWidth(20.0);
+        imageView5.setFitHeight(20.0);
+        imageView5.setFitWidth(20.0);
         //imposto il layout di imageview3 e imagevie4
         imageView3.setLayoutX(911);
         imageView3.setLayoutY(459);
         imageView4.setLayoutX(911);
         imageView4.setLayoutY(459);
+        imageView5.setLayoutX(931);
+        imageView5.setLayoutY(480);
         //aggiungo i maker al pane
         anchor1.getChildren().add(imageView3);
         anchor2.getChildren().add(imageView4);
+        anchor2.getChildren().add(imageView5);
         //aggiungo le gridPane all pane che le contiene
         anchor1.getChildren().add(gridPane1);
         anchor2.getChildren().add(gridPane2);
@@ -207,15 +221,15 @@ public class GameStationController extends InputGui {
             firstCardBack.setImage(imageBack);
             firstCard.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    //aggiungo la posizione della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                    multipleResponses.add(String.valueOf(pos));
+                    //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
+                    multipleResponses.add(String.valueOf(num));
                     multipleResponses.add(String.valueOf(true));
                 }
             });
             firstCardBack.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    //aggiungo la posizione della carta e il suo verso nella multiple responsesserve per capire quale voglio mettere nella gamestation)
-                    multipleResponses.add(String.valueOf(pos));
+                    //aggiungo l'id della carta e il suo verso nella multiple responsesserve per capire quale voglio mettere nella gamestation)
+                    multipleResponses.add(String.valueOf(num));
                     multipleResponses.add(String.valueOf(false));
                 }
             });
@@ -226,15 +240,15 @@ public class GameStationController extends InputGui {
             secondCardBack.setImage(imageBack);
             secondCard.setOnMouseClicked(event -> {
                         if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo la posizione della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(pos));
+                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
+                            multipleResponses.add(String.valueOf(num));
                             multipleResponses.add(String.valueOf(true));
                         }
             });
             secondCardBack.setOnMouseClicked(event -> {
                         if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo la posizione della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(pos));
+                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
+                            multipleResponses.add(String.valueOf(num));
                             multipleResponses.add(String.valueOf(false));
                         }
             });
@@ -245,15 +259,15 @@ public class GameStationController extends InputGui {
             thirdCardBack.setImage(imageBack);
             thirdCard.setOnMouseClicked(event -> {
                         if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo la posizione della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(pos));
+                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
+                            multipleResponses.add(String.valueOf(num));
                             multipleResponses.add(String.valueOf(true));
                         }
                     });
                     thirdCardBack.setOnMouseClicked(event -> {
                         if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo la posizione della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(pos));
+                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
+                            multipleResponses.add(String.valueOf(num));
                             multipleResponses.add(String.valueOf(false));
                         }
                     });

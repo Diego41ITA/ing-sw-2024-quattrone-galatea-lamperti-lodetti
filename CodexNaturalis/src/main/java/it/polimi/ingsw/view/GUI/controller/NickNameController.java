@@ -16,7 +16,7 @@ public class NickNameController extends InputGui {
     private Button enter;
     public void OkButton(javafx.event.ActionEvent actionEvent) {
         //nella guiinput si può mettere un ciclo while che fin quando in multipleResponses non abbiamo
-        //la stringa ok il gameflow/guiInput aspetta
-        multipleResponses.add("ok");
+        //la stringa adeguata il gameflow/guiInput aspetta
+        multipleResponses.add(nickName.getText());
     }
 }

@@ -6,9 +6,13 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.InputParser;
+import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -22,8 +26,8 @@ public class PlaceCardState extends StateActive{
     private ClientAction client;
     private String nickName;
 
-    public PlaceCardState(GameFlow flow) {
-        super(flow);
+    public PlaceCardState(GameFlow flow, InputParser input) {
+        super(flow, input);
         view = flow.getView();
         ui = flow.getUi();
         client = flow.getClient();
@@ -32,7 +36,6 @@ public class PlaceCardState extends StateActive{
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         Optional<PlayableCard> cardCheck;
         boolean isFrontOrBack = true;
         boolean isBooleanValid = false;
@@ -45,10 +48,8 @@ public class PlaceCardState extends StateActive{
         while(!flag) {
             try {
                 do {
-                    ui.show_message("""
-                    CHOOSE A CARD ID:
-                    """);
-                    int cardIdInput = scanner.nextInt();
+                    ui.show_requestCardId();
+                    int cardIdInput = inputGetter.getCardId();
 
                     cardCheck = view.getCurrentPlayer().showCard().stream()
                             .filter(card -> card.getCardId() == cardIdInput)
@@ -57,27 +58,20 @@ public class PlaceCardState extends StateActive{
                 }while (!cardCheck.isPresent());
 
                 do {
-                    ui.show_message("""
-                YOU WANNA PLAY IT FRONT OR BACK:
-                    
-                ENTER TRUE TO PLAY IF FRONT, FALSE TO PLAY IF BACK
-                """);
+                    ui.show_requestSide();
                     try {
-                        isFrontOrBack = scanner.nextBoolean();
+                        isFrontOrBack = inputGetter.getSideOfTheCard();
                         isBooleanValid = true;
                     }catch (InputMismatchException e){
                         isBooleanValid = false;}
                 }while (!isBooleanValid);
 
-                ui.show_message("""
-                CHOOSE A COORD:
-                
-                ENTER X COORDINATE THAN Y COORDINATE:
-                """);
+                Point coord;
+                do {
+                    ui.show_requestCoordinates();
+                    coord = inputGetter.getCoordinate();
+                }while(!checkCoordinate(coord));
 
-                int x = scanner.nextInt();
-                int y = scanner.nextInt();
-                Point coord = new Point(x, y);
                 client.playCard(cardCheck.get(), coord, nickName, isFrontOrBack);
                 flag = true;
             } catch (IOException e) {
@@ -90,11 +84,16 @@ public class PlaceCardState extends StateActive{
     }
 
     @Override
-    public void nextState() {new DrawCardState(flow).execute();
+    public void nextState() {new DrawCardState(flow, StateWaiting.inputGetter).execute();
     }
 
     @Override
     public void setView(GameView view) {
         this.view = view;
+    }
+
+    private boolean checkCoordinate(Point coord){
+        ArrayList<Point> freeCoords = (ArrayList<Point>) this.view.getMyGameStation(nickName).getFreeCords();
+        return freeCoords.contains(coord);
     }
 }

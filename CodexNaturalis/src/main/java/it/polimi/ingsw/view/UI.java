@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 
+import java.util.ArrayList;
+
 /**
  * This is interface is implemented by the GUI and TUI
  * It shows all the possible outputs to the player about information or inputs required
@@ -72,4 +74,21 @@ public interface UI {
     public void show_lastTurn(); //indica che un giocatore ha raggiunto 20 punti ed è l'ultimo turno
 
     public void show_gameOver();
+    public void show_youWin();
+    public void show_youLose();
+    public void show_requestGoalCard(ArrayList<GoalCard> cards);
+    public void show_requestCardId();
+    public void show_winner(String name);
+
+    public void show_requestTypeToDraw();
+    public void show_drawFromWhere();
+    public void show_invalidChoice();
+
+    public void show_requestSide();
+    public void show_requestCoordinates();
+    public void show_connectionError();
+    public void show_invalidInput();
+    public void show_invalidCommand();
+    public void show_waitingOtherPlayers();
+    public void show_requestToLeave();
 }

@@ -1,10 +1,11 @@
 package it.polimi.ingsw.view.statusWaiting;
 
 import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
-import it.polimi.ingsw.view.input.GetInput;
+import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class StateColor extends StateWaiting {
     private String nick;
     private GameView view;
 
-    public StateColor(GameFlow flow, GetInput input){
+    public StateColor(GameFlow flow, InputParser input){
         super(flow, input);
         this.ui = flow.getUi();
         this.client = flow.getClient();
@@ -27,9 +28,14 @@ public class StateColor extends StateWaiting {
 
     @Override
     public void execute(){
-        ui.show_requestPlayerColor(StateWaiting.flow.getView());
-        Scanner scanner = new Scanner(System.in);
-        String color = scanner.nextLine();
+
+        String color;
+
+        do{
+            ui.show_requestPlayerColor(StateWaiting.flow.getView());
+            color = inputGetter.getColor();
+        }while(!checkColor(color));
+
         String colorParsed = color.toLowerCase();
         try {
             client.setColor(colorParsed, StateWaiting.flow.getNickname());
@@ -41,5 +47,13 @@ public class StateColor extends StateWaiting {
     @Override
     public void nextState(){
         //it does nothing
+    }
+
+    private boolean checkColor(String color){
+        for(Color c: Color.values()){
+            if(c.toString().equalsIgnoreCase(color))
+                return true;
+        }
+        return false;
     }
 }

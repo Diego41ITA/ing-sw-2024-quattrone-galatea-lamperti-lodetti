@@ -5,8 +5,10 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -17,8 +19,8 @@ public class DrawCardState extends StateActive{
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
-    public DrawCardState(GameFlow flow){
-        super(flow);
+    public DrawCardState(GameFlow flow, InputParser input){
+        super(flow, input);
         this.view = flow.getView();
         this.ui = flow.getUi();
         this.client = flow.getClient();
@@ -28,23 +30,17 @@ public class DrawCardState extends StateActive{
     @Override
     public void execute(){ //manca exception in gameController
         Scanner scanner = new Scanner(System.in);
+        String typeOfCard, input;
         ui.show_tableOfDecks(view);
-        ui.show_message("""
-                WHICH TYPE OF CARD DO YOU WANT TO DRAW:
-                
-                RESOURCE
-                GOLD
-                """);
-        String typeOfCard = scanner.nextLine();
+        do {
+            ui.show_requestTypeToDraw();
+            typeOfCard = inputGetter.getTypeOfCard();
+        }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));
 
-        ui.show_message("""
-                FROM WHERE DO YOU WANT DRAW A CARD:
-                
-                A-DECK
-                B-TABLE
-                
-                """);
-        String input = scanner.nextLine();
+        ui.show_drawFromWhere();
+        do {
+            input = inputGetter.getDrawFromDeckOrTable().toUpperCase(); //getDrawFromDeckOrTable()
+        }while(!(input.equalsIgnoreCase("A") || input.equalsIgnoreCase("B")));
 
         switch (input){
             case "A":
@@ -57,8 +53,8 @@ public class DrawCardState extends StateActive{
             case "B":
                 Optional<Card> cardCheck;
                 do {
-                    ui.show_message("ENTER CARD ID");
-                    int cardId = scanner.nextInt();
+                    ui.show_requestCardId();
+                    int cardId = inputGetter.getCardId();
 
                     cardCheck = view.getTableOfDecks().getCards().stream()
                             .filter(card -> card.getCardId()==cardId)
@@ -73,9 +69,7 @@ public class DrawCardState extends StateActive{
                 }
                 break;
             default:
-                ui.show_message("""
-                        INVALID CHOICE...
-                        """);
+                ui.show_invalidChoice();
                 this.execute();
         }
         nextState();
