@@ -62,98 +62,94 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
 
     //contiene tutto il flusso di gioco.
     public void run(){
-            boolean stay = true;
+        boolean stay = true;
 
-            ui.show_RequestPlayerNickName();
-            nickname = input.getNickName();
+        ui.show_RequestPlayerNickName();
+        nickname = input.getNickName();
 
-            //inizializza gli state di partenza.
-            initializeStates();
+        //inizializza gli state di partenza.
+        initializeStates();
+        while (stay) {
+            if (view == null || view.getStatus() == Status.WAITING) {
+                if(notStarted)
+                    state1.execute();
+                //se la view ha i giocatori giusti la partita può iniziare
+                if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
+                    try {
+                        client.startGame();
+                        notStarted = false;
 
-            while (stay) {
-                if (view == null || view.getStatus() == Status.WAITING) {
-
-                    if(notStarted)
-                        state1.execute();
-
-                    //se la view ha i giocatori giusti la partita può iniziare
-                    if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
-                        try {
-                            client.startGame();
-                            notStarted = false;
-
-                        } catch (IOException e) { // da sistemare non dovrebbe riceverla
-                            throw new RuntimeException(e);
-                        }
+                    } catch (IOException e) { // da sistemare non dovrebbe riceverla
+                        throw new RuntimeException(e);
                     }
-
-                        //se invece i giocatori non sono ancora del numero corretto si aspetta
-                    while (waitingForNewPlayers) {
-                        try {
-                            synchronized (lock) {
-                                lock.wait();
-                            }
-                        } catch (InterruptedException e) {
-                            System.out.println("this game is aborted");
-                        }
-                    }
-                } else if (view.getStatus() == Status.ACTIVE) {
-                    if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
-                        if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) { //da inserire gestione caso che non è il tuo turno
-                            state2 = new PlaceCardState(this, input);
-                            state2.setView(view);
-                            state2.execute();
-                            myTurn = false;
-                        }
-                        while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
-                            System.out.println("it's not your turn. Wait");
-                            try{
-                                synchronized (lock) {
-                                    lock.wait();
-                                }
-                            }catch(InterruptedException e){
-                                System.out.println("game interrupted");
-                            }
-                        }
-                    }
-                } else if (view.getStatus() == Status.SUSPENDED) {
-                    ui.show_GameStatus(view);
-                    ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
-                    ui.show_gameStation(view);
-                    ui.show_playerHand(view);
-
-                    while(view.getStatus() == Status.SUSPENDED) {
-                        try {
-                            synchronized (lock) {
-                                lock.wait();
-                            }    //need to add some notify when the gameStatus change.
-                        } catch (InterruptedException e) {
-                            System.out.println("this game got interrupted");
-                        }
-                    }
-                } else if (view.getStatus() == Status.FINISHED) {
-                    ui.show_GameStatus(view);
-                    ui.show_gameOver();
-
-                    while(winner == null) {
-                        try {
-                            synchronized (lock) {
-                                lock.wait();
-                            }
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-
-                    ui.show_winner(winner);
-                    if(winner.equals(nickname))
-                        ui.show_youWin();
-                    else
-                        ui.show_youLose();
-                    askToLeave();
-                    stay = false;
                 }
+
+                //se invece i giocatori non sono ancora del numero corretto si aspetta
+                while (waitingForNewPlayers) {
+                    try {
+                        synchronized (lock) {
+                            lock.wait();
+                        }
+                    } catch (InterruptedException e) {
+                        System.out.println("this game is aborted");
+                    }
+                }
+            } else if (view.getStatus() == Status.ACTIVE) {
+                if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
+                    if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) { //da inserire gestione caso che non è il tuo turno
+                        state2 = new PlaceCardState(this, input);
+                        state2.setView(view);
+                        state2.execute();
+                        myTurn = false;
+                    }
+                    while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
+                        System.out.println("it's not your turn. Wait");
+                        try{
+                            synchronized (lock) {
+                                lock.wait();
+                            }
+                        }catch(InterruptedException e){
+                            System.out.println("game interrupted");
+                        }
+                    }
+                }
+            } else if (view.getStatus() == Status.SUSPENDED) {
+                ui.show_GameStatus(view);
+                ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
+                ui.show_gameStation(view);
+                ui.show_playerHand(view);
+                while(view.getStatus() == Status.SUSPENDED) {
+                    try {
+                        synchronized (lock) {
+                            lock.wait();
+                        }    //need to add some notify when the gameStatus change.
+                    } catch (InterruptedException e) {
+                        System.out.println("this game got interrupted");
+                    }
+                }
+            } else if (view.getStatus() == Status.FINISHED) {
+                ui.show_GameStatus(view);
+                ui.show_gameOver();
+                while(winner == null) {
+                    try {
+                        synchronized (lock) {
+                            lock.wait();
+                        }
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                ui.show_winner(winner);
+                if(winner.equals(nickname))
+                    ui.show_youWin();
+                else
+                    ui.show_youLose();
+                askToLeave();
+                stay = false;
             }
+        }
+        System.out.println("application is closing...");
+        System.exit(0);
     }
 
     private void askToLeave(){
