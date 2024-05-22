@@ -35,19 +35,22 @@ public class Gui extends Application implements UI {
         show_startingMenu();
     }
 
+    public Scene loadScene(String path){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root;
+        try {
+            root = loader.load();
+            InputGui input = loader.getController();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return new Scene(root);
+    }
+
     @Override
     public void show_startingMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Menu.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
-                InputGui input = loader.getController();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
+            primaryStage.setScene(loadScene("/scenes/Menu.fxml"));
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
