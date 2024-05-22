@@ -2,9 +2,12 @@ package it.polimi.ingsw.main;
 
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
+import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.GameFlow;
 import it.polimi.ingsw.view.TUI.Cli;
+import it.polimi.ingsw.view.input.InputGui;
 import it.polimi.ingsw.view.input.InputUi;
+import javafx.application.Application;
 
 import java.util.Scanner;
 
@@ -79,11 +82,15 @@ public class MainClient {
                     flow.setClient(new ClientRMI(flow));
                     flow.run();
                 } else if (selection == 3) {
-                    System.out.println("game starting");
-                    //lancia gameflow
-                    return;
+                    GameFlow flow = new GameFlow(new Gui(), new InputGui());
+                    Application.launch(Gui.class, args);
+                    flow.setClient(new ClientSocket(flow));
+                    flow.run();
                 } else if (selection == 4) {
-                    //
+                    GameFlow flow = new GameFlow(new Gui(), new InputGui());
+                    Application.launch(Gui.class, args);
+                    flow.setClient(new ClientRMI(flow));
+                    flow.run();
                 }
 
 

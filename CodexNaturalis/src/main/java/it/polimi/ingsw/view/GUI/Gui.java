@@ -6,11 +6,19 @@ import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
+import it.polimi.ingsw.view.input.InputGui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import it.polimi.ingsw.view.GameFlow;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
@@ -18,13 +26,32 @@ Useremo all'interno di questi metodi i vari controllers delle scene.
 La grafica verrà runnata su thread
  */
 public class Gui extends Application implements UI {
-    @Override
-    public void start(Stage stage) throws Exception {
+    private Stage primaryStage;
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("CodexNaturalis - PSP21");
+        show_startingMenu();
     }
 
     @Override
     public void show_startingMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Menu.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                InputGui input = loader.getController();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -252,5 +279,9 @@ public class Gui extends Application implements UI {
     @Override
     public void show_requestToLeave(){
 
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
