@@ -1,4 +1,4 @@
-package it.polimi.ingsw.testModel;
+package it.polimi.ingsw.TestJunit;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

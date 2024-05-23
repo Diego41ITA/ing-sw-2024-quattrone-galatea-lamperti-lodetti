@@ -1,4 +1,4 @@
-package it.polimi.ingsw.testModel;
+package it.polimi.ingsw.TestJunit.testModel;
 
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;

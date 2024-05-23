@@ -1,5 +1,5 @@
 
-        package it.polimi.ingsw.testController;
+        package it.polimi.ingsw.TestJunit.testController;
         import static org.junit.jupiter.api.Assertions.*;
         import it.polimi.ingsw.controller.*;
         import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
