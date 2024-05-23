@@ -1,10 +1,9 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.observer.GameObserver;
 
@@ -19,8 +18,8 @@ import java.util.ArrayList;
 
 //funziona sia con socket che con Rmi
 public class GameObserverHandlerClient implements GameObserver, Serializable {
-    private final GameFlow flow;
-    public GameObserverHandlerClient(GameFlow flow){
+    private final FsmGame flow;
+    public GameObserverHandlerClient(FsmGame flow){
         this.flow = flow;
     }
 

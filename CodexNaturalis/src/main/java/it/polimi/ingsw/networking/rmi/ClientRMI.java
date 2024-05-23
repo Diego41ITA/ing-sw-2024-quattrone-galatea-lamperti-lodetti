@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
@@ -21,8 +21,8 @@ import java.util.ArrayList;
 //si occupa di implementare le azioni del client lavorando sulla rete.
 public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     //tutti i client istanziati su questa macchina avranno lo stesso riferimento
-    private static MainControllerInterface request;
-    private GameControllerInterface gameController = null;
+    private static ControllerOfMatchesInterface request;
+    private ControllerOfGameInterface gameController = null;
 
     //notificationGetter è un oggetto su cui il SERVER chiamerà i metodi remoti (per notificare che è successo qualcosa)
     private GameObserver notificationGetter;
@@ -30,11 +30,11 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     private String nickname;
     private Registry registry;
-    private GameFlow flow;
+    private FsmGame flow;
     //private Boolean firstCard;
 
     //ora ho il costruttore piu dei metodi ausiliari.
-    public ClientRMI(GameFlow flow) throws RemoteException {
+    public ClientRMI(FsmGame flow) throws RemoteException {
         //super();
         gameObserverHandler = new GameObserverHandlerClient(flow);
         connect(); //connette il client con il server RMI
@@ -47,7 +47,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         //va reso più solido chiaramente
         try{
             registry = LocateRegistry.getRegistry("localhost", 1099);
-            request = (MainControllerInterface) registry.lookup("server name");
+            request = (ControllerOfMatchesInterface) registry.lookup("server name");
 
             notificationGetter = (GameObserver) UnicastRemoteObject.exportObject(gameObserverHandler, 0);
 

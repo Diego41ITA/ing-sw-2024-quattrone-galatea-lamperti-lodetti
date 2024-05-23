@@ -1,7 +1,7 @@
 package it.polimi.ingsw.networking.socket.server;
 
-import it.polimi.ingsw.controller.GameControllerInterface;
-import it.polimi.ingsw.controller.MainController;
+import it.polimi.ingsw.controller.ControllerOfGameInterface;
+import it.polimi.ingsw.controller.ControllerOfMatches;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.networking.socket.client.message.Message;
 
@@ -25,7 +25,7 @@ public class ClientHandlerSocket extends Thread{
     private LinkedBlockingQueue<Message> queue;
 
     //similar to Rmi we need to pass the object where the operation are available.
-    private GameControllerInterface game;
+    private ControllerOfGameInterface game;
     private GameObserverHandlerSocket notify;
 
     public ClientHandlerSocket(Socket socket) throws IOException{
@@ -69,7 +69,7 @@ public class ClientHandlerSocket extends Thread{
 
                 //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
                 if (msg.isForMainController()) {
-                    game = msg.execute(notify, MainController.getMainController());
+                    game = msg.execute(notify, ControllerOfMatches.getMainController());
                     if (game != null)
                         nick = msg.getNickname();
                 } else {

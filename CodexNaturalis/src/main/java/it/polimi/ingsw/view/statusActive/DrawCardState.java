@@ -1,14 +1,13 @@
 package it.polimi.ingsw.view.statusActive;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.networking.ClientAction;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class DrawCardState extends StateActive{
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
-    public DrawCardState(GameFlow flow, InputParser input){
+    public DrawCardState(FsmGame flow, InputParser input){
         super(flow, input);
         this.view = flow.getView();
         this.ui = flow.getUi();

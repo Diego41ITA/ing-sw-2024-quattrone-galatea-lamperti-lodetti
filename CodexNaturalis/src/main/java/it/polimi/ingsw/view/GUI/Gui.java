@@ -1,24 +1,19 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import it.polimi.ingsw.view.GameFlow;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.

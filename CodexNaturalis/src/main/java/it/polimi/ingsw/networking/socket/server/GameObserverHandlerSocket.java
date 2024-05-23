@@ -1,11 +1,9 @@
 package it.polimi.ingsw.networking.socket.server;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
-import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.gameDataManager.Color;
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.*;
 import it.polimi.ingsw.observer.GameObserver;

@@ -9,7 +9,7 @@ import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.socket.client.message.*;
 import it.polimi.ingsw.networking.socket.client.message.Color;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.ServerNotification;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
@@ -25,18 +25,18 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Receives all the incoming notifications from the server, and it processes them by passing
- * {@link GameObserverHandlerClient}, that calls the methods of {@link GameFlow}
+ * {@link GameObserverHandlerClient}, that calls the methods of {@link FsmGame}
  */
 public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private final GameObserverHandlerClient gameObserverHandler;    //invoca i metodi di gameFlow
-    private GameFlow flow;
+    private FsmGame flow;
 
     private BlockingQueue<ServerNotification> notificationQueue;
 
-    public ClientSocket(GameFlow flow){
+    public ClientSocket(FsmGame flow){
         this.flow = flow;
         connect("127.0.0.1", 50000 );
         gameObserverHandler = new GameObserverHandlerClient(flow);

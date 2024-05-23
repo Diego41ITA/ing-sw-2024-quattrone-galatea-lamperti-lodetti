@@ -1,11 +1,9 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
-import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
@@ -17,7 +15,6 @@ import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
 
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,9 +22,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
+public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver {
 
     public boolean waitingForNewPlayers = false;
     public boolean notStarted;
@@ -51,7 +47,7 @@ public class GameFlow implements Runnable, /*ClientAction,*/ GameObserver {
     private StateActive state2 = new PlaceCardState(this, this.input);
 
     //costruttore
-    public GameFlow(UI ui, InputParser input){
+    public FsmGame(UI ui, InputParser input){
         this.ui = ui;
         this.input = input;
         inGame = false;

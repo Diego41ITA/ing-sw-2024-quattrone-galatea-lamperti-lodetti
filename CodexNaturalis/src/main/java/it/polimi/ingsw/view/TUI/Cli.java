@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.TUI;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.card.strategyPattern.*;
 import it.polimi.ingsw.model.gameDataManager.Color;

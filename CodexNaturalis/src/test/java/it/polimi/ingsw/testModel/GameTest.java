@@ -68,7 +68,7 @@ public class GameTest {
             game.setMaxNumberPlayer(2);
             game.addPlayer(player1);
             game.addPlayer(player2);
-            assertThrows(IllegalStateException.class, () -> game.addPlayer(player3)); // Adding the third player should fail
+            assertThrows(MaxPlayersInException.class, () -> game.addPlayer(player3)); // Adding the third player should fail
             // Ensure maxNumberPlayer is clamped within valid range (2 to 4)
             game.setMaxNumberPlayer(1);
             assertEquals(2, game.getMaxNumberPlayer());
@@ -118,7 +118,7 @@ public class GameTest {
         CheckInterface item = new ItemCheck();
         GoalCard goal = new GoalCard(99, true, 3, item, objects);
         goals.add(goal);
-        player1.chooseGoal(goals, 0);
+        player1.chooseGoal(goals, 99);
         players.add(player1);
         Turn turn1= new Turn(players);
         game.setTurn(turn1);
@@ -144,7 +144,7 @@ public class GameTest {
         CheckInterface item = new ItemCheck();
         GoalCard goal = new GoalCard(99, true, 3, item, objects);
         goals.add(goal);
-        player1.chooseGoal(goals, 0);
+        player1.chooseGoal(goals, 99);
         players.put(player1, true);
         game.setPlayers(players);
         boolean condition = false;
@@ -170,7 +170,7 @@ public class GameTest {
         CheckInterface item = new ItemCheck();
         GoalCard goal = new GoalCard(99, true, 3, item, objects);
         goals.add(goal);
-        player2.chooseGoal(goals, 0);
+        player2.chooseGoal(goals, 99);
         game.setSinglePlayer(player2);
         boolean condition = false;
         for (Player player : game.getPlayers().keySet()) {

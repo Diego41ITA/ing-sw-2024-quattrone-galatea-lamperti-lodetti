@@ -1,20 +1,19 @@
 package it.polimi.ingsw.view.statusWaiting;
 
 import it.polimi.ingsw.networking.ClientAction;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.util.Scanner;
 
 public class StateMenu extends StateWaiting {
     private UI ui;
     private ClientAction client;
     private String nickName;
 
-    public StateMenu(GameFlow flow, InputParser input) {
+    public StateMenu(FsmGame flow, InputParser input) {
         super(flow, input);
         ui = flow.getUi();
         client = flow.getClient();

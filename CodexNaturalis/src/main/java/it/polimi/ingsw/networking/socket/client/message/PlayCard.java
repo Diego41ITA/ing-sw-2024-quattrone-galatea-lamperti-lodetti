@@ -1,7 +1,7 @@
 package it.polimi.ingsw.networking.socket.client.message;
 
-import it.polimi.ingsw.controller.GameControllerInterface;
-import it.polimi.ingsw.controller.MainControllerInterface;
+import it.polimi.ingsw.controller.ControllerOfGameInterface;
+import it.polimi.ingsw.controller.ControllerOfMatchesInterface;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
@@ -23,7 +23,7 @@ public class PlayCard extends Message{
     }
 
     @Override
-    public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
+    public void execute(ControllerOfGameInterface game) throws RemoteException, GameEndedException {
         //if first card, I maybe need to set the GameStation
         try {
             game.playCard(playedCard, nickname, isFront, point); //illegal operation exception needs to be transformed in
@@ -34,7 +34,7 @@ public class PlayCard extends Message{
     }
 
     @Override
-    public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
+    public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
         return null;
     }
 }

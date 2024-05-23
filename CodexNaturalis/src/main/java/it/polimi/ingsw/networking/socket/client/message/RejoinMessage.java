@@ -1,7 +1,7 @@
 package it.polimi.ingsw.networking.socket.client.message;
 
-import it.polimi.ingsw.controller.GameControllerInterface;
-import it.polimi.ingsw.controller.MainControllerInterface;
+import it.polimi.ingsw.controller.ControllerOfGameInterface;
+import it.polimi.ingsw.controller.ControllerOfMatchesInterface;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.observer.GameObserver;
 
@@ -16,12 +16,12 @@ public class RejoinMessage extends Message{
     }
 
     @Override
-    public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
+    public void execute(ControllerOfGameInterface game) throws RemoteException, GameEndedException {
         //... no operations need to be implemented
     }
 
     @Override
-    public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
+    public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
         return operation.rejoin(obs, this.nickname, this.gameId); //aggiungere il numero massimo di giocatori.
     }
 }

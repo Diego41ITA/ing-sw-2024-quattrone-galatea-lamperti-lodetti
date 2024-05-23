@@ -1,16 +1,13 @@
 package it.polimi.ingsw.view.statusWaiting;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.networking.ClientAction;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputParser;
-import it.polimi.ingsw.view.statusActive.PlaceCardState;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Scanner;
 
 public class StateColor extends StateWaiting {
     private UI ui;
@@ -18,7 +15,7 @@ public class StateColor extends StateWaiting {
     private String nick;
     private GameView view;
 
-    public StateColor(GameFlow flow, InputParser input){
+    public StateColor(FsmGame flow, InputParser input){
         super(flow, input);
         this.ui = flow.getUi();
         this.client = flow.getClient();

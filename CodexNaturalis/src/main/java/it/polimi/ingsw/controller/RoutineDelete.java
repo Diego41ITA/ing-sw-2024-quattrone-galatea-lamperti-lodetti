@@ -1,14 +1,10 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.gameDataManager.Game;
-import it.polimi.ingsw.model.gameDataManager.Matches;
-import it.polimi.ingsw.parse.SaverWriter;
-
 public class RoutineDelete extends Thread{
 
-    MainController matches;
+    ControllerOfMatches matches;
 
-    public RoutineDelete(MainController matches){
+    public RoutineDelete(ControllerOfMatches matches){
         this.matches = matches;
     }
 

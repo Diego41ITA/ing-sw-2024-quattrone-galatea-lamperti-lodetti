@@ -3,7 +3,7 @@ package it.polimi.ingsw.main;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.TUI.Cli;
 import it.polimi.ingsw.view.input.InputGui;
 import it.polimi.ingsw.view.input.InputUi;
@@ -74,20 +74,20 @@ public class MainClient {
                 } while (!flag);
 
                 if(selection == 1) {
-                    GameFlow flow = new GameFlow(new Cli(), new InputUi());
+                    FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientSocket(flow));
                     flow.run();
                 } else if (selection == 2) {
-                    GameFlow flow = new GameFlow(new Cli(), new InputUi());
+                    FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientRMI(flow));
                     flow.run();
                 } else if (selection == 3) {
-                    GameFlow flow = new GameFlow(new Gui(), new InputGui());
+                    FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     Application.launch(Gui.class, args);
                     flow.setClient(new ClientSocket(flow));
                     flow.run();
                 } else if (selection == 4) {
-                    GameFlow flow = new GameFlow(new Gui(), new InputGui());
+                    FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     Application.launch(Gui.class, args);
                     flow.setClient(new ClientRMI(flow));
                     flow.run();

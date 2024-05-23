@@ -2,16 +2,18 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
+import it.polimi.ingsw.model.gameDataManager.Player;
 
 import java.awt.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * this interface defines all the operation that are available on a GameController object.
  */
-public interface GameControllerInterface extends Remote {
+public interface ControllerOfGameInterface extends Remote {
 
     /**
      * it is used to set the color for a specific player
@@ -119,5 +121,10 @@ public interface GameControllerInterface extends Remote {
      * @throws RemoteException
      */
     void initializeTurn(String nick) throws RemoteException;
+
+    //leave it, I need it for the testController
+    String getGameId() throws RemoteException;
+    //leave it, I need it for the testController
+    HashMap<Player, Boolean> getPlayers() throws RemoteException;
 
 }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.networking.socket.server.serverToClientMessage;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.observer.GameObserver;
 

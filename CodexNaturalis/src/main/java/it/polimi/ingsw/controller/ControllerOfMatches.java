@@ -2,31 +2,27 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
-import it.polimi.ingsw.model.exceptions.NoAvailableGameToJoinException;
-import it.polimi.ingsw.model.exceptions.PlayerAlreadyInException;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
-import it.polimi.ingsw.observer.HandleObserver;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
-import java.io.Serializable;
 
 /**
  * this class exposes all the MainControllerInterface methods to operate on a list of GameController
  */
-public class MainController extends UnicastRemoteObject implements /*Serializable,*/ MainControllerInterface /*, Runnable*/ {
+public class ControllerOfMatches extends UnicastRemoteObject implements /*Serializable,*/ ControllerOfMatchesInterface /*, Runnable*/ {
     /**
      * List of all the activeGames, represented by their controllers
      */
-    private final List<GameController> activeGames;
+    private final List<ControllerOfGame> activeGames;
 
     /**
      * Attribute for the SingleTon pattern
      */
-    private static MainController mainController;
+    private static ControllerOfMatches mainController;
 
     /**
      * Useful to generate a random number
@@ -36,9 +32,9 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
     /**
      * Default constructor that initialize the ArrayList for the activeGames
      */
-    private MainController() throws RemoteException{
+    private ControllerOfMatches() throws RemoteException{
         super();
-        this.activeGames = new ArrayList<GameController>();
+        this.activeGames = new ArrayList<ControllerOfGame>();
 
         //it starts a routine operation
         Thread routineDelete = new Thread(new RoutineDelete(this));
@@ -49,12 +45,12 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      * SingleTon pattern: allows to have only 1 instance of the MainController class
      * @return the only possible instance
      */
-    public synchronized static MainController getMainController() throws RemoteException {
+    public synchronized static ControllerOfMatches getMainController() throws RemoteException {
         if(mainController == null)
-            mainController = new MainController();
+            mainController = new ControllerOfMatches();
         return mainController;
     }
-    public List<GameController> getActiveGames(){
+    public List<ControllerOfGame> getActiveGames(){
         return activeGames;
     }
 
@@ -69,10 +65,10 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      * @throws RemoteException it could throw this exception if something goes wrong
      */
     @Override
-    public synchronized GameControllerInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException{
+    public synchronized ControllerOfGameInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException{
         Player player = new Player(nick);
         String gameID = "Game" + (activeGames.size() + 1);
-        GameController controller = new GameController(gameID, maxNumPlayers);
+        ControllerOfGame controller = new ControllerOfGame(gameID, maxNumPlayers);
         controller.addObserver(obs, player);
         controller.readiness.put(nick, 0);
         activeGames.add(controller);
@@ -99,8 +95,8 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      * @throws RemoteException it could throw this exception when something goes wrong
      */
     @Override
-    public synchronized GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException*/ {
-        List<GameController> availableGames = activeGames.stream()
+    public synchronized ControllerOfGameInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException*/ {
+        List<ControllerOfGame> availableGames = activeGames.stream()
                 .filter(gameController ->
                         gameController.getStatus().equals(Status.WAITING) &&
                                 !gameController.checkIfStart() &&
@@ -111,7 +107,7 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
 
         // If there are available games, try to join one
         if (!availableGames.isEmpty()) {
-            GameController randomAvailableGame = availableGames.get(random.nextInt(availableGames.size()));
+            ControllerOfGame randomAvailableGame = availableGames.get(random.nextInt(availableGames.size()));
             Player player = new Player(nick);
             try {
                 randomAvailableGame.addObserver(obs, player);
@@ -145,8 +141,8 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      * @return GameControllerInterface of the joined game
      * @throws RemoteException it could throw this when something goes wrong
      */
-    public synchronized GameControllerInterface rejoin(GameObserver obs, String nick, String GameID) throws RemoteException {
-        for (GameController game : activeGames) {
+    public synchronized ControllerOfGameInterface rejoin(GameObserver obs, String nick, String GameID) throws RemoteException {
+        for (ControllerOfGame game : activeGames) {
             if (game.getGameId().equals(GameID)) {
                 try {
                     for (Player player : game.getPlayers().keySet()) {
@@ -178,8 +174,8 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      * @throws RemoteException it could throw it if something goes wrong
      */
     @Override
-    public GameControllerInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
-        for (GameController game : activeGames) {
+    public ControllerOfGameInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
+        for (ControllerOfGame game : activeGames) {
             if (game.getGameId().equals(gameID)) {
                 game.leave(nick);
                 System.out.println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
@@ -195,14 +191,14 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
     }
 
     /**
-     * Remove the @param idGame from the {@link MainController#activeGames}
+     * Remove the @param idGame from the {@link ControllerOfMatches#activeGames}
      *
      * @param GameID unique ID of the game to delete
      */
     public synchronized void deleteGame(String GameID) {
-        Iterator<GameController> iterator = activeGames.iterator();
+        Iterator<ControllerOfGame> iterator = activeGames.iterator();
         while (iterator.hasNext()) {
-            GameController game = iterator.next();
+            ControllerOfGame game = iterator.next();
             if (game.getGameId().equals(GameID)) {
                 iterator.remove();
                 System.out.println("\t>Game " + GameID + " removed from activeGames");
@@ -216,7 +212,7 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
      */
     private void printActiveGames() {
         System.out.println("\t\trunningGames: ");
-        for (GameController game : activeGames) {
+        for (ControllerOfGame game : activeGames) {
             System.out.println("\t\t" + game.getGameId() + " ");
         }
         System.out.println("");
@@ -224,7 +220,12 @@ public class MainController extends UnicastRemoteObject implements /*Serializabl
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).
     //some getter:
-    public List<GameController> getActiveGame(){
+    public List<ControllerOfGame> getActiveGame(){
         return this.activeGames;
+    }
+
+    //It's used in TestController, leave this method
+    public void clearActiveGames(){
+        activeGames.clear();
     }
 }

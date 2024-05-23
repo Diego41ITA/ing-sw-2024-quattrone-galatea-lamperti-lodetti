@@ -7,10 +7,9 @@ import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.parse.SaverWriter;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
@@ -18,10 +17,10 @@ import java.util.stream.Collectors;
 
 /**
  * This class handles all the operations relative to a single CodexNaturalis game, exposing
- * several methods that are called by {@link GameFlow}. Each method is also in charge to correctly
+ * several methods that are called by {@link FsmGame}. Each method is also in charge to correctly
  * notify the Players affected the action performed.
  */
-public class GameController extends UnicastRemoteObject implements GameControllerInterface/*, Serializable*/ {
+public class ControllerOfGame extends UnicastRemoteObject implements ControllerOfGameInterface/*, Serializable*/ {
     /**The model of the game to control*/
     private final Game game;
 
@@ -33,11 +32,11 @@ public class GameController extends UnicastRemoteObject implements GameControlle
 
 
     /**
-     * Constructor of the class. It's called by {@link MainController} when creating a new game
+     * Constructor of the class. It's called by {@link ControllerOfMatches} when creating a new game
      * @param id unique code associated with the specific game
      * @param maxNumPlayers maximum number of players in the game
      */
-    public GameController(String id, int maxNumPlayers) throws  RemoteException{
+    public ControllerOfGame(String id, int maxNumPlayers) throws  RemoteException{
         game = new Game(id);
         game.setMaxNumberPlayer(maxNumPlayers);
 
@@ -51,7 +50,7 @@ public class GameController extends UnicastRemoteObject implements GameControlle
 
     /**
      * Adds a {@link Player}, specifying its nickname, and a {@link GameObserver} to the
-     * {@link GameController#observers} HashMap
+     * {@link ControllerOfGame#observers} HashMap
      * @param obs Observer of the Player
      * @param p Player
      * @throws RemoteException
@@ -75,7 +74,7 @@ public class GameController extends UnicastRemoteObject implements GameControlle
     }
 
     /**
-     * Remove a {@link Player}, specifying its nickname from the {@link GameController#observers} HashMap
+     * Remove a {@link Player}, specifying its nickname from the {@link ControllerOfGame#observers} HashMap
      * @param p Player
      * @throws RemoteException
      */
@@ -99,7 +98,7 @@ public class GameController extends UnicastRemoteObject implements GameControlle
     }
 
     /**
-     * Method that sets the {@link GameController#game} Status to {@link Status#ACTIVE} and notify all the Players about
+     * Method that sets the {@link ControllerOfGame#game} Status to {@link Status#ACTIVE} and notify all the Players about
      * the beginning.
      */
     public void start_Game() throws RemoteException {
@@ -473,7 +472,7 @@ public class GameController extends UnicastRemoteObject implements GameControlle
     }
 
     /**
-     * Support method for the internal logic of {@link GameController} class. It calculates the score of a specific gold card.
+     * Support method for the internal logic of {@link ControllerOfGame} class. It calculates the score of a specific gold card.
      * @param card Specified card.
      * @param nick Nickname of the Player.
      * @return Calculated points.
@@ -491,12 +490,12 @@ public class GameController extends UnicastRemoteObject implements GameControlle
     }
 
     /**
-     * Support method for the internal logic of {@link GameController} class. It increments the points of a specific Player.
+     * Support method for the internal logic of {@link ControllerOfGame} class. It increments the points of a specific Player.
      * @param nick Nickname of the Player.
      * @param point Amount of point to be added.
      */
-    //@Override
-    private void addPoints2Player(String nick, int point) {
+    //leave public because it's used in testController
+    public void addPoints2Player(String nick, int point) {
         HashMap<Player, Boolean> players;
         players = (HashMap<Player, Boolean>) game.getPlayers();
         PointTable pointTable = game.getPointTable();

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.networking.socket.client.message;
 
-import it.polimi.ingsw.controller.GameControllerInterface;
-import it.polimi.ingsw.controller.MainControllerInterface;
+import it.polimi.ingsw.controller.ControllerOfGameInterface;
+import it.polimi.ingsw.controller.ControllerOfMatchesInterface;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.observer.GameObserver;
 //import jdk.swing.interop.DragSourceContextWrapper;
@@ -16,12 +16,12 @@ public class DrawFromDeck extends Message{
         this.deck = deck;
     }
     @Override
-    public void execute(GameControllerInterface game) throws RemoteException, GameEndedException {
+    public void execute(ControllerOfGameInterface game) throws RemoteException, GameEndedException {
         game.drawPlayableCardFromTableOfDecks(this.deck, this.nickname);
     }
 
     @Override
-    public GameControllerInterface execute(GameObserver obs, MainControllerInterface operation) throws RemoteException {
+    public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
         return null;
     }
 }

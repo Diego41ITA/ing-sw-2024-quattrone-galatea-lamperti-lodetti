@@ -8,7 +8,8 @@ import java.rmi.RemoteException;
 /**
  * this interface exposes all the useful methods to create, join or leave a game.
  */
-public interface MainControllerInterface extends Remote {
+public interface ControllerOfMatchesInterface extends Remote {
+
 
     /**
      * it creates a new game
@@ -18,7 +19,7 @@ public interface MainControllerInterface extends Remote {
      * @return returns an interface: GameControllerInterface.
      * @throws RemoteException
      */
-    GameControllerInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException;
+    ControllerOfGameInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException;
 
     /**
      * with this method the client can join a random game
@@ -27,7 +28,7 @@ public interface MainControllerInterface extends Remote {
      * @return returns an interface: GameControllerInterface.
      * @throws RemoteException
      */
-    GameControllerInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException;
+    ControllerOfGameInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException;
 
     /**
      * with this method the client can rejoin a game
@@ -37,7 +38,7 @@ public interface MainControllerInterface extends Remote {
      * @return returns an interface: GameControllerInterface.
      * @throws RemoteException
      */
-    GameControllerInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException;
+    ControllerOfGameInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException;
 
     /**
      * with this method the client can leave a game
@@ -47,5 +48,6 @@ public interface MainControllerInterface extends Remote {
      * @return returns an interface: GameControllerInterface.
      * @throws RemoteException
      */
-    GameControllerInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException;
+    ControllerOfGameInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException;
+
 }

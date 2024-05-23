@@ -1,14 +1,14 @@
 package it.polimi.ingsw.view.statusActive;
 
-import it.polimi.ingsw.model.GameView;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.GameView.GameView;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.input.*;
 
 public abstract class StateActive {
-    protected static GameFlow flow;
+    protected static FsmGame flow;
     protected static InputParser inputGetter;
 
-    protected StateActive(GameFlow flow, InputParser input){
+    protected StateActive(FsmGame flow, InputParser input){
         StateActive.flow = flow;
         StateActive.inputGetter = input;
     }

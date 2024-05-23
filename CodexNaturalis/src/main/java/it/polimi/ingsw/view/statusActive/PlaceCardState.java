@@ -1,23 +1,19 @@
 package it.polimi.ingsw.view.statusActive;
 
-import it.polimi.ingsw.model.GameView;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
-import it.polimi.ingsw.view.GameFlow;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusWaiting.StateWaiting;
 
 import java.awt.Point;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Optional;
-import java.util.Scanner;
-
-import static it.polimi.ingsw.view.statusWaiting.StateWaiting.inputGetter;
 
 public class PlaceCardState extends StateActive{
 
@@ -26,7 +22,7 @@ public class PlaceCardState extends StateActive{
     private ClientAction client;
     private String nickName;
 
-    public PlaceCardState(GameFlow flow, InputParser input) {
+    public PlaceCardState(FsmGame flow, InputParser input) {
         super(flow, input);
         view = flow.getView();
         ui = flow.getUi();

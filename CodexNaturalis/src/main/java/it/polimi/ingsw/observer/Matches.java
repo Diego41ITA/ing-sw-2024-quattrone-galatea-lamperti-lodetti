@@ -1,14 +1,17 @@
-package it.polimi.ingsw.model.gameDataManager;
+package it.polimi.ingsw.observer;
 
 import com.google.gson.*;
 import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.gameDataManager.Game;
+import it.polimi.ingsw.model.gameDataManager.Player;
+import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.parse.Crafter;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.io.*;
 
-
+//(IMPORTANT!!!!!) Leave matches here, because this way I have complete coverage of the junit tests
 /**
  * This is the class that manages all the game (ongoing, suspended and ended). The user should be able to join a game
  * only by using this class, instruction like Game.join() should be avoided: this class often returns a list of

@@ -1,16 +1,12 @@
 package it.polimi.ingsw.networking.rmi;
 
-import it.polimi.ingsw.controller.GameControllerInterface;
-import it.polimi.ingsw.controller.MainController;
-import it.polimi.ingsw.controller.MainControllerInterface;
-import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.controller.ControllerOfMatchesInterface;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.ExportException;
-import java.rmi.server.UnicastRemoteObject;
 
-import static it.polimi.ingsw.controller.MainController.getMainController;
+import static it.polimi.ingsw.controller.ControllerOfMatches.getMainController;
 
 /**
  * this class defines the server for RMI communication
@@ -42,7 +38,7 @@ public class ServerRMI /* extends UnicastRemoteObject implements MainControllerI
     public ServerRMI(){
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
-            MainControllerInterface mainController = getMainController();
+            ControllerOfMatchesInterface mainController = getMainController();
             registry.rebind("server name", mainController);
             System.out.println("Server RMI is running...");
         } catch (Exception e) {

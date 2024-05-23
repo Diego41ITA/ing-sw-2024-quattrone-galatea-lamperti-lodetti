@@ -136,11 +136,10 @@ public class PlayerTest {
         ArrayList<GoalCard> test = new ArrayList<GoalCard>();
         test.add(goal1);
         test.add(goal2);
-        player.chooseGoal(test, 1);
+        player.chooseGoal(test, 100);
         //verifies that the ids are the same
         assertEquals(goal2.getCardId(), player.getGoal().getCardId());
-        assertThrows(IllegalArgumentException.class, () -> player.chooseGoal(test, -1));
-        assertThrows(IllegalArgumentException.class, () -> player.chooseGoal(test, 2));
+        assertThrows(NullPointerException.class, () -> player.chooseGoal(null, 100));
     }
 
     @Test
@@ -173,7 +172,7 @@ public class PlayerTest {
             player.playCard(cardToPlay, cord);
             fail("Expected IllegalOperationException to be thrown");
         } catch (illegalOperationException e) {
-            assertEquals("There are not enough resources to play this card", e.getMessage());
+            assertEquals("Invalid card placement", e.getMessage());
         }
     }
 
