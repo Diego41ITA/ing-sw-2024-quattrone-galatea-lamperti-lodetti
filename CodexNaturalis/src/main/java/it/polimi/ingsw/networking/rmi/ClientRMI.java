@@ -31,14 +31,16 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     private String nickname;
     private Registry registry;
     private FsmGame flow;
+
+    private String ipAddress;
     //private Boolean firstCard;
 
     //ora ho il costruttore piu dei metodi ausiliari.
-    public ClientRMI(FsmGame flow) throws RemoteException {
+    public ClientRMI(FsmGame flow, String ip) throws RemoteException {
         //super();
         gameObserverHandler = new GameObserverHandlerClient(flow);
         connect(); //connette il client con il server RMI
-
+        ipAddress = ip;
         this.flow = flow;
         //firstCard = true;
     }
@@ -46,7 +48,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     public void connect(){
         //va reso più solido chiaramente
         try{
-            registry = LocateRegistry.getRegistry("localhost", 1099);
+            registry = LocateRegistry.getRegistry(ipAddress, 1099);
             request = (ControllerOfMatchesInterface) registry.lookup("server name");
 
             notificationGetter = (GameObserver) UnicastRemoteObject.exportObject(gameObserverHandler, 0);
@@ -85,15 +87,6 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         // request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notificationGetter, nick);
         nickname = nick;
-    }
-
-    @Override
-    public void rejoin(String nick, String gameId) throws RemoteException, NotBoundException {
-        //registry = LocateRegistry.getRegistry("localhost", 1099);
-        //request = (MainControllerInterface) registry.lookup("server name");
-        gameController = request.rejoin(notificationGetter, nick, gameId);
-        nickname = nick;
-        //firstCard = false;
     }
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)

@@ -35,10 +35,12 @@ public class ClientSocket extends Thread implements ClientAction {
     private FsmGame flow;
 
     private BlockingQueue<ServerNotification> notificationQueue;
+    private String ipAddress;
 
-    public ClientSocket(FsmGame flow){
+    public ClientSocket(FsmGame flow,String ip){
         this.flow = flow;
-        connect("127.0.0.1", 50000 );
+        ipAddress = ip;
+        connect(ipAddress, 50000 );
         gameObserverHandler = new GameObserverHandlerClient(flow);
         notificationQueue = new LinkedBlockingQueue<>();
         this.start();
@@ -142,17 +144,6 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new LeaveGameMessage(nick, gameId));
             completeForwarding();
         }catch(IOException e){
-            throw new RemoteException();
-        }
-    }
-
-    @Override
-    public void rejoin(String nick, String gameID) throws RemoteException, NotBoundException{
-        try{
-            out.writeObject(new RejoinMessage(nick, gameID));
-            completeForwarding();
-            waitForNotification();
-        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }

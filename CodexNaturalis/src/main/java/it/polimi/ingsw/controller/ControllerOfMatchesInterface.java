@@ -6,7 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * this interface exposes all the useful methods to create, join or leave a game.
+ * this interface exposes all the useful methods to create and  leave a game.
  */
 public interface ControllerOfMatchesInterface extends Remote {
 
@@ -29,16 +29,6 @@ public interface ControllerOfMatchesInterface extends Remote {
      * @throws RemoteException
      */
     ControllerOfGameInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException;
-
-    /**
-     * with this method the client can rejoin a game
-     * @param obs it is the object that handles the notification for the client.
-     * @param nick the client's nickname
-     * @param gameId It the id that the client wants to rejoin.
-     * @return returns an interface: GameControllerInterface.
-     * @throws RemoteException
-     */
-    ControllerOfGameInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException;
 
     /**
      * with this method the client can leave a game

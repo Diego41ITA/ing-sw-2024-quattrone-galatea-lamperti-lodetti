@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * this interface defines all the operation that are available on a GameController object.
+ * this interface defines all the operation that are available on Controller of Game object.
  */
 public interface ControllerOfGameInterface extends Remote {
 

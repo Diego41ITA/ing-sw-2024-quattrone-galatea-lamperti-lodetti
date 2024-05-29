@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 /**
- * this class exposes all the MainControllerInterface methods to operate on a list of GameController
+ * this class exposes all the ControllerOfMatches methods to operate on a list of GameController
  */
 public class ControllerOfMatches extends UnicastRemoteObject implements /*Serializable,*/ ControllerOfMatchesInterface /*, Runnable*/ {
     /**
@@ -133,36 +133,6 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         return null;
     }
 
-    /**
-     * Allows Player to rejoin the game after being disconnected
-     * @param obs GameObserver associated with the player who is rejoining the game
-     * @param nick Player's nickname
-     * @param GameID unique ID of the game to rejoin
-     * @return GameControllerInterface of the joined game
-     * @throws RemoteException it could throw this when something goes wrong
-     */
-    public synchronized ControllerOfGameInterface rejoin(GameObserver obs, String nick, String GameID) throws RemoteException {
-        for (ControllerOfGame game : activeGames) {
-            if (game.getGameId().equals(GameID)) {
-                try {
-                    for (Player player : game.getPlayers().keySet()) {
-                        if (player.getNick().equals(nick)) {
-                            game.addObserver(obs, player);
-                            game.reconnectPlayer(player);
-                            obs.reconnectedToGame(GameID);
-                            return game;
-                        }
-                    }
-                    obs.genericErrorWhenEnteringGame("The player" + nick + "was not connected in the running game.", GameID);
-                    return null;
-                } catch (MaxPlayersInException | GameEndedException e) {
-                    obs.genericErrorWhenEnteringGame("An error occured during reconnection to the game", GameID);
-                }
-            }
-        }
-        obs.gameIdNotExists(GameID);
-        return null;
-    }
 
     /**
      * Allows a player to leave a game

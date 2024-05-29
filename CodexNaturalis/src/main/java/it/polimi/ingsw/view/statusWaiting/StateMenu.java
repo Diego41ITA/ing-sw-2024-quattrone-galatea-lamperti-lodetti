@@ -44,22 +44,6 @@ public class StateMenu extends StateWaiting {
                     }
                 }
                 break;
-            case "B":
-                validInput = true;
-                ui.show_RequestGameId();
-                String gameID = inputGetter.getGameId();
-                try {
-                    client.rejoin(nickName, gameID);
-                } catch (NotBoundException | IOException | InterruptedException e) {
-                    ui.show_connectionError();
-                    try {
-                        StateWaiting.flow.wait(100); // non sono sicuro
-                        StateWaiting.flow.exit();
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-                break;
             default:
                 ui.show_invalidCommand();
                 break;

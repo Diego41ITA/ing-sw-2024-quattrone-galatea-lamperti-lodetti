@@ -7,9 +7,10 @@ import it.polimi.ingsw.observer.GameObserver;
 
 import java.rmi.RemoteException;
 
-public class RejoinMessage extends Message{
+public class RejoinMessage extends Message {
     private final String gameId;
-    public RejoinMessage(String nick, String gameId){
+
+    public RejoinMessage(String nick, String gameId) {
         this.nickname = nick;
         this.gameId = gameId;
         this.forMainController = true;
@@ -22,6 +23,6 @@ public class RejoinMessage extends Message{
 
     @Override
     public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
-        return operation.rejoin(obs, this.nickname, this.gameId); //aggiungere il numero massimo di giocatori.
+      return null;
     }
 }

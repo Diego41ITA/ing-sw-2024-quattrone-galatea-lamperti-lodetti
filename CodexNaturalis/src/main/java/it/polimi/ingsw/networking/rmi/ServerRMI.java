@@ -119,25 +119,8 @@ public class ServerRMI /* extends UnicastRemoteObject implements MainControllerI
         return stub;
     }
 
-    /**
-     * this method handles the request to rejoin a game
-     * @param obs it is the object that handles the notification for the client.
-     * @param nick the client's nickname
-     * @param gameId It the id that the client wants to rejoin.
-     * @return the gameController interface of the GameController
-     * @throws RemoteException
-     */
-    /*
-    @Override
-    public GameControllerInterface rejoin(GameObserver obs, String nick, String gameId) throws RemoteException{
-        GameControllerInterface stub = server.mainController.rejoin(obs, nick, gameId);
-        try{
-            UnicastRemoteObject.exportObject(stub, 0);
-        }catch(RemoteException e){
-            //...
-        }
-        return stub;
-    }
+
+
 
     /**
      * this method handles the request to leave the game

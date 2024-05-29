@@ -45,15 +45,6 @@ public interface ClientAction {
      */
     void joinRandomGame(String nick) throws IOException, InterruptedException, NotBoundException;
 
-    /**
-     * this method asks to rejoin a specific game
-     * @param nick the name of the client
-     * @param gameId the id of the game that the client wants to rejoin
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws NotBoundException
-     */
-    void rejoin(String nick, String gameId) throws IOException, InterruptedException, NotBoundException;
 
 
     void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws IOException, illegalOperationException;
