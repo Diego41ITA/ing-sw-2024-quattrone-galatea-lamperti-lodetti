@@ -29,6 +29,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      */
     private final Random random = new Random();
 
+    private RoutineDelete routine;
     /**
      * Default constructor that initialize the ArrayList for the activeGames
      */
@@ -37,7 +38,8 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         this.activeGames = new ArrayList<ControllerOfGame>();
 
         //it starts a routine operation
-        Thread routineDelete = new Thread(new RoutineDelete(this));
+        routine = new RoutineDelete(this);
+        Thread routineDelete = new Thread(routine);
         routineDelete.start();
     }
 
@@ -137,50 +139,19 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     /**
      * Allows a player to leave a game
      *
-     * @param obs GameObserver associated with the player who is rejoining the game
      * @param nick Player's nickname
      * @param gameID unique ID of the game to leave
-     * @return the new game controller interface
-     * @throws RemoteException it could throw it if something goes wrong
+     * @throws RemoteException if something goes wrong
      */
     @Override
-    public ControllerOfGameInterface leaveGame(GameObserver obs, String nick, String gameID) throws RemoteException {
-        for (ControllerOfGame game : activeGames) {
-            if (game.getGameId().equals(gameID)) {
-                game.leave(nick);
-                System.out.println("\t>Game " + game.getGameId() + " player: \"" + nick + "\" decided to leave");
-                printActiveGames();
-                if (game.getNumOfOnlinePlayers() == 0) {
-                    deleteGame(gameID);
-                }
-                if(activeGames.isEmpty())
-                    break;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Remove the @param idGame from the {@link ControllerOfMatches#activeGames}
-     *
-     * @param GameID unique ID of the game to delete
-     */
-    public synchronized void deleteGame(String GameID) {
-        Iterator<ControllerOfGame> iterator = activeGames.iterator();
-        while (iterator.hasNext()) {
-            ControllerOfGame game = iterator.next();
-            if (game.getGameId().equals(GameID)) {
-                iterator.remove();
-                System.out.println("\t>Game " + GameID + " removed from activeGames");
-                printActiveGames();
-            }
-        }
+    public void leaveGame(String gameID, String nick) throws RemoteException {
+        routine.leaveGame(gameID, nick);
     }
 
     /**
      * Print all games currently running
      */
-    private void printActiveGames() {
+    public void printActiveGames() {
         System.out.println("\t\trunningGames: ");
         for (ControllerOfGame game : activeGames) {
             System.out.println("\t\t" + game.getGameId() + " ");

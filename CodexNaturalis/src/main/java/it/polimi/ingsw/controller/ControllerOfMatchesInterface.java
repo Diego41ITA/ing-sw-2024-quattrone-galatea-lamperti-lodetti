@@ -32,12 +32,10 @@ public interface ControllerOfMatchesInterface extends Remote {
 
     /**
      * with this method the client can leave a game
-     * @param obs it is the object that handles the notification for the client.
      * @param nick the client's nickname
      * @param gameId the id of the game that the client wants to leave.
-     * @return returns an interface: GameControllerInterface.
      * @throws RemoteException
      */
-    ControllerOfGameInterface leaveGame(GameObserver obs, String nick, String gameId) throws RemoteException;
+    void leaveGame(String gameId, String nick) throws RemoteException;
 
 }

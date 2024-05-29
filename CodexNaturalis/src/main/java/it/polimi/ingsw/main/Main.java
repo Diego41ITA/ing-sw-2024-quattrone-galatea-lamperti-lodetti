@@ -53,10 +53,10 @@ public class Main {
                 } while (!containsOneOrTwoAndHasLengthOne(type));
                 String ip;
                 do {
-                    System.out.println("Write the Ip address:\n if if you want to use the local host write \"localHost\"");
+                    System.out.println("Write the Ip address:\n if you want to use the local host write \"localhost\"");
                     ip = scanner.nextLine();
                     if(!verifyIpAddress(ip)){System.out.println("Invalid Ip address, try again");}
-                } while (verifyIpAddress(ip));
+                } while (!verifyIpAddress(ip));
                 System.out.println("""
                                             
                                             ██     ██  ███████  ██        ██████   ██████   ███    ███  ███████     ████████  ██████ \s

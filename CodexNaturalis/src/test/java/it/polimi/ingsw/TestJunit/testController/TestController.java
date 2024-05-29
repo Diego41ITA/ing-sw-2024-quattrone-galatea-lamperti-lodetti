@@ -74,10 +74,15 @@ public class TestController  {
         UI ui = new Cli();
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
+
         ControllerOfGameInterface gameController = controllerOfMatches.createGame(obs, "Player1", 4);
-        assertNotNull(gameController);
-        ControllerOfGameInterface leftGameController = controllerOfMatches.leaveGame(obs, "Player1", gameController.getGameId());
-        assertNull(leftGameController); // The method returns null because the game is still active
+        UI ui2 = new Cli();
+        GameObserver obs2 = new FsmGame(ui2, input);
+        ControllerOfGameInterface gameController2 = controllerOfMatches.joinRandomGame(obs2, "Player2");
+        assertNotNull(gameController2);
+        controllerOfMatches.leaveGame(gameController2.getGameId(), "Player1");
+        Player player1 = new Player("Player1");
+        assertFalse(gameController.getPlayers().containsKey(player1));
     }
 
     @Test
@@ -88,7 +93,7 @@ public class TestController  {
         ControllerOfGameInterface gameController = controllerOfMatches.createGame(obs, "Player1", 4);
         assertEquals(1, controllerOfMatches.getActiveGames().size());
         assertNotNull(gameController);
-        controllerOfMatches.deleteGame(gameController.getGameId());
+        controllerOfMatches.leaveGame("Game1", "Player1");
         assertEquals(false, controllerOfMatches.getActiveGames().contains(gameController)); // The game should have been removed from the active games list
         assertEquals(0, controllerOfMatches.getActiveGames().size());
     }

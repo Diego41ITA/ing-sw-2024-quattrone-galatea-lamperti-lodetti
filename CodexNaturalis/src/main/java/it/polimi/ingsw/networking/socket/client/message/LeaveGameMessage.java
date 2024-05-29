@@ -21,6 +21,7 @@ public class LeaveGameMessage extends Message {
 
     @Override
     public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
-        return operation.leaveGame(obs, this.nickname, this.gameId); //aggiungere il numero massimo di giocatori.
+        operation.leaveGame(this.gameId,this.nickname); //aggiungere il numero massimo di giocatori.
+        return null;
     }
 }

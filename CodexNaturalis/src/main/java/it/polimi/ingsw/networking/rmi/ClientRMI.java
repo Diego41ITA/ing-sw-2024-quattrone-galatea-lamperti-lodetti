@@ -75,7 +75,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     public void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException {
         //registry = LocateRegistry.getRegistry("localhost", 1099);
         //request = (MainControllerInterface) registry.lookup("server name");
-        request.leaveGame(notificationGetter, nick, idGame);
+        request.leaveGame(idGame, nick);
         gameController = null;
         nickname = null;
         //firstCard = false;
