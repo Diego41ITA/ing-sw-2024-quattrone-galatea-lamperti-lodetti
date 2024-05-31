@@ -1,19 +1,27 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.GameView.GameView;
+import it.polimi.ingsw.networking.rmi.ClientRMI;
+import javafx.application.Platform;
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+import it.polimi.ingsw.view.FsmGame;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
@@ -27,29 +35,24 @@ public class Gui extends Application implements UI {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
-        show_startingMenu();
     }
 
-    public Scene loadScene(String path){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Parent root;
-        try {
-            root = loader.load();
-            InputGui input = loader.getController();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return new Scene(root);
+    public void loadScene(String path) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                Parent root = loader.load();
+                primaryStage.setScene(new Scene(root));
+                primaryStage.show();
+            } catch (IOException e) {
+                System.out.println("qualcosa si è rotto");
+            }
+        });
     }
 
     @Override
     public void show_startingMenu() {
-        try {
-            primaryStage.setScene(loadScene("/scenes/Menu.fxml"));
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loadScene("/scenes/Menu.fxml");
     }
 
     @Override

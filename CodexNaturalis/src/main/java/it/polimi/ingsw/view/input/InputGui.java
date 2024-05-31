@@ -57,7 +57,9 @@ public class InputGui implements InputParser {
 
     @Override
     public String getOption() {
-        return null;
+        while(!multipleResponses.getResponses().isEmpty()){
+        }
+        return multipleResponses.getFirst();
     }
 
     @Override
