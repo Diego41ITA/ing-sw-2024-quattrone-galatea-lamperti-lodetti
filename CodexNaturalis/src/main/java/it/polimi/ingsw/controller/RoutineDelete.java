@@ -25,8 +25,11 @@ public class RoutineDelete extends Thread{
     }
 
     //******LEAVE THIS METHOD IN THIS CLASS**************************
-    public void leaveGame(String gameID, String nick){
+    //you can use this method in this class(Routine delete) without invoke matches
+    public synchronized void leaveGame(String gameID, String nick){
         Iterator<ControllerOfGame> iterator = matches.getActiveGames().iterator();
+        if(matches.getActiveGames().isEmpty())
+            return;
         while (iterator.hasNext()) {
             ControllerOfGame game = iterator.next();
             if (game.getGameId().equals(gameID)) {
@@ -37,8 +40,7 @@ public class RoutineDelete extends Thread{
                 }else {
                     System.out.println("the player " + nick + " of " + gameID + " is out of the game");
                 }
-                if(matches.getActiveGames().isEmpty())
-                    break;
+
             }
         }
     }

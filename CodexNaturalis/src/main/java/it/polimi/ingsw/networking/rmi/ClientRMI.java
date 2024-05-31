@@ -39,8 +39,8 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     public ClientRMI(FsmGame flow, String ip) throws RemoteException {
         //super();
         gameObserverHandler = new GameObserverHandlerClient(flow);
-        connect(); //connette il client con il server RMI
         ipAddress = ip;
+        connect(); //connette il client con il server RMI
         this.flow = flow;
         //firstCard = true;
     }
