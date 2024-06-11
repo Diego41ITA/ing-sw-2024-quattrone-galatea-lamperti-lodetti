@@ -10,7 +10,6 @@ import it.polimi.ingsw.networking.socket.client.message.*;
 import it.polimi.ingsw.networking.socket.client.message.Color;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.ServerNotification;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
 import java.io.ObjectInputStream;
@@ -25,13 +24,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Receives all the incoming notifications from the server, and it processes them by passing
- * {@link GameObserverHandlerClient}, that calls the methods of {@link FsmGame}
+ * {@link //GameObserverHandlerClient}, that calls the methods of {@link FsmGame}
  */
 public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private final GameObserverHandlerClient gameObserverHandler;    //invoca i metodi di gameFlow
+    //private final GameObserverHandlerClient gameObserverHandler;    //invoca i metodi di gameFlow
     private FsmGame flow;
 
     private BlockingQueue<ServerNotification> notificationQueue;
@@ -41,7 +40,7 @@ public class ClientSocket extends Thread implements ClientAction {
         this.flow = flow;
         ipAddress = ip;
         connect(ipAddress, 50000 );
-        gameObserverHandler = new GameObserverHandlerClient(flow);
+        //gameObserverHandler = new GameObserverHandlerClient(flow);
         notificationQueue = new LinkedBlockingQueue<>();
         this.start();
     }
@@ -84,7 +83,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     public void executeAsync(ServerNotification notification){
         try {
-            notification.execute(gameObserverHandler);
+            notification.execute(flow);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -106,7 +105,7 @@ public class ClientSocket extends Thread implements ClientAction {
     public void waitForNotification() throws InterruptedException{
         ServerNotification notification = notificationQueue.take();
         try {
-            notification.execute(gameObserverHandler);
+            notification.execute(flow); //invece di notificationGetter
         } catch (IOException e) {
             System.out.println("something went wrong ...");
             throw new RuntimeException(e);

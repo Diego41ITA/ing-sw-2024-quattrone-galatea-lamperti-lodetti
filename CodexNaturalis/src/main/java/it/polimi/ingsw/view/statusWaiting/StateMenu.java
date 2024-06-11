@@ -23,6 +23,7 @@ public class StateMenu extends StateWaiting {
     @Override
     public void execute() {
         Boolean validInput = false;
+        Boolean exitRequest = false;
         String input, inputParsed;
         do {
         ui.show_startingMenu();
@@ -63,7 +64,7 @@ public class StateMenu extends StateWaiting {
                     do{
                     ui.show_RequestNumberOfPlayers();
                     numberOfPlayer = inputGetter.getNumberOfPlayer();
-                    if(numberOfPlayer != 0){
+                    if(numberOfPlayer != 0){ //per ora gestiamo anche numeri a caso (unico errore lo da per input mismatch)
                         try {
                             client.createGame(StateWaiting.flow.getNickname(), numberOfPlayer);
                         } catch (NotBoundException | IOException | InterruptedException e) {
@@ -83,6 +84,7 @@ public class StateMenu extends StateWaiting {
                     break;
                 case ("B"):
                     validInput = true;
+                    exitRequest = true;
                     StateWaiting.flow.exit();
                     break;
                 default:
@@ -91,8 +93,7 @@ public class StateMenu extends StateWaiting {
             }
         }while(!validInput);
         }
-
-        nextState();
+        if(!exitRequest) nextState();
     }
     @Override
     public void nextState(){

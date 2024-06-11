@@ -18,12 +18,15 @@ import it.polimi.ingsw.view.statusWaiting.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
-public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver {
+public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serializable {
 
     public boolean waitingForNewPlayers = false;
     public boolean notStarted;
@@ -47,7 +50,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver {
     private StateActive state2 = new PlaceCardState(this, this.input);
 
     //costruttore
-    public FsmGame(UI ui, InputParser input){
+    public FsmGame(UI ui, InputParser input) throws RemoteException{
         this.ui = ui;
         this.input = input;
         inGame = false;
@@ -69,6 +72,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver {
             if (view == null || view.getStatus() == Status.WAITING) {
                 if(notStarted)
                     state1.execute();
+                if(view == null) break; //condizione per uscita dal game dopo scelta joingame
                 //se la view ha i giocatori giusti la partita può iniziare
                 if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
                     try {
@@ -349,8 +353,16 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver {
     @Override
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
         ui.show_initialCard(card);
-        boolean isFrontOrBack;
-        isFrontOrBack = input.getSideOfTheCard();
+        boolean isFrontOrBack = false;
+        boolean isValid = false;
+        do {
+            try {
+                isFrontOrBack = input.getSideOfTheCard();
+                isValid = true;
+            }catch (InputMismatchException e){
+                ui.show_invalidInput();
+            }
+        }while (!isValid);
         client.setGameStation(nickname, card, isFrontOrBack);
     }
 
