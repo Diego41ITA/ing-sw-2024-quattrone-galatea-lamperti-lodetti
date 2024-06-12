@@ -45,10 +45,10 @@ public class Gui extends Application implements UI {
             case "socket" -> this.client = new ClientSocket(flow, getParameters().getUnnamed().get(1));
         }
         flow.setClient(client);
-        flow.run();
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
+        flow.run();
     }
 
     public void loadScene(String path) {
