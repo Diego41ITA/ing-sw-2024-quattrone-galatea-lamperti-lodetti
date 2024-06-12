@@ -132,7 +132,7 @@ public class Main {
                     String[] arg = new String[2];
                     arg[0] = "rmi";
                     arg[1] = ip;
-                    Application.launch(Gui.class, "rmi");
+                    Application.launch(Gui.class, arg);
                 }
 
 
