@@ -118,15 +118,21 @@ public class Main {
                     flow.setClient(new ClientRMI(flow, ip));
                     flow.run();
                 } else if (selection == 3) {
-                    FsmGame flow = new FsmGame(new Gui(), new InputGui());
+                    /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     flow.setClient(new ClientSocket(flow, ip));
-                    flow.run();
-                    Application.launch(Gui.class, args);
+                    flow.run();*/
+                    String[] arg = new String[2];
+                    arg[0] = "socket";
+                    arg[1] = ip;
+                    Application.launch(Gui.class,arg);
                 } else if (selection == 4) {
-                    FsmGame flow = new FsmGame(new Gui(), new InputGui());
+                    /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     flow.setClient(new ClientRMI(flow, ip));
-                    flow.run();
-                    Application.launch(Gui.class, args);
+                    flow.run();*/
+                    String[] arg = new String[2];
+                    arg[0] = "rmi";
+                    arg[1] = ip;
+                    Application.launch(Gui.class, "rmi");
                 }
 
 

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.GameView.GameView;
+import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
+import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import javafx.application.Platform;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
@@ -30,9 +32,21 @@ La grafica verrà runnata su thread
  */
 public class Gui extends Application implements UI {
     private Stage primaryStage;
+    private FsmGame flow;
+    private ClientAction client;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        flow = new FsmGame(new Gui(), new InputGui());
+        String typeConnection = getParameters().getUnnamed().getFirst();
+        switch (typeConnection){
+            case "rmi" -> this.client = new ClientRMI(flow, getParameters().getUnnamed().get(1));
+            case "socket" -> this.client = new ClientSocket(flow, getParameters().getUnnamed().get(1));
+        }
+        flow.setClient(client);
+        flow.run();
+
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
     }
