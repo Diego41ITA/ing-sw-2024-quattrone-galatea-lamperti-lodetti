@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GameObserverHandlerClient;
 
 import java.awt.*;
 import java.rmi.NotBoundException;
@@ -54,7 +55,8 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
             //il client è pronto
         }catch(Exception e){
-            //fa qualcosa...
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
