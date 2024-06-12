@@ -119,14 +119,14 @@ public class Main {
                     flow.run();
                 } else if (selection == 3) {
                     FsmGame flow = new FsmGame(new Gui(), new InputGui());
-                    Application.launch(Gui.class, args);
                     flow.setClient(new ClientSocket(flow, ip));
                     flow.run();
+                    Application.launch(Gui.class, args);
                 } else if (selection == 4) {
                     FsmGame flow = new FsmGame(new Gui(), new InputGui());
-                    Application.launch(Gui.class, args);
                     flow.setClient(new ClientRMI(flow, ip));
                     flow.run();
+                    Application.launch(Gui.class, args);
                 }
 
 

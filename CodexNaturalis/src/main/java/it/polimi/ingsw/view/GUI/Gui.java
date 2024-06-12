@@ -122,7 +122,7 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_RequestPlayerNickName() {
-
+        loadScene("/scenes/NickNameSetUp.fxml");
     }
 
     @Override
