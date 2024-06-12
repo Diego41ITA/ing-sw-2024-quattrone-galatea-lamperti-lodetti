@@ -112,7 +112,7 @@ public class Main {
                 if (selection == 1) {
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientSocket(flow, ip));
-                    flow.run();
+                    flow.run(); //in this way the main class doesn't end until run() is finished
                 } else if (selection == 2) {
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientRMI(flow, ip));

@@ -38,7 +38,7 @@ public class Gui extends Application implements UI {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        flow = new FsmGame(new Gui(), new InputGui());
+        flow = new FsmGame(this, new InputGui());
         String typeConnection = getParameters().getUnnamed().getFirst();
         switch (typeConnection){
             case "rmi" -> this.client = new ClientRMI(flow, getParameters().getUnnamed().get(1));
@@ -48,7 +48,9 @@ public class Gui extends Application implements UI {
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
-        flow.run();
+        this.primaryStage.show();
+        Thread myThread = new Thread(flow);
+        myThread.start();
     }
 
     public void loadScene(String path) {
@@ -58,8 +60,10 @@ public class Gui extends Application implements UI {
                 Parent root = loader.load();
                 primaryStage.setScene(new Scene(root));
                 primaryStage.show();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 System.out.println("qualcosa si è rotto");
+                e.getCause();
+                e.printStackTrace();
             }
         });
     }
@@ -136,7 +140,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_RequestPlayerNickName() {
-        loadScene("/scenes/NickNameSetUp.fxml");
+        if(primaryStage != null)
+            loadScene("/scenes/NickNameSetUp.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override

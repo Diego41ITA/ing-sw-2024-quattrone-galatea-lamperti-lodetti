@@ -51,14 +51,12 @@ public class InputGui implements InputParser {
     }
 
     @Override
-    public String getNickName() { return null;
-
+    public String getNickName() {
+        return multipleResponses.getFirst();
     }
 
     @Override
     public String getOption() {
-        while(multipleResponses.getResponses().isEmpty()){
-        }
         return multipleResponses.getFirst();
     }
 
