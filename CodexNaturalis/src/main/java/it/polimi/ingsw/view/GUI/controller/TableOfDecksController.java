@@ -69,22 +69,28 @@ public class TableOfDecksController extends InputGui {
 
 
     public void drawDeckGold(MouseEvent e){
+        multipleResponses.add("A");
         multipleResponses.add("gold");
     }
     public void drawDeckResource(MouseEvent e){
+        multipleResponses.add("A");
         multipleResponses.add("resource");
     }
     public void drawFirstCard(MouseEvent e){
-        multipleResponses.add("pos1");
+        multipleResponses.add("B");
+        multipleResponses.add("1");
     }
     public void drawSecondCard(MouseEvent e){
-        multipleResponses.add("pos2");
+        multipleResponses.add("B");
+        multipleResponses.add("2");
     }
     public void drawThirdCard(MouseEvent e){
-        multipleResponses.add("pos3");
+        multipleResponses.add("B");
+        multipleResponses.add("3");
     }
     public void drawFourthCard(MouseEvent e){
-        multipleResponses.add("pos4");
+        multipleResponses.add("B");
+        multipleResponses.add("4");
     }
 
 

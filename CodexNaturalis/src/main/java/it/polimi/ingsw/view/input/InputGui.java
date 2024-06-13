@@ -22,29 +22,39 @@ public class InputGui implements InputParser {
     //devono essere implementati
     @Override
     public boolean getSideOfTheCard() {
-        return false;
+        String result = multipleResponses.getFirst();
+        boolean var;
+        var = result.equals("true");
+        return var;
     }
 
+    /*
+    deve ritornare un intero che rappresenta l'id della carta -> si salvano gli id nel controller di table of decks
+    e quando viene scelto invece che ritornare pos1 o pos2 si ritorna l'id della carta.
+     */
     @Override
     public int getCardId() {
+        int position = Integer.parseInt(multipleResponses.getFirst());
+        //int cardId =
         return 0;
     }
 
     @Override
     public String getColor() {
-        return null;
+        return multipleResponses.getFirst();
     }
 
     @Override
     public String getTypeOfCard() {
-        return null;
+        return multipleResponses.getFirst();
     }
 
     @Override
     public String getDrawFromDeckOrTable() {
-        return null;
+        return multipleResponses.getFirst();
     }
 
+    //bisognerà fare una cosa analoga a getCardId()
     @Override
     public Point getCoordinate() {
         return null;
@@ -62,7 +72,7 @@ public class InputGui implements InputParser {
 
     @Override
     public String getGameId() {
-        return null;
+        return multipleResponses.getFirst();
     }
 
 }

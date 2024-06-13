@@ -31,10 +31,10 @@ public class DrawCardState extends StateActive{
         Scanner scanner = new Scanner(System.in);
         String typeOfCard, input;
         ui.show_tableOfDecks(view);
-        do {
+        /*do {
             ui.show_requestTypeToDraw();
             typeOfCard = inputGetter.getTypeOfCard();
-        }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));
+        }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));*/
 
         ui.show_drawFromWhere();
         do {
@@ -44,6 +44,10 @@ public class DrawCardState extends StateActive{
         switch (input){
             case "A":
                 try {
+                    do {
+                        ui.show_requestTypeToDraw();
+                        typeOfCard = inputGetter.getTypeOfCard();
+                    }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));
                     client.drawPlayableCardFromTableOfDecks(nickName,typeOfCard.toLowerCase());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
