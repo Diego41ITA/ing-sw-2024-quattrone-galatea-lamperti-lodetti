@@ -64,7 +64,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         boolean stay = true;
 
         ui.show_RequestPlayerNickName();
-        nickname = input.getNickName();
+        nickname = this.input.getNickName();
 
         //inizializza gli state di partenza.
         initializeStates();

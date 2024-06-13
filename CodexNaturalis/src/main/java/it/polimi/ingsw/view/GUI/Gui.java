@@ -70,32 +70,44 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_startingMenu() {
-        loadScene("/scenes/Menu.fxml");
+        if(primaryStage != null)
+            loadScene("/scenes/Menu.fxml");
+        else
+            System.out.println("error primary stage is null");;
     }
 
     @Override
     public void show_message(String message) {
-
+        //non dovrebbe servire nel caso mettere un pop up
     }
 
     @Override
     public void show_initialCard(InitialCard card) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/InitialCard.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
+    //mettere una scena oppure niente
     @Override
     public void show_joinRandomGame() {
-
     }
 
     @Override
     public void show_requestPlayerColor(GameView gameView) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/SetColor.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_noAvailableGames() {
-
+        if(primaryStage != null)
+            loadScene("/scenes/CreateGame.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -130,7 +142,7 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_playerColors(GameView gameView) {
-
+        //un pop-up
     }
 
     @Override
@@ -153,17 +165,20 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_RequestNumberOfPlayers() {
-
+        if(primaryStage != null)
+            loadScene("/scenes/SetNumberOfPlayers.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_playerJoined(String id) {
-
+        //un pop-up
     }
 
     @Override
     public void show_playerLeft(String playerNickName) {
-
+        //un pop-up
     }
 
     @Override
@@ -171,19 +186,34 @@ public class Gui extends Application implements UI {
 
     }
 
+    //si potrebbe modificare waitTurn.fxml in modo che stampi il nome del giocatore corrente e basta.
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-
+        if(immutableModel.getCurrentPlayer().equals(this.flow.getNickname())){
+            //un pop-up che dica è il tuo turno
+            //oppure si aggiorna la gameStation
+        }else{
+            if(primaryStage != null)
+                loadScene("/scenes/waitTurn.fxml");
+            else
+                System.out.println("error primary stage is null");
+        }
     }
 
     @Override
     public void show_playerHand(GameView immutableModel) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/Gamestation.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_gameStation(GameView view) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/Gamestation.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -210,57 +240,72 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/TableOfDecks.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
+    //un pop-up che dica che è iniziato l'ultimo giro.
     @Override
     public void show_lastTurn() {
 
     }
 
+    //point table is in game station, if we have multiple show() methods that display the "everything" we can
+    //refresh more frequently the interface.
     @Override
     public void show_pointTable(GameView immutableModel) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/Gamestation.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_gameOver() {
-
+        if(primaryStage != null)
+            loadScene("/scenes/EndScene.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_youWin() {
-
+        //nothing, end scene already shows the winner
     }
 
     @Override
     public void show_youLose() {
-
+        //nothing, end scene already shows the winner
     }
 
     @Override
     public void show_requestGoalCard(ArrayList<GoalCard> cards) {
-
+        if(primaryStage != null)
+            loadScene("/scenes/PlayerGoal.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
     public void show_requestCardId() {
-
+        //non serve
     }
 
     @Override
     public void show_winner(String name) {
-
+        //nothing, end scene already shows the winner
     }
 
     @Override
     public void show_requestTypeToDraw() {
-
+        //non serve
     }
 
     @Override
     public void show_drawFromWhere() {
-
+        //non serve
     }
 
     @Override
@@ -270,12 +315,12 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestSide() {
-
+        //non serve?
     }
 
     @Override
     public void show_requestCoordinates() {
-
+        //non serve
     }
 
     @Override
@@ -295,7 +340,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_waitingOtherPlayers() {
-
+        if(primaryStage != null)
+            loadScene("/scenes/waitStart.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
