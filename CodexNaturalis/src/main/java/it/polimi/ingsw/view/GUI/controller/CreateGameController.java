@@ -12,7 +12,7 @@ public class CreateGameController extends InputGui {
     public void createGame(ActionEvent e){
         //fin quando in multiplesResponses non abbiamo "GameCreated" allora il GUIinput rimane nello stesso punto
         //nel gGuiInput dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses.
-        multipleResponses.add("GameCreated");
+        multipleResponses.add("A");
     }
 
 }

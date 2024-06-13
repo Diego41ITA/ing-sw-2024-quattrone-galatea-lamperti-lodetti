@@ -12,11 +12,15 @@ public class InputGui implements InputParser {
     //esempio:
     @Override
     public int getNumberOfPlayer() {
+        /*
         //ciclo infinito fin quando l'ultimo elemento dell'array non è un numero
         while(!(Character.isDigit( multipleResponses.get(multipleResponses.size()-1).charAt(0)))){
         }
         //ritorno il numero
         return Integer.parseInt(multipleResponses.get(multipleResponses.size()-1));
+
+         */
+        return Integer.parseInt(multipleResponses.getFirst());
     }
 
     //devono essere implementati

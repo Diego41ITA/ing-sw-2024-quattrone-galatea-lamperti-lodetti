@@ -301,7 +301,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         setGameView(game);
         waitingForNewPlayers = true;
         ui.show_playerColors(game);
-        System.out.println("waiting for new players");
+        ui.show_message("waiting for new players");
     }
 
     @Override

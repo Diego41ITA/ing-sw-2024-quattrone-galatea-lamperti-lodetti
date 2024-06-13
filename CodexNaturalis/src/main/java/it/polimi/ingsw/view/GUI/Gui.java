@@ -142,7 +142,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_playerColors(GameView gameView) {
-        //un pop-up
+        if(primaryStage != null)
+            loadScene("/scenes/waitStart.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
