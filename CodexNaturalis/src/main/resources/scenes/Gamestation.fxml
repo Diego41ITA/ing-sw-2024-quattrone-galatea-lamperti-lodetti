@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.GameStationController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.GameStationController">
     <tabs>
         <Tab text="YourGameStation">
             <content>
@@ -72,7 +73,7 @@
                   <Pane layoutX="617.0" layoutY="255.0" prefHeight="636.0" prefWidth="591.0" />
                    <ImageView fx:id="imageView" fitHeight="469.0" fitWidth="512.0" layoutX="328.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@images/plateau.png" />
+                           <Image url="@images/PLATEAU-SCORE-IMP/plateau.png" />
                        </image>
                    </ImageView>
                   <ImageView fx:id="image0" fitHeight="28.0" fitWidth="37.0" layoutX="372.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
