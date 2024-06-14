@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetNumberOfPlayersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetNumberOfPlayersController">
    <children>
-      <Text layoutX="240.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Number Of Players" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="44.0" layoutX="198.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="204.0" />
+      <Text layoutX="225.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Number Of Players" />
       <Text fx:id="game" layoutX="37.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gameid" />
-      <TextField fx:id="textField" layoutX="225.0" layoutY="187.0" />
-      <Button fx:id="button" layoutX="376.0" layoutY="187.0" mnemonicParsing="false" onAction="#getNumber" text="Button" />
+      <TextField fx:id="textField" layoutX="224.0" layoutY="187.0" prefHeight="31.0" prefWidth="116.0" />
+      <Button fx:id="button" layoutX="340.0" layoutY="187.0" mnemonicParsing="false" onAction="#getNumber" text="Ok" />
    </children>
 </AnchorPane>
