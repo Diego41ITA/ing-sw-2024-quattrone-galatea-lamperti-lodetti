@@ -28,7 +28,7 @@ public class PlayerGoalController extends AbstractController {
         int id1 = game.availableGoalCard.getFirst();
         int id2 = game.availableGoalCard.getLast();
 
-        firstImage.setImage(new Image(associatorPng2Card(String.valueOf(id1),false)));
+        firstImage.setImage(new Image(associatorPng2Card(String.valueOf(id1),true)));
         secondImage.setImage(new Image(associatorPng2Card(String.valueOf(id2),true)));
     }
     // se con il mouse clicco sulla immagine allora mette 1 in multipleResponses

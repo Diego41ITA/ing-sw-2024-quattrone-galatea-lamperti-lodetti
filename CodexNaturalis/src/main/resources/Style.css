@@ -1,9 +1,10 @@
 .root{
-    -fx-background-image: url("/scenes/images/menu.png");
-    -fx-background-position: center center;
+    -fx-background-image: url("/scenes/images/01.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
 }
 .menu-label{
     -fx-background-color: brown;
-    -fx-background-position: center center;
+    -fx-background-position: center;
     -fx-font-family: Georgia;
 }
