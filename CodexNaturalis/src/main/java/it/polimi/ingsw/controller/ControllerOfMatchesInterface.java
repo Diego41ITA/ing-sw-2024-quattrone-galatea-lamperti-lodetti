@@ -38,4 +38,6 @@ public interface ControllerOfMatchesInterface extends Remote {
      */
     void leaveGame(String gameId, String nick) throws RemoteException;
 
+    ControllerOfGameInterface rejoinGame(GameObserver obs, String gameId, String nick) throws RemoteException;
+
 }

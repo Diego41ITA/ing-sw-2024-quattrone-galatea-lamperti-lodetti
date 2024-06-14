@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
 import it.polimi.ingsw.model.gameDataManager.Player;
@@ -37,6 +38,9 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         super();
         this.activeGames = new ArrayList<ControllerOfGame>();
 
+        //if the server comes back up it can restore all the saved games
+
+
         //it starts a routine operation
         routine = new RoutineDelete(this);
         Thread routineDelete = new Thread(routine);
@@ -71,7 +75,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         Player player = new Player(nick);
         String gameID = "Game" + (activeGames.size() + 1);
         ControllerOfGame controller = new ControllerOfGame(gameID, maxNumPlayers);
-        controller.addObserver(obs, player);
+        controller.addObserver(obs, nick);
         controller.readiness.put(nick, 0);
         activeGames.add(controller);
 
@@ -112,7 +116,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             ControllerOfGame randomAvailableGame = availableGames.get(random.nextInt(availableGames.size()));
             Player player = new Player(nick);
             try {
-                randomAvailableGame.addObserver(obs, player);
+                randomAvailableGame.addObserver(obs, nick);
                 randomAvailableGame.addPlayer(player);
 
                 randomAvailableGame.readiness.put(nick, 0);
@@ -121,7 +125,6 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
                 printActiveGames();
 
                 obs.randomGameJoined(randomAvailableGame.getGameId());
-
 
                 return randomAvailableGame;
             } catch (MaxPlayersInException e) {
@@ -157,6 +160,30 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             System.out.println("\t\t" + game.getGameId() + " ");
         }
         System.out.println("");
+    }
+
+    public ControllerOfGameInterface rejoinGame(GameObserver obs, String gameId, String nick) throws RemoteException{
+        Optional<ControllerOfGame> availableGames = activeGames.stream()
+                .filter(gameController ->
+                        gameController.getGameId().equals(gameId) &&
+                                gameController.getPlayers().keySet().stream()
+                                        .anyMatch(player -> player.getNick().equals(nick))
+                )
+                .findFirst();
+
+        if(availableGames.isPresent()){
+            //the player can rejoin the game
+            ControllerOfGame game = availableGames.get();
+            game.addObserver(obs, nick);
+            System.out.println("\t>Game " + game.getGameId() + " player:\"" + nick + "\" entered player");
+            printActiveGames();
+
+            obs.reconnectedToGame(new GameView(game.returnGame()));
+            return game;
+        }
+        else
+            obs.genericErrorWhenEnteringGame("No games currently available to join...", "");
+        return null;
     }
 
     //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).

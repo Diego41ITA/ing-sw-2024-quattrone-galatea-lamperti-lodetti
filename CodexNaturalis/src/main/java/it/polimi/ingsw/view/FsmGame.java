@@ -233,8 +233,9 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     }
 
     @Override
-    public void reconnectedToGame(String GameID) throws RemoteException {
-        ui.show_playerJoined(GameID);
+    public void reconnectedToGame(GameView view) throws RemoteException {
+        this.view = view;
+        ui.show_gameStation(view);
     }
 
     @Override

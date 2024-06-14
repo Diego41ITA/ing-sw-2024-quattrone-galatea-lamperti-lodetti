@@ -29,7 +29,7 @@ public class SaverWriter {
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
         }catch(IOException e){
-            //
+            System.out.println("something went wrong during salvation process");
         }
     }
 

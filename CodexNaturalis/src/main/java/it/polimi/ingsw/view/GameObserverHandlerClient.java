@@ -113,8 +113,8 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
         flow.randomGameJoined(gameID);
     }
     @Override
-    public void reconnectedToGame(String gameID)throws RemoteException /*deve ritornare anche una GameView*/{
-        flow.reconnectedToGame(gameID);
+    public void reconnectedToGame(GameView game)throws RemoteException /*deve ritornare anche una GameView*/{
+        flow.reconnectedToGame(game);
 }
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException{

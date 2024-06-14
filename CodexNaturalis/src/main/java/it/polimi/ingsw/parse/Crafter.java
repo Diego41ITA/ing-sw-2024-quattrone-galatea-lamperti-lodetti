@@ -19,7 +19,7 @@ public class Crafter {
     public static void createGameFile(String id)
     {
         //create a path to the directory
-        String directoryPath = "src/main/resources/JsonMatches/Game" + id;
+        String directoryPath = "src/main/resources/JsonMatches";
         File directory = new File(directoryPath);
 
         if(!directory.exists()){
@@ -28,7 +28,7 @@ public class Crafter {
         }
 
         //now the directory surly exists
-        String gameFilePath = "src/main/resources/JsonMatches/Game" + id + "/Game" + id + ".json";
+        String gameFilePath = "src/main/resources/JsonMatches/game" + ".json";
         File gameFile = new File(gameFilePath);
 
         if(!gameFile.exists()){

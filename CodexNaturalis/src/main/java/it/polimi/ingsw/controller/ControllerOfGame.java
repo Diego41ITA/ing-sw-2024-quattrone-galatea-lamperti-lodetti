@@ -55,12 +55,12 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param p Player
      * @throws RemoteException
      */
-    public void addObserver(GameObserver obs, Player p) throws RemoteException {
-        if (observers.containsKey(p.getNick())){
-            observers.remove(p.getNick());
-            observers.put(p.getNick(), (new HandleObserver(obs)));
+    public void addObserver(GameObserver obs, String p) throws RemoteException {
+        if (observers.containsKey(p)){
+            observers.remove(p);
+            observers.put(p, (new HandleObserver(obs)));
         } else {
-            observers.put(p.getNick(), (new HandleObserver(obs)));
+            observers.put(p, (new HandleObserver(obs)));
         }
     }
 

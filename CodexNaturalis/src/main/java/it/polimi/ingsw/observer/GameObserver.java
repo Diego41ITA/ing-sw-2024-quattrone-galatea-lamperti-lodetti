@@ -35,7 +35,7 @@ public interface GameObserver extends Remote{
     void updateGameStatus(GameView game)throws  RemoteException;
     void newGameCreated(String gameID)throws RemoteException;
     void randomGameJoined(String gameID)throws RemoteException;
-    void reconnectedToGame(String gameID)throws RemoteException; //deve ritornare anche una GameView
+    void reconnectedToGame(GameView view)throws RemoteException; //deve ritornare anche una GameView
     void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException;
     void startGame(GameView game)throws IOException;
 

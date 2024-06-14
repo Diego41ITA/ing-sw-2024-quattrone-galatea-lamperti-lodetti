@@ -1,17 +1,18 @@
 package it.polimi.ingsw.networking.socket.server.serverToClientMessage;
 
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.observer.GameObserver;
 
 import java.io.IOException;
 
 public class ReconnectedToGame extends ServerNotification{
-    private final String gameId;
-    public ReconnectedToGame(String gameId){
+    private final GameView view;
+    public ReconnectedToGame(GameView game){
         super(true);
-        this.gameId = gameId;
+        this.view = game;
     }
     @Override
     public void execute(GameObserver obs) throws IOException, InterruptedException{
-        obs.reconnectedToGame(gameId);
+        obs.reconnectedToGame(view);
     }
 }
