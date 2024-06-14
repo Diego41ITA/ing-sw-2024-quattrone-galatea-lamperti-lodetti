@@ -68,9 +68,7 @@ public class Gui extends Application implements UI {
 
                 primaryStage.show();
             } catch (IOException | NullPointerException e) {
-                System.out.println("qualcosa si è rotto");
-                e.getCause();
-                e.printStackTrace();
+                System.out.println("the scene: " + path +", doesn't provide a controller");
             }
         });
     }

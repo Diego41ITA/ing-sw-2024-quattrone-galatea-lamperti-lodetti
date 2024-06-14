@@ -38,7 +38,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     private GameView view;
     public boolean inGame;
 
-    public ArrayList<Integer> availableGoalCard;
+    public ArrayList<Integer> availableGoalCard = new ArrayList<>();
 
     private InputParser input;
 
