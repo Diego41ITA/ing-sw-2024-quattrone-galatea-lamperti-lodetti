@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
@@ -11,15 +12,16 @@ import javafx.scene.text.Text;
 
 import javax.swing.*;
 
-public class SetNumberOfPlayersController extends InputGui {
+public class SetNumberOfPlayersController extends AbstractController {
     @FXML
     private Text game;
     @FXML
     private TextField textField;
     @FXML
     private Button button;
-    public void setGameid(String id){
-        game.setText(id);
+    public void setUpController(FsmGame game){
+        setGame(game);
+        this.game.setText(game.getView().getId());
 
     }
     //fin quando in multiplesResponses non abbiamo un numero valido allora il gameflow/GUiinput rimane nello stesso punto
@@ -27,5 +29,4 @@ public class SetNumberOfPlayersController extends InputGui {
     public void getNumber(ActionEvent actionEvent) {
         multipleResponses.add(textField.getText());
     }
-
 }

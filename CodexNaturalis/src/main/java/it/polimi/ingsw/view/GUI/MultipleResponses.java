@@ -12,9 +12,16 @@ import java.util.concurrent.LinkedBlockingQueue;
 //questa classe verrà messa nella gui come attributo
 public class MultipleResponses{
 
-    private LinkedBlockingQueue<String> Responses;
-    public MultipleResponses(){
+    private  LinkedBlockingQueue<String> Responses;
+    private static MultipleResponses instance = null;
+    private MultipleResponses(){
         Responses = new LinkedBlockingQueue<>();
+    }
+
+    public static MultipleResponses getInstance(){
+        if(instance == null)
+            instance = new MultipleResponses();
+        return instance;
     }
 
     public void add(String c) {

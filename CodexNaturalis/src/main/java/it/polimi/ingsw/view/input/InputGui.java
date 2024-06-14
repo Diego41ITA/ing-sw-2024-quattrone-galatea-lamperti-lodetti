@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class InputGui implements InputParser {
     //questa arrayList contiene i valori degli input che l'utente ha inserito tramite i bottoni della gui
-    protected static MultipleResponses multipleResponses = new MultipleResponses();
+    protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
     //idea: creare dei metodi che ciclano sugli ultimi elementi dell'array multipleResponses e fin quando
     //non hanno un valori validi aspettano a restiture qualcosa
     //esempio:
@@ -38,9 +38,7 @@ public class InputGui implements InputParser {
      */
     @Override
     public int getCardId() {
-        int position = Integer.parseInt(multipleResponses.getFirst());
-        //int cardId =
-        return 0;
+        return Integer.parseInt(multipleResponses.getFirst());
     }
 
     @Override

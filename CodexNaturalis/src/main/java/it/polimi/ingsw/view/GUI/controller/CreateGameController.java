@@ -1,10 +1,11 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
 
-public class CreateGameController extends InputGui {
+public class CreateGameController extends AbstractController {
     public void exit(ActionEvent e){
         System.exit(-1);;
     }
@@ -15,4 +16,13 @@ public class CreateGameController extends InputGui {
         multipleResponses.add("A");
     }
 
+    /**
+     * this method set up additional attributes for the controller class if this is needed.
+     *
+     * @param updatedGame is the new version of the game
+     */
+    @Override
+    public void setUpController(FsmGame updatedGame) {
+        setGame(updatedGame);
+    }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.input.InputGui;
@@ -9,7 +10,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController extends InputGui implements Initializable {
+public class MenuController extends AbstractController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -22,4 +23,13 @@ public class MenuController extends InputGui implements Initializable {
         multipleResponses.add("B");
     }
 
+    /**
+     * this method set up additional attributes for the controller class if this is needed.
+     *
+     * @param updatedGame a new version of the game
+     */
+    @Override
+    public void setUpController(FsmGame updatedGame) {
+        setGame(updatedGame);
+    }
 }

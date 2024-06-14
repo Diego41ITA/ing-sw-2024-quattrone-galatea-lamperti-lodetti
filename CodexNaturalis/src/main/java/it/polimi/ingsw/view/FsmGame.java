@@ -38,6 +38,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     private GameView view;
     public boolean inGame;
 
+    public ArrayList<Integer> availableGoalCard;
+
     private InputParser input;
 
     private String winner = null;
@@ -301,7 +303,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         setGameView(game);
         waitingForNewPlayers = true;
         ui.show_playerColors(game);
-        ui.show_message("waiting for new players");
+        ui.show_waitingOtherPlayers();
     }
 
     @Override
@@ -326,6 +328,9 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
 
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
+
+        this.availableGoalCard.add(cards.getFirst().getCardId());
+        this.availableGoalCard.add(cards.getLast().getCardId());
 
         int cardId;
         do {

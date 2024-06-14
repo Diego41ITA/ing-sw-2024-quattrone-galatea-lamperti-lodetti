@@ -1,15 +1,20 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.Player;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
+import it.polimi.ingsw.view.TUI.Cli;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class SetColorController extends InputGui {
+public class SetColorController extends AbstractController {
     @FXML
     private Button yellow;
     @FXML
@@ -40,8 +45,15 @@ public class SetColorController extends InputGui {
         blue.setVisible(false);
         yellow.setVisible(false);
     }
-    //rende visibili solo i bottoni relativi ai colori disponibili
-    public void setVisibleColorAvailable(ArrayList<Color> colors) {
+
+    /**
+     * this method set visible only the available button.
+     * @param game it's a new version of game
+     */
+    public void setUpController(FsmGame game) {
+        setGame(game);
+        ArrayList<Color> colors = Cli.freeColors(game.getView());
+
         for (Color color:colors) {
             if (color == Color.RED) {
                 red.setVisible(true);
@@ -54,5 +66,4 @@ public class SetColorController extends InputGui {
             }
         }
     }
-
 }

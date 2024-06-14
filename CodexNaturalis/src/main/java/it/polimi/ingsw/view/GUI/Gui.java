@@ -4,6 +4,7 @@ import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
+import it.polimi.ingsw.view.GUI.controller.AbstractController;
 import javafx.application.Platform;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
@@ -58,7 +59,13 @@ public class Gui extends Application implements UI {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
                 Parent root = loader.load();
+
+                AbstractController controller = loader.getController();
+
                 primaryStage.setScene(new Scene(root));
+
+                controller.setUpController(this.flow);
+
                 primaryStage.show();
             } catch (IOException | NullPointerException e) {
                 System.out.println("qualcosa si è rotto");

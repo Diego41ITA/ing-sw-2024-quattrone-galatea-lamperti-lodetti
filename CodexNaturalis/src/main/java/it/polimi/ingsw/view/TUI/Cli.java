@@ -134,7 +134,7 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
-    private static ArrayList<Color> freeColors(GameView gameView){
+    public static ArrayList<Color> freeColors(GameView gameView){
         ArrayList<Color> freeColors = new ArrayList<>(Arrays.asList(Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN));
         if(gameView != null) {
             for (Player p : gameView.getPlayers().keySet()) {
