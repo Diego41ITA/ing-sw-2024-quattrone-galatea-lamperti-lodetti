@@ -1,5 +1,5 @@
 .root{
-    -fx-background-image: url("../resources/images/menu.png");
+    -fx-background-image: url("scenes/images/Menu.png");
     -fx-background-position: center center;
 }
 .menu-label{
