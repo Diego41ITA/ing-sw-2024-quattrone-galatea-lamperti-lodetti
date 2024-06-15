@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.MenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.MenuController">
    <top>
-      <Label prefHeight="55.0" prefWidth="466.0" styleClass="menu-label" text="Welcome to CODEX naturalis" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label prefHeight="83.0" prefWidth="975.0" styleClass="menu-label" text="Welcome to CODEX naturalis" BorderPane.alignment="CENTER">
          <font>
-            <Font name="System Bold Italic" size="30.0" />
+            <Font name="System Bold Italic" size="56.0" />
          </font>
          <opaqueInsets>
             <Insets />
@@ -20,9 +20,15 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#actionJoinRandomGame" prefHeight="31.0" prefWidth="182.0" text="Join Random Game" />
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#actionJoinRandomGame" prefHeight="82.0" prefWidth="442.0" text="Join Random Game">
+               <font>
+                  <Font size="39.0" />
+               </font></Button>
             <Region prefHeight="61.0" prefWidth="345.0" />
-            <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#actionReconnect" prefHeight="31.0" prefWidth="182.0" text="Rejoin a Game" />
+            <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#actionReconnect" prefHeight="77.0" prefWidth="444.0" text="Rejoin a Game">
+               <font>
+                  <Font size="36.0" />
+               </font></Button>
             <Region layoutX="10.0" layoutY="174.0" prefHeight="53.0" prefWidth="184.0" />
          </children>
          <opaqueInsets>

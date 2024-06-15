@@ -10,12 +10,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetNumberOfPlayersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetNumberOfPlayersController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="44.0" layoutX="198.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="204.0" />
-      <Text layoutX="225.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Number Of Players" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="480.0" layoutY="252.0" stroke="BLACK" strokeType="INSIDE" width="320.0" />
+      <Text layoutX="510.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Number Of Players">
+         <font>
+            <Font size="26.0" />
+         </font></Text>
       <Text fx:id="game" layoutX="37.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gameid" />
-      <TextField fx:id="textField" layoutX="224.0" layoutY="187.0" prefHeight="31.0" prefWidth="116.0" />
-      <Button fx:id="button" layoutX="340.0" layoutY="187.0" mnemonicParsing="false" onAction="#getNumber" text="Ok" />
+      <TextField fx:id="textField" layoutX="469.0" layoutY="353.0" prefHeight="51.0" prefWidth="260.0">
+         <font>
+            <Font size="28.0" />
+         </font></TextField>
+      <Button fx:id="button" layoutX="756.0" layoutY="358.0" mnemonicParsing="false" onAction="#getNumber" text="Ok">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>

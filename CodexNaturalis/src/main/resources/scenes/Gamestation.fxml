@@ -57,7 +57,7 @@
                         <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="588.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Text fx:id="yourLastTurn" fill="RED" layoutX="863.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="this is your last turn">
+                  <Text fx:id="yourLastTurn" fill="RED" layoutX="863.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IT'S YOUR TURN">
                      <font>
                         <Font size="19.0" />
                      </font>

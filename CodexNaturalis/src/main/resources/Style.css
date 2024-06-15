@@ -3,6 +3,13 @@
     -fx-background-size: contain;
     -fx-background-position: center;
 }
+
+.table{
+    -fx-background-image: url("/scenes/images/table.jpg");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+}
+
 .menu-label{
     -fx-background-color: brown;
     -fx-background-position: center;
