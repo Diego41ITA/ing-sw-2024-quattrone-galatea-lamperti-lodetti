@@ -73,7 +73,7 @@
                   <Pane layoutX="617.0" layoutY="255.0" prefHeight="636.0" prefWidth="591.0" />
                    <ImageView fx:id="imageView" fitHeight="469.0" fitWidth="512.0" layoutX="328.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@images/PLATEAU-SCORE-IMP/plateau.png" />
+                           <Image url="@images/plateau.png" />
                        </image>
                    </ImageView>
                   <ImageView fx:id="image0" fitHeight="28.0" fitWidth="37.0" layoutX="372.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
