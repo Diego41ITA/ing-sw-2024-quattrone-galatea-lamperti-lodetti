@@ -47,7 +47,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         this.activeGames = new ArrayList<ControllerOfGame>();
 
         //if the server comes back up it can restore all the saved games
-        URL resourceUrl = getClass().getClassLoader().getResource("JsonGame");
+        URL resourceUrl = getClass().getClassLoader().getResource("JsonGames");
         try{
             //Path resourcePath = Paths.get(resourceUrl.toURI());
             String resourcePathString = resourceUrl.getPath();
@@ -234,7 +234,8 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         List<Game> storedGames = new ArrayList<>();
         File directory  = new File(directoryPath);
         for(File file : directory.listFiles()){
-            storedGames.add(SaverReader.gameReader(file.getPath()));
+            if(!file.getName().equals("dummy.txt"))
+                storedGames.add(SaverReader.gameReader(file.getPath()));
         }
         //Controller creation
         for(Game g : storedGames){
