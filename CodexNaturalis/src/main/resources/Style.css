@@ -1,6 +1,6 @@
 .root{
     -fx-background-image: url("/scenes/images/01.png");
-    -fx-background-size: cover;
+    -fx-background-size: contain;
     -fx-background-position: center;
 }
 .menu-label{
