@@ -1,18 +1,13 @@
 package it.polimi.ingsw.view.GUI.controller;
 
-import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.gameDataManager.Color;
-import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.TUI.Cli;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SetColorController extends AbstractController {
     @FXML
@@ -44,6 +39,11 @@ public class SetColorController extends AbstractController {
         green.setVisible(false);
         blue.setVisible(false);
         yellow.setVisible(false);
+    }
+
+    @Override
+    public void setCardDetails(int[] id) {
+
     }
 
     /**

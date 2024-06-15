@@ -1,14 +1,9 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-
-import java.awt.event.ActionEvent;
 
 public class NickNameController extends AbstractController {
     @FXML
@@ -19,6 +14,11 @@ public class NickNameController extends AbstractController {
         //nella guiinput si può mettere un ciclo while che fin quando in multipleResponses non abbiamo
         //la stringa adeguata il gameflow/guiInput aspetta
         multipleResponses.add(nickName.getText());
+    }
+
+    @Override
+    public void setCardDetails(int[] id) {
+
     }
 
     /**

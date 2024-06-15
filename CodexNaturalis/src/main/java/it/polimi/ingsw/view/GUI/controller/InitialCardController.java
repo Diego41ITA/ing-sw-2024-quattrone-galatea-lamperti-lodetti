@@ -1,23 +1,12 @@
 package it.polimi.ingsw.view.GUI.controller;
-import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.event.*;
-import javafx.scene.text.Text;
-
-import java.awt.*;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
-import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
+
 public class InitialCardController extends AbstractController {
 
     @FXML
@@ -29,16 +18,12 @@ public class InitialCardController extends AbstractController {
     @Override
     public void setUpController(FsmGame game){
         setGame(game);
+    }
 
-        Point point = new Point(0,0);
-        int cardId = game.getView()
-                .getMyGameStation(game.getNickname())
-                .getPlayedCards()
-                .get(point)
-                .getCardId();
-
-        imageBack.setImage(new Image(associatorPng2Card(String.valueOf(cardId),false)));
-        imageFront.setImage(new Image(associatorPng2Card(String.valueOf(cardId),true)));
+    @Override
+    public void setCardDetails(int[] id){
+        imageBack.setImage(new Image(associatorPng2Card(String.valueOf(id[0]),false)));
+        imageFront.setImage(new Image(associatorPng2Card(String.valueOf(id[0]),true)));
     }
     // se con il mouse clicco sulla immagine allora mette true in multipleResponses
     public void selectFront(MouseEvent e){

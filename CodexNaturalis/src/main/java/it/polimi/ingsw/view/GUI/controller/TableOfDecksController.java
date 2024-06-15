@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.card.Deck;
 import it.polimi.ingsw.model.card.GoldCard;
 import it.polimi.ingsw.model.card.ResourceCard;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 
@@ -102,6 +100,11 @@ public class TableOfDecksController extends AbstractController {
         multipleResponses.add(String.valueOf(mapping.get(card3)));
     }
 
+
+    @Override
+    public void setCardDetails(int[] id) {
+
+    }
 
     /**
      * this method set up additional attributes for the controller class if this is needed.

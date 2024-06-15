@@ -1,16 +1,11 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
-import javax.swing.*;
 
 public class SetNumberOfPlayersController extends AbstractController {
     @FXML
@@ -19,6 +14,12 @@ public class SetNumberOfPlayersController extends AbstractController {
     private TextField textField;
     @FXML
     private Button button;
+
+    @Override
+    public void setCardDetails(int[] id) {
+
+    }
+
     public void setUpController(FsmGame game){
         setGame(game);
         //this.game.setText(game.getView().getId());

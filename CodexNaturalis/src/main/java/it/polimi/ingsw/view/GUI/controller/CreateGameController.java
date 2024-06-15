@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.ActionEvent;
 
 public class CreateGameController extends AbstractController {
@@ -15,6 +13,9 @@ public class CreateGameController extends AbstractController {
         //nel gGuiInput dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses.
         multipleResponses.add("A");
     }
+
+    @Override
+    public void setCardDetails(int[] id) {}
 
     /**
      * this method set up additional attributes for the controller class if this is needed.

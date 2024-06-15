@@ -23,6 +23,11 @@ public class MenuController extends AbstractController implements Initializable 
         multipleResponses.add("B");
     }
 
+    @Override
+    public void setCardDetails(int[] id) {
+
+    }
+
     /**
      * this method set up additional attributes for the controller class if this is needed.
      *

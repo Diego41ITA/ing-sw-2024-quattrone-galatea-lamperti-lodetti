@@ -24,6 +24,9 @@ public abstract class AbstractController {
         this.game = updatedGame;
     }
 
+    public abstract void setCardDetails(int[] id);
+
+
     /**
      * this method set up additional attributes for the controller class if this is needed.
      */

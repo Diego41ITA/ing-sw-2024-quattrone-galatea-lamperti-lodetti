@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import javafx.scene.text.Text;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 //non è definitivo ma è una buona base
-public class GameStationController extends InputGui {
+public class GameStationController extends AbstractController {
     @FXML
     private Text gameId;
     @FXML
@@ -321,4 +322,13 @@ public class GameStationController extends InputGui {
         image.setImage(imageMaker);
     }
 
+    @Override
+    public void setCardDetails(int[] id) {
+
+    }
+
+    @Override
+    public void setUpController(FsmGame updatedGame) {
+
+    }
 }

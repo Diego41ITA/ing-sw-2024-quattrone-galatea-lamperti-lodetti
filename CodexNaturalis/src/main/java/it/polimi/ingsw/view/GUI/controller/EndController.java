@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
 public class EndController extends AbstractController{
@@ -20,6 +18,11 @@ public class EndController extends AbstractController{
     //Quando clicco il mouse eseguo questo metodo che mi esce dall'app
     public void exit(ActionEvent e){
         System.exit(-1);;
+    }
+
+    @Override
+    public void setCardDetails(int[] id) {
+
     }
 
     /**
