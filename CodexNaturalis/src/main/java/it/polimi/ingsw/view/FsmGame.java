@@ -76,7 +76,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                     state1.execute();
                 if(view == null) break; //condizione per uscita dal game dopo scelta joingame
                 //se la view ha i giocatori giusti la partita può iniziare
-                if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null){
+                if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null && notStarted){
                     try {
                         client.startGame();
                         notStarted = false;
@@ -236,6 +236,11 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     public void reconnectedToGame(GameView view) throws RemoteException {
         this.view = view;
         ui.show_gameStation(view);
+        inGame = true;
+        //questo dovrebbe fare in modo che non si vada nello stato color -> si potrebbe aggiungere un nuovo stato
+        //di StateWaiting che non fa nulla.
+        notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover
+        //aggiungere uno stato d'attesa.
     }
 
     @Override
@@ -408,7 +413,12 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                 break;
             case ("The nickname used was not connected in the running game."):
                 ui.show_invalidNickToReconnect(id);
+                this.inGame = false;
                 break;
+            case("game not found"):
+                ui.show_noAvailableGames();
+                this.inGame = false;
+                //per ora se non è possibile riconnettersi alla partita si può solo crearne una nuova
         }
     }
 

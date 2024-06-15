@@ -147,6 +147,16 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    @Override
+    public void rejoin(String nick, String idGame) throws RemoteException{
+        try{
+            out.writeObject(new RejoinMessage(nick, idGame));
+            completeForwarding();
+        }catch(IOException e){
+            throw new RemoteException();
+        }
+    }
+
     //ora scrivo tutti i metodi per cooperare con il GameController
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
 

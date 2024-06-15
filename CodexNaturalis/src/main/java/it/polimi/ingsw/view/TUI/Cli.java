@@ -100,6 +100,8 @@ public class Cli implements UI {
                 CHOOSE AN OPTION:
                 
                 A- JOIN RANDOM GAME
+                
+                B- REJOIN A SPECIFIC GAME
              
                 """);
     }

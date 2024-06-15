@@ -114,9 +114,9 @@ public class Game implements Serializable {
      * @author Lodetti Alessandro
      * @param p is a Player Object with updated stats.
      */
-    public void setSinglePlayer(Player p){
+    public void setSinglePlayer(Player p, Boolean bool){
         this.players.remove(p);
-        this.players.put(new Player(p), true);
+        this.players.put(new Player(p), bool);
     }
 
     /**
@@ -185,7 +185,7 @@ public class Game implements Serializable {
      * this method starts the game by assigning active status to "this.status"
      */
     public void start() {
-        if(players.size() == maxNumberPlayer)
+        if(players.size() == maxNumberPlayer && this.players.values().stream().allMatch(b -> b))
             this.status = Status.ACTIVE;
     }
 
@@ -193,11 +193,9 @@ public class Game implements Serializable {
      * This method suspends the game only if the previous status was ACTIVE
      * @throws IllegalStateException if the previous status was not ACTIVE
      */
-    public void suspend() throws IllegalStateException {
-        if(this.status == Status.ACTIVE)
+    public void suspend(){
+        if(this.status == Status.ACTIVE || this.status == Status.SUSPENDED)
             this.status = Status.SUSPENDED;
-        else
-            throw new IllegalStateException("this game is not active");
     }
 
     /**

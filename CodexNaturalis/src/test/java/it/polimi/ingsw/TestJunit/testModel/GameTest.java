@@ -171,7 +171,7 @@ public class GameTest {
         GoalCard goal = new GoalCard(99, true, 3, item, objects);
         goals.add(goal);
         player2.chooseGoal(goals, 99);
-        game.setSinglePlayer(player2);
+        game.setSinglePlayer(player2, true);
         boolean condition = false;
         for (Player player : game.getPlayers().keySet()) {
             if (player.getNick().equals("Alessandro")) {

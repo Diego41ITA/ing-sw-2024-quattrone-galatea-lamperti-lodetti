@@ -48,6 +48,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         observers = new HashMap<>();
     }
 
+    public ControllerOfGame(Game g) throws RemoteException{
+        this.game = g;
+    }
+
     /**
      * Adds a {@link Player}, specifying its nickname, and a {@link GameObserver} to the
      * {@link ControllerOfGame#observers} HashMap
@@ -66,7 +70,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
     /**
      * This class is only used for test.
-     * @deprecated
      * @return the game saved in this controller
      */
     public Game returnGame(){
@@ -627,7 +630,8 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @return boolean flag.
      */
     public synchronized boolean checkIfStart(){
-        return game.getPlayers().size()==game.getMaxNumberPlayer();
+        return game.getPlayers().size()==game.getMaxNumberPlayer()
+                && game.getPlayers().values().stream().filter(b -> b).count() >= 2;
     }
 
     //----------------------------------------------------------------------------------------------------------

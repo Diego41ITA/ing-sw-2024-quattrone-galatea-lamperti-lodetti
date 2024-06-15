@@ -83,12 +83,20 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
+    public void rejoin(String nick, String idGame) throws RemoteException{
+        request.rejoinGame(notify, nick, idGame);
+        nickname = nick;
+    }
+
+    @Override
     public void joinRandomGame(String nick) throws RemoteException, NotBoundException/*, NoAvailableGameToJoinException */{
         //registry = LocateRegistry.getRegistry("localhost", 1099);
         // request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notify, nick);
         nickname = nick;
     }
+
+
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
     public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException, illegalOperationException {
