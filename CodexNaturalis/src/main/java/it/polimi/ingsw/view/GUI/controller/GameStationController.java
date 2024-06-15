@@ -128,7 +128,7 @@ public class GameStationController extends AbstractController {
                     if(row == 12 && col == 12){ //mi agginge le carte inziali a le gamestation dei giocatori
                         //mi associa il file png alla Imageview e mi setta le dimensioni
                         ImageView imageView1 = createImageView(associatorPng2Card(String.valueOf(num1), front1));
-                        ImageView imageView2 = createImageView(associatorPng2Card(String.valueOf(num1), front2));
+                        ImageView imageView2 = createImageView(associatorPng2Card(String.valueOf(num2), front2));
                         //la inserisco nella gridPane
                         gridPane1.setRowIndex(imageView1, row);
                         gridPane2.setColumnIndex(imageView1, col);
