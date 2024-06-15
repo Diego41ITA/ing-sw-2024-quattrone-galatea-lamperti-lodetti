@@ -561,11 +561,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         observers.get(nick).notify_chooseGoal(game, card);
 
-        try {
+        /*try {
             this.initializeTurn(nick);
         } catch (RemoteException e) {
             System.out.println("something went wrong during turn initialization process");
-        }
+        }*/
     }
 
     /**
@@ -594,6 +594,12 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         }
         observers.get(nick).notify_updatedHandAndTable(game, nick);
+
+        try {
+            this.initializeTurn(nick);
+        } catch (RemoteException e) {
+            System.out.println("something went wrong during turn initialization process");
+        }
     }
 
     /**
