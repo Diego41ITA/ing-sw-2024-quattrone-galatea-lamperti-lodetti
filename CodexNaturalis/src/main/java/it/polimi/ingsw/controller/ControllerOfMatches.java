@@ -1,12 +1,20 @@
 package it.polimi.ingsw.controller;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.exceptions.GameEndedException;
 import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.parse.SaverReader;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
@@ -39,7 +47,16 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         this.activeGames = new ArrayList<ControllerOfGame>();
 
         //if the server comes back up it can restore all the saved games
-
+        URL resourceUrl = getClass().getClassLoader().getResource("JsonGame");
+        try{
+            //Path resourcePath = Paths.get(resourceUrl.toURI());
+            String resourcePathString = resourceUrl.getPath();
+            restoreAllStoredGames(resourcePathString);
+            System.out.println("the path to the directory is: " + resourcePathString);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            e.getCause();
+        }
 
         //it starts a routine operation
         routine = new RoutineDelete(this);
@@ -162,6 +179,14 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         System.out.println("");
     }
 
+    /**
+     * this method allows to rejoin a specific game by providing the nickname and the id
+     * @param obs it's a reference to the client
+     * @param gameId it is the game id
+     * @param nick this is the nickname of the player
+     * @return the interface of the game or null, if there are no matches.
+     * @throws RemoteException
+     */
     public ControllerOfGameInterface rejoinGame(GameObserver obs, String gameId, String nick) throws RemoteException{
         Optional<ControllerOfGame> availableGames = activeGames.stream()
                 .filter(gameController ->
@@ -175,6 +200,8 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             //the player can rejoin the game
             ControllerOfGame game = availableGames.get();
             game.addObserver(obs, nick);
+            game.returnGame().reconnectPlayer(game.returnGame().getPlayerByNick(nick)); //sets true the activity of the player.
+
             System.out.println("\t>Game " + game.getGameId() + " player:\"" + nick + "\" entered player");
             printActiveGames();
 
@@ -182,7 +209,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             return game;
         }
         else
-            obs.genericErrorWhenEnteringGame("No games currently available to join...", "");
+            obs.genericErrorWhenEnteringGame("game not found", "");
         return null;
     }
 
@@ -195,5 +222,37 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     //It's used in TestController, leave this method
     public void clearActiveGames(){
         activeGames.clear();
+    }
+
+    /**
+     * this method is called when this class is build: it reads all the files saved in specific directory, and it
+     * recreates the ControllerOfGame object (for each game). Pay attention that an observer is added only when
+     * it is passed with a rejoin method.
+     */
+    private void restoreAllStoredGames(String directoryPath){
+        //read
+        List<Game> storedGames = new ArrayList<>();
+        File directory  = new File(directoryPath);
+        for(File file : directory.listFiles()){
+            storedGames.add(SaverReader.gameReader(file.getPath()));
+        }
+        //Controller creation
+        for(Game g : storedGames){
+            try {
+                ControllerOfGame controller = new ControllerOfGame(g);
+
+                Map<Player, Boolean> playerActivity = g.getPlayers();
+                //every player is set as inactive
+                for(Player p : playerActivity.keySet())
+                    playerActivity.put(p, false);
+                g.setPlayers(playerActivity);
+                g.suspend(); //the game should start only when there are at least two people.
+
+                this.activeGames.add(controller);
+            }catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 }
