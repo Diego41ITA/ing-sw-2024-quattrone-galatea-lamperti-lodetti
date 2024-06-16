@@ -26,10 +26,12 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
+
+    /**
+     * this attribute contains the name of the player and an indicator that holds the count of how many setup steps the
+     * specific client has done.
+     */
     public final HashMap<String, Integer> readiness = new HashMap<>();
-
-    //private String clientNick = "invalidName";
-
 
     /**
      * Constructor of the class. It's called by {@link ControllerOfMatches} when creating a new game
@@ -48,6 +50,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         observers = new HashMap<>();
     }
 
+    /**
+     * this constructor builds this object by passing an existing game.
+     * @param g is the saved game.
+     * @throws RemoteException
+     */
     public ControllerOfGame(Game g) throws RemoteException{
         this.game = g;
     }
@@ -126,17 +133,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         this.initializePlayers(nick);
         this.getPossibleGoals(nick);
         this.initializeHandPlayer(nick);
-
-        //prima_versione
-        //now we could start the game so:
-        /*Thread threadInitializeTurn = new Thread(() -> {
-            try {
-                initializeTurn(nick);
-            } catch (RemoteException e) {
-                System.out.println("something went wrong during Turn initialization process");
-            }
-        });
-        threadInitializeTurn.start();*/
     }
 
     /**
@@ -146,17 +142,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
-        /*synchronized (this.readiness) {
-            while (!checkReadiness()) {
-                try {
-                    readiness.wait();
-                } catch (InterruptedException e) {
-                    System.out.println("the thread for turn initialization got interrupted");
-                }
-            }
-        }*/
-
-        //if the game is null I should initialize it
         if(checkReadiness()) {
             ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
             Turn turn = new Turn(keysList);
@@ -167,6 +152,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         }
     }
 
+    /**
+     * this method checks if all the players have completed all the initialization process
+     * @return true if and only if all the player are ready, false otherwise.
+     */
     private boolean checkReadiness(){
         boolean check = true;
         for(String n: readiness.keySet())
@@ -399,16 +388,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public void initializeTable() {
         TableOfDecks table = game.getTableOfDecks();
         table.initializeTable();
-        //ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet()); //non posso inizializzare turn senza goalCards
-        //Turn turn = new Turn(keysList);
-        //game.setTurn(turn);
         game.setTableOfDecks(table);
-        /* non mostro all'inizio la table of deck
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver obs = entry.getValue();
-            obs.notify_InitializeTable(game);//capire che argomenti mettergli
-        }
-        */
     }
 
     /**
@@ -582,12 +562,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         observers.get(nick).notify_chooseGoal(game, card);
 
-        //the turn initialization thread can be awoken and if all the player are ready the game starts.
-        /*synchronized (readiness) {
-            readiness.put(nick, readiness.get(nick) + 1);
-            readiness.notify();
-        }*/
-
         readiness.put(nick, readiness.get(nick) + 1);
 
         try {
@@ -731,12 +705,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         }
         observers.get(nick).notify_updateGameStations(game);
 
-        //it possible to awake the turn initialization thread also here.
-        /*synchronized (readiness) {
-            readiness.put(nick, readiness.get(nick) + 1);
-            readiness.notify();
-        }
-        */
         readiness.put(nick, readiness.get(nick) + 1);
         try {
             this.initializeTurn(nick);

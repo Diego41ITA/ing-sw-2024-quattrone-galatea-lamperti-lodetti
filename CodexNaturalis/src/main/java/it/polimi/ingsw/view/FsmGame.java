@@ -39,14 +39,9 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     private final UI ui;
     private GameView view;
     public boolean inGame;
-
-    //public ArrayList<Integer> availableGoalCard = new ArrayList<>();
-
     private InputParser input;
 
-    private String winner = null;
-
-    //un attributo per uscire dal ciclo (viene settato dall'ultimo stato)
+    private String winner = null; //puo essere estesa la classe DbCardInfo, magari rinominandola DbGameInfo
     private boolean stay = true;
 
     //metto 4 attributi State
@@ -201,16 +196,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         state2 = new PlaceCardState(this, this.input);
     }
 
-    //serve ad andare allo waiting state successivo
-    public void setWaitingState(StateWaiting sw){
-        this.state1 = sw;
-    }
-
-    //serve ad andare allo stato attivo successivo.
-    public void setActiveState(StateActive sa){
-        this.state2 = sa;
-    }
-
     public void exit(){
         this.stay = false;
     }
@@ -263,7 +248,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     }
 
     @Override
-    public void updateGameStatus(GameView game) throws RemoteException { //non va bene
+    public void updateGameStatus(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_GameStatus(game);
         if(view.getMaxNumOfPlayer() == view.getPlayers().size()) {
@@ -283,7 +268,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         }
     }
 
-    //basta notificare che la partita è stata creata?
     @Override
     public void updatePlayerAndMaxNumberPlayer(GameView game) throws RemoteException {
         setGameView(game);
@@ -337,9 +321,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
 
-        /*this.availableGoalCard.add(cards.getFirst().getCardId());
-        this.availableGoalCard.add(cards.getLast().getCardId());*/
-
         //this inserts the relevant attributes inside the Record
         DbCardInfo.getInstance().addRecord(new CardRecord(cards.getFirst().getType(), cards.getFirst().getCardId()));
         DbCardInfo.getInstance().addRecord(new CardRecord(cards.getLast().getType(), cards.getLast().getCardId()));
@@ -349,8 +330,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
             ui.show_requestGoalCard(cards);
             cardId = input.getCardId();
         }while(!checkIfValidId(cards, cardId));
-
-        ui.show_waitingOtherPlayers();
 
         client.chooseGoal(cards, cardId, nickname);
     }
@@ -365,6 +344,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     public void updateGoalPlayer(GameView game, GoalCard card) throws RemoteException {
         setGameView(game);
         ui.show_goalCard(card);
+        ui.show_waitingOtherPlayers();
     }
 
     @Override
@@ -405,7 +385,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     @Override
     public void updateGameStations(GameView game) throws RemoteException {
         setGameView(game);
-        ui.show_waitingOtherPlayers();
     }
 
     @Override
@@ -428,7 +407,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
             case("game not found"):
                 ui.show_noAvailableGames();
                 this.inGame = false;
-                //per ora se non è possibile riconnettersi alla partita si può solo crearne una nuova
+                //per ora se non è possibile riconnettersi alla partita si può solo crearne una nuova quindi
+                //non è possibile joinare un game random.
         }
     }
 
