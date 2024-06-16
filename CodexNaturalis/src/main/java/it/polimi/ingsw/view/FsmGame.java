@@ -9,6 +9,8 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.view.GUI.CardRecord;
+import it.polimi.ingsw.view.GUI.DbCardInfo;
 import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
@@ -38,7 +40,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     private GameView view;
     public boolean inGame;
 
-    public ArrayList<Integer> availableGoalCard = new ArrayList<>();
+    //public ArrayList<Integer> availableGoalCard = new ArrayList<>();
 
     private InputParser input;
 
@@ -335,8 +337,12 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     @Override
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
 
-        this.availableGoalCard.add(cards.getFirst().getCardId());
-        this.availableGoalCard.add(cards.getLast().getCardId());
+        /*this.availableGoalCard.add(cards.getFirst().getCardId());
+        this.availableGoalCard.add(cards.getLast().getCardId());*/
+
+        //this inserts the relevant attributes inside the Record
+        DbCardInfo.getInstance().addRecord(new CardRecord(cards.getFirst().getType(), cards.getFirst().getCardId()));
+        DbCardInfo.getInstance().addRecord(new CardRecord(cards.getLast().getType(), cards.getLast().getCardId()));
 
         int cardId;
         do {
@@ -363,6 +369,10 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
 
     @Override
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
+
+        //this inserts the relevant attributes in the Record
+        DbCardInfo.getInstance().addRecord(new CardRecord(card.getType(), card.getCardId()));
+
         ui.show_initialCard(card);
         boolean isFrontOrBack = false;
         boolean isValid = false;

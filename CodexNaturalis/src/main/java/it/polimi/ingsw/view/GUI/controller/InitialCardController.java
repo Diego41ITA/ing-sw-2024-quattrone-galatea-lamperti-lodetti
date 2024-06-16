@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.DbCardInfo;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +18,13 @@ public class InitialCardController extends AbstractController {
 
     @Override
     public void setUpController(FsmGame game){
+
         setGame(game);
+
+        int cardId = DbCardInfo.getInstance().readCardRecord().cardId();
+
+        imageBack.setImage(new Image(associatorPng2Card(String.valueOf(cardId),false)));
+        imageFront.setImage(new Image(associatorPng2Card(String.valueOf(cardId),true)));
     }
 
     @Override
