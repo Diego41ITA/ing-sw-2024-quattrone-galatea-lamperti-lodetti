@@ -1,10 +1,14 @@
 package it.polimi.ingsw.parse;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.card.*;
 
+import java.awt.*;
 import java.io.*;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * this class defines two static methods that read a specific object from a json file.
@@ -18,11 +22,16 @@ public class SaverReader {
      * @return it returns the read Game object
      */
     public static Game gameReader(String filePath){
-        Gson gson = new GsonBuilder()
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setPrettyPrinting()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
                 .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
                 .registerTypeAdapter(CheckInterface.class, new InterfaceDeserializer())
-                .create();
+                .registerTypeAdapter(Point.class, new PointTypeAdapter());
+        gsonBuilder.registerTypeAdapter(new TypeToken<Map<Point, PlayableCard>>(){}.getType(), new MapTypeAdapter(gsonBuilder.create()));
+
+        Gson gson = gsonBuilder.create();
+
         try(FileReader reader = new FileReader(filePath)) {
             return gson.fromJson(reader, Game.class);
         }catch(IOException e){

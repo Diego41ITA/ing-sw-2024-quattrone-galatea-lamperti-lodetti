@@ -23,7 +23,7 @@ public class Crafter {
     public static void createGameFile(String id)
     {
         //create a path to the directory
-        URL directoryUrl = ClassLoader.getSystemResource("JsonGame");
+        URL directoryUrl = ClassLoader.getSystemResource("JsonGames");
         String directoryPath = directoryUrl.getPath();
         File directory = new File(directoryPath);
 
@@ -49,9 +49,9 @@ public class Crafter {
     public static String getGameFilePath(String id){
 
         try {
-            URL resourceUrl = ClassLoader.getSystemResource("JsonGames/Game" + id + ".json");
+            URL resourceUrl = ClassLoader.getSystemResource("JsonGames");
             Path resourcePath = Paths.get(resourceUrl.toURI());
-            return resourcePath.toString();
+            return resourcePath.toString() + "/Game" + id + ".json";
         }catch(URISyntaxException | NullPointerException e){
             e.printStackTrace();
         }

@@ -139,7 +139,7 @@ public class Cli implements UI {
     public static ArrayList<Color> freeColors(GameView gameView){
         ArrayList<Color> freeColors = new ArrayList<>(Arrays.asList(Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN));
         if(gameView != null) {
-            for (Player p : gameView.getPlayers().keySet()) {
+            for (Player p : gameView.getPlayers()) {
                 freeColors.remove(p.getColor());
             }
         }
@@ -183,7 +183,7 @@ public class Cli implements UI {
     public void show_NickAlreadyUsed(GameView gameView) {
         StringBuilder str = new StringBuilder();
         str.append("NICKNAME ALREADY USED!\n").append("\n").append("ALREADY USED NICKNAMES:\n");
-        for(Player p : gameView.getPlayers().keySet()) {
+        for(Player p : gameView.getPlayers()) {
             str.append(p.getNick()).append('\n');
         }
         System.out.println(str.toString());
@@ -201,8 +201,8 @@ public class Cli implements UI {
     public void show_currentPlayersStatus(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
-        for(Player p : gameView.getPlayers().keySet()){
-            stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getPlayers().get(p)).append('\n');
+        for(Player p : gameView.getPlayers()){
+            stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getActivity().get(p.getNick())).append('\n');
         }
         System.out.println(stringBuilder.toString());
     }
@@ -211,7 +211,7 @@ public class Cli implements UI {
     public void show_playerColors(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n").append("Connected player: \n");
-        for(Player p : gameView.getPlayers().keySet()){
+        for(Player p : gameView.getPlayers()){
             stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
         }
         System.out.println(stringBuilder.toString());
@@ -413,7 +413,7 @@ public class Cli implements UI {
 
         int maxRow = 0;
 
-        for(Player p : view.getPlayers().keySet()){
+        for(Player p : view.getPlayers()){
             Map<Point, PlayableCard> playedCards = p.getGameStation().getPlayedCards();
 
             int row = (findMaxValue(playedCards.keySet(), "x") +1) *2 +1;
@@ -440,7 +440,7 @@ public class Cli implements UI {
         stringBuilder.append("\n");
 
         for(int row = 1; row <= maxRow; row++){
-            for(Player p : view.getPlayers().keySet()){
+            for(Player p : view.getPlayers()){
                 if(gameDimension.get(p.getNick()).x + 1 == row) {
                     stringBuilder.append("_".repeat(gameDimension.get(p.getNick()).y*6 +1));
                 } else if (gameDimension.get(p.getNick()).x < row){
@@ -517,7 +517,7 @@ public class Cli implements UI {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(Player p : view.getPlayers().keySet()){
+        for(Player p : view.getPlayers()){
             stringBuilder.append(p.getNick()).append(" CARDS PLAYED: \n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
                 stringBuilder.append("CARD ID: ").append(c.getCardId()).append(" ".repeat(18));
@@ -719,7 +719,7 @@ public class Cli implements UI {
         StringBuilder stringBuilder = new StringBuilder();
         HashMap<Color, Integer> rankColors = new HashMap<>(immutableModel.getPoints().getMap());
         Map<String, Integer> rankPlayers = new HashMap<>();
-        for(Player p : immutableModel.getPlayers().keySet()){
+        for(Player p : immutableModel.getPlayers()){
             rankPlayers.put(p.getNick(), rankColors.get(p.getColor()));
         }
         List<Map.Entry<String, Integer>> list = new ArrayList<>(rankPlayers.entrySet());

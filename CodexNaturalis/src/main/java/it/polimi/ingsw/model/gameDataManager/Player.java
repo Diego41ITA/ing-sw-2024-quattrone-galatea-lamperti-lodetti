@@ -16,13 +16,13 @@ public class Player implements Serializable {
     /** nickname is the player's name and is a string */
     private String nickname;
     /** cards is a list and represents the cards the player has in his hand*/
-    private ArrayList<PlayableCard> cards;
+    private ArrayList<Card> cards;
     /** gamestation is an object that represents the level in which the cards played by the player are located*/
     private GameStation gamestation;
     /** color is a data item in an enum and indicates the marker associated with the player*/
     private Color color;
     /** optionalColor represents the black marker associated with the first player*/
-    private Optional<Color> optionalColor;
+    //private Optional<Color> optionalColor;
     /** goal is a class type of data and represents the goal card chosen by the player*/
     private GoalCard goal;
 
@@ -44,12 +44,13 @@ public class Player implements Serializable {
      * is the constructor of the class
      * @author Lorenzo Galatea
     */
-    public Player(String nickname, GameStation gamestation, Color color, ArrayList<PlayableCard> cards) {
+    public Player(String nickname, GameStation gamestation, Color color, ArrayList<PlayableCard> cards, GoalCard goal/*, Optional<Color> optionalColor*/) {
         this.cards = new ArrayList<>(cards);
         this.nickname = nickname;
         this.gamestation = new GameStation(gamestation);
         this.color = color;
-        this.optionalColor = Optional.empty();
+        //this.optionalColor = optionalColor;
+        this.goal = goal;
     }
 
     public Player(Player player){
@@ -57,7 +58,7 @@ public class Player implements Serializable {
         this.cards = new ArrayList<>(player.showCard());    //no need for the empty exception, we will see it later
         this.gamestation = new GameStation(player.getGameStation());
         this.color = player.getColor();
-        this.optionalColor = player.getOptionalColor();
+        //this.optionalColor = player.getOptionalColor();
         this.goal = new GoalCard(player.getGoal()); //this is the safest approach
     }
 
@@ -102,17 +103,17 @@ public class Player implements Serializable {
      * @author Lorenzo Galatea
      * @return optionalColor that is the maker null or the maker black if is associated with the first player
      */
-    public Optional<Color> getOptionalColor() {
+    /*public Optional<Color> getOptionalColor() {
         return optionalColor;
-    }
+    }*/
 
     /**
      * method that set the maker black if I am the first player
      * @author Lorenzo Galatea
      */
-    public void setOptionalColor() {
+    /*public void setOptionalColor() {
         this.optionalColor = Optional.of(Color.BLACK);
-    }
+    }*/
 
     /**
      * method return the maker associated with the player
@@ -212,7 +213,11 @@ public class Player implements Serializable {
      */
     public List<PlayableCard> showCard() {
         if (cards != null) {
-            return new ArrayList<>(cards);
+            ArrayList<PlayableCard> newCards = new ArrayList<>();
+            for(Card c : cards){
+                newCards.add((PlayableCard) c);
+            }
+            return newCards;
         } else {
             return new ArrayList<>();
         }

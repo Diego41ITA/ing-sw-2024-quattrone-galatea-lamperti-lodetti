@@ -242,11 +242,11 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             try {
                 ControllerOfGame controller = new ControllerOfGame(g);
 
-                Map<Player, Boolean> playerActivity = g.getPlayers();
+                Map<String, Boolean> activity = g.getActivity();
                 //every player is set as inactive
-                for(Player p : playerActivity.keySet())
-                    playerActivity.put(p, false);
-                g.setPlayers(playerActivity);
+                activity.replaceAll((p, v) -> false);
+
+                g.setActivity(activity);
                 g.suspend(); //the game should start only when there are at least two people.
 
                 this.activeGames.add(controller);

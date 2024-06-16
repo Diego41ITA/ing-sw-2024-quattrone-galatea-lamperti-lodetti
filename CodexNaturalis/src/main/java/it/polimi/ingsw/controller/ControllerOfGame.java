@@ -13,6 +13,7 @@ import java.awt.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -143,7 +144,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
         if(checkReadiness()) {
-            ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
+            ArrayList<Player> keysList = new ArrayList<>(game.getPlayers());
             Turn turn = new Turn(keysList);
             turn.sort();
             game.setTurn(turn);
@@ -173,13 +174,13 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public synchronized void setColor(String color, String name) {
         synchronized (this.game) {
             PointTable pointTable = game.getPointTable();
-            HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) game.getPlayers();
+            List<Player> players = game.getPlayers();
 
             if (!this.game.isColorAvailable(color)) {
                 System.out.println("Color " + color + " is not available.");
                 this.game.printAvailableColors();
 
-                ArrayList<Color> notAvailableColor = new ArrayList<>(game.getPlayers().keySet().stream()
+                ArrayList<Color> notAvailableColor = new ArrayList<>(game.getPlayers().stream()
                         .map(Player::getColor)
                         .collect(Collectors.toList()));
 
@@ -198,7 +199,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
                 return;
             }
 
-            for (Player player : players.keySet()) {
+            for (Player player : players) {
                 if (player.getNick().equals(name)) {
                     player.setColor(Color.valueOf(color.toUpperCase()));
                     pointTable.setColorPoints(Color.valueOf(color.toUpperCase()));
@@ -224,11 +225,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException, illegalOperationException { //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         GameStation gamestation = null;
         Turn turn = game.getTurn();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 try {
                     cardIsFrontChanger(playedCard, front);
@@ -286,10 +287,9 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public /*synchronized*/ void drawPlayableCardFromTableOfDecks(String typo, String nick) {
         String parsedTypo = typo.toLowerCase();
 
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 switch (parsedTypo) {
                     case "gold" -> {
@@ -332,10 +332,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param nick The nickname of the Player that draws the card.
      */
     public /*synchronized*/ void drawFromTable(Card cardSelected, String nick) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 player.draw((PlayableCard) cardSelected);
                 table.setCards(cardSelected);
@@ -357,15 +357,25 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     //@Override
     public void changePlayerStatus(String nick, Boolean value) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
-        for (Player player : players.keySet()) {
+        /*List<Player> players;
+        players = game.getPlayers();
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 //Boolean status = players.remove(player); non serve perchè il valore viene sostituito da put()
                 players.put(player, value);
             }
         }
-        game.setPlayers(players);
+        game.setPlayers(players);*/
+
+        Map<String, Boolean> activity = game.getActivity();
+        for (String player : activity.keySet()) {
+            if (player.equals(nick)) {
+                //Boolean status = players.remove(player); non serve perchè il valore viene sostituito da put()
+                activity.put(player, value);
+            }
+        }
+        game.setActivity(activity);
+
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_ChangedPlayerStatus(game);
@@ -405,12 +415,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public String calculateWinner() {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players = game.getPlayers();
         PointTable pointTable = game.getPointTable();
         String winnerNick = "nobody";
         int maxpoint = 0;
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             int point = 0;
             point = player.getGoal()
                     .getGoalPoints(
@@ -474,7 +483,8 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         }
 
         //this should save the entire game.
-        Thread thread = new Thread(()-> SaverWriter.saveGame(this.game));
+        Thread saveThread = new Thread(()-> SaverWriter.saveGame(this.game));
+        saveThread.start();
     }
 
     /**
@@ -485,9 +495,9 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     //@Override
     private int calculateGoldPoints(GoldCard card, String nick) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
-        for (Player player : players.keySet()) {
+        List<Player> players;
+        players = game.getPlayers();
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 return player.getGameStation().calculateGoldPoints(card);
             }
@@ -502,10 +512,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     //leave public because it's used in testController
     public void addPoints2Player(String nick, int point) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         PointTable pointTable = game.getPointTable();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 point = point + pointTable.getPoint(player);
                 pointTable.updatePoint(player, point);
@@ -528,9 +538,9 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     //@Override
     public ArrayList<PlayableCard> showPlayerHand(String nick) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
-        for (Player player : players.keySet()) {
+        List<Player> players;
+        players = game.getPlayers();
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 return (ArrayList<PlayableCard>) player.showCard();
             }
@@ -549,10 +559,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) {//bisogna gestire l'eccezione nel caso num non vada bene(se vogliamo)
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         GoalCard card = null;
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 player.chooseGoal(goals, num);
                 card = new GoalCard(player.getGoal());
@@ -577,11 +587,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public void initializeHandPlayer(String nick) {
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
         PointTable pointTable = game.getPointTable();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 Deck<GoldCard> deck = table.getDeckGold();
                 player.drawGold(deck);
@@ -642,7 +652,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     public synchronized boolean checkIfStart(){
         return game.getPlayers().size()==game.getMaxNumberPlayer()
-                && game.getPlayers().values().stream().filter(b -> b).count() >= 2;
+                && game.getActivity().values().stream().filter(b -> b).count() >= 2;
     }
 
     //----------------------------------------------------------------------------------------------------------
@@ -651,7 +661,16 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         return game.getId();
     }
     public HashMap<Player, Boolean> getPlayers(){
-        return (HashMap<Player, Boolean>) game.getPlayers();
+
+        HashMap<Player, Boolean> activityPlayer = new HashMap<>();
+
+        for(Player player : game.getPlayers())
+        {
+            Boolean activity = game.getActivity().get(player.getNick());
+            activityPlayer.put(player, activity);
+        }
+
+        return activityPlayer;
     }
 
     public Status getStatus(){
@@ -691,11 +710,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     @Override
     public void setGameStation(String nick, InitialCard card, boolean front) {
 
-        HashMap<Player, Boolean> players;
-        players = (HashMap<Player, Boolean>) game.getPlayers();
+        List<Player> players;
+        players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
 
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getNick().equals(nick)) {
                 cardIsFrontChanger(card, front);
                 player.setGameStation(new GameStation(card));
@@ -715,7 +734,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
     /**
      * This method assigns the black color to the first Player.
-     */
+
     public void assignBlackColor(){
         String nick = this.game.getTurn().getFirstPlayerNick();
         HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) this.game.getPlayers();
@@ -726,7 +745,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
                 observers.get(nick).notify_color(game);
             }
         }
-    }
+    }*/
 
     /**
      * @return it returns the number of online player.

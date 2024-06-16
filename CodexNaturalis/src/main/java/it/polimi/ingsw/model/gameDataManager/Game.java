@@ -11,7 +11,8 @@ import java.util.*;
  */
 public class Game implements Serializable {
     /**a HashMap that associates every player partecipating to a game with a boolean, representing its connection status. */
-    private Map<Player, Boolean> players;
+    private List<Player> players;
+    private Map<String, Boolean> activity;
     /**the maximum number of players that can partecipate to a game. */
     private int maxNumberPlayer;
     /**an object representing the common playing field, holding the decks and all the drawable cards. */
@@ -33,7 +34,8 @@ public class Game implements Serializable {
      */
     public Game(String id){
         this.id = id;
-        this.players = new HashMap<>();
+        this.players = new ArrayList<>();
+        this.activity = new HashMap<>();
         this.maxNumberPlayer = 4;   //in the future it could be changed
         this.status = Status.WAITING;
         //this.turn = new Turn(); //useless you can set it later with setTurn()
@@ -45,7 +47,7 @@ public class Game implements Serializable {
      * @param g it's a Game object to copy.
      */
     public Game(Game g){
-        this.players = new HashMap<>();
+        this.players = new ArrayList<>(g.getPlayers());
         setPlayers(g.getPlayers());
         this.maxNumberPlayer = g.getMaxNumberPlayer();
         this.tableOfDecks = new TableOfDecks(g.getTableOfDecks());
@@ -56,8 +58,8 @@ public class Game implements Serializable {
 
     }
 
-    public Map<Player, Boolean> getPlayers() {
-        return new HashMap<>(players);
+    public List<Player> getPlayers() {
+        return new ArrayList<>(players);
     }
 
     public PointTable getPointTable() {
@@ -104,9 +106,8 @@ public class Game implements Serializable {
      * constructor also for the key player.
      * @param players map of players and their status: active (true), inactive (false)
      */
-    public void setPlayers(Map<Player, Boolean> players) {
-        this.players.clear();
-        this.players.putAll(players);
+    public void setPlayers(List<Player> players) {
+        this.players = new ArrayList<>(players);
     }
 
     /**
@@ -115,8 +116,8 @@ public class Game implements Serializable {
      * @param p is a Player Object with updated stats.
      */
     public void setSinglePlayer(Player p, Boolean bool){
-        this.players.remove(p);
-        this.players.put(new Player(p), bool);
+        this.activity.remove(p.getNick());
+        this.activity.put(p.getNick(), bool);
     }
 
     /**
@@ -165,7 +166,7 @@ public class Game implements Serializable {
      * @return true if the name is correct, false otherwise.
      */
     public boolean checkName(String name){
-        for(Player p: players.keySet()){
+        for(Player p: players){
             if(p.getNick().equals(name))
                 return true;
         }
@@ -173,7 +174,7 @@ public class Game implements Serializable {
     }
 
     public Player getPlayerByNick(String name){
-        for(Player p: players.keySet()){
+        for(Player p: players){
             if(p.getNick().equals(name))
                 return p;
         }
@@ -185,7 +186,7 @@ public class Game implements Serializable {
      * this method starts the game by assigning active status to "this.status"
      */
     public void start() {
-        if(players.size() == maxNumberPlayer && this.players.values().stream().allMatch(b -> b))
+        if(players.size() == maxNumberPlayer && this.activity.values().stream().allMatch(b -> b))
             this.status = Status.ACTIVE;
     }
 
@@ -215,7 +216,7 @@ public class Game implements Serializable {
      * @return true if the player is active, false otherwise.
      */
     public boolean isConnected(Player player){
-        return players.get(player);
+        return activity.get(player.getNick());
     }
 
     /**
@@ -227,7 +228,8 @@ public class Game implements Serializable {
     public void addPlayer(Player player) throws MaxPlayersInException {
         if(players.size() >= this.maxNumberPlayer)
             throw new MaxPlayersInException();
-        players.put(player, true);
+        players.add(player);
+        activity.put(player.getNick(), true);
     }
 
     /**
@@ -235,14 +237,15 @@ public class Game implements Serializable {
      * @param nick Nickname of the player to remove
      */
     public void removePlayer(String nick) {
-        this.players.entrySet().removeIf(entry -> entry.getKey().getNick().equals(nick));
+        this.players.removeIf(entry -> entry.getNick().equals(nick));
+        this.activity.entrySet().removeIf(entry -> entry.getKey().equals(nick));
     }
 
 
     public void reconnectPlayer(Player p) {
-        for(Player player : this.players.keySet()){
-            if(player.getNick().equals(p.getNick()) && this.players.get(player)) {
-                this.players.put(player, true);
+        for(Player player : this.players){
+            if(player.getNick().equals(p.getNick()) && !this.activity.get(player.getNick())) {
+                this.activity.put(player.getNick(), true);
                 return;
             }
         }
@@ -251,7 +254,7 @@ public class Game implements Serializable {
 
     public int getNumOfOnlinePlayers(){
         int count = 0;
-        for (Boolean value : players.values()) {
+        for (Boolean value : activity.values()) {
             if (value) {
                 count++;
             }
@@ -260,7 +263,7 @@ public class Game implements Serializable {
     }
 
     public boolean isColorAvailable(String color) {
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             if (player.getColor() != null && player.getColor().toString().equalsIgnoreCase(color)) {
                 return false;
             }
@@ -271,7 +274,7 @@ public class Game implements Serializable {
     public void printAvailableColors() {
         System.out.println("Available colors:");
         Set<Color> chosenColors = new HashSet<>();
-        for (Player player : players.keySet()) {
+        for (Player player : players) {
             Color playerColor = player.getColor();
             if (playerColor != null) {
                 chosenColors.add(playerColor);
@@ -310,5 +313,13 @@ public class Game implements Serializable {
         }catch(ClassCastException e){
             return false;
         }
+    }
+
+    public void setActivity(Map<String, Boolean> activity) {
+        this.activity = activity;
+    }
+
+    public Map<String, Boolean> getActivity(){
+        return this.activity;
     }
 }

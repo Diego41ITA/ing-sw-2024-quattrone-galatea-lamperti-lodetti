@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GameView;
 import it.polimi.ingsw.model.gameDataManager.*;
+import javafx.scene.layout.BorderImage;
 
 import java.io.Closeable;
 import java.util.*;
@@ -11,7 +12,8 @@ import java.util.stream.Collectors;
  * @author Lodetti Alessandro
  */
 public class GameView implements Serializable {
-    private final Map<Player, Boolean> players;
+    private final List<Player> players;
+    private final Map<String, Boolean> activity;
     private final TableOfDecks tableOfDecks;
     private final PointTable points;
     private final int maxNumOfPlayer;
@@ -21,7 +23,8 @@ public class GameView implements Serializable {
 
 
     public GameView(){
-        this.players = new HashMap<>();
+        this.players = new ArrayList<>();
+        this.activity = new HashMap<>();
         this.tableOfDecks = new TableOfDecks();
         this.points = new PointTable();
         this.maxNumOfPlayer = 4;
@@ -30,7 +33,8 @@ public class GameView implements Serializable {
         this.id = "Default-Game";
     }
     public GameView(Game game){
-        this.players = new HashMap<>(game.getPlayers());
+        this.players = new ArrayList<>(game.getPlayers());
+        this.activity = new HashMap<>(game.getActivity());
         this.tableOfDecks = new TableOfDecks(game.getTableOfDecks());
         this.points = new PointTable(game.getPointTable());
         this.maxNumOfPlayer = game.getMaxNumberPlayer();
@@ -39,6 +43,9 @@ public class GameView implements Serializable {
         this.id = game.getId();
     }
 
+    public Map<String, Boolean> getActivity(){
+        return this.activity;
+    }
     public Status getStatus(){
         return this.status;
     }
@@ -61,7 +68,7 @@ public class GameView implements Serializable {
         return new TableOfDecks(this.tableOfDecks);
     }
 
-    public Map<Player, Boolean> getPlayers(){
+    public List<Player> getPlayers(){
         return this.players;
     }
 
@@ -70,13 +77,13 @@ public class GameView implements Serializable {
     }
 
     public List<GameStation> getAllGameStation(){
-        return this.players.keySet().stream()
+        return this.players.stream()
                 .map(Player::getGameStation)
                 .collect(Collectors.toList());
     }
 
     public GameStation getMyGameStation(String nick){
-        for(Player p: players.keySet()){
+        for(Player p: players){
             if(p.getNick().equals(nick)){
                 return p.getGameStation();
             }
@@ -95,7 +102,7 @@ public class GameView implements Serializable {
      */
     public Player getPlayer(String nick){
         Player player = null;
-        for(Player p: players.keySet()){
+        for(Player p: players){
             if(p.getNick().equals(nick))
                 player = p;
         }
@@ -103,7 +110,7 @@ public class GameView implements Serializable {
     }
 
     public Player getPlayerByNick(String name) {
-        for (Player p : players.keySet()) {
+        for (Player p : players) {
             if (p.getNick().equals(name))
                 return p;
         }

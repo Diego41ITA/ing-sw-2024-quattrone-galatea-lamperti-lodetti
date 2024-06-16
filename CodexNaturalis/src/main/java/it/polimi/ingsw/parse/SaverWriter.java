@@ -1,11 +1,18 @@
 package it.polimi.ingsw.parse;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
 import it.polimi.ingsw.model.gameDataManager.*;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.parse.*;
 import com.google.gson.*;
+
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * this class defines two static methods that write on the correct file the status of the player
@@ -20,12 +27,20 @@ public class SaverWriter {
      * @return it returns true if and only if the object is correctly saved.
      */
     public static void saveGame(Game game){
-        Gson gson = new GsonBuilder()
+
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setPrettyPrinting()
                 .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
                 .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
-                .registerTypeAdapter(CheckInterface.class, new InterfaceSerializer())
-                .create();
-        try(FileWriter writer = new FileWriter(Crafter.getGameFilePath(game.getId()))){
+                .registerTypeAdapter(CheckInterface.class, new InterfaceDeserializer())
+                .registerTypeAdapter(Point.class, new PointTypeAdapter());
+        gsonBuilder.registerTypeAdapter(new TypeToken<Map<Point, PlayableCard>>(){}.getType(), new MapTypeAdapter(gsonBuilder.create()));
+
+        Gson gson = gsonBuilder.create();
+
+        String pathToFile = Crafter.getGameFilePath(game.getId());
+
+        try(FileWriter writer = new FileWriter(pathToFile)){
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
         }catch(IOException e){
