@@ -126,7 +126,17 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         this.initializePlayers(nick);
         this.getPossibleGoals(nick);
         this.initializeHandPlayer(nick);
-        //player are initialized now.
+
+        //prima_versione
+        //now we could start the game so:
+        /*Thread threadInitializeTurn = new Thread(() -> {
+            try {
+                initializeTurn(nick);
+            } catch (RemoteException e) {
+                System.out.println("something went wrong during Turn initialization process");
+            }
+        });
+        threadInitializeTurn.start();*/
     }
 
     /**
@@ -136,13 +146,18 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
-        //prova per sistemare turn
-        boolean check = true;
-        for(String n: readiness.keySet())
-            if(readiness.get(n) < 2 )
-                check = false;
+        /*synchronized (this.readiness) {
+            while (!checkReadiness()) {
+                try {
+                    readiness.wait();
+                } catch (InterruptedException e) {
+                    System.out.println("the thread for turn initialization got interrupted");
+                }
+            }
+        }*/
 
-        if(check) {
+        //if the game is null I should initialize it
+        if(checkReadiness()) {
             ArrayList<Player> keysList = new ArrayList<>(game.getPlayers().keySet());
             Turn turn = new Turn(keysList);
             turn.sort();
@@ -150,6 +165,14 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
             observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
         }
+    }
+
+    private boolean checkReadiness(){
+        boolean check = true;
+        for(String n: readiness.keySet())
+            if(readiness.get(n) < 3 )
+                check = false;
+        return check;
     }
 
     /**
@@ -557,15 +580,21 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         }
         game.setPlayers(players);
 
-        readiness.put(nick, readiness.get(nick) + 1);
-
         observers.get(nick).notify_chooseGoal(game, card);
 
-        /*try {
+        //the turn initialization thread can be awoken and if all the player are ready the game starts.
+        /*synchronized (readiness) {
+            readiness.put(nick, readiness.get(nick) + 1);
+            readiness.notify();
+        }*/
+
+        readiness.put(nick, readiness.get(nick) + 1);
+
+        try {
             this.initializeTurn(nick);
         } catch (RemoteException e) {
             System.out.println("something went wrong during turn initialization process");
-        }*/
+        }
     }
 
     /**
@@ -594,6 +623,8 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         }
         observers.get(nick).notify_updatedHandAndTable(game, nick);
+
+        readiness.put(nick, readiness.get(nick) + 1);
 
         try {
             this.initializeTurn(nick);
@@ -698,10 +729,15 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
                 this.game.setTableOfDecks(table);
             }
         }
-
-        readiness.put(nick, readiness.get(nick) + 1);
-
         observers.get(nick).notify_updateGameStations(game);
+
+        //it possible to awake the turn initialization thread also here.
+        /*synchronized (readiness) {
+            readiness.put(nick, readiness.get(nick) + 1);
+            readiness.notify();
+        }
+        */
+        readiness.put(nick, readiness.get(nick) + 1);
         try {
             this.initializeTurn(nick);
         } catch (RemoteException e) {
