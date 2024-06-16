@@ -104,7 +104,7 @@ public class TestController  {
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
         Player player = new Player("Player1");
-        controllerOfGame.addObserver(obs, player);
+        controllerOfGame.addObserver(obs, "Player1");
         assertTrue(controllerOfGame.getObservers().containsKey(player.getNick()));
     }
 
@@ -114,7 +114,7 @@ public class TestController  {
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
         Player player = new Player("Player1");
-        controllerOfGame.addObserver(obs, player);
+        controllerOfGame.addObserver(obs, "Player2");
         controllerOfGame.removeObserver(player);
         assertFalse(controllerOfGame.getObservers().containsKey(player.getNick()));
     }
@@ -160,19 +160,19 @@ public class TestController  {
 
         // Aggiunta dei giocatori e degli osservatori
         controllerOfGame.addPlayer(player1);
-        controllerOfGame.addObserver(obs, player1);
+        controllerOfGame.addObserver(obs,"Player1");
 
         // Configurazione readiness
         controllerOfGame.readiness.put("Player1", 3);
         controllerOfGame.chooseGoal(testGoals, 99, "Player1");
-
+        controllerOfGame.initializeTurn("Player1");
         controllerOfGame.addPlayer(player2);
-        controllerOfGame.addObserver(obs, player2);
+        controllerOfGame.addObserver(obs, "Player2");
 
 
         controllerOfGame.readiness.put("Player2", 3);
         controllerOfGame.chooseGoal(testGoals, 99, "Player2");
-
+        controllerOfGame.initializeTurn("Player2");
 
         // Esecuzione del metodo goOn
         controllerOfGame.goOn();
@@ -215,10 +215,11 @@ public class TestController  {
         testGoals.add(goal1);
         testGoals.add(goal2);
         // Add of Players and observers
-        controllerOfGame.addObserver(obs, player1);
+        controllerOfGame.addObserver(obs, "Player1");
 
         controllerOfGame.readiness.put("Player1", 3);
         controllerOfGame.chooseGoal(testGoals, 99, "Player1");
+        controllerOfGame.initializeTurn("Player1");
         // Verify that the assignBlackColor method works correctly
         controllerOfGame.assignBlackColor();
         ArrayList<Player> players = new ArrayList<>(controllerOfGame.getPlayers().keySet());
@@ -337,7 +338,7 @@ public class TestController  {
         UI ui = new Cli();
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
-        controllerOfGame.addObserver(obs,player1);
+        controllerOfGame.addObserver(obs,"Player1");
         HashMap<Item, Integer> objects1 = new HashMap<>();
         objects1.put(Item.FEATHER, 1);
         objects1.put(Item.POTION, 1);
@@ -365,7 +366,7 @@ public class TestController  {
         UI ui = new Cli();
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
-        controllerOfGame.addObserver(obs,player1);
+        controllerOfGame.addObserver(obs,"Player1");
         //initial Card
         HashMap<Angle, Item> frontItems = new HashMap<>();
         HashMap<Angle, Item> backItems = new HashMap<>();
@@ -388,7 +389,7 @@ public class TestController  {
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
         Player player1 = new Player("Player1");
-        controllerOfGame.addObserver(obs, player1);
+        controllerOfGame.addObserver(obs, "Player1");
         controllerOfGame.addPlayer(player1);
         controllerOfGame.changePlayerStatus("Player1", false);
         controllerOfGame.getPlayers();

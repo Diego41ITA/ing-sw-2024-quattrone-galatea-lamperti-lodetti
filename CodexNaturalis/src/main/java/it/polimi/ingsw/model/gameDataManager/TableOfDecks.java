@@ -33,24 +33,6 @@ public class TableOfDecks implements Serializable {
         this.goals = new ArrayList<GoalCard>();
     }
 
-    /**
-     * this method is the constructor of the class
-     * @author Lorenzo Galatea
-     * @param deckGold: represents the gold deck
-     * @param deckGoal: represents the goal deck
-     * @param deckResource: represents the resource deck
-     * @param cards: the 4 cards face up
-     * @param goals:the 2 shared goals
-     */
-    public TableOfDecks(Deck<GoldCard> deckGold,Deck<GoalCard> deckGoal, Deck<ResourceCard> deckResource,
-                        Deck<InitialCard> deckStart, ArrayList<Card> cards, ArrayList<GoalCard> goals) {
-        this.cards = new ArrayList<Card>(cards); //this one should be set later
-        this.deckGold =  new Deck<>(deckGold);
-        this.deckGoal = new Deck<>(deckGoal);
-        this.deckResource = new Deck<>(deckResource);
-        this.deckStart = new Deck<>(deckStart);
-        this.goals = new ArrayList<GoalCard>(goals); //this one should be set later too
-    }
 
     /**
      * this second constructor is useful to upload a saved game
@@ -283,21 +265,6 @@ public class TableOfDecks implements Serializable {
 
     }
 
-    /**
-     * deletes all cards in goals
-     * @author Lorenzo Galatea
-     */
-    public void resetGoals(){
-        goals.clear();
-    }
-
-    /**
-     * deletes all cards in cards
-     * @author Lorenzo Galatea
-     */
-    public void resetCards(){
-        cards.clear();
-    }
 
     /**
      * this method shuffles all the decks.

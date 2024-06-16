@@ -65,24 +65,6 @@ public abstract class PlayableCard extends Card{
         return newMap;
     }
 
-    /**
-     * this method check if the item in the specified angle is hidden
-     * @param a is the angle position to search
-     * @return true if the item is "Item.HIDDEN"
-     */
-    public boolean checkIfHidden(Angle a){
-        if(!isFront())
-            return false;
-        else return front.get(a) == Item.HIDDEN;
-    }
-
-    /**
-     * using getFreeAngleAndContents() methods, this one provides e list of free angles.
-     * @return an ArrayList of all the free Angles.
-     */
-    public List<Angle> getFreeAngle(){
-        return new ArrayList<>(this.getFreeAngleAndContents().keySet());
-    }
 
     /**
      * this method provides the user the free item (the ones not hidden by other card for example).
@@ -113,26 +95,6 @@ public abstract class PlayableCard extends Card{
         return true;
     }
 
-    /**
-     * this method provides to the caller a List of the hidden corner
-     * @return a list of angles and the user should know that the associated item is HIDDEN.
-     */
-    public List<Angle> getHiddenCorner(){
-        List<Angle> l = new ArrayList<>();
-        if(isFront()) {
-            for (Angle a : front.keySet()) {
-                if (front.get(a) == Item.HIDDEN)
-                    l.add(a);
-            }
-        }
-        else {
-            for (Angle a : back.keySet()) {
-                if (back.get(a) == Item.HIDDEN)
-                    l.add(a);
-            }
-        }
-        return l;
-    }
 
     /**
      * This method return the frontward disposition
