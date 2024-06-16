@@ -323,11 +323,6 @@ public class GameStationController extends AbstractController {
     }
 
     @Override
-    public void setCardDetails(int[] id) {
-
-    }
-
-    @Override
     public void setUpController(FsmGame updatedGame) {
 
     }

@@ -17,17 +17,8 @@ public class PlayerGoalController extends AbstractController {
     @FXML
     ImageView secondImage;
 
-    private int[] id;
-
     private int firstGoal;
     private int secondGoal;
-
-    @Override
-    public void setCardDetails(int[] id) {
-        firstImage.setImage(new Image(associatorPng2Card(String.valueOf(id[0]),true)));
-        secondImage.setImage(new Image(associatorPng2Card(String.valueOf(id[1]),true)));
-        this.id = id;
-    }
 
     /**
      * this method initializes the controller with other attribute.

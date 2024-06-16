@@ -27,11 +27,6 @@ public class InitialCardController extends AbstractController {
         imageFront.setImage(new Image(associatorPng2Card(String.valueOf(cardId),true)));
     }
 
-    @Override
-    public void setCardDetails(int[] id){
-        imageBack.setImage(new Image(associatorPng2Card(String.valueOf(id[0]),false)));
-        imageFront.setImage(new Image(associatorPng2Card(String.valueOf(id[0]),true)));
-    }
     // se con il mouse clicco sulla immagine allora mette true in multipleResponses
     public void selectFront(MouseEvent e){
         multipleResponses.add("true");

@@ -36,8 +36,6 @@ public class Gui extends Application implements UI {
     private FsmGame flow;
     private ClientAction client;
 
-    private AbstractController controller;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -68,8 +66,6 @@ public class Gui extends Application implements UI {
 
                 controller.setUpController(this.flow);
 
-                //this.controller = controller;
-
                 primaryStage.show();
             } catch (IOException | NullPointerException e) {
                 System.out.println("the scene: " + path +", doesn't provide a controller");
@@ -94,11 +90,6 @@ public class Gui extends Application implements UI {
     public void show_initialCard(InitialCard card) {
         if(primaryStage != null) {
             loadScene("/scenes/InitialCard.fxml");
-            /*Platform.runLater(() -> {
-                int[] id = new int[1];
-                id[0] = card.getCardId();
-                controller.setCardDetails(id);
-            });*/
         }
         else
             System.out.println("error primary stage is null");
@@ -302,12 +293,6 @@ public class Gui extends Application implements UI {
     public void show_requestGoalCard(ArrayList<GoalCard> cards) {
         if(primaryStage != null) {
             loadScene("/scenes/PlayerGoal.fxml");
-            /*Platform.runLater(() -> {
-                int[] id = new int[2];
-                id[0] = cards.getFirst().getCardId();
-                id[1] = cards.getLast().getCardId();
-                controller.setCardDetails(id);
-            });*/
         }
         else
             System.out.println("error primary stage is null");

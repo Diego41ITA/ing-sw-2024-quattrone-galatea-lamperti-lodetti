@@ -14,9 +14,6 @@ public class CreateGameController extends AbstractController {
         multipleResponses.add("A");
     }
 
-    @Override
-    public void setCardDetails(int[] id) {}
-
     /**
      * this method set up additional attributes for the controller class if this is needed.
      *

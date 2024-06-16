@@ -23,11 +23,6 @@ import javafx.scene.control.Label;
             System.exit(-1);
         }
 
-        @Override
-        public void setCardDetails(int[] id) {
-
-        }
-
         /**
          * this method set up additional attributes for the controller class if this is needed.
          *

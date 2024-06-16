@@ -41,11 +41,6 @@ public class SetColorController extends AbstractController {
         yellow.setVisible(false);
     }
 
-    @Override
-    public void setCardDetails(int[] id) {
-
-    }
-
     /**
      * this method set visible only the available button.
      * @param game it's a new version of game

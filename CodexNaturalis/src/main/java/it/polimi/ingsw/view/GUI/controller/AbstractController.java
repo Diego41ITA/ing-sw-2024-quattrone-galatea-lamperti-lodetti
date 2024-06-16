@@ -3,6 +3,9 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.MultipleResponses;
 
+/**
+ * this is a class that generalize the controller concept
+ */
 public abstract class AbstractController {
     private FsmGame game;
 
@@ -23,9 +26,6 @@ public abstract class AbstractController {
     protected void setGame(FsmGame updatedGame){
         this.game = updatedGame;
     }
-
-    public abstract void setCardDetails(int[] id);
-
 
     /**
      * this method set up additional attributes for the controller class if this is needed.

@@ -15,11 +15,6 @@ public class SetNumberOfPlayersController extends AbstractController {
     @FXML
     private Button button;
 
-    @Override
-    public void setCardDetails(int[] id) {
-
-    }
-
     public void setUpController(FsmGame game){
         setGame(game);
         //this.game.setText(game.getView().getId());
