@@ -152,7 +152,8 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new RejoinMessage(nick, idGame));
             completeForwarding();
-        }catch(IOException e){
+            waitForNotification();
+        }catch(IOException | InterruptedException e){
             throw new RemoteException();
         }
     }

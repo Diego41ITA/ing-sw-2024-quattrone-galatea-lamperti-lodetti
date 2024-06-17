@@ -23,6 +23,6 @@ public class RejoinMessage extends Message {
 
     @Override
     public ControllerOfGameInterface execute(GameObserver obs, ControllerOfMatchesInterface operation) throws RemoteException {
-      return null;
+      return operation.rejoinGame(obs, this.gameId, this.nickname);
     }
 }
