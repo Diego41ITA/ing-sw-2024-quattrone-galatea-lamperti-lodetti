@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.GameView.GameView;
+import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -15,6 +18,10 @@ import javafx.scene.layout.Pane;
 import javafx.event.*;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 //non è definitivo ma è una buona base
@@ -22,11 +29,7 @@ public class GameStationController extends AbstractController {
     @FXML
     private Text gameId;
     @FXML
-    private Tab secondPlayer;
-    @FXML
     private Pane anchor1;
-    @FXML
-    private Pane anchor2;
     @FXML
     private ImageView firstCard;
     @FXML
@@ -100,83 +103,67 @@ public class GameStationController extends AbstractController {
     private ImageView image27;
     @FXML
     private ImageView image28;
+
     //è un array che contiene tuelle le imageview della pointTable
     //mi serve per poter selezionare la imageview corrispondente al punteggio
     private ImageView[] imageViews = new ImageView[29];
-
-    public void setSecondPlayer(String name){
-        secondPlayer.setText(name);
-    }
 
     //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
     public void setGameId(String id){
         gameId.setText(id);
     }
 
-    // mi crea la grindPane per 2 giocatori(per ora funziona solo per 2 giocoatori) inoltre mi inserisce le carte iniziali nella gamestation
-    public void initialize(int num1, int num2, boolean front1, boolean front2, Color color1, Color color2) {
+    private void initializeGameStationPane(int num, boolean front, Color color) {
         //rende invisibile il messaggio di last turn
         yourLastTurn.setVisible(false);
         //crea le GridPane
-        GridPane gridPane1 = new GridPane();
-        GridPane gridPane2 = new GridPane();
+        GridPane gridPane = new GridPane();
         // Dimensiona la GridPane
-        gridPane1.setPrefSize(1842, 938);
-        gridPane1.setPrefSize(1842, 938);
+        gridPane.setPrefSize(1842, 938);
         for (int row = 0; row < 24; row++) {
             for (int col = 0; col < 24; col++) {
-                    if(row == 12 && col == 12){ //mi agginge le carte inziali a le gamestation dei giocatori
-                        //mi associa il file png alla Imageview e mi setta le dimensioni
-                        ImageView imageView1 = createImageView(associatorPng2Card(String.valueOf(num1), front1));
-                        ImageView imageView2 = createImageView(associatorPng2Card(String.valueOf(num2), front2));
-                        //la inserisco nella gridPane
-                        gridPane1.setRowIndex(imageView1, row);
-                        gridPane2.setColumnIndex(imageView1, col);
-                        gridPane2.setRowIndex(imageView2, row);
-                        gridPane2.setColumnIndex(imageView2, col);
-                        gridPane1.getChildren().add(imageView1);
-                        gridPane2.getChildren().add(imageView2);
-                    }else{
-                        ImageView imageView1 = new ImageView();
-                        ImageView imageView2 = new ImageView();
-                        imageView1.setFitHeight(41.0);
-                        imageView1.setFitWidth(77.0);
-                        imageView2.setFitHeight(41.0);
-                        imageView2.setFitWidth(77.0);
-                        gridPane1.setRowIndex(imageView1, row);
-                        gridPane1.setColumnIndex(imageView1, col);
-                        gridPane2.setRowIndex(imageView2, row);
-                        gridPane2.setColumnIndex(imageView2, col);
-                        gridPane1.getChildren().add(imageView1);
-                        gridPane1.getChildren().add(imageView1);
-                        imageView1.setOnMouseClicked(primaryMouseEvent -> {
-                                    if (primaryMouseEvent.getButton() == MouseButton.PRIMARY) {
-                                        // Se il mouse sinistro è stato cliccato:
-                                        //ottengo l'id e il verso della carta pescata dalla multipleResponses in gui tramite getLast
-                                         Image imageCard = new Image(associatorPng2Card(multipleResponses.getLast(), Boolean.parseBoolean(multipleResponses.get(multipleResponses.size()-2))));
-                                        imageView1.setImage(imageCard);
-                                        imageView1.setFitWidth(100);  // Imposta la larghezza
-                                        imageView1.setFitHeight(100);
-                                        imageView1.setOnMouseClicked(event -> {
-                                            event.consume(); // Consuma l'evento per evitare ulteriori azioni
-                                        });
-                                    }
-                                });
-                        imageView2.setOnMouseClicked(primaryMouseEvent -> {
+                if(row == 12 && col == 12){ //mi agginge le carte inziali a le gamestation dei giocatori
+                    //mi associa il file png alla Imageview e mi setta le dimensioni
+                    ImageView imageView = createImageView(associatorPng2Card(String.valueOf(num), front));
+                    //la inserisco nella gridPane
+                    gridPane.setRowIndex(imageView, row);
+                    gridPane.setColumnIndex(imageView, col);
+                    gridPane.getChildren().add(imageView);
+                }else{
+                    ImageView imageView = new ImageView();
+                    imageView.setFitHeight(41.0);
+                    imageView.setFitWidth(77.0);
+                    gridPane.setRowIndex(imageView, row);
+                    gridPane.setColumnIndex(imageView, col);
+                    gridPane.getChildren().add(imageView);
+                    //gridPane.getChildren().add(imageView);
+                    imageView.setOnMouseClicked(primaryMouseEvent -> {
                         if (primaryMouseEvent.getButton() == MouseButton.PRIMARY) {
-                            Image imageCard = new Image(associatorPng2Card(multipleResponses.getLast(), Boolean.parseBoolean(multipleResponses.get(multipleResponses.size()-2))));
-                            imageView2.setImage(imageCard);
-                            imageView2.setFitWidth(100);  // Imposta la larghezza
-                            imageView2.setFitHeight(100);
-                            imageView2.setOnMouseClicked(event -> {
+                            // Se il mouse sinistro è stato cliccato:
+                            //ottengo l'id e il verso della carta pescata dalla multipleResponses in gui tramite getLast
+                             Image imageCard = new Image(associatorPng2Card(multipleResponses.getLast(), Boolean.parseBoolean(multipleResponses.get(multipleResponses.size()-2))));
+                            imageView.setImage(imageCard);
+                            imageView.setFitWidth(100);  // Imposta la larghezza
+                            imageView.setFitHeight(100);
+                            imageView.setOnMouseClicked(event -> {
                                 event.consume(); // Consuma l'evento per evitare ulteriori azioni
                             });
-                            }
-                        });
-                    }
+                        }
+                    });
+                }
+            }
         }
-        }
-                    //metto nella gamestation anche il segnalino(compreso quello nero)
+        ImageView imageView3 = createImageView(makerAssociator(color));
+        imageView3.setFitHeight(20.0);
+        imageView3.setFitWidth(20.0);
+        imageView3.setLayoutX(911);
+        imageView3.setLayoutY(459);
+        anchor1.getChildren().add(imageView3);
+        anchor1.getChildren().add(gridPane);
+    }
+
+    /*
+    private void initializePointTablePane(){
         ImageView imageView3 = createImageView(makerAssociator(color1));
         ImageView imageView4 = createImageView(makerAssociator(color2));
         ImageView imageView5 = createImageView(makerAssociator(Color.BLACK));
@@ -200,19 +187,19 @@ public class GameStationController extends AbstractController {
         //aggiungo le gridPane all pane che le contiene
         anchor1.getChildren().add(gridPane1);
         anchor2.getChildren().add(gridPane2);
-    }
+    }*/
+
     //crea un immagine e ne assegna le dimensioni, restituisce un immagine che verrà settata per le carte iniziali
     private ImageView createImageView(String imagePath) {
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
         imageView.setFitHeight(90);
-
-    // Gestione dell'evento del click del mouse sull'ImageView (disabilitata temporaneamente)
-    imageView.setOnMouseClicked(event -> {
-    event.consume(); // Consuma l'evento per evitare ulteriori azioni
-    });
-    return imageView;
+        // Gestione dell'evento del click del mouse sull'ImageView (disabilitata temporaneamente)
+        // Consuma l'evento per evitare ulteriori azioni
+        imageView.setOnMouseClicked(Event::consume);
+        return imageView;
     }
+
     //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
     public void setHand(int num, int pos){
         if(pos == 1){
@@ -324,6 +311,31 @@ public class GameStationController extends AbstractController {
 
     @Override
     public void setUpController(FsmGame updatedGame) {
+        setGame(updatedGame);
+        Point point = new Point(0,0);
+        GameView gameView = updatedGame.getView();
+        int cardId = gameView
+                .getMyGameStation(updatedGame.getNickname())
+                .getPlayedCards()
+                .get(point)
+                .getCardId();
+        boolean side = gameView
+                .getMyGameStation(updatedGame.getNickname())
+                .getPlayedCards()
+                .get(point)
+                .isFront();
+        Color color = gameView.
+                getPlayerByNick(updatedGame.getNickname())
+                .getColor();
+        this.setGameId(gameView.getId());
+        this.initializeGameStationPane(cardId, side, color);
 
+        List<PlayableCard> playerHand;
+        playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
+
+        for (int i = 0; i < playerHand.size(); i++) {
+            int playerCardId = playerHand.get(i).getCardId();
+            setHand(playerCardId, i);
+        }
     }
 }
