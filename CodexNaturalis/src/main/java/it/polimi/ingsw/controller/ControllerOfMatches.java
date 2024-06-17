@@ -13,7 +13,6 @@ import it.polimi.ingsw.parse.SaverReader;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -47,7 +46,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         this.activeGames = new ArrayList<ControllerOfGame>();
 
         //if the server comes back up it can restore all the saved games
-        URL resourceUrl = getClass().getClassLoader().getResource("JsonGames");
+        /*URL resourceUrl = getClass().getClassLoader().getResource("JsonGames");
         try{
             //Path resourcePath = Paths.get(resourceUrl.toURI());
             String resourcePathString = resourceUrl.getPath();
@@ -56,7 +55,10 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         }catch (NullPointerException e){
             e.printStackTrace();
             e.getCause();
-        }
+        }*/
+        String resourcePathString = "CodexNaturalis/SavedGames";
+        restoreAllStoredGames(resourcePathString);
+        System.out.println("the path to the directory is: " + resourcePathString);
 
         //it starts a routine operation
         routine = new RoutineDelete(this);
@@ -232,10 +234,14 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     private void restoreAllStoredGames(String directoryPath){
         //read
         List<Game> storedGames = new ArrayList<>();
-        File directory  = new File(directoryPath);
-        for(File file : directory.listFiles()){
-            if(!file.getName().equals("dummy.txt"))
-                storedGames.add(SaverReader.gameReader(file.getPath()));
+        File directory  = new File(Paths.get("").toAbsolutePath().toString(), directoryPath);
+
+        File[] files = directory.listFiles();
+        if(files != null) {
+            for (File f : files) {
+                if (!f.getName().equals("dummy.txt"))
+                    storedGames.add(SaverReader.gameReader(f.getPath()));
+            }
         }
         //Controller creation
         for(Game g : storedGames){

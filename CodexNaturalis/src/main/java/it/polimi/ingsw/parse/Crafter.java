@@ -49,10 +49,11 @@ public class Crafter {
     public static String getGameFilePath(String id){
 
         try {
-            URL resourceUrl = ClassLoader.getSystemResource("JsonGames");
+            /*URL resourceUrl = ClassLoader.getSystemResource("JsonGames");
             Path resourcePath = Paths.get(resourceUrl.toURI());
-            return resourcePath.toString() + "/Game" + id + ".json";
-        }catch(URISyntaxException | NullPointerException e){
+            return resourcePath.toString() + "/Game" + id + ".json";*/
+            return "CodexNaturalis/SavedGames/" + id + ".json";
+        }catch(/*URISyntaxException | */NullPointerException e){
             e.printStackTrace();
         }
         return null;

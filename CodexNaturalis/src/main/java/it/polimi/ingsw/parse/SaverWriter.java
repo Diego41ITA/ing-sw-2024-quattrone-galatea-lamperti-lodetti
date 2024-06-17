@@ -43,6 +43,7 @@ public class SaverWriter {
         try(FileWriter writer = new FileWriter(pathToFile)){
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
+            System.out.println("the current game (" + game.getId() + ") is saved in: " + pathToFile);
         }catch(IOException e){
             System.out.println("something went wrong during salvation process");
         }
