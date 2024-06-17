@@ -83,9 +83,9 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
-    public void rejoin(String nick, String idGame) throws RemoteException{
-        request.rejoinGame(notify, nick, idGame);
-        nickname = nick;
+    public void rejoin(String idGame, String nickname) throws RemoteException{
+        gameController = request.rejoinGame(notify, idGame, nickname);
+        this.nickname = nickname;
     }
 
     @Override

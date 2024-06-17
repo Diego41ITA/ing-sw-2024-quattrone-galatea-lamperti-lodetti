@@ -102,6 +102,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                         myTurn = false;
                     }
                     while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
+                        ui.show_playerHand(view);
+                        ui.show_gameStation(view);
                         System.out.println("it's not your turn. Wait");
                         try{
                             synchronized (lock) {
@@ -114,9 +116,9 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
                 ui.show_GameStatus(view);
-                ui.show_message("these are your cards, goal and game station.\n" + ui.show_goalCard(view.getPlayer(nickname).getGoal()));
-                ui.show_gameStation(view);
                 ui.show_playerHand(view);
+                ui.show_gameStation(view);
+
                 while(view.getStatus() == Status.SUSPENDED) {
                     try {
                         synchronized (lock) {
@@ -221,8 +223,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
 
     @Override
     public void reconnectedToGame(GameView view) throws RemoteException {
-        this.view = view;
-        ui.show_gameStation(view);
+        setGameView(view);
+        //ui.show_gameStation(view);
         inGame = true;
         //questo dovrebbe fare in modo che non si vada nello stato color -> si potrebbe aggiungere un nuovo stato
         //di StateWaiting che non fa nulla.
@@ -239,12 +241,21 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     public void updatePlayerInGame(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_currentPlayersStatus(game);
+        //if this notification comes from a rejoin procedure we need to set myTurn = true in some cases
+        if(game.getStatus() == Status.ACTIVE && game.getCurrentPlayer().getNick().equals(nickname))
+            myTurn = true;
+        synchronized (lock){
+            lock.notifyAll();
+        }
     }
 
     @Override
     public void updatePlayerStatus(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_currentPlayersStatus(game);
+        synchronized (lock){
+            lock.notifyAll();
+        }
     }
 
     @Override

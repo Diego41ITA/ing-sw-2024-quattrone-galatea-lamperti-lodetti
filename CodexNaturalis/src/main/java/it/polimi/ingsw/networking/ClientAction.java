@@ -52,7 +52,7 @@ public interface ClientAction {
      * @throws IOException
      * @throws InterruptedException
      */
-    void rejoin(String nick, String idGame) throws IOException, InterruptedException;
+    void rejoin(String idGame, String nick) throws IOException, InterruptedException;
 
     void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws IOException, illegalOperationException;
     void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) throws RemoteException;

@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.GameObserver;
+import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.parse.SaverReader;
 
 import java.io.File;
@@ -59,6 +60,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         String resourcePathString = "CodexNaturalis/SavedGames";
         restoreAllStoredGames(resourcePathString);
         System.out.println("the path to the directory is: " + resourcePathString);
+        printActiveGames();
 
         //it starts a routine operation
         routine = new RoutineDelete(this);
@@ -190,7 +192,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      * @throws RemoteException
      */
     public ControllerOfGameInterface rejoinGame(GameObserver obs, String gameId, String nick) throws RemoteException{
-        Optional<ControllerOfGame> availableGames = activeGames.stream()
+        Optional<ControllerOfGame> availableGame = activeGames.stream()
                 .filter(gameController ->
                         gameController.getGameId().equals(gameId) &&
                                 gameController.getPlayers().keySet().stream()
@@ -198,14 +200,24 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
                 )
                 .findFirst();
 
-        if(availableGames.isPresent()){
+        if(availableGame.isPresent()){
             //the player can rejoin the game
-            ControllerOfGame game = availableGames.get();
+            ControllerOfGame game = availableGame.get();
             game.addObserver(obs, nick);
-            game.returnGame().reconnectPlayer(game.returnGame().getPlayerByNick(nick)); //sets true the activity of the player.
+            //game.returnGame().reconnectPlayer(game.returnGame().getPlayerByNick(nick)); //sets true the activity of the player.
+            try {
+                game.reconnectPlayer(nick);
+            } catch (GameEndedException | MaxPlayersInException e) {
+                throw new RuntimeException(e);
+            }
 
             System.out.println("\t>Game " + game.getGameId() + " player:\"" + nick + "\" entered player");
             printActiveGames();
+
+            for (HashMap.Entry<String, HandleObserver> entry : game.getObservers().entrySet()) {
+                HandleObserver observer = entry.getValue();
+                observer.notify_AddedPlayer(game.returnGame());
+            }
 
             obs.reconnectedToGame(new GameView(game.returnGame()));
             return game;

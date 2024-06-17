@@ -242,14 +242,19 @@ public class Game implements Serializable {
     }
 
 
-    public void reconnectPlayer(Player p) {
+    public void reconnectPlayer(String nick) {
+        boolean matched = false;
         for(Player player : this.players){
-            if(player.getNick().equals(p.getNick()) && !this.activity.get(player.getNick())) {
+            if(player.getNick().equals(nick) && !this.activity.get(player.getNick())) {
                 this.activity.put(player.getNick(), true);
-                return;
+                matched = true;
+                //return;
             }
         }
-        System.err.println("Error during player" + p.getNick() + "reconnection.");
+        if(activity.values().stream().allMatch(b -> b))
+            this.status = Status.ACTIVE;
+        if(!matched)
+            System.err.println("Error during player" + nick + "reconnection.");
     }
 
     public int getNumOfOnlinePlayers(){

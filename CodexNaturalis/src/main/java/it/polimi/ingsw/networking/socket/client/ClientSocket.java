@@ -148,7 +148,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void rejoin(String nick, String idGame) throws RemoteException{
+    public void rejoin(String idGame, String nick) throws RemoteException{
         try{
             out.writeObject(new RejoinMessage(nick, idGame));
             completeForwarding();

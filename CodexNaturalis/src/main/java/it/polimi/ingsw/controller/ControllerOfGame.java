@@ -58,6 +58,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     public ControllerOfGame(Game g) throws RemoteException{
         this.game = g;
+        this.observers = new HashMap<>();
     }
 
     /**
@@ -685,9 +686,9 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @throws GameEndedException
      * @throws MaxPlayersInException
      */
-    public void reconnectPlayer(Player player) throws GameEndedException, MaxPlayersInException {
+    public void reconnectPlayer(String player) throws GameEndedException, MaxPlayersInException {
         this.game.reconnectPlayer(player);
-        changePlayerStatus(player.getNick(), true);
+        changePlayerStatus(player, true);
     }
 
     /**
