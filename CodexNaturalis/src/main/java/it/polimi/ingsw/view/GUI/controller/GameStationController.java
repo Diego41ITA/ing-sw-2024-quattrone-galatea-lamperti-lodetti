@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
@@ -14,15 +15,18 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.event.*;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
@@ -32,6 +36,8 @@ public class GameStationController extends AbstractController {
     private Text gameId;
     @FXML
     private Pane anchor1;
+    @FXML
+    private TabPane tabPane;
     @FXML
     private ImageView firstCard;
     @FXML
@@ -105,6 +111,12 @@ public class GameStationController extends AbstractController {
     private ImageView image27;
     @FXML
     private ImageView image28;
+    @FXML
+    private double dragStartX, dragStartY;
+    @FXML
+    private double initialTranslateX, initialTranslateY;
+    @FXML
+    private Scale scaleTransform = new Scale(1, 1);
 
     //è un array che contiene tuelle le imageview della pointTable
     //mi serve per poter selezionare la imageview corrispondente al punteggio
@@ -201,6 +213,76 @@ public class GameStationController extends AbstractController {
         imageView.setOnMouseClicked(Event::consume);
         return imageView;
     }
+
+    public void createGameStationTabPane(Player player) {
+        Pane pane = new Pane();  // Create a single Pane
+        GameStation gameStation = getGameView().getMyGameStation(player.getNick());
+        for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
+            Point point = entry.getKey();
+            PlayableCard card = entry.getValue();
+
+            double layoutX = 615 + (point.getX() * (39));
+            double layoutY = 364 + (point.getY()) * (21);
+
+            // Create ImageView and add it to the Pane
+            ImageView imageView = createImageView(associatorPng2Card(String.valueOf(card.getCardId()), card.isFront()));
+            imageView.setFitHeight(33);
+            imageView.setFitWidth(65);
+            imageView.setLayoutX(layoutX);
+            imageView.setLayoutY(layoutY);
+            imageView.setPreserveRatio(true);
+
+            pane.getChildren().add(imageView);
+        }
+
+        // Create a new Tab and set the Pane as its content
+        Tab tab = new Tab(getGameFsm().getNickname() + "'s GameStation");
+        tab.setContent(pane);
+        tab.setId("tab" + (player.getNick()));
+
+        // Add the Tab to the TabPane
+        tabPane.getTabs().add(tab);
+
+        // Zoom handling
+        pane.getTransforms().add(scaleTransform);
+        pane.getParent().addEventFilter(ScrollEvent.SCROLL, event -> {
+            double zoomFactor = 1.05;
+            if (event.getDeltaY() < 0) {
+                zoomFactor = 1 / zoomFactor;
+            }
+
+            double scaleX = scaleTransform.getX() * zoomFactor;
+            double scaleY = scaleTransform.getY() * zoomFactor;
+
+            double deltaX = (event.getX() - (pane.getBoundsInParent().getWidth() / 2 + pane.getBoundsInParent().getMinX()));
+            double deltaY = (event.getY() - (pane.getBoundsInParent().getHeight() / 2 + pane.getBoundsInParent().getMinY()));
+
+            pane.setTranslateX(pane.getTranslateX() - deltaX * (zoomFactor - 1));
+            pane.setTranslateY(pane.getTranslateY() - deltaY * (zoomFactor - 1));
+
+            scaleTransform.setX(scaleX);
+            scaleTransform.setY(scaleY);
+            event.consume();
+        });
+
+        // Panning handling
+        pane.setOnMousePressed(event -> {
+            dragStartX = event.getSceneX();
+            dragStartY = event.getSceneY();
+            initialTranslateX = pane.getTranslateX();
+            initialTranslateY = pane.getTranslateY();
+        });
+
+        pane.setOnMouseDragged(event -> {
+            double offsetX = event.getSceneX() - dragStartX;
+            double offsetY = event.getSceneY() - dragStartY;
+
+            pane.setTranslateX(initialTranslateX + offsetX);
+            pane.setTranslateY(initialTranslateY + offsetY);
+        });
+
+    }
+
 
     //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
     public void setHand(int num, int pos){
@@ -313,8 +395,12 @@ public class GameStationController extends AbstractController {
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
-        this.initializeImageArray();
         GameView gameView = updatedGame.getView();
+        yourLastTurn.setVisible(false);
+        this.initializeImageArray();
+        this.setGameId(gameView.getId());
+        for(Player p : gameView.getPlayers())
+            this.createGameStationTabPane(p);
         //Point point = new Point(0,0);
         /*int cardId = gameView
                 .getMyGameStation(updatedGame.getNickname())
@@ -329,19 +415,21 @@ public class GameStationController extends AbstractController {
         Color color = gameView.
                 getPlayerByNick(updatedGame.getNickname())
                 .getColor();*/
-        this.setGameId(gameView.getId());
         //this.initializeGameStationPane(cardId, side, color);
+
         for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
             Color color = entry.getKey();
             Integer point = entry.getValue();
             this.MakerInPointTable(color, point);
         }
+
         List<PlayableCard> playerHand;
         playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
-
         for (int i = 0; i < playerHand.size(); i++) {
             int playerCardId = playerHand.get(i).getCardId();
             setHand(playerCardId, i);
         }
+
+
     }
 }
