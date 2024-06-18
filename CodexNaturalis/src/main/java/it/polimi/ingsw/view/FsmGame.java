@@ -59,6 +59,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
 
 
     //contiene tutto il flusso di gioco.
+    @Override
     public void run(){
         boolean stay = true;
 
@@ -67,6 +68,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
 
         //inizializza gli state di partenza.
         initializeStates();
+        try{
         while (stay) {
             if (view == null || view.getStatus() == Status.WAITING) {
                 if(notStarted)
@@ -150,7 +152,12 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
             }
         }
         System.out.println("application is closing...");
-    }
+    }catch(Exception e){
+        //e.printStackTrace();
+        //e.getCause();
+        System.out.println("exception caught in FsmGame thread.");
+        throw new RuntimeException();
+    }}
 
     private void askToLeave(){
         ui.show_requestToLeave();

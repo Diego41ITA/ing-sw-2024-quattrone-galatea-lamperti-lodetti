@@ -46,7 +46,6 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     public void connect(){
-        //va reso più solido chiaramente
         try{
             registry = LocateRegistry.getRegistry(ipAddress, 1099);
             request = (ControllerOfMatchesInterface) registry.lookup("server name");

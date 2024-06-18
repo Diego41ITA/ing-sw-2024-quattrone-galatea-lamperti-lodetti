@@ -38,12 +38,13 @@ public class StateMenu extends StateWaiting {
                         client.joinRandomGame(nickName);
                     } catch (NotBoundException | IOException | InterruptedException e) {
                         ui.show_connectionError();
-                        try {
+                        /*try {
                             StateWaiting.flow.wait(100); // non sono sicuro
                             StateWaiting.flow.exit();
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
-                        }
+                        }*/
+                        throw new RuntimeException();
                     }
                     break;
                 case "B":
@@ -81,12 +82,12 @@ public class StateMenu extends StateWaiting {
                                     client.createGame(StateWaiting.flow.getNickname(), numberOfPlayer);
                                 } catch (NotBoundException | IOException | InterruptedException e) {
                                     ui.show_invalidInput();
-                                    try {
+                                    /*try {
                                         StateWaiting.flow.wait(100); // non sono sicuro
                                         StateWaiting.flow.exit();
                                     } catch (InterruptedException ex) {
                                         throw new RuntimeException(ex);
-                                    }
+                                    }*/
                                 }
                             } else {
                                 ui.show_invalidInput(); //problema da risolvere su ordine di stampa

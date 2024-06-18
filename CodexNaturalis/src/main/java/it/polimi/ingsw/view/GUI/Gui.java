@@ -52,6 +52,20 @@ public class Gui extends Application implements UI {
         this.primaryStage.show();
         Thread myThread = new Thread(flow);
         myThread.start();
+
+        //we need to catch the exception to show that the server crashed
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+            @Override
+            public void uncaughtException(Thread t, Throwable e){
+                System.out.println("connection to server" + client.getClass() + "lost");
+                //System.out.println("you are going to be disconnected, please wait some moment and try to " +
+                //        "restore you game!!!");
+                myThread.interrupt();
+                //dovrà mostrare la scena di chiusura che gestirà close
+                //primaryStage.close();
+                Platform.exit();
+            }
+        });
     }
 
     public void loadScene(String path) {
