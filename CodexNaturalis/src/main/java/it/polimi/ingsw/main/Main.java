@@ -11,7 +11,11 @@ import it.polimi.ingsw.view.input.InputGui;
 import it.polimi.ingsw.view.input.InputUi;
 import javafx.application.Application;
 
+import java.net.SocketException;
+import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 import static it.polimi.ingsw.main.IpValidator.containsOneOrTwoAndHasLengthOne;
 import static it.polimi.ingsw.main.IpValidator.verifyIpAddress;
@@ -26,6 +30,7 @@ import static it.polimi.ingsw.main.IpValidator.verifyIpAddress;
 // ********IMPORTANT leave this class as it is built*******
 public class Main {
         public static void main(String[] args) {
+
             try {
                 int selection;
                 boolean flag = true;
@@ -109,14 +114,51 @@ public class Main {
                     }
                 } while (!flag);
 
+                //I create an instance of executor service to manage the synchronization of all the threads.
                 if (selection == 1) {
+
+                    Thread threadFsmGame;
+
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientSocket(flow, ip));
-                    flow.run(); //in this way the main class doesn't end until run() is finished
+
+                    threadFsmGame = new Thread(flow);
+                    threadFsmGame.start();
+
+
+                    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+                        @Override
+                        public void uncaughtException(Thread t, Throwable e){
+                            System.out.println("connection to server Socket lost");
+                            threadFsmGame.interrupt();
+
+                        }
+                    });
+
+                    threadFsmGame.join();
+
                 } else if (selection == 2) {
+
+                    Thread threadFsmGame;
+
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientRMI(flow, ip));
-                    flow.run();
+
+                    threadFsmGame = new Thread(flow);
+                    threadFsmGame.start();
+
+                    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
+                        @Override
+                        public void uncaughtException(Thread t, Throwable e){
+                            System.out.println("connection to server RMI lost");
+                            //System.out.println("you are going to be disconnected, please wait some moment and try to " +
+                            //        "restore you game!!!");
+                            threadFsmGame.interrupt();
+                        }
+                    });
+                    threadFsmGame.join();
+                    Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
+
                 } else if (selection == 3) {
                     /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     flow.setClient(new ClientSocket(flow, ip));
@@ -125,6 +167,7 @@ public class Main {
                     arg[0] = "socket";
                     arg[1] = ip;
                     Application.launch(Gui.class,arg);
+
                 } else if (selection == 4) {
                     /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
                     flow.setClient(new ClientRMI(flow, ip));
@@ -135,9 +178,11 @@ public class Main {
                     Application.launch(Gui.class, arg);
                 }
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            System.out.println("application closing... Application closed");
         }
+
 }

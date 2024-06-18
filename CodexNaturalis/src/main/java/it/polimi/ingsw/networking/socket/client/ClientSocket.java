@@ -62,7 +62,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //serve per leggere le notifiche inviate dal server.
     public void run(){
-        while(true){
+        while(!this.isInterrupted()){
             try{
                 ServerNotification notification = (ServerNotification) in.readObject();
                 //System.out.println("ho ricevuto: " + notification.getClass().getName());
@@ -72,11 +72,9 @@ public class ClientSocket extends Thread implements ClientAction {
                     Thread trd = new Thread(() -> executeAsync(notification));
                     trd.start();
                 }
-            }catch(IOException | ClassNotFoundException e){
-                System.out.println("something went wrong :( ...");
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            }catch(IOException | ClassNotFoundException | InterruptedException e) {
+                System.err.println("socket server disconnected: detection happened in ClientSocket Thread");
+                this.interrupt();
             }
         }
     }
