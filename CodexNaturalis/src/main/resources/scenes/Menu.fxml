@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -23,12 +24,18 @@
             <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#actionJoinRandomGame" prefHeight="82.0" prefWidth="442.0" text="Join Random Game">
                <font>
                   <Font size="39.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Region prefHeight="61.0" prefWidth="345.0" />
             <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#actionReconnect" prefHeight="77.0" prefWidth="444.0" text="Rejoin a Game">
                <font>
                   <Font size="36.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Region layoutX="10.0" layoutY="174.0" prefHeight="53.0" prefWidth="184.0" />
          </children>
          <opaqueInsets>

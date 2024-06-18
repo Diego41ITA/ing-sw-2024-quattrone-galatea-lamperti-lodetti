@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -39,7 +40,13 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <ImageView fx:id="imageFront" fitHeight="167.0" fitWidth="243.0" layoutX="280.0" layoutY="365.0" onMouseClicked="#selectFront" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageBack" fitHeight="167.0" fitWidth="243.0" layoutX="761.0" layoutY="365.0" onMouseClicked="#selectBack" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageFront" fitHeight="167.0" fitWidth="243.0" layoutX="280.0" layoutY="365.0" onMouseClicked="#selectFront" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imageBack" fitHeight="167.0" fitWidth="243.0" layoutX="761.0" layoutY="365.0" onMouseClicked="#selectBack" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
    </children>
 </Pane>

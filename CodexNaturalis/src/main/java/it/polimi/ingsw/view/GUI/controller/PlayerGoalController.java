@@ -17,7 +17,9 @@ public class PlayerGoalController extends AbstractController {
     @FXML
     ImageView secondImage;
 
+    @FXML
     private int firstGoal;
+    @FXML
     private int secondGoal;
 
     /**

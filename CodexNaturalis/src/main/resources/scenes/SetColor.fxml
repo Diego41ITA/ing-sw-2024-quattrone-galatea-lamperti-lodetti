@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -21,18 +22,30 @@
       <Button fx:id="red" layoutX="447.0" layoutY="329.0" mnemonicParsing="false" onAction="#clickRed" text="Red" textFill="RED">
          <font>
             <Font size="27.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="blue" layoutX="447.0" layoutY="426.0" mnemonicParsing="false" onAction="#clickBlue" text="Blue" textFill="#001aff">
          <font>
             <Font size="27.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="yellow" layoutX="770.0" layoutY="329.0" mnemonicParsing="false" onAction="#clickYellow" text="Yellow" textFill="#d9d623">
          <font>
             <Font size="27.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="green" layoutX="770.0" layoutY="426.0" mnemonicParsing="false" onAction="#clickGreen" text="Green" textFill="#2da43f">
          <font>
             <Font size="27.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </AnchorPane>

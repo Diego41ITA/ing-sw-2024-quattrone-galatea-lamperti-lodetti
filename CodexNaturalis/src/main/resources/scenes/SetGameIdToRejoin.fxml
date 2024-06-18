@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -24,6 +25,9 @@
       <Button fx:id="button" layoutX="777.0" layoutY="388.0" mnemonicParsing="false" onAction="#getGameId" text="Ok">
          <font>
             <Font size="27.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </AnchorPane>

@@ -10,6 +10,7 @@ import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -197,6 +198,7 @@ public class GameStationController extends AbstractController {
             dragStartY = event.getSceneY();
             initialTranslateX = pane.getTranslateX();
             initialTranslateY = pane.getTranslateY();
+            pane.setCursor(Cursor.CLOSED_HAND);
         });
 
         pane.setOnMouseDragged(event -> {
@@ -207,6 +209,11 @@ public class GameStationController extends AbstractController {
             pane.setTranslateY(initialTranslateY + offsetY);
         });
 
+        pane.setOnMouseReleased(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                pane.setCursor(Cursor.DEFAULT); // Change cursor to open hand when dragging stops
+            }
+        });
     }
 
     public void generateFreeCords(String nick) {
