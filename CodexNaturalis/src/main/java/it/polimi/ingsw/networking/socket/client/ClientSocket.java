@@ -177,7 +177,7 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             waitForNotification();  //aspetta quella di turn o quella di updateGameStations
         }catch(IOException | InterruptedException e){
-            //throw new RemoteException();
+            throw new RuntimeException(e);
         }
 
     }
@@ -189,7 +189,7 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             //waitForNotification();
         }catch(IOException /*| InterruptedException*/ e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -200,7 +200,7 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             waitForNotification();
         }catch(IOException | InterruptedException e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -211,7 +211,7 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             waitForNotification();
         }catch(IOException | InterruptedException e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -222,7 +222,7 @@ public class ClientSocket extends Thread implements ClientAction {
             completeForwarding();
             waitForNotification();
         }catch(IOException | InterruptedException e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -233,7 +233,7 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new InitializeHand(nick));
             completeForwarding();
         }catch(IOException e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -249,8 +249,7 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new SetGameStation(nick, card, isFront));
             completeForwarding();
         }catch(IOException e){
-            e.printStackTrace();
-            e.getCause();
+            throw new RuntimeException(e);
         }
     }
 
@@ -261,7 +260,7 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new CalculateWinner());
             completeForwarding();
         }catch(IOException e){
-            //nothing
+            throw new RuntimeException(e);
         }
 
         return "ciao";
@@ -273,7 +272,7 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new StartGame());
             completeForwarding();
         }catch(IOException e){
-            //nothing
+            throw new RuntimeException(e);
         }
     }
 
@@ -284,7 +283,7 @@ public class ClientSocket extends Thread implements ClientAction {
             out.writeObject(new InitializeTurn(nick));
             completeForwarding();
         }catch(IOException e){
-            //
+            throw new RuntimeException(e);
         }
     }
 
@@ -297,7 +296,7 @@ public class ClientSocket extends Thread implements ClientAction {
             waitForNotification(); //aspetta goalCardsDrawed
             waitForNotification(); //aspetta updateHandAndTable
         }catch(IOException | InterruptedException e){
-            //
+            throw new RuntimeException(e);
         }
     }
 }

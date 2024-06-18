@@ -92,7 +92,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                             lock.wait();
                         }
                     } catch (InterruptedException e) {
-                        System.out.println("this game is aborted");
+                        throw new RuntimeException();
                     }
                 }
             } else if (view.getStatus() == Status.ACTIVE) {
