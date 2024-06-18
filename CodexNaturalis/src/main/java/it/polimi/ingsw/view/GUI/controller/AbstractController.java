@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 
+import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.MultipleResponses;
 
@@ -9,15 +10,19 @@ import it.polimi.ingsw.view.GUI.MultipleResponses;
 public abstract class AbstractController {
     private FsmGame game;
 
+    private GameView gameView;
+
     protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
 
     /**
      * a subclass can use this method to get the private FsmGame attribute
      * @return the attribute
      */
-    protected FsmGame getGameInfo(){
+    protected FsmGame getGameFsm(){
         return game;
     }
+
+    protected GameView getGameView() {return gameView;}
 
     /**
      * this method sets a new fresh updated game.
@@ -25,6 +30,7 @@ public abstract class AbstractController {
      */
     protected void setGame(FsmGame updatedGame){
         this.game = updatedGame;
+        this.gameView = updatedGame.getView();
     }
 
     /**

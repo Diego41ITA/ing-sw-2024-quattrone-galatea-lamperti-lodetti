@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
@@ -32,6 +33,8 @@ public class GameStationController extends AbstractController {
     private Text gameId;
     @FXML
     private Pane anchor1;
+    @FXML
+    private TabPane tabPane;
     @FXML
     private ImageView firstCard;
     @FXML
@@ -202,6 +205,36 @@ public class GameStationController extends AbstractController {
         return imageView;
     }
 
+    public void createGameStationTabPane(Player player) {
+        Pane pane = new Pane();  // Create a single Pane
+        GameStation gameStation = getGameView().getMyGameStation(player.getNick());
+        for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
+            Point point = entry.getKey();
+            PlayableCard card = entry.getValue();
+
+            double layoutX = 615 + (point.getX() * (39));
+            double layoutY = 364 + (point.getY()) * (21);
+
+            // Create ImageView and add it to the Pane
+            ImageView imageView = createImageView(associatorPng2Card(String.valueOf(card.getCardId()), card.isFront()));
+            imageView.setFitHeight(33);
+            imageView.setFitWidth(65);
+            imageView.setLayoutX(layoutX);
+            imageView.setLayoutY(layoutY);
+            imageView.setPreserveRatio(true);
+
+            pane.getChildren().add(imageView);
+        }
+
+        // Create a new Tab and set the Pane as its content
+        Tab tab = new Tab(getGameFsm().getNickname() + "'s GameStation");
+        tab.setContent(pane);
+
+        // Add the Tab to the TabPane
+        tabPane.getTabs().add(tab);
+    }
+
+
     //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
     public void setHand(int num, int pos){
         if(pos == 1){
@@ -313,8 +346,11 @@ public class GameStationController extends AbstractController {
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
-        this.initializeImageArray();
         GameView gameView = updatedGame.getView();
+        this.initializeImageArray();
+        this.setGameId(gameView.getId());
+        for(Player p : gameView.getPlayers())
+            this.createGameStationTabPane(p);
         //Point point = new Point(0,0);
         /*int cardId = gameView
                 .getMyGameStation(updatedGame.getNickname())
@@ -329,19 +365,21 @@ public class GameStationController extends AbstractController {
         Color color = gameView.
                 getPlayerByNick(updatedGame.getNickname())
                 .getColor();*/
-        this.setGameId(gameView.getId());
         //this.initializeGameStationPane(cardId, side, color);
+
         for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
             Color color = entry.getKey();
             Integer point = entry.getValue();
             this.MakerInPointTable(color, point);
         }
+
         List<PlayableCard> playerHand;
         playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
-
         for (int i = 0; i < playerHand.size(); i++) {
             int playerCardId = playerHand.get(i).getCardId();
             setHand(playerCardId, i);
         }
+
+
     }
 }
