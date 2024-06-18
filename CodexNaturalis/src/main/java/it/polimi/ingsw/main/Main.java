@@ -176,6 +176,7 @@ public class Main {
                     arg[0] = "rmi";
                     arg[1] = ip;
                     Application.launch(Gui.class, arg);
+                    //Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
                 }
 
             } catch (Exception e) {
