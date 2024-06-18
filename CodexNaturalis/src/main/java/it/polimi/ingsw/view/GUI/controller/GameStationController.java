@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
@@ -304,17 +306,17 @@ public class GameStationController extends AbstractController {
 
     //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
     public void MakerInPointTable(Color color, int point){
-        ImageView image = imageViews[point];
         Image imageMaker = new Image(makerAssociator(color));
-        image.setImage(imageMaker);
+        imageViews[point].setImage(imageMaker);
     }
 
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
-        Point point = new Point(0,0);
+        this.initializeImageArray();
         GameView gameView = updatedGame.getView();
-        int cardId = gameView
+        //Point point = new Point(0,0);
+        /*int cardId = gameView
                 .getMyGameStation(updatedGame.getNickname())
                 .getPlayedCards()
                 .get(point)
@@ -326,10 +328,14 @@ public class GameStationController extends AbstractController {
                 .isFront();
         Color color = gameView.
                 getPlayerByNick(updatedGame.getNickname())
-                .getColor();
+                .getColor();*/
         this.setGameId(gameView.getId());
-        this.initializeGameStationPane(cardId, side, color);
-
+        //this.initializeGameStationPane(cardId, side, color);
+        for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
+            Color color = entry.getKey();
+            Integer point = entry.getValue();
+            this.MakerInPointTable(color, point);
+        }
         List<PlayableCard> playerHand;
         playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
 
