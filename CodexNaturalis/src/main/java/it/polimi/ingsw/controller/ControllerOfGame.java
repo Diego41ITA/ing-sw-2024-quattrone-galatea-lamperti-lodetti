@@ -61,6 +61,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public ControllerOfGame(Game g) throws RemoteException{
         this.game = g;
         this.observers = new HashMap<>();
+        this.checkTurn = true;
     }
 
     /**
@@ -485,14 +486,27 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
             }
             return;
         }
-        for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
-            HandleObserver obs = entry.getValue();
-            obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
+        if(checkEnoughPlayer()) {
+            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                HandleObserver obs = entry.getValue();
+                obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
+            }
+        }else{
+            //if there are not enough player the game is suspended and we do not notify the client.
+            this.game.suspend();
+            System.out.println("this game " + this.getGameId() + "is suspended");
         }
-
         //this should save the entire game.
         Thread saveThread = new Thread(()-> SaverWriter.saveGame(this.game));
         saveThread.start();
+    }
+
+    private boolean checkEnoughPlayer(){
+        Map<String, Boolean> activity = game.getActivity();
+        long numOnlinePlayer = activity.values().stream()
+                .filter(b -> b)
+                .count();
+        return (numOnlinePlayer >= 2);
     }
 
     /**
@@ -693,8 +707,16 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @throws GameEndedException
      * @throws MaxPlayersInException
      */
-    public void reconnectPlayer(String player) throws GameEndedException, MaxPlayersInException {
+    public synchronized void reconnectPlayer(String player) throws GameEndedException, MaxPlayersInException {
         this.game.reconnectPlayer(player);
+        //if there are enough player to restart playing it should be done.
+        if(checkEnoughPlayer()) {
+            game.setStatus(Status.ACTIVE);
+            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                HandleObserver obs = entry.getValue();
+                obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
+            }
+        }
         changePlayerStatus(player, true);
     }
 

@@ -245,7 +245,7 @@ public class Game implements Serializable {
     public void reconnectPlayer(String nick) {
         boolean matched = false;
         for(Player player : this.players){
-            if(player.getNick().equals(nick) && !this.activity.get(player.getNick())) {
+            if(activity.containsKey(nick) && !this.activity.get(player.getNick())) {
                 this.activity.put(player.getNick(), true);
                 matched = true;
                 //return;
