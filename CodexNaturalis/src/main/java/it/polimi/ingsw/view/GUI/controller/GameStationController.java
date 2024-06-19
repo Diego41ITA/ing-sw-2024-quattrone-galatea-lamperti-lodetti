@@ -171,11 +171,17 @@ public class GameStationController extends AbstractController {
 
     public void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(this::drawDeckGold);
+        deckGold.setCursor(Cursor.HAND);
         deckResource.setOnMouseClicked(this::drawDeckResource);
+        deckResource.setCursor(Cursor.HAND);
         card1.setOnMouseClicked(this::drawFirstCard);
+        card1.setCursor(Cursor.HAND);
         card2.setOnMouseClicked(this::drawSecondCard);
+        card2.setCursor(Cursor.HAND);
         card3.setOnMouseClicked(this::drawThirdCard);
+        card3.setCursor(Cursor.HAND);
         card4.setOnMouseClicked(this::drawFourthCard);
+        card4.setCursor(Cursor.HAND);
     }
 
     public void setUpTableOfDecks() {
