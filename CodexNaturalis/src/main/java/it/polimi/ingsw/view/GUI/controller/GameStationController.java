@@ -141,7 +141,7 @@ public class GameStationController extends AbstractController {
     private ImageView goal1;
     @FXML
     private ImageView goal2;
-    private Map<ImageView, Integer> mapping;
+    private Map<ImageView, Integer> mapping = new HashMap<>();
 
 
     public void drawDeckGold(MouseEvent e){
