@@ -52,7 +52,11 @@ public class InputUi implements InputParser {
 
     @Override
     public int getCardId() {
-        return scannerInputInt();
+        try {
+            return scannerInputInt();
+        }catch (InputMismatchException e){
+            return -1;
+        }
     }
 
     @Override
@@ -73,9 +77,13 @@ public class InputUi implements InputParser {
     @Override
     public Point getCoordinate() {
         Scanner scanner = new Scanner(System.in);
+        try {
         int x = scanner.nextInt();
         int y = scanner.nextInt();
         return new Point(x,y);
+        }catch (InputMismatchException e){
+            return new Point(0,0);
+        }
     }
 
 

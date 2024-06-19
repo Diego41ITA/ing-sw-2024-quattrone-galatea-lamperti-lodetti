@@ -356,6 +356,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         client.chooseGoal(cards, cardId, nickname);
     }
     private boolean checkIfValidId(ArrayList<GoalCard> cards, int cardId){
+        if(cardId < 0) return false;
         List<Integer> id = cards.stream()
                 .map(Card::getCardId)
                 .toList();
