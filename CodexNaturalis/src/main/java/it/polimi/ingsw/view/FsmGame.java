@@ -156,6 +156,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         //e.printStackTrace();
         //e.getCause();
         System.out.println("exception caught in FsmGame thread.");
+        e.printStackTrace();
+        e.getCause();
         throw new RuntimeException();
     }}
 

@@ -12,7 +12,9 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 
@@ -114,13 +116,13 @@ public class TableOfDecksController extends AbstractController {
         Map<Integer, Integer> pos_key = new HashMap<>();
 
         //goals are always present on the board
-        ArrayList<Integer> goals = (ArrayList<Integer>) updatedGame.getView().getTableOfDecks().getGoals()
+        List<Integer> goals = updatedGame.getView().getTableOfDecks().getGoals()
                 .stream().map(Card::getCardId)
-                .toList();
+                .collect(Collectors.toList());
 
         //some of the cards could be absent, so I need to remember the position of them. In this way if a card is absent
         //the program will assign to it "cardId" = 0.
-        ArrayList<Integer> cards = (ArrayList<Integer>) updatedGame.getView().getTableOfDecks().getCards()
+        List<Integer> cards = updatedGame.getView().getTableOfDecks().getCards()
                 .stream().map(c -> {
                     if(c != null){
                         return c.getCardId();
@@ -128,7 +130,7 @@ public class TableOfDecksController extends AbstractController {
                     else
                         return 0;
                 })
-                .toList();
+                .collect(Collectors.toList());
 
 
         //for the decks I need only the first card

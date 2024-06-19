@@ -60,6 +60,7 @@ public class Gui extends Application implements UI {
                 System.out.println("connection to server" + client.getClass() + "lost");
                 //System.out.println("you are going to be disconnected, please wait some moment and try to " +
                 //        "restore you game!!!");
+                e.printStackTrace();
                 myThread.interrupt();
                 //dovrà mostrare la scena di chiusura che gestirà close
                 //primaryStage.close();
@@ -162,10 +163,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_playerColors(GameView gameView) {
-        if(primaryStage != null)
+        /*if(primaryStage != null)
             loadScene("/scenes/waitStart.fxml");
         else
-            System.out.println("error primary stage is null");
+            System.out.println("error primary stage is null");*/
     }
 
     @Override

@@ -28,7 +28,7 @@ public class DrawCardState extends StateActive{
 
     @Override
     public void execute(){ //manca exception in gameController
-        Scanner scanner = new Scanner(System.in);
+
         String typeOfCard, input;
         ui.show_tableOfDecks(view);
         /*do {

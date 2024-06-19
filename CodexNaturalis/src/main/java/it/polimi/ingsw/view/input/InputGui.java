@@ -59,7 +59,10 @@ public class InputGui implements InputParser {
     //bisognerà fare una cosa analoga a getCardId()
     @Override
     public Point getCoordinate() {
-        return null;
+        int x = Integer.parseInt(multipleResponses.getFirst());
+        int y = Integer.parseInt(multipleResponses.getFirst());
+
+        return new Point(x, y);
     }
 
     @Override
