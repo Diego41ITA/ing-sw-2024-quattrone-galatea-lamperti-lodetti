@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
+import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -20,16 +21,17 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.ScrollEvent;
 import javafx.event.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
@@ -239,6 +241,9 @@ public class GameStationController extends AbstractController {
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
 
+                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, point));
+                rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
+
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
             }
         }
@@ -263,68 +268,105 @@ public class GameStationController extends AbstractController {
         }
         return contentPane;
     }
-        //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
+
+    ImageView chosenCardToPlay;
+
+    private void showCardChosen(Pane pane, Point point){
+        chosenCardToPlay = createImageView(associatorPng2Card(String.valueOf(idChosenCardToPlay), sideChosenCardToPlay));
+        chosenCardToPlay.setFitHeight(33);
+        chosenCardToPlay.setFitWidth(65);
+        double layoutX = 615 + (point.getX() * 37);
+        double layoutY = 364 + (point.getY() * 21);
+        chosenCardToPlay.setLayoutX(layoutX);
+        chosenCardToPlay.setLayoutY(layoutY);
+        chosenCardToPlay.setPreserveRatio(true);
+        chosenCardToPlay.setOpacity(0.0); // Start with full transparency
+        chosenCardToPlay.setMouseTransparent(true);
+
+        pane.getChildren().add(chosenCardToPlay);
+
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(200), chosenCardToPlay);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
+    }
+
+    private void hideCardChosen(Pane root) {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), chosenCardToPlay);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(event -> {
+            root.getChildren().remove(chosenCardToPlay);
+            chosenCardToPlay = null;
+        });
+        fadeOut.play();
+    }
+
+
+
+    //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
     public void setHand(int num, int pos){
-        if(pos == 1){
+        if(pos == 0){
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
             Image imageBack = new Image(associatorPng2Card(String.valueOf(num), false));
             firstCard.setImage(imageFront);
             firstCardBack.setImage(imageBack);
-            firstCard.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                    multipleResponses.add(String.valueOf(num));
-                    multipleResponses.add(String.valueOf(true));
-                }
-            });
-            firstCardBack.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    //aggiungo l'id della carta e il suo verso nella multiple responsesserve per capire quale voglio mettere nella gamestation)
-                    multipleResponses.add(String.valueOf(num));
-                    multipleResponses.add(String.valueOf(false));
-                }
-            });
-        }else if(pos == 2){
+
+        }else if(pos == 1){
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
             Image imageBack = new Image(associatorPng2Card(String.valueOf(num), false));
             secondCard.setImage(imageFront);
             secondCardBack.setImage(imageBack);
-            secondCard.setOnMouseClicked(event -> {
-                        if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(num));
-                            multipleResponses.add(String.valueOf(true));
-                        }
-            });
-            secondCardBack.setOnMouseClicked(event -> {
-                        if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(num));
-                            multipleResponses.add(String.valueOf(false));
-                        }
-            });
+
         }else{
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
             Image imageBack = new Image(associatorPng2Card(String.valueOf(num), false));
             thirdCard.setImage(imageFront);
             thirdCardBack.setImage(imageBack);
-            thirdCard.setOnMouseClicked(event -> {
-                        if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(num));
-                            multipleResponses.add(String.valueOf(true));
-                        }
-                    });
-                    thirdCardBack.setOnMouseClicked(event -> {
-                        if (event.getButton() == MouseButton.PRIMARY) {
-                            //aggiungo l'id della carta e il suo verso nella multiple responses(serve per capire quale voglio mettere nella gamestation)
-                            multipleResponses.add(String.valueOf(num));
-                            multipleResponses.add(String.valueOf(false));
-                        }
-                    });
         }
 
     }
+
+    private int idChosenCardToPlay;
+    private boolean sideChosenCardToPlay;
+
+    public void makeHandCardsPlayable(List<PlayableCard> cards) {
+        setCardEvent(firstCard, cards.get(0), true);
+        setCardEvent(firstCardBack, cards.get(0), false);
+        setCardEvent(secondCard, cards.get(1), true);
+        setCardEvent(secondCardBack, cards.get(1), false);
+        setCardEvent(thirdCard, cards.get(2), true);
+        setCardEvent(thirdCardBack, cards.get(2), false);
+    }
+
+    private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront) {
+        cardView.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                idChosenCardToPlay = card.getCardId();
+                sideChosenCardToPlay = isFront;
+                cardView.setScaleX(1.2);
+                cardView.setScaleY(1.2);
+
+                // Reset scale for all other card views
+                resetOtherCardViewsScale(cardView);
+            }
+        });
+        cardView.setCursor(Cursor.HAND);
+    }
+
+    private void resetOtherCardViewsScale(ImageView clickedCardView) {
+        // List of all card views
+        List<ImageView> allCardViews = Arrays.asList(firstCard, firstCardBack, secondCard, secondCardBack, thirdCard, thirdCardBack);
+
+        // Loop through all card views
+        for (ImageView cardView : allCardViews) {
+            if (cardView != clickedCardView) {
+                cardView.setScaleX(1.0);
+                cardView.setScaleY(1.0);
+            }
+        }
+    }
+
 
     //mi rende visibile il messaggio che è l'ultimo turno
     public void setLastTurn(){
@@ -394,8 +436,8 @@ public class GameStationController extends AbstractController {
             int playerCardId = playerHand.get(i).getCardId();
             setHand(playerCardId, i);
         }
-
-
+        List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
+        this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
     }
 }

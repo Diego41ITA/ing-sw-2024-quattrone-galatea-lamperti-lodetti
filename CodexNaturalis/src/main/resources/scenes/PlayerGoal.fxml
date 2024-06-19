@@ -20,12 +20,12 @@
       <Separator layoutX="655.0" layoutY="167.0" orientation="VERTICAL" prefHeight="200.0" />
       <Separator layoutX="655.0" layoutY="367.0" orientation="VERTICAL" prefHeight="200.0" />
       <Separator layoutX="655.0" layoutY="567.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Text fx:id="firstGoal" layoutX="368.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FIRST CARD">
+      <Text layoutX="368.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FIRST CARD">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
-      <Text fx:id="secondGoal" layoutX="868.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECOND CARD">
+      <Text layoutX="868.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECOND CARD">
          <font>
             <Font size="22.0" />
          </font>

@@ -17,10 +17,9 @@ public class PlayerGoalController extends AbstractController {
     @FXML
     ImageView secondImage;
 
-    @FXML
-    private String firstGoal;
-    @FXML
-    private String secondGoal;
+    private int firstGoal;
+
+    private int secondGoal;
 
     /**
      * this method initializes the controller with other attribute.
@@ -31,11 +30,11 @@ public class PlayerGoalController extends AbstractController {
 
         setGame(game);
 
-        this.firstGoal = String.valueOf(DbCardInfo.getInstance().readCardRecord().cardId());
-        this.secondGoal = String.valueOf(DbCardInfo.getInstance().readCardRecord().cardId());
+        this.firstGoal = DbCardInfo.getInstance().readCardRecord().cardId();
+        this.secondGoal = DbCardInfo.getInstance().readCardRecord().cardId();
 
-        firstImage.setImage(new Image(associatorPng2Card(firstGoal,true)));
-        secondImage.setImage(new Image(associatorPng2Card(secondGoal,true)));
+        firstImage.setImage(new Image(associatorPng2Card(String.valueOf(firstGoal),true)));
+        secondImage.setImage(new Image(associatorPng2Card(String.valueOf(secondGoal),true)));
     }
 
 
