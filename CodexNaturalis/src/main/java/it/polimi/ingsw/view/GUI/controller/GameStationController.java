@@ -1,10 +1,11 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.GameView.GameView;
-import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
+import it.polimi.ingsw.model.gameDataManager.TableOfDecks;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.Gui;
 import it.polimi.ingsw.view.input.InputGui;
@@ -18,6 +19,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.event.*;
 import javafx.scene.layout.GridPane;
@@ -32,6 +34,7 @@ import javafx.util.Duration;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
@@ -122,6 +125,110 @@ public class GameStationController extends AbstractController {
     private double initialTranslateX, initialTranslateY;
     @FXML
     private Scale scaleTransform = new Scale(1, 1);
+    @FXML
+    private ImageView deckResource;
+    @FXML
+    private ImageView deckGold;
+    @FXML
+    private ImageView card1;
+    @FXML
+    private ImageView card2;
+    @FXML
+    private ImageView card3;
+    @FXML
+    private ImageView card4;
+    @FXML
+    private ImageView goal1;
+    @FXML
+    private ImageView goal2;
+    private Map<ImageView, Integer> mapping;
+
+
+    public void drawDeckGold(MouseEvent e){
+        multipleResponses.add("A");
+        multipleResponses.add("gold");
+    }
+    public void drawDeckResource(MouseEvent e){
+        multipleResponses.add("A");
+        multipleResponses.add("resource");
+    }
+    public void drawFirstCard(MouseEvent e){
+        multipleResponses.add("B");
+        multipleResponses.add(String.valueOf(mapping.get(card1)));
+    }
+    public void drawSecondCard(MouseEvent e){
+        multipleResponses.add("B");
+        multipleResponses.add(String.valueOf(mapping.get(card2)));
+    }
+    public void drawThirdCard(MouseEvent e){
+        multipleResponses.add("B");
+        multipleResponses.add(String.valueOf(mapping.get(card3)));
+    }
+    public void drawFourthCard(MouseEvent e){
+        multipleResponses.add("B");
+        multipleResponses.add(String.valueOf(mapping.get(card3)));
+    }
+
+    public void makeTableOfDecksTabResponsive(){
+        deckGold.setOnMouseClicked(this::drawDeckGold);
+        deckResource.setOnMouseClicked(this::drawDeckResource);
+        card1.setOnMouseClicked(this::drawFirstCard);
+        card2.setOnMouseClicked(this::drawSecondCard);
+        card3.setOnMouseClicked(this::drawThirdCard);
+        card4.setOnMouseClicked(this::drawFourthCard);
+    }
+
+    public void setUpTableOfDecks() {
+        FsmGame updatedGame = getGameFsm();
+        TableOfDecks tableOfDecks = updatedGame.getView().getTableOfDecks();
+
+        // Extracting decks
+        Deck<ResourceCard> resource = tableOfDecks.getDeckResource();
+        Deck<GoldCard> gold = tableOfDecks.getDeckGold();
+
+        // Extracting goals and cards
+        ArrayList<Integer> goals = tableOfDecks.getGoals().stream()
+                .map(Card::getCardId)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        ArrayList<Integer> cards = tableOfDecks.getCards().stream()
+                .map(c -> c != null ? c.getCardId() : 0)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        // Extracting deck IDs
+        ArrayList<Integer> decks = new ArrayList<>();
+        decks.add(resource.getDimension() != 0 ? resource.getFirst().getCardId() : resource.getDimension());
+        decks.add(gold.getDimension() != 0 ? gold.getFirst().getCardId() : gold.getDimension());
+
+        // Setting images for cards and decks
+        setImageWithDefault(card1, cards.get(0));
+        setImageWithDefault(card2, cards.get(1));
+        setImageWithDefault(card3, cards.get(2));
+        setImageWithDefault(card4, cards.get(3));
+        setImageWithDefault(deckResource, decks.get(0));
+        setImageWithDefault(deckGold, decks.get(1));
+
+        // Setting images for goals
+        goal1.setImage(new Image(associatorPng2Card(String.valueOf(goals.get(0)), true)));
+        goal2.setImage(new Image(associatorPng2Card(String.valueOf(goals.get(1)), true)));
+
+        // Mapping ImageView to card IDs
+        mapping.put(card1, cards.get(0));
+        mapping.put(card2, cards.get(1));
+        mapping.put(card3, cards.get(2));
+        mapping.put(card4, cards.get(3));
+    }
+
+    private void setImageWithDefault(ImageView imageView, int cardId) {
+        if (cardId == 0) {
+            imageView.setImage(null); // Set ImageView to display no image
+            imageView.setVisible(false);
+        } else {
+            imageView.setImage(new Image(associatorPng2Card(String.valueOf(cardId), true)));
+            imageView.setVisible(true); // Make ImageView visible when setting a specific image
+        }
+    }
+
 
     //è un array che contiene tuelle le imageview della pointTable
     //mi serve per poter selezionare la imageview corrispondente al punteggio
@@ -231,8 +338,8 @@ public class GameStationController extends AbstractController {
             GameStation gameStation = getGameView().getMyGameStation(nick);
             for (Point point : gameStation.getFreeCords()) {
                 Rectangle rectangle = new Rectangle();
-                rectangle.setWidth(33);
-                rectangle.setHeight(15);
+                rectangle.setWidth(55);
+                rectangle.setHeight(33);
                 rectangle.setFill(Paint.valueOf("FFFFFF"));
 
                 double layoutX = 615 + (point.getX() * 37);
@@ -240,7 +347,7 @@ public class GameStationController extends AbstractController {
 
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
-
+                rectangle.setOpacity(0);
                 rectangle.setCursor(Cursor.HAND);
 
                 rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, point));
@@ -279,6 +386,8 @@ public class GameStationController extends AbstractController {
     ImageView chosenCardToPlay;
 
     private void showCardChosen(Pane pane, Point point){
+        if (idChosenCardToPlay == 0)
+            return;
         chosenCardToPlay = createImageView(associatorPng2Card(String.valueOf(idChosenCardToPlay), sideChosenCardToPlay));
         chosenCardToPlay.setFitHeight(33);
         chosenCardToPlay.setFitWidth(65);
@@ -299,6 +408,8 @@ public class GameStationController extends AbstractController {
     }
 
     private void hideCardChosen(Pane root) {
+        if (idChosenCardToPlay == 0)
+            return;
         FadeTransition fadeOut = new FadeTransition(Duration.millis(200), chosenCardToPlay);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
@@ -446,5 +557,6 @@ public class GameStationController extends AbstractController {
         List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
+        this.setUpTableOfDecks();
     }
 }
