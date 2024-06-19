@@ -809,4 +809,19 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public void setGame(Game game) {
         this.game = game;
     }
+
+    @Override
+    public boolean equals(Object controller){
+        if(controller instanceof ControllerOfGame){
+            ControllerOfGame otherController = (ControllerOfGame) controller;
+            if(otherController.getGameId().equals(this.getGameId()))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.getGameId().hashCode();
+    }
 }

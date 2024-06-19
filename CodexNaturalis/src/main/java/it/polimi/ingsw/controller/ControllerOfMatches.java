@@ -252,11 +252,15 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      * @param gameID the id of game that needs to be removed.
      */
     public void removeGame(String gameID){
-        for(ControllerOfGame game : activeGames){
+        Iterator<ControllerOfGame> iterator = activeGames.iterator();
+        while(iterator.hasNext()){
+            ControllerOfGame game = iterator.next();
             if(game.getGameId().equals(gameID)){
-                activeGames.remove(game);
+                iterator.remove();
             }
         }
+
+        printActiveGames();
     }
 
     /**
