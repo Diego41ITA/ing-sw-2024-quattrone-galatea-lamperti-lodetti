@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class ControllerOfGame extends UnicastRemoteObject implements ControllerOfGameInterface/*, Serializable*/ {
     /**The model of the game to control*/
-    private final Game game;
+    private Game game;
 
     /**An HashMap that associates each player with a {@link HandleObserver} object*/
     private HashMap<String, HandleObserver> observers;
@@ -33,6 +33,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * specific client has done.
      */
     public final HashMap<String, Integer> readiness = new HashMap<>();
+    public boolean checkTurn = false;
 
     /**
      * Constructor of the class. It's called by {@link ControllerOfMatches} when creating a new game
@@ -49,6 +50,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         game.setTurn(new Turn(new ArrayList<Player>()));
         observers = new HashMap<>();
+        this.checkTurn = false;
     }
 
     /**
@@ -149,6 +151,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
             Turn turn = new Turn(keysList);
             turn.sort();
             game.setTurn(turn);
+
+            //we need to save the game for the first time
+            Thread saveThread = new Thread(()-> SaverWriter.saveGame(this.game));
+            saveThread.start();
+            this.checkTurn = true;
 
             observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
         }
@@ -775,5 +782,9 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         Possibili problemi sul ritardo e l'asincronismo: basterebbe pingare il current player però potrebbe
         disconnettersi subito dopo il ping.
          */
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

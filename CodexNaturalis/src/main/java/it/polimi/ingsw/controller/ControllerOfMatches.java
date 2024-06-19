@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.exceptions.MaxPlayersInException;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
+import it.polimi.ingsw.networking.PingTheClient;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.parse.SaverReader;
@@ -62,6 +63,11 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         System.out.println("the path to the directory is: " + resourcePathString);
         printActiveGames();
 
+        //devo avviare le routine di ping per ogni controller dei game attivi.
+        for(ControllerOfGame game: activeGames){
+            new PingTheClient(game).start();
+        }
+
         //it starts a routine operation
         routine = new RoutineDelete(this);
         Thread routineDelete = new Thread(routine);
@@ -109,6 +115,8 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         } catch (MaxPlayersInException e) {
             obs.genericErrorWhenEnteringGame(e.getMessage(), gameID);
         }
+
+        new PingTheClient(controller).start();
 
         return controller;
     }

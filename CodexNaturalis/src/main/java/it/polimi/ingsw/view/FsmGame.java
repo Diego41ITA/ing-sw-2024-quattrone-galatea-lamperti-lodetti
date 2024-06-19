@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
@@ -443,5 +444,11 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     }
 
     public void interruptDueToDisconnection(){
+    }
+
+    @Override
+    public void pingTheClient(GameView game) throws RemoteException {
+        System.out.println("i recived a ping from the server");
+        setGameView(game);
     }
 }

@@ -54,6 +54,7 @@ public class ClientHandlerSocket extends Thread{
             }
         }catch(IOException | ClassNotFoundException e){
             System.out.println("No communication with the client");
+            this.interrupt();
         }
     }
 

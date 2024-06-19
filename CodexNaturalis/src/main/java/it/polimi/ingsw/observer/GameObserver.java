@@ -46,5 +46,11 @@ public interface GameObserver extends Remote{
     void genericErrorWhenEnteringGame(String msg, String gameID) throws RemoteException;
     void gameIdNotExists(String gameId) throws RemoteException;
 
+    /**
+     * this method pings the client constantly, and it passes it the GameView in this way it can refresh the view
+     * faster and the game should be more fluid.
+     * @param game the updated view of the model
+     */
+    void pingTheClient(GameView game) throws RemoteException;
 }
 

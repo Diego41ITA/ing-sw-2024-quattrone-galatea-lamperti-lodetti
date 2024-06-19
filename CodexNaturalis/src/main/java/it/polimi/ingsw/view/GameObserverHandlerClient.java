@@ -134,4 +134,9 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     public void gameIdNotExists(String gameId) throws RemoteException{
         flow.gameIdNotExists(gameId);
     }
+
+    @Override
+    public void pingTheClient(GameView game)throws RemoteException{
+        flow.setGameView(game);
+    }
 }

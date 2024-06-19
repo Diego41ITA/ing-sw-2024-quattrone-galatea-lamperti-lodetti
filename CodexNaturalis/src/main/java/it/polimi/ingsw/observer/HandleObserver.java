@@ -183,9 +183,7 @@ public class HandleObserver implements Serializable {
         try {
             observer.goalCardsDrawed(cards);
         }catch(RemoteException e){
-            e.printStackTrace();
-            e.getCause();
-            e.getMessage();
+            //
         }
     }
 
@@ -194,6 +192,19 @@ public class HandleObserver implements Serializable {
             observer.updatePlayerInGame(new GameView(game));
         }catch(RemoteException e){
             //
+        }
+    }
+
+    /**
+     * this method tries to ping the client
+     * @param game it passes the updated view
+     */
+    public void notify_PingClient(Game game) throws IOException{
+        try{
+            observer.pingTheClient(new GameView(game));
+        }catch(RemoteException e){
+            System.out.println("the client: " + this.observer + " disconnected ");
+            throw new IOException();
         }
     }
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
+import it.polimi.ingsw.networking.PingTheClient;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.*;
 import it.polimi.ingsw.observer.GameObserver;
 
@@ -263,6 +264,15 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
             out.writeObject(new Update20Points(game));
         }catch(IOException e){
             //
+        }
+    }
+
+    @Override
+    public void pingTheClient(GameView game)throws RemoteException{
+        try{
+            out.writeObject(new PingMessage(game));
+        }catch(IOException e){
+            System.err.println("client is not reachable");
         }
     }
 }
