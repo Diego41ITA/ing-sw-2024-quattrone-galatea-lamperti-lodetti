@@ -247,6 +247,19 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     }
 
     /**
+     * this method removes a game when someone of the player disconnect: it is either impossible to wait for other player
+     * or to reload the game
+     * @param gameID the id of game that needs to be removed.
+     */
+    public void removeGame(String gameID){
+        for(ControllerOfGame game : activeGames){
+            if(game.getGameId().equals(gameID)){
+                activeGames.remove(game);
+            }
+        }
+    }
+
+    /**
      * this method is called when this class is build: it reads all the files saved in specific directory, and it
      * recreates the ControllerOfGame object (for each game). Pay attention that an observer is added only when
      * it is passed with a rejoin method.

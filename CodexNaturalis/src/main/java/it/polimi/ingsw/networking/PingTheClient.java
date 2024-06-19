@@ -1,6 +1,7 @@
 package it.polimi.ingsw.networking;
 
 import it.polimi.ingsw.controller.ControllerOfGame;
+import it.polimi.ingsw.controller.ControllerOfMatches;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.Status;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.parse.SaverReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.rmi.RemoteException;
 import java.util.Map;
 
 public class PingTheClient extends Thread{
@@ -45,11 +47,19 @@ public class PingTheClient extends Thread{
                 controller.returnGame().setActivity(activity);
 
                 //the disconnected player could be also the CURRENT PLAYER.
-                if(controller.checkTurn /*some controls on the current player*/){
+                if(controller.checkTurn && controller.returnGame().getTurn().getCurrentPlayerNick().equals(nick)){
                     //it reloads the last saving of this game
                     reloadGame(controller.getGameId());
                     //the show must go on
                     controller.goOn();
+                }else if(!controller.checkTurn){
+                    ControllerOfMatches matches = null;
+                    try {
+                        matches = ControllerOfMatches.getMainController();
+                    } catch (RemoteException ex) {
+                        System.err.println("this point should have not been reached");
+                    }
+                    matches.removeGame(this.controller.getGameId());
                 }
             }
         }
