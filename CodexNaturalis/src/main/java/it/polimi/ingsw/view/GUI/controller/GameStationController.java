@@ -184,7 +184,7 @@ public class GameStationController extends AbstractController {
         card4.setCursor(Cursor.HAND);
     }
 
-    public void setUpTableOfDecks() {
+    private void setUpTableOfDecks() {
         FsmGame updatedGame = getGameFsm();
         TableOfDecks tableOfDecks = updatedGame.getView().getTableOfDecks();
 
@@ -241,7 +241,7 @@ public class GameStationController extends AbstractController {
     private ImageView[] imageViews = new ImageView[29];
 
     //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
-    public void setGameId(String id){
+    private void setGameId(String id){
         gameId.setText(id);
     }
 
@@ -256,7 +256,7 @@ public class GameStationController extends AbstractController {
         return imageView;
     }
 
-    public void createGameStationTabPane(Player player) {
+    private void createGameStationTabPane(Player player) {
         Pane pane = new Pane();  // Create a single Pane
         GameStation gameStation = getGameView().getMyGameStation(player.getNick());
         for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
@@ -362,6 +362,8 @@ public class GameStationController extends AbstractController {
                 rectangle.setOnMouseClicked(mouseEvent -> {
                     multipleResponses.add(String.valueOf(idChosenCardToPlay));
                     multipleResponses.add(String.valueOf(sideChosenCardToPlay));
+                    multipleResponses.add(String.valueOf(point.x));
+                    multipleResponses.add(String.valueOf(point.y));
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
@@ -429,7 +431,7 @@ public class GameStationController extends AbstractController {
 
 
     //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
-    public void setHand(int num, int pos){
+    private void setHand(int num, int pos){
         if(pos == 0){
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
             Image imageBack = new Image(associatorPng2Card(String.valueOf(num), false));
@@ -533,7 +535,7 @@ public class GameStationController extends AbstractController {
     }
 
     //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
-    public void MakerInPointTable(Color color, int point){
+    private void MakerInPointTable(Color color, int point){
         Image imageMaker = new Image(makerAssociator(color));
         imageViews[point].setImage(imageMaker);
     }
