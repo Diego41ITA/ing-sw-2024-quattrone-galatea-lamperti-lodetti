@@ -147,26 +147,38 @@ public class GameStationController extends AbstractController {
     public void drawDeckGold(MouseEvent e){
         multipleResponses.add("A");
         multipleResponses.add("gold");
+        deckGold.setScaleX(1.2);
+        deckGold.setScaleY(1.2);
     }
     public void drawDeckResource(MouseEvent e){
         multipleResponses.add("A");
         multipleResponses.add("resource");
+        deckResource.setScaleX(1.2);
+        deckResource.setScaleY(1.2);
     }
     public void drawFirstCard(MouseEvent e){
         multipleResponses.add("B");
         multipleResponses.add(String.valueOf(mapping.get(card1)));
+        card1.setScaleX(1.2);
+        card1.setScaleY(1.2);
     }
     public void drawSecondCard(MouseEvent e){
         multipleResponses.add("B");
         multipleResponses.add(String.valueOf(mapping.get(card2)));
+        card2.setScaleX(1.2);
+        card2.setScaleY(1.2);
     }
     public void drawThirdCard(MouseEvent e){
         multipleResponses.add("B");
         multipleResponses.add(String.valueOf(mapping.get(card3)));
+        card3.setScaleX(1.2);
+        card3.setScaleY(1.2);
     }
     public void drawFourthCard(MouseEvent e){
         multipleResponses.add("B");
         multipleResponses.add(String.valueOf(mapping.get(card3)));
+        card4.setScaleX(1.2);
+        card4.setScaleY(1.2);
     }
 
     public void makeTableOfDecksTabResponsive(){
@@ -359,11 +371,12 @@ public class GameStationController extends AbstractController {
                 rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, point));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
-                rectangle.setOnMouseClicked(mouseEvent -> {
+                rectangle.setOnMouseClicked(event -> {
                     multipleResponses.add(String.valueOf(idChosenCardToPlay));
                     multipleResponses.add(String.valueOf(sideChosenCardToPlay));
-                    multipleResponses.add(String.valueOf(point.x));
-                    multipleResponses.add(String.valueOf(point.y));
+                    multipleResponses.add(String.valueOf(point.getX()));
+                    multipleResponses.add(String.valueOf(point.getY()));
+                    showCardChosen(playerPane, point);
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
