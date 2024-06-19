@@ -4,15 +4,19 @@ import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
+import it.polimi.ingsw.networking.socket.server.GameObserverHandlerSocket;
 
 import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-//questa interfaccia è usata per notificare al client qualcosa: server -> client
+/**
+ * exposes all {@link HandleObserver} methods,
+ * these methods are exposed to be used on the client and server side to notify changes
+ */
 public interface GameObserver extends Remote{
-    //lancia il messaggio in cui non ci siano abbastanza risorse per piazzare le carte
+
     void invalidCardPlacement()throws RemoteException;
     void winner(GameView game, String nick)throws RemoteException;
     void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException;
@@ -35,7 +39,7 @@ public interface GameObserver extends Remote{
     void updateGameStatus(GameView game)throws  RemoteException;
     void newGameCreated(String gameID)throws RemoteException;
     void randomGameJoined(String gameID)throws RemoteException;
-    void reconnectedToGame(GameView view)throws RemoteException; //deve ritornare anche una GameView
+    void reconnectedToGame(GameView view)throws RemoteException;
     void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException;
     void startGame(GameView game)throws IOException;
 

@@ -1,16 +1,15 @@
 package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.model.gameDataManager.*;
-//questa classe serve ad associare gli oggetti del model con la loro rappresentazione png
-//ImageAssociator viene impiegata per associare le carte con la loro rappresentazione grafica
-//e anche per associare i maker con la loro rappresentazione grafica
-//questa classe verrà poi impiegata nei controller della Gui per settare la grafica in base alla
-//carta che è stata selezionata
+/**
+ ImageAssociator is used to associate cards with their graphic representation
+and also to associate makers with their graphical representation
+this class will then be used in the controller to set the graphics based on the
+card that has been selected
+*/
 public class ImageAssociator {
 
     public static String associatorPng2Card(String id, boolean isFront) {
-        // Converte il valore booleano in una rappresentazione stringa
         String secondAttributeString = isFront ? "true" : "false";
-        // Combina i valori degli attributi in un'unica stringa per lo switch-case
         String combinedAttributes = id + "-" + secondAttributeString;
         return switch (combinedAttributes) {
             case "1-true" -> "/scenes/images/CODEX_cards_gold_front/001.png";
