@@ -241,8 +241,15 @@ public class GameStationController extends AbstractController {
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
 
+                rectangle.setCursor(Cursor.HAND);
+
                 rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, point));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
+
+                rectangle.setOnMouseClicked(mouseEvent -> {
+                    multipleResponses.add(String.valueOf(idChosenCardToPlay));
+                    multipleResponses.add(String.valueOf(sideChosenCardToPlay));
+                });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
             }

@@ -41,8 +41,8 @@ public class PlayerGoalController extends AbstractController {
     // se con il mouse clicco sulla immagine allora mette 1 in multipleResponses
     public void selectFirst(MouseEvent e){
         multipleResponses.add(String.valueOf(firstGoal));
-
     }
+
     // se con il mouse clicco sulla immagine allora mette 2 in multipleResponses
     public void selectSecond(MouseEvent e){
         multipleResponses.add(String.valueOf(secondGoal));
