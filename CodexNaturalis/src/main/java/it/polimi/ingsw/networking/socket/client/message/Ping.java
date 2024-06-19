@@ -6,13 +6,16 @@ import it.polimi.ingsw.observer.GameObserver;
 
 import java.rmi.RemoteException;
 
-public class CalculateWinner extends Message{
-    public CalculateWinner(){
+public class Ping extends Message{
+    private final String nick;
+
+    public Ping(String nick){
         this.forMainController = false;
+        this.nick = nick;
     }
     @Override
     public void execute(ControllerOfGameInterface game) throws RemoteException{
-        game.calculateWinner();
+        game.ping(nick);
     }
 
     @Override

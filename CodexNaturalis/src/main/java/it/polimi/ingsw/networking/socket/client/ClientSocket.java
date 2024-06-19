@@ -74,7 +74,7 @@ public class ClientSocket extends Thread implements ClientAction {
                 }
             }catch(IOException | ClassNotFoundException | InterruptedException e) {
                 System.err.println("socket server disconnected: detection happened in ClientSocket Thread");
-                System.exit(0);
+                this.interrupt();
             }
         }
     }
@@ -255,15 +255,13 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //questo metodo non ha senso
     @Override
-    public String calculateWinner(){
+    public void ping(String nick){
         try{
-            out.writeObject(new CalculateWinner());
+            out.writeObject(new Ping(nick));
             completeForwarding();
         }catch(IOException e){
             throw new RuntimeException(e);
         }
-
-        return "ciao";
     }
 
     @Override //prova

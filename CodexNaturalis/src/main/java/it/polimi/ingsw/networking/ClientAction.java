@@ -66,7 +66,7 @@ public interface ClientAction {
 
     //Questo metodo non ha proprio senso. Quando il controller si accorge che la partita sta finendo valuta gli ultimi
     //gli ultimi giocatori e successivamente calcola il vincitore notificandolo ai player.
-    String calculateWinner() throws IOException;
+    void ping(String nick) throws IOException;
 
     //prova
     void startGame() throws IOException;

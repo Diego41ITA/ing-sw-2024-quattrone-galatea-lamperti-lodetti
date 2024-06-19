@@ -127,4 +127,6 @@ public interface ControllerOfGameInterface extends Remote {
     //leave it, I need it for the testController
     HashMap<Player, Boolean> getPlayers() throws RemoteException;
 
+
+    void ping(String nick) throws RemoteException;
 }

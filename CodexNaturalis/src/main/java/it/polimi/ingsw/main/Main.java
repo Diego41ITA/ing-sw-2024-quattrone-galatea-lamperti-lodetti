@@ -136,6 +136,7 @@ public class Main {
                     });
 
                     threadFsmGame.join();
+                    Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
 
                 } else if (selection == 2) {
 

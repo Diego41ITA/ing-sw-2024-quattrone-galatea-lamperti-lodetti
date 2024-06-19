@@ -138,8 +138,8 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     }
 
     @Override
-    public String calculateWinner() throws RemoteException{
-        return gameController.calculateWinner();
+    public void ping(String nick) throws RemoteException{
+        gameController.ping(nick);
     }
 
     @Override //prova

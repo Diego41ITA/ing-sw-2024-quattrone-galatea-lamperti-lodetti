@@ -760,4 +760,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     public HashMap<String, HandleObserver> getObservers() {
         return observers;
     }
+
+    /**
+     * allows the client to ping the server.
+     * @param nick the nickname of the client
+     */
+    public void ping(String nick){}
 }

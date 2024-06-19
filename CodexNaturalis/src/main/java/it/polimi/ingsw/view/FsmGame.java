@@ -55,6 +55,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         inGame = false;
         notStarted = true;
         myTurn = false;
+        new PingServer(this, this.client, this.lock).start();
     }
 
 
@@ -439,5 +440,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         synchronized (lock){
             lock.notify();
         }
+    }
+
+    public void interruptDueToDisconnection(){
     }
 }
