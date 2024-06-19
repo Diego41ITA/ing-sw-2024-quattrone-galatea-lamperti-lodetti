@@ -1,9 +1,8 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.networking;
 
-import it.polimi.ingsw.networking.ClientAction;
+import it.polimi.ingsw.view.FsmGame;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class PingServer extends Thread {
     private final FsmGame game;

@@ -765,5 +765,15 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * allows the client to ping the server.
      * @param nick the nickname of the client
      */
-    public void ping(String nick){}
+    public void ping(String nick){
+        //Bisogna fare in modo che il client setti qualcosa che faccia capire che è online.
+        //Probabilmente non serve fare nulla al limite settare che è online.
+
+        /*
+        Si potrebbe aggiungere un metodo analogo a quello del client che pinga tutti i client e se sono irraggiungibili
+        catcha l'eccezione e li setta a false nella activity.
+        Possibili problemi sul ritardo e l'asincronismo: basterebbe pingare il current player però potrebbe
+        disconnettersi subito dopo il ping.
+         */
+    }
 }
