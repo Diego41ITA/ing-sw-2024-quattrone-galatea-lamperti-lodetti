@@ -368,21 +368,26 @@ public class GameStationController extends AbstractController {
                 rectangle.setOpacity(0);
                 rectangle.setCursor(Cursor.HAND);
 
-                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, point));
+                // Capture the current point coordinates
+                final int x = point.x;
+                final int y = point.y;
+
+                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, y)));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
                 rectangle.setOnMouseClicked(event -> {
                     multipleResponses.add(String.valueOf(idChosenCardToPlay));
                     multipleResponses.add(String.valueOf(sideChosenCardToPlay));
-                    multipleResponses.add(String.valueOf(point.getX()));
-                    multipleResponses.add(String.valueOf(point.getY()));
-                    showCardChosen(playerPane, point);
+                    multipleResponses.add(String.valueOf(x));
+                    multipleResponses.add(String.valueOf(y));
+                    showCardChosen(playerPane, new Point(x, y));
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
             }
         }
     }
+
 
     private Tab findTabById(String tabId) {
         for (Tab tab : tabPane.getTabs()) {
