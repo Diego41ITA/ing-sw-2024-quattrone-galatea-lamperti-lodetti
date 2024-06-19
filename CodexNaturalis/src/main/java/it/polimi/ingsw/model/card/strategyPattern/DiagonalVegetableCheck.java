@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 /**
- * @author Luca Lamperti
  * Implementation of CheckInterface that checks for diagonal placement of cards with vegetable type
  * It checks if there are three cards with vegetable type placed diagonally
+ *  @author Luca Lamperti
  */
 public class DiagonalVegetableCheck implements CheckInterface{
     /**

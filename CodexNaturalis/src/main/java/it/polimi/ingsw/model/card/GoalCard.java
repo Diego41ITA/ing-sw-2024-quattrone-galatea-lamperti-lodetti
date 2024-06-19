@@ -74,6 +74,11 @@ public class GoalCard extends Card implements Serializable {
         return new HashMap<>(listOfObjects);
     }
 
+    /**
+     * Uses the checkInterface to get the number of points made based on the type of goal.
+     * @author Luca Lamperti
+     * @return an integer that shows the number of points obtained with this card.
+     */
     public int getGoalPoints(HashMap<Point, PlayableCard> playedCard, HashMap<Item, Integer> availableItems){
         return this.numOfPoints * this.goalType.check(playedCard, availableItems, this.listOfObjects);
     }

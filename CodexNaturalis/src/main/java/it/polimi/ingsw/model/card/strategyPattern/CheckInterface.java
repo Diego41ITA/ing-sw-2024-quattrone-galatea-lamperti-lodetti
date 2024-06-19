@@ -8,9 +8,9 @@ import java.util.*;
 import java.awt.*;
 
 /**
- * @author Luca Lamperti
  * Define an interface to implement strategy pattern for GoalCards
  * It includes a method to check if the requirements of the GoalCard are satisfied
+ * @author Luca Lamperti
  */
 public interface CheckInterface extends Serializable {
     /**

@@ -4,11 +4,10 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 /**
- * @author Luca Lamperti
- *
  * Class used to get the maximum number of valid placements without common cards
  * This class provides a method to optimize the placement of cards that maximize the number of valid placements
  * checking that no common cards are in any placement
+ *  @author Luca Lamperti
  */
 public class PlacementOptimizer {
     /**

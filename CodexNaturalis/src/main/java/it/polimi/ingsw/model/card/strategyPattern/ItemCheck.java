@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.HashMap;
 /**
- * @author Luca Lamperti
  * Implementation of CheckInterface that checks if the number of available items is enough to satisfy the requirement
+ *  @author Luca Lamperti
  */
 public class ItemCheck implements CheckInterface {
     /**

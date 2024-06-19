@@ -6,9 +6,9 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * @author Luca Lamperti
  * Implementation of CheckInterface that checks for diagonal placement of cards with animal type
  * It checks if there are three cards with animal type placed diagonally
+ * @author Luca Lamperti
  */
 public class DiagonalAnimalCheck implements CheckInterface{
     /**

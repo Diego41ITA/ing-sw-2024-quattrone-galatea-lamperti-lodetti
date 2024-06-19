@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.card.*;
 import java.awt.*;
 import java.util.*;
 /**
- * @author Luca Lamperti
  * Implementation of CheckInterface that checks for the presence of a specific pattern involving mushroom and vegetable cards
+ *  @author Luca Lamperti
  */
 public class UpsideDownLAnimalMushroomCheck implements CheckInterface{
     /**

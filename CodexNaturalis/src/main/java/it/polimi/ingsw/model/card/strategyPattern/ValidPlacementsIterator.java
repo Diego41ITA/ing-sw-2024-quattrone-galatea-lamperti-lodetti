@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 /**
- * @author Luca Lamperti
  * Implementation of a personalized iterator for validPlacements
  * This iterator is designed to iterate over a set of sets of points
+ * @author Luca Lamperti
  */
 public class ValidPlacementsIterator implements Iterator<Set<Point>> {
     private Iterator<Set<Point>> iterator;

@@ -6,9 +6,9 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * @author Luca Lamperti
  * Implementation of CheckInterface that checks for diagonal placement of cards with insect type
  * It checks if there are three cards with insect type placed diagonally
+ * @author Luca Lamperti
  */
 public class DiagonalInsectCheck implements CheckInterface{
     /**
