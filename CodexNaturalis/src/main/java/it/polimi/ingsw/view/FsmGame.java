@@ -106,7 +106,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                         myTurn = false;
                     }
                     while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
-                        ui.show_playerHand(view);
+                        //ui.show_playerHand(view);
                         ui.show_gameStation(view);
                         System.out.println("it's not your turn. Wait");
                         try{
@@ -449,6 +449,6 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     @Override
     public void pingTheClient(GameView game) throws RemoteException {
         //System.out.println("i recived a ping from the server");
-        setGameView(game);
+        //setGameView(game);
     }
 }
