@@ -212,7 +212,7 @@ public class Gui extends Application implements UI {
     //si potrebbe modificare waitTurn.fxml in modo che stampi il nome del giocatore corrente e basta.
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-        if(immutableModel.getCurrentPlayer().equals(this.flow.getNickname())){
+        if(immutableModel.getCurrentPlayer().getNick().equals(this.flow.getNickname())){
             //un pop-up che dica è il tuo turno
             //oppure si aggiorna la gameStation
         }else{
