@@ -207,12 +207,12 @@ public class GameStationController extends AbstractController {
         decks.add(gold.getDimension() != 0 ? gold.getFirst().getCardId() : gold.getDimension());
 
         // Setting images for cards and decks
-        setImageWithDefault(card1, cards.get(0));
-        setImageWithDefault(card2, cards.get(1));
-        setImageWithDefault(card3, cards.get(2));
-        setImageWithDefault(card4, cards.get(3));
-        setImageWithDefault(deckResource, decks.get(0));
-        setImageWithDefault(deckGold, decks.get(1));
+        setImageWithDefault(card1, cards.get(0), true);
+        setImageWithDefault(card2, cards.get(1), true);
+        setImageWithDefault(card3, cards.get(2), true);
+        setImageWithDefault(card4, cards.get(3), true);
+        setImageWithDefault(deckResource, decks.get(0), false);
+        setImageWithDefault(deckGold, decks.get(1), false);
 
         // Setting images for goals
         goal1.setImage(new Image(associatorPng2Card(String.valueOf(goals.get(0)), true)));
@@ -225,12 +225,12 @@ public class GameStationController extends AbstractController {
         mapping.put(card4, cards.get(3));
     }
 
-    private void setImageWithDefault(ImageView imageView, int cardId) {
+    private void setImageWithDefault(ImageView imageView, int cardId, boolean isFront) {
         if (cardId == 0) {
             imageView.setImage(null); // Set ImageView to display no image
             imageView.setVisible(false);
         } else {
-            imageView.setImage(new Image(associatorPng2Card(String.valueOf(cardId), true)));
+            imageView.setImage(new Image(associatorPng2Card(String.valueOf(cardId), isFront)));
             imageView.setVisible(true); // Make ImageView visible when setting a specific image
         }
     }
@@ -565,6 +565,7 @@ public class GameStationController extends AbstractController {
         List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
+        this.makeTableOfDecksTabResponsive();
         this.setUpTableOfDecks();
     }
 }
