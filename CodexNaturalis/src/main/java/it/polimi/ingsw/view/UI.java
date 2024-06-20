@@ -90,4 +90,6 @@ public interface UI {
     public void show_invalidCommand();
     public void show_waitingOtherPlayers();
     public void show_requestToLeave();
+
+    public void show_abortGame();
 }

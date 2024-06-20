@@ -9,6 +9,7 @@ import it.polimi.ingsw.networking.PingTheClient;
 import it.polimi.ingsw.networking.socket.server.serverToClientMessage.*;
 import it.polimi.ingsw.observer.GameObserver;
 
+import javax.imageio.IIOException;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -253,6 +254,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     public void winner(GameView view, String winner){
         try{
             out.writeObject(new Winner(view, winner));
+            completeForwarding();
         }catch(IOException e){
             //does something
         }
@@ -262,6 +264,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     public void update20PointsReached(GameView game)throws RemoteException{
         try{
             out.writeObject(new Update20Points(game));
+            completeForwarding();
         }catch(IOException e){
             //
         }
@@ -271,8 +274,19 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     public void pingTheClient(GameView game)throws RemoteException{
         try{
             out.writeObject(new PingMessage(game));
+            completeForwarding();
         }catch(IOException e){
             System.err.println("client is not reachable");
+        }
+    }
+
+    @Override
+    public void abortGame() throws RemoteException{
+        try{
+            out.writeObject(new AbortMessage());
+            completeForwarding();
+        }catch (IOException e){
+            //
         }
     }
 }

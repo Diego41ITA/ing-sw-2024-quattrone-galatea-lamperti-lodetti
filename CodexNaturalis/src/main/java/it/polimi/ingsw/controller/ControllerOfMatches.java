@@ -13,6 +13,7 @@ import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.parse.SaverReader;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -256,6 +257,14 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         while(iterator.hasNext()){
             ControllerOfGame game = iterator.next();
             if(game.getGameId().equals(gameID)){
+                for(HandleObserver obs: game.getObservers().values()) {
+                    try {
+                        obs.notify_abortGame();
+                    } catch (IOException e) {
+                        System.err.println("client " + obs + " not reachable");
+                        throw new RuntimeException(e);
+                    }
+                }
                 iterator.remove();
             }
         }

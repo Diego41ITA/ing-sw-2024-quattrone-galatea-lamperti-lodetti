@@ -54,8 +54,8 @@ public class ClientSocket extends Thread implements ClientAction {
                 in = new ObjectInputStream(client.getInputStream());
                 attempt = false;
             }catch(IOException e){
-                System.out.println("something went wrong :( ...");
-                attempt = true;
+                System.err.println("something went wrong :( ...");
+                attempt = false;
             }
         }while(attempt);
     }
@@ -72,7 +72,7 @@ public class ClientSocket extends Thread implements ClientAction {
                     Thread trd = new Thread(() -> executeAsync(notification));
                     trd.start();
                 }
-            }catch(IOException | ClassNotFoundException | InterruptedException e) {
+            }catch(IOException | ClassNotFoundException | InterruptedException | NullPointerException e) {
                 System.err.println("socket server disconnected: detection happened in ClientSocket Thread");
                 this.interrupt();
             }

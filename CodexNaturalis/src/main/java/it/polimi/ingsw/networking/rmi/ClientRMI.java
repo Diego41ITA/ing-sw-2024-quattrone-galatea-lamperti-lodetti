@@ -54,8 +54,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
             //il client è pronto
         }catch(Exception e){
-            e.printStackTrace();
-            e.getCause();
+            System.err.println("impossible to connect to the RMI server");
         }
     }
 

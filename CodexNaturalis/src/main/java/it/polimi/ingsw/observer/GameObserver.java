@@ -52,5 +52,12 @@ public interface GameObserver extends Remote{
      * @param game the updated view of the model
      */
     void pingTheClient(GameView game) throws RemoteException;
+
+    /**
+     * this method tells the clients that the game is no longer available due to some player's disconnection during
+     * the setup.
+     * @throws RemoteException
+     */
+    void abortGame() throws RemoteException;
 }
 

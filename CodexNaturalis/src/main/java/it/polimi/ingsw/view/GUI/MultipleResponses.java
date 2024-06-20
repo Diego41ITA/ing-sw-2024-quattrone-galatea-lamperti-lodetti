@@ -39,7 +39,7 @@ public class MultipleResponses{
         try {
             return Responses.take();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

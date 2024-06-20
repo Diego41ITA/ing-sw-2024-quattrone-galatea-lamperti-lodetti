@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serializable {
+public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, Serializable {
 
     public boolean waitingForNewPlayers = false;
     public boolean notStarted;
@@ -56,7 +56,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         inGame = false;
         notStarted = true;
         myTurn = false;
-        new PingServer(this, this.client, this.lock).start();
+
     }
 
 
@@ -115,13 +115,14 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                             }
                         }catch(InterruptedException e){
                             System.out.println("game interrupted");
+                            throw new RuntimeException();
                         }
                     }
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
                 ui.show_GameStatus(view);
-                ui.show_playerHand(view);
                 ui.show_gameStation(view);
+                ui.show_isYourTurn(getView());
 
                 while(view.getStatus() == Status.SUSPENDED) {
                     try {
@@ -130,6 +131,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                         }    //need to add some notify when the gameStatus change.
                     } catch (InterruptedException e) {
                         System.out.println("this game got interrupted");
+                        throw new RuntimeException();
                     }
                 }
             } else if (view.getStatus() == Status.FINISHED) {
@@ -155,11 +157,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         }
         System.out.println("application is closing...");
     }catch(Exception e){
-        //e.printStackTrace();
-        //e.getCause();
-        System.out.println("exception caught in FsmGame thread.");
+        System.err.println("exception caught in FsmGame thread.");
         e.printStackTrace();
-        e.getCause();
         throw new RuntimeException();
     }}
 
@@ -224,23 +223,27 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
+        new PingServer(this, this.client, this.lock).start();
     }
 
     @Override
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
+
+        new PingServer(this, this.client, this.lock).start();
+
         inGame = true;
     }
 
     @Override
     public void reconnectedToGame(GameView view) throws RemoteException {
         setGameView(view);
-        //ui.show_gameStation(view);
+
         inGame = true;
-        //questo dovrebbe fare in modo che non si vada nello stato color -> si potrebbe aggiungere un nuovo stato
-        //di StateWaiting che non fa nulla.
-        notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover
-        //aggiungere uno stato d'attesa.
+
+        notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover cambiare il resto
+
+        new PingServer(this, this.client, this.lock).start();
     }
 
     @Override
@@ -428,7 +431,7 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
                 this.inGame = false;
                 break;
             case("game not found"):
-                ui.show_noAvailableGames();
+                //ui.show_noAvailableGames();
                 this.inGame = false;
                 //per ora se non è possibile riconnettersi alla partita si può solo crearne una nuova quindi
                 //non è possibile joinare un game random.
@@ -444,12 +447,20 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         }
     }
 
-    public void interruptDueToDisconnection(){
-    }
-
     @Override
     public void pingTheClient(GameView game) throws RemoteException {
         //System.out.println("i recived a ping from the server");
         //setGameView(game);
+    }
+
+    /**
+     * this method interrupts all the running process and closes the application; it could also restart from StateMenu.
+     * @throws RemoteException
+     */
+    @Override
+    public synchronized void abortGame() throws RemoteException{
+        ui.show_abortGame();
+        stay = false;
+        Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
     }
 }

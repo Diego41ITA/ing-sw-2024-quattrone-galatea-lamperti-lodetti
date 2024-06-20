@@ -8,6 +8,7 @@ import it.polimi.ingsw.networking.socket.server.GameObserverHandlerSocket;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -205,6 +206,14 @@ public class HandleObserver implements Serializable {
         }catch(RemoteException e){
             System.out.println("the client: " + this.observer + " disconnected ");
             throw new IOException();
+        }
+    }
+
+    public void notify_abortGame() throws IOException{
+        try{
+            observer.abortGame();
+        }catch(RemoteException e){
+            System.out.println("the client: " + this.observer + " is unreachable");
         }
     }
 }
