@@ -47,7 +47,13 @@ public class InputUi implements InputParser {
 
     @Override
     public boolean getSideOfTheCard() {
-        return scannerInputBoolean();
+        try {
+            return scannerInputBoolean();
+        }
+        catch (InputMismatchException e){
+            System.out.println("Invalid input. Insert TRUE or FALSE");
+            return getSideOfTheCard();
+        }
     }
 
     @Override
