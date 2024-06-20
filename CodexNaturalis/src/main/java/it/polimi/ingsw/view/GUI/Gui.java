@@ -45,8 +45,9 @@ public class Gui extends Application implements UI {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
         this.primaryStage.show();
-        Thread myThread = new Thread(flow);
-        myThread.start();
+        //Thread myThread = new Thread(flow);
+        //myThread.start();
+        flow.start();
 
         //we need to catch the exception to show that the server crashed
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
@@ -55,8 +56,9 @@ public class Gui extends Application implements UI {
                 System.out.println("connection to server" + client.getClass() + "lost");
                 //System.out.println("you are going to be disconnected, please wait some moment and try to " +
                 //        "restore you game!!!");
-                e.printStackTrace();
-                myThread.interrupt();
+                //e.printStackTrace();
+                //myThread.interrupt();
+                flow.interrupt();
                 //dovrà mostrare la scena di chiusura che gestirà close
                 //primaryStage.close();
                 Platform.exit();
@@ -356,6 +358,11 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestToLeave(){
+
+    }
+
+    @Override
+    public void show_abortGame(){
 
     }
 
