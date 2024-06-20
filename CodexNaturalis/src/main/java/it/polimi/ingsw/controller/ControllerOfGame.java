@@ -479,7 +479,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         if(turn.checkIfLast() && currentPlayer.equals(endingPlayer)){
             game.setStatus(Status.FINISHED);
-            String winnerNick = calculateWinner();
+            String winnerNick = calculateWinner();  //modificare questa nel caso di piu vincitori.
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
                 obs.notify_winner(game, winnerNick);//capire che argomenti mettergli
