@@ -143,57 +143,62 @@ public class GameStationController extends AbstractController {
     private ImageView goal2;
     private Map<ImageView, Integer> mapping = new HashMap<>();
 
-
-    public void drawDeckGold(MouseEvent e){
-        multipleResponses.add("A");
-        multipleResponses.add("gold");
-        deckGold.setScaleX(1.2);
-        deckGold.setScaleY(1.2);
-    }
-    public void drawDeckResource(MouseEvent e){
-        multipleResponses.add("A");
-        multipleResponses.add("resource");
-        deckResource.setScaleX(1.2);
-        deckResource.setScaleY(1.2);
-    }
-    public void drawFirstCard(MouseEvent e){
-        multipleResponses.add("B");
-        multipleResponses.add(String.valueOf(mapping.get(card1)));
-        card1.setScaleX(1.2);
-        card1.setScaleY(1.2);
-    }
-    public void drawSecondCard(MouseEvent e){
-        multipleResponses.add("B");
-        multipleResponses.add(String.valueOf(mapping.get(card2)));
-        card2.setScaleX(1.2);
-        card2.setScaleY(1.2);
-    }
-    public void drawThirdCard(MouseEvent e){
-        multipleResponses.add("B");
-        multipleResponses.add(String.valueOf(mapping.get(card3)));
-        card3.setScaleX(1.2);
-        card3.setScaleY(1.2);
-    }
-    public void drawFourthCard(MouseEvent e){
-        multipleResponses.add("B");
-        multipleResponses.add(String.valueOf(mapping.get(card3)));
-        card4.setScaleX(1.2);
-        card4.setScaleY(1.2);
-    }
-
     public void makeTableOfDecksTabResponsive(){
-        deckGold.setOnMouseClicked(this::drawDeckGold);
-        deckGold.setCursor(Cursor.HAND);
-        deckResource.setOnMouseClicked(this::drawDeckResource);
-        deckResource.setCursor(Cursor.HAND);
-        card1.setOnMouseClicked(this::drawFirstCard);
-        card1.setCursor(Cursor.HAND);
-        card2.setOnMouseClicked(this::drawSecondCard);
-        card2.setCursor(Cursor.HAND);
-        card3.setOnMouseClicked(this::drawThirdCard);
-        card3.setCursor(Cursor.HAND);
-        card4.setOnMouseClicked(this::drawFourthCard);
-        card4.setCursor(Cursor.HAND);
+        deckGold.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("A");
+                multipleResponses.add("gold");
+            }
+        });
+        deckResource.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("A");
+                multipleResponses.add("resource");
+            }
+        });
+        card1.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("B");
+                multipleResponses.add(String.valueOf(mapping.get(card1)));
+            }
+        });
+        card2.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("B");
+                multipleResponses.add(String.valueOf(mapping.get(card2)));
+            }
+        });
+        card3.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("B");
+                multipleResponses.add(String.valueOf(mapping.get(card3)));
+            }
+        });
+        card4.setOnMouseClicked(event -> {
+            if(showConfirmationAlert()){
+                multipleResponses.add("B");
+                multipleResponses.add(String.valueOf(mapping.get(card4)));
+            }
+        });
+
+        applyHoverEffects(deckGold);
+        applyHoverEffects(deckResource);
+        applyHoverEffects(card1);
+        applyHoverEffects(card2);
+        applyHoverEffects(card3);
+        applyHoverEffects(card4);
+    }
+
+    private void applyHoverEffects(ImageView component) {
+        component.setCursor(Cursor.HAND);
+        component.setOnMouseEntered(mouseEvent -> {
+            component.setScaleX(1.2);
+            component.setScaleY(1.2);
+        });
+        component.setOnMouseExited(mouseEvent -> {
+            component.setScaleX(1);
+            component.setScaleY(1);
+        });
     }
 
     private void setUpTableOfDecks() {
@@ -376,12 +381,16 @@ public class GameStationController extends AbstractController {
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
                 rectangle.setOnMouseClicked(event -> {
-                    multipleResponses.add(String.valueOf(idChosenCardToPlay));
-                    multipleResponses.add(String.valueOf(sideChosenCardToPlay));
-                    multipleResponses.add(String.valueOf(x));
-                    multipleResponses.add(String.valueOf(y));
                     showCardChosen(playerPane, new Point(x, y));
-                    showConfirmationAlert();
+                    if (showConfirmationAlert()){
+                        multipleResponses.add(String.valueOf(idChosenCardToPlay));
+                        multipleResponses.add(String.valueOf(sideChosenCardToPlay));
+                        multipleResponses.add(String.valueOf(x));
+                        multipleResponses.add(String.valueOf(y));
+                        makeTableOfDecksTabResponsive();
+                    } else {
+                        hideCardChosen(playerPane);
+                    }
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
@@ -389,9 +398,9 @@ public class GameStationController extends AbstractController {
         }
     }
 
-    private void showConfirmationAlert() {
+    private boolean showConfirmationAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation stage");
+        alert.setTitle("Confirmation Stage");
         alert.setHeaderText("Confirm your action");
         alert.setContentText("Are you sure you want to proceed?");
 
@@ -402,14 +411,11 @@ public class GameStationController extends AbstractController {
 
         alert.initStyle(StageStyle.UTILITY);
 
-        // Handle the button actions
-        alert.showAndWait().ifPresent(type -> {
-            if (type == yesButton) {
-                System.out.println("Yes selected");
-                // Perform any action needed for "Yes"
-            }
-            // No specific action is needed for "No", clicking "No" just closes the alert
-        });
+        // Show the alert and wait for a response
+        var result = alert.showAndWait();
+
+        // Return true if "Yes" is clicked, false if "No" is clicked
+        return result.isPresent() && result.get() == yesButton;
     }
 
     private Tab findTabById(String tabId) {
@@ -507,6 +513,7 @@ public class GameStationController extends AbstractController {
     }
 
     private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront) {
+        applyHoverEffects(cardView);
         cardView.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 idChosenCardToPlay = card.getCardId();
@@ -606,7 +613,6 @@ public class GameStationController extends AbstractController {
         List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
-        this.makeTableOfDecksTabResponsive();
         this.setUpTableOfDecks();
     }
 }
