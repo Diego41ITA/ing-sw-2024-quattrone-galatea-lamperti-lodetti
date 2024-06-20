@@ -384,6 +384,7 @@ public class PlayingSceneController extends AbstractController {
                         multipleResponses.add(String.valueOf(y));
                         makeTableOfDecksTabResponsive();
                         showDrawAlert();
+                        tabPane.getSelectionModel().select(1);
                     } else {
                         hideCardChosen(playerPane);
                     }
@@ -397,8 +398,8 @@ public class PlayingSceneController extends AbstractController {
     private boolean showConfirmationAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Stage");
-        alert.setHeaderText("Confirm your action");
-        alert.setContentText("Are you sure you want to proceed?");
+        alert.setHeaderText("Do you confirm your choice?");
+        alert.setContentText("Think well! This action is irreversible");
 
         // Custom buttons
         ButtonType yesButton = new ButtonType("Yes");
