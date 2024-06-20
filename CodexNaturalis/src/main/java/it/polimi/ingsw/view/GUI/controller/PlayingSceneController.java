@@ -690,5 +690,6 @@ public class PlayingSceneController extends AbstractController {
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
         this.showYourTurnAlert();
+        tabPane.getSelectionModel().select(2);
     }
 }
