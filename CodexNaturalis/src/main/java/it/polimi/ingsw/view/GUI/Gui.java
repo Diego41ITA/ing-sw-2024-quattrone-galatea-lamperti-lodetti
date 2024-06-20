@@ -229,7 +229,7 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_playerHand(GameView immutableModel) {
+    public void show_playerHand(GameView immutableModel, String nickname) {
 
     }
 

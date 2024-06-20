@@ -138,7 +138,7 @@ public class PlayingSceneController extends AbstractController {
     private ImageView goal2;
     private Map<ImageView, Integer> mapping = new HashMap<>();
 
-    public void makeTableOfDecksTabResponsive(){
+    private void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(event -> {
             if(showConfirmationAlert()){
                 multipleResponses.add("A");
@@ -343,7 +343,7 @@ public class PlayingSceneController extends AbstractController {
         });
     }
 
-    public void generateFreeCords(String nick) {
+    private void generateFreeCords(String nick) {
         // Get the tab associated with the player's nickname
         String tabId = "tab" + nick;
         Tab playerTab = findTabById(tabId);
@@ -376,15 +376,12 @@ public class PlayingSceneController extends AbstractController {
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
                 rectangle.setOnMouseClicked(event -> {
-                    showCardChosen(playerPane, new Point(x, y));
                     if (showConfirmationAlert()){
                         multipleResponses.add(String.valueOf(idChosenCardToPlay));
                         multipleResponses.add(String.valueOf(sideChosenCardToPlay));
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
                         makeTableOfDecksTabResponsive();
-                        showDrawAlert();
-                        tabPane.getSelectionModel().select(1);
                     } else {
                         hideCardChosen(playerPane);
                     }
@@ -467,7 +464,6 @@ public class PlayingSceneController extends AbstractController {
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(event -> {
             root.getChildren().remove(chosenCardToPlay);
-            root.getChildren().remove(chosenCardToPlay);
             chosenCardToPlay = null;
         });
         fadeOut.play();
@@ -501,13 +497,14 @@ public class PlayingSceneController extends AbstractController {
     private int idChosenCardToPlay = 0;
     private boolean sideChosenCardToPlay = false;
 
-    public void makeHandCardsPlayable(List<PlayableCard> cards) {
+    private void makeHandCardsPlayable(List<PlayableCard> cards) {
         setCardEvent(firstCard, cards.get(0), true);
         setCardEvent(firstCardBack, cards.get(0), false);
         setCardEvent(secondCard, cards.get(1), true);
         setCardEvent(secondCardBack, cards.get(1), false);
         setCardEvent(thirdCard, cards.get(2), true);
         setCardEvent(thirdCardBack, cards.get(2), false);
+        this.showYourTurnAlert();
     }
 
     private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront) {
@@ -549,7 +546,7 @@ public class PlayingSceneController extends AbstractController {
     //inserisce le image0 all'interno del imageView array
     //il tag@FXML indica che questo metodo verrà lanciato in automatico quando si aprirà l'interfaccia associata a questo controller
     @FXML
-    public void initializeImageArray(){
+    private void initializeImageArray(){
         imageViews[0] = image0;
         imageViews[1] = image1;
         imageViews[2] = image2;
@@ -626,7 +623,7 @@ public class PlayingSceneController extends AbstractController {
         alert.showAndWait();
     }
 
-    private void showDrawAlert() {
+    public void showDrawAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -661,6 +658,50 @@ public class PlayingSceneController extends AbstractController {
 
         // Show the alert and wait for the user to close it
         alert.showAndWait();
+
+        tabPane.getSelectionModel().select(1);
+    }
+
+    public void showInvalidPlayAlert() {
+        // Create a new alert dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        // Set the title and header text
+        alert.setTitle("Invalid position stage");
+        alert.setHeaderText("The positioning you choose is not allowed!");
+
+        // Create a grid pane to allow for more complex content
+        GridPane gridPane = new GridPane();
+        gridPane.setMaxWidth(Double.MAX_VALUE);
+
+        // Set padding and gap properties
+        gridPane.setPadding(new javafx.geometry.Insets(10));
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        // Create a label for each item in the list
+        Label label1 = new Label("• Select a different card or positioning.");
+
+        // Add labels to the grid pane
+        gridPane.add(label1, 0, 0);
+
+        // Set the content of the alert to the grid pane
+        alert.getDialogPane().setContent(gridPane);
+
+        // Optional: Customize the style of the alert dialog (utility style)
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Set the button types (OK button only)
+        ButtonType okButton = new ButtonType("OK");
+        alert.getButtonTypes().setAll(okButton);
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+
+        String tabId = "tab" + getGameFsm().getNickname();
+        Tab tab = findTabById(tabId);
+        Pane pane = findOrCreatePaneInTab(tab);
+        hideCardChosen(pane);
     }
 
     @Override
@@ -689,7 +730,6 @@ public class PlayingSceneController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
-        this.showYourTurnAlert();
         tabPane.getSelectionModel().select(2);
     }
 }

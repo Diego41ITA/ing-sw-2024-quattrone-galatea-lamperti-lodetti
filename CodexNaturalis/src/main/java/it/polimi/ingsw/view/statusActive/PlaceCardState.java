@@ -36,7 +36,7 @@ public class PlaceCardState extends StateActive{
         boolean isFrontOrBack = true;
         boolean isBooleanValid = false;
 
-        ui.show_playerHand(view);
+        ui.show_playerHand(view, nickName);
         ui.show_gameStation(view);
 
         boolean flag = false;
