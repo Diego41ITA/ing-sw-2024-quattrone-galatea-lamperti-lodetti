@@ -504,7 +504,6 @@ public class PlayingSceneController extends AbstractController {
         setCardEvent(secondCardBack, cards.get(1), false);
         setCardEvent(thirdCard, cards.get(2), true);
         setCardEvent(thirdCardBack, cards.get(2), false);
-        this.showYourTurnAlert();
     }
 
     private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront) {
@@ -730,6 +729,7 @@ public class PlayingSceneController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
+        this.showYourTurnAlert();
         tabPane.getSelectionModel().select(2);
     }
 }
