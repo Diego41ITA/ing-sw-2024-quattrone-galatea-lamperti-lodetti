@@ -157,8 +157,8 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
             Thread saveThread = new Thread(()-> SaverWriter.saveGame(this.game));
             saveThread.start();
             this.checkTurn = true;
-
-            observers.get(this.getCurrentPlayer()).notify_CurrentPlayerUpdated(game);
+            for(HandleObserver obs: observers.values())
+                obs.notify_CurrentPlayerUpdated(game);
         }
     }
 
