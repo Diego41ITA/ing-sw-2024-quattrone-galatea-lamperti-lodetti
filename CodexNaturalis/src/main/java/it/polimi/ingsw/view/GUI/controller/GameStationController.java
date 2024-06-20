@@ -14,8 +14,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -23,12 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.event.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -381,6 +381,7 @@ public class GameStationController extends AbstractController {
                     multipleResponses.add(String.valueOf(x));
                     multipleResponses.add(String.valueOf(y));
                     showCardChosen(playerPane, new Point(x, y));
+                    showConfirmationAlert();
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
@@ -388,6 +389,28 @@ public class GameStationController extends AbstractController {
         }
     }
 
+    private void showConfirmationAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation stage");
+        alert.setHeaderText("Confirm your action");
+        alert.setContentText("Are you sure you want to proceed?");
+
+        // Custom buttons
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        alert.getButtonTypes().setAll(yesButton, noButton);
+
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Handle the button actions
+        alert.showAndWait().ifPresent(type -> {
+            if (type == yesButton) {
+                System.out.println("Yes selected");
+                // Perform any action needed for "Yes"
+            }
+            // No specific action is needed for "No", clicking "No" just closes the alert
+        });
+    }
 
     private Tab findTabById(String tabId) {
         for (Tab tab : tabPane.getTabs()) {

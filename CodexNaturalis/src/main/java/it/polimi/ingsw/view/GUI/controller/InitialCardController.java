@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,29 @@ public class InitialCardController extends AbstractController {
 
         imageBack.setImage(new Image(associatorPng2Card(String.valueOf(cardId),false)));
         imageFront.setImage(new Image(associatorPng2Card(String.valueOf(cardId),true)));
+
+        imageFront.setCursor(Cursor.HAND);
+        imageBack.setCursor(Cursor.HAND);
+
+        imageFront.setOnMouseEntered(mouseEvent -> {
+            imageFront.setScaleX(1.2);
+            imageFront.setScaleY(1.2);
+        });
+
+        imageFront.setOnMouseExited(mouseEvent -> {
+            imageFront.setScaleX(1);
+            imageFront.setScaleY(1);
+        });
+
+        imageBack.setOnMouseEntered(mouseEvent -> {
+            imageBack.setScaleX(1.2);
+            imageBack.setScaleY(1.2);
+        });
+
+        imageBack.setOnMouseExited(mouseEvent -> {
+            imageBack.setScaleX(1);
+            imageBack.setScaleY(1);
+        });
     }
 
     // se con il mouse clicco sulla immagine allora mette true in multipleResponses

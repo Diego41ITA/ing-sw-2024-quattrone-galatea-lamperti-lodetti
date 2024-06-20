@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,6 +36,29 @@ public class PlayerGoalController extends AbstractController {
 
         firstImage.setImage(new Image(associatorPng2Card(String.valueOf(firstGoal),true)));
         secondImage.setImage(new Image(associatorPng2Card(String.valueOf(secondGoal),true)));
+
+        firstImage.setCursor(Cursor.HAND);
+        secondImage.setCursor(Cursor.HAND);
+
+        firstImage.setOnMouseEntered(mouseEvent -> {
+            firstImage.setScaleX(1.2);
+            firstImage.setScaleY(1.2);
+        });
+
+        firstImage.setOnMouseExited(mouseEvent -> {
+            firstImage.setScaleX(1);
+            firstImage.setScaleY(1);
+        });
+
+        secondImage.setOnMouseEntered(mouseEvent -> {
+            secondImage.setScaleX(1.2);
+            secondImage.setScaleY(1.2);
+        });
+
+        secondImage.setOnMouseExited(mouseEvent -> {
+            secondImage.setScaleX(1);
+            secondImage.setScaleY(1);
+        });
     }
 
 
