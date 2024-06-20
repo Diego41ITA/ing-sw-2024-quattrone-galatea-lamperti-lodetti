@@ -471,11 +471,15 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     @Override
     public void goOn() {
-        Turn turn = game.getTurn();
-        turn.goOn();
-        String currentPlayer = turn.getCurrentPlayerNick();
-        String endingPlayer = turn.getEndingPlayer();
-        game.setTurn(turn);
+        String currentPlayer, endingPlayer;
+        Turn turn;
+        do{
+            turn = game.getTurn();
+            turn.goOn();
+            currentPlayer = turn.getCurrentPlayerNick();
+            endingPlayer = turn.getEndingPlayer();
+            game.setTurn(turn);
+        }while(!game.getActivity().get(currentPlayer));
 
         if(turn.checkIfLast() && currentPlayer.equals(endingPlayer)){
             game.setStatus(Status.FINISHED);
