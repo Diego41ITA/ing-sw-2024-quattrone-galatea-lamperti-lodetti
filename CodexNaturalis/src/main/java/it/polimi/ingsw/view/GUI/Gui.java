@@ -234,10 +234,6 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_gameStation(GameView view) {
-        if(primaryStage != null)
-            loadScene("/scenes/Gamestation.fxml");
-        else
-            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -264,10 +260,6 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
-        if(primaryStage != null)
-            loadScene("/scenes/TableOfDecks.fxml");
-        else
-            System.out.println("error primary stage is null");
     }
 
     //un pop-up che dica che è iniziato l'ultimo giro.
@@ -280,10 +272,6 @@ public class Gui extends Application implements UI {
     //refresh more frequently the interface.
     @Override
     public void show_pointTable(GameView immutableModel) {
-        if(primaryStage != null)
-            loadScene("/scenes/Gamestation.fxml");
-        else
-            System.out.println("error primary stage is null");
     }
 
     @Override
