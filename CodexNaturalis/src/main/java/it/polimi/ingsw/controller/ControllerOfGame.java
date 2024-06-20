@@ -498,6 +498,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         }else{
             //if there are not enough player the game is suspended and we do not notify the client.
             this.game.suspend();
+            for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
+                HandleObserver obs = entry.getValue();
+                obs.notify_changedGameStatus(game);//capire che argomenti mettergli
+            }
             System.out.println("this game " + this.getGameId() + "is suspended");
         }
         //this should save the entire game.

@@ -273,10 +273,10 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public void updateGameStatus(GameView game) throws RemoteException {
         setGameView(game);
         ui.show_GameStatus(game);
-        if(view.getMaxNumOfPlayer() == view.getPlayers().size()) {
+        /*if(view.getMaxNumOfPlayer() == view.getPlayers().size()) {
             waitingForNewPlayers = false;
             lock.notify();
-        }
+        }*/
     }
 
     @Override
