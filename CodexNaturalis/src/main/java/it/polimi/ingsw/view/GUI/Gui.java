@@ -230,8 +230,6 @@ public class Gui extends Application implements UI {
         }else{
             if(primaryStage != null) {
                 loadScene("/scenes/WaitingScene.fxml");
-                WaitingSceneController controller = (WaitingSceneController) abstractController;
-                Platform.runLater(controller::showWaitTurnAlert);
             }
             else
                 System.out.println("error primary stage is null");
@@ -317,8 +315,6 @@ public class Gui extends Application implements UI {
     public void show_requestCardId() {
         if(primaryStage != null) {
             loadScene("/scenes/PlayingScene.fxml");
-            PlayingSceneController controller = (PlayingSceneController) abstractController;
-            Platform.runLater(controller::showYourTurnAlert);
         }
         else
             System.out.println("error primary stage is null");

@@ -381,7 +381,6 @@ public class PlayingSceneController extends AbstractController {
                         multipleResponses.add(String.valueOf(sideChosenCardToPlay));
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
-                        makeTableOfDecksTabResponsive();
                         showCardChosen(playerPane, new Point(x,y));
                     } else {
                         hideCardChosen(playerPane);
@@ -660,6 +659,7 @@ public class PlayingSceneController extends AbstractController {
         alert.showAndWait();
 
         tabPane.getSelectionModel().select(1);
+        makeTableOfDecksTabResponsive();
     }
 
     public void showInvalidPlayAlert() {
@@ -731,5 +731,6 @@ public class PlayingSceneController extends AbstractController {
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
         tabPane.getSelectionModel().select(2);
+        this.showYourTurnAlert();
     }
 }
