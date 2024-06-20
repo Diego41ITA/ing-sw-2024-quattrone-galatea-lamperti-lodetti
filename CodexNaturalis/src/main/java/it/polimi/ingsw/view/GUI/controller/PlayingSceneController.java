@@ -584,7 +584,7 @@ public class PlayingSceneController extends AbstractController {
         imageViews[point].setImage(imageMaker);
     }
 
-    private void showYourTurnAlert() {
+    public void showYourTurnAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 

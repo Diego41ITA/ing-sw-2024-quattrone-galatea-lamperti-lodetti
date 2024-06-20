@@ -120,7 +120,6 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
             } else if (view.getStatus() == Status.SUSPENDED) {
                 ui.show_GameStatus(view);
                 ui.show_gameStation(view);
-                ui.show_isYourTurn(getView());
 
                 while(view.getStatus() == Status.SUSPENDED) {
                     try {

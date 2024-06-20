@@ -284,11 +284,28 @@ public class WaitingSceneController extends AbstractController {
         });
     }
 
-    private void showWaitTurnAlert() {
+    public void showWaitTurnAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Waiting stage");
         alert.setHeaderText("This is " + getGameFsm().getView().getCurrentPlayer().getNick() + "' turn");
         alert.setContentText("Wait for your turn, and think about the next move!");
+
+        // Optional: Customize the style of the alert dialog
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Set OK button
+        ButtonType okButton = new ButtonType("OK");
+        alert.getButtonTypes().setAll(okButton);
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+    }
+
+    public void showGameSuspendedAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game suspended stage");
+        alert.setHeaderText("The game is currently suspended");
+        alert.setContentText("Wait for resume, and think about the next move!");
 
         // Optional: Customize the style of the alert dialog
         alert.initStyle(StageStyle.UTILITY);
@@ -390,6 +407,5 @@ public class WaitingSceneController extends AbstractController {
             setHand(playerCardId, i);
         }
         this.setUpTableOfDecks();
-        this.showWaitTurnAlert();
     }
 }

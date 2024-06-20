@@ -173,7 +173,13 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_GameStatus(GameView gameView) {
-
+        if(primaryStage != null) {
+            loadScene("/scenes/WaitingScene.fxml");
+            WaitingSceneController controller = (WaitingSceneController) abstractController;
+            Platform.runLater(controller::showGameSuspendedAlert);
+        }
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -222,8 +228,11 @@ public class Gui extends Application implements UI {
             //un pop-up che dica è il tuo turno
             //oppure si aggiorna la gameStation
         }else{
-            if(primaryStage != null)
+            if(primaryStage != null) {
                 loadScene("/scenes/WaitingScene.fxml");
+                WaitingSceneController controller = (WaitingSceneController) abstractController;
+                Platform.runLater(controller::showWaitTurnAlert);
+            }
             else
                 System.out.println("error primary stage is null");
         }
@@ -306,8 +315,11 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestCardId() {
-        if(primaryStage != null)
+        if(primaryStage != null) {
             loadScene("/scenes/PlayingScene.fxml");
+            PlayingSceneController controller = (PlayingSceneController) abstractController;
+            Platform.runLater(controller::showYourTurnAlert);
+        }
         else
             System.out.println("error primary stage is null");
     }
