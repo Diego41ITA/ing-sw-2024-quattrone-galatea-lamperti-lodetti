@@ -471,8 +471,8 @@ public class GameStationController extends AbstractController {
 
     }
 
-    private int idChosenCardToPlay;
-    private boolean sideChosenCardToPlay;
+    private int idChosenCardToPlay = 0;
+    private boolean sideChosenCardToPlay = false;
 
     public void makeHandCardsPlayable(List<PlayableCard> cards) {
         setCardEvent(firstCard, cards.get(0), true);
