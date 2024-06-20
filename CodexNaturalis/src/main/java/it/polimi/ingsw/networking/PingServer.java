@@ -23,13 +23,21 @@ public class PingServer extends Thread {
                     client.ping(game.getNickname());
                 else
                     this.client = game.getClient();
-                Thread.sleep(10000);
-            }catch(InterruptedException | IOException e){
+                Thread.sleep(3000);
+            }catch (NullPointerException e){
+                System.err.println("the controller is still not initialized ");
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    System.err.println("exception caught during sleep");
+                    this.interrupt();
+                }
+            }catch(InterruptedException | IOException e) {
                 System.err.println("impossible to reach the server due to exception: " + e.getCause());
                 this.interrupt();
-                this.game.interruptDueToDisconnection();
                 throw new RuntimeException();
             }
         }
     }
 }
+

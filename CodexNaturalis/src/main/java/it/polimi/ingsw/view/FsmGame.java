@@ -56,7 +56,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         inGame = false;
         notStarted = true;
         myTurn = false;
-        new PingServer(this, this.client, this.lock).start();
+
     }
 
 
@@ -115,12 +115,12 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                             }
                         }catch(InterruptedException e){
                             System.out.println("game interrupted");
+                            throw new RuntimeException();
                         }
                     }
                 }
             } else if (view.getStatus() == Status.SUSPENDED) {
                 ui.show_GameStatus(view);
-                ui.show_playerHand(view);
                 ui.show_gameStation(view);
 
                 while(view.getStatus() == Status.SUSPENDED) {
@@ -130,6 +130,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                         }    //need to add some notify when the gameStatus change.
                     } catch (InterruptedException e) {
                         System.out.println("this game got interrupted");
+                        throw new RuntimeException();
                     }
                 }
             } else if (view.getStatus() == Status.FINISHED) {
@@ -155,11 +156,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         }
         System.out.println("application is closing...");
     }catch(Exception e){
-        //e.printStackTrace();
-        //e.getCause();
-        System.out.println("exception caught in FsmGame thread.");
-        //e.printStackTrace();
-        //e.getCause();
+        System.err.println("exception caught in FsmGame thread.");
+        e.printStackTrace();
         throw new RuntimeException();
     }}
 
@@ -224,23 +222,27 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
+        new PingServer(this, this.client, this.lock).start();
     }
 
     @Override
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
+
+        new PingServer(this, this.client, this.lock).start();
+
         inGame = true;
     }
 
     @Override
     public void reconnectedToGame(GameView view) throws RemoteException {
         setGameView(view);
-        //ui.show_gameStation(view);
+
         inGame = true;
-        //questo dovrebbe fare in modo che non si vada nello stato color -> si potrebbe aggiungere un nuovo stato
-        //di StateWaiting che non fa nulla.
-        notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover
-        //aggiungere uno stato d'attesa.
+
+        notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover cambiare il resto
+
+        new PingServer(this, this.client, this.lock).start();
     }
 
     @Override
@@ -444,9 +446,6 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         }
     }
 
-    public void interruptDueToDisconnection(){
-    }
-
     @Override
     public void pingTheClient(GameView game) throws RemoteException {
         //System.out.println("i recived a ping from the server");
@@ -460,13 +459,6 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public synchronized void abortGame() throws RemoteException{
         ui.show_abortGame();
-        //String option = input.getOption();
-        /*if(option.equalsIgnoreCase("A")){
-
-        }else if(option.equalsIgnoreCase("B")){
-            stay = false;
-        }*/
-        System.out.println("setto stay a false");
         stay = false;
         Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
     }

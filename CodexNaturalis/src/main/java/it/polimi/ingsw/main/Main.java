@@ -161,6 +161,7 @@ public class Main {
                             //System.out.println("you are going to be disconnected, please wait some moment and try to " +
                             //        "restore you game!!!");
                             //threadFsmGame.interrupt();
+                            e.printStackTrace();
                             flow.interrupt();
                         }
                     });
