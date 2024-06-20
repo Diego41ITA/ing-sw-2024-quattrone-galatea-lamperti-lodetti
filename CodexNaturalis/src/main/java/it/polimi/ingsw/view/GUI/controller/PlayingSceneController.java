@@ -382,6 +382,7 @@ public class PlayingSceneController extends AbstractController {
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
                         makeTableOfDecksTabResponsive();
+                        showCardChosen(playerPane, new Point(x,y));
                     } else {
                         hideCardChosen(playerPane);
                     }
@@ -729,7 +730,6 @@ public class PlayingSceneController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
-        this.showYourTurnAlert();
         tabPane.getSelectionModel().select(2);
     }
 }

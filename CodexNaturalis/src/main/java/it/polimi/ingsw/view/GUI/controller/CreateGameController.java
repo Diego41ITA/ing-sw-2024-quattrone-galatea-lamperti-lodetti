@@ -1,11 +1,12 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.FsmGame;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
 public class CreateGameController extends AbstractController {
     public void exit(ActionEvent e){
-        System.exit(-1);;
+        Platform.exit();
     }
     //mi fa vedere l'interfaccia relativa al setting dei giocatori
     public void createGame(ActionEvent e){
