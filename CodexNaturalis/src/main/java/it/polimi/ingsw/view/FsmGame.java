@@ -428,7 +428,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                 this.inGame = false;
                 break;
             case("game not found"):
-                ui.show_noAvailableGames();
+                //ui.show_noAvailableGames();
                 this.inGame = false;
                 //per ora se non è possibile riconnettersi alla partita si può solo crearne una nuova quindi
                 //non è possibile joinare un game random.
