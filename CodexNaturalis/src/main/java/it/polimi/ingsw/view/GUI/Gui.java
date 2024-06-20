@@ -6,6 +6,7 @@ import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GUI.controller.AbstractController;
 import it.polimi.ingsw.view.GUI.controller.PlayingSceneController;
+import it.polimi.ingsw.view.GUI.controller.WaitingSceneController;
 import javafx.application.Platform;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
@@ -367,12 +368,14 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestToLeave(){
-
     }
 
     @Override
     public void show_abortGame(){
-
+        if(primaryStage != null)
+            loadScene("/scenes/AbortedGame.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     public static void main(String[] args) {
