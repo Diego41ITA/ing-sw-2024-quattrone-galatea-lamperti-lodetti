@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
-import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.networking.ClientAction;
@@ -106,9 +105,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                         myTurn = false;
                     }
                     while(!view.getCurrentPlayer().getNick().equals(nickname) && view.getStatus() == Status.ACTIVE){
-                        //ui.show_playerHand(view);
+                        ui.show_playerHand(view, nickname);
                         ui.show_gameStation(view);
-                        System.out.println("it's not your turn. Wait");
                         try{
                             synchronized (lock) {
                                 lock.wait();

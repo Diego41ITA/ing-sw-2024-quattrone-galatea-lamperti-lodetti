@@ -378,7 +378,7 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_playerHand(GameView immutableModel) {
+    public void show_playerHand(GameView immutableModel, String nickname) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
@@ -389,7 +389,7 @@ public class Cli implements UI {
                                 
                 """);
 //57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
-        stringBuilder.append(draw_playableCards(immutableModel.getCurrentPlayer().showCard()));
+        stringBuilder.append(draw_playableCards(immutableModel.getPlayerByNick(nickname).showCard()));
         stringBuilder.append("\n");
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████

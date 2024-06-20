@@ -56,7 +56,7 @@ public interface UI {
 
     public String show_goalCard(GoalCard card);
 
-    public void show_playerHand(GameView immutableModel);
+    public void show_playerHand(GameView immutableModel, String nickname);
 
     public String show_playableCard(PlayableCard card);
 

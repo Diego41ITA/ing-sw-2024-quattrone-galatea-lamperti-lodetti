@@ -5,6 +5,7 @@ import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GUI.controller.AbstractController;
+import it.polimi.ingsw.view.GUI.controller.PlayingSceneController;
 import javafx.application.Platform;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
@@ -30,6 +31,8 @@ public class Gui extends Application implements UI {
     private Stage primaryStage;
     private FsmGame flow;
     private ClientAction client;
+
+    private AbstractController abstractController;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -78,6 +81,7 @@ public class Gui extends Application implements UI {
 
                 controller.setUpController(this.flow);
 
+                abstractController = controller;
                 primaryStage.show();
             } catch (IOException | NullPointerException e) {
                 System.out.println("the scene: " + path +", doesn't provide a controller");
@@ -181,7 +185,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_RequestGameId() {
-
+        if(primaryStage != null)
+            loadScene("/scenes/RejoinGame.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -222,11 +229,8 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_playerHand(GameView immutableModel) {
-        if(primaryStage != null)
-            loadScene("/scenes/PlayingScene.fxml");
-        else
-            System.out.println("error primary stage is null");
+    public void show_playerHand(GameView immutableModel, String nickname) {
+
     }
 
     @Override
@@ -235,7 +239,8 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_invalidPlay() {
-
+        PlayingSceneController controller = (PlayingSceneController) abstractController;
+        Platform.runLater(controller::showInvalidPlayAlert);
     }
 
     @Override
@@ -300,7 +305,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestCardId() {
-        //non serve
+        if(primaryStage != null)
+            loadScene("/scenes/PlayingScene.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
 
     @Override
@@ -315,7 +323,8 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_drawFromWhere() {
-        //non serve
+        PlayingSceneController controller = (PlayingSceneController) abstractController;
+        Platform.runLater(controller::showDrawAlert);
     }
 
     @Override
