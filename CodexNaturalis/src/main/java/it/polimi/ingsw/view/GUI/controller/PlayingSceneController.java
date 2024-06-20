@@ -7,23 +7,18 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.TableOfDecks;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.input.InputGui;
 import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.event.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
@@ -39,7 +34,7 @@ import java.util.stream.Collectors;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 //non è definitivo ma è una buona base
-public class GameStationController extends AbstractController {
+public class PlayingSceneController extends AbstractController {
     @FXML
     private Text gameId;
     @FXML
@@ -388,6 +383,7 @@ public class GameStationController extends AbstractController {
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
                         makeTableOfDecksTabResponsive();
+                        showDrawAlert();
                     } else {
                         hideCardChosen(playerPane);
                     }
@@ -470,6 +466,7 @@ public class GameStationController extends AbstractController {
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(event -> {
             root.getChildren().remove(chosenCardToPlay);
+            root.getChildren().remove(chosenCardToPlay);
             chosenCardToPlay = null;
         });
         fadeOut.play();
@@ -516,11 +513,12 @@ public class GameStationController extends AbstractController {
         applyHoverEffects(cardView);
         cardView.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
+                makeHandCardsPlayable(getGameView().getPlayerByNick(getGameFsm().getNickname()).showCard());
                 idChosenCardToPlay = card.getCardId();
                 sideChosenCardToPlay = isFront;
                 cardView.setScaleX(1.2);
                 cardView.setScaleY(1.2);
-
+                cardView.setOnMouseExited(null);
                 // Reset scale for all other card views
                 resetOtherCardViewsScale(cardView);
             }
@@ -588,6 +586,82 @@ public class GameStationController extends AbstractController {
         imageViews[point].setImage(imageMaker);
     }
 
+    private void showYourTurnAlert() {
+        // Create a new alert dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        // Set the title and header text
+        alert.setTitle("Playing stage");
+        alert.setHeaderText("This is your turn");
+
+        // Create a grid pane to allow for more complex content
+        GridPane gridPane = new GridPane();
+        gridPane.setMaxWidth(Double.MAX_VALUE);
+
+        // Set padding and gap properties
+        gridPane.setPadding(new javafx.geometry.Insets(10));
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        // Create a label for each item in the list
+        Label label1 = new Label("• Select the card you want to play from YourHand.");
+        Label label2 = new Label("• Click on the position in your GameStation tab to play the card.");
+
+        // Add labels to the grid pane
+        gridPane.add(label1, 0, 0);
+        gridPane.add(label2, 0, 1);
+
+        // Set the content of the alert to the grid pane
+        alert.getDialogPane().setContent(gridPane);
+
+        // Optional: Customize the style of the alert dialog (utility style)
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Set the button types (OK button only)
+        ButtonType okButton = new ButtonType("OK");
+        alert.getButtonTypes().setAll(okButton);
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+    }
+
+    private void showDrawAlert() {
+        // Create a new alert dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        // Set the title and header text
+        alert.setTitle("Drawing stage");
+        alert.setHeaderText("Now you can draw a card");
+
+        // Create a grid pane to allow for more complex content
+        GridPane gridPane = new GridPane();
+        gridPane.setMaxWidth(Double.MAX_VALUE);
+
+        // Set padding and gap properties
+        gridPane.setPadding(new javafx.geometry.Insets(10));
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        // Create a label for each item in the list
+        Label label1 = new Label("• Select the card you want to draw from TableOfDecks tab.");
+
+        // Add labels to the grid pane
+        gridPane.add(label1, 0, 0);
+
+        // Set the content of the alert to the grid pane
+        alert.getDialogPane().setContent(gridPane);
+
+        // Optional: Customize the style of the alert dialog (utility style)
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Set the button types (OK button only)
+        ButtonType okButton = new ButtonType("OK");
+        alert.getButtonTypes().setAll(okButton);
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+    }
+
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
@@ -614,5 +688,6 @@ public class GameStationController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
+        this.showYourTurnAlert();
     }
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="table" stylesheets="@../Style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.WaitingSceneController">
+   <tabs>
+      <Tab text="YourHand">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text fx:id="yourLastTurn" fill="RED" layoutX="533.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THIS IS YOUR LAST TURN">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="223.0" layoutY="138.0" stroke="BLACK" strokeType="INSIDE" width="251.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="814.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="251.0" />
+                  <ImageView fx:id="firstCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="secondCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="thirdCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text layoutX="843.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back side of your cards">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="249.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Front side of your cards">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="firstCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="secondCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="gameId" layoutX="1080.0" layoutY="701.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gameid" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="PointTable">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="469.0" fitWidth="512.0" layoutX="523.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/plateau.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="image0" fitHeight="28.0" fitWidth="37.0" layoutX="567.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image1" fitHeight="28.0" fitWidth="37.0" layoutX="622.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image2" fitHeight="28.0" fitWidth="37.0" layoutX="678.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image3" fitHeight="28.0" fitWidth="37.0" layoutX="704.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image4" fitHeight="28.0" fitWidth="37.0" layoutX="651.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image5" fitHeight="28.0" fitWidth="37.0" layoutX="597.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image6" fitHeight="28.0" fitWidth="37.0" layoutX="530.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image10" fitHeight="28.0" fitWidth="37.0" layoutX="704.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image9" fitHeight="28.0" fitWidth="37.0" layoutX="651.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image8" fitHeight="28.0" fitWidth="37.0" layoutX="597.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image7" fitHeight="28.0" fitWidth="37.0" layoutX="536.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image11" fitHeight="28.0" fitWidth="37.0" layoutX="704.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image12" fitHeight="28.0" fitWidth="37.0" layoutX="641.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image13" fitHeight="28.0" fitWidth="37.0" layoutX="597.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image14" fitHeight="28.0" fitWidth="37.0" layoutX="536.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image18" fitHeight="28.0" fitWidth="37.0" layoutX="704.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image17" fitHeight="28.0" fitWidth="37.0" layoutX="651.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image16" fitHeight="24.0" fitWidth="37.0" layoutX="586.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image15" fitHeight="24.0" fitWidth="37.0" layoutX="536.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image19" fitHeight="24.0" fitWidth="37.0" layoutX="704.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image20" fitHeight="24.0" fitWidth="37.0" layoutX="622.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image21" fitHeight="24.0" fitWidth="37.0" layoutX="536.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image22" fitHeight="24.0" fitWidth="37.0" layoutX="536.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image23" fitHeight="24.0" fitWidth="37.0" layoutX="549.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image24" fitHeight="24.0" fitWidth="37.0" layoutX="568.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image25" fitHeight="24.0" fitWidth="37.0" layoutX="622.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image26" fitHeight="24.0" fitWidth="37.0" layoutX="678.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image27" fitHeight="24.0" fitWidth="37.0" layoutX="704.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image28" fitHeight="24.0" fitWidth="37.0" layoutX="704.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image29" fitHeight="24.0" fitWidth="37.0" layoutX="622.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="TableOfDecks">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Separator layoutX="400.0" layoutY="16.0" orientation="VERTICAL" prefHeight="730.0" prefWidth="0.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="738.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="111.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="738.0" layoutY="503.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="111.0" layoutY="389.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <ImageView fx:id="card1" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="card2" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text layoutX="763.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DRAWABLE CARDS">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="card3" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="card4" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
+                  <Separator layoutX="468.0" layoutY="487.0" prefHeight="6.0" prefWidth="733.0" />
+                  <Text layoutX="129.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESOURCE CARDS DECK" />
+                  <Text layoutX="150.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GOLD CARD DECK" />
+                  <ImageView fx:id="deckResource" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="deckGold" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text layoutX="775.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMMON GOALS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="goal1" fitHeight="184.0" fitWidth="281.0" layoutX="553.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="goal2" fitHeight="184.0" fitWidth="281.0" layoutX="883.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

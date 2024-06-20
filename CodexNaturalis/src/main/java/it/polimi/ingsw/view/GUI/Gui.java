@@ -6,25 +6,20 @@ import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
 import it.polimi.ingsw.view.GUI.controller.AbstractController;
 import javafx.application.Platform;
-import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import it.polimi.ingsw.view.FsmGame;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
@@ -210,7 +205,7 @@ public class Gui extends Application implements UI {
 
     }
 
-    //si potrebbe modificare waitTurn.fxml in modo che stampi il nome del giocatore corrente e basta.
+    //si potrebbe modificare WaitingScene.fxml in modo che stampi il nome del giocatore corrente e basta.
     @Override
     public void show_isYourTurn(GameView immutableModel) {
         if(immutableModel.getCurrentPlayer().getNick().equals(this.flow.getNickname())){
@@ -218,7 +213,7 @@ public class Gui extends Application implements UI {
             //oppure si aggiorna la gameStation
         }else{
             if(primaryStage != null)
-                loadScene("/scenes/waitTurn.fxml");
+                loadScene("/scenes/WaitingScene.fxml");
             else
                 System.out.println("error primary stage is null");
         }
@@ -227,7 +222,7 @@ public class Gui extends Application implements UI {
     @Override
     public void show_playerHand(GameView immutableModel) {
         if(primaryStage != null)
-            loadScene("/scenes/Gamestation.fxml");
+            loadScene("/scenes/PlayingScene.fxml");
         else
             System.out.println("error primary stage is null");
     }
