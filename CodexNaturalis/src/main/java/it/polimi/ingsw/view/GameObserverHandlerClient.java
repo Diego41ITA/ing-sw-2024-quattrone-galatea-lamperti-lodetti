@@ -139,4 +139,9 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     public void pingTheClient(GameView game)throws RemoteException{
         flow.setGameView(game);
     }
+
+    @Override
+    public void abortGame() throws RemoteException{
+        flow.abortGame();
+    }
 }

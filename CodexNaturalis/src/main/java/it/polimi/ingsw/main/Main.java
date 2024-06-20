@@ -117,47 +117,59 @@ public class Main {
                 //I create an instance of executor service to manage the synchronization of all the threads.
                 if (selection == 1) {
 
-                    Thread threadFsmGame;
+                    //Thread threadFsmGame;
 
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientSocket(flow, ip));
 
-                    threadFsmGame = new Thread(flow);
+                    /*threadFsmGame = new Thread(flow);
                     threadFsmGame.start();
-
+                    */
+                    flow.start();
 
                     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
                         @Override
                         public void uncaughtException(Thread t, Throwable e){
                             System.out.println("connection to server Socket lost");
-                            threadFsmGame.interrupt();
-
+                            //threadFsmGame.interrupt();
+                            flow.interrupt();
                         }
                     });
 
-                    threadFsmGame.join();
+                    //threadFsmGame.join();
+                    try{
+                        flow.join();
+                    }catch(InterruptedException e){
+                        System.out.println("join() is interrupted");
+                    }
                     Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
 
                 } else if (selection == 2) {
 
-                    Thread threadFsmGame;
+                    //Thread threadFsmGame;
 
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientRMI(flow, ip));
 
-                    threadFsmGame = new Thread(flow);
-                    threadFsmGame.start();
-
+                    //threadFsmGame = new Thread(flow);
+                    //threadFsmGame.start();
+                    flow.start();
                     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
                         @Override
                         public void uncaughtException(Thread t, Throwable e){
                             System.out.println("connection to server RMI lost");
                             //System.out.println("you are going to be disconnected, please wait some moment and try to " +
                             //        "restore you game!!!");
-                            threadFsmGame.interrupt();
+                            //threadFsmGame.interrupt();
+                            flow.interrupt();
                         }
                     });
-                    threadFsmGame.join();
+                    //threadFsmGame.join();
+                    try{
+                        flow.join();
+                    }catch(InterruptedException e){
+                        System.out.println("join() is interrupted");
+                    }
                     Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
 
                 } else if (selection == 3) {
@@ -185,6 +197,7 @@ public class Main {
             }
 
             System.out.println("application closing... Application closed");
+            System.exit(0);
         }
 
 }

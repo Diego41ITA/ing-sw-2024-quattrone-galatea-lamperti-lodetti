@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serializable {
+public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, Serializable {
 
     public boolean waitingForNewPlayers = false;
     public boolean notStarted;
@@ -158,8 +158,8 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
         //e.printStackTrace();
         //e.getCause();
         System.out.println("exception caught in FsmGame thread.");
-        e.printStackTrace();
-        e.getCause();
+        //e.printStackTrace();
+        //e.getCause();
         throw new RuntimeException();
     }}
 
@@ -451,5 +451,23 @@ public class FsmGame implements Runnable, /*ClientAction,*/ GameObserver, Serial
     public void pingTheClient(GameView game) throws RemoteException {
         //System.out.println("i recived a ping from the server");
         //setGameView(game);
+    }
+
+    /**
+     * this method interrupts all the running process and closes the application; it could also restart from StateMenu.
+     * @throws RemoteException
+     */
+    @Override
+    public synchronized void abortGame() throws RemoteException{
+        ui.show_abortGame();
+        //String option = input.getOption();
+        /*if(option.equalsIgnoreCase("A")){
+
+        }else if(option.equalsIgnoreCase("B")){
+            stay = false;
+        }*/
+        System.out.println("setto stay a false");
+        stay = false;
+        Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
     }
 }

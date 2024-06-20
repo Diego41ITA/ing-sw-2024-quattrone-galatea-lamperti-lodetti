@@ -1006,4 +1006,9 @@ public class Cli implements UI {
     public void show_requestToLeave() {
         System.out.println("press any button to leave...");
     }
+
+    @Override
+    public void show_abortGame(){
+        System.out.println("this game is abort please quit or try to join another game");
+    }
 }
