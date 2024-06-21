@@ -13,8 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetColorController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="68.0" layoutX="554.0" layoutY="233.0" stroke="BLACK" strokeType="INSIDE" width="209.0" />
-      <Text layoutX="554.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a color" textAlignment="CENTER" wrappingWidth="209.0">
+      <Text layoutX="322.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Select a color" textAlignment="CENTER" wrappingWidth="637.0">
          <font>
             <Font size="33.0" />
          </font>

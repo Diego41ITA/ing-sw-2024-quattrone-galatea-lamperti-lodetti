@@ -53,7 +53,9 @@ public class Gui extends Application implements UI {
         this.primaryStage.show();
         Image icon = new Image("/scenes/images/01.png");
         this.primaryStage.getIcons().add(icon);
-
+        this.primaryStage.setResizable(false);
+        this.primaryStage.setY(0);
+        this.primaryStage.setX(150);
         //Thread myThread = new Thread(flow);
         //myThread.start();
         flow.start();

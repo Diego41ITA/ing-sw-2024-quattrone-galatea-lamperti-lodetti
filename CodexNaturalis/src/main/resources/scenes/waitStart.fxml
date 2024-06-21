@@ -10,8 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="112.0" layoutX="419.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="437.0" />
-      <Text fill="RED" layoutX="440.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wait the start">
+      <Text fill="RED" layoutX="372.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Wait the start">
          <font>
             <Font size="67.0" />
          </font>

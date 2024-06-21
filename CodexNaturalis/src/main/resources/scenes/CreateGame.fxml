@@ -17,11 +17,14 @@
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="375.0" stroke="BLACK" strokeType="INSIDE" width="1278.0" />
-            <Text layoutX="-1.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NO GAMES AVAILABLE" textAlignment="CENTER" wrappingWidth="1280.0">
+            <Text layoutX="-1.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are no games available" textAlignment="CENTER" wrappingWidth="1280.0">
                <font>
                   <Font size="55.0" />
                </font>
+               <styleClass>
+                  <String fx:value="stack-pane-custom" />
+                  <String fx:value="text-style" />
+               </styleClass>
             </Text>
             <Button fx:id="exit" layoutX="1178.0" layoutY="21.0" mnemonicParsing="false" onAction="#exit" text="Close App" textFill="RED">
                <font>
