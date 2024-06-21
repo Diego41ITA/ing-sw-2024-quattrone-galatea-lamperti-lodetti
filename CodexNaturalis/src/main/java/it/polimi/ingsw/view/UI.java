@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is interface is implemented by the GUI and TUI
@@ -77,7 +78,7 @@ public interface UI {
     public void show_youLose();
     public void show_requestGoalCard(ArrayList<GoalCard> cards);
     public void show_requestCardId();
-    public void show_winner(String name);
+    public void show_winner(List<String> name);
 
     public void show_requestTypeToDraw();
     public void show_drawFromWhere();

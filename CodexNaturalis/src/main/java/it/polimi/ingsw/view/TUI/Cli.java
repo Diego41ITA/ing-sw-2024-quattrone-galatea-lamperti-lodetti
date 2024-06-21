@@ -932,8 +932,13 @@ public class Cli implements UI {
     }
 
     @Override
-    public void show_winner(String winner){
-        show_message("the winner is: " + winner);
+    public void show_winner(List<String> winner){
+        if(winner.size() == 1)
+            show_message("the winner is: " + winner.getFirst());
+        else{
+            show_message("the winners are: ");
+            winner.forEach(System.out::println);
+        }
     }
 
     @Override

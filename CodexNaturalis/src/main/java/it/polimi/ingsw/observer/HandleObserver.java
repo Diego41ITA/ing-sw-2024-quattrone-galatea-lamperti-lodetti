@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains all the notifications that can be thrown and calls the correspondent
@@ -140,7 +141,7 @@ public class HandleObserver implements Serializable {
         }
     }
 
-    public void notify_winner(Game game, String nick){
+    public void notify_winner(Game game, List<String> nick){
         try {
             observer.winner(new GameView(game), nick);
         }catch(RemoteException e){

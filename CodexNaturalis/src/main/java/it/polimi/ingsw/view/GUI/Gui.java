@@ -22,6 +22,7 @@ import it.polimi.ingsw.view.FsmGame;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /* All'interno di questa classe implementeremo i metodi della UI per la GUI.
 All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
@@ -321,7 +322,7 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_winner(String name) {
+    public void show_winner(List<String> name) {
         //nothing, end scene already shows the winner
     }
 

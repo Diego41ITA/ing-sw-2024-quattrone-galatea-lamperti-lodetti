@@ -423,39 +423,65 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @return The nickname of the winner.
      */
     @Override
-    public String calculateWinner() {
+    public List<String> calculateWinner() {
+        Map<Player, Integer[]> playerPointsObjectives = new HashMap<>();
         List<Player> players = game.getPlayers();
         PointTable pointTable = game.getPointTable();
         String winnerNick = "nobody";
         int maxpoint = 0;
+        int maxObj = 0;
         for (Player player : players) {
             int point = 0;
+            int nObj = 0;
             point = player.getGoal()
                     .getGoalPoints(
                             (HashMap<Point, PlayableCard>) player.getGameStation().getPlayedCards(),
                             (HashMap<Item, Integer>) player.getGameStation().calculateAvailableResources()
                     );
+            //if the points are > of 0, then an objective is satisfied.
+            if(point > 0)
+                nObj++;
+
             ArrayList<GoalCard> goals = (ArrayList<GoalCard>) game.getTableOfDecks().getGoals();
             for (GoalCard goalCard : goals) {
+                int pointPrevious = point;
                 point = point + goalCard.getGoalPoints(
                                 (HashMap<Point, PlayableCard>) player.getGameStation().getPlayedCards(),
                                 (HashMap<Item, Integer>) player.getGameStation().calculateAvailableResources()
                         );
+                //if the point are > then before another objective is satisfied.
+                if(point > pointPrevious)
+                    nObj++;
+                if(nObj > maxObj)
+                    maxObj = nObj;
             }
             point = point + pointTable.getPoint(player);
             pointTable.updatePoint(player, point);
-            if (point > maxpoint) {
+
+            Integer[] values = {point, nObj};
+            playerPointsObjectives.put(player, values);
+
+            if(point>maxpoint)
                 maxpoint = point;
-                winnerNick = player.getNick();
-            }
         }
         game.setPointTable(pointTable);
         for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
             HandleObserver obs = entry.getValue();
             obs.notify_FinalsPoint(game);
         }
+        //i need to create the list of the winners
+        List<Player> winners = new ArrayList<>();
+        for(Player p : playerPointsObjectives.keySet()){
+            if(playerPointsObjectives.get(p)[0] == maxpoint)
+                winners.add(p);
+        }
 
-        return winnerNick;
+        final int maxObjFinal = maxObj;
+
+        return winners.stream()
+                .filter(p -> playerPointsObjectives.get(p)[1] == maxObjFinal)
+                .map(p -> p.getNick())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -483,10 +509,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
         if(turn.checkIfLast() && currentPlayer.equals(endingPlayer)){
             game.setStatus(Status.FINISHED);
-            String winnerNick = calculateWinner();  //modificare questa nel caso di piu vincitori.
+            List<String> winnerNicks = calculateWinner();
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
-                obs.notify_winner(game, winnerNick);//capire che argomenti mettergli
+                obs.notify_winner(game, winnerNicks);//capire che argomenti mettergli
             }
             return;
         }
