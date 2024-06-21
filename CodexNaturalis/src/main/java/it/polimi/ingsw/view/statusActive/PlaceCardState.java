@@ -38,6 +38,7 @@ public class PlaceCardState extends StateActive{
 
         ui.show_playerHand(view, nickName);
         ui.show_gameStation(view);
+        ui.show_playingScene(view);
 
         boolean flag = false;
 

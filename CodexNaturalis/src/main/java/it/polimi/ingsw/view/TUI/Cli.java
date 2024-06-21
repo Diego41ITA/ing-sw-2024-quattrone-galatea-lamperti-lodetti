@@ -288,6 +288,11 @@ public class Cli implements UI {
     }
 
     @Override
+    public void show_playingScene(GameView immutableModel) {
+
+    }
+
+    @Override
     public void show_isYourTurn(GameView immutableModel) {
             System.out.println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
     }
