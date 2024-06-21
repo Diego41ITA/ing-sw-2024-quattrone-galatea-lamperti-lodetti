@@ -1,5 +1,10 @@
 package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.model.gameDataManager.*;
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  ImageAssociator is used to associate cards with their graphic representation
 and also to associate makers with their graphical representation
@@ -228,9 +233,25 @@ public class ImageAssociator {
             case GREEN -> "/scenes/images/CODEX_pion_vert.png";
             case BLUE -> "/scenes/images/CODEX_pion_bleu.png";
         };
-
-
     }
 
+    private static ArrayList<Image> rulebookImages;
 
+    public static ArrayList<Image> createRulebookImage (){
+        if (rulebookImages == null){
+            rulebookImages = new ArrayList<Image>();
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/02.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/03.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/04.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/05.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/06.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/07.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/08.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/09.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/10.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/11.png"));
+            rulebookImages.add(new Image("/scenes/images/CODEX_Rulebook_IT/12.png"));
+        }
+        return rulebookImages;
+    }
 }
