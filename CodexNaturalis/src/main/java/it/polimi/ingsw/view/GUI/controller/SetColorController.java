@@ -2,10 +2,10 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
-public class EndController extends AbstractController{
+public class EndController extends AbstractController {
     @FXML
     private Text winner;
     @FXML

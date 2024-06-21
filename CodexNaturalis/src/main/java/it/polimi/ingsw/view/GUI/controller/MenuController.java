@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.GUI.Gui;
-import it.polimi.ingsw.view.GUI.MultipleResponses;
-import it.polimi.ingsw.view.input.InputGui;
+import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 

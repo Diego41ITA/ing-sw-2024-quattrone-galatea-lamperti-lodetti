@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.TableOfDecks;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.controller.abstractControllers.InGameController;
 import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
