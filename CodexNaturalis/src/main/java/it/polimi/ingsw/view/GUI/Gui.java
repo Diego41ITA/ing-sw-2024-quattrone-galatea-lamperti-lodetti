@@ -221,6 +221,15 @@ public class Gui extends Application implements UI {
 
     }
 
+    @Override
+    public void show_playingScene(GameView immutableModel) {
+        if(primaryStage != null) {
+            loadScene("/scenes/PlayingScene.fxml");
+        }
+        else
+            System.out.println("error primary stage is null");
+    }
+
     //si potrebbe modificare WaitingScene.fxml in modo che stampi il nome del giocatore corrente e basta.
     @Override
     public void show_isYourTurn(GameView immutableModel) {
@@ -313,11 +322,6 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestCardId() {
-        if(primaryStage != null) {
-            loadScene("/scenes/PlayingScene.fxml");
-        }
-        else
-            System.out.println("error primary stage is null");
     }
 
     @Override

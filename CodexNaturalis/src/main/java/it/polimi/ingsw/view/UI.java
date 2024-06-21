@@ -52,6 +52,8 @@ public interface UI {
 
     public void show_gameStarting(String id);
 
+    public void show_playingScene(GameView immutableModel);
+
     public void show_isYourTurn(GameView immutableModel);
 
     public String show_goalCard(GoalCard card);
