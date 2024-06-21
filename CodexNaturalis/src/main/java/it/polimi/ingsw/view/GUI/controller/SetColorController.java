@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
@@ -21,25 +22,29 @@ public class SetColorController extends AbstractController {
     private Button green;
     //quando clicco un bottone aggiungo il colore corrispettivo all'interno di multipleResponses
 
-    public void clickGreen(ActionEvent actionEvent){
+    public void clickGreen(){
         multipleResponses.add("green");
     }
-    public void clickYellow(ActionEvent actionEvent){
+    public void clickYellow(){
         multipleResponses.add("yellow");
     }
-    public void clickRed(ActionEvent actionEvent){
+    public void clickRed(){
         multipleResponses.add("red");
     }
-    public void clickBlue(ActionEvent actionEvent){
+    public void clickBlue(){
         multipleResponses.add("blue");
     }
     //mette la visibilità dei bottoni false di dafault
 
     public void initializeColorButton(){
-        red.setVisible(false);
-        green.setVisible(false);
-        blue.setVisible(false);
-        yellow.setVisible(false);
+        red.setOpacity(0.7);
+        red.setCursor(Cursor.DEFAULT);
+        green.setOpacity(0.7);
+        green.setCursor(Cursor.DEFAULT);
+        blue.setOpacity(0.7);
+        blue.setCursor(Cursor.DEFAULT);
+        yellow.setOpacity(0.7);
+        yellow.setCursor(Cursor.DEFAULT);
     }
 
     /**
@@ -52,13 +57,21 @@ public class SetColorController extends AbstractController {
         initializeColorButton();
         for (Color color:colors) {
             if (color == Color.RED) {
-                red.setVisible(true);
+                red.setOpacity(1);
+                red.setOnMouseClicked(mouseEvent -> clickRed());
+                red.setCursor(Cursor.HAND);
             } else if (color == Color.GREEN) {
-                green.setVisible(true);
+                green.setOpacity(1);
+                green.setOnMouseClicked(mouseEvent -> clickGreen());
+                green.setCursor(Cursor.HAND);
             } else if (color == Color.BLUE) {
-                blue.setVisible(true);
+                blue.setOpacity(1);
+                blue.setOnMouseClicked(mouseEvent -> clickBlue());
+                blue.setCursor(Cursor.HAND);
             } else {
-                yellow.setVisible(true);
+                yellow.setOpacity(1);
+                yellow.setOnMouseClicked(mouseEvent -> clickYellow());
+                yellow.setCursor(Cursor.HAND);
             }
         }
     }

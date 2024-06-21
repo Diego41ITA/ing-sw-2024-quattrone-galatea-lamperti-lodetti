@@ -19,28 +19,28 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <Button fx:id="red" layoutX="447.0" layoutY="329.0" mnemonicParsing="false" onAction="#clickRed" text="Red" textFill="RED">
+      <Button fx:id="red" layoutX="447.0" layoutY="329.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="103.0" text="Red" textFill="RED">
          <font>
             <Font size="27.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="blue" layoutX="447.0" layoutY="426.0" mnemonicParsing="false" onAction="#clickBlue" text="Blue" textFill="#001aff">
+      <Button fx:id="blue" layoutX="447.0" layoutY="426.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="103.0" text="Blue" textFill="#001aff">
          <font>
             <Font size="27.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="yellow" layoutX="770.0" layoutY="329.0" mnemonicParsing="false" onAction="#clickYellow" text="Yellow" textFill="#d9d623">
+      <Button fx:id="yellow" layoutX="770.0" layoutY="329.0" mnemonicParsing="false" text="Yellow" textFill="#d9d623">
          <font>
             <Font size="27.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="green" layoutX="770.0" layoutY="426.0" mnemonicParsing="false" onAction="#clickGreen" text="Green" textFill="#2da43f">
+      <Button fx:id="green" layoutX="770.0" layoutY="426.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="114.0" text="Green" textFill="#2da43f">
          <font>
             <Font size="27.0" />
          </font>
