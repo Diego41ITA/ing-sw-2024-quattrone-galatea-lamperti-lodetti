@@ -86,11 +86,6 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Text fx:id="yourLastTurn" fill="RED" layoutX="405.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="THIS IS YOUR LAST TURN!!">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
                   <ImageView fx:id="firstCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="secondCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="thirdCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
