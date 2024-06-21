@@ -28,6 +28,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Objects;
 
 public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, Serializable {
 
@@ -76,8 +77,9 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                 if(notStarted)
                     state1.execute();
                 if(view == null) break; //condizione per uscita dal game dopo scelta joingame
+
                 //se la view ha i giocatori giusti la partita può iniziare
-                if(view.getPlayers().size() == view.getMaxNumOfPlayer() && view.getPlayer(nickname).getColor() != null && notStarted){
+                if(view.getPlayers().size() == view.getMaxNumOfPlayer() && checkAllColor() && notStarted){
                     try {
                         client.startGame();
                         notStarted = false;
@@ -88,7 +90,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                 }
 
                 //se invece i giocatori non sono ancora del numero corretto si aspetta
-                while (waitingForNewPlayers) {
+                while (waitingForNewPlayers && notStarted) {
                     try {
                         synchronized (lock) {
                             lock.wait();
@@ -206,12 +208,27 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         state2 = new PlaceCardState(this, this.input);
     }
 
+    public void setWaitingState(StateWaiting state){
+        this.state1 = state;
+    }
+
     public void exit(){
         this.stay = false;
     }
 
     public void setGameView(GameView game){
         this.view = game;
+    }
+
+    private boolean checkAllColor(){
+        return (this.view.getPlayers().stream()
+                .map(p -> {
+            if(p.getColor() != null)
+                return p.getColor();
+            else
+                return null;
+        }).filter(Objects::nonNull)
+                .count() == this.view.getMaxNumOfPlayer());
     }
 
     //----------------------------------------------------------------

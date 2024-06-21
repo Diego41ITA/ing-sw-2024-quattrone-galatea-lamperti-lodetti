@@ -39,11 +39,12 @@ public class StateColor extends StateWaiting {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+        //nextState();
     }
 
     @Override
     public void nextState(){
-        //it does nothing
+        flow.setWaitingState(new DoesNothing(flow, inputGetter));
     }
 
     private boolean checkColor(String color){
