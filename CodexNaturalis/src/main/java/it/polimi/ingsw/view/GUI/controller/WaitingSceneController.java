@@ -412,6 +412,7 @@ public class WaitingSceneController extends AbstractController {
             int playerCardId = playerHand.get(i).getCardId();
             setHand(playerCardId, i);
         }
+
         this.setUpTableOfDecks();
     }
 }

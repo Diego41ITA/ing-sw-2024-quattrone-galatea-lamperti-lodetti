@@ -9,15 +9,13 @@ import javafx.scene.text.Text;
 
 public class SetNumberOfPlayersController extends AbstractController {
     @FXML
-    private Text game;
-    @FXML
     private TextField textField;
     @FXML
     private Button button;
 
     public void setUpController(FsmGame game){
         setGame(game);
-        this.game.setText(game.getView().getId());
+        //this.game.setText(game.getView().getId());
 
     }
     //fin quando in multiplesResponses non abbiamo un numero valido allora il gameflow/GUiinput rimane nello stesso punto
