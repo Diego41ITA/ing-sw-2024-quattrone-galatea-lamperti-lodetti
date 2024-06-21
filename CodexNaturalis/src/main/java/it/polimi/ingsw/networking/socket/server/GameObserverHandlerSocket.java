@@ -37,7 +37,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     //Bisogna fare l' override dei metodi di gameObserver, come per GameObserverHandlerClient bisognerà inviare un
     //messaggio questo verrà scritto sull' OutputStream
     @Override
-    public void invalidCardPlacement()throws RemoteException{
+    public synchronized void invalidCardPlacement()throws RemoteException{
         try{
             out.writeObject(new NotEnoughResource());
             completeForwarding();
@@ -46,7 +46,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException{
+    public synchronized void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdatePlayerAndMaxPlayer(game));
             completeForwarding();
@@ -55,7 +55,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateTableOfDecks(GameView game)throws RemoteException{
+    public synchronized void updateTableOfDecks(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdateTableOfDecks(game));
             completeForwarding();
@@ -64,7 +64,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateGamestation(GameView game, GameStation gameStation)throws RemoteException{
+    public synchronized void updateGamestation(GameView game, GameStation gameStation)throws RemoteException{
         try{
             out.writeObject(new UpdateGameStation(game, gameStation));
             completeForwarding();
@@ -73,7 +73,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updatePlayerStatus(GameView game)throws RemoteException{
+    public synchronized void updatePlayerStatus(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdatePlayerStatus(game));
             completeForwarding();
@@ -83,7 +83,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void updateColor(GameView game)throws RemoteException{
+    public synchronized void updateColor(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdateColor(game));
             completeForwarding();
@@ -93,7 +93,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void updateSetAvailableColors(GameView game, ArrayList<Color> colors) throws RemoteException{
+    public synchronized void updateSetAvailableColors(GameView game, ArrayList<Color> colors) throws RemoteException{
         try{
             out.writeObject(new UpdateNewColors(game, colors)); //va cambiato in UpdateNewColors
             completeForwarding();
@@ -102,7 +102,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateTableAndTurn(GameView game)throws RemoteException{
+    public synchronized void updateTableAndTurn(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdateTableAndTurn(game));
             completeForwarding();
@@ -112,7 +112,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void updateCurrentPlayer(GameView game)throws RemoteException{
+    public synchronized void updateCurrentPlayer(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdateCurrentPlayer(game));
             completeForwarding();
@@ -121,7 +121,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updatePoints(GameView game)throws RemoteException{
+    public synchronized void updatePoints(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdatePoints(game));
             completeForwarding();
@@ -130,7 +130,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateGoalPlayer(GameView game, GoalCard card)throws RemoteException{
+    public synchronized void updateGoalPlayer(GameView game, GoalCard card)throws RemoteException{
         try{
             out.writeObject(new UpdateGoalPlayer(game, card));
             completeForwarding();
@@ -139,7 +139,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateHandAndTable(GameView game, String nick)throws RemoteException{
+    public synchronized void updateHandAndTable(GameView game, String nick)throws RemoteException{
         try{
             out.writeObject(new UpdateHandAndTable(game, nick));
             completeForwarding();
@@ -148,7 +148,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updatePlayerInGame(GameView game)throws RemoteException{
+    public synchronized void updatePlayerInGame(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdatePlayerInGame(game));
             completeForwarding();
@@ -157,7 +157,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateGameStations(GameView game)throws RemoteException{
+    public synchronized void updateGameStations(GameView game)throws RemoteException{
         try{
             out.writeObject(new UpdateGameStations(game));
             completeForwarding();
@@ -168,7 +168,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateGameStatus(GameView game)throws  RemoteException{
+    public synchronized void updateGameStatus(GameView game)throws  RemoteException{
         try{
             out.writeObject(new UpdateGameStatus(game));
             completeForwarding();
@@ -177,7 +177,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void updateInitialCardsDrawn(InitialCard card) throws RemoteException{
+    public synchronized void updateInitialCardsDrawn(InitialCard card) throws RemoteException{
         try{
             out.writeObject(new UpdateInitialCard(card));
             completeForwarding();
@@ -186,7 +186,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void newGameCreated(String gameID)throws RemoteException{
+    public synchronized void newGameCreated(String gameID)throws RemoteException{
         try{
             out.writeObject(new NewGameCreated(gameID));
             completeForwarding();
@@ -195,7 +195,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void randomGameJoined(String gameID)throws RemoteException{
+    public synchronized void randomGameJoined(String gameID)throws RemoteException{
         try{
             out.writeObject(new RandomGameJoined(gameID));
             completeForwarding();
@@ -204,7 +204,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void reconnectedToGame(GameView game)throws RemoteException{
+    public synchronized void reconnectedToGame(GameView game)throws RemoteException{
         try{
             out.writeObject(new ReconnectedToGame(game));
             completeForwarding();
@@ -213,7 +213,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException{
+    public synchronized void goalCardsDrawed(ArrayList<GoalCard> cards)throws RemoteException{
         try{
             out.writeObject(new GoalCardsDrawn(cards));
             completeForwarding();
@@ -223,7 +223,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void startGame(GameView game)throws RemoteException{
+    public synchronized void startGame(GameView game)throws RemoteException{
         try{
             out.writeObject(new StartGame(game));
             completeForwarding();
@@ -233,7 +233,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void genericErrorWhenEnteringGame(String msg, String gameID) throws RemoteException{
+    public synchronized void genericErrorWhenEnteringGame(String msg, String gameID) throws RemoteException{
         try{
             out.writeObject(new GenericError(msg, gameID));
             completeForwarding();
@@ -242,7 +242,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
         }
     }
     @Override
-    public void gameIdNotExists(String gameId) throws RemoteException{
+    public synchronized void gameIdNotExists(String gameId) throws RemoteException{
         try{
             out.writeObject(new GameIdNotExists(gameId));
             completeForwarding();
@@ -252,7 +252,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void winner(GameView view, List<String> winner) throws RemoteException{
+    public synchronized void winner(GameView view, List<String> winner) throws RemoteException{
         try{
             out.writeObject(new Winner(view, winner));
             completeForwarding();
@@ -262,7 +262,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void update20PointsReached(GameView game)throws RemoteException{
+    public synchronized void update20PointsReached(GameView game)throws RemoteException{
         try{
             out.writeObject(new Update20Points(game));
             completeForwarding();
@@ -272,7 +272,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void pingTheClient(GameView game)throws RemoteException{
+    public synchronized void pingTheClient(GameView game)throws RemoteException{
         try{
             out.writeObject(new PingMessage(game));
             completeForwarding();
@@ -282,7 +282,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void abortGame() throws RemoteException{
+    public synchronized void abortGame() throws RemoteException{
         try{
             out.writeObject(new AbortMessage());
             completeForwarding();

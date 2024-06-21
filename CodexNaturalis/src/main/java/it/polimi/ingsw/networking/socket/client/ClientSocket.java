@@ -137,7 +137,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void leaveGame(String nick, String gameId) throws RemoteException, NotBoundException{
+    public synchronized void leaveGame(String nick, String gameId) throws RemoteException, NotBoundException{
         try{
             out.writeObject(new LeaveGameMessage(nick, gameId));
             completeForwarding();
@@ -161,7 +161,7 @@ public class ClientSocket extends Thread implements ClientAction {
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
 
     @Override
-    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException, RemoteException {
+    public synchronized void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException, RemoteException {
         try{
             out.writeObject(new PlayCard(nick, playedCard, cord, front));
             completeForwarding();
@@ -172,7 +172,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick){
+    public synchronized void chooseGoal(ArrayList<GoalCard> goals, int num, String nick){
         try{
             out.writeObject(new ChooseGoal(nick, num, goals));
             completeForwarding();
@@ -184,7 +184,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void goOn(){
+    public synchronized void goOn(){
         try{
             out.writeObject(new Pass());
             completeForwarding();
@@ -195,7 +195,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void setColor(String color, String nick){
+    public synchronized void setColor(String color, String nick){
         try{
             out.writeObject(new Color(nick, color));
             completeForwarding();
@@ -206,7 +206,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void drawPlayableCardFromTableOfDecks(String nick, String deck){
+    public synchronized void drawPlayableCardFromTableOfDecks(String nick, String deck){
         try{
             out.writeObject(new DrawFromDeck(nick, deck));
             completeForwarding();
@@ -217,7 +217,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void drawFromTable(String nick, Card card){
+    public synchronized void drawFromTable(String nick, Card card){
         try{
             out.writeObject(new DrawFromTable(nick, card));
             completeForwarding();
@@ -229,7 +229,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //forse va messo waitForNotification però è no usage
     @Override
-    public void initializeHandPlayer(String nick){
+    public synchronized void initializeHandPlayer(String nick){
         try{
             out.writeObject(new InitializeHand(nick));
             completeForwarding();
@@ -245,7 +245,7 @@ public class ClientSocket extends Thread implements ClientAction {
      * @param isFront
      */
     @Override
-    public void setGameStation(String nick, InitialCard card, boolean isFront){
+    public synchronized void setGameStation(String nick, InitialCard card, boolean isFront){
         try{
             out.writeObject(new SetGameStation(nick, card, isFront));
             completeForwarding();
@@ -256,7 +256,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //questo metodo non ha senso
     @Override
-    public void ping(String nick){
+    public synchronized void ping(String nick){
         try{
             out.writeObject(new Ping(nick));
             completeForwarding();
@@ -266,7 +266,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override //prova
-    public void startGame() throws IOException {
+    public synchronized void startGame() throws IOException {
         try{
             out.writeObject(new StartGame());
             completeForwarding();
@@ -277,7 +277,7 @@ public class ClientSocket extends Thread implements ClientAction {
 
     //aggiunti per risolvere i problemi dei socket
     @Override
-    public void initializeTurn(String nick) throws RemoteException{
+    public synchronized void initializeTurn(String nick) throws RemoteException{
         try{
             out.writeObject(new InitializeTurn(nick));
             completeForwarding();
@@ -287,7 +287,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     @Override
-    public void definePlayer(String nick) throws RemoteException{
+    public synchronized void definePlayer(String nick) throws RemoteException{
         try{
             out.writeObject(new DefinePlayer(nick));
             completeForwarding();

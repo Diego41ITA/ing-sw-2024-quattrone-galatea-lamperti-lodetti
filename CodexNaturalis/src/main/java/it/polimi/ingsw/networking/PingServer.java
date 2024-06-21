@@ -23,9 +23,10 @@ public class PingServer extends Thread {
                     client.ping(game.getNickname());
                 else
                     this.client = game.getClient();
-                Thread.sleep(3000);
+                Thread.sleep(50 );
             }catch (NullPointerException e){
                 System.err.println("the controller is still not initialized ");
+                e.printStackTrace();
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {

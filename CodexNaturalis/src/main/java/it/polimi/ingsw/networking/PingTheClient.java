@@ -35,7 +35,7 @@ public class PingTheClient extends Thread{
                         observerMap.get(key).notify_PingClient(controller.returnGame());
                     }
                 }
-                Thread.sleep(3000);
+                Thread.sleep(1000);
 
             }catch(IOException | InterruptedException e){
                 System.out.println("impossible to reach the client" + nick);
