@@ -231,6 +231,31 @@ public class WaitingSceneController extends AbstractController {
             pane.getChildren().add(imageView);
         }
 
+        ImageView imageMakerPlayer = createImageView(makerAssociator(player.getColor()));
+        if(player.getNick().equals(getGameView().getTurn().getFirstPlayerNick())){
+            ImageView imageMakerBlack = createImageView(makerAssociator(Color.BLACK));
+            imageMakerBlack.setFitWidth(15);
+            imageMakerBlack.setFitHeight(15);
+            imageMakerBlack.setLayoutX(621);
+            imageMakerBlack.setLayoutY(373);
+            imageMakerBlack.setPreserveRatio(true);
+            imageMakerPlayer.setFitWidth(15);
+            imageMakerPlayer.setFitHeight(15);
+            imageMakerPlayer.setLayoutX(645);
+            imageMakerPlayer.setLayoutY(373);
+            imageMakerPlayer.setPreserveRatio(true);
+            pane.getChildren().add(imageMakerBlack);
+            pane.getChildren().add(imageMakerPlayer);
+        }
+        else {
+            imageMakerPlayer.setFitWidth(15);
+            imageMakerPlayer.setFitHeight(15);
+            imageMakerPlayer.setLayoutX(621);
+            imageMakerPlayer.setLayoutY(373);
+            imageMakerPlayer.setPreserveRatio(true);
+            pane.getChildren().add(imageMakerPlayer);
+        }
+
         // Create a new Tab and set the Pane as its content
         Tab tab = new Tab(player.getNick() + "'s GameStation");
         tab.setContent(pane);
