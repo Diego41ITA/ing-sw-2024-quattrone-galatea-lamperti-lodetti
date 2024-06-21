@@ -13,8 +13,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetGameIdToRejoinController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="59.0" layoutX="416.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="441.0" />
-      <Text layoutX="457.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert GameId to Rejoin">
+      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" styleClass="stack-pane-custom" stylesheets="@../Style.css" />
+      <Text layoutX="189.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Insert GameId to Rejoin">
          <font>
             <Font size="36.0" />
          </font></Text>
@@ -22,7 +22,7 @@
          <font>
             <Font size="36.0" />
          </font></TextField>
-      <Button fx:id="button" layoutX="777.0" layoutY="388.0" mnemonicParsing="false" onAction="#getGameId" text="Ok">
+      <Button fx:id="button" layoutX="777.0" layoutY="380.0" mnemonicParsing="false" onAction="#getGameId" prefHeight="78.0" prefWidth="70.0" text="Ok">
          <font>
             <Font size="27.0" />
          </font>

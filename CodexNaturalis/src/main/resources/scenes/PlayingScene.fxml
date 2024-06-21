@@ -57,13 +57,9 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
                 <Separator layoutX="400.0" layoutY="16.0" orientation="VERTICAL" prefHeight="730.0" prefWidth="0.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="738.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="111.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="738.0" layoutY="503.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="38.0" layoutX="111.0" layoutY="389.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
                 <ImageView fx:id="card1" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="card2" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-                <Text layoutX="763.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DRAWABLE CARDS">
+                <Text layoutX="722.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Drawable cards">
                     <font>
                         <Font size="22.0" />
                     </font>
@@ -71,11 +67,11 @@
                 <ImageView fx:id="card3" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="card4" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
                 <Separator layoutX="468.0" layoutY="487.0" prefHeight="6.0" prefWidth="733.0" />
-                <Text layoutX="129.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESOURCE CARDS DECK" />
-                <Text layoutX="150.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GOLD CARD DECK" />
+                <Text layoutX="79.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Resource cards deck" textAlignment="CENTER" wrappingWidth="285.171875" />
+                <Text layoutX="90.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Gold cards deck" />
                 <ImageView fx:id="deckResource" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="deckGold" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" />
-                <Text layoutX="775.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMMON GOALS">
+                <Text layoutX="689.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Common goal cards">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -90,30 +86,30 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Text fx:id="yourLastTurn" fill="RED" layoutX="533.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THIS IS YOUR LAST TURN">
+                  <Text fx:id="yourLastTurn" fill="RED" layoutX="405.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="THIS IS YOUR LAST TURN!!">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="223.0" layoutY="138.0" stroke="BLACK" strokeType="INSIDE" width="251.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="814.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="251.0" />
-                  <ImageView fx:id="firstCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="secondCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="thirdCard" fitHeight="150.0" fitWidth="200.0" layoutX="245.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text layoutX="843.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back side of your cards">
+                  <ImageView fx:id="firstCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="secondCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="thirdCard" fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text layoutX="504.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Back side of your cards" textAlignment="CENTER" wrappingWidth="272.25">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text layoutX="249.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Front side of your cards">
+                  <Text layoutX="181.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Front side of your cards" textAlignment="CENTER" wrappingWidth="268.5">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="firstCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="secondCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="gameId" layoutX="1080.0" layoutY="701.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gameid" />
+                  <ImageView fx:id="firstCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="secondCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="gameId" layoutX="1116.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Gameid" />
+                  <Text layoutX="828.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Personal goal card" />
+                  <ImageView fx:id="personalCard" fitHeight="150.0" fitWidth="200.0" layoutX="886.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
         </content>

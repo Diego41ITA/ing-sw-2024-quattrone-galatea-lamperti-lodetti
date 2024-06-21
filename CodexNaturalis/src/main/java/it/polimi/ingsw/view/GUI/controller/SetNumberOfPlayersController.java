@@ -17,7 +17,7 @@ public class SetNumberOfPlayersController extends AbstractController {
 
     public void setUpController(FsmGame game){
         setGame(game);
-        //this.game.setText(game.getView().getId());
+        this.game.setText(game.getView().getId());
 
     }
     //fin quando in multiplesResponses non abbiamo un numero valido allora il gameflow/GUiinput rimane nello stesso punto

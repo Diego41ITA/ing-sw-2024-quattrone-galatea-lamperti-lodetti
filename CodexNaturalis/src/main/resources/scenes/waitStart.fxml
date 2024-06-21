@@ -10,6 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" styleClass="stack-pane-custom" stylesheets="@../Style.css" />
       <Text fill="RED" layoutX="372.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Wait the start">
          <font>
             <Font size="67.0" />

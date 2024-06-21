@@ -16,26 +16,23 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="table" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.InitialCardController">
    <children>
-      <Text fx:id="title" layoutX="218.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the side of your initial Card">
+      <Text fx:id="title" layoutX="272.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Select the side of your initial card" textAlignment="CENTER" wrappingWidth="749.0703125">
          <font>
             <Font size="57.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="301.0" layoutY="248.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="782.0" layoutY="248.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Separator layoutX="647.0" layoutY="148.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Separator layoutX="647.0" layoutY="348.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Separator layoutX="647.0" layoutY="548.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="644.0" layoutY="241.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="644.0" layoutY="441.0" orientation="VERTICAL" prefHeight="200.0" />
       <Line endX="100.0" layoutX="402.0" layoutY="348.0" startX="-100.0" />
       <Line endX="100.0" layoutX="882.0" layoutY="349.0" startX="-100.0" />
       <Line endX="100.0" layoutX="402.0" layoutY="555.0" startX="-100.0" />
       <Line endX="100.0" layoutX="882.0" layoutY="555.0" startX="-100.0" />
-      <Text fx:id="front" layoutX="361.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FRONT">
+      <Text fx:id="front" layoutX="317.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Front side">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text fx:id="back" layoutX="851.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK">
+      <Text fx:id="back" layoutX="803.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Back side">
          <font>
             <Font size="26.0" />
          </font>

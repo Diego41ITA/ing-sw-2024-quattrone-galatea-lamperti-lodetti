@@ -135,7 +135,10 @@ public class WaitingSceneController extends AbstractController {
     private ImageView goal1;
     @FXML
     private ImageView goal2;
+    @FXML
+    private ImageView personalCard;
     private Map<ImageView, Integer> mapping = new HashMap<>();
+
 
     private void setUpTableOfDecks() {
         FsmGame updatedGame = getGameFsm();
@@ -390,6 +393,9 @@ public class WaitingSceneController extends AbstractController {
         GameView gameView = updatedGame.getView();
         yourLastTurn.setVisible(false);
         this.initializeImageArray();
+        GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
+        Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));
+        personalCard.setImage(imagePersonalGoalCard);
         this.setGameId(gameView.getId());
         for(Player p : gameView.getPlayers())
             this.createGameStationTabPane(p);

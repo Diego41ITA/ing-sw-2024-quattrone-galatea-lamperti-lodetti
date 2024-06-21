@@ -200,7 +200,7 @@ public class Gui extends Application implements UI {
     @Override
     public void show_RequestGameId() {
         if(primaryStage != null)
-            loadScene("/scenes/RejoinGame.fxml");
+            loadScene("/scenes/SetGameIdToRejoin.fxml");
         else
             System.out.println("error primary stage is null");
     }

@@ -11,6 +11,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -137,6 +138,8 @@ public class PlayingSceneController extends AbstractController {
     @FXML
     private ImageView goal2;
     private Map<ImageView, Integer> mapping = new HashMap<>();
+    @FXML
+    private ImageView personalCard;
 
     private void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(event -> {
@@ -660,6 +663,19 @@ public class PlayingSceneController extends AbstractController {
 
         tabPane.getSelectionModel().select(1);
         makeTableOfDecksTabResponsive();
+
+        String tabId = "tab" + getGameFsm().getNickname();
+
+        // Reset mouse entered and exited events for all rectangles
+        for (Node node : findOrCreatePaneInTab(findTabById(tabId)).getChildren()) {
+            if (node instanceof Rectangle) {
+                Rectangle rect = (Rectangle) node;
+                rect.setOnMouseEntered(null);
+                rect.setOnMouseExited(null);
+                rect.setOnMouseClicked(null);
+                rect.setCursor(Cursor.DEFAULT);
+            }
+        }
     }
 
     public void showInvalidPlayAlert() {
@@ -709,6 +725,9 @@ public class PlayingSceneController extends AbstractController {
         setGame(updatedGame);
         GameView gameView = updatedGame.getView();
         yourLastTurn.setVisible(false);
+        GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
+        Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));
+        personalCard.setImage(imagePersonalGoalCard);
         this.initializeImageArray();
         this.setGameId(gameView.getId());
         for(Player p : gameView.getPlayers())
