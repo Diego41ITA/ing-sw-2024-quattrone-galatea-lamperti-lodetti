@@ -146,7 +146,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @throws RemoteException
      */
     @Override
-    public synchronized void initializeTurn(String nick) throws RemoteException{
+    public void initializeTurn(String nick) throws RemoteException{
         if(checkReadiness()) {
             ArrayList<Player> keysList = new ArrayList<>(game.getPlayers());
             Turn turn = new Turn(keysList);
@@ -641,7 +641,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param nick Nickname of the Player.
      */
     @Override
-    public synchronized void initializeHandPlayer(String nick) {
+    public void initializeHandPlayer(String nick) {
         List<Player> players;
         players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
