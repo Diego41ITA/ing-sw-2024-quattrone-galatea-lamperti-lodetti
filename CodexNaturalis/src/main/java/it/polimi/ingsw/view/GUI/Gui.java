@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.card.PlayableCard;
 import it.polimi.ingsw.view.UI;
 import it.polimi.ingsw.view.input.InputGui;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,6 +51,9 @@ public class Gui extends Application implements UI {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
         this.primaryStage.show();
+        Image icon = new Image("/scenes/images/01.png");
+        this.primaryStage.getIcons().add(icon);
+
         //Thread myThread = new Thread(flow);
         //myThread.start();
         flow.start();
