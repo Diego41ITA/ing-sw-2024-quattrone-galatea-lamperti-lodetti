@@ -108,8 +108,12 @@
                   <ImageView fx:id="secondCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true" />
                   <Text layoutX="828.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Personal goal card" />
-                  <ImageView fx:id="personalCard" fitHeight="150.0" fitWidth="200.0" layoutX="886.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="gameId" layoutX="1119.0" layoutY="696.0" styleClass="text-inGame-style" text="Gameid" textFill="WHITE" />
+                  <ImageView fx:id="personalCard" fitHeight="150.0" fitWidth="200.0" layoutX="886.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="70.0" layoutX="1146.0" layoutY="695.0" stroke="WHITE" strokeType="INSIDE" width="134.0" />
+                  <Label fx:id="gameId" layoutX="1167.0" layoutY="703.0" text="Gameid">
+                     <font>
+                        <Font size="29.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
         </content>

@@ -42,3 +42,15 @@
 .stack-pane-custom {
     -fx-background-color: rgba(0, 0, 0, 0.8);
 }
+
+.custom-tooltip {
+    -fx-background-color: lightyellow;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-family: "Arial";
+    -fx-pref-width: 200px;
+    -fx-wrap-text: true;
+}

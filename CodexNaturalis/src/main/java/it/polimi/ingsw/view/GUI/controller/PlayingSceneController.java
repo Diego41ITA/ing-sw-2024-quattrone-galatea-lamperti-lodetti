@@ -258,9 +258,12 @@ public class PlayingSceneController extends AbstractController {
     //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
     private void setGameId(String id){
         gameId.setText(id);
-        Tooltip tooltip = new Tooltip("This is the id of the game you are connected to. Don't forget it!" +
-                "it is neeed if you want to reconnect to this game");
-        Tooltip.install(gameId, tooltip);
+        Tooltip tooltip = new Tooltip("This is the id of the game you are connected to. Don't forget it! " + "\n" +
+                "It is neeed if you want to reconnect to this game");
+        // Create a tooltip with custom style
+        tooltip.getStyleClass().add("custom-tooltip"); // Assign custom style class
+        tooltip.setShowDelay(Duration.millis(100));
+        gameId.setTooltip(tooltip); // Directly set the tooltip on the label
     }
 
     //crea un immagine e ne assegna le dimensioni, restituisce un immagine che verrà settata per le carte iniziali
