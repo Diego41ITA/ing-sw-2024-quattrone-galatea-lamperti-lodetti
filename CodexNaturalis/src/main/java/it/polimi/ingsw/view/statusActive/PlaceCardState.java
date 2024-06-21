@@ -72,8 +72,8 @@ public class PlaceCardState extends StateActive{
                 flag = true;
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            } catch (illegalOperationException e) {
-                flag = false;
+            }catch(illegalOperationException e){
+                flag = true;
             }
         }
         this.nextState();

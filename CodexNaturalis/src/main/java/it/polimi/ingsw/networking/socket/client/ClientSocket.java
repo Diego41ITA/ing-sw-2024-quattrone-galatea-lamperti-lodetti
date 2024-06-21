@@ -74,6 +74,7 @@ public class ClientSocket extends Thread implements ClientAction {
                 }
             }catch(IOException | ClassNotFoundException | InterruptedException | NullPointerException e) {
                 System.err.println("socket server disconnected: detection happened in ClientSocket Thread");
+                e.printStackTrace();
                 this.interrupt();
             }
         }

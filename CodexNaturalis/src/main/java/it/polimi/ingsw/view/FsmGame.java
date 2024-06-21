@@ -14,6 +14,7 @@ import it.polimi.ingsw.view.GUI.CardRecord;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
 import it.polimi.ingsw.view.input.InputParser;
 import it.polimi.ingsw.view.statusActive.PlaceCardState;
+import it.polimi.ingsw.view.statusActive.PlaceNewCardState;
 import it.polimi.ingsw.view.statusActive.StateActive;
 import it.polimi.ingsw.view.statusWaiting.StateMenu;
 import it.polimi.ingsw.view.statusWaiting.*;
@@ -403,6 +404,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public void invalidCardPlacement() throws RemoteException {
         ui.show_invalidPlay();
+        state2 = new PlaceNewCardState(this, this.input);
+        state2.execute();
     }
 
     @Override
