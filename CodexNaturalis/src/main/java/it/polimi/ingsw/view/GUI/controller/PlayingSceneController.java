@@ -13,11 +13,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
@@ -32,8 +34,8 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
-import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
+import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
+
 //non è definitivo ma è una buona base
 public class PlayingSceneController extends AbstractController {
     @FXML
@@ -617,6 +619,70 @@ public class PlayingSceneController extends AbstractController {
         imageViews[point].setImage(imageMaker);
     }
 
+    private int currentIndex = 0;
+
+    private void createRulebookTab() {
+        Tab rulebookTab = new Tab();
+        rulebookTab.setText("Rulebook");
+
+        // Create ImageView
+        ImageView rulebookImageView = new ImageView();
+        rulebookImageView.setFitWidth(842.0);
+        rulebookImageView.setFitHeight(736.0);
+        rulebookImageView.setLayoutX(272.0);
+        rulebookImageView.setLayoutY(13.0);
+        rulebookImageView.setPreserveRatio(true);
+        rulebookImageView.setPickOnBounds(true);
+
+        // Load image
+        Image image = createRulebookImage().getFirst();
+        rulebookImageView.setImage(image);
+
+        // Create Buttons
+        Button previousButton = new Button();
+        previousButton.setLayoutX(206.0);
+        previousButton.setLayoutY(355.0);
+        previousButton.setPrefWidth(53.0);
+        previousButton.setPrefHeight(53.0);
+        previousButton.setText("<");
+        previousButton.setOnMouseClicked(mouseEvent -> showPreviousImage(rulebookImageView));
+
+        Button nextButton = new Button();
+        nextButton.setLayoutX(1019.0);
+        nextButton.setLayoutY(354.0);
+        nextButton.setPrefWidth(53.0);
+        nextButton.setPrefHeight(53.0);
+        nextButton.setText(">");
+        nextButton.setOnMouseClicked(mouseEvent -> showNextImage(rulebookImageView));
+
+        // Create AnchorPane for content
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefWidth(200.0);
+        anchorPane.setPrefHeight(180.0);
+        anchorPane.getChildren().addAll(rulebookImageView, previousButton, nextButton);
+
+        // Set content to Tab
+        rulebookTab.setContent(anchorPane);
+
+        tabPane.getTabs().add(rulebookTab);
+    }
+
+
+
+    private void showPreviousImage(ImageView rulebook) {
+        if (currentIndex > 0) {
+            currentIndex--;
+            rulebook.setImage(createRulebookImage().get(currentIndex));
+        }
+    }
+
+    private void showNextImage(ImageView rulebook) {
+        if (currentIndex < createRulebookImage().size() - 1) {
+            currentIndex++;
+            rulebook.setImage(createRulebookImage().get(currentIndex));
+        }
+    }
+
     public void showYourTurnAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -780,6 +846,7 @@ public class PlayingSceneController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
+        this.createRulebookTab();
         tabPane.getSelectionModel().select(2);
         this.showYourTurnAlert();
     }
