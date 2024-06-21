@@ -252,7 +252,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void winner(GameView view, List<String> winner){
+    public void winner(GameView view, List<String> winner) throws RemoteException{
         try{
             out.writeObject(new Winner(view, winner));
             completeForwarding();

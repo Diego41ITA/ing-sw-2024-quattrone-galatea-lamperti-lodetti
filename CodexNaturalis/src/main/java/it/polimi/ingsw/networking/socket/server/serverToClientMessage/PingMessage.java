@@ -12,7 +12,7 @@ public class PingMessage extends ServerNotification{
         this.view = game;
     }
     @Override
-    public void execute(GameObserver obs) throws IOException{
+    public void execute(GameObserver obs) throws IOException, InterruptedException{
         obs.pingTheClient(view);
     }
 }
