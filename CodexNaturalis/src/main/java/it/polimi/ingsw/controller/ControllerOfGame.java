@@ -134,7 +134,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @throws RemoteException
      */
     @Override
-    public void definePlayer(String nick) throws RemoteException{
+    public synchronized void definePlayer(String nick) throws RemoteException{
         this.initializePlayers(nick);
         this.getPossibleGoals(nick);
         this.initializeHandPlayer(nick);
@@ -641,7 +641,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param nick Nickname of the Player.
      */
     @Override
-    public void initializeHandPlayer(String nick) {
+    public synchronized void initializeHandPlayer(String nick) {
         List<Player> players;
         players = game.getPlayers();
         TableOfDecks table = game.getTableOfDecks();
