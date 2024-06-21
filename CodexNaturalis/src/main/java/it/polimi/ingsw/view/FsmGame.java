@@ -41,7 +41,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public boolean inGame;
     private InputParser input;
 
-    private String winner = null; //puo essere estesa la classe DbCardInfo, magari rinominandola DbGameInfo
+    private List<String> winner = null; //puo essere estesa la classe DbCardInfo, magari rinominandola DbGameInfo
     private boolean stay = true;
 
     //metto 4 attributi State
@@ -144,7 +144,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                     }
                 }
                 ui.show_winner(winner);
-                if(winner.equals(nickname))
+                if(winner.contains(nickname))
                     ui.show_youWin();
                 else
                     ui.show_youLose();
@@ -194,7 +194,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         return nickname;
     }
 
-    public String getWinner(){
+    public List<String> getWinner(){
         return this.winner;
     }
 
@@ -436,8 +436,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     }
 
     @Override
-    public void winner(GameView game, String winner){
-        this.winner = winner;
+    public void winner(GameView game, List<String> winner){
+        this.winner = new ArrayList<>(winner);
         setGameView(game);
         synchronized (lock){
             lock.notify();

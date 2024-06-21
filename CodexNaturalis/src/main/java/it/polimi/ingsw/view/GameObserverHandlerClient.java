@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 //implementa GameObserver e nel caso di RMI viene esportata in modo che quando si effettua una chiamata a metodi di
 //GameObserver si comporta come un oggetto remoto => ha come effetto quello di chiamare metodi di flow di conseguenza
@@ -30,7 +31,7 @@ public class GameObserverHandlerClient implements GameObserver, Serializable {
     }
 
     @Override
-    public void winner(GameView game, String nick) throws RemoteException {
+    public void winner(GameView game, List<String> nick) throws RemoteException {
         flow.winner(game, nick);
     }
 

@@ -9,6 +9,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * this interface defines all the operation that are available on Controller of Game object.
@@ -47,7 +48,7 @@ public interface ControllerOfGameInterface extends Remote {
      * @return the name of the winner.
      * @throws RemoteException
      */
-    public String calculateWinner() throws RemoteException;
+    public List<String> calculateWinner() throws RemoteException;
 
     /**
      * this method tries to select a goal card as the personal goal for the client.

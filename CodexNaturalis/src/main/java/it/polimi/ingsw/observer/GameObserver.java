@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * exposes all {@link HandleObserver} methods,
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public interface GameObserver extends Remote{
 
     void invalidCardPlacement()throws RemoteException;
-    void winner(GameView game, String nick)throws RemoteException;
+    void winner(GameView game, List<String> nick)throws RemoteException;
     void updatePlayerAndMaxNumberPlayer(GameView game)throws RemoteException;
     void update20PointsReached(GameView game)throws RemoteException;
     void updateTableOfDecks(GameView game)throws RemoteException;

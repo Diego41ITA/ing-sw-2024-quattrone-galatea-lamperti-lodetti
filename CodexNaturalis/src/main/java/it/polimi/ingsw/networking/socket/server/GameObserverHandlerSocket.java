@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -251,7 +252,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
     }
 
     @Override
-    public void winner(GameView view, String winner){
+    public void winner(GameView view, List<String> winner){
         try{
             out.writeObject(new Winner(view, winner));
             completeForwarding();
