@@ -4,6 +4,7 @@ import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.networking.rmi.ClientRMI;
 import it.polimi.ingsw.networking.socket.client.ClientSocket;
+import it.polimi.ingsw.view.GUI.controller.EndController;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import it.polimi.ingsw.view.GUI.controller.PlayingSceneController;
 import it.polimi.ingsw.view.GUI.controller.WaitingSceneController;
@@ -333,7 +334,8 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_winner(List<String> name) {
-        //nothing, end scene already shows the winner
+        EndController controller = (EndController) abstractController;
+        controller.setWinnerNick(name.getFirst());
     }
 
     @Override
