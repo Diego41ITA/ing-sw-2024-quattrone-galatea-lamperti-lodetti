@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetNumberOfPlayersController">
    <children>
-      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" styleClass="stack-pane-custom" stylesheets="@../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text layoutX="232.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Set Number Of Players">
          <font>
             <Font size="26.0" />

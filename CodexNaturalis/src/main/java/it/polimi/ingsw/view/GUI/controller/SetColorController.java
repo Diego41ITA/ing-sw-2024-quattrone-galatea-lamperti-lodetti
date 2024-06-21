@@ -2,12 +2,13 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
-import it.polimi.ingsw.view.TUI.Cli;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
+
+import static it.polimi.ingsw.view.UI.freeColors;
 
 public class SetColorController extends AbstractController {
     @FXML
@@ -33,7 +34,7 @@ public class SetColorController extends AbstractController {
         multipleResponses.add("blue");
     }
     //mette la visibilità dei bottoni false di dafault
-    @FXML
+
     public void initializeColorButton(){
         red.setVisible(false);
         green.setVisible(false);
@@ -47,8 +48,8 @@ public class SetColorController extends AbstractController {
      */
     public void setUpController(FsmGame game) {
         setGame(game);
-        ArrayList<Color> colors = Cli.freeColors(game.getView());
-
+        ArrayList<Color> colors = freeColors(game.getView());
+        initializeColorButton();
         for (Color color:colors) {
             if (color == Color.RED) {
                 red.setVisible(true);

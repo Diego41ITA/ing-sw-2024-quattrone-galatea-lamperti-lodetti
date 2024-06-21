@@ -32,4 +32,5 @@ public class MenuController extends AbstractController implements Initializable 
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
     }
+
 }

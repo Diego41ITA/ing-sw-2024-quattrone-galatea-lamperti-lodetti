@@ -37,7 +37,7 @@ import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 //non è definitivo ma è una buona base
 public class PlayingSceneController extends AbstractController {
     @FXML
-    private Text gameId;
+    private Label gameId;
     @FXML
     private Pane anchor1;
     @FXML
@@ -258,6 +258,9 @@ public class PlayingSceneController extends AbstractController {
     //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
     private void setGameId(String id){
         gameId.setText(id);
+        Tooltip tooltip = new Tooltip("This is the id of the game you are connected to. Don't forget it!" +
+                "it is neeed if you want to reconnect to this game");
+        Tooltip.install(gameId, tooltip);
     }
 
     //crea un immagine e ne assegna le dimensioni, restituisce un immagine che verrà settata per le carte iniziali
@@ -290,6 +293,31 @@ public class PlayingSceneController extends AbstractController {
             imageView.setPreserveRatio(true);
 
             pane.getChildren().add(imageView);
+        }
+
+        ImageView imageMakerPlayer = createImageView(makerAssociator(player.getColor()));
+        if(player.getNick().equals(getGameView().getTurn().getFirstPlayerNick())){
+            ImageView imageMakerBlack = createImageView(makerAssociator(Color.BLACK));
+            imageMakerBlack.setFitWidth(15);
+            imageMakerBlack.setFitHeight(15);
+            imageMakerBlack.setLayoutX(621);
+            imageMakerBlack.setLayoutY(373);
+            imageMakerBlack.setPreserveRatio(true);
+            imageMakerPlayer.setFitWidth(15);
+            imageMakerPlayer.setFitHeight(15);
+            imageMakerPlayer.setLayoutX(645);
+            imageMakerPlayer.setLayoutY(373);
+            imageMakerPlayer.setPreserveRatio(true);
+            pane.getChildren().add(imageMakerBlack);
+            pane.getChildren().add(imageMakerPlayer);
+        }
+        else {
+            imageMakerPlayer.setFitWidth(15);
+            imageMakerPlayer.setFitHeight(15);
+            imageMakerPlayer.setLayoutX(621);
+            imageMakerPlayer.setLayoutY(373);
+            imageMakerPlayer.setPreserveRatio(true);
+            pane.getChildren().add(imageMakerPlayer);
         }
 
         // Create a new Tab and set the Pane as its content

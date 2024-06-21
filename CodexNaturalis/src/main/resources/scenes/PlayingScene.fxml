@@ -107,9 +107,9 @@
                   <ImageView fx:id="firstCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="secondCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="thirdCardBack" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="gameId" layoutX="1116.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Gameid" />
                   <Text layoutX="828.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Personal goal card" />
                   <ImageView fx:id="personalCard" fitHeight="150.0" fitWidth="200.0" layoutX="886.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="gameId" layoutX="1119.0" layoutY="696.0" styleClass="text-inGame-style" text="Gameid" textFill="WHITE" />
                </children>
             </AnchorPane>
         </content>

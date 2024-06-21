@@ -52,8 +52,6 @@ public class WaitingSceneController extends AbstractController {
     private ImageView secondCardBack;
     @FXML
     private ImageView thirdCardBack;
-    @FXML
-    private Text yourLastTurn;
     //sono tutte le immagini che conterrano i maker nella point table
     @FXML
     private ImageView image0;
@@ -343,11 +341,6 @@ public class WaitingSceneController extends AbstractController {
         }
     }
 
-    //mi rende visibile il messaggio che è l'ultimo turno
-    public void setLastTurn(){
-        yourLastTurn.setVisible(true);
-    }
-
     //inserisce le image0 all'interno del imageView array
     public void initializeImageArray(){
         imageViews[0] = image0;
@@ -391,7 +384,6 @@ public class WaitingSceneController extends AbstractController {
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
         GameView gameView = updatedGame.getView();
-        yourLastTurn.setVisible(false);
         this.initializeImageArray();
         GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
         Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));

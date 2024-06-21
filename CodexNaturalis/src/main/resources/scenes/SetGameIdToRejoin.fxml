@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="root" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.SetGameIdToRejoinController">
    <children>
-      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" styleClass="stack-pane-custom" stylesheets="@../Style.css" />
+      <StackPane opacity="0.5" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../Style.css" />
       <Text layoutX="189.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Insert GameId to Rejoin">
          <font>
             <Font size="36.0" />

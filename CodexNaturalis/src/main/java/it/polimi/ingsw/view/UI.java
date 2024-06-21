@@ -4,8 +4,11 @@ import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
+import it.polimi.ingsw.model.gameDataManager.Color;
+import it.polimi.ingsw.model.gameDataManager.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -95,4 +98,13 @@ public interface UI {
     public void show_requestToLeave();
 
     public void show_abortGame();
+    public static ArrayList<Color> freeColors(GameView gameView){
+        ArrayList<Color> freeColors = new ArrayList<>(Arrays.asList(Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN));
+        if(gameView != null) {
+            for (Player p : gameView.getPlayers()) {
+                freeColors.remove(p.getColor());
+            }
+        }
+        return freeColors;
+    }
 }

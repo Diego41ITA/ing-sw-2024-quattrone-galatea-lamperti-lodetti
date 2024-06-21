@@ -126,7 +126,7 @@ public class Cli implements UI {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nCHOOSE A COLOR:\n");
 
-        for (Color c : freeColors(gameView)) {
+        for (Color c : UI.freeColors(gameView)) {
             stringBuilder.append(c + ", ");
         }
 
@@ -134,16 +134,6 @@ public class Cli implements UI {
         stringBuilder.append("\n");
 
         System.out.println(stringBuilder.toString());
-    }
-
-    public static ArrayList<Color> freeColors(GameView gameView){
-        ArrayList<Color> freeColors = new ArrayList<>(Arrays.asList(Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN));
-        if(gameView != null) {
-            for (Player p : gameView.getPlayers()) {
-                freeColors.remove(p.getColor());
-            }
-        }
-        return freeColors;
     }
 
     @Override
