@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
@@ -17,7 +18,7 @@ public class EndController extends AbstractController{
 
     //Quando clicco il mouse eseguo questo metodo che mi esce dall'app
     public void exit(ActionEvent e){
-        System.exit(-1);;
+        Platform.exit();
     }
 
     /**

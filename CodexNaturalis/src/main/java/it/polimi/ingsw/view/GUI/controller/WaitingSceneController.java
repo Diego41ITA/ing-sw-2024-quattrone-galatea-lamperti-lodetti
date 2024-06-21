@@ -502,5 +502,6 @@ public class WaitingSceneController extends AbstractController {
         }
         this.setUpTableOfDecks();
         this.createRulebookTab();
+        this.showWaitTurnAlert();
     }
 }

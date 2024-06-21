@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
 
 //non è definitivo ma è una buona base
-public class PlayingSceneController extends AbstractController {
+public class PlayingSceneController extends InGameController {
     @FXML
     private Label gameId;
     @FXML
@@ -279,54 +279,12 @@ public class PlayingSceneController extends AbstractController {
         return imageView;
     }
 
-    private void createGameStationTabPane(Player player) {
-        Pane pane = new Pane();  // Create a single Pane
-        GameStation gameStation = getGameView().getMyGameStation(player.getNick());
-        for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
-            Point point = entry.getKey();
-            PlayableCard card = entry.getValue();
-
-            double layoutX = 615 + (point.getX() * (37));
-            double layoutY = 364 + (point.getY()) * (21);
-
-            // Create ImageView and add it to the Pane
-            ImageView imageView = createImageView(associatorPng2Card(String.valueOf(card.getCardId()), card.isFront()));
-            imageView.setFitHeight(33);
-            imageView.setFitWidth(65);
-            imageView.setLayoutX(layoutX);
-            imageView.setLayoutY(layoutY);
-            imageView.setPreserveRatio(true);
-
-            pane.getChildren().add(imageView);
-        }
-
-        ImageView imageMakerPlayer = createImageView(makerAssociator(player.getColor()));
-        if(player.getNick().equals(getGameView().getTurn().getFirstPlayerNick())){
-            ImageView imageMakerBlack = createImageView(makerAssociator(Color.BLACK));
-            imageMakerBlack.setFitWidth(15);
-            imageMakerBlack.setFitHeight(15);
-            imageMakerBlack.setLayoutX(621);
-            imageMakerBlack.setLayoutY(373);
-            imageMakerBlack.setPreserveRatio(true);
-            imageMakerPlayer.setFitWidth(15);
-            imageMakerPlayer.setFitHeight(15);
-            imageMakerPlayer.setLayoutX(645);
-            imageMakerPlayer.setLayoutY(373);
-            imageMakerPlayer.setPreserveRatio(true);
-            pane.getChildren().add(imageMakerBlack);
-            pane.getChildren().add(imageMakerPlayer);
-        }
-        else {
-            imageMakerPlayer.setFitWidth(15);
-            imageMakerPlayer.setFitHeight(15);
-            imageMakerPlayer.setLayoutX(621);
-            imageMakerPlayer.setLayoutY(373);
-            imageMakerPlayer.setPreserveRatio(true);
-            pane.getChildren().add(imageMakerPlayer);
-        }
+    private void createAndAddGameStationTab(Player player) {
 
         // Create a new Tab and set the Pane as its content
         Tab tab = new Tab(player.getNick() + "'s GameStation");
+
+        Pane pane = createGameStationTabPane(player);
         tab.setContent(pane);
         tab.setId("tab" + (player.getNick()));
 
@@ -619,8 +577,6 @@ public class PlayingSceneController extends AbstractController {
         imageViews[point].setImage(imageMaker);
     }
 
-    private int currentIndex = 0;
-
     private void createRulebookTab() {
         Tab rulebookTab = new Tab();
         rulebookTab.setText("Rulebook");
@@ -667,7 +623,7 @@ public class PlayingSceneController extends AbstractController {
         tabPane.getTabs().add(rulebookTab);
     }
 
-
+    private int currentIndex = 0;
 
     private void showPreviousImage(ImageView rulebook) {
         if (currentIndex > 0) {
@@ -682,6 +638,7 @@ public class PlayingSceneController extends AbstractController {
             rulebook.setImage(createRulebookImage().get(currentIndex));
         }
     }
+
 
     public void showYourTurnAlert() {
         // Create a new alert dialog
@@ -828,7 +785,7 @@ public class PlayingSceneController extends AbstractController {
         this.initializeImageArray();
         this.setGameId(gameView.getId());
         for(Player p : gameView.getPlayers())
-            this.createGameStationTabPane(p);
+            this.createAndAddGameStationTab(p);
 
         for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
             Color color = entry.getKey();
@@ -846,7 +803,7 @@ public class PlayingSceneController extends AbstractController {
         this.makeHandCardsPlayable(cards);
         this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
-        this.createRulebookTab();
+        createRulebookTab();
         tabPane.getSelectionModel().select(2);
         this.showYourTurnAlert();
     }
