@@ -20,7 +20,11 @@ public class InputGui implements InputParser {
         return Integer.parseInt(multipleResponses.get(multipleResponses.size()-1));
 
          */
-        return Integer.parseInt(multipleResponses.getFirst());
+        try{
+            return Integer.parseInt(multipleResponses.getFirst());
+        }catch (NumberFormatException e){
+            return 0;
+        }
     }
 
     //devono essere implementati
