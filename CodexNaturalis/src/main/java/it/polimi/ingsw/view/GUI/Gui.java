@@ -335,7 +335,7 @@ public class Gui extends Application implements UI {
     @Override
     public void show_winner(List<String> name) {
         EndController controller = (EndController) abstractController;
-        controller.setWinnerNick(name.getFirst());
+        Platform.runLater(() -> controller.setWinnerNick(name.getFirst()));
     }
 
     @Override
