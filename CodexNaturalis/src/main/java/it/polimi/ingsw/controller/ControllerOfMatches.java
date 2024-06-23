@@ -40,6 +40,8 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      */
     private final Random random = new Random();
 
+    private final IdSet idSet;
+
     private RoutineDelete routine;
     /**
      * Default constructor that initialize the ArrayList for the activeGames
@@ -48,21 +50,13 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         super();
         this.activeGames = new ArrayList<ControllerOfGame>();
 
-        //if the server comes back up it can restore all the saved games
-        /*URL resourceUrl = getClass().getClassLoader().getResource("JsonGames");
-        try{
-            //Path resourcePath = Paths.get(resourceUrl.toURI());
-            String resourcePathString = resourceUrl.getPath();
-            restoreAllStoredGames(resourcePathString);
-            System.out.println("the path to the directory is: " + resourcePathString);
-        }catch (NullPointerException e){
-            e.printStackTrace();
-            e.getCause();
-        }*/
         String resourcePathString = "CodexNaturalis/SavedGames";
         restoreAllStoredGames(resourcePathString);
         System.out.println("the path to the directory is: " + resourcePathString);
         printActiveGames();
+
+        //initializes the set of possible id.
+        this.idSet = new IdSet(this.activeGames);
 
         //devo avviare le routine di ping per ogni controller dei game attivi.
         for(ControllerOfGame game: activeGames){
@@ -101,7 +95,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     @Override
     public synchronized ControllerOfGameInterface createGame(GameObserver obs, String nick, int maxNumPlayers) throws RemoteException{
         Player player = new Player(nick);
-        String gameID = "Game" + (activeGames.size() + 1);
+        String gameID = "Game" + idSet.getRandomId();
         ControllerOfGame controller = new ControllerOfGame(gameID, maxNumPlayers);
         controller.addObserver(obs, nick);
         controller.readiness.put(nick, 0);
