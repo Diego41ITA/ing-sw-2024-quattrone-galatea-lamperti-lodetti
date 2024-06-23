@@ -9,6 +9,8 @@ import it.polimi.ingsw.model.gameDataManager.TableOfDecks;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.InGameController;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -677,8 +679,21 @@ public class PlayingSceneController extends InGameController {
         ButtonType okButton = new ButtonType("OK");
         alert.getButtonTypes().setAll(okButton);
 
-        // Show the alert and wait for the user to close it
-        alert.showAndWait();
+        alert.show();
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(4000),
+                ae -> alert.close()
+        ));
+        timeline.play();
+        // Add an event handler for the OK button
+        alert.resultProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == okButton) {
+                timeline.stop(); // Stop the timeline if the OK button is pressed
+                alert.close(); // Close the alert
+            }
+        });
+
     }
 
     public void showDrawAlert() {

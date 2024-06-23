@@ -115,7 +115,7 @@ public class Cardtest {
 
 
     @Test
-    public void testGeResources() {
+    public void testGetResources() {
         HashMap<Item, Integer> expectedResources = new HashMap<>();
         expectedResources.put(Item.MUSHROOM, 2);
         expectedResources.put(Item.ANIMAL,1);
