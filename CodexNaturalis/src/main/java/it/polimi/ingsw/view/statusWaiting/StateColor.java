@@ -9,12 +9,20 @@ import it.polimi.ingsw.view.input.InputParser;
 
 import java.rmi.RemoteException;
 
+/**
+ * this is the state where the client must choose the color he wants
+ */
 public class StateColor extends StateWaiting {
     private UI ui;
     private ClientAction client;
     private String nick;
     private GameView view;
 
+    /**
+     * this builds an instance of the class
+     * @param flow the corresponding FsmGame
+     * @param input the corresponding inputGetter
+     */
     public StateColor(FsmGame flow, InputParser input){
         super(flow, input);
         this.ui = flow.getUi();
@@ -23,6 +31,9 @@ public class StateColor extends StateWaiting {
         view = flow.getView();
     }
 
+    /**
+     * this method contains the logic to ask the player to choose a color and to forward the choice to the server
+     */
     @Override
     public void execute() {
 
