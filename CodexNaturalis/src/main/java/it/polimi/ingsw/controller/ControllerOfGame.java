@@ -705,7 +705,11 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     }
 
     //----------------------------------------------------------------------------------------------------------
-    //ritorna id del gioco
+
+    /**
+     * method to get the id of the controlled game
+     * @return the id of the controlled game.
+     */
     public String getGameId() {
         return game.getId();
     }
@@ -741,7 +745,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
             game.setStatus(Status.ACTIVE);
             for (HashMap.Entry<String, HandleObserver> entry : observers.entrySet()) {
                 HandleObserver obs = entry.getValue();
-                obs.notify_CurrentPlayerUpdated(game);//capire che argomenti mettergli
+                obs.notify_CurrentPlayerUpdated(game);
             }
         }
         changePlayerStatus(player, true);

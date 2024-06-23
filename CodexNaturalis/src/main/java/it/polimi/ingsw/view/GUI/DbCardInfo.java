@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -12,10 +12,11 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class DbCardInfo {
     private static DbCardInfo dbCardInfo;
-    private LinkedBlockingQueue<CardRecord> cardRecords;
-
+    private final LinkedBlockingQueue<CardRecord> cardRecords;
+    private final LinkedBlockingQueue<List<String>> winnersRecord;
     private DbCardInfo(){
         this.cardRecords = new LinkedBlockingQueue<>();
+        this.winnersRecord = new LinkedBlockingQueue<>();
     }
 
     public static DbCardInfo getInstance(){
@@ -36,6 +37,22 @@ public class DbCardInfo {
     public CardRecord readCardRecord(){
         try {
             return this.cardRecords.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addWinners(List<String> winners){
+        try {
+            this.winnersRecord.put(winners);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> readWinners(){
+        try {
+            return this.winnersRecord.take();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -456,8 +456,9 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     }
 
     @Override
-    public void winner(GameView game, List<String> winner){
-        this.winner = new ArrayList<>(winner);
+    public void winner(GameView game, List<String> winners){
+        this.winner = new ArrayList<>(winners);
+        DbCardInfo.getInstance().addWinners(winners);
         setGameView(game);
         synchronized (lock){
             lock.notify();
