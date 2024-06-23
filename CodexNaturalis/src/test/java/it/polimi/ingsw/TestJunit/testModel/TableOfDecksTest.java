@@ -57,7 +57,7 @@ public class TableOfDecksTest {
         assertEquals(goalCard2, table.getGoals().get(2));
     }
     @Test
-    public void testSetCards() {
+    public void testOtherMethods() {
         table.setCards(table.getCards().get(0)); // Replace the first card
         // Assert that the first card has been replaced correctly
         assertEquals(4, table.getCards().size()); // Ensure still 4 cards in total
@@ -65,6 +65,10 @@ public class TableOfDecksTest {
         // Test setting cards when the resource deck is empty
         table.setDeckResource(new Deck<>(empty)); // Empty the resource deck
         table.setCards(table.getCards().get(0)); // Try replacing the first card again
+        //verify resource cards are 2 and also gold cards
+        assertEquals(table.getResourceCards().size(), 2);
+        assertEquals(table.getGoldCards().size(), 2);
+        table.getGoldCards();
         // Assert that the first card is null due to empty deck
         assertNull(table.getCards().get(0));
     }
