@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.statusActive;
 
 import it.polimi.ingsw.GameView.GameView;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.UI;
@@ -73,8 +72,6 @@ public class PlaceCardState extends StateActive{
                 flag = true;
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            }catch(illegalOperationException e){
-                flag = true;
             }
         }
         this.nextState();

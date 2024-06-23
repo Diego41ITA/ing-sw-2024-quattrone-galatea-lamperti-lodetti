@@ -54,7 +54,7 @@ public interface ClientAction {
      */
     void rejoin(String idGame, String nick) throws IOException, InterruptedException;
 
-    void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws IOException, illegalOperationException;
+    void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws IOException;
     void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) throws RemoteException;
     void goOn() throws IOException;
     void setColor(String color, String name) throws RemoteException;

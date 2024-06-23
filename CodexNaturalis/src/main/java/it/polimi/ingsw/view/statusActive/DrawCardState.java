@@ -9,8 +9,10 @@ import it.polimi.ingsw.view.input.InputParser;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Scanner;
 
+/**
+ * this is the state that allows the player to draw a card from the table.
+ */
 public class DrawCardState extends StateActive{
 
     private GameView view = flow.getView();
@@ -18,6 +20,11 @@ public class DrawCardState extends StateActive{
     private ClientAction client = flow.getClient();
     private String nickName = flow.getNickname();
 
+    /**
+     * this is the only constructor: it has the FsmGame associated and the input getter.
+     * @param flow
+     * @param input
+     */
     public DrawCardState(FsmGame flow, InputParser input){
         super(flow, input);
         this.view = flow.getView();
@@ -26,15 +33,14 @@ public class DrawCardState extends StateActive{
         this.nickName = flow.getNickname();
     }
 
+    /**
+     * this method ask the user to draw a card and manages all the possible input combinations.
+     */
     @Override
-    public void execute(){ //manca exception in gameController
+    public void execute(){
 
         String typeOfCard, input;
         ui.show_tableOfDecks(view);
-        /*do {
-            ui.show_requestTypeToDraw();
-            typeOfCard = inputGetter.getTypeOfCard();
-        }while(!(typeOfCard.equalsIgnoreCase("resource") || typeOfCard.equalsIgnoreCase("gold")));*/
 
         ui.show_drawFromWhere();
         do {
@@ -78,6 +84,9 @@ public class DrawCardState extends StateActive{
         nextState();
     }
 
+    /**
+     * the concrete "next state" doesn't exist: it should just go on and another player will play.
+     */
     @Override
     public void nextState(){
         try {

@@ -233,7 +233,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param cord       A {@link Point} object representing the chosen coordinate.
      */
     @Override
-    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException{ //problema caso coordinata sbagliata, nel catch la carta rimossa va riaggiunta(altrimenti o non si usa la notify o si crea un altro metodo)
+    public void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException{
         List<Player> players;
         players = game.getPlayers();
         GameStation gamestation = null;
