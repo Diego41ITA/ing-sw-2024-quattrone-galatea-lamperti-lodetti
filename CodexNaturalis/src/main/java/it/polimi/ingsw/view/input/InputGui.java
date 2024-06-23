@@ -4,22 +4,21 @@ import it.polimi.ingsw.view.GUI.MultipleResponses;
 
 import java.awt.*;
 
+/**
+ * This class reads an input when the user interface is graphical. To do so all the methods blocks the flow until there
+ * is a valid readable input.
+ */
 public class InputGui implements InputParser {
-    //questa arrayList contiene i valori degli input che l'utente ha inserito tramite i bottoni della gui
+    /**
+     * this object contains
+     */
     protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
-    //idea: creare dei metodi che ciclano sugli ultimi elementi dell'array multipleResponses e fin quando
-    //non hanno un valori validi aspettano a restiture qualcosa
-    //esempio:
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getNumberOfPlayer() {
-        /*
-        //ciclo infinito fin quando l'ultimo elemento dell'array non è un numero
-        while(!(Character.isDigit( multipleResponses.get(multipleResponses.size()-1).charAt(0)))){
-        }
-        //ritorno il numero
-        return Integer.parseInt(multipleResponses.get(multipleResponses.size()-1));
-
-         */
         try{
             return Integer.parseInt(multipleResponses.getFirst());
         }catch (NumberFormatException e){
@@ -27,7 +26,9 @@ public class InputGui implements InputParser {
         }
     }
 
-    //devono essere implementati
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean getSideOfTheCard() {
         String result = multipleResponses.getFirst();
@@ -36,31 +37,41 @@ public class InputGui implements InputParser {
         return var;
     }
 
-    /*
-    deve ritornare un intero che rappresenta l'id della carta -> si salvano gli id nel controller di table of decks
-    e quando viene scelto invece che ritornare pos1 o pos2 si ritorna l'id della carta.
+    /**
+     * {@inheritDoc}
      */
     @Override
     public int getCardId() {
         return Integer.parseInt(multipleResponses.getFirst());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getColor() {
         return multipleResponses.getFirst();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTypeOfCard() {
         return multipleResponses.getFirst();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDrawFromDeckOrTable() {
         return multipleResponses.getFirst();
     }
 
-    //bisognerà fare una cosa analoga a getCardId()
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Point getCoordinate() {
         int x = Integer.parseInt(multipleResponses.getFirst());
@@ -69,16 +80,25 @@ public class InputGui implements InputParser {
         return new Point(x, y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getNickName() {
         return multipleResponses.getFirst();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOption() {
         return multipleResponses.getFirst();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getGameId() {
         return multipleResponses.getFirst();
