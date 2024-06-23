@@ -84,6 +84,9 @@ public class Cli implements UI {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_startingMenu() {
         System.out.println("""
@@ -106,11 +109,17 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_message(String message) {
         System.out.println(message);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_joinRandomGame() {
         System.out.println("""
@@ -121,6 +130,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestPlayerColor(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -136,6 +148,9 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_noAvailableGames() {
         System.out.println("""
@@ -148,20 +163,9 @@ public class Cli implements UI {
                 """);
     }
 
-    @Override
-    public void show_createNewGame() {
-        System.out.println("""
-                CREATING A NEW GAME...
-                """);
-    }
-
-    @Override
-    public void show_reconnectGame() {
-        System.out.println("""
-                RECONNECTING TO THE GAME...
-                """);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidIdGame() {
         System.out.println("""
@@ -169,16 +173,9 @@ public class Cli implements UI {
                 """);
     }
 
-    @Override
-    public void show_NickAlreadyUsed(GameView gameView) {
-        StringBuilder str = new StringBuilder();
-        str.append("NICKNAME ALREADY USED!\n").append("\n").append("ALREADY USED NICKNAMES:\n");
-        for(Player p : gameView.getPlayers()) {
-            str.append(p.getNick()).append('\n');
-        }
-        System.out.println(str.toString());
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidNickToReconnect(String id){
         StringBuilder str = new StringBuilder();
@@ -187,6 +184,9 @@ public class Cli implements UI {
         System.out.println(str.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_currentPlayersStatus(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -197,6 +197,9 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_playerColors(GameView gameView) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -207,16 +210,25 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_GameStatus(GameView gameView){
         System.out.println(gameView.getStatus().toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_RequestPlayerNickName() {
         System.out.println("\nENTER A NICKNAME:\n");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_RequestGameId() {
         System.out.println("""
@@ -224,6 +236,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_RequestNumberOfPlayers() {
         System.out.println("""
@@ -231,6 +246,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_playerJoined(String id) {
         System.out.println("""
@@ -242,11 +260,9 @@ public class Cli implements UI {
         System.out.println("THE ID OF THE GAME IS: " + id + ". DON'T FORGET IT! IT'S NEEDED IF YOU WANT TO RECONNECT");
     }
 
-    @Override
-    public void show_playerLeft(String playerNickName) {
-        System.out.println(playerNickName + " LEFT");
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_initialCard(InitialCard card){
                 StringBuilder stringBuilder = new StringBuilder();
@@ -272,16 +288,25 @@ public class Cli implements UI {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_gameStarting(String id) {
         System.out.println("\nGAME: " + id + " IS STARTING");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_playingScene(GameView immutableModel) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_isYourTurn(GameView immutableModel) {
             System.out.println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
@@ -314,7 +339,8 @@ public class Cli implements UI {
                 stringBuilder.append("POINTS: ").append(goldPoint((GoldCard) card)).append(" ".repeat(46));
                 if(((GoldCard) card).getGoldType().equals(GoldType.ANGLE)){
                     stringBuilder.setLength(stringBuilder.length() - 23);
-                }else if(((GoldCard) card).getGoldType().equals(GoldType.ITEM)){
+                }else if(((GoldCard) card).getGoldType().equals(
+                 GoldType.ITEM)){
                     stringBuilder.setLength(stringBuilder.length() - 10 - ((GoldCard) card).getBox().toString().length());
                 }
             } else if (card instanceof ResourceCard) {
@@ -372,6 +398,9 @@ public class Cli implements UI {
         return stringBuilder;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_playerHand(GameView immutableModel, String nickname) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -383,7 +412,7 @@ public class Cli implements UI {
                   █  █ █ █ ▄██   █ ▄██    █  ▀▄▀ ▀▄█ █▀▄   █ █ █▀█ █ ▀█ █▄▀
                                 
                 """);
-//57 lunghezza carte più spazio (5 per ognuna più 2 per ognuna -1)
+
         stringBuilder.append(draw_playableCards(immutableModel.getPlayerByNick(nickname).showCard()));
         stringBuilder.append("\n");
         stringBuilder.append("""
@@ -392,6 +421,9 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_gameStation(GameView view){
 
@@ -559,6 +591,9 @@ public class Cli implements UI {
         return stringBuilder.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidPlay() {
         System.out.println("""
@@ -566,13 +601,9 @@ public class Cli implements UI {
                 """);
     }
 
-    @Override
-    public void show_notEnoughResources() {
-        System.out.println("""
-                NOT ENOUGH RESOURCES!!!
-                """);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String show_goalCard(GoalCard card) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -587,6 +618,9 @@ public class Cli implements UI {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String show_playableCard(PlayableCard card) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -659,6 +693,9 @@ public class Cli implements UI {
         return stringBuilder.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_tableOfDecks(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -697,6 +734,9 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_lastTurn() {
         System.out.println("""
@@ -709,6 +749,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_pointTable(GameView immutableModel) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -740,8 +783,11 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void show_gameOver() {//solo scritta gameover o anche nome vincitore?
+    public void show_gameOver() {
         System.out.println("the game is over now we are calculating the winner...");
     }
 
@@ -877,6 +923,9 @@ public class Cli implements UI {
         return "error";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_youWin(){
         show_message("""
@@ -892,6 +941,9 @@ public class Cli implements UI {
                                                                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_youLose(){
         show_message("""
@@ -908,6 +960,9 @@ public class Cli implements UI {
                                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestGoalCard(ArrayList<GoalCard> cards){
         StringBuilder stringBuilder = new StringBuilder();
@@ -921,11 +976,17 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestCardId() {
         System.out.println("ENTER CARD ID:");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_winner(List<String> winner){
         if(winner.size() == 1)
@@ -936,6 +997,9 @@ public class Cli implements UI {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestTypeToDraw() {
         show_message("""
@@ -946,6 +1010,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_drawFromWhere() {
         show_message("""
@@ -957,6 +1024,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidChoice() {
         show_message("""
@@ -964,6 +1034,9 @@ public class Cli implements UI {
                         """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestSide() {
         System.out.println("""
@@ -973,6 +1046,9 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestCoordinates() {
         System.out.println("""
@@ -982,31 +1058,49 @@ public class Cli implements UI {
                 """);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_connectionError() {
         System.out.println("CONNECTION ERROR, GAME OVER...");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidInput() {
         System.out.println("INVALID INPUT\n");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_invalidCommand() {
         System.out.println("INVALID COMMAND\n");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_waitingOtherPlayers() {
         System.out.println("Waiting for other players...");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_requestToLeave() {
         System.out.println("press any button to leave...");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show_abortGame(){
         System.out.println("this game is abort please quit or try to join another game");

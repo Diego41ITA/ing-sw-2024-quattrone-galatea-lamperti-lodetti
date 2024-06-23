@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Optional;
 
+/**
+ * this state allows the player to play the cards wherever he wants: in respect of the forms and the limits of the
+ * constitution.
+ */
 public class PlaceCardState extends StateActive{
 
     private GameView view;
@@ -21,6 +25,11 @@ public class PlaceCardState extends StateActive{
     private ClientAction client;
     private String nickName;
 
+    /**
+     * this builds an instance of the class
+     * @param flow the corresponding FsmGame
+     * @param input the corresponding inputGetter
+     */
     public PlaceCardState(FsmGame flow, InputParser input) {
         super(flow, input);
         view = flow.getView();
@@ -29,6 +38,9 @@ public class PlaceCardState extends StateActive{
         nickName = flow.getNickname();
     }
 
+    /**
+     * this method contains the logic to ask for information and play the card
+     */
     @Override
     public void execute() {
         Optional<PlayableCard> cardCheck;
@@ -77,15 +89,27 @@ public class PlaceCardState extends StateActive{
         this.nextState();
     }
 
+    /**
+     * this method allows to go to the next state which is DrawCardState
+     */
     @Override
     public void nextState() {new DrawCardState(flow, StateWaiting.inputGetter).execute();
     }
 
+    /**
+     * this method sets the View
+     * @param view the view that's needed to be set.
+     */
     @Override
     public void setView(GameView view) {
         this.view = view;
     }
 
+    /**
+     * this method checks if the coord is available
+     * @param coord the coord that needs to be checked
+     * @return true if and only if the coord is available
+     */
     private boolean checkCoordinate(Point coord){
         ArrayList<Point> freeCoords = (ArrayList<Point>) this.view.getMyGameStation(nickName).getFreeCords();
         return freeCoords.contains(coord);
