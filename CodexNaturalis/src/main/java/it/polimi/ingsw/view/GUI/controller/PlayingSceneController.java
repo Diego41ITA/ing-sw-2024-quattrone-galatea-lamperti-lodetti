@@ -12,6 +12,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -356,7 +357,7 @@ public class PlayingSceneController extends InGameController {
                 rectangle.setFill(Paint.valueOf("FFFFFF"));
 
                 double layoutX = 615 + (point.getX() * 37);
-                double layoutY = 364 + (point.getY() * 21);
+                double layoutY = 364 + (-(point.getY() * 21));
 
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
@@ -367,7 +368,7 @@ public class PlayingSceneController extends InGameController {
                 final int x = point.x;
                 final int y = point.y;
 
-                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, y)));
+                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, -y)));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
                 rectangle.setOnMouseClicked(event -> {
@@ -376,7 +377,7 @@ public class PlayingSceneController extends InGameController {
                         multipleResponses.add(String.valueOf(sideChosenCardToPlay));
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
-                        showCardChosen(playerPane, new Point(x,y));
+                        showCardChosen(playerPane, new Point(x,-y));
                     } else {
                         hideCardChosen(playerPane);
                     }
