@@ -280,7 +280,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public void newGameCreated(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
-        new PingServer(this, this.client, this.lock).start();
+        new PingServer(this, this.client).start();
     }
 
     /**
@@ -290,7 +290,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public void randomGameJoined(String GameID) throws RemoteException {
         ui.show_playerJoined(GameID);
 
-        new PingServer(this, this.client, this.lock).start();
+        new PingServer(this, this.client).start();
 
         inGame = true;
     }
@@ -306,7 +306,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
 
         notStarted = false; //la partita era chiaramente iniziata questo dovrebbe risolvere i problemi senza dover cambiare il resto
 
-        new PingServer(this, this.client, this.lock).start();
+        new PingServer(this, this.client).start();
     }
 
     /**

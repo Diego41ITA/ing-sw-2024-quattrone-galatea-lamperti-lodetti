@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.ControllerOfGame;
 import it.polimi.ingsw.controller.ControllerOfMatches;
 import it.polimi.ingsw.model.gameDataManager.Game;
 import it.polimi.ingsw.model.gameDataManager.Player;
-import it.polimi.ingsw.model.gameDataManager.Status;
 import it.polimi.ingsw.observer.HandleObserver;
 import it.polimi.ingsw.parse.SaverReader;
 
@@ -14,14 +13,27 @@ import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.Map;
 
+/**
+ * this class pings the client constantly and to do so it extends thread class.
+ */
 public class PingTheClient extends Thread{
 
     ControllerOfGame controller;
 
+    /**
+     * it only needs the controller that controls the game where the client is playing
+     * @param controller the controller of the game
+     */
     public PingTheClient(ControllerOfGame controller){
         this.controller = controller;
     }
 
+    /**
+     * it overrides run of thread in order not to slow down the controller class. It manages the consequences of the
+     * possible disconnection: who is the new current player? what happen if the disconnected player was the current
+     * player?
+     * So the user should just provide all the methods to insert/remove an observer from the controller and to goOn.
+     */
     @Override
     public void run(){
         while(!this.isInterrupted()){
@@ -56,15 +68,23 @@ public class PingTheClient extends Thread{
                     ControllerOfMatches matches = null;
                     try {
                         matches = ControllerOfMatches.getMainController();
+                        matches.removeGame(this.controller.getGameId());
                     } catch (RemoteException ex) {
                         System.err.println("this point should have not been reached");
+                    } catch(NullPointerException ex){
+                        //it gently manages the case that there is no match with the same id.
                     }
-                    matches.removeGame(this.controller.getGameId());
+
                 }
             }
         }
     }
 
+    /**
+     * if the current player leaves the match it reloads the last saving: in this way it deletes the actions that the ex
+     * current player has done and the game is going to be surely in a consistent status.
+     * @param gameId the game that needs to be fixed
+     */
     private void reloadGame(String gameId){
         //codice simile a quello di main controller.
         String gamePath = "CodexNaturalis/SavedGames/" + gameId + ".json";

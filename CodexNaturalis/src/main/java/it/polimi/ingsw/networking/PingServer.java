@@ -4,17 +4,28 @@ import it.polimi.ingsw.view.FsmGame;
 
 import java.io.IOException;
 
+/**
+ * this class defines a way to constantly ping the server and avoid deadlocks, it extends thread and it has only one
+ * method (run)
+ */
 public class PingServer extends Thread {
     private final FsmGame game;
     private ClientAction client;
-    private final Object lock;
 
-    public PingServer(FsmGame game, ClientAction client, Object lock) {
+    /**
+     * the constructor links the FsmGame to this class
+     * @param game the flow that needs to be linked
+     * @param client the way to comunicate to the server
+     */
+    public PingServer(FsmGame game, ClientAction client) {
         this.game = game;
         this.client = client;
-        this.lock = lock;
     }
 
+    /**
+     * this overried the run method of thread class, and it simply has the code to ping the server and avoid possible
+     * error. It manages some exceptions in order to start this class in multiple points of the program.
+     */
     @Override
     public void run() {
         while(!this.isInterrupted()){
