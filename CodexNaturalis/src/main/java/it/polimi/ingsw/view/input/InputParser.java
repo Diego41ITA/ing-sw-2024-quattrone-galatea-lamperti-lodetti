@@ -9,7 +9,10 @@ public interface InputParser {
      */
     public String getNickName();
 
-
+    /**
+     * it reads the chosen option from the client
+     * @return it returns the nickname
+     */
     public String getOption();
 
     /**
