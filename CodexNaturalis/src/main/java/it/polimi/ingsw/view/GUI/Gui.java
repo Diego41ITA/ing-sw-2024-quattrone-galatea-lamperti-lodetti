@@ -57,8 +57,7 @@ public class Gui extends Application implements UI {
         this.primaryStage.setResizable(false);
         this.primaryStage.setY(0);
         this.primaryStage.setX(150);
-        //Thread myThread = new Thread(flow);
-        //myThread.start();
+
         flow.start();
 
         //we need to catch the exception to show that the server crashed
@@ -66,13 +65,9 @@ public class Gui extends Application implements UI {
             @Override
             public void uncaughtException(Thread t, Throwable e){
                 System.out.println("connection to server" + client.getClass() + "lost");
-                //System.out.println("you are going to be disconnected, please wait some moment and try to " +
-                //        "restore you game!!!");
-                //e.printStackTrace();
-                //myThread.interrupt();
+
                 flow.interrupt();
-                //dovrà mostrare la scena di chiusura che gestirà close
-                //primaryStage.close();
+
                 Platform.exit();
             }
         });
@@ -142,22 +137,7 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_createNewGame() {
-
-    }
-
-    @Override
-    public void show_reconnectGame() {
-
-    }
-
-    @Override
     public void show_invalidIdGame() {
-
-    }
-
-    @Override
-    public void show_NickAlreadyUsed(GameView gameView) {
 
     }
 
@@ -170,13 +150,8 @@ public class Gui extends Application implements UI {
     public void show_currentPlayersStatus(GameView gameView) {
 
     }
-
     @Override
     public void show_playerColors(GameView gameView) {
-        /*if(primaryStage != null)
-            loadScene("/scenes/waitStart.fxml");
-        else
-            System.out.println("error primary stage is null");*/
     }
 
     @Override
@@ -216,14 +191,7 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_playerJoined(String id) {
-        //un pop-up
     }
-
-    @Override
-    public void show_playerLeft(String playerNickName) {
-        //un pop-up
-    }
-
     @Override
     public void show_gameStarting(String id) {
 
@@ -269,11 +237,6 @@ public class Gui extends Application implements UI {
     }
 
     @Override
-    public void show_notEnoughResources() {
-
-    }
-
-    @Override
     public String show_goalCard(GoalCard card) {
 
         return null;
@@ -289,13 +252,10 @@ public class Gui extends Application implements UI {
     public void show_tableOfDecks(GameView immutableModel) {
     }
 
-    //un pop-up che dica che è iniziato l'ultimo giro.
     @Override
     public void show_lastTurn() {
     }
 
-    //point table is in game station, if we have multiple show() methods that display the "everything" we can
-    //refresh more frequently the interface.
     @Override
     public void show_pointTable(GameView immutableModel) {
     }
@@ -307,12 +267,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_youWin() {
-        //nothing, end scene already shows the winner
     }
 
     @Override
     public void show_youLose() {
-        //nothing, end scene already shows the winner
     }
 
     @Override
@@ -338,7 +296,6 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestTypeToDraw() {
-        //non serve
     }
 
     @Override
@@ -354,12 +311,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_requestSide() {
-        //non serve?
     }
 
     @Override
     public void show_requestCoordinates() {
-        //non serve
     }
 
     @Override

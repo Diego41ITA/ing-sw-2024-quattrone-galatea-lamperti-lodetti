@@ -1,17 +1,13 @@
 package it.polimi.ingsw.view.GUI;
 
-import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-//Quando premiamo un pulsante nella view stiamo in realtà passando una data stringa come input.
-//per esempio se decidiamo di schiacciarer il bottone relativo a Join Random Game stiamo passando
-//come input la stringa A. Questa classe serve ad associare le azioni sui bottoni della view con
-//le stringhe in input
-//si salvano i valori di input all'interno di questa classe che po verranno adoperati dal gameflow
-//per svolgere la logica di gioco
-//questa classe verrà messa nella gui come attributo
+/**
+ * this class is used to hold various input, and it works like a bridge between the gui and the FsmGame, clearly to do so
+ * all the get-methods are blocking.
+ * To optimize the coupling it implements the Singleton Pattern
+ */
 public class MultipleResponses{
-
     private  LinkedBlockingQueue<String> Responses;
     private static MultipleResponses instance = null;
     private MultipleResponses(){
@@ -24,6 +20,10 @@ public class MultipleResponses{
         return instance;
     }
 
+    /**
+     * it adds a String to the queue
+     * @param c the string that you want to add
+     */
     public void add(String c) {
         try {
             Responses.put(c);
@@ -32,60 +32,15 @@ public class MultipleResponses{
         }
     }
 
-    public LinkedBlockingQueue<String> getResponses() {
-        return Responses;
-    }
+    /**
+     * it gets the first element in the list, this is a blocking method
+     * @return the first element (with a FIFO logic)
+     */
     public String getFirst(){
         try {
             return Responses.take();
         } catch (InterruptedException e) {
-            //e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
-
-    public String getLast(){
-        String lastElement = null;
-        LinkedBlockingQueue<String> newQueue = new LinkedBlockingQueue<>();
-        while(this.Responses.peek() != null){
-            lastElement = this.Responses.poll();
-
-            //if it's not the last element
-            if(this.Responses.peek() != null) {
-                try {
-                    newQueue.put(lastElement);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
-        this.Responses = newQueue;
-        return lastElement;
-    }
-
-    public void clearResponses(){
-        Responses.clear();
-    }
-
-    //this method could return the wrong element.
-    public String get(int n){
-        String nElement = null;
-        LinkedBlockingQueue<String> newQueue = new LinkedBlockingQueue<>();
-        for(int i = 0; i<(n - 1); i++){
-            nElement = this.Responses.poll();
-            try {
-                newQueue.put(nElement);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        nElement = this.Responses.poll();
-        return nElement;
-    }
-    public int size(){
-        return Responses.size();
-
-    }
-
 }

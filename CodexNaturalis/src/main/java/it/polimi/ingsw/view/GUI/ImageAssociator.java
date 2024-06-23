@@ -3,14 +3,13 @@ import it.polimi.ingsw.model.gameDataManager.*;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- ImageAssociator is used to associate cards with their graphic representation
-and also to associate makers with their graphical representation
-this class will then be used in the controller to set the graphics based on the
-card that has been selected
-*/
+ * ImageAssociator is used to associate cards with their graphic representation
+ * and also to associate makers with their graphical representation
+ * this class will then be used in the controller to set the graphics based on the
+ * card that has been selected
+ */
 public class ImageAssociator {
 
     public static String associatorPng2Card(String id, boolean isFront) {
