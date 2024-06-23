@@ -146,6 +146,8 @@ public class PlayingSceneController extends InGameController {
     private Map<ImageView, Integer> mapping = new HashMap<>();
     @FXML
     private ImageView personalCard;
+    @FXML ImageView imageViewCardToPlay;
+
 
     private void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(event -> {
@@ -516,6 +518,7 @@ public class PlayingSceneController extends InGameController {
                 cardView.setOnMouseExited(null);
                 // Reset scale for all other card views
                 resetOtherCardViewsScale(cardView);
+                imageViewCardToPlay = cardView;
             }
         });
         cardView.setCursor(Cursor.HAND);
@@ -696,7 +699,23 @@ public class PlayingSceneController extends InGameController {
 
     }
 
+    private void resetEventsImageView(ImageView imageView){
+        imageView.setOnMouseExited(null);
+        imageView.setOnMouseEntered(null);
+        imageView.setOnMouseClicked(null);
+        imageView.setCursor(Cursor.DEFAULT);
+    }
+
     public void showDrawAlert() {
+        imageViewCardToPlay.setOpacity(0.5);
+        resetEventsImageView(firstCard);
+        resetEventsImageView(firstCardBack);
+        resetEventsImageView(secondCard);
+        resetEventsImageView(secondCardBack);
+        resetEventsImageView(thirdCard);
+        resetEventsImageView(thirdCardBack);
+
+
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
