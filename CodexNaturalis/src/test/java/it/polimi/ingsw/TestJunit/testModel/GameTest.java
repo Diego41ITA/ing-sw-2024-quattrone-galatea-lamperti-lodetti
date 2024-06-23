@@ -31,12 +31,26 @@ public class GameTest {
         }
 
         @Test
+        public void GameEquals(){
+            Game gameTest= new Game("Game");
+            assertEquals(gameTest, game);
+        }
+
+        @Test
         public void testAddPlayer() throws MaxPlayersInException {
             game.addPlayer(player1);
             game.addPlayer(player2);
             assertEquals(2, game.getPlayers().size());
             assertTrue(game.getActivity().containsKey("Lorenzo"));
             assertTrue(game.getActivity().containsKey("Alessandro"));
+        }
+
+        @Test
+        public void getPlayerByNick() throws MaxPlayersInException {
+            game.addPlayer(player1);
+            game.addPlayer(player2);
+            assertEquals(game.getPlayerByNick("Lorenzo"), player1);
+
         }
 
         @Test

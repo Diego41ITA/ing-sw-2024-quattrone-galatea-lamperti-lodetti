@@ -14,6 +14,7 @@ import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -358,7 +359,7 @@ public class PlayingSceneController extends InGameController {
                 rectangle.setFill(Paint.valueOf("FFFFFF"));
 
                 double layoutX = 615 + (point.getX() * 37);
-                double layoutY = 364 - (point.getY() * 21);
+                double layoutY = 364 + (-(point.getY() * 21));
 
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
@@ -367,7 +368,7 @@ public class PlayingSceneController extends InGameController {
 
                 // Capture the current point coordinates
                 final int x = point.x;
-                final int y = point.y;
+                final int y = -(point.y);
 
                 rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, y)));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
@@ -438,7 +439,7 @@ public class PlayingSceneController extends InGameController {
         chosenCardToPlay.setFitHeight(33);
         chosenCardToPlay.setFitWidth(65);
         double layoutX = 615 + (point.getX() * 37);
-        double layoutY = 364 - (point.getY() * 21);
+        double layoutY = 364 + (point.getY() * 21);
         chosenCardToPlay.setLayoutX(layoutX);
         chosenCardToPlay.setLayoutY(layoutY);
         chosenCardToPlay.setPreserveRatio(true);

@@ -56,7 +56,7 @@ public class GameStationTest {
 
 
     @Test
-    public void testUpdateFreeCoords() {
+    public void testUpdateFreeCoordsAndCalculateGoldPoints() {
         //verifies that if I place a card that has an unoccupiable corner then the coordinate will not be available in freecord
         HashMap<Angle, Item> frontResource = new HashMap<>();
         frontResource.put(Angle.HIGHLEFT, Item.MUSHROOM);
@@ -67,10 +67,21 @@ public class GameStationTest {
         Point cardPosition = new Point(1, 1);
         Point unOccupiablePosition = new Point(2, 0);
         gameStation.placeCard(card, cardPosition);
+        //goldCard(num 1) for testing GoldCard
+        HashMap<Angle, Item> front = new HashMap<>();
+        HashMap<Angle, Item> back = new HashMap<>();
+        ArrayList<Item> backResourceGold = new ArrayList<>();
+        backResourceGold.add(Item.MUSHROOM);
+        HashMap<Item, Integer> resources = new HashMap<>();
+        resources.put(Item.MUSHROOM, 1);
+         GoldCard goldCard = new GoldCard(front, back, 3, backResourceGold, GoldType.ITEM, resources, Item.MUSHROOM, TypeOfCard.MUSHROOM, true, 1);
 
-        // Ensure that the coordinate associated with the unusable angle is not in freeCords
+        Point cardPosition2 = new Point(-1, 1);
+        gameStation.placeCard(goldCard, cardPosition2);
+        // Ensure that calculateGoldPoint works
         List<Point> freeCords = gameStation.getFreeCords();
         assertFalse(freeCords.contains(unOccupiablePosition));
+        assertEquals(gameStation.calculateGoldPoints(goldCard), 6);
 
     }
 
@@ -89,9 +100,4 @@ public class GameStationTest {
         assertTrue(gameStation.verifyResourcesNeeded(goldCard));
     }
 
-    @Test
-    public void testCalculateGoldPoints() {
-       //verifica il calcolo dei punti nei 3 casi delle gold card(qua dentro vengono testate anche itempresent, findCardposition e cornerCovered)
-        //Questi metodi che ho elecanto nelle parentesi non sono direttamente testabili poichè sono privati
-    }
 }
