@@ -358,7 +358,7 @@ public class PlayingSceneController extends InGameController {
                 rectangle.setFill(Paint.valueOf("FFFFFF"));
 
                 double layoutX = 615 + (point.getX() * 37);
-                double layoutY = 364 + (point.getY() * 21);
+                double layoutY = 364 - (point.getY() * 21);
 
                 rectangle.setLayoutX(layoutX);
                 rectangle.setLayoutY(layoutY);
@@ -438,7 +438,7 @@ public class PlayingSceneController extends InGameController {
         chosenCardToPlay.setFitHeight(33);
         chosenCardToPlay.setFitWidth(65);
         double layoutX = 615 + (point.getX() * 37);
-        double layoutY = 364 + (point.getY() * 21);
+        double layoutY = 364 - (point.getY() * 21);
         chosenCardToPlay.setLayoutX(layoutX);
         chosenCardToPlay.setLayoutY(layoutY);
         chosenCardToPlay.setPreserveRatio(true);

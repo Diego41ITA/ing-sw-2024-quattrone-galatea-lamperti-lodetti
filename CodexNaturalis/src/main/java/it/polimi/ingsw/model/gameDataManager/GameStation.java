@@ -36,17 +36,37 @@ public class GameStation implements Serializable {
         forbiddenCoords = new ArrayList<>();
         playedCards.put(new Point(0, 0), card);
         freeCords = new ArrayList<>();
-        freeCords.add(new Point(-1, 1));
-        freeCords.add(new Point(1, 1));
-        freeCords.add(new Point(-1, -1));
-        freeCords.add(new Point(1, -1));
+        setFreeCoord(card);
     }
 
     public GameStation(GameStation gs) {
         this.playedCards = new HashMap<>();
         this.forbiddenCoords = gs != null && gs.getForbiddenCords() != null ? new ArrayList<>(gs.getForbiddenCords()) : new ArrayList<>();
         setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
-        this.freeCords = gs != null && gs.getFreeCords() != null ? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
+        this.freeCords = (gs != null && gs.getFreeCords() != null )? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
+    }
+
+    /**
+     * not all the initial cards have 4 different free corners
+     * @param card
+     */
+    private void setFreeCoord(InitialCard card){
+
+        Map<Angle, Item> newMap = new HashMap<>();
+
+        if(card.isFront())
+            newMap = card.getFront();
+        else
+            newMap = card.getBack();
+
+        for(Angle a :newMap.keySet()){
+            switch (a){
+                case HIGHLEFT -> freeCords.add(new Point(-1, 1));
+                case DOWNLEFT -> freeCords.add(new Point(-1, -1));
+                case HIGHRIGHT -> freeCords.add(new Point(1, 1));
+                case DOWNRIGHT -> freeCords.add(new Point(1, -1));
+            }
+        }
     }
 
     /**
@@ -74,7 +94,7 @@ public class GameStation implements Serializable {
      * @return returns a copy of the forbidden coordinates.
      */
     public List<Point> getForbiddenCords() {
-        return new ArrayList<>(this.freeCords);
+        return new ArrayList<>(this.forbiddenCoords);
     }
     /**
      * returns the free coordinates
@@ -135,11 +155,16 @@ public class GameStation implements Serializable {
                         if (playedCards.get(cord).getFront().containsKey(angles[i])) {
                             freeCords.add(neighbor);
 
-                        } else {
+                        } else{
                             forbiddenCoords.add(neighbor);
                         }
-                    } else {
+                    } else if(!playedCards.get(cord).isFront()){
+                        if (playedCards.get(cord).getBack().containsKey(angles[i])) {
                             freeCords.add(neighbor);
+
+                        } else{
+                            forbiddenCoords.add(neighbor);
+                        }
                         }
                     }
                 }
