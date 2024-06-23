@@ -33,7 +33,7 @@ public interface ControllerOfGameInterface extends Remote {
      * @throws RemoteException
      * @throws illegalOperationException
      */
-    void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException, illegalOperationException;
+    void playCard(PlayableCard playedCard, String nick, boolean front, Point cord) throws RemoteException;
 
     /**
      * this method try to draw a card from the specified deck.

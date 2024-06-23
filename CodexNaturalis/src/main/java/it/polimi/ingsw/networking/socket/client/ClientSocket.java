@@ -161,7 +161,7 @@ public class ClientSocket extends Thread implements ClientAction {
     //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
 
     @Override
-    public synchronized void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws illegalOperationException, RemoteException {
+    public synchronized void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException {
         try{
             out.writeObject(new PlayCard(nick, playedCard, cord, front));
             completeForwarding();

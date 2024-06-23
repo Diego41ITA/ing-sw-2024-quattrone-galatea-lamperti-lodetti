@@ -97,7 +97,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
 
     @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
-    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException, illegalOperationException {
+    public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException{
         gameController.playCard(playedCard, nick, front, cord);
     }
 
