@@ -128,6 +128,10 @@ public interface ControllerOfGameInterface extends Remote {
     //leave it, I need it for the testController
     HashMap<Player, Boolean> getPlayers() throws RemoteException;
 
-
+    /**
+     * this method allows the client to randomly ping the server.
+     * @param nick the clients that pings the server
+     * @throws RemoteException
+     */
     void ping(String nick) throws RemoteException;
 }

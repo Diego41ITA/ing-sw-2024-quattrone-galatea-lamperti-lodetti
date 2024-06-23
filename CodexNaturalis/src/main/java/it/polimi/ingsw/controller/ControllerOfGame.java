@@ -292,7 +292,7 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param nick is the nickname of the player
      */
     @Override
-    public /*synchronized*/ void drawPlayableCardFromTableOfDecks(String typo, String nick) {
+    public void drawPlayableCardFromTableOfDecks(String typo, String nick) {
         String parsedTypo = typo.toLowerCase();
 
         List<Player> players = game.getPlayers();
@@ -365,20 +365,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      */
     //@Override
     public void changePlayerStatus(String nick, Boolean value) {
-        /*List<Player> players;
-        players = game.getPlayers();
-        for (Player player : players) {
-            if (player.getNick().equals(nick)) {
-                //Boolean status = players.remove(player); non serve perchè il valore viene sostituito da put()
-                players.put(player, value);
-            }
-        }
-        game.setPlayers(players);*/
 
         Map<String, Boolean> activity = game.getActivity();
         for (String player : activity.keySet()) {
             if (player.equals(nick)) {
-                //Boolean status = players.remove(player); non serve perchè il valore viene sostituito da put()
                 activity.put(player, value);
             }
         }
@@ -534,6 +524,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         saveThread.start();
     }
 
+    /**
+     * this private method checks if there are enough active player.
+     * @return true if and only if there are enough active player
+     */
     private boolean checkEnoughPlayer(){
         Map<String, Boolean> activity = game.getActivity();
         long numOnlinePlayer = activity.values().stream()
@@ -796,21 +790,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     }
 
     /**
-     * This method assigns the black color to the first Player.
-
-    public void assignBlackColor(){
-        String nick = this.game.getTurn().getFirstPlayerNick();
-        HashMap<Player, Boolean> players = (HashMap<Player, Boolean>) this.game.getPlayers();
-        for (Player player : players.keySet()) {
-            if (player.getNick().equals(nick)) {
-                player.setOptionalColor();
-                this.game.setPlayers(players);
-                observers.get(nick).notify_color(game);
-            }
-        }
-    }*/
-
-    /**
      * @return it returns the number of online player.
      */
     public int getNumOfOnlinePlayers(){return this.game.getNumOfOnlinePlayers();}
@@ -828,21 +807,21 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
      * @param nick the nickname of the client
      */
     public void ping(String nick){
-        //Bisogna fare in modo che il client setti qualcosa che faccia capire che è online.
-        //Probabilmente non serve fare nulla al limite settare che è online.
-
-        /*
-        Si potrebbe aggiungere un metodo analogo a quello del client che pinga tutti i client e se sono irraggiungibili
-        catcha l'eccezione e li setta a false nella activity.
-        Possibili problemi sul ritardo e l'asincronismo: basterebbe pingare il current player però potrebbe
-        disconnettersi subito dopo il ping.
-         */
     }
 
+    /**
+     * sets the game to control
+     * @param game the game object that you want to control
+     */
     public void setGame(Game game) {
         this.game = game;
     }
 
+    /**
+     * defines when two instance of controller of game are the same object
+     * @param controller     the Object to compare with
+     * @return true if and only if the two instance have same game id.
+     */
     @Override
     public boolean equals(Object controller){
         if(controller instanceof ControllerOfGame){
@@ -853,6 +832,10 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
         return false;
     }
 
+    /**
+     * redefines the method of object class in case the gameController is the key in a hash map
+     * @return
+     */
     @Override
     public int hashCode(){
         return this.getGameId().hashCode();

@@ -2,8 +2,19 @@ package it.polimi.ingsw.controller;
 
 import java.util.*;
 
+/**
+ * this class helps to generate unique id for the game, it only has 100 possible key if there's the need to extend this
+ * you should only modify the fill up method.
+ * @author Lodetti Alessandro
+ */
 public class IdSet {
     private Set<Integer> set;
+
+    /**
+     * constructs an instance of the private attribute, it fills it with 100 elements and it removes the already used
+     * ids.
+     * @param list the list of the already ongoing games.
+     */
     public IdSet(List<ControllerOfGame> list){
         fillUp();
         removeFromSet(convertToInt(list));
