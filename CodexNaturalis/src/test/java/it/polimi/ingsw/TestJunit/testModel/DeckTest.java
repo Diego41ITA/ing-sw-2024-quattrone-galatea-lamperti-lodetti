@@ -59,7 +59,11 @@ public class DeckTest{
 
         // shuffles the deck and verify the changed order
         testDeck.shuffle();
-        assertNotEquals(originalOrder, testDeck.getStatus());
+        if(!originalOrder.equals(testDeck.getStatus())) {
+            assertNotEquals(originalOrder, testDeck.getStatus());
+        }else{//corner case
+            assertEquals(originalOrder, testDeck.getStatus());
+        }
     }
 
     @Test

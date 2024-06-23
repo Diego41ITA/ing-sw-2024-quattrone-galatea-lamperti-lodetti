@@ -35,8 +35,8 @@ public class GameTest {
             game.addPlayer(player1);
             game.addPlayer(player2);
             assertEquals(2, game.getPlayers().size());
-            assertTrue(game.getPlayers().containsKey(player1));
-            assertTrue(game.getPlayers().containsKey(player2));
+            assertTrue(game.getActivity().containsKey("Lorenzo"));
+            assertTrue(game.getActivity().containsKey("Alessandro"));
         }
 
         @Test
@@ -135,8 +135,8 @@ public class GameTest {
     }
 
     @Test
-    public void testSetPlayers() {
-        HashMap<Player, Boolean> players = new HashMap<>();
+    public void testSetActivity() {
+        HashMap<String, Boolean> players = new HashMap<>();
         ArrayList<GoalCard> goals = new ArrayList<>();
         HashMap<Item, Integer> objects = new HashMap<>();
         objects.put(Item.FEATHER, 1);
@@ -146,18 +146,16 @@ public class GameTest {
         GoalCard goal = new GoalCard(99, true, 3, item, objects);
         goals.add(goal);
         player1.chooseGoal(goals, 99);
-        players.put(player1, true);
-        game.setPlayers(players);
+        players.put("Lorenzo", true);
+        game.setActivity(players);
         boolean condition = false;
-        for (Player player : game.getPlayers().keySet()) {
-            if (player.getNick().equals("Lorenzo")) {
+        for (String name : game.getActivity().keySet()) {
+            if (name.equals("Lorenzo")) {
                 condition = true;
                 break;
             }
         }
         assertTrue(condition);
-
-        //assertEquals(true, game.getPlayers().get(player1)); manca controllo sul value
     }
 
     @Test
@@ -174,8 +172,8 @@ public class GameTest {
         player2.chooseGoal(goals, 99);
         game.setSinglePlayer(player2, true);
         boolean condition = false;
-        for (Player player : game.getPlayers().keySet()) {
-            if (player.getNick().equals("Alessandro")) {
+        for (String name : game.getActivity().keySet()) {
+            if (name.equals("Alessandro")){
                 condition = true;
                 break;
             }
