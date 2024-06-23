@@ -92,7 +92,6 @@ public class StateMenu extends StateWaiting {
                     case ("B"):
                         validInput = true;
                         exitRequest = true;
-                        StateWaiting.flow.exit();
                         break;
                     default:
                         ui.show_invalidCommand();
