@@ -823,5 +823,7 @@ public class PlayingSceneController extends InGameController {
         createRulebookTab();
         tabPane.getSelectionModel().select(2);
         this.showYourTurnAlert();
+        if(getGameFsm().isPointsThresholdReached())
+            showLastTurnAlert();
     }
 }

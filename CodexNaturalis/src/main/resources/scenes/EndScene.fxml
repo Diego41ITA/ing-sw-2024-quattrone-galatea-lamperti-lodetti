@@ -63,9 +63,34 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Text layoutX="327.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="THE WINNER IS" />
-                  <Text fx:id="winnerNick" layoutX="327.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="THE WINNER IS" />
+                  <Text fx:id="winnerNick" layoutX="327.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="THE WINNER IS" textAlignment="CENTER" />
                   <Text fx:id="youWon" layoutX="417.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="YOU WON!!" />
                </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Goal cards">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="471.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Common goal cards" />
+                  <ImageView fx:id="commonGoal1" fitHeight="150.0" fitWidth="200.0" layoutX="371.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="commonGoal2" fitHeight="150.0" fitWidth="200.0" layoutX="709.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+                  <Separator layoutX="96.0" layoutY="270.0" prefHeight="11.0" prefWidth="1072.0" />
+                  <Text layoutX="409.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Personal secrets goal cards" />
+                  <ImageView fx:id="goal1" fitHeight="150.0" fitWidth="200.0" layoutX="53.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="goal2" fitHeight="150.0" fitWidth="200.0" layoutX="371.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="goal3" fitHeight="150.0" fitWidth="200.0" layoutX="709.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="goal4" fitHeight="150.0" fitWidth="200.0" layoutX="1026.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="nick1" layoutX="11.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" textAlignment="CENTER" wrappingWidth="284.71875" />
+                  <Text fx:id="nick2" layoutX="329.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" textAlignment="CENTER" wrappingWidth="284.71875" />
+                  <Text fx:id="nick3" layoutX="667.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" textAlignment="CENTER" wrappingWidth="284.71875" />
+                  <Text fx:id="nick4" layoutX="984.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" textAlignment="CENTER" wrappingWidth="284.71875" />
+                  <ImageView fx:id="maker1" fitHeight="50.0" fitWidth="50.0" layoutX="128.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="maker2" fitHeight="50.0" fitWidth="50.0" layoutX="446.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="maker3" fitHeight="50.0" fitWidth="50.0" layoutX="784.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="maker4" fitHeight="50.0" fitWidth="50.0" layoutX="1101.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
         </content>
       </Tab>
   </tabs>

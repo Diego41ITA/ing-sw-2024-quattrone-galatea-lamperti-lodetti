@@ -42,6 +42,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     private GameView view;
     public boolean inGame;
     private InputParser input;
+    private boolean pointsThresholdReached = false;
 
     private List<String> winner = null; //puo essere estesa la classe DbCardInfo, magari rinominandola DbGameInfo
     private boolean stay = true;
@@ -49,6 +50,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     //metto 4 attributi State
     private StateWaiting state1 = new StateMenu(this, this.input);
     private StateActive state2 = new PlaceCardState(this, this.input);
+
+
 
     //costruttore
     public FsmGame(UI ui, InputParser input) throws RemoteException{
@@ -201,6 +204,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
         return this.winner;
     }
 
+    public boolean isPointsThresholdReached(){return this.pointsThresholdReached;}
 
     //serve a inizializzare gli stati
     public void initializeStates(){
@@ -316,6 +320,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public void update20PointsReached(GameView game) throws RemoteException {
         ui.show_lastTurn();
+        pointsThresholdReached = true;
     }
 
     @Override

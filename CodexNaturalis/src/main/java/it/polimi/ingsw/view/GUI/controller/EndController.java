@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.GameView.GameView;
+import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.DbCardInfo;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.InGameController;
 import javafx.application.Platform;
@@ -20,8 +22,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 
 public class EndController extends InGameController {
@@ -89,7 +94,34 @@ public class EndController extends InGameController {
     private ImageView image27;
     @FXML
     private ImageView image28;
-
+    @FXML
+    private Text nick1;
+    @FXML
+    private Text nick2;
+    @FXML
+    private Text nick3;
+    @FXML
+    private Text nick4;
+    @FXML
+    private ImageView commonGoal1;
+    @FXML
+    private ImageView commonGoal2;
+    @FXML
+    private ImageView goal1;
+    @FXML
+    private ImageView goal2;
+    @FXML
+    private ImageView goal3;
+    @FXML
+    private ImageView goal4;
+    @FXML
+    private ImageView maker1;
+    @FXML
+    private ImageView maker2;
+    @FXML
+    private ImageView maker3;
+    @FXML
+    private ImageView maker4;
     @FXML
     private double initialTranslateX, initialTranslateY;
     @FXML
@@ -99,7 +131,37 @@ public class EndController extends InGameController {
 
     private ImageView[] imageViews = new ImageView[29];
 
-    private void initializeImageArray(){
+    private ImageView[] goalCardImageViews = new ImageView[4];
+
+    private ImageView[] makerImageViews = new ImageView[4];
+
+    private Text[] nickArray = new Text[4];
+
+    private void initializeGoalCardsTab(){
+        GameView gameView = getGameView();
+        List<Player> players = gameView.getPlayers();
+        List<GoalCard> commonGoals = gameView.getTableOfDecks().getGoals();
+
+        int i = 0;
+
+        for (Player p : players) {
+            GoalCard card = p.getGoal();
+            int cardId = card.getCardId();
+            String cardIdStr = Integer.toString(cardId);
+            String playerNick = p.getNick();
+            Color playerColor = p.getColor();
+
+            goalCardImageViews[i].setImage(new Image(associatorPng2Card(cardIdStr, true)));
+            nickArray[i].setText(playerNick);
+            makerImageViews[i].setImage(new Image(makerAssociator(playerColor)));
+            i++;
+        }
+
+        commonGoal1.setImage(new Image(associatorPng2Card(String.valueOf(commonGoals.getFirst().getCardId()), true)));
+        commonGoal2.setImage(new Image(associatorPng2Card(String.valueOf(commonGoals.get(1).getCardId()), true)));
+    }
+
+    private void initializeArrays(){
         imageViews[0] = image0;
         imageViews[1] = image1;
         imageViews[2] = image2;
@@ -129,6 +191,21 @@ public class EndController extends InGameController {
         imageViews[26] = image26;
         imageViews[27] = image27;
         imageViews[28] = image28;
+
+        goalCardImageViews[0] = goal1;
+        goalCardImageViews[1] = goal2;
+        goalCardImageViews[2] = goal3;
+        goalCardImageViews[3] = goal4;
+
+        nickArray[0] = nick1;
+        nickArray[1] = nick2;
+        nickArray[2] = nick3;
+        nickArray[3] = nick4;
+
+        makerImageViews[0] = maker1;
+        makerImageViews[1] = maker2;
+        makerImageViews[2] = maker3;
+        makerImageViews[3] = maker4;
     }
 
     //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
@@ -210,7 +287,8 @@ public class EndController extends InGameController {
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
-        initializeImageArray();
+        initializeArrays();
+        initializeGoalCardsTab();
         GameView gameView = getGameView();
         for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
             Color color = entry.getKey();
@@ -219,5 +297,8 @@ public class EndController extends InGameController {
         }
         for(Player p : gameView.getPlayers())
             this.createAndAddGameStationTab(p);
+        setWinnerNick(DbCardInfo.getInstance().readWinners().getFirst());
+
+        tabPane.getSelectionModel().select(1);
     }
 }
