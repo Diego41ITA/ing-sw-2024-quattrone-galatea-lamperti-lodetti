@@ -14,7 +14,6 @@ import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -146,7 +145,13 @@ public class PlayingSceneController extends InGameController {
     private Map<ImageView, Integer> mapping = new HashMap<>();
     @FXML
     private ImageView personalCard;
-    @FXML ImageView imageViewCardToPlay;
+
+    private int indexCardToPlay;
+    @FXML
+    private ImageView[] handCardsFront = new ImageView[3];
+    @FXML
+    private ImageView[] handCardsBack = new ImageView[3];
+
 
 
     private void makeTableOfDecksTabResponsive(){
@@ -498,15 +503,15 @@ public class PlayingSceneController extends InGameController {
     private boolean sideChosenCardToPlay = false;
 
     private void makeHandCardsPlayable(List<PlayableCard> cards) {
-        setCardEvent(firstCard, cards.get(0), true);
-        setCardEvent(firstCardBack, cards.get(0), false);
-        setCardEvent(secondCard, cards.get(1), true);
-        setCardEvent(secondCardBack, cards.get(1), false);
-        setCardEvent(thirdCard, cards.get(2), true);
-        setCardEvent(thirdCardBack, cards.get(2), false);
+        setCardEvent(firstCard, cards.get(0), true, 0);
+        setCardEvent(firstCardBack, cards.get(0), false, 0);
+        setCardEvent(secondCard, cards.get(1), true, 1);
+        setCardEvent(secondCardBack, cards.get(1), false, 1);
+        setCardEvent(thirdCard, cards.get(2), true, 2);
+        setCardEvent(thirdCardBack, cards.get(2), false, 2);
     }
 
-    private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront) {
+    private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront, int index) {
         applyHoverEffects(cardView);
         cardView.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
@@ -518,7 +523,7 @@ public class PlayingSceneController extends InGameController {
                 cardView.setOnMouseExited(null);
                 // Reset scale for all other card views
                 resetOtherCardViewsScale(cardView);
-                imageViewCardToPlay = cardView;
+                indexCardToPlay = index;
             }
         });
         cardView.setCursor(Cursor.HAND);
@@ -546,7 +551,7 @@ public class PlayingSceneController extends InGameController {
     //inserisce le image0 all'interno del imageView array
     //il tag@FXML indica che questo metodo verrà lanciato in automatico quando si aprirà l'interfaccia associata a questo controller
     @FXML
-    private void initializeImageArray(){
+    private void initializeArrays(){
         imageViews[0] = image0;
         imageViews[1] = image1;
         imageViews[2] = image2;
@@ -576,6 +581,14 @@ public class PlayingSceneController extends InGameController {
         imageViews[26] = image26;
         imageViews[27] = image27;
         imageViews[28] = image28;
+
+        handCardsFront[0] = firstCard;
+        handCardsFront[1] = secondCard;
+        handCardsFront[2] = thirdCard;
+
+        handCardsBack[0] = firstCardBack;
+        handCardsBack[1] = secondCardBack;
+        handCardsBack[2] = thirdCardBack;
     }
 
     //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
@@ -707,14 +720,12 @@ public class PlayingSceneController extends InGameController {
     }
 
     public void showDrawAlert() {
-        imageViewCardToPlay.setOpacity(0.5);
-        resetEventsImageView(firstCard);
-        resetEventsImageView(firstCardBack);
-        resetEventsImageView(secondCard);
-        resetEventsImageView(secondCardBack);
-        resetEventsImageView(thirdCard);
-        resetEventsImageView(thirdCardBack);
-
+        handCardsBack[indexCardToPlay].setOpacity(0.5);
+        handCardsFront[indexCardToPlay].setOpacity(0.5);
+        for(int i = 0; i <3 ; i++){
+            resetEventsImageView(handCardsBack[i]);
+            resetEventsImageView(handCardsFront[i]);
+        }
 
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -818,7 +829,7 @@ public class PlayingSceneController extends InGameController {
         GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
         Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));
         personalCard.setImage(imagePersonalGoalCard);
-        this.initializeImageArray();
+        this.initializeArrays();
         this.setGameId(gameView.getId());
         for(Player p : gameView.getPlayers())
             this.createAndAddGameStationTab(p);
