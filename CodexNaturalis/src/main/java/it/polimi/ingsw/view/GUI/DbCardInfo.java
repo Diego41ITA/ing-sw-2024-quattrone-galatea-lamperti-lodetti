@@ -19,6 +19,10 @@ public class DbCardInfo {
         this.winnersRecord = new LinkedBlockingQueue<>();
     }
 
+    /**
+     * creates an instance of the class if there is not
+     * @return the instance of the class
+      */
     public static DbCardInfo getInstance(){
         if(DbCardInfo.dbCardInfo == null){
             DbCardInfo.dbCardInfo = new DbCardInfo();
@@ -26,6 +30,10 @@ public class DbCardInfo {
         return DbCardInfo.dbCardInfo;
     }
 
+    /**
+     * add a card record which contains some useful information especially for the GUI
+     * @param cardRecord the record
+     */
     public void addRecord(CardRecord cardRecord){
         try {
             this.cardRecords.put(cardRecord);
@@ -34,6 +42,10 @@ public class DbCardInfo {
         }
     }
 
+    /**
+     * reads the record: be careful that this method blocks the calling thread until there is a readable record
+     * @return the read record
+     */
     public CardRecord readCardRecord(){
         try {
             return this.cardRecords.take();
@@ -42,6 +54,10 @@ public class DbCardInfo {
         }
     }
 
+    /**
+     * add the list of winner to the DB: useful to pass arguments without increasing coupling
+     * @param winners the list of winners
+     */
     public void addWinners(List<String> winners){
         try {
             this.winnersRecord.put(winners);
@@ -50,6 +66,10 @@ public class DbCardInfo {
         }
     }
 
+    /**
+     * read the winners: be careful that this method blocks the calling thread until there is a readable list
+     * @return the list of winner
+     */
     public List<String> readWinners(){
         try {
             return this.winnersRecord.take();

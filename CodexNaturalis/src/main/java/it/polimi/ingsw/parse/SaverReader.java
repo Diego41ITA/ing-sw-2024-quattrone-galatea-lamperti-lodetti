@@ -38,21 +38,4 @@ public class SaverReader {
             return null;
         }
     }
-
-    /**
-     * this method read a player object from the file that should exist at the address
-     * defined by the parameter filePath
-     * @param filePath defines where the file is located inside this project
-     * @return it returns the read Player object
-     */
-    public static Player playerReader(String filePath){
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
-                .create();
-        try(FileReader reader = new FileReader(filePath)) {
-            return gson.fromJson(reader, Player.class);
-        }catch(IOException e){
-            return null;
-        }
-    }
 }

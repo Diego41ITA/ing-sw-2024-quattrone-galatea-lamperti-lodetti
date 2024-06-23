@@ -38,6 +38,14 @@ public interface ControllerOfMatchesInterface extends Remote {
      */
     void leaveGame(String gameId, String nick) throws RemoteException;
 
+    /**
+     * this method allows the client to rejoin an existing game.
+     * @param obs the client
+     * @param gameId the game that he wants to rejoin
+     * @param nick the client nick
+     * @return the interface of the rejoined game.
+     * @throws RemoteException
+     */
     ControllerOfGameInterface rejoinGame(GameObserver obs, String gameId, String nick) throws RemoteException;
 
 }

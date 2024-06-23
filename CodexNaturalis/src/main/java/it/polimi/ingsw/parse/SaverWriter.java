@@ -48,23 +48,4 @@ public class SaverWriter {
             System.out.println("something went wrong during salvation process");
         }
     }
-
-    /**
-     * this method save the object player on the correct file. It has the precondition that the directory
-     * (where the player is going to be saved) should already exists (as for the file)
-     * @param player it's the object that you want to be saved
-     * @return it returns true if and only if the object it's correctly saved
-     */
-    public static boolean savePlayer(Game game, Player player){
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Card.class, new CardTypeAdapter<>())
-                .create();
-        try(FileWriter writer = new FileWriter(Crafter.getPlayerFilePath(player.getNick(), game.getId()))){
-            String serializedObject = gson.toJson(player);
-            writer.write(serializedObject);
-            return true;
-        }catch(IOException e){
-            return false;
-        }
-    }
 }

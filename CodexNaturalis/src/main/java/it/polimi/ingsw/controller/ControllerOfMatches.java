@@ -44,7 +44,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
 
     private RoutineDelete routine;
     /**
-     * Default constructor that initialize the ArrayList for the activeGames
+     * Default constructor that initialize the ArrayList for the activeGames, the saved game ecc...
      */
     private ControllerOfMatches() throws RemoteException{
         super();
@@ -78,6 +78,11 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             mainController = new ControllerOfMatches();
         return mainController;
     }
+
+    /**
+     * this method returns the active games; it's use only for testing purpose.
+     * @return the list of games
+     */
     public List<ControllerOfGame> getActiveGames(){
         return activeGames;
     }
@@ -125,7 +130,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      * @throws RemoteException it could throw this exception when something goes wrong
      */
     @Override
-    public synchronized ControllerOfGameInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException/*, NoAvailableGameToJoinException*/ {
+    public synchronized ControllerOfGameInterface joinRandomGame(GameObserver obs, String nick) throws RemoteException{
         List<ControllerOfGame> availableGames = activeGames.stream()
                 .filter(gameController ->
                         gameController.getStatus().equals(Status.WAITING) &&
@@ -207,7 +212,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
             //the player can rejoin the game
             ControllerOfGame game = availableGame.get();
             game.addObserver(obs, nick);
-            //game.returnGame().reconnectPlayer(game.returnGame().getPlayerByNick(nick)); //sets true the activity of the player.
+
             try {
                 game.reconnectPlayer(nick);
             } catch (GameEndedException | MaxPlayersInException e) {
@@ -230,13 +235,10 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
         return null;
     }
 
-    //bisogna aggiungere anche i metodi per il salvataggio e l'eliminazione (questo conviene farlo con un thread).
-    //some getter:
-    public List<ControllerOfGame> getActiveGame(){
-        return this.activeGames;
-    }
-
-    //It's used in TestController, leave this method
+    /**
+     * this metho delete all the active games; used only for test purpose
+     */
+    @Deprecated
     public void clearActiveGames(){
         activeGames.clear();
     }
@@ -270,6 +272,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      * this method is called when this class is build: it reads all the files saved in specific directory, and it
      * recreates the ControllerOfGame object (for each game). Pay attention that an observer is added only when
      * it is passed with a rejoin method.
+     * @param directoryPath this is the path to the directory where all the games are saved
      */
     private void restoreAllStoredGames(String directoryPath){
         //read
