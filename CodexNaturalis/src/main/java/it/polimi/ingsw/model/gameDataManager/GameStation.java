@@ -34,9 +34,10 @@ public class GameStation implements Serializable {
     public GameStation(InitialCard card) {
         playedCards = new HashMap<>();
         forbiddenCoords = new ArrayList<>();
-        playedCards.put(new Point(0, 0), card);
+        //playedCards.put(new Point(0, 0), card);
         freeCords = new ArrayList<>();
-        setFreeCoord(card);
+        //setFreeCoord(card);
+        placeCard(card, new Point(0, 0));
     }
 
     public GameStation(GameStation gs) {
