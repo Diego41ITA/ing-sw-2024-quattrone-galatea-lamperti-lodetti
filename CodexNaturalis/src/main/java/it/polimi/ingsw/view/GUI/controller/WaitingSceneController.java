@@ -351,7 +351,7 @@ public class WaitingSceneController extends InGameController {
         alert.show();
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(4000),
+                Duration.millis(3000),
                 ae -> alert.close()
         ));
         timeline.play();

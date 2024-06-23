@@ -503,12 +503,12 @@ public class PlayingSceneController extends InGameController {
     private boolean sideChosenCardToPlay = false;
 
     private void makeHandCardsPlayable(List<PlayableCard> cards) {
-        setCardEvent(firstCard, cards.get(0), true, 0);
-        setCardEvent(firstCardBack, cards.get(0), false, 0);
-        setCardEvent(secondCard, cards.get(1), true, 1);
-        setCardEvent(secondCardBack, cards.get(1), false, 1);
-        setCardEvent(thirdCard, cards.get(2), true, 2);
-        setCardEvent(thirdCardBack, cards.get(2), false, 2);
+        int index = 0 ;
+        for (PlayableCard card : cards){
+            setCardEvent(handCardsBack[index], card, false, index);
+            setCardEvent(handCardsFront[index], card, true, index);
+            index += 1;
+        }
     }
 
     private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront, int index) {
@@ -698,7 +698,7 @@ public class PlayingSceneController extends InGameController {
         alert.show();
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(4000),
+                Duration.millis(3000),
                 ae -> alert.close()
         ));
         timeline.play();
