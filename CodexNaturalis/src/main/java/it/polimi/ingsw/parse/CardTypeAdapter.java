@@ -6,7 +6,7 @@ import java.lang.reflect.*;
 /**
  * This class define a type adapter for the abstract object Card, in this case it implements two
  * method that serializes and deserializes the Card object in its concrete type
- * @param <T> is a sub type of Card
+ * @param <T> is a subtype of Card
  */
 public class CardTypeAdapter <T extends Card> implements JsonSerializer<T>, JsonDeserializer<T>{
     /**

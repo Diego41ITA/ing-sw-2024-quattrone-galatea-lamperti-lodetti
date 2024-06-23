@@ -24,14 +24,14 @@ public class StateColor extends StateWaiting {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
 
         String color;
 
-        do{
+        do {
             ui.show_requestPlayerColor(StateWaiting.flow.getView());
             color = inputGetter.getColor();
-        }while(!checkColor(color));
+        } while (!checkColor(color));
 
         String colorParsed = color.toLowerCase();
         try {
@@ -39,14 +39,18 @@ public class StateColor extends StateWaiting {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-        //nextState();
     }
 
     @Override
     public void nextState(){
-        flow.setWaitingState(new DoesNothing(flow, inputGetter));
+        //there is not any "next state";
     }
 
+    /**
+     * it checks if the color is and actual color
+     * @param color this is the color that the user typed in
+     * @return true if and only if the color typed is a real Color.
+     */
     private boolean checkColor(String color){
         for(Color c: Color.values()){
             if(c.toString().equalsIgnoreCase(color))

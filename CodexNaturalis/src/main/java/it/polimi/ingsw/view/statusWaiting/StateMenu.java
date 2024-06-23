@@ -9,6 +9,9 @@ import it.polimi.ingsw.view.input.InputParser;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
+/**
+ * this is the class that allows the player to choose which game to join. It implements a sort of State Pattern
+ */
 public class StateMenu extends StateWaiting {
     private UI ui;
     private ClientAction client;
@@ -21,6 +24,9 @@ public class StateMenu extends StateWaiting {
         nickName = flow.getNickname();
     }
 
+    /**
+     * it asks and manages the input and output about the set-up procedure.
+     */
     @Override
     public void execute() {
         Boolean validInput = false;
@@ -38,12 +44,6 @@ public class StateMenu extends StateWaiting {
                         client.joinRandomGame(nickName);
                     } catch (NotBoundException | IOException | InterruptedException e) {
                         ui.show_connectionError();
-                        /*try {
-                            StateWaiting.flow.wait(100); // non sono sicuro
-                            StateWaiting.flow.exit();
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }*/
                         throw new RuntimeException();
                     }
                     break;
@@ -77,20 +77,14 @@ public class StateMenu extends StateWaiting {
                         do {
                             ui.show_RequestNumberOfPlayers();
                             numberOfPlayer = inputGetter.getNumberOfPlayer();
-                            if (numberOfPlayer != 0) { //per ora gestiamo anche numeri a caso (unico errore lo da per input mismatch)
+                            if (numberOfPlayer != 0) {
                                 try {
                                     client.createGame(StateWaiting.flow.getNickname(), numberOfPlayer);
                                 } catch (NotBoundException | IOException | InterruptedException e) {
                                     ui.show_invalidInput();
-                                    /*try {
-                                        StateWaiting.flow.wait(100); // non sono sicuro
-                                        StateWaiting.flow.exit();
-                                    } catch (InterruptedException ex) {
-                                        throw new RuntimeException(ex);
-                                    }*/
                                 }
                             } else {
-                                ui.show_invalidInput(); //problema da risolvere su ordine di stampa
+                                ui.show_invalidInput();
                             }
                         } while (numberOfPlayer == 0);
 
@@ -107,10 +101,14 @@ public class StateMenu extends StateWaiting {
             } while (!validInput);
         }
 
-        //if the game is SUSPENDED or ACTIVE it should not ask for a color (it already has one)
+        //if the game is ACTIVE or SUSPENDED it should not ask for a color (it already has one)
         if(!exitRequest && (flow.getView().getStatus() == Status.WAITING))
             nextState();
     }
+
+    /**
+     * it executes the "next state" which is StateColor
+     */
     @Override
     public void nextState(){
         new StateColor(StateWaiting.flow, inputGetter).execute();
