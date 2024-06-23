@@ -368,9 +368,9 @@ public class PlayingSceneController extends InGameController {
 
                 // Capture the current point coordinates
                 final int x = point.x;
-                final int y = point.y;
+                final int y = -(point.y);
 
-                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, -y)));
+                rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, y)));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
                 rectangle.setOnMouseClicked(event -> {
@@ -379,7 +379,7 @@ public class PlayingSceneController extends InGameController {
                         multipleResponses.add(String.valueOf(sideChosenCardToPlay));
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
-                        showCardChosen(playerPane, new Point(x,-y));
+                        showCardChosen(playerPane, new Point(x,y));
                     } else {
                         hideCardChosen(playerPane);
                     }
