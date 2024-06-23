@@ -292,7 +292,7 @@ public class Gui extends Application implements UI {
     //un pop-up che dica che è iniziato l'ultimo giro.
     @Override
     public void show_lastTurn() {
-
+        Platform.runLater(abstractController::showLastTurnAlert);
     }
 
     //point table is in game station, if we have multiple show() methods that display the "everything" we can
@@ -307,6 +307,7 @@ public class Gui extends Application implements UI {
             loadScene("/scenes/EndScene.fxml");
         else
             System.out.println("error primary stage is null");
+
     }
 
     @Override
@@ -336,6 +337,7 @@ public class Gui extends Application implements UI {
     public void show_winner(List<String> name) {
         EndController controller = (EndController) abstractController;
         Platform.runLater(() -> controller.setWinnerNick(name.getFirst()));
+
     }
 
     @Override

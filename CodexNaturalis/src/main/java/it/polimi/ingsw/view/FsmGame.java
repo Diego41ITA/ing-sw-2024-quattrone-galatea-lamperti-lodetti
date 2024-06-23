@@ -135,7 +135,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                     }
                 }
             } else if (view.getStatus() == Status.FINISHED) {
-                ui.show_GameStatus(view);
+                //ui.show_GameStatus(view);
                 ui.show_gameOver();
                 while(winner == null) {
                     try {
