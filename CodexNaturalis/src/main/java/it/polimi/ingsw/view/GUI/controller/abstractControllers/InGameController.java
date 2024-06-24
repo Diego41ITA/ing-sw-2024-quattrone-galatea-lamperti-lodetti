@@ -88,6 +88,7 @@ public abstract class InGameController extends AbstractController {
         return pane;
 
     }
+
     /**
      * Private helper method that creates an {@link ImageView} of a specific image.
      * @param imagePath the relative path to the specific image.
