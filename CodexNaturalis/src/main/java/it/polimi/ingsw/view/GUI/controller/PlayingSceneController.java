@@ -156,37 +156,37 @@ public class PlayingSceneController extends InGameController {
 
     private void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("A");
                 multipleResponses.add("gold");
             }
         });
         deckResource.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("A");
                 multipleResponses.add("resource");
             }
         });
         card1.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("B");
                 multipleResponses.add(String.valueOf(mapping.get(card1)));
             }
         });
         card2.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("B");
                 multipleResponses.add(String.valueOf(mapping.get(card2)));
             }
         });
         card3.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("B");
                 multipleResponses.add(String.valueOf(mapping.get(card3)));
             }
         });
         card4.setOnMouseClicked(event -> {
-            if(showConfirmationAlert()){
+            if(showConfirmationDrawAlert()){
                 multipleResponses.add("B");
                 multipleResponses.add(String.valueOf(mapping.get(card4)));
             }
@@ -342,9 +342,7 @@ public class PlayingSceneController extends InGameController {
         });
 
         pane.setOnMouseReleased(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                pane.setCursor(Cursor.DEFAULT); // Change cursor to open hand when dragging stops
-            }
+            pane.setCursor(Cursor.DEFAULT); // Change cursor to open hand when dragging stops
         });
     }
 
@@ -375,21 +373,23 @@ public class PlayingSceneController extends InGameController {
 
                 // Capture the current point coordinates
                 final int x = point.x;
-                final int y = -(point.y);
+                final int y = point.y;
 
                 rectangle.setOnMouseEntered(event -> showCardChosen(playerPane, new Point(x, y)));
                 rectangle.setOnMouseExited(event -> hideCardChosen(playerPane));
 
-                rectangle.setOnMouseClicked(event -> {
-                    if (showConfirmationAlert()){
+                rectangle.setOnMouseClicked(mouseEvent -> {
+                    if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                    if (showConfirmationPlayAlert()){
                         multipleResponses.add(String.valueOf(idChosenCardToPlay));
                         multipleResponses.add(String.valueOf(sideChosenCardToPlay));
                         multipleResponses.add(String.valueOf(x));
                         multipleResponses.add(String.valueOf(y));
                         showCardChosen(playerPane, new Point(x,y));
+                        showDrawAlert();
                     } else {
                         hideCardChosen(playerPane);
-                    }
+                    }}
                 });
 
                 playerPane.getChildren().add(rectangle); // Add rectangle to the player's pane
@@ -397,7 +397,28 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
-    private boolean showConfirmationAlert() {
+    private boolean showConfirmationPlayAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Stage");
+        alert.setHeaderText("Do you confirm your choice?");
+        alert.setContentText("Think well! This action is irreversible");
+
+        // Custom buttons
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        alert.getButtonTypes().setAll(yesButton, noButton);
+
+        alert.initStyle(StageStyle.UTILITY);
+
+        // Show the alert and wait for a response
+        var result = alert.showAndWait();
+
+
+        // Return true if "Yes" is clicked, false if "No" is clicked
+        return result.isPresent() && result.get() == yesButton;
+    }
+
+    private boolean showConfirmationDrawAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Stage");
         alert.setHeaderText("Do you confirm your choice?");
@@ -446,7 +467,7 @@ public class PlayingSceneController extends InGameController {
         chosenCardToPlay.setFitHeight(33);
         chosenCardToPlay.setFitWidth(65);
         double layoutX = 615 + (point.getX() * 37);
-        double layoutY = 364 + (point.getY() * 21);
+        double layoutY = 364 + (- point.getY() * 21);
         chosenCardToPlay.setLayoutX(layoutX);
         chosenCardToPlay.setLayoutY(layoutY);
         chosenCardToPlay.setPreserveRatio(true);

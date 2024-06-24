@@ -300,8 +300,10 @@ public class Gui extends Application implements UI {
 
     @Override
     public void show_drawFromWhere() {
+        /*
         PlayingSceneController controller = (PlayingSceneController) abstractController;
         Platform.runLater(controller::showDrawAlert);
+         */
     }
 
     @Override

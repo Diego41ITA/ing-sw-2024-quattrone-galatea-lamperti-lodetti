@@ -580,22 +580,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
     }
 
     //----------------------------------------------------------------------------------------------------------
-    /**
-     * Getter method.
-     * @param nick Nickname of the Player.
-     * @return The Player's hand.
-     */
-    //@Override
-    public ArrayList<PlayableCard> showPlayerHand(String nick) {
-        List<Player> players;
-        players = game.getPlayers();
-        for (Player player : players) {
-            if (player.getNick().equals(nick)) {
-                return (ArrayList<PlayableCard>) player.showCard();
-            }
-        }
-        return null;
-    }
     //----------------------------------------------------------------------------------------------------------
 
 
