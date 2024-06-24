@@ -26,12 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* All'interno di questa classe implementeremo i metodi della UI per la GUI.
-All'interno di questi metodi ci preoccuperemo anche di caricare la scena attraverso un FXMLLoader.
-Useremo all'interno di questi metodi i vari controllers delle scene.
-La grafica verrà runnata su thread
- */
-
 /**
  * This class is responsible for loading the JavaFX scenes and eventually calling methods of the relative controllers,
  * if needed. It extends {@link Application} and implements {@link UI}, to override all the methods needed to make the
