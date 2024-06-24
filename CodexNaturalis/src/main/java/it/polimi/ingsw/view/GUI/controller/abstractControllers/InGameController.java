@@ -17,15 +17,30 @@ import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
+import it.polimi.ingsw.view.GUI.controller.*;
 
+/**
+ * An abstract class, that hold the common methods needed by {@link PlayingSceneController},
+ * {@link WaitingSceneController} and {@link EndController}.
+ */
 public abstract class InGameController extends AbstractController {
+    /**
+     * {@inheritDoc}
+     * @param updatedGame
+     */
     @Override
     public void setUpController(FsmGame updatedGame) {
     }
 
+    /**
+     * Create a pane containing all the {@link PlayableCard}s placed in the {@link GameStation}.
+     * @param player needed to obtain the correct GameStation.
+     * @return
+     */
     protected Pane createGameStationTabPane(Player player) {
         Pane pane = new Pane();  // Create a single Pane
         GameStation gameStation = getGameView().getMyGameStation(player.getNick());
@@ -73,6 +88,10 @@ public abstract class InGameController extends AbstractController {
         return pane;
 
     }
+    /**
+     * Private helper method that creates an {@link ImageView} of a specific image.
+     * @param imagePath the relative path to the specific image.
+     */
     private ImageView createImageView (String imagePath){
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
