@@ -32,7 +32,7 @@ public class GameStation implements Serializable {
      * @param card is the initial card chosen by the player
      */
     public GameStation(InitialCard card) {
-        playedCards = new HashMap<>();
+        playedCards = new LinkedHashMap<>();
         forbiddenCoords = new ArrayList<>();
         //playedCards.put(new Point(0, 0), card);
         freeCords = new ArrayList<>();
@@ -41,7 +41,7 @@ public class GameStation implements Serializable {
     }
 
     public GameStation(GameStation gs) {
-        this.playedCards = new HashMap<>();
+        this.playedCards = new LinkedHashMap<>();
         this.forbiddenCoords = gs != null && gs.getForbiddenCords() != null ? new ArrayList<>(gs.getForbiddenCords()) : new ArrayList<>();
         setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
         this.freeCords = (gs != null && gs.getFreeCords() != null )? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
