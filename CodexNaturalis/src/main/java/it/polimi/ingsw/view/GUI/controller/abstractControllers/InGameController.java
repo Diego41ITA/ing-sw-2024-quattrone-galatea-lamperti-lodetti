@@ -37,7 +37,7 @@ public abstract class InGameController extends AbstractController {
     }
 
     /**
-     * Create a pane containing all the {@link PlayableCard}s placed in the {@link GameStation}.
+     * Creates a pane containing all the {@link PlayableCard}s placed in the {@link GameStation}.
      * @param player needed to obtain the correct GameStation.
      * @return
      */
