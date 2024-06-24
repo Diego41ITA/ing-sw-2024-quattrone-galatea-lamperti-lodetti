@@ -6,18 +6,11 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import javafx.event.Event;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.StageStyle;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
