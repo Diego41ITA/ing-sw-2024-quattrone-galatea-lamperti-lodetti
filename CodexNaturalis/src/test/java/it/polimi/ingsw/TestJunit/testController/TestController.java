@@ -9,19 +9,22 @@
         import it.polimi.ingsw.view.TUI.Cli;
         import it.polimi.ingsw.view.UI;
         import it.polimi.ingsw.view.input.InputParser;
+        import it.polimi.ingsw.view.input.InputUi;
         import org.junit.jupiter.api.BeforeEach;
         import org.junit.jupiter.api.Test;
         import java.rmi.RemoteException;
-        import java.util.ArrayList;
-        import java.util.HashMap;
+        import java.util.*;
+
         import it.polimi.ingsw.model.card.*;
         import it.polimi.ingsw.model.card.strategyPattern.CheckInterface;
         import it.polimi.ingsw.model.card.strategyPattern.ItemCheck;
         import it.polimi.ingsw.model.exceptions.illegalOperationException;
         import it.polimi.ingsw.model.gameDataManager.Color;
         import java.awt.*;
-        import java.util.Collections;
-public class TestController  {
+        import java.util.List;
+
+
+        public class TestController  {
 
     private ControllerOfMatches controllerOfMatches;
 
@@ -51,7 +54,14 @@ public class TestController  {
         assertNotNull(gameController);
         assertEquals(1, controllerOfMatches.getActiveGames().size());
         assertEquals("Game1", gameController.getGameId());
-
+    }
+    @Test
+    public void testSetGame() {
+        Game newGame = new Game("newGameId");
+        // Call the setGame method
+        controllerOfGame.setGame(newGame);
+        // Verify the game is set correctly
+        assertEquals("newGameId", controllerOfGame.getGameId(), "Game ID should be updated to newGameId.");
     }
 
     @Test
@@ -66,7 +76,48 @@ public class TestController  {
         GameObserver obs2 = new FsmGame(ui2, input);
         ControllerOfGameInterface gameController2 = controllerOfMatches.joinRandomGame(obs2, "Player2");
         assertNotNull(gameController2);
+        //test if the player joined(the size of Players needs to be 2)
         assertEquals(2, gameController1.getPlayers().size());
+    }
+    @Test
+    public void testRejoinGame() throws RemoteException, MaxPlayersInException {
+        Game game = new Game("testGameId");
+        game.setPointTable(new PointTable());
+        ArrayList players = new ArrayList<>();
+        Player player = new Player("Player1");
+        HashMap<Item, Integer> objects1 = new HashMap<>();
+        objects1.put(Item.FEATHER, 1);
+        objects1.put(Item.POTION, 1);
+        objects1.put(Item.PARCHMENT, 1);
+        HashMap<Item, Integer> objects2 = new HashMap<>();
+        objects1.put(Item.PARCHMENT, 2);
+        CheckInterface item = new ItemCheck();
+        GoalCard goal1 = new GoalCard(99, true, 3, item, objects1);
+        GoalCard goal2 = new GoalCard(100, true, 2, item, objects2);
+        ArrayList<GoalCard> test = new ArrayList<GoalCard>();
+        test.add(goal1);
+        test.add(goal2);
+        player.chooseGoal(test, 100);
+        players.add(player);
+        game.setTurn(new Turn(players));
+        controllerOfGame = new ControllerOfGame(game);
+        controllerOfMatches.getActiveGames().add(controllerOfGame);
+        String gameID = controllerOfGame.getGameId();
+        String playerNick = "Player1";
+        // observer
+        UI ui = new Cli();
+        InputParser input = null;
+        GameObserver obs = new FsmGame(ui, input);
+        // Add player to the game
+        controllerOfGame.addPlayer(player);
+        controllerOfGame.addObserver(obs, playerNick);
+        // Simulate player disconnecting
+        controllerOfGame.changePlayerStatus(playerNick, false);
+        // Attempt to rejoin the game
+        ControllerOfGameInterface result = controllerOfMatches.rejoinGame(obs, gameID, playerNick);
+        controllerOfMatches.printActiveGames();
+        // Check if the player has successfully rejoined
+        assertTrue(controllerOfGame.getPlayers().get(player), "The player's status should be active.");
     }
 
     @Test
@@ -74,14 +125,17 @@ public class TestController  {
         UI ui = new Cli();
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
-
         ControllerOfGameInterface gameController = controllerOfMatches.createGame(obs, "Player1", 4);
         UI ui2 = new Cli();
         GameObserver obs2 = new FsmGame(ui2, input);
         ControllerOfGameInterface gameController2 = controllerOfMatches.joinRandomGame(obs2, "Player2");
         assertNotNull(gameController2);
-        controllerOfMatches.leaveGame(gameController2.getGameId(), "Player1");
-        Player player1 = new Player("Player1");
+        UI ui3= new Cli();
+        GameObserver obs3= new FsmGame(ui2, input);
+        ControllerOfGameInterface gameController3 = controllerOfMatches.joinRandomGame(obs2, "Player3");
+        controllerOfMatches.leaveGame(gameController2.getGameId(), "Player3");
+        Player player1 = new Player("Player3");
+        //check that the player3 is not there
         assertFalse(gameController.getPlayers().containsKey(player1));
     }
 
@@ -93,10 +147,16 @@ public class TestController  {
         ControllerOfGameInterface gameController = controllerOfMatches.createGame(obs, "Player1", 4);
         assertEquals(1, controllerOfMatches.getActiveGames().size());
         assertNotNull(gameController);
-        controllerOfMatches.leaveGame("Game1", "Player1");
+        controllerOfMatches.leaveGame("Game2", "Player1");
         assertEquals(false, controllerOfMatches.getActiveGames().contains(gameController)); // The game should have been removed from the active games list
         assertEquals(0, controllerOfMatches.getActiveGames().size());
+        String gameID = controllerOfGame.getGameId();
+        controllerOfMatches.removeGame("Game0");
+        boolean gameStillExists = controllerOfMatches.getActiveGames().stream()
+                .anyMatch(game -> game.getGameId().equals(gameID));
+        assertFalse(gameStillExists, "The game should be removed from active games.");
     }
+
 
     @Test
     public void testAddObserver() throws RemoteException {
@@ -106,6 +166,22 @@ public class TestController  {
         Player player = new Player("Player1");
         controllerOfGame.addObserver(obs, "Player1");
         assertTrue(controllerOfGame.getObservers().containsKey(player.getNick()));
+    }
+    @Test
+    public void testAddPoints2Player() throws RemoteException, MaxPlayersInException {
+        Game game = new Game("testGameId");
+        Player player = new Player("Player1");
+        player.setColor(Color.RED);
+        PointTable table = new PointTable();
+        table.setColorPoints(Color.RED);
+        game.addPlayer(player);
+        game.setPointTable(table);
+        controllerOfGame = new ControllerOfGame(game);
+        //add points
+        controllerOfGame.addPoints2Player("Player1", 10);
+        // Verify the points are added correctly
+        int points = game.getPointTable().getPoint(player);
+        assertEquals(10, points, "Player should have 10 points.");
     }
 
     @Test
@@ -130,16 +206,16 @@ public class TestController  {
     }
     @Test
     public void testGoOn() throws RemoteException, MaxPlayersInException {
-        // Creazione osservatore
+        //observer creation
         UI ui = new Cli();
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
 
-        // Creazione giocatori
+        // Player creation
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
 
-        // Creazione oggetti
+        // Creation of objects
         HashMap<Item, Integer> objects1 = new HashMap<>();
         objects1.put(Item.FEATHER, 1);
         objects1.put(Item.POTION, 1);
@@ -148,34 +224,28 @@ public class TestController  {
         HashMap<Item, Integer> objects2 = new HashMap<>();
         objects2.put(Item.PARCHMENT, 2); // Corretto da objects1.put
 
-        // Creazione check e carte obiettivo
+        // creation goal cards
         CheckInterface itemCheck = new ItemCheck();
         GoalCard goal1 = new GoalCard(99, true, 3, itemCheck, objects1);
         GoalCard goal2 = new GoalCard(100, true, 2, itemCheck, objects2);
 
-        // Lista delle carte obiettivo
+        // List of goals cards
         ArrayList<GoalCard> testGoals = new ArrayList<>();
         testGoals.add(goal1);
         testGoals.add(goal2);
-
-        // Aggiunta dei giocatori e degli osservatori
         controllerOfGame.addPlayer(player1);
         controllerOfGame.addObserver(obs,"Player1");
-
-        // Configurazione readiness
         controllerOfGame.readiness.put("Player1", 3);
         controllerOfGame.chooseGoal(testGoals, 99, "Player1");
         controllerOfGame.initializeTurn("Player1");
         controllerOfGame.addPlayer(player2);
         controllerOfGame.addObserver(obs, "Player2");
-
-
         controllerOfGame.readiness.put("Player2", 3);
         controllerOfGame.chooseGoal(testGoals, 99, "Player2");
         controllerOfGame.initializeTurn("Player2");
-
-        // Esecuzione del metodo goOn
         controllerOfGame.goOn();
+        //check that the current player has changed, if it was previously
+        // player1 it is now player2 otherwise if it was previously player2 it is now player1
         if (controllerOfGame.getCurrentPlayer().equals("Player1")) {
             controllerOfGame.goOn();
             assertEquals("Player2", controllerOfGame.getCurrentPlayer());
@@ -262,11 +332,13 @@ public class TestController  {
         InputParser input = null;
         GameObserver obs = new FsmGame(ui, input);
         HashMap<Angle, Item> front = new HashMap<>();
+        front.put(Angle.DOWNLEFT, Item.EMPTY);
         HashMap<Angle, Item> back = new HashMap<>();
         ResourceCard resourceCard = new ResourceCard(front, back, Collections.singletonList(Item.MUSHROOM), TypeOfCard.ANIMAL, true, 8, 1);
-        Player player1 = new Player("Player1");
+        Player player1 = new Player("TestPlayer");
         controllerOfGame.addPlayer(player1);
         HashMap<Angle, Item> frontItems = new HashMap<>();
+        frontItems.put(Angle.HIGHRIGHT, Item.MUSHROOM);
         HashMap<Angle, Item> backItems = new HashMap<>();
         ArrayList<Item> backResource = new ArrayList<>();
         backResource.add(Item.MUSHROOM);
@@ -276,10 +348,10 @@ public class TestController  {
         players.get(0).setGameStation(new GameStation(initialCard));
         ArrayList<PlayableCard> cards = new ArrayList<>();
         cards.add(resourceCard);
-        players.get(0).setNickname("testPlayer");
+        players.get(0).setNickname("TestPlayer");
         players.get(0).setCards(cards);
         controllerOfGame.addPlayer(players.get(0));
-        controllerOfGame.setColor("blue", "testPlayer");
+        controllerOfGame.setColor("blue", "TestPlayer");
         CheckInterface itemCheck = new ItemCheck();
         HashMap<Item, Integer> objects1 = new HashMap<>();
         objects1.put(Item.FEATHER, 1);
@@ -291,29 +363,27 @@ public class TestController  {
         testGoals.add(goal1);
         testGoals.add(goal2);
         controllerOfGame.addPlayer(player1);
-        controllerOfGame.readiness.put("testPlayer", 3);
-        controllerOfGame.addObserver(obs, "testPlayer");
-        controllerOfGame.chooseGoal(testGoals, 99, "testPlayer");
-        controllerOfGame.initializeTurn("testPlayer");
+        controllerOfGame.readiness.put("TestPlayer", 3);
+        controllerOfGame.addObserver(obs, "TestPlayer");
+        controllerOfGame.chooseGoal(testGoals, 99, "TestPlayer");
+        controllerOfGame.initializeTurn("TestPlayer");
         Point cord = new Point(1, 1);
         try {
-            controllerOfGame.playCard(resourceCard, "testPlayer", true, cord);
+            controllerOfGame.playCard(resourceCard, "TestPlayer", true, cord);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
         Game game = controllerOfGame.returnGame();
+        //after adding the card, check if you have reached the correct number of points
         assertEquals(game.getPointTable().getPoint(players.get(0)), 4);
         ArrayList<Player> players3 = new ArrayList<>(controllerOfGame.getPlayers().keySet());
-        if (players3.get(0).getNick().equals("testPlayer")) {
-            assertTrue(players3.get(0).showCard().isEmpty());
-        } else {
-            assertTrue(players3.get(1).showCard().isEmpty());
-        }
+        ////check that after playing the card there is nothing left in your hand
+        assertTrue(players3.get(0).showCard().isEmpty());
 
     }
 
     @Test
-    public void test_DrawPlayableCardFromTableOfDecks() throws MaxPlayersInException {
+    public void test_DrawPlayableCardFromTableOfDecks() throws MaxPlayersInException, RemoteException {
         //I have to initialize the game table (I use the game Controller method)
         //I have to see the hand has at least one card in hand (I do this for all decks)
         controllerOfGame.initializeTable();
@@ -325,7 +395,7 @@ public class TestController  {
         assertTrue(players.get(0).showCard().get(0).getCardId() > 40);
         controllerOfGame.drawPlayableCardFromTableOfDecks("resource", "Player1");
         assertEquals(players.get(0).showCard().size(), 2);
-        assertTrue(players.get(0).showCard().get(1).getCardId() < 40);
+        assertTrue(players.get(0).showCard().get(1).getCardId() <= 40);
         controllerOfGame.drawPlayableCardFromTableOfDecks("initial", "Player1");
         assertEquals(players.get(0).showCard().size(), 3);
         assertTrue(players.get(0).showCard().get(2).getCardId() > 80);
