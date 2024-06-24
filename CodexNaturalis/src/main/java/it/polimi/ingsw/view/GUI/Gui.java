@@ -31,13 +31,38 @@ All'interno di questi metodi ci preoccuperemo anche di caricare la scena attrave
 Useremo all'interno di questi metodi i vari controllers delle scene.
 La grafica verrà runnata su thread
  */
-public class Gui extends Application implements UI {
-    private Stage primaryStage;
-    private FsmGame flow;
-    private ClientAction client;
 
+/**
+ * This class is responsible for loading the JavaFX scenes and eventually calling methods of the relative controllers,
+ * if needed. It extends {@link Application} and implements {@link UI}, to override all the methods needed to make the
+ * application works both with GUI and TUI. Only some show_ methods are overridden, because all the others are needed
+ * by the {@link it.polimi.ingsw.view.TUI.Cli}. This class handles various stages of the FSM with few scenes.
+ */
+public class Gui extends Application implements UI {
+    /**
+     *Primary stage of the scene.
+     */
+    private Stage primaryStage;
+    /**
+     *Fined state machine of the game.
+     */
+    private FsmGame flow;
+    /**
+     * It's needed to start the chosen type of protocol design.
+     */
+    private ClientAction client;
+    /**
+     * It stores the controller of the loaded scene.
+     */
     private AbstractController abstractController;
 
+    /**
+     * It's the override of the start(Stage primaryStage) method of the {@link Application} class. It handles various
+     * operations relative to JavaFX (setting the primaryStage, the title, the icon..); it also initializes and starts
+     * the fined state machine of the game.
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -73,6 +98,11 @@ public class Gui extends Application implements UI {
         });
     }
 
+    /**
+     * Loads a .fxml file, setting the corresponding scene to the primaryStage. It also calls the
+     * setUpController(FsmGame flow) methods that initializes all the components and possible interaction in the scene.
+     * @param path the relative path to the scene to load.
+     */
     public void loadScene(String path) {
         Platform.runLater(() -> {
             try {
@@ -93,6 +123,20 @@ public class Gui extends Application implements UI {
         });
     }
 
+    /**
+     * It shows the nickname selection menu.
+     */
+    @Override
+    public void show_RequestPlayerNickName() {
+        if(primaryStage != null)
+            loadScene("/scenes/NickNameSetUp.fxml");
+        else
+            System.out.println("error primary stage is null");
+    }
+
+    /**
+     * It shows the starting menu.
+     */
     @Override
     public void show_startingMenu() {
         if(primaryStage != null)
@@ -101,11 +145,9 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");;
     }
 
-    @Override
-    public void show_message(String message) {
-        //non dovrebbe servire nel caso mettere un pop up
-    }
-
+    /**
+     * It shows the initial card choosing menu.
+     */
     @Override
     public void show_initialCard(InitialCard card) {
         if(primaryStage != null) {
@@ -115,11 +157,9 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
-    //mettere una scena oppure niente
-    @Override
-    public void show_joinRandomGame() {
-    }
-
+    /**
+     * It shows the personal color choosing menu.
+     */
     @Override
     public void show_requestPlayerColor(GameView gameView) {
         if(primaryStage != null)
@@ -128,6 +168,22 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
+    /**
+     * It shows the personal objective card selection screen.
+     * @param cards the goal cards.
+     */
+    @Override
+    public void show_requestGoalCard(ArrayList<GoalCard> cards) {
+        if(primaryStage != null) {
+            loadScene("/scenes/PlayerGoal.fxml");
+        }
+        else
+            System.out.println("error primary stage is null");
+    }
+
+    /**
+     * It shows the creation game menu.
+     */
     @Override
     public void show_noAvailableGames() {
         if(primaryStage != null)
@@ -136,24 +192,11 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
-    @Override
-    public void show_invalidIdGame() {
-
-    }
-
-    @Override
-    public void show_invalidNickToReconnect(String id) {
-
-    }
-
-    @Override
-    public void show_currentPlayersStatus(GameView gameView) {
-
-    }
-    @Override
-    public void show_playerColors(GameView gameView) {
-    }
-
+    /**
+     * It shows a scene with all the relevant information to the players that are not currently waiting for the
+     * game to resume after a disconnection.
+     * @param gameView the immutable version of the model that contains all the information.
+     */
     @Override
     public void show_GameStatus(GameView gameView) {
         if(primaryStage != null) {
@@ -165,14 +208,9 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
-    @Override
-    public void show_RequestPlayerNickName() {
-        if(primaryStage != null)
-            loadScene("/scenes/NickNameSetUp.fxml");
-        else
-            System.out.println("error primary stage is null");
-    }
-
+    /**
+     * It shows a scene that allows to insert the GameId to reconnect.
+     */
     @Override
     public void show_RequestGameId() {
         if(primaryStage != null)
@@ -181,6 +219,9 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
+    /**
+     * It shows a scene that allows the player to set the maximum number of players in the game.
+     */
     @Override
     public void show_RequestNumberOfPlayers() {
         if(primaryStage != null)
@@ -189,14 +230,22 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
+    /**
+     * It shows a waiting scene, until the game is ready to start.
+     */
     @Override
-    public void show_playerJoined(String id) {
+    public void show_waitingOtherPlayers() {
+        if(primaryStage != null)
+            loadScene("/scenes/waitStart.fxml");
+        else
+            System.out.println("error primary stage is null");
     }
-    @Override
-    public void show_gameStarting(String id) {
 
-    }
-
+    /**
+     * It shows a scene with all the relevant information needed by the player to perform the action of playing and then
+     * drawing a card.
+     * @param immutableModel the immutable version of the model that contains all the information.
+     */
     @Override
     public void show_playingScene(GameView immutableModel) {
         if(primaryStage != null) {
@@ -206,13 +255,22 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
-    //si potrebbe modificare WaitingScene.fxml in modo che stampi il nome del giocatore corrente e basta.
+    /**
+     * It shows a popup to communicate that is now possible to draw a card from the table.
+     */
+    @Override
+    public void show_drawFromWhere() {
+        PlayingSceneController controller = (PlayingSceneController) abstractController;
+        Platform.runLater(controller::showDrawAlert);
+    }
+
+    /**
+     * It shows a scene with all the relevant information about the game to the players that are waiting for their turn.
+     * @param immutableModel the immutable version of the model that contains all the information.
+     */
     @Override
     public void show_isYourTurn(GameView immutableModel) {
-        if(immutableModel.getCurrentPlayer().getNick().equals(this.flow.getNickname())){
-            //un pop-up che dica è il tuo turno
-            //oppure si aggiorna la gameStation
-        }else{
+        if(!immutableModel.getCurrentPlayer().getNick().equals(this.flow.getNickname())){
             if(primaryStage != null) {
                 loadScene("/scenes/WaitingScene.fxml");
             }
@@ -221,71 +279,19 @@ public class Gui extends Application implements UI {
         }
     }
 
-    @Override
-    public void show_playerHand(GameView immutableModel, String nickname) {
-
-    }
-
-    @Override
-    public void show_gameStation(GameView view) {
-    }
-
+    /**
+     * It shows a popup saying that the selected card placement is invalid.
+     */
     @Override
     public void show_invalidPlay() {
         PlayingSceneController controller = (PlayingSceneController) abstractController;
         Platform.runLater(controller::showInvalidPlayAlert);
     }
 
-    @Override
-    public String show_goalCard(GoalCard card) {
-
-        return null;
-    }
-
-    @Override
-    public String show_playableCard(PlayableCard card) {
-
-        return null;
-    }
-
-    @Override
-    public void show_tableOfDecks(GameView immutableModel) {
-    }
-
-    @Override
-    public void show_lastTurn() {
-    }
-
-    @Override
-    public void show_pointTable(GameView immutableModel) {
-    }
-
-    @Override
-    public void show_gameOver() {
-
-    }
-
-    @Override
-    public void show_youWin() {
-    }
-
-    @Override
-    public void show_youLose() {
-    }
-
-    @Override
-    public void show_requestGoalCard(ArrayList<GoalCard> cards) {
-        if(primaryStage != null) {
-            loadScene("/scenes/PlayerGoal.fxml");
-        }
-        else
-            System.out.println("error primary stage is null");
-    }
-
-    @Override
-    public void show_requestCardId() {
-    }
-
+    /**
+     * It shows a scene with the summary of the finished game.
+     * @param name all the names
+     */
     @Override
     public void show_winner(List<String> name) {
         if(primaryStage != null)
@@ -294,62 +300,152 @@ public class Gui extends Application implements UI {
             System.out.println("error primary stage is null");
     }
 
-    @Override
-    public void show_requestTypeToDraw() {
-    }
-
-    @Override
-    public void show_drawFromWhere() {
-        PlayingSceneController controller = (PlayingSceneController) abstractController;
-        Platform.runLater(controller::showDrawAlert);
-    }
-
-    @Override
-    public void show_invalidChoice() {
-
-    }
-
-    @Override
-    public void show_requestSide() {
-    }
-
-    @Override
-    public void show_requestCoordinates() {
-    }
-
-    @Override
-    public void show_connectionError() {
-
-    }
-
-    @Override
-    public void show_invalidInput() {
-
-    }
-
-    @Override
-    public void show_invalidCommand() {
-
-    }
-
-    @Override
-    public void show_waitingOtherPlayers() {
-        if(primaryStage != null)
-            loadScene("/scenes/waitStart.fxml");
-        else
-            System.out.println("error primary stage is null");
-    }
-
-    @Override
-    public void show_requestToLeave(){
-    }
-
+    /**
+     * It shows a scenes to communicate that the game is being aborted.
+     */
     @Override
     public void show_abortGame(){
         if(primaryStage != null)
             loadScene("/scenes/AbortedGame.fxml");
         else
             System.out.println("error primary stage is null");
+    }
+
+    @Override
+    public void show_message(String message) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_joinRandomGame() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_invalidIdGame() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_invalidNickToReconnect(String id) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_currentPlayersStatus(GameView gameView) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_playerColors(GameView gameView) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_playerJoined(String id) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_gameStarting(String id) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_playerHand(GameView immutableModel, String nickname) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_gameStation(GameView view) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public String show_goalCard(GoalCard card) {
+        //no need to implement this method, the other scenes are sufficient.
+        return null;
+    }
+
+    @Override
+    public String show_playableCard(PlayableCard card) {
+        //no need to implement this method, the other scenes are sufficient.
+        return null;
+    }
+
+    @Override
+    public void show_tableOfDecks(GameView immutableModel) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_lastTurn() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_pointTable(GameView immutableModel) {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_gameOver() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_youWin() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_youLose() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_requestCardId() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_requestTypeToDraw() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_invalidChoice() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_requestSide() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_requestCoordinates() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_connectionError() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_invalidInput() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_invalidCommand() {
+        //no need to implement this method, the other scenes are sufficient.
+    }
+
+    @Override
+    public void show_requestToLeave(){
+        //no need to implement this method, the other scenes are sufficient.
     }
 
     public static void main(String[] args) {
