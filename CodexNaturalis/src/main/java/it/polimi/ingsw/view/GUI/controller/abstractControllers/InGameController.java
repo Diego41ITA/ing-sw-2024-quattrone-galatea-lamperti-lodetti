@@ -24,7 +24,7 @@ import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
 import it.polimi.ingsw.view.GUI.controller.*;
 
 /**
- * An abstract class, that hold the common methods needed by {@link PlayingSceneController},
+ * An abstract class, that holds the common methods needed by {@link PlayingSceneController},
  * {@link WaitingSceneController} and {@link EndController}.
  */
 public abstract class InGameController extends AbstractController {
