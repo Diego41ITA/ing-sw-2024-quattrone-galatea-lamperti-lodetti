@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
 
@@ -28,7 +29,7 @@ public abstract class InGameController extends AbstractController {
     protected Pane createGameStationTabPane(Player player) {
         Pane pane = new Pane();  // Create a single Pane
         GameStation gameStation = getGameView().getMyGameStation(player.getNick());
-        for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
+        for (Map.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
             Point point = entry.getKey();
             PlayableCard card = entry.getValue();
 
