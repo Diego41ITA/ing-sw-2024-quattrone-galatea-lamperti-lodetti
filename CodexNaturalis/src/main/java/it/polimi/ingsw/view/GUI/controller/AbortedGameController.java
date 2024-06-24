@@ -7,8 +7,9 @@ import javafx.application.Platform;
 import javafx.util.Duration;
 
 
-//visualizza l'interfaccia di error dove viene stampato il messaggio di errore e viene mostrato
-//un bottone per uscire dal gioco
+/**
+ *Controller for the AbortedGame scene.
+ */
 public class AbortedGameController extends AbstractController {
 
     /**

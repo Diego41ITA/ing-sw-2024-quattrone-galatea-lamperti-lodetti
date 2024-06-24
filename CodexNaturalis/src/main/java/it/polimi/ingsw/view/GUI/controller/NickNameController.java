@@ -6,14 +6,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller of the NickNameSetUp scene.
+ */
 public class NickNameController extends AbstractController {
     @FXML
     private TextField nickName;
     @FXML
     private Button enter;
+
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void OkButton(javafx.event.ActionEvent actionEvent) {
-        //nella guiinput si può mettere un ciclo while che fin quando in multipleResponses non abbiamo
-        //la stringa adeguata il gameflow/guiInput aspetta
         multipleResponses.add(nickName.getText());
     }
 

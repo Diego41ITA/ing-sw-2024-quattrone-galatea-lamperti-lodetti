@@ -29,6 +29,9 @@ import java.util.List;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.makerAssociator;
 
+/**
+ * Controller for the EndScene.
+ */
 public class EndController extends InGameController {
     @FXML
     private Text winnerNick;
@@ -122,21 +125,41 @@ public class EndController extends InGameController {
     private ImageView maker3;
     @FXML
     private ImageView maker4;
+    /**
+     * Needed for the zooming feature in the GameStation tab.
+     */
     @FXML
     private double initialTranslateX, initialTranslateY;
+    /**
+     * Needed for the panning feature in the GameStation tab.
+     */
     @FXML
     private double dragStartX, dragStartY;
+    /**
+     * Needed for the zooming feature in the GameStation tab.
+     */
     @FXML
     private Scale scaleTransform = new Scale(1, 1);
-
+    /**
+     * An array that holds all the ImageViews that places the makers on the PointTable
+     */
     private ImageView[] imageViews = new ImageView[29];
-
+    /**
+     * An array that holds all the ImageViews of the Goal Cards.
+     */
     private ImageView[] goalCardImageViews = new ImageView[4];
-
+    /**
+     * An array that holds all the ImageViews of the makers.
+     */
     private ImageView[] makerImageViews = new ImageView[4];
-
+    /**
+     * An array that holds all the text to set the nicknames.
+     */
     private Text[] nickArray = new Text[4];
 
+    /**
+     * Initialize the tab of the Goal Cards, setting all the ImageViews.
+     */
     private void initializeGoalCardsTab(){
         GameView gameView = getGameView();
         List<Player> players = gameView.getPlayers();
@@ -161,6 +184,9 @@ public class EndController extends InGameController {
         commonGoal2.setImage(new Image(associatorPng2Card(String.valueOf(commonGoals.get(1).getCardId()), true)));
     }
 
+    /**
+     * Private helper method that initializes all the arrays.
+     */
     private void initializeArrays(){
         imageViews[0] = image0;
         imageViews[1] = image1;
@@ -208,12 +234,20 @@ public class EndController extends InGameController {
         makerImageViews[3] = maker4;
     }
 
-    //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
+    /**
+     * Places a maker on a specific point.
+     * @param color the color of the maker to place.
+     * @param point the point on the PointTable.
+     */
     private void MakerInPointTable(Color color, int point){
         Image imageMaker = new Image(makerAssociator(color));
         imageViews[point].setImage(imageMaker);
     }
 
+    /**
+     * Creates the GameStation Tab, adds it to the TabPane and assign the correct responses to the mouse events.
+     * @param player the owner of the GameStation to create
+     */
     private void createAndAddGameStationTab(Player player) {
 
         // Create a new Tab and set the Pane as its content
@@ -266,13 +300,15 @@ public class EndController extends InGameController {
         });
 
         pane.setOnMouseReleased(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                pane.setCursor(Cursor.DEFAULT); // Change cursor to open hand when dragging stops
-            }
+            pane.setCursor(Cursor.DEFAULT);
         });
     }
 
-    public void setWinnerNick(String winnerNick){
+    /**
+     * Sets the winner nickname.
+     * @param winnerNick nickname of the winner.
+     */
+    private void setWinnerNick(String winnerNick){
         this.winnerNick.setText(winnerNick);
         if(getGameFsm().getNickname().equals(winnerNick))
             youWon.setText("YOU WON!!");
