@@ -21,8 +21,8 @@ public class GameStation implements Serializable {
      */
     private ArrayList<Point> freeCords;
 
-    /**is a list of those banned coordinates (where cards cannot be placed because there is no corner)
-     *
+    /**
+     * is a list of those banned coordinates (where cards cannot be placed because there is no corner)
      */
     private ArrayList<Point> forbiddenCoords;
 
@@ -44,24 +44,25 @@ public class GameStation implements Serializable {
         this.playedCards = new HashMap<>();
         this.forbiddenCoords = gs != null && gs.getForbiddenCords() != null ? new ArrayList<>(gs.getForbiddenCords()) : new ArrayList<>();
         setPlayedCards(gs != null ? gs.getPlayedCards() : new HashMap<>());
-        this.freeCords = (gs != null && gs.getFreeCords() != null )? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
+        this.freeCords = (gs != null && gs.getFreeCords() != null) ? new ArrayList<>(gs.getFreeCords()) : new ArrayList<>();
     }
 
     /**
      * not all the initial cards have 4 different free corners
+     *
      * @param card
      */
-    private void setFreeCoord(InitialCard card){
+    private void setFreeCoord(InitialCard card) {
 
         Map<Angle, Item> newMap = new HashMap<>();
 
-        if(card.isFront())
+        if (card.isFront())
             newMap = card.getFront();
         else
             newMap = card.getBack();
 
-        for(Angle a :newMap.keySet()){
-            switch (a){
+        for (Angle a : newMap.keySet()) {
+            switch (a) {
                 case HIGHLEFT -> freeCords.add(new Point(-1, 1));
                 case DOWNLEFT -> freeCords.add(new Point(-1, -1));
                 case HIGHRIGHT -> freeCords.add(new Point(1, 1));
@@ -90,13 +91,16 @@ public class GameStation implements Serializable {
         }
     }
 
-    /** returns the banned coordinates
-     * @author Lorenzo Galatea
+    /**
+     * returns the banned coordinates
+     *
      * @return returns a copy of the forbidden coordinates.
+     * @author Lorenzo Galatea
      */
     public List<Point> getForbiddenCords() {
         return new ArrayList<>(this.forbiddenCoords);
     }
+
     /**
      * returns the free coordinates
      *
@@ -121,16 +125,16 @@ public class GameStation implements Serializable {
         for (int i = 0; i < offsets.length; i++) {
             Point point = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
             //if there is the card then
-            if(getPlayedCards().containsKey(point)){
-                if(i==0){
+            if (getPlayedCards().containsKey(point)) {
+                if (i == 0) {
                     playedCards.get(point).hideAngle(Angle.HIGHRIGHT);
 
-                }else if(i==1){
+                } else if (i == 1) {
                     playedCards.get(point).hideAngle(Angle.DOWNRIGHT);
 
-                }else if(i==2){
+                } else if (i == 2) {
                     playedCards.get(point).hideAngle(Angle.HIGHLEFT);
-                }else{
+                } else {
                     playedCards.get(point).hideAngle(Angle.DOWNLEFT);
 
                 }
@@ -151,26 +155,28 @@ public class GameStation implements Serializable {
         for (int i = 0; i < offsets.length; i++) {
             Point neighbor = new Point(cord.x + offsets[i].x, cord.y + offsets[i].y);
             if (!forbiddenCoords.contains(neighbor)) {
-                if (!playedCards.containsKey(neighbor)) {
-                    if (playedCards.get(cord).isFront()) {
-                        if (playedCards.get(cord).getFront().containsKey(angles[i])) {
-                            freeCords.add(neighbor);
+                if (!freeCords.contains(neighbor)) {
+                    if (!playedCards.containsKey(neighbor)) {
+                        if (playedCards.get(cord).isFront()) {
+                            if (playedCards.get(cord).getFront().containsKey(angles[i])) {
+                                freeCords.add(neighbor);
 
-                        } else{
-                            forbiddenCoords.add(neighbor);
-                        }
-                    } else if(!playedCards.get(cord).isFront()){
-                        if (playedCards.get(cord).getBack().containsKey(angles[i])) {
-                            freeCords.add(neighbor);
+                            } else {
+                                forbiddenCoords.add(neighbor);
+                            }
+                        } else if (!playedCards.get(cord).isFront()) {
+                            if (playedCards.get(cord).getBack().containsKey(angles[i])) {
+                                freeCords.add(neighbor);
 
-                        } else{
-                            forbiddenCoords.add(neighbor);
-                        }
+                            } else {
+                                forbiddenCoords.add(neighbor);
+                            }
                         }
                     }
                 }
             }
         }
+    }
 
     /**
      * Checks if there are enough resources to place the Gold Card

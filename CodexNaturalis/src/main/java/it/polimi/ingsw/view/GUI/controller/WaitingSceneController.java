@@ -292,27 +292,45 @@ public class WaitingSceneController extends InGameController {
 
         // Zoom handling
         pane.getTransforms().add(scaleTransform);
-        pane.getParent().addEventFilter(ScrollEvent.SCROLL, event -> {
+        // Zoom handling keeping target element centered if exists, otherwise zoom on cursor
+        pane.setOnScroll(event -> {
             double zoomFactor = 1.05;
             if (event.getDeltaY() < 0) {
                 zoomFactor = 1 / zoomFactor;
             }
 
-            double scaleX = scaleTransform.getX() * zoomFactor;
-            double scaleY = scaleTransform.getY() * zoomFactor;
+            // Get the cursor position relative to the pane
+            double cursorX = event.getX();
+            double cursorY = event.getY();
 
-            double deltaX = (event.getX() - (pane.getBoundsInParent().getWidth() / 2 + pane.getBoundsInParent().getMinX()));
-            double deltaY = (event.getY() - (pane.getBoundsInParent().getHeight() / 2 + pane.getBoundsInParent().getMinY()));
+            // Get the current scale
+            double currentScaleX = scaleTransform.getX();
+            double currentScaleY = scaleTransform.getY();
 
-            pane.setTranslateX(pane.getTranslateX() - deltaX * (zoomFactor - 1));
-            pane.setTranslateY(pane.getTranslateY() - deltaY * (zoomFactor - 1));
+            // Calculate new scale
+            double newScaleX = currentScaleX * zoomFactor;
+            double newScaleY = currentScaleY * zoomFactor;
 
-            scaleTransform.setX(scaleX);
-            scaleTransform.setY(scaleY);
+            // Adjust pivot to cursor position
+            scaleTransform.setPivotX(cursorX);
+            scaleTransform.setPivotY(cursorY);
+
+            // Update the scale transform
+            scaleTransform.setX(newScaleX);
+            scaleTransform.setY(newScaleY);
+
+            // Adjust the translation to keep the cursor position fixed
+            double f = (zoomFactor - 1) / zoomFactor;
+            double newTranslateX = pane.getTranslateX() - f * (cursorX - pane.getLayoutBounds().getWidth() / 2 - pane.getTranslateX());
+            double newTranslateY = pane.getTranslateY() - f * (cursorY - pane.getLayoutBounds().getHeight() / 2 - pane.getTranslateY());
+
+            pane.setTranslateX(newTranslateX);
+            pane.setTranslateY(newTranslateY);
+
             event.consume();
         });
 
-        // Panning handling
+        // Variables for panning
         pane.setOnMousePressed(event -> {
             dragStartX = event.getSceneX();
             dragStartY = event.getSceneY();
@@ -330,9 +348,7 @@ public class WaitingSceneController extends InGameController {
         });
 
         pane.setOnMouseReleased(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                pane.setCursor(Cursor.DEFAULT); // Change cursor to open hand when dragging stops
-            }
+            pane.setCursor(Cursor.DEFAULT);
         });
     }
 
