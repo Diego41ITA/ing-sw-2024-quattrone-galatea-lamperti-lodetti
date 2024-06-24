@@ -278,6 +278,7 @@ public class GameObserverHandlerSocket implements GameObserver, Serializable {
             completeForwarding();
         }catch(IOException e){
             System.err.println("client is not reachable");
+            throw new RemoteException();
         }
     }
 

@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameDataManager.Player;
 import java.awt.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -41,7 +42,7 @@ public class MapTypeAdapter implements JsonSerializer<Map<Point, PlayableCard>>,
     @Override
     public Map<Point, PlayableCard> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
-        Map<Point, PlayableCard> playerMap = new HashMap<>();
+        Map<Point, PlayableCard> playerMap = new LinkedHashMap<>();
         for(Map.Entry<String, JsonElement> entry : jsonObject.entrySet()){
 
             JsonElement keyElement = JsonParser.parseString(entry.getKey());
