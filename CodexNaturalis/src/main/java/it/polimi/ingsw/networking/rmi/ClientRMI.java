@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.GoalCard;
 import it.polimi.ingsw.model.card.InitialCard;
 import it.polimi.ingsw.model.card.PlayableCard;
-import it.polimi.ingsw.model.exceptions.illegalOperationException;
 import it.polimi.ingsw.networking.ClientAction;
 import it.polimi.ingsw.observer.GameObserver;
 import it.polimi.ingsw.view.FsmGame;
@@ -17,53 +16,36 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-//si occupa di implementare le azioni del client lavorando sulla rete.
 public class ClientRMI extends UnicastRemoteObject implements ClientAction {
-    //tutti i client istanziati su questa macchina avranno lo stesso riferimento
     private static ControllerOfMatchesInterface request;
     private ControllerOfGameInterface gameController = null;
-
-    //notificationGetter è un oggetto su cui il SERVER chiamerà i metodi remoti (per notificare che è successo qualcosa)
     private GameObserver notify;
-//    private GameObserverHandlerClient gameObserverHandler;
 
     private String nickname;
     private Registry registry;
     private FsmGame flow;
 
     private String ipAddress;
-    //private Boolean firstCard;
 
-    //ora ho il costruttore piu dei metodi ausiliari.
     public ClientRMI(FsmGame flow, String ip) throws RemoteException {
-        //super();
-        //gameObserverHandler = new GameObserverHandlerClient(flow);
         ipAddress = ip;
         this.flow = flow;
-        connect(); //connette il client con il server RMI
-        //firstCard = true;
+        connect(); //it connects the client to the RMI server
+
     }
 
     public void connect(){
         try{
             registry = LocateRegistry.getRegistry(ipAddress, 1099);
             request = (ControllerOfMatchesInterface) registry.lookup("server name");
-
             notify = (GameObserver) UnicastRemoteObject.exportObject(flow, 0);
-
-            //il client è pronto
         }catch(Exception e){
             System.err.println("impossible to connect to the RMI server");
         }
     }
 
-    //bisogna implementare i metodi di ClientAction
     @Override
     public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException, NotBoundException {
-
-
-            //registry = LocateRegistry.getRegistry("localhost", 1099);
-            //request = (MainControllerInterface) registry.lookup("server name");
             gameController = request.createGame(notify, nick, maxNumberOfPlayers);
             nickname = nick;
 
@@ -71,12 +53,9 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     @Override
     public void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException {
-        //registry = LocateRegistry.getRegistry("localhost", 1099);
-        //request = (MainControllerInterface) registry.lookup("server name");
         request.leaveGame(idGame, nick);
         gameController = null;
         nickname = null;
-        //firstCard = false;
     }
 
     @Override
@@ -87,8 +66,6 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     @Override
     public void joinRandomGame(String nick) throws RemoteException, NotBoundException/*, NoAvailableGameToJoinException */{
-        //registry = LocateRegistry.getRegistry("localhost", 1099);
-        // request = (MainControllerInterface) registry.lookup("server name");
         gameController = request.joinRandomGame(notify, nick);
         nickname = nick;
     }
