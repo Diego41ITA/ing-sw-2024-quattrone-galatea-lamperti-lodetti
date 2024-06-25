@@ -49,10 +49,7 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     private ControllerOfMatches() throws RemoteException{
         super();
         this.activeGames = new ArrayList<ControllerOfGame>();
-
-        String resourcePathString = "CodexNaturalis/SavedGames";
-        restoreAllStoredGames(resourcePathString);
-        System.out.println("the path to the directory is: " + resourcePathString);
+        restoreAllStoredGames();
         printActiveGames();
 
         //initializes the set of possible id.
@@ -272,14 +269,15 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
      * this method is called when this class is build: it reads all the files saved in specific directory, and it
      * recreates the ControllerOfGame object (for each game). Pay attention that an observer is added only when
      * it is passed with a rejoin method.
-     * @param directoryPath this is the path to the directory where all the games are saved
      */
-    private void restoreAllStoredGames(String directoryPath){
+    private void restoreAllStoredGames(){
         //read
         List<Game> storedGames = new ArrayList<>();
         String userHome = System.getProperty("user.home");
         String saveDirPath = userHome + File.separator + "SavedGames";
         File directory  = new File(saveDirPath);
+
+        System.out.println("the path to the directory is: " + saveDirPath);
 
         File[] files = directory.listFiles();
         if(files != null) {
