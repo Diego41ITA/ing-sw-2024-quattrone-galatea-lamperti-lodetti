@@ -14,6 +14,12 @@ import java.util.List;
 
 public class Cli implements UI {
 
+    /**
+     * Converts a map that holds the type of resources and the number of that specific resource to
+     * emojis.
+     * @param resources the map to convert.
+     * @return a string with all the emojis.
+     */
     private static String mapToEmoji(HashMap<Item, Integer> resources) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Item, Integer> entry : resources.entrySet()) {
@@ -29,6 +35,11 @@ public class Cli implements UI {
         return stringBuilder.toString();
     }
 
+    /**
+     * Converts a list of resources to the corresponding emojis.
+     * @param resources the list to convert.
+     * @return a string with the emojis.
+     */
     private static String listToEmoji(List<Item> resources) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Item resourceType : resources) {
@@ -42,6 +53,11 @@ public class Cli implements UI {
         return stringBuilder.toString();
     }
 
+    /**
+     * Associates a color to a specific type of card.
+     * @param type the type of card to be colored.
+     * @return  the ansi code of the color to use.
+     */
     public static String getAnsiCode(TypeOfCard type) {
         switch (type) {
             case ANIMAL:
@@ -59,6 +75,11 @@ public class Cli implements UI {
         }
     }
 
+    /**
+     * Associates the correct emoji to the corresponding resource.
+     * @param resourceType the resource to convert.
+     * @return the UTF-8 code of the emoji.
+     */
     private static String getResourceEmoji(Item resourceType) {
         switch (resourceType) {
             case VEGETABLE:
@@ -312,6 +333,11 @@ public class Cli implements UI {
             System.out.println("IT'S " + immutableModel.getCurrentPlayer().getNick() + " TURN");
     }
 
+    /**
+     * Prints horizontally the cards that can be drawn from the table.
+     * @param cards the cards to print.
+     * @return the corresponding StringBuilder.
+     */
     public StringBuilder draw_playableCards(List<PlayableCard> cards){
         StringBuilder stringBuilder = new StringBuilder();
         for(PlayableCard card : cards){
@@ -509,7 +535,12 @@ public class Cli implements UI {
         System.out.println(stringBuilder.toString());
     }
 
-
+    /**
+     * Private helper method needed to print the GameStations.
+     * @param set
+     * @param coord
+     * @return
+     */
     private static int findMaxValue(Set<Point> set, String coord) {
         if(coord.equals("x")) {
             Point maxPoint = set.stream()
@@ -525,6 +556,12 @@ public class Cli implements UI {
         return 0;
     }
 
+    /**
+     * Private helper method needed to print the GameStations.
+     * @param gameStation
+     * @param point
+     * @return
+     */
     private static String determineValue(GameStation gameStation, Point point){
         if(gameStation.getPlayedCards().containsKey(point)){
             return String.valueOf(gameStation.getPlayedCards().get(point).getCardId());
@@ -535,8 +572,12 @@ public class Cli implements UI {
         }
     }
 
+    /**
+     * Private helper method that prints horizontally the cards played in the GameStation.
+     * @param view
+     * @return
+     */
     private static String cardDraw(GameView view){
-
         String HL;
         String HR;
         String DL;
@@ -799,6 +840,11 @@ public class Cli implements UI {
         }
     }
 
+    /**
+     * Private helper methods that convert a List to a String.
+     * @param list the list to convert.
+     * @return the corresponding StringBuilder.
+     */
     private static String listToString(List<Item> list){
         StringBuilder stringBuilder = new StringBuilder();
         for(Item i : list){
