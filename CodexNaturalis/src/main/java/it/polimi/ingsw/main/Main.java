@@ -62,12 +62,12 @@ public class Main {
                 } while (!containsOneOrTwoAndHasLengthOne(type));
                 String ipServer;
                 do {
-                    System.out.println("Write the Ip address:\n if you want to use the local host write \"localhost\"");
+                    System.out.println("Write the Server Ip address:\n if you want to use the local host write \"localhost\"");
                     ipServer = scanner.nextLine();
                     if(!verifyIpAddress(ipServer)){System.out.println("Invalid Ip address, try again");}
                 } while (!verifyIpAddress(ipServer));
                 System.setProperty("java.rmi.server.hostname", ipServer);
-                System.out.println("Write the Ip address:\n if you want to use the local host write \"localhost\"");
+                System.out.println("Write the Client Ip address:\n if you want to use the local host write \"localhost\"");
                 String ipClient = scanner.nextLine();
                 System.setProperty("java.rmi.server.hostname", ipClient);
                 System.out.println("""
