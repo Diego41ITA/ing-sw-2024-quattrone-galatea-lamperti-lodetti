@@ -8,8 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.lang.annotation.Inherited;
+
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 
+/**
+ * Controller of the InitialCard scene.
+ */
 public class InitialCardController extends AbstractController {
 
     @FXML
@@ -18,10 +23,15 @@ public class InitialCardController extends AbstractController {
     @FXML
     ImageView imageBack;
 
+    /**
+     * this method set up additional attributes for the controller class if this is needed.
+     *
+     * @param updatedGame is the new version of the game
+     */
     @Override
-    public void setUpController(FsmGame game){
+    public void setUpController(FsmGame updatedGame){
 
-        setGame(game);
+        setGame(updatedGame);
 
         int cardId = DbCardInfo.getInstance().readCardRecord().cardId();
 
@@ -52,11 +62,16 @@ public class InitialCardController extends AbstractController {
         });
     }
 
-    // se con il mouse clicco sulla immagine allora mette true in multipleResponses
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void selectFront(MouseEvent e){
         multipleResponses.add("true");
     }
-    // se con il mouse clicco sulla immagine allora mette false in multipleResponses
+
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void selectBack(MouseEvent e){
         multipleResponses.add("false");
     }

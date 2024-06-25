@@ -8,15 +8,20 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController extends AbstractController implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+/**
+ * Controller for the Menu scene.
+ */
+public class MenuController extends AbstractController {
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
+    public void actionJoinRandomGame(ActionEvent e){
+        multipleResponses.add("A");
+    }
 
-    }
-    public void actionJoinRandomGame(ActionEvent e){ // quando viene premuto il bottone si salva
-        //un valore all'interno di MultipleResponses
-        multipleResponses.add("A");  // la successiva interfaccia verrò scelta dalla game flow dovo aver effettuato i controlli su l'input
-    }
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void actionReconnect(ActionEvent e){
         multipleResponses.add("B");
     }

@@ -13,10 +13,19 @@ import javafx.stage.StageStyle;
  * this is a class that generalize the controller concept
  */
 public abstract class AbstractController {
+    /**
+     * The FSM of the game.
+     */
     private FsmGame game;
 
+    /**
+     * The immutable version of the model of the game.
+     */
     private GameView gameView;
 
+    /**
+     * An attribute for the class that contains all the input corresponding to the various user's mouse action.
+     */
     protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
 
     /**
@@ -43,6 +52,9 @@ public abstract class AbstractController {
      */
     public abstract void setUpController(FsmGame updatedGame);
 
+    /**
+     * It shows a popup for the last turn, after the point threshold has been reached.
+     */
     public void showLastTurnAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

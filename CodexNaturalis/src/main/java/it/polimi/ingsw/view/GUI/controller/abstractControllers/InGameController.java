@@ -6,29 +6,38 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import javafx.event.Event;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.StageStyle;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
+import it.polimi.ingsw.view.GUI.controller.*;
 
+/**
+ * An abstract class, that holds the common methods needed by {@link PlayingSceneController},
+ * {@link WaitingSceneController} and {@link EndController}.
+ */
 public abstract class InGameController extends AbstractController {
+    /**
+     * {@inheritDoc}
+     * @param updatedGame
+     */
     @Override
     public void setUpController(FsmGame updatedGame) {
     }
 
+    /**
+     * Creates a pane containing all the {@link PlayableCard}s placed in the {@link GameStation}.
+     * @param player needed to obtain the correct GameStation.
+     * @return
+     */
     protected Pane createGameStationTabPane(Player player) {
         Pane pane = new Pane();  // Create a single Pane
         GameStation gameStation = getGameView().getMyGameStation(player.getNick());
-        for (HashMap.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
+        for (Map.Entry<Point, PlayableCard> entry : gameStation.getPlayedCards().entrySet()) {
             Point point = entry.getKey();
             PlayableCard card = entry.getValue();
 
@@ -72,6 +81,11 @@ public abstract class InGameController extends AbstractController {
         return pane;
 
     }
+
+    /**
+     * Private helper method that creates an {@link ImageView} of a specific image.
+     * @param imagePath the relative path to the specific image.
+     */
     private ImageView createImageView (String imagePath){
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);

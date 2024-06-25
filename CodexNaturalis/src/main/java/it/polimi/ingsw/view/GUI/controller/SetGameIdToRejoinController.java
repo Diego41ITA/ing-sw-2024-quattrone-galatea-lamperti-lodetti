@@ -16,12 +16,18 @@ public class SetGameIdToRejoinController extends AbstractController {
     @FXML
     private Button button;
 
+    /**
+     * this method set up additional attributes for the controller class if this is needed.
+     *
+     * @param game is a new version of the game
+     */
     public void setUpController(FsmGame game){
         setGame(game);
-
     }
-    //fin quando in multiplesResponses non abbiamo un numero valido allora il gameflow/GUiinput rimane nello stesso punto
-    //nella GuiInput dobbiamo avere un ciclo while che controlla l'ultimo valore di multipleResponses
+
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void getGameId(ActionEvent actionEvent) {
         multipleResponses.add(textField.getText());
     }

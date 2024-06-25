@@ -44,8 +44,6 @@ public class PlayingSceneController extends InGameController {
     @FXML
     private Label gameId;
     @FXML
-    private Pane anchor1;
-    @FXML
     private TabPane tabPane;
     @FXML
     private ImageView firstCard;
@@ -145,15 +143,69 @@ public class PlayingSceneController extends InGameController {
     private Map<ImageView, Integer> mapping = new HashMap<>();
     @FXML
     private ImageView personalCard;
-
+    /**
+     * It stores the index inside the imageViews array of the chosen card to play by the user.
+     */
     private int indexCardToPlay;
+    /**
+     * An array that holds all the ImageViews of the makers.
+     */
+    private ImageView[] imageViews = new ImageView[29];
+    /**
+     * An array that holds all the ImageViews of the front side of the cards in the hand tab.
+     */
     @FXML
     private ImageView[] handCardsFront = new ImageView[3];
+    /**
+     * An array that holds all the ImageViews of the back side of the cards in the hand tab.
+     */
     @FXML
     private ImageView[] handCardsBack = new ImageView[3];
 
+    /**
+     * This method initializes additional attributes and sets up all the consequences of the mouse events on
+     * the different components.
+     * @param updatedGame updated FSM of the Game.
+     */
+    @Override
+    public void setUpController(FsmGame updatedGame) {
+        setGame(updatedGame);
+        GameView gameView = updatedGame.getView();
+        yourLastTurn.setVisible(false);
+        GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
+        Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));
+        personalCard.setImage(imagePersonalGoalCard);
+        this.initializeArrays();
+        this.setGameId(gameView.getId());
+        for(Player p : gameView.getPlayers())
+            this.createAndAddGameStationTab(p);
 
+        for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
+            Color color = entry.getKey();
+            Integer point = entry.getValue();
+            this.MakerInPointTable(color, point);
+        }
 
+        List<PlayableCard> playerHand;
+        playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
+        for (int i = 0; i < playerHand.size(); i++) {
+            int playerCardId = playerHand.get(i).getCardId();
+            setHand(playerCardId, i);
+        }
+        List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
+        this.makeHandCardsPlayable(cards);
+        this.generateFreeCords(getGameFsm().getNickname());
+        this.setUpTableOfDecks();
+        createRulebookTab();
+        tabPane.getSelectionModel().select(2);
+        this.showYourTurnAlert();
+        if(getGameFsm().isPointsThresholdReached())
+            showLastTurnAlert();
+    }
+
+    /**
+     * Generates all the responses to the mouse events in the TableOfDecks Tab
+     */
     private void makeTableOfDecksTabResponsive(){
         deckGold.setOnMouseClicked(event -> {
             if(showConfirmationDrawAlert()){
@@ -200,6 +252,9 @@ public class PlayingSceneController extends InGameController {
         applyHoverEffects(card4);
     }
 
+    /**
+     * Private helper method that generates the hover effects over the cards.
+     */
     private void applyHoverEffects(ImageView component) {
         component.setCursor(Cursor.HAND);
         component.setOnMouseEntered(mouseEvent -> {
@@ -212,6 +267,9 @@ public class PlayingSceneController extends InGameController {
         });
     }
 
+    /**
+     * Sets the imageViews in the TableOfDecks tab to the actual cards stored in the model.
+     */
     private void setUpTableOfDecks() {
         FsmGame updatedGame = getGameFsm();
         TableOfDecks tableOfDecks = updatedGame.getView().getTableOfDecks();
@@ -229,7 +287,7 @@ public class PlayingSceneController extends InGameController {
                 .map(c -> c != null ? c.getCardId() : 0)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        // Extracting deck IDs
+        // Extracting decks dimensions
         ArrayList<Integer> decks = new ArrayList<>();
         decks.add(resource.getDimension() != 0 ? resource.getFirst().getCardId() : resource.getDimension());
         decks.add(gold.getDimension() != 0 ? gold.getFirst().getCardId() : gold.getDimension());
@@ -253,6 +311,13 @@ public class PlayingSceneController extends InGameController {
         mapping.put(card4, cards.get(3));
     }
 
+    /**
+     * Private helper method that sets an ImageView to its default if the parameters is an invalid card id,
+     * (meaning that there's no card in that position), to the actual card otherwise.
+     * @param imageView the ImageView to set.
+     * @param cardId the cardId that needs to be shown.
+     * @param isFront side of the card.
+     */
     private void setImageWithDefault(ImageView imageView, int cardId, boolean isFront) {
         if (cardId == 0) {
             imageView.setImage(null); // Set ImageView to display no image
@@ -263,12 +328,10 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
-
-    //è un array che contiene tuelle le imageview della pointTable
-    //mi serve per poter selezionare la imageview corrispondente al punteggio
-    private ImageView[] imageViews = new ImageView[29];
-
-    //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
+    /**
+     * Sets the GameId and adds a tooltip with useful information.
+     * @param id the GameId to set.
+     */
     private void setGameId(String id){
         gameId.setText(id);
         Tooltip tooltip = new Tooltip("This is the id of the game you are connected to. Don't forget it! " + "\n" +
@@ -279,17 +342,23 @@ public class PlayingSceneController extends InGameController {
         gameId.setTooltip(tooltip); // Directly set the tooltip on the label
     }
 
-    //crea un immagine e ne assegna le dimensioni, restituisce un immagine che verrà settata per le carte iniziali
+    /**
+     * Creates an ImageView, specifying the dimensions and assigning an Image.
+     * @param imagePath relative path to the image.
+     * @return the created ImageView.
+     */
     private ImageView createImageView(String imagePath) {
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
         imageView.setFitHeight(90);
-        // Gestione dell'evento del click del mouse sull'ImageView (disabilitata temporaneamente)
-        // Consuma l'evento per evitare ulteriori azioni
         imageView.setOnMouseClicked(Event::consume);
         return imageView;
     }
 
+    /**
+     * Creates the GameStation Tab, adds it to the TabPane and assign the correct responses to the mouse events.
+     * @param player the owner of the GameStation to create
+     */
     private void createAndAddGameStationTab(Player player) {
 
         // Create a new Tab and set the Pane as its content
@@ -363,6 +432,11 @@ public class PlayingSceneController extends InGameController {
         });
     }
 
+    /**
+     * Generates some rectangles with opacity = 0, placing them where the new card can be played, and
+     * assigns the correct responses to the mouse events.
+     * @param nick nickname of the owner of the GameStation tab.
+     */
     private void generateFreeCords(String nick) {
         // Get the tab associated with the player's nickname
         String tabId = "tab" + nick;
@@ -414,6 +488,10 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
+    /**
+     * Shows an alert that ask for confirmation of the card placement.
+     * @return the button selected (yes and no as true and false).
+     */
     private boolean showConfirmationPlayAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Stage");
@@ -435,6 +513,10 @@ public class PlayingSceneController extends InGameController {
         return result.isPresent() && result.get() == yesButton;
     }
 
+    /**
+     * Shows an alert that ask for confirmation of the card to be drawn.
+     * @return the button selected (yes and no as true and false).
+     */
     private boolean showConfirmationDrawAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Stage");
@@ -455,6 +537,11 @@ public class PlayingSceneController extends InGameController {
         return result.isPresent() && result.get() == yesButton;
     }
 
+    /**
+     * Return the tab corresponding to a specified id.
+     * @param tabId the specified id.
+     * @return the founded tab.
+     */
     private Tab findTabById(String tabId) {
         for (Tab tab : tabPane.getTabs()) {
             if (tab.getId() != null && tab.getId().equals(tabId)) {
@@ -464,9 +551,11 @@ public class PlayingSceneController extends InGameController {
         return null;
     }
 
+    /**
+     * Returns the Pane inside the tab. It is used for modifying the GameStation Tab, so we can safely perform
+     * a type casting.
+     */
     private Pane findOrCreatePaneInTab(Tab tab) {
-        // Here you can define how to find or create the Pane within the tab
-        // For simplicity, assuming the content of each tab is a Pane or similar
         Pane contentPane = (Pane) tab.getContent();
         if (contentPane == null) {
             contentPane = new Pane();
@@ -475,8 +564,16 @@ public class PlayingSceneController extends InGameController {
         return contentPane;
     }
 
-    ImageView chosenCardToPlay;
+    /**
+     * ImageView of the chosen card to play
+     */
+    private ImageView chosenCardToPlay;
 
+    /**
+     * Shows the ImageView of the chosen card to play, applying some fancy but functional effects.
+     * @param pane the pane that holds all the played card in the GameStation.
+     * @param point the coordinates to place the card.
+     */
     private void showCardChosen(Pane pane, Point point){
         if (idChosenCardToPlay == 0)
             return;
@@ -499,6 +596,10 @@ public class PlayingSceneController extends InGameController {
         fadeIn.play();
     }
 
+    /**
+     * Private helper method for the fancy effects in the GameStation Tab.
+     * @param root the pane inside the tab.
+     */
     private void hideCardChosen(Pane root) {
         if (idChosenCardToPlay == 0)
             return;
@@ -513,8 +614,11 @@ public class PlayingSceneController extends InGameController {
     }
 
 
-
-    //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
+    /**
+     * Sets the ImageView of the hand tab to the actual images of the cards stored in the model.
+     * @param num id of the card.
+     * @param pos position of the card in the array of personal cards.
+     */
     private void setHand(int num, int pos){
         if(pos == 0){
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
@@ -537,9 +641,19 @@ public class PlayingSceneController extends InGameController {
 
     }
 
+    /**
+     * Stores the id of the chosen card to play.
+     */
     private int idChosenCardToPlay = 0;
+    /**
+     * Stores the side of the chosen card to play.
+     */
     private boolean sideChosenCardToPlay = false;
 
+    /**
+     * Applies some fancy but function effects to the card in "your hand" tab.
+     * @param cards list of the player's personal Playable Cards.
+     */
     private void makeHandCardsPlayable(List<PlayableCard> cards) {
         int index = 0 ;
         for (PlayableCard card : cards){
@@ -549,6 +663,13 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
+    /**
+     * Private helper method for the card's effects.
+     * @param cardView The ImageView of the card.
+     * @param card The actual card object.
+     * @param isFront The side of the card.
+     * @param index the index of the card inside the cards' ImageViews array.
+     */
     private void setCardEvent(ImageView cardView, PlayableCard card, boolean isFront, int index) {
         applyHoverEffects(cardView);
         cardView.setOnMouseClicked(event -> {
@@ -567,6 +688,10 @@ public class PlayingSceneController extends InGameController {
         cardView.setCursor(Cursor.HAND);
     }
 
+    /**
+     * Private helper method for the clicked card's effect.
+     * @param clickedCardView The clicked card.
+     */
     private void resetOtherCardViewsScale(ImageView clickedCardView) {
         // List of all card views
         List<ImageView> allCardViews = Arrays.asList(firstCard, firstCardBack, secondCard, secondCardBack, thirdCard, thirdCardBack);
@@ -581,13 +706,17 @@ public class PlayingSceneController extends InGameController {
     }
 
 
-    //mi rende visibile il messaggio che è l'ultimo turno
+    /**
+     * Sets the "This is the last turn" text as visible.
+     */
     public void setLastTurn(){
         yourLastTurn.setVisible(true);
 
     }
-    //inserisce le image0 all'interno del imageView array
-    //il tag@FXML indica che questo metodo verrà lanciato in automatico quando si aprirà l'interfaccia associata a questo controller
+
+    /**
+     * Initializes all the arrays.
+     */
     @FXML
     private void initializeArrays(){
         imageViews[0] = image0;
@@ -629,12 +758,19 @@ public class PlayingSceneController extends InGameController {
         handCardsBack[2] = thirdCardBack;
     }
 
-    //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
+    /**
+     * Places the maker in the PointTable.
+     * @param color The color of the maker to place.
+     * @param point The point to be covered.
+     */
     private void MakerInPointTable(Color color, int point){
         Image imageMaker = new Image(makerAssociator(color));
         imageViews[point].setImage(imageMaker);
     }
 
+    /**
+     * Creates a tab containing the rulebook and adds it to the TabPane.
+     */
     private void createRulebookTab() {
         Tab rulebookTab = new Tab();
         rulebookTab.setText("Rulebook");
@@ -681,8 +817,15 @@ public class PlayingSceneController extends InGameController {
         tabPane.getTabs().add(rulebookTab);
     }
 
+    /**
+     * Stores the index of the rulebook's page.
+     */
     private int currentIndex = 0;
 
+    /**
+     * Private helper method to navigate the rulebook.
+     * @param rulebook
+     */
     private void showPreviousImage(ImageView rulebook) {
         if (currentIndex > 0) {
             currentIndex--;
@@ -690,6 +833,10 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
+    /**
+     * Private helper method to navigate the rulebook
+     * @param rulebook
+     */
     private void showNextImage(ImageView rulebook) {
         if (currentIndex < createRulebookImage().size() - 1) {
             currentIndex++;
@@ -697,7 +844,9 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
-
+    /**
+     * Shows a popup saying that it is the last turn of the game.
+     */
     public void showYourTurnAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -750,6 +899,10 @@ public class PlayingSceneController extends InGameController {
 
     }
 
+    /**
+     * Resets to default the mouse events responses of the ImageView in the GameStation Tab.
+     * @param imageView The ImageView to reset.
+     */
     private void resetEventsImageView(ImageView imageView){
         imageView.setOnMouseExited(null);
         imageView.setOnMouseEntered(null);
@@ -757,6 +910,10 @@ public class PlayingSceneController extends InGameController {
         imageView.setCursor(Cursor.DEFAULT);
     }
 
+    /**
+     * Shows an alert saying that is possible to draw a card. It also handles the responses to the mouse events
+     * in the personal GameStation tab and in the "Your hand" tab.
+     */
     public void showDrawAlert() {
         handCardsBack[indexCardToPlay].setOpacity(0.5);
         handCardsFront[indexCardToPlay].setOpacity(0.5);
@@ -817,6 +974,9 @@ public class PlayingSceneController extends InGameController {
         }
     }
 
+    /**
+     * It shows an alert saying that the chosen card positioning is not allowed by the game's rules.
+     */
     public void showInvalidPlayAlert() {
         // Create a new alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -859,39 +1019,4 @@ public class PlayingSceneController extends InGameController {
         hideCardChosen(pane);
     }
 
-    @Override
-    public void setUpController(FsmGame updatedGame) {
-        setGame(updatedGame);
-        GameView gameView = updatedGame.getView();
-        yourLastTurn.setVisible(false);
-        GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();
-        Image imagePersonalGoalCard = new Image(associatorPng2Card(String.valueOf(goalCard.getCardId()), true));
-        personalCard.setImage(imagePersonalGoalCard);
-        this.initializeArrays();
-        this.setGameId(gameView.getId());
-        for(Player p : gameView.getPlayers())
-            this.createAndAddGameStationTab(p);
-
-        for (HashMap.Entry<Color, Integer> entry : gameView.getPoints().getMap().entrySet()) {
-            Color color = entry.getKey();
-            Integer point = entry.getValue();
-            this.MakerInPointTable(color, point);
-        }
-
-        List<PlayableCard> playerHand;
-        playerHand = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
-        for (int i = 0; i < playerHand.size(); i++) {
-            int playerCardId = playerHand.get(i).getCardId();
-            setHand(playerCardId, i);
-        }
-        List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
-        this.makeHandCardsPlayable(cards);
-        this.generateFreeCords(getGameFsm().getNickname());
-        this.setUpTableOfDecks();
-        createRulebookTab();
-        tabPane.getSelectionModel().select(2);
-        this.showYourTurnAlert();
-        if(getGameFsm().isPointsThresholdReached())
-            showLastTurnAlert();
-    }
 }

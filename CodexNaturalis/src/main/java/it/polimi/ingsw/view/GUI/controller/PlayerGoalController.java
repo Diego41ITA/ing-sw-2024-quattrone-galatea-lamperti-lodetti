@@ -19,8 +19,14 @@ public class PlayerGoalController extends AbstractController {
     @FXML
     ImageView secondImage;
 
+    /**
+     * The id of the first Goal Card, stored in {@link DbCardInfo}.
+     */
     private int firstGoal;
 
+    /**
+     * The id of the second Goal Card, stored in {@link DbCardInfo}.
+     */
     private int secondGoal;
 
     /**
@@ -62,13 +68,16 @@ public class PlayerGoalController extends AbstractController {
         });
     }
 
-
-    // se con il mouse clicco sulla immagine allora mette 1 in multipleResponses
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void selectFirst(MouseEvent e){
         multipleResponses.add(String.valueOf(firstGoal));
     }
 
-    // se con il mouse clicco sulla immagine allora mette 2 in multipleResponses
+    /**
+     * Write in multipleResponses the correct output for the mouse event.
+     */
     public void selectSecond(MouseEvent e){
         multipleResponses.add(String.valueOf(secondGoal));
     }

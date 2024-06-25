@@ -20,22 +20,35 @@ public class SetColorController extends AbstractController {
     private Button blue;
     @FXML
     private Button green;
-    //quando clicco un bottone aggiungo il colore corrispettivo all'interno di multipleResponses
 
+    /**
+     * Action corresponding to the "green" button
+     */
     public void clickGreen(){
         multipleResponses.add("green");
     }
+    /**
+     * Action corresponding to the "yellow" button
+     */
     public void clickYellow(){
         multipleResponses.add("yellow");
     }
+    /**
+     * Action corresponding to the "red" button
+     */
     public void clickRed(){
         multipleResponses.add("red");
     }
+    /**
+     * Action corresponding to the "blue" button
+     */
     public void clickBlue(){
         multipleResponses.add("blue");
     }
-    //mette la visibilità dei bottoni false di dafault
 
+    /**
+     * Initializes the buttons with opacity = 0.7
+     */
     public void initializeColorButton(){
         red.setOpacity(0.7);
         red.setCursor(Cursor.DEFAULT);
@@ -48,7 +61,8 @@ public class SetColorController extends AbstractController {
     }
 
     /**
-     * this method set visible only the available button.
+     * this method set visible only the available button. It also writes the correct in multipleResponses the correct
+     * output corresponding to the mouse events.
      * @param game it's a new version of game
      */
     public void setUpController(FsmGame game) {
