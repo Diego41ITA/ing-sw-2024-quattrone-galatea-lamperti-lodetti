@@ -24,11 +24,6 @@ public abstract class AbstractController {
     private GameView gameView;
 
     /**
-     * An attribute for the class that contains all the input corresponding to the various user's mouse action.
-     */
-    protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
-
-    /**
      * a subclass can use this method to get the private FsmGame attribute
      * @return the attribute
      */
@@ -50,7 +45,7 @@ public abstract class AbstractController {
     /**
      * this method set up additional attributes for the controller class if this is needed.
      */
-    public abstract void setUpController(FsmGame updatedGame);
+    public abstract void setUpController(FsmGame updatedGame, MultipleResponses multipleResponses);
 
     /**
      * It shows a popup for the last turn, after the point threshold has been reached.

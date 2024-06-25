@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -20,6 +21,11 @@ public class SetColorController extends AbstractController {
     private Button blue;
     @FXML
     private Button green;
+
+    /**
+     * An attribute that stores all the input corresponding to the mouse events.
+     */
+    private MultipleResponses multipleResponses;
 
     /**
      * Action corresponding to the "green" button
@@ -63,10 +69,13 @@ public class SetColorController extends AbstractController {
     /**
      * this method set visible only the available button. It also writes the correct in multipleResponses the correct
      * output corresponding to the mouse events.
-     * @param game it's a new version of game
+     *
+     * @param game              it's a new version of game
+     * @param multipleResponses
      */
-    public void setUpController(FsmGame game) {
+    public void setUpController(FsmGame game, MultipleResponses multipleResponses) {
         setGame(game);
+        this.multipleResponses=multipleResponses;
         ArrayList<Color> colors = freeColors(game.getView());
         initializeColorButton();
         for (Color color:colors) {

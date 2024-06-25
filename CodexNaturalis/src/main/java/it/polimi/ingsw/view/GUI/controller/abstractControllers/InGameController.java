@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import javafx.event.Event;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,10 +24,12 @@ import it.polimi.ingsw.view.GUI.controller.*;
 public abstract class InGameController extends AbstractController {
     /**
      * {@inheritDoc}
+     *
      * @param updatedGame
+     * @param multipleResponses
      */
     @Override
-    public void setUpController(FsmGame updatedGame) {
+    public void setUpController(FsmGame updatedGame, MultipleResponses multipleResponses) {
     }
 
     /**

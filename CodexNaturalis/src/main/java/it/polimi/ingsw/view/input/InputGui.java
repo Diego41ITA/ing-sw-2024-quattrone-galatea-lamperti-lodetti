@@ -9,11 +9,11 @@ import java.awt.*;
  * is a valid readable input.
  */
 public class InputGui implements InputParser {
-    /**
-     * this object contains
-     */
-    protected static MultipleResponses multipleResponses = MultipleResponses.getInstance();
 
+    private MultipleResponses multipleResponses;
+    public InputGui(MultipleResponses responses){
+        this.multipleResponses = responses;
+    }
     /**
      * {@inheritDoc}
      */

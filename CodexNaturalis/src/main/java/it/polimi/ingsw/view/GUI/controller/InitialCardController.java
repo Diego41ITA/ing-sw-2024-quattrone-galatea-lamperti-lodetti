@@ -1,14 +1,13 @@
 package it.polimi.ingsw.view.GUI.controller;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
-import java.lang.annotation.Inherited;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.associatorPng2Card;
 
@@ -24,14 +23,22 @@ public class InitialCardController extends AbstractController {
     ImageView imageBack;
 
     /**
+     * An attribute that stores all the input corresponding to the mouse events.
+     */
+    private MultipleResponses multipleResponses;
+
+    /**
      * this method set up additional attributes for the controller class if this is needed.
      *
-     * @param updatedGame is the new version of the game
+     * @param updatedGame       is the new version of the game
+     * @param multipleResponses
      */
     @Override
-    public void setUpController(FsmGame updatedGame){
+    public void setUpController(FsmGame updatedGame, MultipleResponses multipleResponses){
 
         setGame(updatedGame);
+
+        this.multipleResponses=multipleResponses;
 
         int cardId = DbCardInfo.getInstance().readCardRecord().cardId();
 

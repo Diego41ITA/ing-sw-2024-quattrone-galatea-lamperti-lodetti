@@ -49,6 +49,8 @@ public class Gui extends Application implements UI {
      */
     private AbstractController abstractController;
 
+    private MultipleResponses multipleResponses = new MultipleResponses();
+
     /**
      * It's the override of the start(Stage primaryStage) method of the {@link Application} class. It handles various
      * operations relative to JavaFX (setting the primaryStage, the title, the icon..); it also initializes and starts
@@ -59,7 +61,7 @@ public class Gui extends Application implements UI {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        flow = new FsmGame(this, new InputGui());
+        flow = new FsmGame(this, new InputGui(multipleResponses));
         String typeConnection = getParameters().getUnnamed().getFirst();
         switch (typeConnection){
             case "rmi" -> this.client = new ClientRMI(flow, getParameters().getUnnamed().get(1));
@@ -106,7 +108,7 @@ public class Gui extends Application implements UI {
 
                 primaryStage.setScene(new Scene(root));
 
-                controller.setUpController(this.flow);
+                controller.setUpController(this.flow, multipleResponses);
 
                 abstractController = controller;
                 primaryStage.show();

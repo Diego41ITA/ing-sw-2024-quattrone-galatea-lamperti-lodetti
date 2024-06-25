@@ -9,15 +9,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class MultipleResponses{
     private  LinkedBlockingQueue<String> Responses;
-    private static MultipleResponses instance = null;
-    private MultipleResponses(){
-        Responses = new LinkedBlockingQueue<>();
-    }
 
-    public static MultipleResponses getInstance(){
-        if(instance == null)
-            instance = new MultipleResponses();
-        return instance;
+    public MultipleResponses(){
+        Responses = new LinkedBlockingQueue<>();
     }
 
     /**

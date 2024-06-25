@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gameDataManager.GameStation;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.model.gameDataManager.TableOfDecks;
 import it.polimi.ingsw.view.FsmGame;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.InGameController;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -21,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
@@ -144,6 +144,12 @@ public class PlayingSceneController extends InGameController {
     private Map<ImageView, Integer> mapping = new HashMap<>();
     @FXML
     private ImageView personalCard;
+
+    /**
+     * An attribute that stores all the input corresponding to the mouse events.
+     */
+    private MultipleResponses multipleResponses;
+
     /**
      * It stores the index inside the imageViews array of the chosen card to play by the user.
      */
@@ -166,11 +172,14 @@ public class PlayingSceneController extends InGameController {
     /**
      * This method initializes additional attributes and sets up all the consequences of the mouse events on
      * the different components.
-     * @param updatedGame updated FSM of the Game.
+     *
+     * @param updatedGame       updated FSM of the Game.
+     * @param multipleResponses
      */
     @Override
-    public void setUpController(FsmGame updatedGame) {
+    public void setUpController(FsmGame updatedGame, MultipleResponses multipleResponses) {
         setGame(updatedGame);
+        this.multipleResponses=multipleResponses;
         GameView gameView = updatedGame.getView();
         yourLastTurn.setVisible(false);
         GoalCard goalCard = gameView.getPlayerByNick(updatedGame.getNickname()).getGoal();

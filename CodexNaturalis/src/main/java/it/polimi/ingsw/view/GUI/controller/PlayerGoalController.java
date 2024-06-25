@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.controller;
 
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -20,6 +21,11 @@ public class PlayerGoalController extends AbstractController {
     ImageView secondImage;
 
     /**
+     * An attribute that stores all the input corresponding to the mouse events.
+     */
+    private MultipleResponses multipleResponses;
+
+    /**
      * The id of the first Goal Card, stored in {@link DbCardInfo}.
      */
     private int firstGoal;
@@ -31,12 +37,16 @@ public class PlayerGoalController extends AbstractController {
 
     /**
      * this method initializes the controller with other attribute.
-     * @param game is a new version of game
+     *
+     * @param game              is a new version of game
+     * @param multipleResponses
      */
     @Override
-    public void setUpController(FsmGame game){
+    public void setUpController(FsmGame game, MultipleResponses multipleResponses){
 
         setGame(game);
+
+        this.multipleResponses=multipleResponses;
 
         this.firstGoal = DbCardInfo.getInstance().readCardRecord().cardId();
         this.secondGoal = DbCardInfo.getInstance().readCardRecord().cardId();

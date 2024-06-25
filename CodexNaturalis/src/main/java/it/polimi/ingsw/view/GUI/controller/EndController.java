@@ -5,24 +5,19 @@ import it.polimi.ingsw.model.gameDataManager.Color;
 import it.polimi.ingsw.model.gameDataManager.Player;
 import it.polimi.ingsw.view.FsmGame;
 import it.polimi.ingsw.view.GUI.DbCardInfo;
-import it.polimi.ingsw.view.GUI.controller.abstractControllers.AbstractController;
+import it.polimi.ingsw.view.GUI.MultipleResponses;
 import it.polimi.ingsw.view.GUI.controller.abstractControllers.InGameController;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -318,10 +313,11 @@ public class EndController extends InGameController {
     /**
      * this method set up additional attributes for the controller class if this is needed.
      *
-     * @param updatedGame is the new version of the game
+     * @param updatedGame       is the new version of the game
+     * @param multipleResponses
      */
     @Override
-    public void setUpController(FsmGame updatedGame) {
+    public void setUpController(FsmGame updatedGame, MultipleResponses multipleResponses) {
         setGame(updatedGame);
         initializeArrays();
         initializeGoalCardsTab();
