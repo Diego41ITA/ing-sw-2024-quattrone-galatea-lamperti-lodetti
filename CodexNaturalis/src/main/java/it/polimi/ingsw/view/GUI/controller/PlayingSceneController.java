@@ -39,7 +39,9 @@ import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
 
-//non è definitivo ma è una buona base
+/**
+ * Controller of the PlayingScene.
+ */
 public class PlayingSceneController extends InGameController {
     @FXML
     private Label gameId;
@@ -59,7 +61,6 @@ public class PlayingSceneController extends InGameController {
     private ImageView thirdCardBack;
     @FXML
     private Text yourLastTurn;
-    //sono tutte le immagini che conterrano i maker nella point table
     @FXML
     private ImageView image0;
     @FXML
@@ -845,7 +846,7 @@ public class PlayingSceneController extends InGameController {
     }
 
     /**
-     * Shows a popup saying that it is the last turn of the game.
+     * Shows a popup saying that to the player that it's his turn.
      */
     public void showYourTurnAlert() {
         // Create a new alert dialog

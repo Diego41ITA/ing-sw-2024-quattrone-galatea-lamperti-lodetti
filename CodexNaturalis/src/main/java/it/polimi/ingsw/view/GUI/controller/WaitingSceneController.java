@@ -32,7 +32,9 @@ import java.util.stream.Collectors;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.*;
 import static it.polimi.ingsw.view.GUI.ImageAssociator.createRulebookImage;
 
-
+/**
+ * Controller of the WaitingScene
+ */
 public class WaitingSceneController extends InGameController {
     @FXML
     private Label gameId;
@@ -137,7 +139,9 @@ public class WaitingSceneController extends InGameController {
     private ImageView personalCard;
     private Map<ImageView, Integer> mapping = new HashMap<>();
 
-
+    /**
+     * Sets the imageViews in the TableOfDecks tab to the actual cards stored in the model.
+     */
     private void setUpTableOfDecks() {
         FsmGame updatedGame = getGameFsm();
         TableOfDecks tableOfDecks = updatedGame.getView().getTableOfDecks();
@@ -179,6 +183,13 @@ public class WaitingSceneController extends InGameController {
         mapping.put(card4, cards.get(3));
     }
 
+    /**
+     * Private helper method that sets an ImageView to its default if the parameters is an invalid card id,
+     * (meaning that there's no card in that position), to the actual card otherwise.
+     * @param imageView the ImageView to set.
+     * @param cardId the cardId that needs to be shown.
+     * @param isFront side of the card.
+     */
     private void setImageWithDefault(ImageView imageView, int cardId, boolean isFront) {
         if (cardId == 0) {
             imageView.setImage(null); // Set ImageView to display no image
@@ -190,11 +201,15 @@ public class WaitingSceneController extends InGameController {
     }
 
 
-    //è un array che contiene tuelle le imageview della pointTable
-    //mi serve per poter selezionare la imageview corrispondente al punteggio
+    /**
+     * An array that holds all the ImageViews of the makers.
+     */
     private ImageView[] imageViews = new ImageView[29];
 
-    //mi aggiorna il contenuto di gameId(serve a settare id del game nella gamestation)
+    /**
+     * Sets the GameId and adds a tooltip with useful information.
+     * @param id the GameId to set.
+     */
     private void setGameId(String id){
         gameId.setText(id);
         Tooltip tooltip = new Tooltip("This is the id of the game you are connected to. Don't forget it! " + "\n" +
@@ -205,17 +220,9 @@ public class WaitingSceneController extends InGameController {
         gameId.setTooltip(tooltip); // Directly set the tooltip on the label
     }
 
-    //crea un immagine e ne assegna le dimensioni, restituisce un immagine che verrà settata per le carte iniziali
-    private ImageView createImageView(String imagePath) {
-        ImageView imageView = new ImageView(new Image(imagePath));
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(90);
-        // Gestione dell'evento del click del mouse sull'ImageView (disabilitata temporaneamente)
-        // Consuma l'evento per evitare ulteriori azioni
-        imageView.setOnMouseClicked(Event::consume);
-        return imageView;
-    }
-
+    /**
+     * Creates a tab containing the rulebook and adds it to the TabPane.
+     */
     private void createRulebookTab() {
         Tab rulebookTab = new Tab();
         rulebookTab.setText("Rulebook");
@@ -262,8 +269,15 @@ public class WaitingSceneController extends InGameController {
         tabPane.getTabs().add(rulebookTab);
     }
 
+    /**
+     * Stores the index of the rulebook's page.
+     */
     private int currentIndex = 0;
 
+    /**
+     * Private helper method to navigate the rulebook.
+     * @param rulebook
+     */
     private void showPreviousImage(ImageView rulebook) {
         if (currentIndex > 0) {
             currentIndex--;
@@ -271,6 +285,10 @@ public class WaitingSceneController extends InGameController {
         }
     }
 
+    /**
+     * Private helper method to navigate the rulebook
+     * @param rulebook
+     */
     private void showNextImage(ImageView rulebook) {
         if (currentIndex < createRulebookImage().size() - 1) {
             currentIndex++;
@@ -278,8 +296,11 @@ public class WaitingSceneController extends InGameController {
         }
     }
 
+    /**
+     * Creates the GameStation Tab, adds it to the TabPane and assign the correct responses to the mouse events.
+     * @param player the owner of the GameStation to create
+     */
     private void createAndAddGameStationTab(Player player) {
-
         // Create a new Tab and set the Pane as its content
         Tab tab = new Tab(player.getNick() + "'s GameStation");
 
@@ -352,6 +373,9 @@ public class WaitingSceneController extends InGameController {
         });
     }
 
+    /**
+     * Shows a popup saying that to the player that it's not his turn.
+     */
     public void showWaitTurnAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Waiting stage");
@@ -380,6 +404,9 @@ public class WaitingSceneController extends InGameController {
         });
     }
 
+    /**
+     * Shows a popup saying that to the player that the game is currently suspended due to a disconnection.
+     */
     public void showGameSuspendedAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game suspended stage");
@@ -397,7 +424,11 @@ public class WaitingSceneController extends InGameController {
         alert.showAndWait();
     }
 
-    //mi setta la mano in base alla carta pescata utilizzando il suo num e la posizione in cui devo sostituire la carta
+    /**
+     * Sets the ImageView of the hand tab to the actual images of the cards stored in the model.
+     * @param num id of the card.
+     * @param pos position of the card in the array of personal cards.
+     */
     private void setHand(int num, int pos){
         if(pos == 0){
             Image imageFront = new Image(associatorPng2Card(String.valueOf(num), true));
@@ -419,7 +450,9 @@ public class WaitingSceneController extends InGameController {
         }
     }
 
-    //inserisce le image0 all'interno del imageView array
+    /**
+     * Initializes all the arrays.
+     */
     public void initializeImageArray(){
         imageViews[0] = image0;
         imageViews[1] = image1;
@@ -452,12 +485,21 @@ public class WaitingSceneController extends InGameController {
         imageViews[28] = image28;
     }
 
-    //assegna alla imageview corrispondende al punteggio il maker del colore adeguato
+    /**
+     * Places the maker in the PointTable.
+     * @param color The color of the maker to place.
+     * @param point The point to be covered.
+     */
     private void MakerInPointTable(Color color, int point){
         Image imageMaker = new Image(makerAssociator(color));
         imageViews[point].setImage(imageMaker);
     }
 
+    /**
+     * This method initializes additional attributes and sets up all the consequences of the mouse events on
+     * the different components.
+     * @param updatedGame updated FSM of the Game.
+     */
     @Override
     public void setUpController(FsmGame updatedGame) {
         setGame(updatedGame);
