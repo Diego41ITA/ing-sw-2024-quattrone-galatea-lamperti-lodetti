@@ -277,7 +277,9 @@ public class ControllerOfMatches extends UnicastRemoteObject implements /*Serial
     private void restoreAllStoredGames(String directoryPath){
         //read
         List<Game> storedGames = new ArrayList<>();
-        File directory  = new File(Paths.get("").toAbsolutePath().toString(), directoryPath);
+        String userHome = System.getProperty("user.home");
+        String saveDirPath = userHome + File.separator + "SavedGames";
+        File directory  = new File(saveDirPath);
 
         File[] files = directory.listFiles();
         if(files != null) {

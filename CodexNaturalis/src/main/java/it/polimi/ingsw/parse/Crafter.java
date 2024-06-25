@@ -1,5 +1,6 @@
 package it.polimi.ingsw.parse;
 import com.google.gson.Gson;
+import it.polimi.ingsw.main.Main;
 import it.polimi.ingsw.model.card.*;
 import it.polimi.ingsw.model.card.strategyPattern.*;
 //le librerie si possono togliere
@@ -23,7 +24,7 @@ public class Crafter {
     public static String getGameFilePath(String id){
 
         try {
-            return "CodexNaturalis/SavedGames/" + id + ".json";
+            return id + ".json";
         }catch(NullPointerException e){
             e.printStackTrace();
         }

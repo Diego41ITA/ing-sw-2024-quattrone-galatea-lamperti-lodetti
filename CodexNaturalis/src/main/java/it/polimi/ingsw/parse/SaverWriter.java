@@ -8,6 +8,7 @@ import it.polimi.ingsw.parse.*;
 import com.google.gson.*;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -40,12 +41,23 @@ public class SaverWriter {
 
         String pathToFile = Crafter.getGameFilePath(game.getId());
 
-        try(FileWriter writer = new FileWriter(pathToFile)){
+        String userHome = System.getProperty("user.home");
+        String saveDirPath = userHome + File.separator + "SavedGames";
+        File saveDir = new File(saveDirPath);
+        if(!saveDir.exists()){
+            boolean created = saveDir.mkdir();
+            if(!created)
+                System.err.println("the directory was not created");
+        }
+
+        try(FileWriter writer = new FileWriter(saveDirPath + File.separator + pathToFile)){
             String serializedObject = gson.toJson(game);
             writer.write(serializedObject);
-            System.out.println("the current game (" + game.getId() + ") is saved in: " + pathToFile);
+            System.out.println("the current game (" + game.getId() + ") is saved in: " + saveDirPath + "/" + pathToFile);
         }catch(IOException e){
             System.out.println("something went wrong during salvation process");
+            e.printStackTrace();
+            e.getMessage();
         }
     }
 }
