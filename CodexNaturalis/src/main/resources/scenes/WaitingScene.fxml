@@ -56,7 +56,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Separator layoutX="400.0" layoutY="16.0" orientation="VERTICAL" prefHeight="730.0" prefWidth="0.0" />
+                  <Separator layoutX="422.0" layoutY="16.0" orientation="VERTICAL" prefHeight="730.0" prefWidth="0.0" />
                   <ImageView fx:id="card1" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="card2" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
                   <Text layoutX="722.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Drawable cards">
@@ -67,8 +67,8 @@
                   <ImageView fx:id="card3" fitHeight="184.0" fitWidth="254.0" layoutX="564.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="card4" fitHeight="184.0" fitWidth="254.0" layoutX="894.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
                   <Separator layoutX="468.0" layoutY="487.0" prefHeight="6.0" prefWidth="733.0" />
-                  <Text layoutX="79.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Resource cards deck" textAlignment="CENTER" wrappingWidth="285.171875" />
-                  <Text layoutX="90.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Gold cards deck" />
+                  <Text layoutX="45.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Resource cards deck" textAlignment="CENTER" wrappingWidth="353.171875" />
+                  <Text layoutX="65.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Gold cards deck" textAlignment="CENTER" wrappingWidth="313.75" />
                   <ImageView fx:id="deckResource" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="deckGold" fitHeight="168.0" fitWidth="274.0" layoutX="85.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" />
                   <Text layoutX="689.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Common goal cards">

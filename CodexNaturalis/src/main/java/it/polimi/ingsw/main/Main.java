@@ -43,6 +43,10 @@ public class Main {
                     type = scanner.nextLine();
                     if (type.equals("1")) {
                         try {
+                            System.out.println("Please enter the server IP");
+                            String ipServer = scanner.nextLine();
+                            System.setProperty("java.rmi.server.hostname", ipServer);
+
                             ServerRMI.startServer();
 
                             ServerS socket = new ServerS();
@@ -56,12 +60,16 @@ public class Main {
                         System.out.println("Invalid input, please enter 1 or 2");
                     }
                 } while (!containsOneOrTwoAndHasLengthOne(type));
-                String ip;
+                String ipServer;
                 do {
                     System.out.println("Write the Ip address:\n if you want to use the local host write \"localhost\"");
-                    ip = scanner.nextLine();
-                    if(!verifyIpAddress(ip)){System.out.println("Invalid Ip address, try again");}
-                } while (!verifyIpAddress(ip));
+                    ipServer = scanner.nextLine();
+                    if(!verifyIpAddress(ipServer)){System.out.println("Invalid Ip address, try again");}
+                } while (!verifyIpAddress(ipServer));
+                System.setProperty("java.rmi.server.hostname", ipServer);
+                System.out.println("Write the Ip address:\n if you want to use the local host write \"localhost\"");
+                String ipClient = scanner.nextLine();
+                System.setProperty("java.rmi.server.hostname", ipClient);
                 System.out.println("""
                                             
                                             ██     ██  ███████  ██        ██████   ██████   ███    ███  ███████     ████████  ██████ \s
@@ -120,7 +128,7 @@ public class Main {
                     //Thread threadFsmGame;
 
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
-                    flow.setClient(new ClientSocket(flow, ip));
+                    flow.setClient(new ClientSocket(flow, ipServer));
 
                     /*threadFsmGame = new Thread(flow);
                     threadFsmGame.start();
@@ -149,7 +157,7 @@ public class Main {
                     //Thread threadFsmGame;
 
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
-                    flow.setClient(new ClientRMI(flow, ip));
+                    flow.setClient(new ClientRMI(flow, ipServer));
 
                     //threadFsmGame = new Thread(flow);
                     //threadFsmGame.start();
@@ -179,7 +187,7 @@ public class Main {
                     flow.run();*/
                     String[] arg = new String[2];
                     arg[0] = "socket";
-                    arg[1] = ip;
+                    arg[1] = ipServer;
                     Application.launch(Gui.class,arg);
 
                 } else if (selection == 4) {
@@ -188,7 +196,7 @@ public class Main {
                     flow.run();*/
                     String[] arg = new String[2];
                     arg[0] = "rmi";
-                    arg[1] = ip;
+                    arg[1] = ipServer;
                     Application.launch(Gui.class, arg);
                     //Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
                 }
