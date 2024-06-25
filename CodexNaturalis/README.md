@@ -34,6 +34,7 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 | TUI + GUI  | :heavy_check_mark:    |
 | Persistence:  | ✔️  |
 
+![Voto](https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/a7894c9b-1df6-4e71-8e9d-ecceb22609cd)
 
 # How to Use(SET UP GUIDE)
 
