@@ -59,20 +59,14 @@ public class Cli implements UI {
      * @return  the ansi code of the color to use.
      */
     public static String getAnsiCode(TypeOfCard type) {
-        switch (type) {
-            case ANIMAL:
-                return "\u001B[36m"; // Light Blue
-            case VEGETABLE:
-                return "\u001B[32m"; // Green
-            case MUSHROOM:
-                return "\u001B[31m"; // Red
-            case INSECT:
-                return "\u001B[35m"; // Purple
-            case STARTING:
-                return "\u001B[33m"; // Yellow
-            default:
-                return "\u001B[0m"; // Default to reset color
-        }
+        return switch (type) {
+            case ANIMAL -> "\u001B[36m"; // Light Blue
+            case VEGETABLE -> "\u001B[32m"; // Green
+            case MUSHROOM -> "\u001B[31m"; // Red
+            case INSECT -> "\u001B[35m"; // Purple
+            case STARTING -> "\u001B[33m"; // Yellow
+            default -> "\u001B[0m"; // Default to reset color
+        };
     }
 
     /**
@@ -81,28 +75,18 @@ public class Cli implements UI {
      * @return the UTF-8 code of the emoji.
      */
     private static String getResourceEmoji(Item resourceType) {
-        switch (resourceType) {
-            case VEGETABLE:
-                return "\uD83C\uDF40";
-            case ANIMAL:
-                return "\uD83E\uDD8A";
-            case INSECT:
-                return "\uD83E\uDD8B";
-            case MUSHROOM:
-                return "\uD83C\uDF44";
-            case HIDDEN:
-                return "\u2753";
-            case EMPTY:
-                return "\u274C";
-            case POTION:
-                return "\uD83D\uDCA7";
-            case FEATHER:
-                return "\uD83E\uDEB6";
-            case PARCHMENT:
-                return "\uD83D\uDCC4";
-            case null:
-                return "\uD83D\uDEAB";
-        }
+        return switch (resourceType) {
+            case VEGETABLE -> "\uD83C\uDF40";
+            case ANIMAL -> "\uD83E\uDD8A";
+            case INSECT -> "\uD83E\uDD8B";
+            case MUSHROOM -> "\uD83C\uDF44";
+            case HIDDEN -> "\u2753";
+            case EMPTY -> "\u274C";
+            case POTION -> "\uD83D\uDCA7";
+            case FEATHER -> "\uD83E\uDEB6";
+            case PARCHMENT -> "\uD83D\uDCC4";
+            case null -> "\uD83D\uDEAB";
+        };
     }
 
     /**
@@ -160,13 +144,13 @@ public class Cli implements UI {
         stringBuilder.append("\nCHOOSE A COLOR:\n");
 
         for (Color c : UI.freeColors(gameView)) {
-            stringBuilder.append(c + ", ");
+            stringBuilder.append(c).append(", ");
         }
 
         stringBuilder.setLength(stringBuilder.length() - 2);
         stringBuilder.append("\n");
 
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -215,7 +199,7 @@ public class Cli implements UI {
         for(Player p : gameView.getPlayers()){
             stringBuilder.append(p.getNick()).append(", STATUS: ").append(gameView.getActivity().get(p.getNick())).append('\n');
         }
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -228,7 +212,7 @@ public class Cli implements UI {
         for(Player p : gameView.getPlayers()){
             stringBuilder.append(p.getNick()).append(", COLOR: ").append(p.getColor()).append('\n');
         }
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -444,7 +428,7 @@ public class Cli implements UI {
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -506,7 +490,7 @@ public class Cli implements UI {
                     for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
                         String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 1, gameDimension.get(p.getNick()).x - row - 1));
                         spaces = Math.round(2 - value.length()/2);
-                        stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                        stringBuilder.append(" ".repeat(spaces)).append(value).append(" ".repeat(spaces));
                         if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
                         stringBuilder.append("|");
                     }
@@ -521,7 +505,7 @@ public class Cli implements UI {
                     for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
                         String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 2, gameDimension.get(p.getNick()).x - row - 2));
                         spaces = Math.round(2 - value.length()/2);
-                        stringBuilder.append(" ".repeat(spaces) + value + " ".repeat(spaces));
+                        stringBuilder.append(" ".repeat(spaces)).append(value).append(" ".repeat(spaces));
                         if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
                         stringBuilder.append("|");
                     }
@@ -532,7 +516,7 @@ public class Cli implements UI {
         }
 
         stringBuilder.append(cardDraw(view));
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -675,14 +659,14 @@ public class Cli implements UI {
         String BDR = safeString(getResourceEmoji(card.getBack().get(Angle.DOWNRIGHT)));
         String ansiCode = getAnsiCode(card.getType());
 
-        if (card instanceof GoldCard) { //manca esprimere metodo in points su come vengono guadagnati
-            stringBuilder.append("""
+        switch (card) {
+            case GoldCard goldCard -> stringBuilder.append("""
                     \nGOLD CARD
                                         
-                    CARD ID: """).append(card.getCardId()).append("\n").append("""
-                    PERMANENT RESOURCE: """).append(getResourceEmoji(((GoldCard) card).getBackResource())).append("\n").append("""
-                    POINTS: """).append(goldPoint((GoldCard) card)).append("\n").append("""
-                    REQUIREMENTS: """).append("\n").append(mapToEmoji(((GoldCard) card).getNeededResources())).append("""
+                    CARD ID:\s""").append(card.getCardId()).append("\n").append("""
+                    PERMANENT RESOURCE:\s""").append(getResourceEmoji(goldCard.getBackResource())).append("\n").append("""
+                    POINTS:\s""").append(goldPoint(goldCard)).append("\n").append("""
+                    REQUIREMENTS:\s""").append("\n").append(mapToEmoji(goldCard.getNeededResources())).append("""
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
@@ -692,14 +676,12 @@ public class Cli implements UI {
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
-
-        } else if (card instanceof ResourceCard) {
-            stringBuilder.append("""
+            case ResourceCard resourceCard -> stringBuilder.append("""
                     \nRESOURCE CARD
                                         
                     CARD ID:""").append(card.getCardId()).append("\n").append("""
-                    PERMANENT RESOURCE:""").append(getResourceEmoji(((ResourceCard) card).getBackResource())).append("\n").append("""
-                    POINTS:""").append(((ResourceCard) card).getNumberOfPoints()).append("\n").append("""
+                    PERMANENT RESOURCE:""").append(getResourceEmoji(resourceCard.getBackResource())).append("\n").append("""
+                    POINTS:""").append(resourceCard.getNumberOfPoints()).append("\n").append("""
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
@@ -709,12 +691,11 @@ public class Cli implements UI {
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
-        } else if (card instanceof InitialCard) {
-            stringBuilder.append("""
+            case InitialCard initialCard -> stringBuilder.append("""
                     \nINITIAL CARD
                                         
                     CARD ID:""").append(card.getCardId()).append("\n").append("""
-                    BACK RESOURCES:""").append(listToEmoji(((InitialCard) card).getBackResources())).append("\n").append("""
+                    BACK RESOURCES:""").append(listToEmoji(initialCard.getBackResources())).append("\n").append("""
                                         
                     FRONT                      BACK
                     """).append(ansiCode).append("""
@@ -724,6 +705,8 @@ public class Cli implements UI {
                     │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
+            default -> {
+            }
         }
 
         stringBuilder.append("""
@@ -766,13 +749,13 @@ public class Cli implements UI {
                  ▀▄▄ ▀▄▀ █ ▀ █ █ ▀ █ ▀▄▀ █ ▀█   ▀▄█ ▀▄▀ █▀█ █▄▄   ▀▄▄ █▀█ █▀▄ █▄▀ ▄█▀
                                 
                 """);
-        for(Card card : immutableModel.getTableOfDecks().getGoals()){
-            stringBuilder.append(show_goalCard((GoalCard) card));
+        for(GoalCard card : immutableModel.getTableOfDecks().getGoals()){
+            stringBuilder.append(show_goalCard(card));
         }
         stringBuilder.append("""
                 ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
                 """);
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**
@@ -806,7 +789,7 @@ public class Cli implements UI {
 
         int rank=1;
         for(Map.Entry<String, Integer> entry : list){
-            stringBuilder.append(rank + "- ").append(entry.getKey()).append(": ").append(entry.getValue()).append(" POINTS\n");
+            stringBuilder.append(rank).append("- ").append(entry.getKey()).append(": ").append(entry.getValue()).append(" POINTS\n");
             rank++;
         }
 
@@ -1019,7 +1002,7 @@ public class Cli implements UI {
             stringBuilder.append(show_goalCard(goalCard));
         }
         stringBuilder.append("ENTER CARD ID:\n");
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     /**

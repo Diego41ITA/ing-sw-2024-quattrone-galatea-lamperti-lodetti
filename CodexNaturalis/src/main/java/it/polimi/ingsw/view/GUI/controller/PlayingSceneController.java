@@ -195,7 +195,6 @@ public class PlayingSceneController extends InGameController {
         }
         List<PlayableCard> cards = gameView.getPlayerByNick(updatedGame.getNickname()).showCard();
         this.makeHandCardsPlayable(cards);
-        this.generateFreeCords(getGameFsm().getNickname());
         this.setUpTableOfDecks();
         createRulebookTab();
         tabPane.getSelectionModel().select(2);
@@ -678,12 +677,14 @@ public class PlayingSceneController extends InGameController {
                 makeHandCardsPlayable(getGameView().getPlayerByNick(getGameFsm().getNickname()).showCard());
                 idChosenCardToPlay = card.getCardId();
                 sideChosenCardToPlay = isFront;
+                chosenCardToPlay = cardView;
                 cardView.setScaleX(1.2);
                 cardView.setScaleY(1.2);
                 cardView.setOnMouseExited(null);
                 // Reset scale for all other card views
                 resetOtherCardViewsScale(cardView);
                 indexCardToPlay = index;
+                this.generateFreeCords(getGameFsm().getNickname());
             }
         });
         cardView.setCursor(Cursor.HAND);
