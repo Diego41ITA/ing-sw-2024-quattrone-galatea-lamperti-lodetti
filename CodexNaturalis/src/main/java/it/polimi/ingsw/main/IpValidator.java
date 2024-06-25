@@ -12,6 +12,7 @@ public class IpValidator {
                 "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
         return ip.matches(regex) || ip.equals("localhost");
     }
+
     public static boolean containsOneOrTwoAndHasLengthOne(String input) {
         if (input == null) {
             return false;
