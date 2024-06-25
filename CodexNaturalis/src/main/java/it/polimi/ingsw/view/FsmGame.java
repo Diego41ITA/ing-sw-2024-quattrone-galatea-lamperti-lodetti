@@ -51,7 +51,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public boolean inGame;
     private InputParser input;
     private boolean pointsThresholdReached = false;
-
+    private boolean isGameSuspended = false;
     private List<String> winner = null; //be aware that this list is also put in the DbCardInfo class
     private boolean stay = true;
 
@@ -116,6 +116,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
                     }
                 }
             } else if (view.getStatus() == Status.ACTIVE) {
+                this.isGameSuspended = false;
                 if(view.getTurn() != null && !view.getTurn().getPlayers().isEmpty()){
                     if (view.getCurrentPlayer().getNick().equals(nickname) && myTurn) {
                         state2 = new PlaceCardState(this, input);
@@ -139,7 +140,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
             } else if (view.getStatus() == Status.SUSPENDED) {
                 ui.show_GameStatus(view);
                 ui.show_gameStation(view);
-
+                this.isGameSuspended=true;
                 while(view.getStatus() == Status.SUSPENDED) {
                     try {
                         synchronized (lock) {
@@ -238,6 +239,12 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
      * @return it returns true if and only if one of the player has reached the point threshold.
      */
     public boolean isPointsThresholdReached(){return this.pointsThresholdReached;}
+
+    /**
+     * verify if the game is suspended
+     * @return true if and only if the game is suspended
+     */
+    public boolean isGameSuspended(){return this.isGameSuspended;}
 
     /**
      * this method initialized the states for the thread.

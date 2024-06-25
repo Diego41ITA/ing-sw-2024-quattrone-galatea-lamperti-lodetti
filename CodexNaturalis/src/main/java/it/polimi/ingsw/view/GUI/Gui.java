@@ -194,8 +194,6 @@ public class Gui extends Application implements UI {
     public void show_GameStatus(GameView gameView) {
         if(primaryStage != null) {
             loadScene("/scenes/WaitingScene.fxml");
-            WaitingSceneController controller = (WaitingSceneController) abstractController;
-            Platform.runLater(controller::showGameSuspendedAlert);
         }
         else
             System.out.println("error primary stage is null");

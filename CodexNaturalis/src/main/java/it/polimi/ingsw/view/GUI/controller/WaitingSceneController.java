@@ -527,8 +527,12 @@ public class WaitingSceneController extends InGameController {
         this.setUpTableOfDecks();
         this.createRulebookTab();
         tabPane.getSelectionModel().select(2);
-        this.showWaitTurnAlert();
-        if(getGameFsm().isPointsThresholdReached())
-            showLastTurnAlert();
+        if(updatedGame.isGameSuspended()){
+            showGameSuspendedAlert();
+        }else {
+            this.showWaitTurnAlert();
+            if (getGameFsm().isPointsThresholdReached())
+                showLastTurnAlert();
+        }
     }
 }
