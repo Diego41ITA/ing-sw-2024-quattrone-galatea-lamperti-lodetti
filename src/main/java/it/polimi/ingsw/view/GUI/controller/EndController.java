@@ -329,7 +329,7 @@ public class EndController extends InGameController {
         }
         for(Player p : gameView.getPlayers())
             this.createAndAddGameStationTab(p);
-        setWinnerNick(DbCardInfo.getInstance().readWinners().getFirst());
+        setWinnerNick(DbCardInfo.getInstance().readWinners(gameView.getId()).getFirst());
 
         tabPane.getSelectionModel().select(1);
     }

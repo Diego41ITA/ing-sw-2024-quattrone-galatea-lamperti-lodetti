@@ -460,8 +460,8 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public void goalCardsDrawed(ArrayList<GoalCard> cards) throws RemoteException {
 
         //this inserts the relevant attributes inside the Record
-        DbCardInfo.getInstance().addRecord(new CardRecord(cards.getFirst().getType(), cards.getFirst().getCardId()));
-        DbCardInfo.getInstance().addRecord(new CardRecord(cards.getLast().getType(), cards.getLast().getCardId()));
+        DbCardInfo.getInstance().addCardRecord(new CardRecord(cards.getFirst().getType(), cards.getFirst().getCardId()), view.getId());
+        DbCardInfo.getInstance().addCardRecord(new CardRecord(cards.getLast().getType(), cards.getLast().getCardId()), view.getId());
 
         int cardId;
         do {
@@ -503,7 +503,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     public void updateInitialCardsDrawn(InitialCard card) throws RemoteException {
 
         //this inserts the relevant attributes in the Record
-        DbCardInfo.getInstance().addRecord(new CardRecord(card.getType(), card.getCardId()));
+        DbCardInfo.getInstance().addCardRecord(new CardRecord(card.getType(), card.getCardId()), view.getId());
 
         ui.show_initialCard(card);
         boolean isFrontOrBack = false;
@@ -585,7 +585,7 @@ public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, S
     @Override
     public void winner(GameView game, List<String> winners){
         this.winner = new ArrayList<>(winners);
-        DbCardInfo.getInstance().addWinners(winners);
+        DbCardInfo.getInstance().addWinners(winners, view.getId());
         setGameView(game);
         synchronized (lock){
             lock.notify();

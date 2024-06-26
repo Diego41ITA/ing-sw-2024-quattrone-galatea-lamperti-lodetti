@@ -93,8 +93,6 @@ public abstract class InGameController extends AbstractController {
         ImageView imageView = new ImageView(new Image(imagePath));
         imageView.setFitWidth(50);
         imageView.setFitHeight(90);
-        // Gestione dell'evento del click del mouse sull'ImageView (disabilitata temporaneamente)
-        // Consuma l'evento per evitare ulteriori azioni
         imageView.setOnMouseClicked(Event::consume);
         return imageView;
     }

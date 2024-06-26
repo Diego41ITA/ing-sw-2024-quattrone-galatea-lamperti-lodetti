@@ -40,7 +40,7 @@ public class InitialCardController extends AbstractController {
 
         this.multipleResponses=multipleResponses;
 
-        int cardId = DbCardInfo.getInstance().readCardRecord().cardId();
+        int cardId = DbCardInfo.getInstance().readCardRecord(getGameView().getId()).cardId();
 
         imageBack.setImage(new Image(associatorPng2Card(String.valueOf(cardId),false)));
         imageFront.setImage(new Image(associatorPng2Card(String.valueOf(cardId),true)));

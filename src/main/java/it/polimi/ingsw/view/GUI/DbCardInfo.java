@@ -1,8 +1,9 @@
 package it.polimi.ingsw.view.GUI;
 
 import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 /**
  * this class is useful to pass information between different classes without increase the coupling.
@@ -12,69 +13,97 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class DbCardInfo {
     private static DbCardInfo dbCardInfo;
-    private final LinkedBlockingQueue<CardRecord> cardRecords;
-    private final LinkedBlockingQueue<List<String>> winnersRecord;
-    private DbCardInfo(){
-        this.cardRecords = new LinkedBlockingQueue<>();
-        this.winnersRecord = new LinkedBlockingQueue<>();
+    private final ConcurrentHashMap<String, LinkedBlockingQueue<CardRecord>> cardsRecordsMap;
+    private final ConcurrentHashMap<String, LinkedBlockingQueue<List<String>>> winnersRecordsMap;
+
+    private DbCardInfo() {
+        this.cardsRecordsMap = new ConcurrentHashMap<>();
+        this.winnersRecordsMap = new ConcurrentHashMap<>();
     }
 
-    /**
-     * creates an instance of the class if there is not
-     * @return the instance of the class
-      */
-    public static DbCardInfo getInstance(){
-        if(DbCardInfo.dbCardInfo == null){
-            DbCardInfo.dbCardInfo = new DbCardInfo();
+    // Singleton instance getter
+    public static synchronized DbCardInfo getInstance() {
+        if (dbCardInfo == null) {
+            dbCardInfo = new DbCardInfo();
         }
-        return DbCardInfo.dbCardInfo;
+        return dbCardInfo;
     }
 
     /**
-     * add a card record which contains some useful information especially for the GUI
+     * Add a card record which contains some useful information especially for the GUI
+     *
      * @param cardRecord the record
+     * @param gameId     the game identifier
      */
-    public void addRecord(CardRecord cardRecord){
+    public void addCardRecord(CardRecord cardRecord, String gameId) {
         try {
-            this.cardRecords.put(cardRecord);
+            // Fetch or create the queue for the given gameId
+            LinkedBlockingQueue<CardRecord> queue = cardsRecordsMap.computeIfAbsent(gameId, k -> new LinkedBlockingQueue<>());
+            // Add the card record to the queue
+            queue.put(cardRecord);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt(); // Reset the interrupted status
+            throw new RuntimeException("Thread was interrupted while adding record", e);
         }
     }
 
     /**
-     * reads the record: be careful that this method blocks the calling thread until there is a readable record
-     * @return the read record
+     * Reads the record for a given gameId: be careful that this method blocks the calling thread until there is a
+     * readable record
+     *
+     * @param gameId the game identifier
+     * @return the read card record
      */
-    public CardRecord readCardRecord(){
+    public CardRecord readCardRecord(String gameId) {
         try {
-            return this.cardRecords.take();
+            // Fetch the queue for the given gameId
+            LinkedBlockingQueue<CardRecord> queue = cardsRecordsMap.get(gameId);
+            if (queue != null) {
+                // Take the card record from the queue
+                return queue.take();
+            } else {
+                throw new RuntimeException("No records found for gameId: " + gameId);
+            }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt(); // Reset the interrupted status
+            throw new RuntimeException("Thread was interrupted while reading record", e);
         }
     }
 
     /**
-     * add the list of winner to the DB: useful to pass arguments without increasing coupling
+     * Add the list of winners to the DB: useful to pass arguments without increasing coupling
+     *
      * @param winners the list of winners
+     * @param gameId  the game identifier
      */
-    public void addWinners(List<String> winners){
+    public void addWinners(List<String> winners, String gameId) {
         try {
-            this.winnersRecord.put(winners);
+            LinkedBlockingQueue<List<String>> queue = winnersRecordsMap.computeIfAbsent(gameId, k -> new LinkedBlockingQueue<>());
+            queue.put(winners);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread was interrupted while adding winners", e);
         }
     }
 
     /**
-     * read the winners: be careful that this method blocks the calling thread until there is a readable list
-     * @return the list of winner
+     * Reads the list of winners for a given gameId: be careful that this method blocks the calling thread
+     * until there is a readable list
+     *
+     * @param gameId the game identifier
+     * @return the list of winners
      */
-    public List<String> readWinners(){
+    public List<String> readWinners(String gameId) {
         try {
-            return this.winnersRecord.take();
+            LinkedBlockingQueue<List<String>> queue = winnersRecordsMap.get(gameId);
+            if (queue != null) {
+                return queue.take();
+            } else {
+                throw new RuntimeException("No winners found for gameId: " + gameId);
+            }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread was interrupted while reading winners", e);
         }
     }
 }

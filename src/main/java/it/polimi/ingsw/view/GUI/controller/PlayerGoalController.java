@@ -48,8 +48,8 @@ public class PlayerGoalController extends AbstractController {
 
         this.multipleResponses=multipleResponses;
 
-        this.firstGoal = DbCardInfo.getInstance().readCardRecord().cardId();
-        this.secondGoal = DbCardInfo.getInstance().readCardRecord().cardId();
+        this.firstGoal = DbCardInfo.getInstance().readCardRecord(getGameView().getId()).cardId();
+        this.secondGoal = DbCardInfo.getInstance().readCardRecord(getGameView().getId()).cardId();
 
         firstImage.setImage(new Image(associatorPng2Card(String.valueOf(firstGoal),true)));
         secondImage.setImage(new Image(associatorPng2Card(String.valueOf(secondGoal),true)));

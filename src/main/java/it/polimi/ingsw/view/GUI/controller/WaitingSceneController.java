@@ -385,7 +385,7 @@ public class WaitingSceneController extends InGameController {
         alert.setHeaderText("This is " + getGameFsm().getView().getCurrentPlayer().getNick() + "' turn");
         alert.setContentText("Wait for your turn, and think about the next move!");
 
-        // Optional: Customize the style of the alert dialog
+        // Customize the style of the alert dialog
         alert.initStyle(StageStyle.UTILITY);
         // Set OK button
         ButtonType okButton = new ButtonType("OK");
@@ -416,7 +416,7 @@ public class WaitingSceneController extends InGameController {
         alert.setHeaderText("The game is currently suspended");
         alert.setContentText("Wait for resume, and think about the next move!");
 
-        // Optional: Customize the style of the alert dialog
+        // Customize the style of the alert dialog
         alert.initStyle(StageStyle.UTILITY);
 
         // Set OK button

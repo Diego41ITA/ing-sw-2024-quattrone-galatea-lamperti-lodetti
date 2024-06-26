@@ -455,7 +455,6 @@ public class PlayingSceneController extends InGameController {
             // Find or create a Pane within the tab to add rectangles
             Pane playerPane = findOrCreatePaneInTab(playerTab);
 
-            // Example logic to add rectangles (adjust as per your game logic)
             GameStation gameStation = getGameView().getMyGameStation(nick);
             for (Point point : gameStation.getFreeCords()) {
                 Rectangle rectangle = new Rectangle();
@@ -866,7 +865,7 @@ public class PlayingSceneController extends InGameController {
         alert.setTitle("Playing stage");
         alert.setHeaderText("This is your turn");
 
-        // Create a grid pane to allow for more complex content
+        // Create a grid pane to allow more complex content
         GridPane gridPane = new GridPane();
         gridPane.setMaxWidth(Double.MAX_VALUE);
 
@@ -886,7 +885,7 @@ public class PlayingSceneController extends InGameController {
         // Set the content of the alert to the grid pane
         alert.getDialogPane().setContent(gridPane);
 
-        // Optional: Customize the style of the alert dialog (utility style)
+        //Customize the style of the alert dialog (utility style)
         alert.initStyle(StageStyle.UTILITY);
 
         // Set the button types (OK button only)
@@ -958,7 +957,7 @@ public class PlayingSceneController extends InGameController {
         // Set the content of the alert to the grid pane
         alert.getDialogPane().setContent(gridPane);
 
-        // Optional: Customize the style of the alert dialog (utility style)
+        // Customize the style of the alert dialog (utility style)
         alert.initStyle(StageStyle.UTILITY);
 
         // Set the button types (OK button only)
@@ -1014,7 +1013,7 @@ public class PlayingSceneController extends InGameController {
         // Set the content of the alert to the grid pane
         alert.getDialogPane().setContent(gridPane);
 
-        // Optional: Customize the style of the alert dialog (utility style)
+        // Customize the style of the alert dialog (utility style)
         alert.initStyle(StageStyle.UTILITY);
 
         // Set the button types (OK button only)
