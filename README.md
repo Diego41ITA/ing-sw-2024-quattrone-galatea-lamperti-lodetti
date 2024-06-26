@@ -38,20 +38,24 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 
 # How to Use(SET UP GUIDE)
 
-**1: From Repo clone in Localhost: (for Windows users)**
-1. Go to deliverables and download PSP21.jar
-2. Download form windows a terminal that support unicode:  https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare  
-3. Open the `Windows Terminal` that you have just downloaded, and navigate to C:/[dir]/[folder with the jar files]  
-4. From here, just type in the `Windows terminal`:  
-   -> `java -jar PSP21.jar` (to run the clients and servers)<br>
+**1: Playing locally, on a single computer:**
+1. Go to "deliverables" folder and download PSP21.jar
+2. Ensure to have a terminal that supports UTF-8 encoding and ansi code. The default one on MacOS system should do it, for Windows users we suggest to download this one: https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare, and to manually set the UTF-8 encoding. 
+3. Open the previously described terminal and navigate to the folder where the jar has been saved, tipically the path is something like "C:/[dir]/[folder with the jar files]"  
+4. From here, just type in the terminal:  
+   -> `java -jar PSP21.jar` (to run both the clients and the servers)<br>
 
-`**2: From two different computers(Repo clone): (for Windows users)**
-1. Go to deliverables and download PSP21.jar
-2. disable the firewall( win key -> windows Defender Firewall -> activate/deactivate fireWall -> disable windows defender (both public and private network)
-3. create an account and install https://www.zerotier.com/, for the use of zero teir consult the guide https://docs.zerotier.com/start
-4. Download form windows a terminal that support unicode:  https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare  
-5. Open the `Windows Terminal` that you have just downloaded, and navigate to C:/[dir]/[folder with the jar files]  
+`**2: Playing on different computers:**
+1. Go to "deliverables" folder and download PSP21.jar
+2. Ensure to allow to enable incoming and outgoing connections on the port you want to connect to. Alternatively, for Windows Users it's possible to temporarly disable the firewall( win key -> windows Defender Firewall -> activate/deactivate fireWall -> disable windows defender (both public and private network)
+3. We suggest to use "ZeroTier", by creating an account and installing the application https://www.zerotier.com/; for more information about its correct usage, consult the guide https://docs.zerotier.com/start
+4. Ensure to have a terminal that supports UTF-8 encoding and ansi code. The default one on MacOS system should do it, for Windows users we suggest to download this one: https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare, and to manually set the UTF-8 encoding. 
+5. Open the previously described terminal and navigate to the folder where the jar has been saved, tipically the path is something like "C:/[dir]/[folder with the jar files]"  
 6. From here, just type in the `Windows terminal`:  
    -> `java -jar PSP21.jar` (to run the clients and servers)<br>
+
+`**NB:**
+The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
+
 
    ![1871216](https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/00292629-7280-4084-bc3a-eff32d2175e7)
