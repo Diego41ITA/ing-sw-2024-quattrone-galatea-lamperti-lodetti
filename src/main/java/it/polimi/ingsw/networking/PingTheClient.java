@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.Map;
 
+import static it.polimi.ingsw.parse.SaverReader.gameReader;
+
 /**
  * this class pings the client constantly and to do so it extends thread class.
  */
@@ -86,10 +88,9 @@ public class PingTheClient extends Thread{
      * @param gameId the game that needs to be fixed
      */
     private void reloadGame(String gameId){
-        //codice simile a quello di main controller.
-        String gamePath = "CodexNaturalis/SavedGames/" + gameId + ".json";
-        File f = new File(Paths.get("").toAbsolutePath().toString(), gamePath);
-        Game game = SaverReader.gameReader(f.getPath());
+        String userHome = System.getProperty("user.home");
+        String gamePath = userHome + File.separator + "SavedGames" + File.separator + gameId + ".json";
+        Game game = gameReader(gamePath);
         //at this point we need to set the game in the controller
         controller.setGame(game);
     }

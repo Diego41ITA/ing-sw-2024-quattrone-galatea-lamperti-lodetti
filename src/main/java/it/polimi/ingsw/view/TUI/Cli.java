@@ -383,7 +383,7 @@ public class Cli implements UI {
             String FHR = safeString(getResourceEmoji(card.getFront().get(Angle.HIGHRIGHT)));
             String BHL = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHLEFT)));
             String BHR = safeString(getResourceEmoji(card.getBack().get(Angle.HIGHRIGHT)));
-            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("    ").append("│").append(BHL).append(" ".repeat(17)).append(BHR).append("│").append("\u001B[0m").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("    ").append("│").append(BHL).append(" ".repeat(18)).append(BHR).append("│").append("\u001B[0m").append("   ");
 
         }
         stringBuilder.append("\n");
@@ -398,7 +398,7 @@ public class Cli implements UI {
             String FDL = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNLEFT)));
             String FDR = safeString(getResourceEmoji(card.getFront().get(Angle.DOWNRIGHT)));
 
-            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("    ").append("│").append(BDL).append(" ".repeat(17)).append(BDR).append("│").append("\u001B[0m").append("   ");
+            stringBuilder.append(getAnsiCode(card.getType())).append("│").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("    ").append("│").append(BDL).append(" ".repeat(18)).append(BDR).append("│").append("\u001B[0m").append("   ");
 
         }
         stringBuilder.append("\n");
@@ -580,31 +580,29 @@ public class Cli implements UI {
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-            if(c.isFront()){
-                HL = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHLEFT)));
-                HR = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHRIGHT)));
-            }else{
-                stringBuilder.append(listToString(c.getAListOfBackResource()));
-                HL = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHLEFT)));
-                HR = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHRIGHT)));
-            }
-                stringBuilder.append(getAnsiCode(c.getType())).append(HL).append(" ".repeat(19)).append(HR).append(" ").append("\u001B[0m").append("   ");
-            }
-            stringBuilder.append("\n");
-            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-                stringBuilder.append(getAnsiCode(c.getType())).append("                        ").append("\u001B[0m").append("   ");
+                if(c.isFront()){
+                    HL = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHLEFT)));
+                    HR = safeString(getResourceEmoji(c.getFront().get(Angle.HIGHRIGHT)));
+                }else{
+                    HL = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHLEFT)));
+                    HR = safeString(getResourceEmoji(c.getBack().get(Angle.HIGHRIGHT)));
+                }
+                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(HL).append(" ".repeat(18)).append(HR).append("│").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
-            if(c.isFront()){
-                DL = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNLEFT)));
-                DR = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNRIGHT)));
-            }else{
-                stringBuilder.append(listToString(c.getAListOfBackResource()));
-                DL = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNLEFT)));
-                DR = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNRIGHT)));
+                stringBuilder.append(getAnsiCode(c.getType())).append("│                      │").append("\u001B[0m").append("   ");
             }
-                stringBuilder.append(getAnsiCode(c.getType())).append(DL).append(" ".repeat(19)).append(DR).append(" ").append("\u001B[0m").append("   ");
+            stringBuilder.append("\n");
+            for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
+                if(c.isFront()){
+                    DL = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNLEFT)));
+                    DR = safeString(getResourceEmoji(c.getFront().get(Angle.DOWNRIGHT)));
+                }else{
+                    DL = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNLEFT)));
+                    DR = safeString(getResourceEmoji(c.getBack().get(Angle.DOWNRIGHT)));
+                }
+                stringBuilder.append(getAnsiCode(c.getType())).append("│").append(DL).append(" ".repeat(18)).append(DR).append("│").append("\u001B[0m").append("   ");
             }
             stringBuilder.append("\n");
             for(PlayableCard c : p.getGameStation().getPlayedCards().values()){
@@ -700,9 +698,9 @@ public class Cli implements UI {
                     FRONT                      BACK
                     """).append(ansiCode).append("""
                     ┌──────────────────────┐    ┌────────────────────────┐
-                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append(" │").append(BHL).append(" ".repeat(19)).append(BHR).append("│\n").append("""
+                    │""").append(FHL).append(" ".repeat(18)).append(FHR).append("│").append("   ").append(" │").append(BHL).append(" ".repeat(20)).append(BHR).append("│\n").append("""
                     │                      │    │                        │
-                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(19)).append(BDR).append("│\n").append("""
+                    │""").append(FDL).append(" ".repeat(18)).append(FDR).append("│").append("   ").append(" │").append(BDL).append(" ".repeat(20)).append(BDR).append("│\n").append("""
                     └──────────────────────┘    └────────────────────────┘
                     """).append("\u001B[0m");
             default -> {

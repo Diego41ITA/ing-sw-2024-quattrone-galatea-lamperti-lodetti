@@ -37,7 +37,6 @@ public class PingServer extends Thread {
                 Thread.sleep(50 );
             }catch (NullPointerException e){
                 System.err.println("the controller is still not initialized ");
-                e.printStackTrace();
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {
