@@ -21,7 +21,6 @@ public class DeckReader<T extends Card> {
     /**
      * Reads a JSON file containing cards and initializes a Deck with them.
      *
-     * @param filePath The path to the JSON file.
      * @return The Deck initialized with the cards read from the JSON file.
      */
     public Deck<T> readDeckFromJSON(InputStream inputStream) {
