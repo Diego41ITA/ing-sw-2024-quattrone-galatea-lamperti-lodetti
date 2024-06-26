@@ -55,7 +55,8 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
    -> `java -jar PSP21.jar` (to run the clients and servers)<br>
 
 `**NB:**
-The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
+1. The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
+2. Due to copyright reasons, the graphical resources necessary for displaying the GUI have not been pushed to this repository. Therefore, to successfully build the jar file on your pc, by cloning the project's repository, you need to download the 'images' folder from the #1-general channel on Slack. Extract its contents and then move the uncompressed 'images' folder into the resources/scenes directory.
 
 
    ![1871216](https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/00292629-7280-4084-bc3a-eff32d2175e7)
