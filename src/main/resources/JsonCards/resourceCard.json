@@ -1,0 +1,723 @@
+[
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 1,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "HIGHRIGHT": "MUSHROOM",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 2,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "MUSHROOM",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 3,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "MUSHROOM",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 4,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "FEATHER",
+      "DOWNLEFT": "VEGETABLE",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 5,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "POTION",
+      "HIGHRIGHT": "MUSHROOM",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 6,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 7,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "MUSHROOM",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 8,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 9,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "MUSHROOM",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 10,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "VEGETABLE",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 11,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "VEGETABLE",
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 12,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "VEGETABLE",
+      "DOWNRIGHT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 13,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 14,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "FEATHER",
+      "DOWNRIGHT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 15,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "MUSHROOM",
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNRIGHT": "POTION"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 16,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "PARCHMENT",
+      "DOWNLEFT": "VEGETABLE",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 17,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 18,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "VEGETABLE"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 19,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 20,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "ANIMAL",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 21,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 22,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "ANIMAL",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 23,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 24,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "POTION",
+      "DOWNRIGHT": "ANIMAL"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 25,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "VEGETABLE",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNRIGHT": "PARCHMENT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 26,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "FEATHER",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 27,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 28,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 29,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "ANIMAL",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 30,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 31,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "INSECT",
+      "DOWNRIGHT": "INSECT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 32,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "DOWNLEFT": "INSECT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 33,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "INSECT",
+      "DOWNRIGHT": "INSECT"
+    } ,
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 34,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHRIGHT": "FEATHER",
+      "DOWNLEFT": "ANIMAL",
+      "DOWNRIGHT": "INSECT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 35,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "PARCHMENT",
+      "HIGHRIGHT": "INSECT",
+      "DOWNRIGHT": "MUSHROOM"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 36,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 0,
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "HIGHRIGHT": "VEGETABLE",
+      "DOWNLEFT": "POTION"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 37,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "INSECT",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 38,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "INSECT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 39,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "numOfPoints": 1,
+    "front": {
+      "HIGHRIGHT": "INSECT",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 40,
+    "isFront": false,
+    "type": "INSECT"
+  }
+]

@@ -1,0 +1,901 @@
+[
+  {
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "ANIMAL": 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHRIGHT" : "EMPTY",
+      "DOWNLEFT" : "EMPTY",
+      "DOWNRIGHT" : "FEATHER"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 41,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "POTION",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 42,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 2,
+      "INSECT" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "PARCHMENT",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 43,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 44,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 45,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3,
+      "INSECT" : 1},
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 46,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "POTION"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 47,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "FEATHER",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 48,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 49,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "MUSHROOM" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "MUSHROOM" ],
+    "cardId" : 50,
+    "isFront": false,
+    "type": "MUSHROOM"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "INSECT" : 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "FEATHER",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 51,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 52,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 2,
+      "ANIMAL" : 1},
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "POTION",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 53,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "INSECT" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 54,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 55,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 56,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "FEATHER"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 57,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "PARCHMENT",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 58,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "POTION",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 59,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "VEGETABLE" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "VEGETABLE" ],
+    "cardId" : 60,
+    "isFront": false,
+    "type": "VEGETABLE"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 2,
+      "INSECT" : 1
+    },
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "POTION",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 61,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 2,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "PARCHMENT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 62,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 2,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 63,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL": 3,
+      "INSECT" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 64,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 3,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 65,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL": 3,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 66,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 67,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "POTION"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 68,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "FEATHER"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 69,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "ANIMAL" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "ANIMAL" ],
+    "cardId" : 70,
+    "isFront": false,
+    "type": "ANIMAL"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 2,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 1,
+    "box": "FEATHER",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 71,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 2,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 1,
+    "box": "PARCHMENT",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "PARCHMENT",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 72,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 2,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 1,
+    "box": "POTION",
+    "typeOfGoldCard": "ITEM",
+    "front": {
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "POTION"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 73,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3,
+      "ANIMAL" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 74,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3,
+      "VEGETABLE" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 75,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3,
+      "MUSHROOM" : 1
+    },
+    "numOfPoints": 2,
+    "typeOfGoldCard": "ANGLE",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 76,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "POTION",
+      "DOWNLEFT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 77,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "PARCHMENT"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 78,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 3
+    },
+    "numOfPoints": 3,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "DOWNLEFT": "FEATHER",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 79,
+    "isFront": false,
+    "type": "INSECT"
+  },
+  {
+    "neededResources": {
+      "INSECT" : 5
+    },
+    "numOfPoints": 5,
+    "typeOfGoldCard": "CLASSIC",
+    "front": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY"
+    },
+    "back": {
+      "HIGHLEFT": "EMPTY",
+      "HIGHRIGHT": "EMPTY",
+      "DOWNLEFT": "EMPTY",
+      "DOWNRIGHT": "EMPTY"
+    },
+    "backResource": [ "INSECT" ],
+    "cardId" : 80,
+    "isFront": false,
+    "type": "INSECT"
+  }
+]

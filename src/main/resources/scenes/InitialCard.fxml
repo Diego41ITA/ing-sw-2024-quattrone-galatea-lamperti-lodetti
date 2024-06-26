@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="table" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.controller.InitialCardController">
+   <children>
+      <Text fx:id="title" layoutX="272.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-style" text="Select the side of your initial card" textAlignment="CENTER" wrappingWidth="749.0703125">
+         <font>
+            <Font size="57.0" />
+         </font>
+      </Text>
+      <Separator layoutX="644.0" layoutY="241.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="644.0" layoutY="441.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Line endX="100.0" layoutX="402.0" layoutY="348.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="882.0" layoutY="349.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="402.0" layoutY="555.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="882.0" layoutY="555.0" startX="-100.0" />
+      <Text fx:id="front" layoutX="317.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Front side">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fx:id="back" layoutX="803.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-inGame-style" text="Back side">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imageFront" fitHeight="167.0" fitWidth="243.0" layoutX="280.0" layoutY="365.0" onMouseClicked="#selectFront" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imageBack" fitHeight="167.0" fitWidth="243.0" layoutX="761.0" layoutY="365.0" onMouseClicked="#selectBack" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+   </children>
+</Pane>
