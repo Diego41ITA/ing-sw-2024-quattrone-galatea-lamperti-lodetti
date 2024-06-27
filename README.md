@@ -57,7 +57,7 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 `**NB:**
 1. The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
 2. To avoid potential runtime errors when running the GUI, dowload the JavaFX library, version 17.0.11. When running the client, use this command:
-  -> java --module-path E:\javafx-sdk-17.0.11\lib --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar PSP21.jar<br>
+  -> `java --module-path E:\javafx-sdk-17.0.11\lib --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar PSP21.jar`<br>
   to correctly specify the module. Remember to change to path to the actual path where the library has been downloaded
 4. Due to copyright reasons, the graphical resources necessary for displaying the GUI have not been pushed to this repository. Therefore, to successfully build the jar file on your pc, by cloning the project's repository, you need to download the 'images' folder from the #1-general channel on Slack. Extract its contents and then move the 'images'(the folder inside the extracted images file) into the resources/scenes directory. Then, since we organized the folder in another way(As you can see plateu.png is moved and is not in the plateu-score-imp folder like in the slack file) you have to
 organize the images folder as follows: 
