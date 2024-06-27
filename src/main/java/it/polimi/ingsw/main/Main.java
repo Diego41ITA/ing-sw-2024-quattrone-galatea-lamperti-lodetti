@@ -132,14 +132,9 @@ public class Main {
                 //I create an instance of executor service to manage the synchronization of all the threads.
                 if (selection == 1) {
 
-                    //Thread threadFsmGame;
-
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientSocket(flow, ipServer));
 
-                    /*threadFsmGame = new Thread(flow);
-                    threadFsmGame.start();
-                    */
                     flow.start();
 
                     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
@@ -151,7 +146,7 @@ public class Main {
                         }
                     });
 
-                    //threadFsmGame.join();
+
                     try{
                         flow.join();
                     }catch(InterruptedException e){
@@ -161,26 +156,18 @@ public class Main {
 
                 } else if (selection == 2) {
 
-                    //Thread threadFsmGame;
-
                     FsmGame flow = new FsmGame(new Cli(), new InputUi());
                     flow.setClient(new ClientRMI(flow, ipServer));
 
-                    //threadFsmGame = new Thread(flow);
-                    //threadFsmGame.start();
                     flow.start();
                     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler(){
                         @Override
                         public void uncaughtException(Thread t, Throwable e){
                             System.out.println("connection to server RMI lost");
-                            //System.out.println("you are going to be disconnected, please wait some moment and try to " +
-                            //        "restore you game!!!");
-                            //threadFsmGame.interrupt();
-                            e.printStackTrace();
                             flow.interrupt();
                         }
                     });
-                    //threadFsmGame.join();
+
                     try{
                         flow.join();
                     }catch(InterruptedException e){
@@ -189,23 +176,16 @@ public class Main {
                     Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
 
                 } else if (selection == 3) {
-                    /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
-                    flow.setClient(new ClientSocket(flow, ip));
-                    flow.run();*/
                     String[] arg = new String[2];
                     arg[0] = "socket";
                     arg[1] = ipServer;
                     Application.launch(Gui.class,arg);
 
                 } else if (selection == 4) {
-                    /*FsmGame flow = new FsmGame(new Gui(), new InputGui());
-                    flow.setClient(new ClientRMI(flow, ip));
-                    flow.run();*/
                     String[] arg = new String[2];
                     arg[0] = "rmi";
                     arg[1] = ipServer;
                     Application.launch(Gui.class, arg);
-                    //Thread.getAllStackTraces().keySet().forEach(Thread::interrupt);
                 }
 
             } catch (Exception e) {

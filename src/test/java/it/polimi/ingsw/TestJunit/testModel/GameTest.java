@@ -60,7 +60,6 @@ public class GameTest {
             game.addPlayer(player2);
             game.setMaxNumberPlayer(2);
             game.start();
-            game.printAvailableColors();
             assertEquals(Status.ACTIVE, game.getStatus());
             game.suspend();
             assertEquals(Status.SUSPENDED, game.getStatus());

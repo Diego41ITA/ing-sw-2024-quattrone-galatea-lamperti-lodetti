@@ -41,7 +41,7 @@ public class ClientHandlerSocket extends Thread{
      */
     @Override
     public void run(){
-        //devo lanciare un thread che processi i messaggi letti. In modo che questo thread sia sempre all'ascolto.
+        //A new thread that processes the received message is started
         Thread thread = new Thread(this::manageRequests);
         thread.start();
 
@@ -49,7 +49,6 @@ public class ClientHandlerSocket extends Thread{
             Message incomingMessage;
             while(!this.isInterrupted()) {
                 incomingMessage = (Message) input.readObject();
-                //System.out.println("Ho ricevuto: " + incomingMessage.getClass().getName());
                 this.queue.add(incomingMessage);
             }
         }catch(IOException | ClassNotFoundException e){
@@ -66,9 +65,7 @@ public class ClientHandlerSocket extends Thread{
             while(!this.isInterrupted()) {
 
                 msg = this.queue.take();
-                //System.out.println("Ho letto: " + msg.getClass().getName());
 
-                //bisogna verificare che non sia per il MainController (in questo caso andrebbero gestite più informazioni)
                 if (msg.isForMainController()) {
                     game = msg.execute(notify, ControllerOfMatches.getMainController());
                     if (game != null)

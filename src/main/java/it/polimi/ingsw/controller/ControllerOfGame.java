@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * several methods that are called by {@link FsmGame}. Each method is also in charge to correctly
  * notify the Players affected the action performed.
  */
-public class ControllerOfGame extends UnicastRemoteObject implements ControllerOfGameInterface/*, Serializable*/ {
+public class ControllerOfGame extends UnicastRemoteObject implements ControllerOfGameInterface {
     /**The model of the game to control*/
     private Game game;
 
@@ -187,7 +187,6 @@ public class ControllerOfGame extends UnicastRemoteObject implements ControllerO
 
             if (!this.game.isColorAvailable(color)) {
                 System.out.println("Color " + color + " is not available.");
-                this.game.printAvailableColors();
 
                 ArrayList<Color> notAvailableColor = new ArrayList<>(game.getPlayers().stream()
                         .map(Player::getColor)

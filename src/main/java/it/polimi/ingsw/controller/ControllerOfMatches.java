@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * this class exposes all the ControllerOfMatches methods to operate on a list of GameController
  */
-public class ControllerOfMatches extends UnicastRemoteObject implements /*Serializable,*/ ControllerOfMatchesInterface /*, Runnable*/ {
+public class ControllerOfMatches extends UnicastRemoteObject implements ControllerOfMatchesInterface {
     /**
      * List of all the activeGames, represented by their controllers
      */
