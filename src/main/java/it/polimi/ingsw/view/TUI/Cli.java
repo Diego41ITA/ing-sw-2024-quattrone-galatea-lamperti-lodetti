@@ -476,11 +476,11 @@ public class Cli implements UI {
         }
         stringBuilder.append("\n");
 
-        for(int row = 1; row <= maxRow; row++){
+        for(int r = 1; r <= maxRow; r++){
             for(Player p : view.getPlayers()){
-                if(gameDimension.get(p.getNick()).x + 1 == row) {
+                if(gameDimension.get(p.getNick()).x + 1 == r) {
                     stringBuilder.append("_".repeat(gameDimension.get(p.getNick()).y*6 +1));
-                } else if (gameDimension.get(p.getNick()).x < row){
+                } else if (gameDimension.get(p.getNick()).x < r){
                     stringBuilder.append(" ".repeat(gameDimension.get(p.getNick()).y * 6 + 1));
                 } else if(gameDimension.get(p.getNick()).x == 3 && gameDimension.get(p.getNick()).y==3){
                     int spaces;
@@ -488,7 +488,7 @@ public class Cli implements UI {
                     stringBuilder.append("|");
 
                     for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
-                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 1, gameDimension.get(p.getNick()).x - row - 1));
+                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 1, gameDimension.get(p.getNick()).x - r - 1));
                         spaces = Math.round(2 - value.length()/2);
                         stringBuilder.append(" ".repeat(spaces)).append(value).append(" ".repeat(spaces));
                         if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
@@ -503,7 +503,7 @@ public class Cli implements UI {
                     stringBuilder.append("|");
 
                     for(int column = 1; column <= gameDimension.get(p.getNick()).y; column++){
-                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 2, gameDimension.get(p.getNick()).x - row - 2));
+                        String value = determineValue(p.getGameStation(), new Point(column - gameDimension.get(p.getNick()).y + 2, gameDimension.get(p.getNick()).x - r - 2));
                         spaces = Math.round(2 - value.length()/2);
                         stringBuilder.append(" ".repeat(spaces)).append(value).append(" ".repeat(spaces));
                         if((2 * spaces + value.length()) != 5) stringBuilder.append(" ");
