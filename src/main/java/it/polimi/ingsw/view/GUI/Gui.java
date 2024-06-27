@@ -72,7 +72,7 @@ public class Gui extends Application implements UI {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CodexNaturalis - PSP21");
         this.primaryStage.show();
-        Image icon = new Image("/scenes/images/01.png");
+        Image icon = new Image("/scenes/images/CODEX_Rulebook_IT/01.png");
         this.primaryStage.getIcons().add(icon);
         this.primaryStage.setResizable(false);
         this.primaryStage.setY(0);
