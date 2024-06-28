@@ -57,6 +57,10 @@ public class ClientHandlerSocket extends Thread{
         }
     }
 
+    /**
+     * It reads messages from the blocking queue and it executes them.
+     * This method avoids deadlock and allows to process all the possible messages without getting stuck
+     */
     public void manageRequests(){
 
         try{
