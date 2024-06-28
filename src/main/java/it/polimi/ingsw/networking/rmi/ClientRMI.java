@@ -47,6 +47,9 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         }
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void createGame(String nick, int maxNumberOfPlayers) throws RemoteException, NotBoundException {
             gameController = request.createGame(notify, nick, maxNumberOfPlayers);
@@ -54,6 +57,9 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
 
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void leaveGame(String nick, String idGame) throws NotBoundException, RemoteException {
         request.leaveGame(idGame, nick);
@@ -61,50 +67,75 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         nickname = null;
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void rejoin(String idGame, String nickname) throws RemoteException{
         gameController = request.rejoinGame(notify, idGame, nickname);
         this.nickname = nickname;
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void joinRandomGame(String nick) throws RemoteException, NotBoundException/*, NoAvailableGameToJoinException */{
         gameController = request.joinRandomGame(notify, nick);
         nickname = nick;
     }
 
-
-
-    @Override // questo metodo oltre a piazzare la carta calcola e aggiunge i punti generati dalla carta piazzata(sia se sia gold che risorsa)
+    /**
+     {@inheritDoc}
+     */
+    @Override
     public void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException{
         gameController.playCard(playedCard, nick, front, cord);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void chooseGoal(ArrayList<GoalCard> goals, int num, String nick) throws RemoteException{
         gameController.chooseGoal(goals, num, nick);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void goOn() throws RemoteException{
         gameController.goOn();
     }
 
-    @Override//serve a pescare dai deck
+    /**
+     {@inheritDoc}
+     */
+    @Override
     public void drawPlayableCardFromTableOfDecks(String nick, String deck) throws RemoteException{
         gameController.drawPlayableCardFromTableOfDecks(deck, nick);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void drawFromTable(String nick, Card card) throws RemoteException{
         gameController.drawFromTable(card, nick);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void setGameStation(String nick, InitialCard card, boolean isFront) throws RemoteException {
         gameController.setGameStation(nick, card, isFront);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void setColor(String color, String name) throws RemoteException{
         gameController.setColor(color, name);
@@ -115,21 +146,33 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         gameController.initializeHandPlayer(nick);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void ping(String nick) throws RemoteException{
         gameController.ping(nick);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void startGame() throws RemoteException {
         gameController.start_Game();
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void definePlayer(String nickname) throws RemoteException{
         gameController.definePlayer(nickname);
     }
 
+    /**
+     {@inheritDoc}
+     */
     @Override
     public void initializeTurn(String nick) throws RemoteException {
         gameController.initializeTurn(nick);

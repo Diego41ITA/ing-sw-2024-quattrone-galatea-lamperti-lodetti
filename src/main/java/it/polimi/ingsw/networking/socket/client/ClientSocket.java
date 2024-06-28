@@ -58,7 +58,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }while(attempt);
     }
 
-    //serve per leggere le notifiche inviate dal server.
+    /**
+     * It read the notification from the server
+     */
     public void run(){
         while(!this.isInterrupted()){
             try{
@@ -77,6 +79,10 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     * It exectues an async notification to avoid deadlocks
+     * @param notification the notification to execute
+     */
     public void executeAsync(ServerNotification notification){
         try {
             notification.execute(flow);
@@ -93,11 +99,19 @@ public class ClientSocket extends Thread implements ClientAction {
         client.close();
     }
 
+    /**
+     * Ensure the correct forwarding of the message
+     * @throws IOException
+     */
     void completeForwarding() throws IOException{
         out.flush();
         out.reset();
     }
 
+    /**
+     * Waits for notifications
+     * @throws InterruptedException
+     */
     public void waitForNotification() throws InterruptedException{
         ServerNotification notification = notificationQueue.take();
         try {
@@ -108,9 +122,13 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
-    //tutte le operazioni, sono quelle presenti nel client RMI, con la differenza che ora scriveranno sull'out un
-    // messaggio che riflette il tipo di operazione che si vuole eseguire.
 
+    //all these methods are similar to the one in ClientRMI, but they also write on the "out" the message
+    //corresponding to the operation to execute
+
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void createGame(String nick, int maxNumberOfPlayer) throws RemoteException, NotBoundException {
         try {
@@ -122,6 +140,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void joinRandomGame(String nick) throws NotBoundException, RemoteException{
         try{
@@ -133,6 +154,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void leaveGame(String nick, String gameId) throws RemoteException, NotBoundException{
         try{
@@ -143,6 +167,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void rejoin(String idGame, String nick) throws RemoteException{
         try{
@@ -154,9 +181,12 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
-    //ora scrivo tutti i metodi per cooperare con il GameController
-    //nota, il controllo va fatto in game flow => se è errato deve inserire nuovamente un valore valido
+    //now all the methods to link with the ControllerOfGame
+    //all the needed checks are done in the controller, that eventually catch an exception
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void playCard(PlayableCard playedCard, Point cord, String nick, boolean front) throws RemoteException {
         try{
@@ -168,6 +198,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void chooseGoal(ArrayList<GoalCard> goals, int num, String nick){
         try{
@@ -180,6 +213,9 @@ public class ClientSocket extends Thread implements ClientAction {
 
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void goOn(){
         try{
@@ -190,6 +226,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void setColor(String color, String nick){
         try{
@@ -201,6 +240,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void drawPlayableCardFromTableOfDecks(String nick, String deck){
         try{
@@ -212,6 +254,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void drawFromTable(String nick, Card card){
         try{
@@ -223,7 +268,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
-    //forse va messo waitForNotification però è no usage
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void initializeHandPlayer(String nick){
         try{
@@ -235,10 +282,7 @@ public class ClientSocket extends Thread implements ClientAction {
     }
 
     /**
-     * PER SETTARE LA PRIMA CARTA
-     * @param nick
-     * @param card
-     * @param isFront
+     *{@inheritDoc}
      */
     @Override
     public synchronized void setGameStation(String nick, InitialCard card, boolean isFront){
@@ -250,6 +294,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void ping(String nick){
         try{
@@ -260,6 +307,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override //prova
     public synchronized void startGame() throws IOException {
         try{
@@ -270,6 +320,9 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
         try{
@@ -280,14 +333,17 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public synchronized void definePlayer(String nick) throws RemoteException{
         try{
             out.writeObject(new DefinePlayer(nick));
             completeForwarding();
-            waitForNotification();  //aspetta updateInitialCard
-            waitForNotification(); //aspetta goalCardsDrawed
-            waitForNotification(); //aspetta updateHandAndTable
+            waitForNotification(); //waits updateInitialCard
+            waitForNotification(); //waits goalCardsDrawed
+            waitForNotification(); //waits updateHandAndTable
         }catch(IOException | InterruptedException e){
             throw new RuntimeException(e);
         }
