@@ -61,17 +61,9 @@ public interface ClientAction {
     void drawPlayableCardFromTableOfDecks(String nick, String deck) throws IOException;
     void drawFromTable(String nick, Card card) throws IOException;
     void setGameStation(String nick, InitialCard card, boolean isFront) throws RemoteException;
-    //questo metodo non so quanto senso possa avere (ci pensa il controller a capire quando inizializzare la partita)
     void initializeHandPlayer(String nick) throws IOException;
-
-    //Questo metodo non ha proprio senso. Quando il controller si accorge che la partita sta finendo valuta gli ultimi
-    //gli ultimi giocatori e successivamente calcola il vincitore notificandolo ai player.
     void ping(String nick) throws IOException;
-
-    //prova
     void startGame() throws IOException;
-
-    //messaggi nuovi per risolvere il problema socket
     void definePlayer(String nick) throws IOException;
     void initializeTurn(String nick) throws IOException;
 

@@ -24,8 +24,7 @@ public class RoutineDelete extends Thread{
         }
     }
 
-    //******LEAVE THIS METHOD IN THIS CLASS**************************
-    //you can use this method in this class(Routine delete) without invoke matches
+    //you can use this method in this class(Routine delete) without invoking matches
     public synchronized void leaveGame(String gameID, String nick){
         Iterator<ControllerOfGame> iterator = matches.getActiveGames().iterator();
         if(matches.getActiveGames().isEmpty())
