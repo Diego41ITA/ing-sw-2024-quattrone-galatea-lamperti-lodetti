@@ -23,14 +23,13 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Receives all the incoming notifications from the server, and it processes them by passing
- * {@link //GameObserverHandlerClient}, that calls the methods of {@link FsmGame}
+ * Receives all the incoming notifications from the server, and it processes them
+ * calling the methods of {@link FsmGame}
  */
 public class ClientSocket extends Thread implements ClientAction {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    //private final GameObserverHandlerClient gameObserverHandler;    //invoca i metodi di gameFlow
     private FsmGame flow;
 
     private BlockingQueue<ServerNotification> notificationQueue;
@@ -40,7 +39,6 @@ public class ClientSocket extends Thread implements ClientAction {
         this.flow = flow;
         ipAddress = ip;
         connect(ipAddress, 50000 );
-        //gameObserverHandler = new GameObserverHandlerClient(flow);
         notificationQueue = new LinkedBlockingQueue<>();
         this.start();
     }
@@ -65,7 +63,6 @@ public class ClientSocket extends Thread implements ClientAction {
         while(!this.isInterrupted()){
             try{
                 ServerNotification notification = (ServerNotification) in.readObject();
-                //System.out.println("ho ricevuto: " + notification.getClass().getName());
                 if(notification.isSynchronous())
                     notificationQueue.put(notification);
                 else{
@@ -188,7 +185,6 @@ public class ClientSocket extends Thread implements ClientAction {
         try{
             out.writeObject(new Pass());
             completeForwarding();
-            //waitForNotification();
         }catch(IOException /*| InterruptedException*/ e){
             throw new RuntimeException(e);
         }
@@ -254,7 +250,6 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
-    //questo metodo non ha senso
     @Override
     public synchronized void ping(String nick){
         try{
@@ -275,7 +270,6 @@ public class ClientSocket extends Thread implements ClientAction {
         }
     }
 
-    //aggiunti per risolvere i problemi dei socket
     @Override
     public synchronized void initializeTurn(String nick) throws RemoteException{
         try{

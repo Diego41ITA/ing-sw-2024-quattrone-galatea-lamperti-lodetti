@@ -16,15 +16,18 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+/**
+ * This class defines all the method to establish a connection with RMI, and also overrides the method
+ * from {@link ClientAction} to allow them to be called on the exported remote object. It is the link
+ * between {@link FsmGame} and {@link ControllerOfGame}.
+ */
 public class ClientRMI extends UnicastRemoteObject implements ClientAction {
     private static ControllerOfMatchesInterface request;
     private ControllerOfGameInterface gameController = null;
     private GameObserver notify;
-
     private String nickname;
     private Registry registry;
     private FsmGame flow;
-
     private String ipAddress;
 
     public ClientRMI(FsmGame flow, String ip) throws RemoteException {
@@ -117,7 +120,7 @@ public class ClientRMI extends UnicastRemoteObject implements ClientAction {
         gameController.ping(nick);
     }
 
-    @Override //prova
+    @Override
     public void startGame() throws RemoteException {
         gameController.start_Game();
     }

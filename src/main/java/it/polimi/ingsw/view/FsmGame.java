@@ -38,7 +38,7 @@ import java.util.Objects;
  * It starts two thread: the first one is the most important one, and it manages the actual flow with the execution of
  * the various states; the second one is activated in the constructor, and actually it refers to the PingServer object.
  */
-public class FsmGame extends Thread implements /*ClientAction,*/ GameObserver, Serializable {
+public class FsmGame extends Thread implements GameObserver, Serializable {
 
     public boolean waitingForNewPlayers = false;
     public boolean notStarted;
