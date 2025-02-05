@@ -11,6 +11,8 @@
   
   ### Alessandro Lodetti
 
+---
+
   ## Coverage:
 In addition to the game logic which is fully implemented in the model,
 we decided also to test the controller.
@@ -21,6 +23,7 @@ Not all of the controller was testable as some parts required user input
 
 </div>
 
+---
 
 ## What we have implemented
 
@@ -35,6 +38,8 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 | Persistence:  | ✔️  |
 
 ![Voto](https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/a7894c9b-1df6-4e71-8e9d-ecceb22609cd)
+
+---
 
 # How to Use(SET UP GUIDE)
 
@@ -53,6 +58,8 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 5. Open the previously described terminal and navigate to the folder where the jar has been saved, tipically the path is something like "C:/[dir]/[folder with the jar files]"  
 6. From here, just type in the `Windows terminal`:  
    -> `java -jar PSP21.jar` (to run the clients and servers)<br>
+
+---
 
 **NB:**
 1. The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
