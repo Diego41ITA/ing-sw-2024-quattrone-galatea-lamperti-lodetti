@@ -62,10 +62,16 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 4. Due to copyright reasons, the graphical resources necessary for displaying the GUI have not been pushed to this repository. Therefore, to successfully build the jar file on your pc, by cloning the project's repository, you need to download the 'images' folder from the #1-general channel on Slack. Extract its contents and then move the 'images'(the folder inside the extracted images file) into the resources/scenes directory. Then, since we organized the folder in another way(As you can see plateu.png is moved and is not in the plateu-score-imp folder like in the slack file) you have to
 organize the images folder as follows: 
 
+
 <p align="center">
   <img src="https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/dfba8bdc-fd29-47e0-97f1-b656a9605f59" alt="Organizzazione cartella immagini" style="max-width:100%;">
 </p>
 
+---
 
+## Copyright and license
+Codex Naturalis is an intellectual property of Cranio Creations. All content, including but not limited to, game mechanics, design, artwork, and assets, is protected under copyright law. Unauthorized reproduction, distribution, or modification of this material is prohibited without prior written consent from Cranio Creations. This project is released under the MIT License. Please refer to the [LICENSE](LICENSE) file for details. file for detailed information regarding the terms and conditions of use, reproduction, and distribution of the game.
+
+---
 
    ![1871216](https://github.com/Diego41ITA/ing-sw-2024-quattrone-galatea-lamperti-lodetti/assets/161478338/00292629-7280-4084-bc3a-eff32d2175e7)
