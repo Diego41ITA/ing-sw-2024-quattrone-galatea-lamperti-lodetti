@@ -70,7 +70,7 @@ organize the images folder as follows:
 ---
 
 ## Copyright and license
-Codex Naturalis is an intellectual property of Cranio Creations. All content, including but not limited to, game mechanics, design, artwork, and assets, is protected under copyright law. Unauthorized reproduction, distribution, or modification of this material is prohibited without prior written consent from Cranio Creations. This project is released under the MIT License. Please refer to the [LICENSE](LICENSE) file for details. file for detailed information regarding the terms and conditions of use, reproduction, and distribution of the game.
+Codex Naturalis is an intellectual property of Cranio Creations. All content, including but not limited to, game mechanics, design, artwork, and assets, is protected under copyright law. Unauthorized reproduction, distribution, or modification of this material is prohibited without prior written consent from Cranio Creations. Commercial usage is forbidden.
 
 ---
 
