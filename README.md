@@ -45,7 +45,7 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 4. From here, just type in the terminal:  
    -> `java -jar PSP21.jar` (to run both the clients and the servers)<br>
 
-`**2: Playing on different computers:**
+**2: Playing on different computers:**
 1. Go to "deliverables" folder and download PSP21.jar
 2. Ensure to allow to enable incoming and outgoing connections on the port you want to connect to. Alternatively, for Windows Users it's possible to temporarly disable the firewall( win key -> windows Defender Firewall -> activate/deactivate fireWall -> disable windows defender (both public and private network)
 3. We suggest to use "ZeroTier", by creating an account and installing the application https://www.zerotier.com/; for more information about its correct usage, consult the guide https://docs.zerotier.com/start
@@ -54,7 +54,7 @@ We have `implemented`, in addition to the `Game Specific` and `Game Agnostic` re
 6. From here, just type in the `Windows terminal`:  
    -> `java -jar PSP21.jar` (to run the clients and servers)<br>
 
-`**NB:**
+**NB:**
 1. The application automatically saves the history of the games, in a path specified when running the server. To delete them, it has to be done manually
 2. To avoid potential runtime errors when running the GUI, dowload the JavaFX library, version 17.0.11. When running the client, use this command:
   -> `java --module-path E:\javafx-sdk-17.0.11\lib --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar PSP21.jar`<br>
